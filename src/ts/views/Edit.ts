@@ -1,5 +1,7 @@
 import '../globals.d'
 
+import * as Config from '../../config.json'
+
 import AbstractView from './AbstractView'
 
 import * as Y from 'yjs'
@@ -51,10 +53,8 @@ window.liaReady = function (params) {
     iframe.contentWindow.LIA.onReady = window.LIA.onReady
 
     // only inject if key has been defined
-    if (process.env.RESPONSIVEVOICE_KEY) {
-      iframe.contentWindow.LIA.injectResposivevoice(
-        process.env.RESPONSIVEVOICE_KEY
-      )
+    if (Config.responsiveVoiceKey) {
+      iframe.contentWindow.LIA.injectResposivevoice(Config.responsiveVoiceKey)
     }
   }
 
@@ -124,7 +124,7 @@ export default class extends AbstractView {
     },
   }
 
-  constructor(params: any) {
+  constructor(params: any, _: any) {
     super(params)
     this.setTitle('Lia[Edit]')
 
@@ -426,7 +426,9 @@ export default class extends AbstractView {
                         </h6>
                       </li>
                       <li>
-                        <button id="${Global.COLLABORATION}" class="btn dropdown-item btn-link" onclick="window.LIA.share('url')">
+                        <button id="${
+                          Global.COLLABORATION
+                        }" class="btn dropdown-item btn-link" onclick="window.LIA.share('url')">
                           collaboration link
                         </button>
                       </li>
@@ -457,6 +459,19 @@ export default class extends AbstractView {
                         <button class="btn dropdown-item btn-link" onclick="window.LIA.download()">
                           README.md
                         </button>
+                      </li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+                        <h6 class="dropdown-header fw-light">
+                          Export to...
+                        </h6>
+                      </li>
+                      <li>
+                        <a class="nav-link" aria-current="page" href="${window.LIA.exporter.github(
+                          this.params.id
+                        )}" title="Create a new and empty document">
+                          GitHub gist
+                        </a>
                       </li>
                     </ul>
                   </div>

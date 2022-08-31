@@ -57,7 +57,7 @@ function createCard(def: { id: string; meta: any; timestamp: number }) {
 `
 }
 export default class extends AbstractView {
-  constructor(params: object) {
+  constructor(params: object, _: any) {
     super(params)
     this.setTitle('Index')
   }

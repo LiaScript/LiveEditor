@@ -3,6 +3,8 @@ import { tutorial } from '../views/Helper/Tutorial'
 import * as Utils from '../utils'
 import * as Shrink from 'shrink-string'
 
+import * as Config from '../../config.json'
+
 export const EDITOR = 'liascript-editor-container'
 export const PREVIEW = 'liascript-preview-container'
 export const COLLABORATION = 'collaboration-link'
@@ -239,6 +241,17 @@ export function init() {
 
       fork: async (code: string) => {
         console.warn('todo')
+      },
+
+      exporter: {
+        github: (documentId: string) => {
+          return `https://github.com/login/oauth/authorize/?client_id=${
+            Config.github.clientId
+          }&redirect_uri=${Utils.urlPath([
+            'export',
+            'github',
+          ])}/&state=${documentId}`
+        },
       },
     }
   }

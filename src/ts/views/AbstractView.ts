@@ -4,7 +4,7 @@ export default class {
   protected index: Dexie
   protected params: any = {}
 
-  constructor(params: any) {
+  constructor(params: any, init?: any) {
     this.index = new Dexie()
     this.params = params
   }

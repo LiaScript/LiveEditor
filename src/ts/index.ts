@@ -1,6 +1,7 @@
 import Index from './views/Index'
 import Edit from './views/Edit'
 import Show from './views/Show'
+import Export from './views/Export'
 
 const pathToRegex = (path) =>
   new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$')
@@ -34,6 +35,11 @@ const router = async () => {
     { path: '/edit/:id', view: Edit },
     { path: '/show/code/:code', view: Show },
     { path: '/show/file/:file', view: Show },
+    {
+      path: '/export/github/&code=:code&state=:state',
+      view: Export,
+      init: 'github',
+    },
   ]
 
   const potentialMatches = routes.map((route) => {
@@ -54,7 +60,7 @@ const router = async () => {
     }
   }
 
-  const view = new match.route.view(getParams(match))
+  const view = new match.route.view(getParams(match), match.route.init)
 
   view.getHtml(document.body)
 }
