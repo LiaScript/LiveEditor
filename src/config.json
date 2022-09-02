@@ -1,7 +1,10 @@
 {
     "responsiveVoiceKey": "blVZszUw",
+
+    "proxy": "https://api.allorigins.win/get?url=",
+    
     "github": {
-        "clientId": "Iv1.89702ef804cbd52e",
-        "clientSecret": "e43c7f3963acaa0e54f62e6a94d15d5eb0dee9d5"
+        "clientId": "95a693eb9a63c8abb37b",
+        "clientSecret": "f896768e1d0e7b67b9c89c9b5a6db825d8a9e364"
     }
 }

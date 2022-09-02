@@ -28,14 +28,24 @@ export default class {
   }
 
   async exists(id: string) {
-    const item = await this.db.data.get(id)
+    const item = this.get(id)
 
     return item ? true : false
   }
 
-  put(id: string, meta: any) {
+  async get(id: string) {
+    return await this.db.data.get(id)
+  }
+
+  async put(id: string, meta: any) {
     if (id.length > 8) {
-      this.db.data.put({
+      const storedMeta = await this.get(id)
+
+      if (storedMeta) {
+        meta = { ...storedMeta.meta, ...meta }
+      }
+
+      await this.db.data.put({
         id: id,
         timestamp: Date.now(),
         meta: meta,

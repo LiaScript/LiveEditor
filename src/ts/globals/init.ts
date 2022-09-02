@@ -242,17 +242,6 @@ export function init() {
       fork: async (code: string) => {
         console.warn('todo')
       },
-
-      exporter: {
-        github: (documentId: string) => {
-          return `https://github.com/login/oauth/authorize/?client_id=${
-            Config.github.clientId
-          }&redirect_uri=${Utils.urlPath([
-            'export',
-            'github',
-          ])}/&state=${documentId}`
-        },
-      },
     }
   }
 }

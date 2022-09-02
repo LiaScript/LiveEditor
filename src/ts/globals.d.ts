@@ -21,10 +21,6 @@ declare global {
       share: () => void
       fork: (code: string) => void
       download: () => void
-
-      exporter: {
-        github: (documentId: string) => string
-      }
     }
   }
 }

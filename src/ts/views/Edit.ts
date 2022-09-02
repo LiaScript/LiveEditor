@@ -10,6 +10,7 @@ import { WebrtcProvider } from 'y-webrtc'
 import { MonacoBinding } from 'y-monaco'
 import * as monaco from 'monaco-editor'
 import * as Utils from '../utils'
+import * as GitHub from './Helper/GitHub'
 
 // @ts-ignore
 import JSONWorker from 'url:monaco-editor/esm/vs/language/json/json.worker.js'
@@ -467,9 +468,9 @@ export default class extends AbstractView {
                         </h6>
                       </li>
                       <li>
-                        <a class="nav-link" aria-current="page" href="${window.LIA.exporter.github(
+                        <a class="btn dropdown-item btn-link" aria-current="page" target="_blank" href="${GitHub.authorization_URL(
                           this.params.id
-                        )}" title="Create a new and empty document">
+                        )}" title="Store the document on github">
                           GitHub gist
                         </a>
                       </li>
