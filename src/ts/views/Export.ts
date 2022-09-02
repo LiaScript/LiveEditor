@@ -12,37 +12,62 @@ export default class extends AbstractView {
   constructor(params: any, init?: string) {
     super(params)
     this.type = init
+
+    this.loadConfig()
+
+    this.params.id = this.params.exportid || this.params.state
+
+    if (init == 'github') {
+      if (!this.config.credentials?.github && this.params.exportid) {
+        GitHub.authorize(this.params.exportid)
+      }
+    }
   }
 
   async getHtml(element?: HTMLElement) {
     const type = this.type
-    const id = this.params.state
+    const params = this.params
 
     const yDoc = new Y.Doc()
-    const provider = new IndexeddbPersistence(id, yDoc)
+    const provider = new IndexeddbPersistence(params.id, yDoc)
 
-    const meta = this.index.get(id)
+    const meta = this.index.get(params.id)
 
     const db = this.index
 
     provider.on('synced', async (_: any) => {
       const metaData = await meta
-      const contentData = yDoc.getText(id).toJSON()
-      const code = this.params.code
+      const contentData = yDoc.getText(params.id).toJSON()
+      console.warn('--------------------------')
 
       switch (type) {
         case 'github': {
-          const gist = await GitHub.gist_Upload(
-            code,
+          if (!this.config.credentials?.github) {
+            this.config.credentials.github = await GitHub.access_token(
+              params.code
+            )
+
+            this.storeConfig()
+          }
+
+          const gist = await GitHub.gistUpload(
+            this.config.credentials.github,
             metaData.meta.title,
             metaData.meta.macro?.comment || '',
             contentData,
             metaData.meta.gist_id
           )
 
-          if (!metaData.meta.gist_id) {
-            //metaData.meta.gist_id = gist.id
-            await db.put(id, { gist_id: gist.id })
+          if (gist.error == 'Bad credentials') {
+            this.config.credentials.github = undefined
+
+            this.storeConfig()
+
+            window.location.reload()
+          }
+
+          if (metaData.meta.gist_id != gist.id) {
+            await db.put(params.id, { gist_id: gist.id })
           }
 
           window.location.href = gist.url

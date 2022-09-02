@@ -25,10 +25,10 @@ function getParams(params: string) {
   return Object.fromEntries(params.split('&').map((e) => e.split('=')))
 }
 
-export function authorization_URL(documentId) {
+export function authorize(documentId) {
   const URL = 'https://github.com/login/oauth/authorize/'
 
-  return addParams(URL, [
+  window.location.href = addParams(URL, [
     ['client_id', Config.github.clientId],
     ['scope', 'gist'],
     ['redirect_uri', Utils.urlPath(['export', 'github']) + '/'],
@@ -36,13 +36,7 @@ export function authorization_URL(documentId) {
   ])
 }
 
-export async function gist_Upload(
-  code: string,
-  title: string,
-  comment: string,
-  content: string,
-  gist_id?: string
-) {
+export async function access_token(code: string) {
   const response = await fetch(
     proxy(
       addParams('https://github.com/login/oauth/access_token', [
@@ -57,8 +51,18 @@ export async function gist_Upload(
   const json = await response.json()
 
   // headers not working that is why contents has to be split manually
-  const contents = getParams(json.contents)
+  const credentials = getParams(json.contents)
 
+  return credentials
+}
+
+export async function gistUpload(
+  credentials: any,
+  title: string,
+  comment: string,
+  content: string,
+  gist_id?: string
+) {
   const gist = {
     description: comment,
     public: true,
@@ -75,17 +79,27 @@ export async function gist_Upload(
     gist_id = ''
   }
 
-  const response2 = await fetch('https://api.github.com/gists' + gist_id, {
+  const response = await fetch('https://api.github.com/gists' + gist_id, {
     headers: {
       'User-Agent': 'LiaScript',
-      Authorization: contents.token_type + ' ' + contents.access_token,
+      Authorization: credentials.token_type + ' ' + credentials.access_token,
       Accept: 'application/vnd.github+json',
     },
     method: 'post',
     body: JSON.stringify(gist),
   })
 
-  const json2 = await response2.json()
+  const json = await response.json()
 
-  return { url: json2.html_url, id: json2.id }
+  // the gist does not exist anymore (has been deleted)
+  if (json.message == 'Not Found') {
+    return await gistUpload(credentials, title, comment, content)
+  }
+  // probably the user has revoked the credentials,
+  // need to revoke ...
+  else if (json.message == 'Bad credentials') {
+    return { error: 'Bad credentials' }
+  }
+
+  return { url: json.html_url, id: json.id }
 }

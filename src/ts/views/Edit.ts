@@ -109,22 +109,6 @@ export default class extends AbstractView {
   private indexeddbProvider?: IndexeddbPersistence
   protected title: string = 'Lia[Edit]'
 
-  private config: {
-    lights: boolean
-    mode: number
-    user: {
-      name: string
-      color: string
-    }
-  } = {
-    lights: false,
-    mode: 2,
-    user: {
-      name: Utils.randomString(),
-      color: Utils.randomColor(),
-    },
-  }
-
   constructor(params: any, _: any) {
     super(params)
     this.setTitle('Lia[Edit]')
@@ -139,16 +123,6 @@ export default class extends AbstractView {
     this.loadConfig()
 
     this.initPreview()
-  }
-
-  loadConfig() {
-    const configString = localStorage.getItem('config')
-
-    if (configString) {
-      this.config = JSON.parse(configString)
-    } else {
-      localStorage.setItem('config', JSON.stringify(this.config))
-    }
   }
 
   initPreview() {
@@ -468,9 +442,11 @@ export default class extends AbstractView {
                         </h6>
                       </li>
                       <li>
-                        <a class="btn dropdown-item btn-link" aria-current="page" target="_blank" href="${GitHub.authorization_URL(
-                          this.params.id
-                        )}" title="Store the document on github">
+                        <a class="btn dropdown-item btn-link" aria-current="page" target="_blank" href="${Utils.urlPath(
+                          ['export', 'github']
+                        )}/${
+      this.params.id
+    }" title="Store the document on github">
                           GitHub gist
                         </a>
                       </li>

@@ -40,6 +40,11 @@ const router = async () => {
       view: Export,
       init: 'github',
     },
+    {
+      path: '/export/github/:exportid',
+      view: Export,
+      init: 'github',
+    },
   ]
 
   const potentialMatches = routes.map((route) => {
