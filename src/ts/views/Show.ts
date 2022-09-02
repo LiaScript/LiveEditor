@@ -8,6 +8,8 @@ function disable(id: string) {
 
   if (element) {
     element.disabled = true
+
+    element.classList.add('disabled')
   }
 }
 
@@ -40,7 +42,7 @@ export default class extends Edit {
         .then((response) => response.text())
         .then((readme) => {
           self.showEditor(replaceURLs(baseURL, readme))
-          //window.LIA.compile()
+          window.LIA.compile()
         })
     }
 
@@ -51,6 +53,7 @@ export default class extends Edit {
     this.initEditor(code)
 
     disable(Global.COLLABORATION)
+    disable(Global.GIST)
 
     const onlineUsers = document.getElementById(Global.USERS)
 

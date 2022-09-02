@@ -442,11 +442,11 @@ export default class extends AbstractView {
                         </h6>
                       </li>
                       <li>
-                        <a class="btn dropdown-item btn-link" aria-current="page" target="_blank" href="${Utils.urlPath(
-                          ['export', 'github']
-                        )}/${
-      this.params.id
-    }" title="Store the document on github">
+                        <a id="${
+                          Global.GIST
+                        }" class="btn dropdown-item btn-link" aria-current="page" target="_blank" href="${Utils.urlPath(
+      ['export', 'github']
+    )}/${this.params.id}" title="Store the document on github">
                           GitHub gist
                         </a>
                       </li>

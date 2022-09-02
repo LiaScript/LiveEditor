@@ -10,6 +10,7 @@ export const PREVIEW = 'liascript-preview-container'
 export const COLLABORATION = 'collaboration-link'
 export const USERS = 'online-users-overview'
 export const SPINNER = 'preview-overlay'
+export const GIST = 'gist-export'
 
 export const modal = (title: string, body: string) => {
   const id = 'modal-container'
