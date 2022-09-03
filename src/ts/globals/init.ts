@@ -11,6 +11,7 @@ export const COLLABORATION = 'collaboration-link'
 export const USERS = 'online-users-overview'
 export const SPINNER = 'preview-overlay'
 export const GIST = 'gist-export'
+export const GIST_SHARE = 'gist-share-course'
 
 export const modal = (title: string, body: string) => {
   const id = 'modal-container'

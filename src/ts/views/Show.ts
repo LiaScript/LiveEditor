@@ -8,7 +8,6 @@ function disable(id: string) {
 
   if (element) {
     element.disabled = true
-
     element.classList.add('disabled')
   }
 }

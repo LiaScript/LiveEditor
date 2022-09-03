@@ -67,7 +67,10 @@ export default class extends AbstractView {
           }
 
           if (metaData.meta.gist_id != gist.id) {
-            await db.put(params.id, { gist_id: gist.id })
+            await db.put(params.id, {
+              gist_id: gist.id,
+              gist_url: gist.raw_url,
+            })
           }
 
           window.location.href = gist.url

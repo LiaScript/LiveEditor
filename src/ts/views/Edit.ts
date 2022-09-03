@@ -283,6 +283,22 @@ export default class extends AbstractView {
   }
 
   navigation(): string {
+    const id = this.params.id
+
+    this.index.get(id).then((item) => {
+      if (item) {
+        const link = document.getElementById(Global.GIST_SHARE)
+        if (link) {
+          if (item.meta?.gist_url) {
+            link.href =
+              'https://LiaScript.github.io/course/?' + item.meta.gist_url
+          } else {
+            link.classList.add('disabled')
+          }
+        }
+      }
+    })
+
     return `
       <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
@@ -423,7 +439,9 @@ export default class extends AbstractView {
                           Share course via ...
                         </h6>
                       </li>
-                      <li><a class="dropdown-item" href="#">direct link</a></li>
+                      <li><a id="${
+                        Global.GIST_SHARE
+                      }" class="dropdown-item" href="" target="_blank">Gist link</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li>
                         <h6 class="dropdown-header fw-light">

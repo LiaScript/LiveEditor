@@ -69,7 +69,9 @@ export async function gistUpload(
     files: {},
   }
 
-  gist.files[`${title}.md`] = {
+  const filename = title + '.md'
+
+  gist.files[filename] = {
     content: content,
   }
 
@@ -101,5 +103,9 @@ export async function gistUpload(
     return { error: 'Bad credentials' }
   }
 
-  return { url: json.html_url, id: json.id }
+  return {
+    url: json.html_url,
+    id: json.id,
+    raw_url: json.files[filename].raw_url,
+  }
 }
