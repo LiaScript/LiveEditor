@@ -19,6 +19,7 @@
     "monaco-editor": "^0.28.1",
     "parcel": "^2.7.0",
     "shrink-string": "^3.0.11",
+    "vue": "^3.2.40",
     "y-indexeddb": "^9.0.9",
     "y-monaco": "^0.1.4",
     "y-webrtc": "^10.2.3",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
+    "@parcel/transformer-vue": "^2.7.0",
     "assert": "^2.0.0",
     "browserify-zlib": "^0.2.0",
     "caniuse-lite": "^1.0.30001374",
