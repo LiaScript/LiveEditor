@@ -38,6 +38,7 @@ export default {
       language: "markdown",
       theme: this.lights ? "vs-light" : "vs-dark",
       automaticLayout: true,
+      wordWrap: "on",
     });
 
     this.editor = editor;
