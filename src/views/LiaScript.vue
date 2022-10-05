@@ -13,6 +13,7 @@
           class="col w-100 p-0 h-100"
           @compile="compile"
           @ready="editorReady"
+          :storageId="$props.editId"
         />
       </div>
 
@@ -27,15 +28,18 @@
 </template>
 
 <script lang="ts">
-import { readYArray } from "yjs/dist/src/internals";
 import { tutorial } from "../ts/views/Helper/Tutorial";
-import Editor from "./Editor.vue";
-import Preview from "./Preview.vue";
+import Editor from "../components/Editor.vue";
+import Preview from "../components/Preview.vue";
 
 export default {
   name: "LiaScript",
 
+  props: ["editId"],
+
   data() {
+    console.warn("XXX", this.$props.editId);
+
     return {
       preview: undefined,
       firstCode: undefined,
