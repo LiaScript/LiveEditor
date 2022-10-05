@@ -135,6 +135,8 @@
 
 <script lang="ts">
 import { tutorial } from "../ts/views/Helper/Tutorial";
+import Dexie from "../ts/indexDB";
+
 import Editor from "../components/Editor.vue";
 import Preview from "../components/Preview.vue";
 
@@ -173,12 +175,20 @@ export default {
   props: ["storageId", "content"],
 
   data() {
+    let database: Dexie | undefined;
+
+    if (this.$props.storageId) {
+      database = new Dexie();
+      database.maybeInit(this.$props.storageId);
+    }
+
     return {
       preview: undefined,
       previewNotReady: true,
       compilationCounter: 0,
       mode: 0,
       editorIsReady: false,
+      database,
     };
   },
 
@@ -222,6 +232,14 @@ export default {
       this.compilationCounter++;
       if (this.compilationCounter > 1) {
         this.previewNotReady = false;
+
+        if (this.$props.storageId) {
+          const titleMatch = this.$refs.editor.getValue().match(/^# (.+)/m);
+
+          if (titleMatch) params.title = titleMatch[1];
+
+          this.database.put(this.$props.storageId, params);
+        }
       }
     },
   },
