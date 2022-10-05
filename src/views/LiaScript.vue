@@ -64,7 +64,7 @@ export default {
 
   methods: {
     compile(code: string) {
-      console.log("liascript: compile", this.$props.content);
+      console.log("liascript: compile");
 
       if (this.firstCode !== undefined && this.preview) {
         code = this.firstCode;

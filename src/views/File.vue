@@ -15,7 +15,7 @@ import LiaScript from "./LiaScript.vue";
 function errorMsg(url: string, response: string) {
   return `# Ups, something went wrong
   
-The following resource with the url:
+The following resource with the URL:
 
 ${url}
 
@@ -25,11 +25,21 @@ It responded with the following error message:
 
 \`${response}\`
 
-Please check if this resource is available, or if your are offline.`;
+**Reasons:**
+
+* The URL is wrong or the resource is not available anymore.
+* Or, you are offline...`;
+}
+
+function replaceURLs(base: string, code: string): string {
+  return code.replace(
+    /(\[[^\]]*\]\()(?!(http:|https:|ipfs:|#|\/\/))\.?\/?([^\)]+)/g,
+    `$1${base}$3`
+  );
 }
 
 export default {
-  name: "File-Editor",
+  name: "LiaScript-FileView",
   props: ["fileUrl"],
   data() {
     return {
@@ -42,6 +52,8 @@ export default {
 
     if (response.ok) {
       this.data = await response.text();
+      const baseURL = this.params.file.replace(/\/[^\/]*$/, "/");
+      this.data = replaceURLs(baseURL, this.data);
     } else {
       this.data = errorMsg(
         this.fileUrl,

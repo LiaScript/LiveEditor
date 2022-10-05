@@ -6,10 +6,8 @@
 import LiaScript from "./LiaScript.vue";
 
 export default {
+  name: "LiaScript-EditView",
   props: ["storageId"],
-  data() {
-    return {};
-  },
   components: { LiaScript },
 };
 </script>
