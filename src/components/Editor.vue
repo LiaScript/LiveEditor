@@ -1,5 +1,6 @@
 <template>
-  <div id="liascript-editor"></div>
+  <div id="liascript-editor">
+  </div>
 </template>
 
 <script lang="ts">
@@ -15,7 +16,7 @@ import * as Utils from "../ts/utils";
 export default {
   name: "Editor",
 
-  props: ["storageId"],
+  props: ["storageId", "content"],
 
   data() {
     return {
@@ -39,7 +40,7 @@ export default {
       }
 
       const editor = monaco.editor.create(div, {
-        value: "",
+        value: code,
         language: "markdown",
         theme: this.lights ? "vs-light" : "vs-dark",
         automaticLayout: true,
@@ -165,7 +166,7 @@ export default {
   emits: ["compile", "ready"],
 
   mounted() {
-    const editor = this.initEditor("");
+    const editor = this.initEditor(this.content || "");
 
     this.editor = editor;
 

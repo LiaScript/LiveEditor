@@ -14,7 +14,9 @@
           @compile="compile"
           @ready="editorReady"
           :storage-id="$props.storageId"
-        />
+          :content="$props.content"
+        >
+        </Editor>
       </div>
 
       <div class="col-6 w-50 h-100 p-0">
@@ -49,7 +51,7 @@ import Preview from "../components/Preview.vue";
 export default {
   name: "LiaScript",
 
-  props: ["storageId"],
+  props: ["storageId", "content"],
 
   data() {
     return {
@@ -62,7 +64,7 @@ export default {
 
   methods: {
     compile(code: string) {
-      console.log("liascript: compile");
+      console.log("liascript: compile", this.$props.content);
 
       if (this.firstCode !== undefined && this.preview) {
         code = this.firstCode;

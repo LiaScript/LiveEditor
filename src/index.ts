@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import Index from './views/Index.vue'
 import LiaScript from './views/LiaScript.vue'
+import Edit from './views/Edit.vue'
+import File from './views/File.vue'
 
 const pathToRegex = (path) =>
   new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$')
@@ -31,9 +33,9 @@ const router = async () => {
   const routes = [
     { path: '/', view: Index },
     { path: '/edit', view: LiaScript },
-    { path: '/edit/:storageId', view: LiaScript },
+    { path: '/edit/:storageId', view: Edit },
     { path: '/show/code/:zipCode', view: LiaScript },
-    { path: '/show/file/:fileUrl', view: LiaScript },
+    { path: '/show/file/:fileUrl', view: File },
     /*  {
       path: '/export/github/&code=:code&state=:state',
       view: Export,
