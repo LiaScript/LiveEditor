@@ -21,7 +21,6 @@ export default {
     return {
       editor: undefined,
       lights: true,
-      storageId: this.$props.storageId,
 
       user: {
         name: Utils.randomString(),
@@ -115,8 +114,6 @@ export default {
     },
 
     loadFromLocalStorage(editor: any, storageId: string) {
-      console.warn("ssssssssssssssssssssss", storageId);
-
       const yDoc = new Y.Doc();
       const provider = new WebrtcProvider(storageId, yDoc, {
         // @ts-ignore
@@ -125,13 +122,19 @@ export default {
 
       const indexeddbProvider = new IndexeddbPersistence(storageId, yDoc);
 
+      const self = this;
+      indexeddbProvider.on("synced", (event: any) => {
+        console.log("content from the database is loaded");
+        self.$emit("ready", editor.getValue());
+      });
+
       const awareness = provider.awareness;
 
       awareness.setLocalStateField("user", this.user);
 
       let status;
 
-      provider.on("status", (event) => {
+      provider.on("status", (event: any) => {
         console.log("-----------------------------", event.status); // logs "connected" or "disconnected"
         status = event.status;
         if (event.status === "connected") {
@@ -149,8 +152,9 @@ export default {
         }
       });
 
+      const content = yDoc.getText(storageId);
       const monacoBinding = new MonacoBinding(
-        yDoc.getText(this.storageId),
+        content,
         editor.getModel(),
         new Set([editor]),
         awareness
@@ -163,13 +167,13 @@ export default {
   mounted() {
     const editor = this.initEditor("");
 
-    if (this.storageId) {
-      this.loadFromLocalStorage(editor, this.storageId);
-    }
-
     this.editor = editor;
 
-    this.$emit("ready", editor.getValue());
+    if (this.storageId) {
+      this.loadFromLocalStorage(editor, this.storageId);
+    } else {
+      this.$emit("ready", editor.getValue());
+    }
   },
 };
 </script>

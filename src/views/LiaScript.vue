@@ -13,14 +13,28 @@
           class="col w-100 p-0 h-100"
           @compile="compile"
           @ready="editorReady"
-          :storageId="$props.editId"
+          :storage-id="$props.storageId"
         />
       </div>
 
       <div class="col-6 w-50 h-100 p-0">
+        <div
+          v-show="previewNotReady"
+          style="position: absolute; background-color: white; width:50%; height: 100%"
+        >
+          <div
+            class="spinner-grow"
+            style="width: 5rem; height: 5rem; margin-top: 50%; margin-left: 45%; margin-right: 45%;"
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
         <Preview
           @ready="previewReady"
           @update="previewUpdate"
+          :class="{ invisible: previewNotReady }"
         />
       </div>
     </div>
@@ -35,14 +49,14 @@ import Preview from "../components/Preview.vue";
 export default {
   name: "LiaScript",
 
-  props: ["editId"],
+  props: ["storageId"],
 
   data() {
-    console.warn("XXX", this.$props.editId);
-
     return {
       preview: undefined,
+      previewNotReady: true,
       firstCode: undefined,
+      compilationCounter: 0,
     };
   },
 
@@ -50,7 +64,7 @@ export default {
     compile(code: string) {
       console.log("liascript: compile");
 
-      if (this.firstCode !== undefined) {
+      if (this.firstCode !== undefined && this.preview) {
         code = this.firstCode;
         this.firstCode = undefined;
         console.log("liascript: first load");
@@ -82,6 +96,11 @@ export default {
 
     previewUpdate(params: any) {
       console.log("liascript: update", params);
+
+      this.compilationCounter++;
+      if (this.compilationCounter > 1) {
+        this.previewNotReady = false;
+      }
     },
   },
 
@@ -92,5 +111,9 @@ export default {
 <style scoped>
 #liascript {
   height: 100vh;
+}
+
+.invisible {
+  visibility: hidden;
 }
 </style>

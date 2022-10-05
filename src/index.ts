@@ -31,9 +31,9 @@ const router = async () => {
   const routes = [
     { path: '/', view: Index },
     { path: '/edit', view: LiaScript },
-    { path: '/edit/:editId', view: LiaScript },
-    { path: '/show/code/:code', view: LiaScript },
-    { path: '/show/file/:file', view: LiaScript },
+    { path: '/edit/:storageId', view: LiaScript },
+    { path: '/show/code/:zipCode', view: LiaScript },
+    { path: '/show/file/:fileUrl', view: LiaScript },
     /*  {
       path: '/export/github/&code=:code&state=:state',
       view: Export,
