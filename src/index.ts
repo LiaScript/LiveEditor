@@ -22,7 +22,7 @@ const getParams = (match) => {
 }
 
 const navigateTo = (url: string) => {
-  history.pushState(null, undefined, url)
+  history.pushState(null, '', url)
   router()
 }
 
@@ -80,7 +80,7 @@ window.addEventListener('popstate', router)
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('click', (e) => {
-    if (e.target.matches('[data-link]')) {
+    if (e.target && e.target.matches('[data-link]')) {
       e.preventDefault()
       navigateTo(e.target.href)
     }

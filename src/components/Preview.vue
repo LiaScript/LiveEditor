@@ -29,11 +29,13 @@ export default {
 
         // only inject if key has been defined
         if (this.responsiveVoiceKey) {
+          // @ts-ignore
           iframe.contentWindow.LIA.injectResposivevoice(
             this.responsiveVoiceKey
           );
         }
 
+        // @ts-ignore
         this.$emit("ready", iframe.contentWindow.LIA);
       }
 
@@ -46,11 +48,15 @@ export default {
   mounted() {
     const iframe = document.getElementById("liascript-preview");
 
+    // @ts-ignore
     if (iframe && iframe.contentWindow) {
+      // @ts-ignore
       if (!iframe.contentWindow.LIA) {
+        // @ts-ignore
         iframe.contentWindow.LIA = {};
       }
 
+      // @ts-ignore
       iframe.contentWindow.LIA.onReady = this.onReady;
     }
   },

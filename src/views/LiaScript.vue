@@ -148,7 +148,7 @@ import HTMLWorker from "url:monaco-editor/esm/vs/language/html/html.worker.js";
 import TSWorker from "url:monaco-editor/esm/vs/language/typescript/ts.worker.js";
 // @ts-ignore
 import EditorWorker from "url:monaco-editor/esm/vs/editor/editor.worker.js";
-
+// @ts-ignore
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
     if (label === "json") {
