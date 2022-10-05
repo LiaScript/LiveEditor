@@ -13,6 +13,8 @@ import * as monaco from "monaco-editor";
 import { Snippets } from "../ts/views/Helper/Snippets";
 import * as Utils from "../ts/utils";
 
+var editor;
+
 export default {
   name: "Editor",
 
@@ -20,7 +22,6 @@ export default {
 
   data() {
     return {
-      editor: undefined,
       lights: true,
 
       user: {
@@ -31,6 +32,12 @@ export default {
   },
 
   methods: {
+    getValue() {
+      if (editor) {
+        return editor.getValue();
+      }
+    },
+
     initEditor(code: string) {
       const div = document.getElementById("liascript-editor");
 
@@ -166,9 +173,7 @@ export default {
   emits: ["compile", "ready"],
 
   mounted() {
-    const editor = this.initEditor(this.content || "");
-
-    this.editor = editor;
+    editor = this.initEditor(this.content || "");
 
     if (this.storageId) {
       this.loadFromLocalStorage(editor, this.storageId);

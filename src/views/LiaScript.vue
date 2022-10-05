@@ -67,6 +67,16 @@
           </label>
         </div>
       </div>
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary me-2 px-3"
+        @click="compile()"
+        title="Compile (Ctrl+S)"
+      >
+        <i class="bi bi-arrow-counterclockwise"></i>
+      </button>
+
     </div>
   </nav>
 
@@ -90,6 +100,7 @@
           @ready="editorReady"
           :storage-id="$props.storageId"
           :content="$props.content"
+          ref="editor"
         >
         </Editor>
       </div>
@@ -147,7 +158,7 @@ export default {
       this.mode = mode;
     },
 
-    compile(code: string) {
+    compile(code?: string) {
       console.log("liascript: compile");
 
       if (this.firstCode !== undefined && this.preview) {
@@ -157,7 +168,11 @@ export default {
       }
 
       if (this.preview) {
-        if (code.trim().length == 0) {
+        if (code === undefined) {
+          code = this.$refs.editor.getValue();
+        }
+
+        if (typeof code == "string" && code.trim().length == 0) {
           code = tutorial;
         }
 
