@@ -72,7 +72,7 @@ export default {
         // Method that will be executed when the action is triggered.
         // @param editor The editor instance is passed in as a convenience
         run: function (_: any) {
-          self.$emit("compile", editor.getValue());
+          self.$emit("compile");
         },
       });
 

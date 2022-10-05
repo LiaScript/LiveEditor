@@ -147,9 +147,9 @@ export default {
     return {
       preview: undefined,
       previewNotReady: true,
-      firstCode: undefined,
       compilationCounter: 0,
       mode: 0,
+      editorIsReady: false,
     };
   },
 
@@ -158,21 +158,13 @@ export default {
       this.mode = mode;
     },
 
-    compile(code?: string) {
+    compile() {
       console.log("liascript: compile");
 
-      if (this.firstCode !== undefined && this.preview) {
-        code = this.firstCode;
-        this.firstCode = undefined;
-        console.log("liascript: first load");
-      }
+      if (this.preview && this.editorIsReady) {
+        let code = this.$refs.editor.getValue();
 
-      if (this.preview) {
-        if (code === undefined) {
-          code = this.$refs.editor.getValue();
-        }
-
-        if (typeof code == "string" && code.trim().length == 0) {
+        if (code.trim().length == 0) {
           code = tutorial;
         }
 
@@ -183,16 +175,16 @@ export default {
       }
     },
 
-    editorReady(code: string) {
+    editorReady() {
       console.log("liascript: editor ready");
-      this.firstCode = code;
-      this.compile("");
+      this.editorIsReady = true;
+      this.compile();
     },
 
     previewReady(preview: any) {
       console.log("liascript: preview ready");
       this.preview = preview;
-      this.compile("");
+      this.compile();
     },
 
     previewUpdate(params: any) {
