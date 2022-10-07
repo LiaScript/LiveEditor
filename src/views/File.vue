@@ -3,6 +3,7 @@
   <LiaScript
     v-if="data"
     :content="data"
+    :file-url="fileUrl"
   >
   </LiaScript>
 </template>

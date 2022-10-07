@@ -127,6 +127,145 @@
               Fork
             </button>
           </div>
+
+          <div class="nav-item dropdown me-4">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Menu
+            </a>
+
+            <ul class="dropdown-menu">
+              <li>
+                <h6 class="dropdown-header fw-light">
+                  Share editor ...
+                </h6>
+              </li>
+              <li>
+                <span
+                  class="d-inline-block"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  title="Fork this document before you can use this function"
+                >
+                  <button
+                    class="btn dropdown-item btn-link"
+                    @click="shareLink"
+                    :disabled="!storageId"
+                  >
+                    collaboration link
+                  </button>
+                </span>
+              </li>
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="shareCode"
+                >
+                  snapshot url
+                </button>
+              </li>
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="shareFile"
+                >
+                  external resource
+                </button>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <h6 class="dropdown-header fw-light">
+                  Share course via ...
+                </h6>
+              </li>
+              <li>
+                <span
+                  class="d-inline-block"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  title="You have to export this file to GitHub gist before you can use this functionality"
+                >
+                  <a
+                    class="dropdown-item"
+                    :class="{disabled: !storageId}"
+                    href=""
+                    target="_blank"
+                  >
+                    GitHub gist link
+                  </a>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="d-inline-block"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  title="This function is only available if you have shared an external resource"
+                >
+                  <a
+                    class="dropdown-item"
+                    :class="{disabled: !fileUrl}"
+                    :href="'https://LiaScript.github.io/course/?' + fileUrl"
+                    target="_blank"
+                  >
+                    file URL
+                  </a>
+                </span>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <h6 class="dropdown-header fw-light">
+                  Download ...
+                </h6>
+              </li>
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="download"
+                >
+                  README.md
+                </button>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <h6 class="dropdown-header fw-light">
+                  Export to...
+                </h6>
+              </li>
+              <li>
+                <span
+                  class="d-inline-block"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  title="Fork this document before you can use this function"
+                >
+
+                  <a
+                    class="btn dropdown-item btn-link"
+                    :class="{disabled: !storageId}"
+                    aria-current="page"
+                    target="_blank"
+                    href=""
+                    title="Store the document on github"
+                  >
+                    GitHub gist
+                  </a>
+                </span>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
 
@@ -184,6 +323,8 @@
       </div>
     </div>
   </div>
+
+  <Modal ref="modal" />
 </template>
 
 <script lang="ts">
@@ -192,6 +333,9 @@ import Dexie from "../ts/indexDB";
 
 import Editor from "../components/Editor.vue";
 import Preview from "../components/Preview.vue";
+import Modal from "../components/Modal.vue";
+import { urlPath } from "../ts/utils";
+import { compress } from "shrink-string";
 
 // @ts-ignore
 import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
@@ -203,6 +347,7 @@ import HTMLWorker from "url:monaco-editor/esm/vs/language/html/html.worker.js";
 import TSWorker from "url:monaco-editor/esm/vs/language/typescript/ts.worker.js";
 // @ts-ignore
 import EditorWorker from "url:monaco-editor/esm/vs/editor/editor.worker.js";
+
 // @ts-ignore
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
@@ -225,7 +370,7 @@ window.MonacoEnvironment = {
 export default {
   name: "LiaScript",
 
-  props: ["storageId", "content"],
+  props: ["storageId", "content", "fileUrl"],
 
   data() {
     let database: Dexie | undefined;
@@ -248,6 +393,86 @@ export default {
   methods: {
     changeMode(mode: number) {
       this.mode = mode;
+    },
+
+    shareLink() {
+      this.$refs.modal.show(
+        "Collaboration link",
+        `
+        If you share the link below, the editor will be in collaborative mode.
+        Working should also be possible offline, but all connected users will work on the same course.
+        If you did receive this via a collaboration link and want to make a complete new course by yourself, then you will have to click onto the "Fork" button, which will create a complete new version.
+
+        <hr>
+
+        <a target="_blank" href="${window.location.toString()}">
+          ${window.location.toString()}
+        </a>`
+      );
+    },
+
+    shareFile() {
+      const fileUrl = prompt(
+        "please insert the URL of a Markdown file you want to share",
+        ""
+      );
+
+      if (!fileUrl) return;
+
+      this.$refs.modal.show(
+        "External resource",
+        `
+        Use this URL to predefine the content for your share link.
+        In this case the editor will at first try to load the Markdown file and insert its content into the editor.
+        This link will only work if your Markdown file is accessible via the internet.
+                    
+        <hr>
+        
+        <a target="_blank" style="word-break: break-all" href="${urlPath([
+          "show",
+          "file",
+          fileUrl,
+        ])}">
+          ${urlPath(["show", "file", fileUrl])}
+        </a>`
+      );
+    },
+
+    async shareCode() {
+      const zipCode = await compress(this.$refs.editor.getValue());
+
+      this.$refs.modal.show(
+        "Snapshot url",
+        `
+        Snapshots are URLs that contain the entire course defintion.
+        However, this works only for short courses, the longer the course the longer the URL.
+        Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
+        Additionally different browser support different lengths of URLs...
+                    
+        <hr>
+        
+        <a target="_blank" style="word-break: break-all" href="${urlPath([
+          "show",
+          "code",
+          zipCode,
+        ])}">
+          ${urlPath(["show", "code", zipCode])}
+        </a>`
+      );
+    },
+
+    download() {
+      const element = document.createElement("a");
+      element.setAttribute(
+        "href",
+        "data:text/plain;charset=utf-8," +
+          encodeURIComponent(this.$refs.editor.getValue())
+      );
+      element.setAttribute("download", "README.md");
+      element.style.display = "none";
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
     },
 
     fork() {
@@ -301,7 +526,7 @@ export default {
     },
   },
 
-  components: { Editor, Preview },
+  components: { Editor, Preview, Modal },
 };
 </script>
 

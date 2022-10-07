@@ -147,7 +147,7 @@ export default {
 
       const self = this;
       indexeddbProvider.on("synced", (event: any) => {
-        console.log("content from the database is loaded");
+        console.log("liascript: content from the database is loaded");
         self.$emit("ready");
       });
 
