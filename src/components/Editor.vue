@@ -12,6 +12,7 @@ import { MonacoBinding } from "y-monaco";
 import * as monaco from "monaco-editor";
 import { Snippets } from "../ts/views/Helper/Snippets";
 import * as Utils from "../ts/utils";
+import { navigateTo } from "../index";
 
 var editor;
 
@@ -36,6 +37,22 @@ export default {
       if (editor) {
         return editor.getValue();
       }
+    },
+
+    fork() {
+      const id = Utils.randomString(24);
+      const yDoc = new Y.Doc();
+      const yText = yDoc.getText(id);
+
+      yText.insert(0, this.getValue());
+
+      const indexeddbProvider = new IndexeddbPersistence(id, yDoc);
+
+      indexeddbProvider.on("synced", (event: any) => {
+        console.log("liascript: fork");
+
+        navigateTo("?/edit/" + id);
+      });
     },
 
     initEditor(code: string) {
@@ -131,7 +148,7 @@ export default {
       const self = this;
       indexeddbProvider.on("synced", (event: any) => {
         console.log("content from the database is loaded");
-        self.$emit("ready", editor.getValue());
+        self.$emit("ready");
       });
 
       const awareness = provider.awareness;

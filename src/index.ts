@@ -23,7 +23,7 @@ const getParams = (match) => {
   )
 }
 
-const navigateTo = (url: string, replace?: boolean) => {
+export const navigateTo = (url: string, replace?: boolean) => {
   if (replace) {
     history.replaceState(null, '', url)
   } else {

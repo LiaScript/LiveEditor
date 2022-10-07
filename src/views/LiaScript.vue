@@ -78,6 +78,58 @@
         <i class="bi bi-arrow-counterclockwise"></i>
       </button>
 
+      <!-- Drop-Down Navigation -->
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div
+        class="collapse navbar-collapse"
+        id="navbarSupportedContent"
+      >
+
+        <!-- SPAN -->
+        <div class="navbar-nav me-auto mb-lg-0">
+        </div>
+
+        <div class="navbar-nav mb-2 mb-lg-0">
+
+          <div class="nav-item nav-item-sm ml-4 me-4">
+            <a
+              class="nav-link"
+              aria-current="page"
+              href="./?/edit"
+              title="Create a new and empty document"
+              data-link
+            >
+              <i class="bi bi-plus"></i>
+              New
+            </a>
+          </div>
+
+          <div class="nav-item me-4">
+            <button
+              type="button"
+              class="btn nav-link btn-link"
+              @click="fork"
+              title="Create a copy of this document"
+            >
+              <i class="bi bi-bezier2"></i>
+              Fork
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </nav>
 
@@ -196,6 +248,10 @@ export default {
   methods: {
     changeMode(mode: number) {
       this.mode = mode;
+    },
+
+    fork() {
+      this.$refs.editor.fork();
     },
 
     compile() {
