@@ -3,6 +3,8 @@ import Index from './views/Index.vue'
 import Edit from './views/Edit.vue'
 import File from './views/File.vue'
 import Zip from './views/Zip.vue'
+import GitHubExporter from './views/Export/GitHub.vue'
+
 import { randomString } from './ts/utils'
 
 var app
@@ -16,11 +18,17 @@ const getParams = (match) => {
     (result) => result[1]
   )
 
-  return Object.fromEntries(
+  let params = Object.fromEntries(
     keys.map((key, i) => {
       return [key, values[i]]
     })
   )
+
+  if (match.params) {
+    params = { ...params, ...match.params }
+  }
+
+  return params
 }
 
 export const navigateTo = (url: string, replace?: boolean) => {
@@ -43,17 +51,14 @@ const router = async () => {
     { path: '/edit/:storageId', view: Edit },
     { path: '/show/code/:zipCode', view: Zip },
     { path: '/show/file/:fileUrl', view: File },
-    /*  {
+    {
       path: '/export/github/&code=:code&state=:state',
-      view: Export,
-      init: 'github',
+      view: GitHubExporter,
     },
     {
-      path: '/export/github/:exportid',
-      view: Export,
-      init: 'github',
+      path: '/export/github/:exportId',
+      view: GitHubExporter,
     },
-    */
   ]
 
   const potentialMatches = routes.map((route) => {
@@ -61,6 +66,7 @@ const router = async () => {
       route: route,
       result: location.search.slice(1).match(pathToRegex(route.path)),
       redirect: route.redirect,
+      params: route.params,
     }
   })
 

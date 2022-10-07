@@ -256,7 +256,7 @@
                     :class="{disabled: !storageId}"
                     aria-current="page"
                     target="_blank"
-                    href=""
+                    :href="urlPath(['export', 'github', storageId])"
                     title="Store the document on github"
                   >
                     GitHub gist
@@ -334,7 +334,6 @@ import Dexie from "../ts/indexDB";
 import Editor from "../components/Editor.vue";
 import Preview from "../components/Preview.vue";
 import Modal from "../components/Modal.vue";
-import { urlPath } from "../ts/utils";
 import { compress } from "shrink-string";
 
 // @ts-ignore
@@ -391,6 +390,15 @@ export default {
   },
 
   methods: {
+    urlPath(path: string[]) {
+      return (
+        window.location.origin +
+        window.location.pathname +
+        "?/" +
+        path.join("/")
+      );
+    },
+
     changeMode(mode: number) {
       this.mode = mode;
     },
@@ -428,12 +436,12 @@ export default {
                     
         <hr>
         
-        <a target="_blank" style="word-break: break-all" href="${urlPath([
+        <a target="_blank" style="word-break: break-all" href="${this.urlPath([
           "show",
           "file",
           fileUrl,
         ])}">
-          ${urlPath(["show", "file", fileUrl])}
+          ${this.urlPath(["show", "file", fileUrl])}
         </a>`
       );
     },
@@ -451,12 +459,12 @@ export default {
                     
         <hr>
         
-        <a target="_blank" style="word-break: break-all" href="${urlPath([
+        <a target="_blank" style="word-break: break-all" href="${this.urlPath([
           "show",
           "code",
           zipCode,
         ])}">
-          ${urlPath(["show", "code", zipCode])}
+          ${this.urlPath(["show", "code", zipCode])}
         </a>`
       );
     },
