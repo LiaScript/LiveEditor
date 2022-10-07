@@ -97,19 +97,17 @@ export default {
 
           const suggestions: any[] = [];
 
-          if (textUntilPosition.match(/(lia|hili|voice).*$/m)) {
-            for (const snippet of Snippets) {
-              suggestions.push({
-                label: snippet.label,
-                kind: monaco.languages.CompletionItemKind.Text,
-                documentation: snippet.documentation,
-                insertText: snippet.insertText,
-                range: range,
-                command: {
-                  id: "editor.action.insertLineAfter",
-                },
-              });
-            }
+          for (const snippet of Snippets) {
+            suggestions.push({
+              label: snippet.label,
+              kind: monaco.languages.CompletionItemKind.Text,
+              documentation: snippet.documentation,
+              insertText: snippet.insertText,
+              range: range,
+              command: {
+                id: "editor.action.insertLineAfter",
+              },
+            });
           }
 
           return {
