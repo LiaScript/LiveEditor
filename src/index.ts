@@ -1,9 +1,11 @@
 import { createApp } from 'vue'
 import Index from './views/Index.vue'
-import LiaScript from './views/LiaScript.vue'
 import Edit from './views/Edit.vue'
 import File from './views/File.vue'
 import Zip from './views/Zip.vue'
+import { randomString } from './ts/utils'
+
+var app
 
 const pathToRegex = (path) =>
   new RegExp('^' + path.replace(/\//g, '\\/').replace(/:\w+/g, '(.+)') + '$')
@@ -21,8 +23,12 @@ const getParams = (match) => {
   )
 }
 
-const navigateTo = (url: string) => {
-  history.pushState(null, '', url)
+const navigateTo = (url: string, replace?: boolean) => {
+  if (replace) {
+    history.replaceState(null, '', url)
+  } else {
+    history.pushState(null, '', url)
+  }
   router()
 }
 
@@ -33,7 +39,7 @@ const router = async () => {
 
   const routes = [
     { path: '/', view: Index },
-    { path: '/edit', view: LiaScript },
+    { path: '/edit', redirect: '?/edit/' + randomString(24) },
     { path: '/edit/:storageId', view: Edit },
     { path: '/show/code/:zipCode', view: Zip },
     { path: '/show/file/:fileUrl', view: File },
@@ -54,6 +60,7 @@ const router = async () => {
     return {
       route: route,
       result: location.search.slice(1).match(pathToRegex(route.path)),
+      redirect: route.redirect,
     }
   })
 
@@ -68,10 +75,17 @@ const router = async () => {
     }
   }
 
+  if (match.redirect) {
+    navigateTo(match.redirect, true)
+    return
+  }
+
   const params = getParams(match)
   const view = match.route.view
 
-  const app = createApp(view, params)
+  app?.unmount()
+
+  app = createApp(view, params)
 
   app.mount(document.body)
 }

@@ -5,6 +5,7 @@
       <a
         class="navbar-brand"
         href="./"
+        data-link="true"
       >[Title]</a>
 
       <div

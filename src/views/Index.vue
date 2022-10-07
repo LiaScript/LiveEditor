@@ -1,12 +1,86 @@
 <template>
-  Index
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a
+        class="navbar-brand"
+        href="./"
+        data-link
+      >
+        Lia[Index]
+      </a>
+
+      <a
+        class="navbar-brand"
+        href="./examples.html"
+      >
+        Lia[Examples]
+      </a>
+
+      <a
+        type="button"
+        class="btn btn-primary"
+        href="./?/edit"
+        data-link
+      >
+        New note
+      </a>
+    </div>
+  </nav>
+
+  <div
+    class="container mx-0 px-0 pb-5"
+    style="max-width: 100vw !important; height:100%; overflow: scroll"
+  >
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-5">
+
+      <Card
+        v-for="item of courses"
+        :key="item.id"
+        :card-id="item.id"
+        :card-timestamp="item.timestamp"
+        :card-title="item.meta.title"
+        :card-logo="item.meta.logo"
+        :card-version="item.meta.version"
+        :card-comment="item.meta.macro.comment"
+        @drop="drop"
+      />
+
+    </div>
+  </div>
+
 </template>
 
 
 <script lang="ts">
+import Dexie from "../ts/indexDB";
+import Card from "../components/Card.vue";
+
 export default {
   data() {
-    return { data: "hello Data" };
+    const database = new Dexie();
+
+    return {
+      database,
+      courses: [],
+    };
   },
+
+  methods: {
+    async init() {
+      this.courses = await this.database.getAll();
+    },
+
+    drop(id: string) {
+      this.database.drop(id);
+      window.indexedDB.deleteDatabase(id);
+      this.init();
+    },
+  },
+
+  async created() {
+    await this.init();
+  },
+
+  components: { Card },
 };
 </script>
