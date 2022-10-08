@@ -5,6 +5,10 @@
     :content="data"
   >
   </LiaScript>
+
+  <Toast :hidden="error">
+    You can modify and compile this course with Ctrl+S, but if you want to store your changes permanently you have to fork it!
+  </Toast>
 </template>
     
   
@@ -12,6 +16,7 @@
 <script lang="ts">
 import * as Shrink from "shrink-string";
 import LiaScript from "./LiaScript.vue";
+import Toast from "../components/Toast.vue";
 
 function errorMsg(msg: string) {
   return `# Ups, something went wrong
@@ -34,17 +39,19 @@ export default {
   data() {
     return {
       data: undefined,
+      error: true,
     };
   },
 
   async created() {
     try {
       this.data = await Shrink.decompress(this.zipCode);
+      this.error = false;
     } catch (e) {
       this.data = errorMsg(e.message);
     }
   },
 
-  components: { LiaScript },
+  components: { LiaScript, Toast },
 };
 </script>

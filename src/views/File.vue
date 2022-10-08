@@ -6,12 +6,24 @@
     :file-url="fileUrl"
   >
   </LiaScript>
+
+  <Toast>
+    You can modify and compile this course with Ctrl+S, but if you want to store your changes permanently you have to fork it!
+
+    <br>
+    If you want to see the course on LiaScript, click <a
+      :href="'https://LiaScript.github.io/course/?' + fileUrl"
+      target="_blank"
+    >here</a>.
+
+  </Toast>
 </template>
   
 
 
 <script lang="ts">
 import LiaScript from "./LiaScript.vue";
+import Toast from "../components/Toast.vue";
 
 function errorMsg(url: string, response: string) {
   return `# Ups, something went wrong
@@ -53,7 +65,7 @@ export default {
 
     if (response.ok) {
       this.data = await response.text();
-      const baseURL = this.params.file.replace(/\/[^\/]*$/, "/");
+      const baseURL = this.fileUrl.replace(/\/[^\/]*$/, "/");
       this.data = replaceURLs(baseURL, this.data);
     } else {
       this.data = errorMsg(
@@ -62,6 +74,6 @@ export default {
       );
     }
   },
-  components: { LiaScript },
+  components: { LiaScript, Toast },
 };
 </script>

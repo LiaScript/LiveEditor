@@ -203,21 +203,23 @@
                 </span>
               </li>
               <li>
-                <span
+                <div
                   class="d-inline-block"
                   tabindex="0"
+                  style="width: 100%"
                   data-toggle="tooltip"
                   title="This function is only available if you have shared an external resource"
                 >
                   <a
-                    class="dropdown-item"
+                    class="btn dropdown-item btn-link"
                     :class="{disabled: !fileUrl}"
                     :href="'https://LiaScript.github.io/course/?' + fileUrl"
                     target="_blank"
+                    title="open this course on LiaScript"
                   >
                     file URL
                   </a>
-                </span>
+                </div>
               </li>
               <li>
                 <hr class="dropdown-divider">
@@ -246,6 +248,7 @@
               <li>
                 <span
                   class="d-inline-block"
+                  style="width:100%"
                   tabindex="0"
                   data-toggle="tooltip"
                   title="Fork this document before you can use this function"
@@ -267,7 +270,7 @@
           </div>
 
           <span
-            class="btn btn-primary"
+            class="badge bg-primary p-3"
             id="global-users"
           >
             <i class="bi bi-people-fill"></i>
