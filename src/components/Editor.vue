@@ -22,13 +22,11 @@ export default {
   props: ["storageId", "content"],
 
   data() {
-    return {
-      lights: true,
+    const config = Utils.loadConfig();
 
-      user: {
-        name: Utils.randomString(),
-        color: Utils.randomColor(),
-      },
+    return {
+      lights: config.lights,
+      user: config.user,
     };
   },
 
