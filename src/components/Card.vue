@@ -40,6 +40,22 @@
           </small>
         </p>
 
+        <div :hidden="cardGist ? false : true">
+          <hr>
+          <small>
+            Exports:
+          </small>
+
+          <p class="mb-0">
+            <small>
+              <a
+                :href="'https://LiaScript.github.io/course/?' + cardGist"
+                target="_blank"
+              >GitHub gist</a>
+            </small>
+          </p>
+        </div>
+
         <hr :hidden="cardComment ? false : true">
         <p class="mb-0 text-muted"><small>ID: {{ cardId }}</small></p>
       </div>
@@ -74,6 +90,7 @@ export default {
     "cardTimestamp",
     "cardLogo",
     "cardComment",
+    "cardGist",
   ],
   emits: ["drop"],
 

@@ -194,8 +194,8 @@
                 >
                   <a
                     class="dropdown-item"
-                    :class="{disabled: !storageId}"
-                    href=""
+                    :class="{disabled: !meta.meta?.gist_url}"
+                    :href="'https://liascript.github.io/course/?' + meta.meta?.gist_url"
                     target="_blank"
                   >
                     GitHub gist link
@@ -386,6 +386,11 @@ export default {
     if (this.$props.storageId) {
       database = new Dexie();
       database.maybeInit(this.$props.storageId);
+
+      const self = this;
+      database.watch(this.$props.storageId, (meta) => {
+        self.meta = meta;
+      });
     }
 
     return {
@@ -395,6 +400,7 @@ export default {
       mode: 0,
       editorIsReady: false,
       database,
+      meta: {},
     };
   },
 

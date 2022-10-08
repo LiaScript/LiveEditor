@@ -41,7 +41,8 @@
         :card-title="item.meta.title"
         :card-logo="item.meta.logo"
         :card-version="item.meta.version"
-        :card-comment="item.meta.macro.comment"
+        :card-comment="item.meta.macro?.comment"
+        :card-gist="item.meta.gist_url"
         @drop="drop"
       />
 
@@ -58,6 +59,10 @@ import Card from "../components/Card.vue";
 export default {
   data() {
     const database = new Dexie();
+    const self = this;
+    database.watch(null, (e: any) => {
+      self.init();
+    });
 
     return {
       database,

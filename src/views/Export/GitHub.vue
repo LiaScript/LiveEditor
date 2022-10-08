@@ -18,6 +18,8 @@ export default {
 
       if (!config.credentials?.github && id) {
         GitHub.authorize(id);
+      } else {
+        this.step2(id);
       }
     },
 
