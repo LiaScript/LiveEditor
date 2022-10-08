@@ -1,9 +1,8 @@
-import * as Config from '../../../config.json'
 import * as Utils from '../../utils'
 
 function proxy(url: string) {
-  if (Config.proxy) {
-    return Config.proxy + encodeURIComponent(url)
+  if (process.env.PROXY) {
+    return process.env.PROXY + encodeURIComponent(url)
   }
 
   return url
@@ -29,7 +28,7 @@ export function authorize(documentId) {
   const URL = 'https://github.com/login/oauth/authorize/'
 
   window.location.href = addParams(URL, [
-    ['client_id', Config.github.clientId],
+    ['client_id', process.env.GITHUB_CLIENT_ID],
     ['scope', 'gist'],
     ['redirect_uri', Utils.urlPath(['export', 'github']) + '/'],
     ['state', documentId],
@@ -40,8 +39,8 @@ export async function access_token(code: string) {
   const response = await fetch(
     proxy(
       addParams('https://github.com/login/oauth/access_token', [
-        ['client_id', Config.github.clientId],
-        ['client_secret', Config.github.clientSecret],
+        ['client_id', process.env.GITHUB_CLIENT_ID],
+        ['client_secret', process.env.GITHUB_CLIENT_SECRET],
         ['code', code],
       ])
     ),

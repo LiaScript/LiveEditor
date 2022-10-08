@@ -266,6 +266,15 @@
             </ul>
           </div>
 
+          <span
+            class="btn btn-primary"
+            id="global-users"
+          >
+            <i class="bi bi-people-fill"></i>
+            <span id="number_of_users">1</span>
+            ONLINE
+          </span>
+
         </div>
       </div>
 
