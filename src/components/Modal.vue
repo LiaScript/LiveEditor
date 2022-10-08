@@ -51,6 +51,7 @@ export default {
     show(title: string, body: string) {
       this.title = title;
       this.body = body;
+      // @ts-ignore
       const modal = new bootstrap.Modal(document.getElementById("modal"), {
         "data-bs-toggle": "modal",
       });

@@ -24,3 +24,54 @@ export function urlPath(path: string[]) {
     window.location.origin + window.location.pathname + '?/' + path.join('/')
   )
 }
+
+const CONFIG = 'config'
+
+export function loadConfig(): {
+  lights: boolean
+  mode: number
+  user: {
+    name: string
+    color: string
+  }
+  credentials: any
+} {
+  const configString = localStorage.getItem(CONFIG)
+
+  let config
+
+  if (configString) {
+    config = JSON.parse(configString)
+
+    if (!config.credentials) {
+      config.credentials = {}
+      storeConfig(config)
+    }
+  } else {
+    config = {
+      lights: false,
+      mode: 2,
+      user: {
+        name: randomString(),
+        color: randomColor(),
+      },
+      credentials: {},
+    }
+
+    storeConfig(config)
+  }
+
+  return config
+}
+
+export function storeConfig(config: {
+  lights: boolean
+  mode: number
+  user: {
+    name: string
+    color: string
+  }
+  credentials: any
+}) {
+  localStorage.setItem(CONFIG, JSON.stringify(config))
+}

@@ -52,11 +52,11 @@ const router = async () => {
     { path: '/show/code/:zipCode', view: Zip },
     { path: '/show/file/:fileUrl', view: File },
     {
-      path: '/export/github/&code=:code&state=:state',
+      path: '/export/github/&code=:code&state=:stepId2',
       view: GitHubExporter,
     },
     {
-      path: '/export/github/:exportId',
+      path: '/export/github/:stepId1',
       view: GitHubExporter,
     },
   ]
