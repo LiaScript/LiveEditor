@@ -16,7 +16,7 @@ export default {
     };
   },
 
-  emits: ["ready", "update"],
+  emits: ["ready", "update", "goto"],
 
   methods: {
     onReady(params: any) {
@@ -37,6 +37,11 @@ export default {
 
         // @ts-ignore
         this.$emit("ready", iframe.contentWindow.LIA);
+
+        const self = this;
+        iframe.contentWindow.LIA.lineGoto = function (line: number) {
+          self.$emit("goto", line);
+        };
       }
 
       if (params) {

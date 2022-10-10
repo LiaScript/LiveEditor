@@ -307,6 +307,7 @@
           @compile="compile"
           @ready="editorReady"
           @online="online"
+          @goto="gotoPreview"
           :storage-id="$props.storageId"
           :content="$props.content"
           ref="editor"
@@ -335,6 +336,7 @@
         <Preview
           @ready="previewReady"
           @update="previewUpdate"
+          @goto="gotoEditor"
           :class="{ invisible: previewNotReady }"
         />
       </div>
@@ -541,9 +543,17 @@ export default {
     previewReady(preview: any) {
       console.log("liascript: preview ready");
       this.preview = preview;
-      this.preview.lineGoto = this.$refs.editor.goto;
-
       this.compile();
+    },
+
+    gotoEditor(line: number) {
+      if (this.$refs.editor) {
+        this.$refs.editor.gotoLine(line);
+      }
+    },
+
+    gotoPreview(line: number) {
+      if (this.preview) this.preview.gotoLine(line);
     },
 
     previewUpdate(params: any) {

@@ -16,6 +16,7 @@ import { navigateTo } from "../index";
 
 var editor;
 var provider;
+var isCtrlPressed = false;
 
 export default {
   name: "Editor",
@@ -39,7 +40,7 @@ export default {
       }
     },
 
-    goto(line: number) {
+    gotoLine(line: number) {
       if (editor) {
         editor.setPosition({ lineNumber: line + 1, column: 0 });
         editor.revealLineNearTop(line + 1);
@@ -141,6 +142,28 @@ export default {
         },
       });
 
+      monaco.languages.registerCodeActionProvider("markdown", {
+        provideCodeActions(model, range, token) {
+          if (isCtrlPressed) {
+            isCtrlPressed = false;
+            self.$emit("goto", range.startLineNumber);
+          }
+          return undefined;
+        },
+      });
+
+      editor.onKeyDown((e) => {
+        if (e.keyCode == 5) {
+          isCtrlPressed = true;
+        }
+      });
+
+      editor.onKeyUp((e) => {
+        if (e.keyCode == 5) {
+          isCtrlPressed = false;
+        }
+      });
+
       return editor;
     },
 
@@ -197,7 +220,7 @@ export default {
     editor = undefined;
   },
 
-  emits: ["compile", "ready", "online"],
+  emits: ["compile", "ready", "online", "goto"],
 
   mounted() {
     editor = this.initEditor(this.content || "");
