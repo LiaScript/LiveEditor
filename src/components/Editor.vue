@@ -10,11 +10,12 @@ import { IndexeddbPersistence } from "y-indexeddb";
 import { WebrtcProvider } from "y-webrtc";
 import { MonacoBinding } from "y-monaco";
 import * as monaco from "monaco-editor";
-import { Snippets } from "../ts/views/Helper/Snippets";
+import { Snippets } from "../ts/Snippets";
 import * as Utils from "../ts/utils";
 import { navigateTo } from "../index";
 
 var editor;
+var provider;
 
 export default {
   name: "Editor",
@@ -27,6 +28,7 @@ export default {
     return {
       lights: config.lights,
       user: config.user,
+      online: null,
     };
   },
 
@@ -136,10 +138,8 @@ export default {
 
     loadFromLocalStorage(editor: any, storageId: string) {
       const yDoc = new Y.Doc();
-      const provider = new WebrtcProvider(storageId, yDoc, {
-        // @ts-ignore
-        url: "https//signaling.simplewebrtc.com:443/",
-      });
+
+      provider = new WebrtcProvider(storageId, yDoc, {});
 
       const indexeddbProvider = new IndexeddbPersistence(storageId, yDoc);
 
@@ -149,27 +149,28 @@ export default {
         self.$emit("ready");
       });
 
-      const awareness = provider.awareness;
-
-      awareness.setLocalStateField("user", this.user);
-
-      let status;
+      provider.awareness.setLocalStateField("user", this.user);
 
       provider.on("status", (event: any) => {
-        console.log("-----------------------------", event.status); // logs "connected" or "disconnected"
-        status = event.status;
         if (event.status === "connected") {
+          self.online = 1;
+        } else {
+          self.online = 0;
         }
+        self.$emit("online", self.online);
       });
 
-      awareness.on("change", (changes) => {
+      provider.awareness.on("change", (changes: any) => {
         // Whenever somebody updates their awareness information,
         // we log all awareness information from all users.
-        const users = document.getElementById("number_of_users");
 
-        if (users) {
-          users.innerText =
-            "" + Array.from(awareness.getStates().values()).length;
+        const online = Array.from(
+          provider.awareness.getStates().values()
+        ).length;
+
+        if (online != self.online) {
+          self.$emit("online", online);
+          self.online = online;
         }
       });
 
@@ -178,20 +179,29 @@ export default {
         content,
         editor.getModel(),
         new Set([editor]),
-        awareness
+        provider.awareness
       );
     },
   },
 
-  emits: ["compile", "ready"],
+  unmounted() {
+    provider.destroy();
+    editor = undefined;
+  },
+
+  emits: ["compile", "ready", "online"],
 
   mounted() {
     editor = this.initEditor(this.content || "");
 
+    if (provider) {
+      provider.destroy();
+    }
+
     if (this.storageId) {
       this.loadFromLocalStorage(editor, this.storageId);
     } else {
-      this.$emit("ready", editor.getValue());
+      this.$emit("ready");
     }
   },
 };

@@ -6,7 +6,7 @@
 import Dexie from "../../ts/indexDB";
 import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
-import * as GitHub from "../../ts/views/Helper/GitHub";
+import * as GitHub from "../../ts/GitHub";
 import * as Utils from "../../ts/utils";
 
 export default {

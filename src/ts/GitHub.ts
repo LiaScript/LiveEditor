@@ -1,10 +1,6 @@
-import * as Utils from '../../utils'
+import * as Utils from './utils'
 
-console.warn('HAHAHAHAHAHAHAHAHAHAHAHAHAHAH')
-
-// javascript-obfuscator:disable
-
-function proxy(url) {
+function proxy(url: string) {
   if (process.env.PROXY) {
     return process.env.PROXY + encodeURIComponent(url)
   }
@@ -12,7 +8,7 @@ function proxy(url) {
   return url
 }
 
-function addParams(url, params) {
+function addParams(url: string, params: [key: string, value: string][]) {
   if (params.length > 0) {
     url += '?' + params[0][0] + '=' + params[0][1]
 
@@ -24,7 +20,7 @@ function addParams(url, params) {
   return url
 }
 
-function getParams(params) {
+function getParams(params: string) {
   return Object.fromEntries(params.split('&').map((e) => e.split('=')))
 }
 
@@ -39,7 +35,7 @@ export function authorize(documentId) {
   ])
 }
 
-export async function access_token(code) {
+export async function access_token(code: string) {
   const response = await fetch(
     proxy(
       addParams('https://github.com/login/oauth/access_token', [
@@ -60,11 +56,11 @@ export async function access_token(code) {
 }
 
 export async function gistUpload(
-  credentials,
-  title,
-  comment,
-  content,
-  gist_id
+  credentials: any,
+  title: string,
+  comment: string,
+  content: string,
+  gist_id?: string
 ) {
   const gist = {
     description: comment,

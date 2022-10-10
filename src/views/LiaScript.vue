@@ -6,7 +6,9 @@
         class="navbar-brand"
         href="./"
         data-link="true"
-      >[Title]</a>
+      >
+        Lia
+      </a>
 
       <div
         class="btn-toolbar btn-group-sm"
@@ -270,12 +272,14 @@
           </div>
 
           <span
-            class="badge bg-primary p-3"
-            id="global-users"
+            class="badge p-3"
+            :class="{'bg-primary': onlineUsers > 0 , 'bg-secondary': onlineUsers == 0}"
           >
             <i class="bi bi-people-fill"></i>
-            <span id="number_of_users">1</span>
-            ONLINE
+            <span class="mx-1">
+              {{ onlineUsers > 0 ? onlineUsers : '' }}
+            </span>
+            {{ onlineUsers > 0 ? 'ONLINE' : 'OFFLINE'}}
           </span>
 
         </div>
@@ -302,6 +306,7 @@
           class="col w-100 p-0 h-100"
           @compile="compile"
           @ready="editorReady"
+          @online="online"
           :storage-id="$props.storageId"
           :content="$props.content"
           ref="editor"
@@ -340,7 +345,7 @@
 </template>
 
 <script lang="ts">
-import { tutorial } from "../ts/views/Helper/Tutorial";
+import { tutorial } from "../ts/Tutorial";
 import Dexie from "../ts/indexDB";
 
 import Editor from "../components/Editor.vue";
@@ -404,6 +409,7 @@ export default {
       editorIsReady: false,
       database,
       meta: {},
+      onlineUsers: 0,
     };
   },
 
@@ -415,6 +421,10 @@ export default {
         "?/" +
         path.join("/")
       );
+    },
+
+    online(users: number) {
+      this.onlineUsers = users;
     },
 
     changeMode(mode: number) {
@@ -535,7 +545,7 @@ export default {
     },
 
     previewUpdate(params: any) {
-      console.log("liascript: update", params);
+      console.log("liascript: update");
 
       this.compilationCounter++;
       if (this.compilationCounter > 1) {
