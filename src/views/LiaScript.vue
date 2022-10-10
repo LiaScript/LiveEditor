@@ -7,7 +7,7 @@
         href="./"
         data-link="true"
       >
-        Lia
+        LiaEdit
       </a>
 
       <div

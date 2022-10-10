@@ -1,19 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a
-        class="navbar-brand"
-        href="./"
-        data-link
-      >
-        Lia[Index]
-      </a>
-
-      <a
-        class="navbar-brand"
-        href="./examples.html"
-      >
-        Lia[Examples]
+      <a class="navbar-brand">
+        LiaEdit
       </a>
 
       <a
@@ -47,6 +36,15 @@
       />
 
     </div>
+
+    <Footer>
+      This is a collaborative online editor for <a
+        href="https://LiaScript.github.io"
+        target="_blank"
+      >LiaScript</a>.
+      All content is stored only within your browser.
+      If you need some inspiration, check out some of our <a href="./examples.html">examples</a>.
+    </Footer>
   </div>
 
 </template>
@@ -55,6 +53,7 @@
 <script lang="ts">
 import Dexie from "../ts/indexDB";
 import Card from "../components/Card.vue";
+import Footer from "../components/Footer.vue";
 
 export default {
   data() {
@@ -86,6 +85,6 @@ export default {
     await this.init();
   },
 
-  components: { Card },
+  components: { Card, Footer },
 };
 </script>

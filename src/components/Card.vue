@@ -32,6 +32,7 @@
           :src="cardLogo"
           style="width:100%"
           :hidden="cardLogo ? false : true"
+          loading="lazy"
         >
 
         <p class="mb-0">

@@ -6,7 +6,16 @@
         href="./"
         data-link=""
       >
-        Lia[Examples]
+        LiaEdit
+      </a>
+
+      <a
+        type="button"
+        class="btn btn-primary"
+        href="./?/edit"
+        data-link
+      >
+        New note
       </a>
     </div>
   </nav>
@@ -26,6 +35,7 @@
             :src="item.logo"
             class="card-img-top img-fluid"
             style="height: 16rem; object-fit: cover;"
+            loading="lazy"
           >
           <div class="card-body">
             <h5 class="card-title">{{ item.title }}</h5>
@@ -38,10 +48,13 @@
         </div>
       </div>
     </div>
+
+    <Footer />
   </div>
 </template>
   
 <script lang="ts">
+import Footer from "../components/Footer.vue";
 interface Example {
   title: string;
   info: string;
@@ -65,5 +78,6 @@ export default {
     },
   },
   expose: ["init"],
+  components: { Footer },
 };
 </script>
