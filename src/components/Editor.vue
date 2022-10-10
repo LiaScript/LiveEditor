@@ -39,6 +39,14 @@ export default {
       }
     },
 
+    goto(line: number) {
+      if (editor) {
+        editor.setPosition({ lineNumber: line + 1, column: 0 });
+        editor.revealLineNearTop(line + 1);
+        editor.focus();
+      }
+    },
+
     fork() {
       const id = Utils.randomString(24);
       const yDoc = new Y.Doc();

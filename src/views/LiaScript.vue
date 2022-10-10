@@ -541,6 +541,8 @@ export default {
     previewReady(preview: any) {
       console.log("liascript: preview ready");
       this.preview = preview;
+      this.preview.lineGoto = this.$refs.editor.goto;
+
       this.compile();
     },
 
