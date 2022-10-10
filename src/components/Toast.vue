@@ -1,7 +1,8 @@
 <template>
   <div
+    :v-if="visible"
     class="position-fixed bottom-0 end-0 p-3"
-    style="z-index: 11"
+    :style="visible ? 'z-index: 11' : 'z-index: -10'"
   >
     <div
       id="liveToast"
@@ -15,8 +16,8 @@
         <button
           type="button"
           class="btn-close"
-          data-bs-dismiss="toast"
           aria-label="Close"
+          @click="close"
         ></button>
       </div>
       <div class="toast-body">
@@ -31,5 +32,15 @@
 <script lang="ts">
 export default {
   name: "Toast",
+
+  data() {
+    return { visible: true };
+  },
+
+  methods: {
+    close() {
+      this.visible = false;
+    },
+  },
 };
 </script>
