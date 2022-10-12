@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       isReady: false,
-      responsiveVoiceKey: undefined,
+      responsiveVoiceKey: process.env.RESPONSIVEVOICE_KEY,
     };
   },
 
