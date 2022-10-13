@@ -7,7 +7,7 @@
     "build": "rm -rf dist && npm run build:index && npm run build:examples",
     "build:index": "npx parcel build src/index.html --log-level verbose --no-source-maps --public-url ./",
     "build:examples": "npx parcel build src/examples.html --log-level verbose --no-source-maps --public-url ./",
-    "watch": "rm -rf dist && npx parcel serve src/*.html --open --port 4321",
+    "watch": "rm -rf dist && npx parcel serve src/*.html --no-cache --no-source-maps --open --port 4321",
     "webrtc": "PORT=4444 node node_modules/y-webrtc/bin/server.js"
   },
   "author": "",
@@ -18,7 +18,7 @@
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
     "date-format-simple": "^1.1.5",
-    "monaco-editor": "^0.28.1",
+    "monaco-editor": "^0.33.0",
     "parcel": "^2.7.0",
     "shrink-string": "^3.0.11",
     "vue": "^3.2.40",

@@ -88,7 +88,7 @@ export default {
         // A label of the action that will be presented to the user.
         label: "LiaScript compile",
         // An optional array of keybindings for the action.
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S],
+        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
         // A precondition for this action.
         precondition: undefined,
         // A rule to evaluate on top of the precondition in order to dispatch the keybindings.
@@ -216,7 +216,8 @@ export default {
   },
 
   unmounted() {
-    provider.destroy();
+    if (provider) provider.destroy();
+
     editor = undefined;
   },
 
@@ -238,8 +239,28 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #liascript-editor {
   height: 100vh;
+}
+
+.yRemoteSelection {
+  background-color: rgb(250, 129, 0, 0.5);
+}
+.yRemoteSelectionHead {
+  position: absolute;
+  border-left: orange solid 2px;
+  border-top: orange solid 2px;
+  border-bottom: orange solid 2px;
+  height: 100%;
+  box-sizing: border-box;
+}
+.yRemoteSelectionHead::after {
+  position: absolute;
+  content: " ";
+  border: 3px solid orange;
+  border-radius: 4px;
+  left: -4px;
+  top: -5px;
 }
 </style>
