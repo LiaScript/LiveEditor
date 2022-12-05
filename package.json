@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@liascript/editor": "^1.1.0--0.10.24"
+    "@liascript/editor": "^1.1.0--0.10.25"
   },
   "devDependencies": {
     "@parcel/css": "^1.14.0",
