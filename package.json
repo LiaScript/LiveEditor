@@ -23,6 +23,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
     "browserify-zlib": "^0.2.0",
+    "buffer": "^5.7.1",
     "caniuse-lite": "^1.0.30001434",
     "date-format-simple": "^1.1.5",
     "dexie": "^3.2.2",
