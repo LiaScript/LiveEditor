@@ -10,10 +10,10 @@
     "watch": "rm -rf dist && npx parcel serve src/*.html --no-cache --no-source-maps --open --port 4321",
     "webrtc": "PORT=4444 node node_modules/y-webrtc/bin/server.js"
   },
-  "author": "",
+  "author": "André Dietrich",
   "license": "ISC",
   "dependencies": {
-    "@liascript/editor": "^1.1.0--0.10.32"
+    "@liascript/editor": "^1.1.0--0.10.33"
   },
   "devDependencies": {
     "@parcel/css": "^1.14.0",
@@ -24,7 +24,7 @@
     "bootstrap-icons": "^1.10.2",
     "browserify-zlib": "^0.2.0",
     "buffer": "^5.7.1",
-    "caniuse-lite": "^1.0.30001434",
+    "caniuse-lite": "^1.0.30001469",
     "date-format-simple": "^1.1.5",
     "dexie": "^3.2.2",
     "events": "^3.3.0",
