@@ -13,7 +13,7 @@
   "author": "André Dietrich",
   "license": "ISC",
   "dependencies": {
-    "@liascript/editor": "^1.1.0--0.12.1"
+    "@liascript/editor": "^1.1.0--0.12.2"
   },
   "devDependencies": {
     "@parcel/css": "^1.14.0",
