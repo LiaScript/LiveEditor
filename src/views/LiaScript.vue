@@ -205,6 +205,14 @@
                 </span>
               </li>
               <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="shareData"
+                >
+                  data-URI
+                </button>
+              </li>
+              <li>
                 <div
                   class="d-inline-block"
                   tabindex="0"
@@ -472,6 +480,27 @@ export default {
           fileUrl,
         ])}">
           ${this.urlPath(["show", "file", fileUrl])}
+        </a>`
+      );
+    },
+
+    async shareData() {
+      const url =
+        "https://liascript.github.io/course/?data:text/plain;base64," +
+        btoa(this.$refs.editor.getValue());
+
+      this.$refs.modal.show(
+        "Data-Protocol",
+        `
+        The entire content of the course is base64 encoded an put into a data-URI.
+        However, this works only for short courses, the longer the course the longer the URi.
+        Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
+        Additionally different browser support different lengths of URLs...
+                    
+        <hr>
+        
+        <a target="_blank" style="word-break: break-all" href="${url}">
+          ${url}
         </a>`
       );
     },
