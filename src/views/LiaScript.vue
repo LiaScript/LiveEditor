@@ -485,23 +485,46 @@ export default {
     },
 
     async shareData() {
-      const url =
-        "https://liascript.github.io/course/?data:text/plain;base64," +
-        btoa(this.$refs.editor.getValue());
+      let base64 = "";
+      let uriEncode = "";
+
+      try {
+        base64 =
+          "https://liascript.github.io/course/?data:text/plain;base64," +
+          btoa(this.$refs.editor.getValue());
+
+        base64 = `<a target="_blank" style="word-break: break-all" href="${base64}">
+          ${base64}
+        </a>`;
+      } catch (e) {}
+
+      try {
+        uriEncode =
+          "https://liascript.github.io/course/?data:text/plain," +
+          encodeURIComponent(this.$refs.editor.getValue());
+
+        uriEncode = `<a target="_blank" style="word-break: break-all" href="${uriEncode}">
+          ${uriEncode}
+        </a>`;
+      } catch (e) {}
 
       this.$refs.modal.show(
         "Data-Protocol",
         `
-        The entire content of the course is base64 encoded an put into a data-URI.
+        The entire content of the course is base64 encoded or URI-encoded put into a data-URI.
+        Since base64 might fail for certain languages, the URI-encoded URL is generated as well.
         However, this works only for short courses, the longer the course the longer the URi.
         Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
-        Additionally different browser support different lengths of URLs...
-                    
+        Additionally different browser support different lengths of URLs... (Choose the shorter version)
+
         <hr>
         
-        <a target="_blank" style="word-break: break-all" href="${url}">
-          ${url}
-        </a>`
+        ${base64}
+        
+        <hr>
+
+        ${uriEncode}        
+        `
       );
     },
 
