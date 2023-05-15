@@ -170,7 +170,9 @@ export default {
     loadFromLocalStorage(editor: any, storageId: string) {
       const yDoc = new Y.Doc();
 
-      provider = new WebrtcProvider(storageId, yDoc, {});
+      provider = new WebrtcProvider(storageId, yDoc, {
+        signaling: ["wss://y-webrtc-ckynwnzncc.now.sh", "wss://rooms.deno.dev"],
+      });
 
       const indexeddbProvider = new IndexeddbPersistence(storageId, yDoc);
 
