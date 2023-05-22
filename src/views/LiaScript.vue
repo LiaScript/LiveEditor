@@ -363,6 +363,8 @@ import Preview from "../components/Preview.vue";
 import Modal from "../components/Modal.vue";
 import { compress } from "shrink-string";
 
+import pako from "pako";
+
 // @ts-ignore
 import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
 // @ts-ignore
@@ -487,6 +489,7 @@ export default {
     async shareData() {
       let base64 = "";
       let uriEncode = "";
+      let gzip = "";
 
       try {
         base64 =
@@ -508,6 +511,17 @@ export default {
         </a>`;
       } catch (e) {}
 
+      try {
+        gzip = pako.gzip(this.$refs.editor.getValue());
+        gzip =
+          "https://liascript.github.io/course/?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
+          btoa(String.fromCharCode.apply(null, gzip));
+
+        gzip = `<a target="_blank" style="word-break: break-all" href="${gzip}">
+          ${gzip}
+        </a>`;
+      } catch (e) {}
+
       this.$refs.modal.show(
         "Data-Protocol",
         `
@@ -518,12 +532,16 @@ export default {
         Additionally different browser support different lengths of URLs... (Choose the shorter version)
 
         <hr>
+
+        ${gzip}
+
+        <hr>
         
         ${base64}
         
         <hr>
 
-        ${uriEncode}        
+        ${uriEncode}
         `
       );
     },
