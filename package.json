@@ -13,7 +13,7 @@
   "author": "André Dietrich",
   "license": "ISC",
   "dependencies": {
-    "@liascript/editor": "^1.1.1--0.12.2",
+    "@liascript/editor": "^1.1.1--0.12.2-1",
     "pako": "^2.1.0"
   },
   "devDependencies": {
