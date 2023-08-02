@@ -10,6 +10,15 @@
         LiaEdit
       </a>
 
+      <button
+        type="button"
+        class="btn btn-outline-secondary me-2 px-3"
+        @click="switchLights()"
+        title="Switch between light and dark mode"
+      >
+        <i :class="lightMode"></i>
+      </button>
+
       <div
         class="btn-toolbar btn-group-sm"
         role="toolbar"
@@ -375,6 +384,7 @@ import HTMLWorker from "url:monaco-editor/esm/vs/language/html/html.worker.js";
 import TSWorker from "url:monaco-editor/esm/vs/language/typescript/ts.worker.js";
 // @ts-ignore
 import EditorWorker from "url:monaco-editor/esm/vs/editor/editor.worker.js";
+import { editor } from "monaco-editor";
 
 // @ts-ignore
 window.MonacoEnvironment = {
@@ -422,7 +432,14 @@ export default {
       database,
       meta: {},
       onlineUsers: 0,
+      lights: false,
     };
+  },
+
+  computed: {
+    lightMode() {
+      return this.lights ? "bi bi-sun" : "bi bi-moon";
+    },
   },
 
   methods: {
@@ -587,6 +604,10 @@ export default {
       this.$refs.editor.fork();
     },
 
+    switchLights() {
+      this.lights = this.$refs.editor.switchLights();
+    },
+
     compile() {
       console.log("liascript: compile");
 
@@ -607,6 +628,7 @@ export default {
     editorReady() {
       console.log("liascript: editor ready");
       this.editorIsReady = true;
+      this.lights = this.$refs.editor.lights;
       this.compile();
     },
 

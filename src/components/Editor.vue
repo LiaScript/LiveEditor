@@ -21,7 +21,7 @@ var isCtrlPressed = false;
 export default {
   name: "Editor",
 
-  props: ["storageId", "content"],
+  props: ["storageId", "content", "lights"],
 
   data() {
     const config = Utils.loadConfig();
@@ -38,6 +38,23 @@ export default {
       if (editor) {
         return editor.getValue();
       }
+    },
+
+    switchLights() {
+      if (editor) {
+        const config = Utils.loadConfig();
+
+        this.lights = !this.lights;
+        editor.updateOptions({
+          theme: this.lights ? "vs-light" : "vs-dark",
+        });
+
+        config.lights = this.lights;
+
+        Utils.storeConfig(config);
+      }
+
+      return this.lights;
     },
 
     gotoLine(line: number) {
@@ -65,6 +82,8 @@ export default {
     },
 
     initEditor(code: string) {
+      console.warn("XXXXXXXXX", this.lights);
+
       const div = document.getElementById("liascript-editor");
 
       if (!div) {
