@@ -134,7 +134,7 @@
               @click="fork"
               title="Create a copy of this document"
             >
-              <i class="bi bi-bezier2"></i>
+              <i class="bi bi-signpost-split"></i>
               Fork
             </button>
           </div>
@@ -318,6 +318,7 @@
         class="col-6 w-50 p-0 h-100"
         :hidden="mode > 0"
         :class="{'w-50': mode==0, 'w-100': mode!=0}"
+        style="border-right: solid lightgray 2px;"
       >
         <Editor
           class="col w-100 p-0 h-100"
