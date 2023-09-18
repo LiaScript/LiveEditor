@@ -1,4 +1,313 @@
 <template>
+  <nav
+    class="navbar navbar-light bg-light"
+    style="border-top: solid lightgray 2px;
+          border-bottom: solid lightgray 2px;
+          padding: 0px;"
+  >
+    <form
+      class="container-fluid justify-content-start"
+      style="padding: 0px"
+    >
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Bold"
+        @click="make('bold')"
+      >
+        <i class="bi bi-type-bold"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Italic"
+        @click="make('italic')"
+      >
+        <i class="bi bi-type-italic"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Heading"
+        @click="make('header')"
+      >
+        <i class="bi bi-type-h1"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Strikethrough"
+        @click="make('strikethrough')"
+      >
+        <i class="bi bi-type-strikethrough"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Underline"
+        @click="make('underline')"
+      >
+        <i class="bi bi-type-underline"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Superscript"
+        @click="make('superscript')"
+      >
+        <i class="bi bi-superscript"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Code"
+        @click="make('code')"
+      >
+        <i class="bi bi-code-slash"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Executable Code"
+        @click="make('code-executable')"
+      >
+        <i class="bi bi-terminal"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Executable Code Project"
+        @click="make('code-project')"
+      >
+        <i class="bi bi-terminal-split"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Quote"
+        @click="make('quote')"
+      >
+        <i class="bi bi-quote"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="List"
+        @click="make('list-unordered')"
+      >
+        <i class="bi bi-list-ul"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Numbered List"
+        @click="make('list-ordered')"
+      >
+        <i class="bi bi-list-ol"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Check List"
+        @click="make('list-check')"
+      >
+        <i class="bi bi-check-square"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Link"
+        @click="make('link')"
+      >
+        <i class="bi bi-link-45deg"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Image"
+        @click="make('image')"
+      >
+        <i class="bi bi-image"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Audio"
+        @click="make('audio')"
+      >
+        <i class="bi bi-music-note-beamed"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Movie"
+        @click="make('movie')"
+      >
+        <i class="bi bi-youtube"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="oEmbed"
+        @click="make('oembed')"
+      >
+        <i class="bi bi-magic"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Table"
+        @click="make('table')"
+      >
+        <i class="bi bi-table"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Horizontal Line"
+        @click="make('line')"
+      >
+        <i class="bi bi-hr"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Animation"
+        @click="make('animation')"
+      >
+        <i class="bi bi-lightning-fill"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Comment"
+        @click="make('comment')"
+      >
+        <i class="bi bi-chat-square-text"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Speak out loud"
+        @click="make('tts')"
+      >
+        <i class="bi bi-play-circle"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Single Choice Quiz"
+        @click="make('quiz-single-choice')"
+      >
+        <i class="bi bi-x-circle"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Multiple Choice Quiz"
+        @click="make('quiz-multiple-choice')"
+      >
+        <i class="bi bi-x-square"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Text Input Quiz"
+        @click="make('quiz-input')"
+      >
+        <i class="bi bi-input-cursor-text"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Selection Quiz"
+        @click="make('quiz-selection')"
+      >
+        <i class="bi bi-option"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Matrix Quiz"
+        @click="make('quiz-matrix')"
+      >
+        <i class="bi bi-grid-3x3-gap"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Gap Text"
+        @click="make('quiz-gap-text')"
+      >
+        <i class="bi bi-body-text"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Key"
+        @click="make('keyboard')"
+      >
+        <i class="bi bi-keyboard"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Formula"
+        @click="make('formula')"
+      >
+        <i class="bi bi-currency-dollar"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Graph"
+        @click="make('graph')"
+      >
+        <i class="bi bi-graph-down"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="ASCII-Art"
+        @click="make('ascii')"
+      >
+        <i class="bi bi-boxes"></i>
+      </button>
+
+    </form>
+  </nav>
   <div id="liascript-editor">
   </div>
 </template>
@@ -38,6 +347,423 @@ export default {
       if (editor) {
         return editor.getValue();
       }
+    },
+
+    make(cmd: string) {
+      if (!editor) return;
+
+      const position = editor.getPosition();
+      const selection = editor.getSelection();
+      const range = {
+        startLineNumber: selection?.startLineNumber || 1,
+        startColumn: selection?.startColumn || 1,
+        endLineNumber: selection?.endLineNumber || 1,
+        endColumn: selection?.endColumn || 1,
+      };
+      const line = editor.getModel().getLineContent(position.lineNumber);
+      const text = editor.getModel().getValueInRange(selection);
+
+      let op = { range, text: "" };
+      let move = 0;
+
+      switch (cmd) {
+        case "animation": {
+          if (text) {
+            if (text.match(/\n\s*\n/g)) {
+              op.text =
+                "      {{1}}\n<section>\n\n" + text + "\n\n</section>\n";
+            } else {
+              op.text = "      {{1}}\n" + text;
+            }
+          } else {
+            op.text = "      {{1}}\n";
+          }
+          break;
+        }
+
+        case "ascii": {
+          if (text) {
+            op.text = "```ascii\n" + text + "\n```\n";
+          } else {
+            op.text = `\`\`\` ascii
+ +------+   +-----+   +-----+   +-----+
+ |      |   |     |   |     |   |     |      .----. 
+ | Foo  +-->| Bar +---+ Baz |<--+ Moo |     (  🦖  )
+ |  🦅  |   |     |   |     |   |     |      \`----'
+ +--+---+   +-----+   +--+--+   +--o--+
+     \\         A         |        \/
+      \\        |         |       \/
+       V       |         V      \/
+ .-------------+---------------+-------.
+ | Hello here and there and everywhere |
+ '-------------------------------------'
+
+"  https://github.com/andre-dietrich/elm-svgbob/  "
+\`\`\`
+
+`;
+          }
+          break;
+        }
+
+        case "audio": {
+          op.text = "?[](https://)";
+          move = 2;
+          break;
+        }
+
+        case "bold": {
+          op.text = "__" + text + "__";
+          if (text === "") {
+            move = 2;
+          }
+          break;
+        }
+
+        case "code": {
+          if (text) {
+            op.text = "```\n" + text + "\n```";
+          } else {
+            op.text =
+              '``` js\nvar message="Hello World"\nconsole.log(message)\n```';
+          }
+
+          break;
+        }
+
+        case "code-executable": {
+          if (text) {
+            op.text = `\`\`\`\`
+${text}
+\`\`\`
+<script>@input <\/script>
+`;
+          } else {
+            op.text = `\`\`\` js
+var message = "Hello World"
+console.log(message)
+message.length
+\`\`\`
+<script>@input <\/script>
+`;
+          }
+
+          break;
+        }
+
+        case "code-project": {
+          op.text = `\`\`\` js     -EvalScript.js
+let who = data.first_name + " " + data.last_name;
+
+if(data.online) {
+  who + " is online";
+} else {
+  who + " is NOT online";
+}
+\`\`\`
+\`\`\` json    +Data.json
+{
+  "first_name" :  "Sammy",
+  "last_name"  :  "Shark",
+  "online"     :  true
+}
+\`\`\`
+<script>
+  // insert the JSON dataset into the local variable data
+  let data = @input(1);
+
+  // eval the script that uses this dataset
+  eval(\`@input(0)\`);
+<\/script>
+`;
+
+          op.range = {
+            startLineNumber: position.lineNumber || 1,
+            startColumn: 0,
+            endLineNumber: position.lineNumber || 1,
+            endColumn: 1,
+          };
+
+          break;
+        }
+
+        case "comment": {
+          op.text = "    --{{1}}--\n" + text;
+          break;
+        }
+
+        case "graph": {
+          op.range = {
+            startLineNumber: position.lineNumber || 1,
+            startColumn: 0,
+            endLineNumber: position.lineNumber || 1,
+            endColumn: 1,
+          };
+
+          op.text = `                                    Multiline
+    1.9 |
+        |                 ***
+      y |               *     *
+      - | r r r r r r r*r r r r*r r r r r r r
+      a |             *         *
+      x |            *           *
+      i | B B B B B * B B B B B B * B B B B B
+      s |         *                 *
+        | *  * *                       * *  *
+     -1 +------------------------------------
+        0              x-axis               1
+
+`;
+          break;
+        }
+
+        case "formula": {
+          if (text) {
+            op.text = "$$\n" + text + "\n$$\n";
+          } else {
+            op.text = `$$
+   \\sum_{i=1}^{\\infty}{\\frac{1}{n^2}
+        =\\frac{\\pi^2}{6}}
+
+% For more information see: https://katex.org
+$$
+
+`;
+          }
+
+          break;
+        }
+
+        case "header": {
+          op.range = {
+            startLineNumber: position.lineNumber || 1,
+            startColumn: 0,
+            endLineNumber: position.lineNumber || 1,
+            endColumn: 1,
+          };
+
+          op.text =
+            "#" + (line.startsWith(" ") || line.startsWith("#") ? "" : " ");
+
+          break;
+        }
+
+        case "image": {
+          op.text = "![](https://)";
+          move = 2;
+          break;
+        }
+
+        case "italic": {
+          op.text = "_" + text + "_";
+          if (text === "") {
+            move = 1;
+          }
+          break;
+        }
+
+        case "keyboard": {
+          op.text = `<kbd>${text}<\/kbd>`;
+          if (text === "") {
+            move = 5;
+          }
+          break;
+        }
+
+        case "line": {
+          op = {
+            range: {
+              startLineNumber: position.lineNumber || 1,
+              startColumn: 0,
+              endLineNumber: position.lineNumber || 1,
+              endColumn: 1,
+            },
+            text: "---\n\n",
+          };
+
+          break;
+        }
+
+        case "link": {
+          op.text = "[](https://)";
+          move = 1;
+          break;
+        }
+
+        case "list-check": {
+          op.text = "- [ ] " + text.replace(/\n/g, "\n- [ ] ");
+          break;
+        }
+
+        case "list-ordered": {
+          if (text) {
+            const lines = text.split("\n");
+
+            for (let i = 0; i < lines.length; i++) {
+              lines[i] = i + 1 + ". " + lines[i];
+            }
+
+            op.text = lines.join("\n");
+          } else {
+            op.text = "1. ";
+          }
+
+          break;
+        }
+
+        case "list-unordered": {
+          op.text = "* " + text.replace(/\n/g, "\n* ");
+          break;
+        }
+
+        case "movie": {
+          op.text = "!?[](https://)";
+          move = 3;
+          break;
+        }
+
+        case "oembed": {
+          op.text = "??[](https://)";
+          move = 3;
+          break;
+        }
+
+        case "quiz-gap-text": {
+          op = {
+            range: {
+              startLineNumber: position.lineNumber || 1,
+              startColumn: 0,
+              endLineNumber: position.lineNumber || 1,
+              endColumn: 1,
+            },
+            text: `__I (learn) [[  have been learning  ]] English for seven years now.__
+But last year I (not / work) [[ was not working ]] hard enough for English,
+that's why my marks (not / be) _[[ were not ]]_ really that good then.
+As I (pass / want) [[ want to pass ]] my English exam successfully next year,
+I (study) ~[[ am going to study ]]~ harder this term.
+
+`,
+          };
+          break;
+        }
+
+        case "quiz-input": {
+          if (text) {
+            op.text = "[[" + text + "]]";
+          } else {
+            op = {
+              range: {
+                startLineNumber: position.lineNumber || 1,
+                startColumn: 0,
+                endLineNumber: position.lineNumber || 1,
+                endColumn: 1,
+              },
+              text: "[[solution]]",
+            };
+          }
+          break;
+        }
+
+        case "quiz-matrix": {
+          op = {
+            range: {
+              startLineNumber: position.lineNumber || 1,
+              startColumn: 0,
+              endLineNumber: position.lineNumber || 1,
+              endColumn: 1,
+            },
+            text: `- [[male (der)] (female [die]) [neuter (das)]]
+- [    [X]           [ ]             [ ]     ]  Mann - German for man
+- [    ( )           (X)             ( )     ]  Frau - German for woman
+- [    ( )           ( )             (X)     ]  Mädchen - German for girl
+
+`,
+          };
+          break;
+        }
+
+        case "quiz-multiple-choice": {
+          op.text = "- [[ ]] " + text.replace(/\n/g, "\n- [[ ]] ");
+          break;
+        }
+
+        case "quiz-single-choice": {
+          if (text) {
+            op.text = "- [( )] " + text.replace(/\n/g, "\n- [( )] ");
+          } else {
+            op.text = "- [( )] not checked\n- [(X)] checked";
+          }
+
+          break;
+        }
+
+        case "quiz-selection": {
+          if (text) {
+            op.text = "[[(" + text + ") | __wrong__ ]]";
+          } else {
+            op.text = "[[ wrong | __wrong too__ | (solution) ]]";
+          }
+          break;
+        }
+
+        case "quote": {
+          op.text = "> " + text.replace(/\n/g, "\n> ");
+          break;
+        }
+
+        case "strikethrough": {
+          op.text = "~" + text + "~";
+          if (text === "") {
+            move = 1;
+          }
+          break;
+        }
+
+        case "superscript": {
+          op.text = "^" + text + "^";
+          if (text === "") {
+            move = 1;
+          }
+          break;
+        }
+
+        case "table": {
+          op = {
+            range: {
+              startLineNumber: position.lineNumber || 1,
+              startColumn: 0,
+              endLineNumber: position.lineNumber || 1,
+              endColumn: 1,
+            },
+            text: "| Column 1 | Column 2 | Column 3 |\n| -------- | :------: | -------: |\n| Text     |   Text   |     Text |\n\n",
+          };
+
+          break;
+        }
+
+        case "tts": {
+          op.text = "    {{|>}}\n" + text;
+          break;
+        }
+
+        case "underline": {
+          op.text = "~~" + text + "~~";
+          if (text === "") {
+            move = 2;
+          }
+          break;
+        }
+      }
+
+      editor.executeEdits("", [op]);
+
+      if (move) {
+        editor.setPosition({
+          lineNumber: position.lineNumber,
+          column: position.column + move,
+        });
+      }
+      editor.focus();
     },
 
     switchLights() {
@@ -82,8 +808,6 @@ export default {
     },
 
     initEditor(code: string) {
-      console.warn("XXXXXXXXX", this.lights);
-
       const div = document.getElementById("liascript-editor");
 
       if (!div) {
@@ -263,6 +987,10 @@ export default {
 <style>
 #liascript-editor {
   height: 100vh;
+}
+
+.btn-sm {
+  border: 0px !important;
 }
 
 .yRemoteSelection {
