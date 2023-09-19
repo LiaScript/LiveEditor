@@ -66,7 +66,16 @@
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
-        title="Code"
+        title="Inline Code"
+        @click="make('code-inline')"
+      >
+        <i class="bi bi-code"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Code Block"
         @click="make('code')"
       >
         <i class="bi bi-code-slash"></i>
@@ -292,10 +301,20 @@
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
-        title="Formula"
+        title="Inline Formula"
+        @click="make('formula-inline')"
+      >
+        <i class="bi bi-currency-dollar"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Formula Block"
         @click="make('formula')"
       >
         <i class="bi bi-currency-dollar"></i>
+        <i class="bi bi-currency-dollar icon-overlay"></i>
       </button>
 
       <button
@@ -314,6 +333,15 @@
         @click="make('ascii')"
       >
         <i class="bi bi-boxes"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Initialize empty document"
+        @click="make('init')"
+      >
+        <i class="bi bi-rocket-takeoff"></i>
       </button>
 
     </form>
@@ -441,6 +469,14 @@ export default {
           break;
         }
 
+        case "code-inline": {
+          op.text = "`" + text + "`";
+          if (text === "") {
+            move = 1;
+          }
+          break;
+        }
+
         case "code-executable": {
           if (text) {
             op.text = `\`\`\`\`
@@ -544,6 +580,14 @@ $$
           break;
         }
 
+        case "formula-inline": {
+          op.text = "$" + text + "$";
+          if (text === "") {
+            move = 1;
+          }
+          break;
+        }
+
         case "header": {
           op.range = {
             startLineNumber: position.lineNumber || 1,
@@ -561,6 +605,18 @@ $$
         case "image": {
           op.text = "![](https://)";
           move = 2;
+          break;
+        }
+
+        case "init": {
+          for (const el of Snippets) {
+            if (el.label === "lia-init") {
+              editor.setValue(el.insertText);
+
+              break;
+            }
+          }
+
           break;
         }
 
@@ -1004,8 +1060,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
 }
 
 .icon-overlay {
-  top: -6px;
+  top: -8px;
   scale: 0.6;
+  left: -3px;
   position: relative;
   display: inline-block;
   width: 0px;
