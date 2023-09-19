@@ -887,6 +887,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         theme: this.lights ? "vs-light" : "vs-dark",
         automaticLayout: true,
         wordWrap: "on",
+        renderWhitespace: "boundary",
       });
 
       const self = this;
