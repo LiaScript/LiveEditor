@@ -196,6 +196,7 @@
         @click="make('animation')"
       >
         <i class="bi bi-lightning-fill"></i>
+        <i class="bi bi-easel icon-overlay"></i>
       </button>
 
       <button
@@ -204,7 +205,8 @@
         title="Comment"
         @click="make('comment')"
       >
-        <i class="bi bi-chat-square-text"></i>
+        <i class="bi bi-chat-text"></i>
+        <i class="bi bi-easel icon-overlay"></i>
       </button>
 
       <button
@@ -214,6 +216,7 @@
         @click="make('tts')"
       >
         <i class="bi bi-play-circle"></i>
+        <i class="bi bi-easel icon-overlay"></i>
       </button>
 
       <button
@@ -223,6 +226,7 @@
         @click="make('quiz-single-choice')"
       >
         <i class="bi bi-x-circle"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
       </button>
 
       <button
@@ -232,6 +236,7 @@
         @click="make('quiz-multiple-choice')"
       >
         <i class="bi bi-x-square"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
       </button>
 
       <button
@@ -241,6 +246,7 @@
         @click="make('quiz-input')"
       >
         <i class="bi bi-input-cursor-text"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
       </button>
 
       <button
@@ -250,6 +256,7 @@
         @click="make('quiz-selection')"
       >
         <i class="bi bi-option"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
       </button>
 
       <button
@@ -259,6 +266,7 @@
         @click="make('quiz-matrix')"
       >
         <i class="bi bi-grid-3x3-gap"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
       </button>
 
       <button
@@ -268,6 +276,7 @@
         @click="make('quiz-gap-text')"
       >
         <i class="bi bi-body-text"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
       </button>
 
       <button
@@ -277,6 +286,7 @@
         @click="make('keyboard')"
       >
         <i class="bi bi-keyboard"></i>
+
       </button>
 
       <button
@@ -991,6 +1001,14 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
 .btn-sm {
   border: 0px !important;
+}
+
+.icon-overlay {
+  top: -6px;
+  scale: 0.6;
+  position: relative;
+  display: inline-block;
+  width: 0px;
 }
 
 .yRemoteSelection {
