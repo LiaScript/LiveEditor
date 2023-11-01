@@ -952,6 +952,16 @@ I (study) ~[[ am going to study ]]~ harder this term.
       return this.lights;
     },
 
+    getBlob(hash: string) {
+      if (!this.blob) return;
+
+      if (hash.startsWith("/")) {
+        hash = hash.slice(1);
+      }
+
+      return this.blob.get(hash);
+    },
+
     gotoLine(line: number) {
       if (editor) {
         editor.setPosition({ lineNumber: line + 1, column: 0 });

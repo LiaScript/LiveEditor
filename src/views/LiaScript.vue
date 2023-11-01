@@ -355,6 +355,7 @@
           @ready="previewReady"
           @update="previewUpdate"
           @goto="gotoEditor"
+          :fetchError="fetchError"
           :class="{ invisible: previewNotReady }"
         />
       </div>
@@ -624,6 +625,10 @@ export default {
 
         this.preview.jit(code);
       }
+    },
+
+    fetchError(src: string) {
+      return this.$refs.editor.getBlob(src);
     },
 
     editorReady() {
