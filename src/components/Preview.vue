@@ -112,21 +112,6 @@ window.LIA.fetchError = (tag, src) => {
 }
 `;
 
-function createBlob(dataURI: any) {
-  const byteString = atob(dataURI.split(",")[1]);
-  const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
-  const ab = new ArrayBuffer(byteString.length);
-  const ia = new Uint8Array(ab);
-
-  for (let i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
-  }
-
-  const blob = new Blob([ab], { type: mimeString });
-
-  return blob;
-}
-
 export default {
   name: "Preview",
 
@@ -149,7 +134,7 @@ export default {
                 this.sendToLia("inject", {
                   tag: param.tag,
                   src: param.src,
-                  data: createBlob(blob),
+                  data: new Blob([blob]),
                 });
               }
             }

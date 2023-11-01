@@ -410,9 +410,7 @@ var editor;
 var provider;
 var isCtrlPressed = false;
 
-async function fileHash(file) {
-  const arrayBuffer = await file.arrayBuffer();
-
+async function fileHash(arrayBuffer) {
   // Use the subtle crypto API to perform a SHA256 Sum of the file's
   // Array Buffer. The resulting hash is stored in an array buffer
   const hashAsArrayBuffer = await crypto.subtle.digest("SHA-1", arrayBuffer);
@@ -1178,8 +1176,10 @@ I (study) ~[[ am going to study ]]~ harder this term.
           const reader = new FileReader();
 
           reader.onload = async function (e) {
-            const hash = await fileHash(file);
-            const blob = e.target?.result;
+            const blob = new Uint8Array(e.target?.result);
+            const hash = await fileHash(e.target?.result);
+
+            console.warn("liascript: upload", e.target);
 
             if (blob) {
               self.blob.set(hash, blob);
@@ -1189,7 +1189,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
             }
           };
 
-          reader.readAsDataURL(file);
+          reader.readAsArrayBuffer(file);
         }
       };
     };
