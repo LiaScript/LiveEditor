@@ -34,6 +34,7 @@ export default {
       provider.on("synced", async (_: any) => {
         const metaData = await meta;
         const contentData = yDoc.getText(id).toJSON();
+        const blobs = yDoc.getMap("blob").toJSON();
 
         if (!config.credentials?.github) {
           config.credentials.github = await GitHub.access_token(code);
@@ -45,6 +46,7 @@ export default {
           metaData.meta.title,
           metaData.meta.macro?.comment || "",
           contentData,
+          blobs,
           metaData.meta.gist_id
         );
 

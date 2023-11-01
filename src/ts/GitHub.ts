@@ -60,6 +60,7 @@ export async function gistUpload(
   title: string,
   comment: string,
   content: string,
+  blobs: { [key: string]: any },
   gist_id?: string
 ) {
   const gist = {
@@ -72,6 +73,14 @@ export async function gistUpload(
 
   gist.files[filename] = {
     content: content,
+  }
+
+  if (blobs) {
+    for (let name in blobs) {
+      gist.files[name] = {
+        content: blobs[name],
+      }
+    }
   }
 
   if (gist_id) {
@@ -94,7 +103,7 @@ export async function gistUpload(
 
   // the gist does not exist anymore (has been deleted)
   if (json.message == 'Not Found') {
-    return await gistUpload(credentials, title, comment, content)
+    return await gistUpload(credentials, title, comment, content, blobs)
   }
   // probably the user has revoked the credentials,
   // need to revoke ...
