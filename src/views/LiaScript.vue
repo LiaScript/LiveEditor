@@ -261,7 +261,7 @@
                   class="btn dropdown-item btn-link"
                   @click="downloadZip"
                 >
-                  project.zip
+                  Project-{{$props.storageId.slice(0,8)}}.zip
                 </button>
               </li>
               <li>
@@ -624,12 +624,13 @@ export default {
         }
       }
 
+      const fileName = "Project-" + this.$props.storageId.slice(0, 8) + ".zip";
       zip.generateAsync({ type: "blob" }).then(function (content) {
         let url = URL.createObjectURL(content);
 
         const element = document.createElement("a");
         element.href = url;
-        element.setAttribute("download", "package.zip");
+        element.setAttribute("download", fileName);
         element.style.display = "none";
         document.body.appendChild(element);
         element.click();

@@ -963,7 +963,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
     getAllBlobs() {
       if (!this.blob) return;
 
-      const blobs = [];
+      const blobs: any[] = [];
 
       this.blob.forEach((data, name) => {
         blobs.push({ name, data });
