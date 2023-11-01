@@ -68,6 +68,7 @@ window.injectHandler = function (param) {
         if (elem.src == src) {
           const parent = elem.parentNode
           parent.src = url
+          elem.src = url
           parent.load()
           parent.onloadeddata = function() {
             parent.play()
@@ -161,6 +162,7 @@ export default {
 
     return {
       isReady: false,
+      // @ts-ignore
       responsiveVoiceKey: process.env.RESPONSIVEVOICE_KEY,
       sendToLia: null,
     };
