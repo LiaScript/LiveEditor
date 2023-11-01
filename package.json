@@ -29,6 +29,7 @@
     "date-format-simple": "^1.1.5",
     "dexie": "^3.2.2",
     "events": "^3.3.0",
+    "jszip": "^3.10.1",
     "monaco-editor": "^0.39.0",
     "parcel": "^2.8.0",
     "parcel-reporter-multiple-static-file-copier": "^1.0.5",

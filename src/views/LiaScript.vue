@@ -257,6 +257,14 @@
                 </button>
               </li>
               <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="downloadZip"
+                >
+                  project.zip
+                </button>
+              </li>
+              <li>
                 <hr class="dropdown-divider">
               </li>
               <li>
@@ -375,6 +383,7 @@ import Modal from "../components/Modal.vue";
 import { compress } from "shrink-string";
 
 import pako from "pako";
+import JSZip from "jszip";
 
 // @ts-ignore
 import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
@@ -600,6 +609,35 @@ export default {
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
+    },
+
+    downloadZip() {
+      const zip = new JSZip();
+
+      zip.file("README.md", this.$refs.editor.getValue());
+
+      const blobs = this.$refs.editor.getAllBlobs();
+
+      if (blobs) {
+        for (const blob of blobs) {
+          zip.file(blob.name, blob.data);
+        }
+      }
+
+      zip.generateAsync({ type: "blob" }).then(function (content) {
+        let url = URL.createObjectURL(content);
+
+        const element = document.createElement("a");
+        element.href = url;
+        element.setAttribute("download", "package.zip");
+        element.style.display = "none";
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+        element.addEventListener("click", function () {
+          setTimeout(() => URL.revokeObjectURL(url), 30 * 1000);
+        });
+      });
     },
 
     fork() {

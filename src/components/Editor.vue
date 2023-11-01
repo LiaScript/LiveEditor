@@ -960,6 +960,18 @@ I (study) ~[[ am going to study ]]~ harder this term.
       return this.blob.get(hash);
     },
 
+    getAllBlobs() {
+      if (!this.blob) return;
+
+      const blobs = [];
+
+      this.blob.forEach((data, name) => {
+        blobs.push({ name, data });
+      });
+
+      return blobs;
+    },
+
     gotoLine(line: number) {
       if (editor) {
         editor.setPosition({ lineNumber: line + 1, column: 0 });
@@ -1179,11 +1191,19 @@ I (study) ~[[ am going to study ]]~ harder this term.
             const blob = new Uint8Array(e.target?.result);
             const hash = await fileHash(e.target?.result);
 
+            let fileEnding = file.name.split(".").pop();
+
+            if (fileEnding) {
+              fileEnding = "." + fileEnding.toLowerCase();
+            } else {
+              fileEnding = "";
+            }
+
             console.warn("liascript: upload", e.target);
 
             if (blob) {
-              self.blob.set(hash, blob);
-              self.make("upload-" + media, hash);
+              self.blob.set(hash + fileEnding, blob);
+              self.make("upload-" + media, hash + fileEnding);
             } else {
               console.warn("could not load file: ", file);
             }
