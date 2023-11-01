@@ -177,14 +177,13 @@ export default {
 
         // only inject if key has been defined
         if (this.responsiveVoiceKey) {
-          // @ts-ignore
-          iframe.contentWindow.LIA.injectResposivevoice(
+          iframe.contentWindow["LIA"].injectResposivevoice(
             this.responsiveVoiceKey
           );
         }
 
         // @ts-ignore
-        this.$emit("ready", iframe.contentWindow.LIA);
+        this.$emit("ready", iframe.contentWindow["LIA"]);
 
         const self = this;
         iframe.contentWindow["LIA"].lineGoto = function (line: number) {
@@ -210,13 +209,13 @@ export default {
     // @ts-ignore
     if (iframe && iframe.contentWindow) {
       // @ts-ignore
-      if (!iframe.contentWindow.LIA) {
+      if (!iframe.contentWindow["LIA"]) {
         // @ts-ignore
-        iframe.contentWindow.LIA = {};
+        iframe.contentWindow["LIA"] = {};
       }
 
       // @ts-ignore
-      iframe.contentWindow.LIA.onReady = this.onReady;
+      iframe.contentWindow["LIA"].onReady = this.onReady;
     }
   },
 };
