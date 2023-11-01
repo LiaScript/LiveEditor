@@ -171,6 +171,51 @@
         <i class="bi bi-youtube"></i>
       </button>
 
+      <input
+        type="file"
+        id="imageInput"
+        style="display: none;"
+      >
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Upload Image"
+        @click="make('upload-image')"
+      >
+        <i class="bi bi-upload"></i>
+        <i class="bi bi-image icon-overlay"></i>
+      </button>
+
+      <input
+        type="file"
+        id="audioInput"
+        style="display: none;"
+      >
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Upload Audio"
+        @click="make('upload-audio')"
+      >
+        <i class="bi bi-upload"></i>
+        <i class="bi bi-music-note-beamed icon-overlay"></i>
+      </button>
+
+      <input
+        type="file"
+        id="movieInput"
+        style="display: none;"
+      >
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Upload Movie"
+        @click="make('upload-movie')"
+      >
+        <i class="bi bi-upload"></i>
+        <i class="bi bi-youtube icon-overlay"></i>
+      </button>
+
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
@@ -365,6 +410,29 @@ var editor;
 var provider;
 var isCtrlPressed = false;
 
+async function fileHash(file) {
+  const arrayBuffer = await file.arrayBuffer();
+
+  // Use the subtle crypto API to perform a SHA256 Sum of the file's
+  // Array Buffer. The resulting hash is stored in an array buffer
+  const hashAsArrayBuffer = await crypto.subtle.digest("SHA-1", arrayBuffer);
+
+  // To display it as a string we will get the hexadecimal value of
+  // each byte of the array buffer. This gets us an array where each byte
+  // of the array buffer becomes one item in the array
+  const uint8ViewOfHash = new Uint8Array(hashAsArrayBuffer);
+
+  // We then convert it to a regular array so we can convert each item
+  // to hexadecimal strings, where characters of 0-9 or a-f represent
+  // a number between 0 and 15, containing 4 bits of information,
+  // so 2 of them is 8 bits (1 byte).
+  const hashAsString = Array.from(uint8ViewOfHash)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+
+  return hashAsString;
+}
+
 export default {
   name: "Editor",
 
@@ -377,6 +445,8 @@ export default {
       lights: config.lights,
       user: config.user,
       online: null,
+      upload: { image: null, audio: null, movie: null },
+      blob: null,
     };
   },
 
@@ -387,7 +457,7 @@ export default {
       }
     },
 
-    make(cmd: string) {
+    make(cmd: string, data: any = null) {
       if (!editor) return;
 
       const position = editor.getPosition();
@@ -819,6 +889,39 @@ I (study) ~[[ am going to study ]]~ harder this term.
           }
           break;
         }
+
+        case "upload-audio": {
+          if (data) {
+            op.text = `?[](${data})`;
+            move = 2;
+          } else {
+            this.upload.audio.click();
+          }
+
+          break;
+        }
+
+        case "upload-image": {
+          if (data) {
+            op.text = `![](${data})`;
+            move = 2;
+          } else {
+            this.upload.image.click();
+          }
+
+          break;
+        }
+
+        case "upload-movie": {
+          if (data) {
+            op.text = `!?[](${data})`;
+            move = 3;
+          } else {
+            this.upload.movie.click();
+          }
+
+          break;
+        }
       }
 
       editor.executeEdits("", [op]);
@@ -861,6 +964,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
       const id = Utils.randomString(24);
       const yDoc = new Y.Doc();
       const yText = yDoc.getText(id);
+      const yMap = yDoc.getMap("blob");
+
+      this.blob.forEach((value, key) => {
+        yMap.set(key, value);
+      });
 
       yText.insert(0, this.getValue());
 
@@ -1018,6 +1126,8 @@ I (study) ~[[ am going to study ]]~ harder this term.
       });
 
       const content = yDoc.getText(storageId);
+      this.blob = yDoc.getMap("blob");
+
       const monacoBinding = new MonacoBinding(
         content,
         editor.getModel(),
@@ -1046,6 +1156,43 @@ I (study) ~[[ am going to study ]]~ harder this term.
       this.loadFromLocalStorage(editor, this.storageId);
     } else {
       this.$emit("ready");
+    }
+
+    const self = this;
+
+    const eventListener = function (media: string) {
+      return function (event) {
+        const file = event.target.files[0];
+
+        if (file) {
+          const reader = new FileReader();
+
+          reader.onload = async function (e) {
+            const hash = await fileHash(file);
+            const blob = e.target?.result;
+
+            if (blob) {
+              self.blob.set(hash, blob);
+              self.make("upload-" + media, hash);
+            } else {
+              console.warn("could not load file: ", file);
+            }
+          };
+
+          reader.readAsDataURL(file);
+        }
+      };
+    };
+
+    for (let media of ["image", "audio", "movie"]) {
+      this.upload[media] = document.getElementById(media + "Input");
+
+      if (this.upload[media])
+        this.upload[media].addEventListener(
+          "change",
+          eventListener(media),
+          false
+        );
     }
   },
 };

@@ -9,14 +9,16 @@
 export default {
   name: "Preview",
 
+  emits: ["ready", "update", "goto"],
+
+  props: ["fetchError"],
+
   data() {
     return {
       isReady: false,
       responsiveVoiceKey: process.env.RESPONSIVEVOICE_KEY,
     };
   },
-
-  emits: ["ready", "update", "goto"],
 
   methods: {
     onReady(params: any) {
@@ -60,6 +62,16 @@ export default {
         // @ts-ignore
         iframe.contentWindow.LIA = {};
       }
+
+      const self = this;
+      // @ts-ignore
+      iframe.contentWindow.LIA.fetchError = (tag: string, src: string) => {
+        console.error(`Error fetching ${tag} from ${src}`);
+
+        if (self.fetchError) {
+          self.fetchError(tag, src);
+        }
+      };
 
       // @ts-ignore
       iframe.contentWindow.LIA.onReady = this.onReady;
