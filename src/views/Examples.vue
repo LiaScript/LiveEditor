@@ -6,6 +6,11 @@
         href="./"
         data-link=""
       >
+        <img
+          src="../../assets/logo.png"
+          alt="LiaScript"
+          height="28"
+        >
         LiaEdit
       </a>
 
