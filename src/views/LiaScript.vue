@@ -549,8 +549,13 @@ export default {
       );
     },
 
+    bytesInfo(url: string) {
+      return `<code>URL-length: ${url.length} bytes</code><br>`;
+    },
+
     async shareData() {
       let base64 = "";
+
       let uriEncode = "";
       let gzip = "";
 
@@ -559,7 +564,9 @@ export default {
           "https://liascript.github.io/course/?data:text/plain;base64," +
           btoa(this.$refs.editor.getValue());
 
-        base64 = `<a target="_blank" style="word-break: break-all" href="${base64}">
+        base64 =
+          this.bytesInfo(base64) +
+          `<a target="_blank" style="word-break: break-all" href="${base64}">
           ${base64}
         </a>`;
       } catch (e) {}
@@ -569,7 +576,9 @@ export default {
           "https://liascript.github.io/course/?data:text/plain," +
           encodeURIComponent(this.$refs.editor.getValue());
 
-        uriEncode = `<a target="_blank" style="word-break: break-all" href="${uriEncode}">
+        uriEncode =
+          this.bytesInfo(uriEncode) +
+          `<a target="_blank" style="word-break: break-all" href="${uriEncode}">
           ${uriEncode}
         </a>`;
       } catch (e) {}
@@ -580,7 +589,9 @@ export default {
           "https://liascript.github.io/course/?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
           btoa(String.fromCharCode.apply(null, gzip));
 
-        gzip = `<a target="_blank" style="word-break: break-all" href="${gzip}">
+        gzip =
+          this.bytesInfo(gzip) +
+          `<a target="_blank" style="word-break: break-all" href="${gzip}">
           ${gzip}
         </a>`;
       } catch (e) {}
@@ -610,7 +621,11 @@ export default {
     },
 
     async shareCode() {
-      const zipCode = await compress(this.$refs.editor.getValue());
+      const zipCode = this.urlPath([
+        "show",
+        "code",
+        await compress(this.$refs.editor.getValue()),
+      ]);
 
       this.$refs.modal.show(
         "Snapshot url",
@@ -621,13 +636,9 @@ export default {
         Additionally different browser support different lengths of URLs...
                     
         <hr>
-        
-        <a target="_blank" style="word-break: break-all" href="${this.urlPath([
-          "show",
-          "code",
-          zipCode,
-        ])}">
-          ${this.urlPath(["show", "code", zipCode])}
+        ${this.bytesInfo(zipCode)}
+        <a target="_blank" style="word-break: break-all" href="${zipCode}">
+          ${zipCode}
         </a>`
       );
     },
