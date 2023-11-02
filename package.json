@@ -42,8 +42,8 @@
     "vue": "^3.2.45",
     "y-indexeddb": "^9.0.9",
     "y-monaco": "^0.1.4",
-    "y-webrtc": "^10.2.5",
-    "yjs": "^13.6.5"
+    "yjs": "^13.6.5",
+    "y-webrtc": "github:disarticulate/y-webrtc"
   },
   "multipleStaticFileCopier": [
     {
