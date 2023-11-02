@@ -245,7 +245,7 @@
               </li>
               <li>
                 <h6 class="dropdown-header fw-light">
-                  Download ...
+                  Download to ...
                 </h6>
               </li>
               <li>
@@ -261,9 +261,44 @@
                   class="btn dropdown-item btn-link"
                   @click="downloadZip"
                 >
-                  Project-{{$props.storageId.slice(0,8)}}.zip
+                  Project-{{$props?.storageId?.slice(0,8) || "xxxxxxxx"}}.zip
                 </button>
               </li>
+              <!--li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <h6 class="dropdown-header fw-light">
+                  Upload from ...
+                </h6>
+              </li>
+
+              <li>
+                <input
+                  type="file"
+                  id="uploadMarkdown"
+                  style="display: none;"
+                >
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="upload"
+                >
+                  README.md
+                </button>
+              </li>
+              <li>
+                <input
+                  type="file"
+                  id="uploadZip"
+                  style="display: none;"
+                >
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="uploadZip"
+                >
+                  Project.zip
+                </button>
+              </li-->
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -624,7 +659,10 @@ export default {
         }
       }
 
-      const fileName = "Project-" + this.$props.storageId.slice(0, 8) + ".zip";
+      const fileName =
+        "Project-" +
+        (this.$props?.storageId?.slice(0, 8) || "xxxxxxxx") +
+        ".zip";
       zip.generateAsync({ type: "blob" }).then(function (content) {
         let url = URL.createObjectURL(content);
 
