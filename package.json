@@ -43,6 +43,7 @@
     "y-indexeddb": "^9.0.9",
     "y-monaco": "^0.1.4",
     "y-webrtc": "github:disarticulate/y-webrtc",
+    "y-websocket": "^1.5.0",
     "yjs": "^13.6.5"
   },
   "multipleStaticFileCopier": [

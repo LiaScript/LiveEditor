@@ -336,16 +336,86 @@
             </ul>
           </div>
 
-          <span
-            class="badge p-3"
-            :class="{'bg-primary': onlineUsers > 0 , 'bg-secondary': onlineUsers == 0}"
-          >
-            <i class="bi bi-people-fill"></i>
-            <span class="mx-1">
-              {{ onlineUsers > 0 ? onlineUsers : '' }}
-            </span>
-            {{ onlineUsers > 0 ? 'ONLINE' : 'OFFLINE'}}
-          </span>
+          <div class="nav-item dropdown me-4">
+            <button
+              class="btn badge dropdown-toggle p-3"
+              :class="conn.users === 0 ? 'bg-secondary' : 'bg-primary'"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="width: 100%;"
+            >
+              {{ conn.type  }}
+              <i class="bi bi-people-fill mx-1"></i>
+              <span class="mx-1">
+                {{ conn.users > 0 ? conn.users : '' }}
+              </span>
+            </button>
+
+            <ul class="dropdown-menu">
+              <li>
+                <span
+                  class="d-inline-block"
+                  style="width:100%"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  title="Fork this document before you can use this function"
+                >
+
+                  <a
+                    class="btn dropdown-item btn-link"
+                    :class="{disabled: !storageId}"
+                    aria-current="page"
+                    :href="this.urlPath(['edit', storageId])"
+                    title="Store the document on github"
+                  >
+                    Offline
+                  </a>
+                </span>
+              </li>
+
+              <li>
+                <span
+                  class="d-inline-block"
+                  style="width:100%"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  title="Fork this document before you can use this function"
+                >
+
+                  <a
+                    class="btn dropdown-item btn-link"
+                    :class="{disabled: !storageId}"
+                    aria-current="page"
+                    :href="this.urlPath(['edit', storageId, 'webrtc'])"
+                    title="Store the document on github"
+                  >
+                    WebRTC
+                  </a>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="d-inline-block"
+                  style="width:100%"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  title="Fork this document before you can use this function"
+                >
+
+                  <a
+                    class="btn dropdown-item btn-link"
+                    :class="{disabled: !storageId}"
+                    aria-current="page"
+                    :href="this.urlPath(['edit', storageId, 'websocket'])"
+                    title="Store the document on github"
+                  >
+                    Websocket
+                  </a>
+                </span>
+              </li>
+
+            </ul>
+          </div>
 
         </div>
       </div>
@@ -377,6 +447,7 @@
           :storage-id="$props.storageId"
           :content="$props.content"
           ref="editor"
+          :connection="$props.connection"
         >
         </Editor>
       </div>
@@ -459,7 +530,7 @@ window.MonacoEnvironment = {
 export default {
   name: "LiaScript",
 
-  props: ["storageId", "content", "fileUrl"],
+  props: ["storageId", "content", "fileUrl", "connection"],
 
   data() {
     let database: Dexie | undefined;
@@ -474,6 +545,19 @@ export default {
       });
     }
 
+    let connectionType = this.$props.connection || "offline";
+
+    switch (connectionType) {
+      case "webrtc":
+        connectionType = "WebRTC";
+        break;
+      case "websocket":
+        connectionType = "WebSocket";
+        break;
+      default:
+        connectionType = "Offline";
+    }
+
     return {
       preview: undefined,
       previewNotReady: true,
@@ -484,6 +568,10 @@ export default {
       meta: {},
       onlineUsers: 0,
       lights: false,
+      conn: {
+        type: connectionType,
+        users: 0,
+      },
     };
   },
 
@@ -504,7 +592,7 @@ export default {
     },
 
     online(users: number) {
-      this.onlineUsers = users;
+      this.conn.users = users;
     },
 
     changeMode(mode: number) {

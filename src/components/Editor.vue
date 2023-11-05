@@ -400,6 +400,7 @@ import * as Y from "yjs";
 
 import { IndexeddbPersistence } from "y-indexeddb";
 import { WebrtcProvider } from "y-webrtc";
+import { WebsocketProvider } from "y-websocket";
 import { MonacoBinding } from "y-monaco";
 import * as monaco from "monaco-editor";
 import { Snippets } from "../ts/Snippets";
@@ -434,7 +435,7 @@ async function fileHash(arrayBuffer) {
 export default {
   name: "Editor",
 
-  props: ["storageId", "content", "lights"],
+  props: ["storageId", "content", "lights", "connection"],
 
   data() {
     const config = Utils.loadConfig();
@@ -1108,16 +1109,32 @@ I (study) ~[[ am going to study ]]~ harder this term.
     loadFromLocalStorage(editor: any, storageId: string) {
       const yDoc = new Y.Doc();
 
-      provider = new WebrtcProvider(storageId, yDoc, {
-        signaling: [
-          "wss://rooms.deno.dev",
-          "wss://tracker.openwebtorrent.com",
-          "wss://tracker.webtorrent.dev",
-          "wss://tracker.files.fm:7073/announce",
-          "wss://tracker.openwebtorrent.com:443/announce",
-          "wss://tracker.files.fm:7073/announce",
-        ],
-      });
+      switch (this.$props.connection) {
+        case "webrtc": {
+          provider = new WebrtcProvider(storageId, yDoc, {
+            signaling: [
+              "wss://rooms.deno.dev",
+              "wss://tracker.openwebtorrent.com",
+              "wss://tracker.webtorrent.dev",
+              "wss://tracker.files.fm:7073/announce",
+              "wss://tracker.openwebtorrent.com:443/announce",
+              "wss://tracker.files.fm:7073/announce",
+            ],
+          });
+          break;
+        }
+        case "websocket": {
+          provider = new WebsocketProvider(
+            "wss://aamkeaam.com/" + storageId,
+            storageId,
+            yDoc
+          );
+          break;
+        }
+        default: {
+          provider = null;
+        }
+      }
 
       const indexeddbProvider = new IndexeddbPersistence(storageId, yDoc);
 
@@ -1127,31 +1144,32 @@ I (study) ~[[ am going to study ]]~ harder this term.
         self.$emit("ready");
       });
 
-      provider.awareness.setLocalStateField("user", this.user);
+      if (provider) {
+        provider.awareness.setLocalStateField("user", this.user);
 
-      provider.on("status", (event: any) => {
-        if (event.status === "connected") {
-          self.online = 1;
-        } else {
-          self.online = 0;
-        }
-        self.$emit("online", self.online);
-      });
+        provider.on("status", (event: any) => {
+          if (event.status === "connected") {
+            self.online = 1;
+          } else {
+            self.online = 0;
+          }
+          self.$emit("online", self.online);
+        });
 
-      provider.awareness.on("change", (changes: any) => {
-        // Whenever somebody updates their awareness information,
-        // we log all awareness information from all users.
+        provider.awareness.on("change", (changes: any) => {
+          // Whenever somebody updates their awareness information,
+          // we log all awareness information from all users.
 
-        const online = Array.from(
-          provider.awareness.getStates().values()
-        ).length;
+          const online = Array.from(
+            provider.awareness.getStates().values()
+          ).length;
 
-        if (online != self.online) {
-          self.$emit("online", online);
-          self.online = online;
-        }
-      });
-
+          if (online != self.online) {
+            self.$emit("online", online);
+            self.online = online;
+          }
+        });
+      }
       const content = yDoc.getText(storageId);
       this.blob = yDoc.getMap("blob");
 
@@ -1159,7 +1177,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         content,
         editor.getModel(),
         new Set([editor]),
-        provider.awareness
+        provider ? provider.awareness : null
       );
     },
   },

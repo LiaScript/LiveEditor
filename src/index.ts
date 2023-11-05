@@ -48,6 +48,7 @@ const router = async () => {
   const routes = [
     { path: '/', view: Index },
     { path: '/edit', redirect: '?/edit/' + randomString(24) },
+    { path: '/edit/:storageId/:connection', view: Edit },
     { path: '/edit/:storageId', view: Edit },
     { path: '/show/code/:zipCode', view: Zip },
     { path: '/show/file/:fileUrl', view: File },
