@@ -1112,20 +1112,15 @@ I (study) ~[[ am going to study ]]~ harder this term.
       switch (this.$props.connection) {
         case "webrtc": {
           provider = new WebrtcProvider(storageId, yDoc, {
-            signaling: [
+            signaling: process.env?.SIGNALING_SERVER?.split(" ") || [
               "wss://rooms.deno.dev",
-              "wss://tracker.openwebtorrent.com",
-              "wss://tracker.webtorrent.dev",
-              "wss://tracker.files.fm:7073/announce",
-              "wss://tracker.openwebtorrent.com:443/announce",
-              "wss://tracker.files.fm:7073/announce",
             ],
           });
           break;
         }
         case "websocket": {
           provider = new WebsocketProvider(
-            "wss://aamkeaam.com/" + storageId,
+            process.env?.WEBSOCKET_SERVER || "wss://aamkeaam.com/" + storageId,
             storageId,
             yDoc
           );
