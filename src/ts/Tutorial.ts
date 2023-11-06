@@ -79,8 +79,10 @@ You can use the mouse to navigate between the editor and the preview.
 
 ## Collaborative editing
 
-When you create a new document and share its URL this "shall" enable collaborative editing with all users that that have opened this URL are online at the same time.
-You can also edit your content when you are offline, all states will be stored in your browser and all synchronizing will happen between the browsers (using [WebRTC](https://en.wikipedia.org/wiki/WebRTC)).
+When you create a new document you are by default in "Offline" mode.
+Currently you can choose between two collaboration modes, based on "[WebRTC](https://en.wikipedia.org/wiki/WebRTC)" (browser to browser) and the other on on a WebSocket using a server for mirroring all status updates.
+If you are in collaboration mode and share this URL all of your edits and those of other users shall be synced, even if you switch to offline and later reunite with your other peers.
+You can also edit your content entirely offline, all states will be stored in your browser.
 Thus, if you want a course where no external user can change the content, you will have to keep the URL private or you can create a new private copy by clicking on "Fork" at the menu.
 A "fork" will create a new starting point for your document that begins with the last state of your current doc.
 
@@ -104,10 +106,9 @@ Insert the URL of the raw Markdown as if you would share a course and this file 
 
 ## Multimedia
 
-Currently it is not possible to store multimedia-content within this editor, we are working on it ;-)
-
-Thus your will have to relay on external resources (URLs) and link to them.
-But, if you need for example simple diagrams, you can use also the LiaScript ASCII-art features.
+You can also upload and store multimedia-content (images, audio, video) to your browser ;-) ...
+When uploading videos, you should use Chrome, the replay of local videos is somehow slow in Firefox.
+Ff you need for example simple diagrams, you can use also the LiaScript ASCII-art features.
 
 You can copy and paste the following example into your document:
 
