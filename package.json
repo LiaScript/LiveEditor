@@ -4,11 +4,12 @@
   "description": "LiveEditor for LiaScript",
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
-    "build": "rm -rf dist && npm run build:index && npm run build:examples",
+    "build": "rm -rf dist && npm run build:index && npm run build:examples && npm run minify:js && npm run sw",
     "build:index": "npx parcel build src/index.html --log-level verbose --no-source-maps --public-url ./",
     "build:examples": "npx parcel build src/examples.html --log-level verbose --no-source-maps --public-url ./",
     "watch": "rm -rf dist && npx parcel serve src/*.html --no-cache --no-source-maps --open --port 4321",
-    "webrtc": "PORT=4444 node node_modules/y-webrtc/bin/server.js"
+    "webrtc": "PORT=4444 node node_modules/y-webrtc/bin/server.js",
+    "minify:js": "find dist -name \"*.js\" -print0 | xargs -0 -P 4 -I {} sh -c 'before=$(wc -c < {}); minify {} > {}.min && after=$(wc -c < {}.min); if [ ${after} -lt ${before} ]; then mv {}.min {}; reduction=$((${before}-${after})); percent=$(awk \"BEGIN {printf \\\"%.2f\\\", ${reduction}/${before}*100}\"); echo \"{} reduced from ${before} to ${after} bytes (${percent}% reduction)\"; else rm {}.min; echo \"{} no reduction achieved, file size unchanged\"; fi'"
   },
   "author": "André Dietrich",
   "license": "ISC",
@@ -18,8 +19,10 @@
   },
   "devDependencies": {
     "@parcel/css": "^1.14.0",
+    "@parcel/packager-raw-url": "^2.9.2",
     "@parcel/transformer-sass": "^2.8.0",
     "@parcel/transformer-vue": "^2.8.0",
+    "@parcel/transformer-webmanifest": "^2.9.2",
     "assert": "^2.0.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.2",
@@ -40,6 +43,7 @@
     "shrink-string": "^3.0.11",
     "stream-browserify": "^3.0.0",
     "vue": "^3.2.45",
+    "workbox-cli": "^7.0.0",
     "y-indexeddb": "^9.0.9",
     "y-monaco": "^0.1.4",
     "y-webrtc": "github:disarticulate/y-webrtc",
