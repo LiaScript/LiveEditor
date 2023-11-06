@@ -1,5 +1,11 @@
 {
   "extends": "@parcel/config-default",
-  "reporters": ["...", "parcel-reporter-multiple-static-file-copier"],
-  "resolvers": ["parcel-resolver-ignore", "..."]
+  "reporters": [
+    "...",
+    "parcel-reporter-multiple-static-file-copier"
+  ],
+  "resolvers": [
+    "parcel-resolver-ignore",
+    "..."
+  ]
 }

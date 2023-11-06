@@ -497,13 +497,13 @@ import pako from "pako";
 import JSZip from "jszip";
 
 // @ts-ignore
-import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
+// import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
 // @ts-ignore
-import CSSWorker from "url:monaco-editor/esm/vs/language/css/css.worker.js";
+// import CSSWorker from "url:monaco-editor/esm/vs/language/css/css.worker.js";
 // @ts-ignore
-import HTMLWorker from "url:monaco-editor/esm/vs/language/html/html.worker.js";
+// import HTMLWorker from "url:monaco-editor/esm/vs/language/html/html.worker.js";
 // @ts-ignore
-import TSWorker from "url:monaco-editor/esm/vs/language/typescript/ts.worker.js";
+// import TSWorker from "url:monaco-editor/esm/vs/language/typescript/ts.worker.js";
 // @ts-ignore
 import EditorWorker from "url:monaco-editor/esm/vs/editor/editor.worker.js";
 import { editor } from "monaco-editor";
@@ -511,6 +511,7 @@ import { editor } from "monaco-editor";
 // @ts-ignore
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
+    /*
     if (label === "json") {
       return JSONWorker;
     }
@@ -523,6 +524,7 @@ window.MonacoEnvironment = {
     if (label === "typescript" || label === "javascript") {
       return TSWorker;
     }
+    */
     return EditorWorker;
   },
 };

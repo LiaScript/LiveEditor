@@ -4,12 +4,13 @@
   "description": "LiveEditor for LiaScript",
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
-    "build": "rm -rf dist && npm run build:index && npm run build:examples && npm run minify:js && npm run sw",
-    "build:index": "npx parcel build src/index.html --log-level verbose --no-source-maps --public-url ./",
+    "build": "rm -rf dist && npm run build:index && npm run minify:js && npm run sw",
+    "build:index": "npx parcel build src/index.html src/examples.html --log-level verbose --no-source-maps --public-url ./",
     "build:examples": "npx parcel build src/examples.html --log-level verbose --no-source-maps --public-url ./",
     "watch": "rm -rf dist && npx parcel serve src/*.html --no-cache --no-source-maps --open --port 4321",
     "webrtc": "PORT=4444 node node_modules/y-webrtc/bin/server.js",
-    "minify:js": "find dist -name \"*.js\" -print0 | xargs -0 -P 4 -I {} sh -c 'before=$(wc -c < {}); minify {} > {}.min && after=$(wc -c < {}.min); if [ ${after} -lt ${before} ]; then mv {}.min {}; reduction=$((${before}-${after})); percent=$(awk \"BEGIN {printf \\\"%.2f\\\", ${reduction}/${before}*100}\"); echo \"{} reduced from ${before} to ${after} bytes (${percent}% reduction)\"; else rm {}.min; echo \"{} no reduction achieved, file size unchanged\"; fi'"
+    "minify:js": "find dist -name \"*.js\" -print0 | xargs -0 -P 4 -I {} sh -c 'before=$(wc -c < {}); minify {} > {}.min && after=$(wc -c < {}.min); if [ ${after} -lt ${before} ]; then mv {}.min {}; reduction=$((${before}-${after})); percent=$(awk \"BEGIN {printf \\\"%.2f\\\", ${reduction}/${before}*100}\"); echo \"{} reduced from ${before} to ${after} bytes (${percent}% reduction)\"; else rm {}.min; echo \"{} no reduction achieved, file size unchanged\"; fi'",
+    "analyze": "rm -rf dist && npx parcel build --no-source-maps --reporter @parcel/reporter-bundle-analyzer src/index.html"
   },
   "author": "André Dietrich",
   "license": "ISC",
@@ -20,8 +21,9 @@
   "devDependencies": {
     "@parcel/css": "^1.14.0",
     "@parcel/packager-raw-url": "^2.9.2",
-    "@parcel/transformer-sass": "^2.8.0",
-    "@parcel/transformer-vue": "^2.8.0",
+    "@parcel/reporter-bundle-analyzer": "^2.9.2",
+    "@parcel/transformer-sass": "^2.9.2",
+    "@parcel/transformer-vue": "^2.9.2",
     "@parcel/transformer-webmanifest": "^2.9.2",
     "assert": "^2.0.0",
     "bootstrap": "^5.2.3",
@@ -34,7 +36,7 @@
     "events": "^3.3.0",
     "jszip": "^3.10.1",
     "monaco-editor": "^0.39.0",
-    "parcel": "^2.8.0",
+    "parcel": "^2.9.2",
     "parcel-reporter-multiple-static-file-copier": "^1.0.5",
     "parcel-reporter-static-files-copy": "^1.4.0",
     "parcel-resolver-ignore": "^2.1.3",
@@ -61,6 +63,6 @@
     "show/.+"
   ],
   "browserslist": [
-    "cover 94.0%"
+    "cover 80.0%"
   ]
 }
