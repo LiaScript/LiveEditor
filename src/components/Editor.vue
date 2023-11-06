@@ -402,12 +402,12 @@ import { IndexeddbPersistence } from "y-indexeddb";
 import { WebrtcProvider } from "y-webrtc";
 import { WebsocketProvider } from "y-websocket";
 import { MonacoBinding } from "y-monaco";
-import * as monaco from "monaco-editor";
+import { editor, KeyMod, KeyCode, languages } from "monaco-editor";
 import { Snippets } from "../ts/Snippets";
 import * as Utils from "../ts/utils";
 import { navigateTo } from "../index";
 
-var editor;
+var Editor;
 var provider;
 var isCtrlPressed = false;
 
@@ -451,24 +451,24 @@ export default {
 
   methods: {
     getValue() {
-      if (editor) {
-        return editor.getValue();
+      if (Editor) {
+        return Editor.getValue();
       }
     },
 
     make(cmd: string, data: any = null) {
-      if (!editor) return;
+      if (!Editor) return;
 
-      const position = editor.getPosition();
-      const selection = editor.getSelection();
+      const position = Editor.getPosition();
+      const selection = Editor.getSelection();
       const range = {
         startLineNumber: selection?.startLineNumber || 1,
         startColumn: selection?.startColumn || 1,
         endLineNumber: selection?.endLineNumber || 1,
         endColumn: selection?.endColumn || 1,
       };
-      const line = editor.getModel().getLineContent(position.lineNumber);
-      const text = editor.getModel().getValueInRange(selection);
+      const line = Editor.getModel().getLineContent(position.lineNumber);
+      const text = Editor.getModel().getValueInRange(selection);
 
       let op = { range, text: "" };
       let move = 0;
@@ -680,7 +680,7 @@ $$
         case "init": {
           for (const el of Snippets) {
             if (el.label === "lia-init") {
-              editor.setValue(el.insertText);
+              Editor.setValue(el.insertText);
 
               break;
             }
@@ -923,23 +923,23 @@ I (study) ~[[ am going to study ]]~ harder this term.
         }
       }
 
-      editor.executeEdits("", [op]);
+      Editor.executeEdits("", [op]);
 
       if (move) {
-        editor.setPosition({
+        Editor.setPosition({
           lineNumber: position.lineNumber,
           column: position.column + move,
         });
       }
-      editor.focus();
+      Editor.focus();
     },
 
     switchLights() {
-      if (editor) {
+      if (Editor) {
         const config = Utils.loadConfig();
 
         this.lights = !this.lights;
-        editor.updateOptions({
+        Editor.updateOptions({
           theme: this.lights ? "vs-light" : "vs-dark",
         });
 
@@ -974,10 +974,10 @@ I (study) ~[[ am going to study ]]~ harder this term.
     },
 
     gotoLine(line: number) {
-      if (editor) {
-        editor.setPosition({ lineNumber: line + 1, column: 0 });
-        editor.revealLineNearTop(line + 1);
-        editor.focus();
+      if (Editor) {
+        Editor.setPosition({ lineNumber: line + 1, column: 0 });
+        Editor.revealLineNearTop(line + 1);
+        Editor.focus();
       }
     },
 
@@ -1010,7 +1010,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         return;
       }
 
-      const editor = monaco.editor.create(div, {
+      const Editor = editor.create(div, {
         value: code,
         language: "markdown",
         theme: this.lights ? "vs-light" : "vs-dark",
@@ -1021,13 +1021,13 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
       const self = this;
 
-      editor.addAction({
+      Editor.addAction({
         // An unique identifier of the contributed action.
         id: "compile",
         // A label of the action that will be presented to the user.
         label: "LiaScript compile",
         // An optional array of keybindings for the action.
-        keybindings: [monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS],
+        keybindings: [KeyMod.CtrlCmd | KeyCode.KeyS],
         // A precondition for this action.
         precondition: undefined,
         // A rule to evaluate on top of the precondition in order to dispatch the keybindings.
@@ -1041,7 +1041,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         },
       });
 
-      monaco.languages.registerCompletionItemProvider("markdown", {
+      languages.registerCompletionItemProvider("markdown", {
         //triggerCharacters: ['['],
         provideCompletionItems: function (model, position, context) {
           const word = model.getWordAtPosition(position);
@@ -1065,7 +1065,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
           for (const snippet of Snippets) {
             suggestions.push({
               label: snippet.label,
-              kind: monaco.languages.CompletionItemKind.Text,
+              kind: languages.CompletionItemKind.Text,
               documentation: snippet.documentation,
               insertText: snippet.insertText,
               range: range,
@@ -1081,7 +1081,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         },
       });
 
-      monaco.languages.registerCodeActionProvider("markdown", {
+      languages.registerCodeActionProvider("markdown", {
         provideCodeActions(model, range, token) {
           if (isCtrlPressed) {
             isCtrlPressed = false;
@@ -1091,19 +1091,19 @@ I (study) ~[[ am going to study ]]~ harder this term.
         },
       });
 
-      editor.onKeyDown((e) => {
+      Editor.onKeyDown((e) => {
         if (e.keyCode == 5) {
           isCtrlPressed = true;
         }
       });
 
-      editor.onKeyUp((e) => {
+      Editor.onKeyUp((e) => {
         if (e.keyCode == 5) {
           isCtrlPressed = false;
         }
       });
 
-      return editor;
+      return Editor;
     },
 
     loadFromLocalStorage(editor: any, storageId: string) {
@@ -1185,20 +1185,20 @@ I (study) ~[[ am going to study ]]~ harder this term.
   unmounted() {
     if (provider) provider.destroy();
 
-    editor = undefined;
+    Editor = undefined;
   },
 
   emits: ["compile", "ready", "online", "goto"],
 
   mounted() {
-    editor = this.initEditor(this.content || "");
+    Editor = this.initEditor(this.content || "");
 
     if (provider) {
       provider.destroy();
     }
 
     if (this.storageId) {
-      this.loadFromLocalStorage(editor, this.storageId);
+      this.loadFromLocalStorage(Editor, this.storageId);
     } else {
       this.$emit("ready");
     }
