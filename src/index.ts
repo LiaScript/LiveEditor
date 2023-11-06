@@ -45,6 +45,11 @@ const router = async () => {
     return
   }
 
+  if (window.location.search.startsWith('?%2F')) {
+    window.location.search = decodeURIComponent(window.location.search)
+    return
+  }
+
   const routes = [
     { path: '/', view: Index },
     { path: '/edit', redirect: '?/edit/' + randomString(24) },
