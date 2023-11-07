@@ -171,10 +171,20 @@
         <i class="bi bi-youtube"></i>
       </button>
 
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="oEmbed"
+        @click="make('oembed')"
+      >
+        <i class="bi bi-magic"></i>
+      </button>
+
       <input
         type="file"
         id="imageInput"
         style="display: none;"
+        accept="image/*"
       >
       <button
         class="btn btn-sm btn-outline-secondary"
@@ -190,6 +200,7 @@
         type="file"
         id="audioInput"
         style="display: none;"
+        accept="audio/*"
       >
       <button
         class="btn btn-sm btn-outline-secondary"
@@ -205,6 +216,7 @@
         type="file"
         id="movieInput"
         style="display: none;"
+        accept="video/*"
       >
       <button
         class="btn btn-sm btn-outline-secondary"
@@ -214,15 +226,6 @@
       >
         <i class="bi bi-upload"></i>
         <i class="bi bi-youtube icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="oEmbed"
-        @click="make('oembed')"
-      >
-        <i class="bi bi-magic"></i>
       </button>
 
       <button
@@ -444,7 +447,11 @@ export default {
       lights: config.lights,
       user: config.user,
       online: null,
-      upload: { image: null, audio: null, movie: null },
+      upload: {
+        image: null,
+        audio: null,
+        movie: null,
+      },
       blob: null,
     };
   },
