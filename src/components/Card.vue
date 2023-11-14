@@ -1,6 +1,67 @@
 <script lang="ts">
 import DateFormat from "date-format-simple";
 
+function mulberry32(a) {
+  return function () {
+    var t = (a += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function hashCode(str: string) {
+  let hash = 0;
+  if (str.length === 0) {
+    return hash;
+  }
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return hash;
+}
+
+function generateLines(id: string) {
+  const random = mulberry32(hashCode(id));
+
+  let html = "";
+
+  const baseHue = random() * 360;
+  const bgColor = `hsl(${baseHue}, 50%, 50%)`;
+  const palette = [
+    `hsl(${baseHue}, 50%, 30%)`,
+    `hsl(${(baseHue + 180) % 360}, 50%, 50%)`,
+    `hsl(${baseHue}, 50%, 100%)`,
+  ];
+
+  html += `<rect x='-20' y='-20' width='200' height='100' fill='${bgColor}' stroke='none'></rect>`;
+
+  for (let i = 10; i > 0; i--) {
+    const x0 = random() * 100;
+    const y0 = random() * 100;
+    const x1 = random() * 100;
+    const y1 = random() * 100;
+    const x2 = random() * 100;
+    const y2 = random() * 100;
+    const a = x2 - x1;
+    const b = y2 - y1;
+    const strokeWidth = i / 20;
+    const hue = baseHue;
+    const color = palette[Math.floor(random() * palette.length)];
+
+    html += `<path fill='none' stroke='${color}' stroke-width='${strokeWidth}' stroke-linejoin='round' stroke-linecap='round' d='M ${x0} ${y0} Q ${
+      x1 - b
+    }  ${y1 - a} ${x1} ${y1} Q ${x1 + b} ${y1 + a} ${x2} ${y2}'/>`;
+    html += `<circle cx='${x0}' cy='${y0}' r='${
+      3 * strokeWidth
+    }' fill='${color}'></circle>`;
+  }
+
+  return html;
+}
+
 export default {
   props: [
     "cardId",
@@ -15,9 +76,11 @@ export default {
 
   data() {
     const dateFormat = new DateFormat(new Date().getTime());
+    const svg = this.$props.cardLogo ? null : generateLines(this.$props.cardId);
 
     return {
       dateFormat,
+      svg,
     };
   },
 
@@ -42,10 +105,38 @@ export default {
     style="height: inherit"
   >
     <div class="card shadow bg-body rounded">
+      <img
+        v-if="cardLogo"
+        :src="cardLogo"
+        class="card-img-top img-fluid"
+        style="height: 12rem; object-fit: cover;"
+        loading="lazy"
+      >
+      <svg
+        v-if="svg"
+        class="card-img-top img-fluid"
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 110 50'
+        style="height: 12rem;"
+        v-html="svg"
+      ></svg>
+
+      <button
+        type="button"
+        class="btn btn-close btn-secondary"
+        aria-label="Delete"
+        @click="drop"
+        style="position: absolute; top: 3px; right: 4px; z-index: 10; background-color: white;"
+      ></button>
+      <p
+        style="padding-left: 5px; position: absolute; top: 10.5rem; left: 0; z-index: 10; background-color: rgba(255, 255, 255, 0.5); width:100%"
+        class="mb-0 text-muted"
+      ><small>ID: {{ cardId }}</small></p>
       <div
         class="card-body"
-        style="margin-bottom: -26px"
+        style="margin-bottom: -16px"
       >
+
         <div class="d-flex justify-content-between">
           <h6
             class="h6 text-truncate"
@@ -53,26 +144,14 @@ export default {
           >
             {{ cardTitle || 'Untitled'}}
           </h6>
-          <button
-            type="button"
-            class="btn btn-close btn-sm"
-            aria-label="Delete"
-            @click="drop"
-          ></button>
+
         </div>
       </div>
-      <hr>
+
       <div
         class="card-body pt-0"
-        style="height: 12rem; overflow: auto"
+        style="height: 4rem; overflow: auto"
       >
-        <img
-          :src="cardLogo"
-          style="width:100%"
-          :hidden="cardLogo ? false : true"
-          loading="lazy"
-        >
-
         <p class="mb-0">
           <small>
             {{ cardComment || '' }}
@@ -95,8 +174,6 @@ export default {
           </p>
         </div>
 
-        <hr :hidden="cardComment ? false : true">
-        <p class="mb-0 text-muted"><small>ID: {{ cardId }}</small></p>
       </div>
 
       <div class="row m-1">
