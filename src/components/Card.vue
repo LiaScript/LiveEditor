@@ -1,3 +1,41 @@
+<script lang="ts">
+import DateFormat from "date-format-simple";
+
+export default {
+  props: [
+    "cardId",
+    "cardTitle",
+    "cardVersion",
+    "cardTimestamp",
+    "cardLogo",
+    "cardComment",
+    "cardGist",
+  ],
+  emits: ["drop"],
+
+  data() {
+    const dateFormat = new DateFormat(new Date().getTime());
+
+    return {
+      dateFormat,
+    };
+  },
+
+  methods: {
+    drop() {
+      this.$emit("drop", this.$props.cardId);
+    },
+
+    createDate(timestamp: number) {
+      const dateObject = new Date(timestamp);
+
+      return this.dateFormat.print(dateObject);
+    },
+  },
+};
+</script>
+
+
 <template>
   <div
     class="col-12 p-2 col-sm-6 col-md-6 col-lg-4 col-xl-3"
@@ -80,39 +118,3 @@
 
 </template>
 
-<script lang="ts">
-import DateFormat from "date-format-simple";
-
-export default {
-  props: [
-    "cardId",
-    "cardTitle",
-    "cardVersion",
-    "cardTimestamp",
-    "cardLogo",
-    "cardComment",
-    "cardGist",
-  ],
-  emits: ["drop"],
-
-  data() {
-    const dateFormat = new DateFormat(new Date().getTime());
-
-    return {
-      dateFormat,
-    };
-  },
-
-  methods: {
-    drop() {
-      this.$emit("drop", this.$props.cardId);
-    },
-
-    createDate(timestamp: number) {
-      const dateObject = new Date(timestamp);
-
-      return this.dateFormat.print(dateObject);
-    },
-  },
-};
-</script>

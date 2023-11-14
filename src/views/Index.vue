@@ -1,3 +1,42 @@
+<script lang="ts">
+import Dexie from "../ts/indexDB";
+import Card from "../components/Card.vue";
+import Footer from "../components/Footer.vue";
+
+export default {
+  data() {
+    const database = new Dexie();
+    const self = this;
+    database.watch(null, (e: any) => {
+      self.init();
+    });
+
+    return {
+      database,
+      courses: [],
+    };
+  },
+
+  methods: {
+    async init() {
+      this.courses = await this.database.getAll();
+    },
+
+    drop(id: string) {
+      this.database.drop(id);
+      window.indexedDB.deleteDatabase(id);
+      this.init();
+    },
+  },
+
+  async created() {
+    await this.init();
+  },
+
+  components: { Card, Footer },
+};
+</script>
+
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -64,41 +103,3 @@
 </template>
 
 
-<script lang="ts">
-import Dexie from "../ts/indexDB";
-import Card from "../components/Card.vue";
-import Footer from "../components/Footer.vue";
-
-export default {
-  data() {
-    const database = new Dexie();
-    const self = this;
-    database.watch(null, (e: any) => {
-      self.init();
-    });
-
-    return {
-      database,
-      courses: [],
-    };
-  },
-
-  methods: {
-    async init() {
-      this.courses = await this.database.getAll();
-    },
-
-    drop(id: string) {
-      this.database.drop(id);
-      window.indexedDB.deleteDatabase(id);
-      this.init();
-    },
-  },
-
-  async created() {
-    await this.init();
-  },
-
-  components: { Card, Footer },
-};
-</script>

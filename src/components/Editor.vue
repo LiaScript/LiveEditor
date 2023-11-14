@@ -1,403 +1,3 @@
-<template>
-  <nav
-    class="navbar navbar-light bg-light"
-    style="border-top: solid lightgray 2px;
-          border-bottom: solid lightgray 2px;
-          padding: 0px;"
-  >
-    <form
-      class="container-fluid justify-content-start"
-      style="padding: 0px"
-    >
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Bold"
-        @click="make('bold')"
-      >
-        <i class="bi bi-type-bold"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Italic"
-        @click="make('italic')"
-      >
-        <i class="bi bi-type-italic"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Heading"
-        @click="make('header')"
-      >
-        <i class="bi bi-type-h1"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Strikethrough"
-        @click="make('strikethrough')"
-      >
-        <i class="bi bi-type-strikethrough"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Underline"
-        @click="make('underline')"
-      >
-        <i class="bi bi-type-underline"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Superscript"
-        @click="make('superscript')"
-      >
-        <i class="bi bi-superscript"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Inline Code"
-        @click="make('code-inline')"
-      >
-        <i class="bi bi-code"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Code Block"
-        @click="make('code')"
-      >
-        <i class="bi bi-code-slash"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Executable Code"
-        @click="make('code-executable')"
-      >
-        <i class="bi bi-terminal"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Executable Code Project"
-        @click="make('code-project')"
-      >
-        <i class="bi bi-terminal-split"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Quote"
-        @click="make('quote')"
-      >
-        <i class="bi bi-quote"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="List"
-        @click="make('list-unordered')"
-      >
-        <i class="bi bi-list-ul"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Numbered List"
-        @click="make('list-ordered')"
-      >
-        <i class="bi bi-list-ol"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Check List"
-        @click="make('list-check')"
-      >
-        <i class="bi bi-check-square"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Link"
-        @click="make('link')"
-      >
-        <i class="bi bi-link-45deg"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Image"
-        @click="make('image')"
-      >
-        <i class="bi bi-image"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Audio"
-        @click="make('audio')"
-      >
-        <i class="bi bi-music-note-beamed"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Movie"
-        @click="make('movie')"
-      >
-        <i class="bi bi-youtube"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="oEmbed"
-        @click="make('oembed')"
-      >
-        <i class="bi bi-magic"></i>
-      </button>
-
-      <input
-        type="file"
-        id="imageInput"
-        style="display: none;"
-        accept="image/*"
-      >
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Upload Image"
-        @click="make('upload-image')"
-      >
-        <i class="bi bi-upload"></i>
-        <i class="bi bi-image icon-overlay"></i>
-      </button>
-
-      <input
-        type="file"
-        id="audioInput"
-        style="display: none;"
-        accept="audio/*"
-      >
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Upload Audio"
-        @click="make('upload-audio')"
-      >
-        <i class="bi bi-upload"></i>
-        <i class="bi bi-music-note-beamed icon-overlay"></i>
-      </button>
-
-      <input
-        type="file"
-        id="movieInput"
-        style="display: none;"
-        accept="video/*"
-      >
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Upload Movie"
-        @click="make('upload-movie')"
-      >
-        <i class="bi bi-upload"></i>
-        <i class="bi bi-youtube icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Table"
-        @click="make('table')"
-      >
-        <i class="bi bi-table"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Horizontal Line"
-        @click="make('line')"
-      >
-        <i class="bi bi-hr"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Animation"
-        @click="make('animation')"
-      >
-        <i class="bi bi-lightning-fill"></i>
-        <i class="bi bi-easel icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Comment"
-        @click="make('comment')"
-      >
-        <i class="bi bi-chat-text"></i>
-        <i class="bi bi-easel icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Speak out loud"
-        @click="make('tts')"
-      >
-        <i class="bi bi-play-circle"></i>
-        <i class="bi bi-easel icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Single Choice Quiz"
-        @click="make('quiz-single-choice')"
-      >
-        <i class="bi bi-x-circle"></i>
-        <i class="bi bi-question-lg icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Multiple Choice Quiz"
-        @click="make('quiz-multiple-choice')"
-      >
-        <i class="bi bi-x-square"></i>
-        <i class="bi bi-question-lg icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Text Input Quiz"
-        @click="make('quiz-input')"
-      >
-        <i class="bi bi-input-cursor-text"></i>
-        <i class="bi bi-question-lg icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Selection Quiz"
-        @click="make('quiz-selection')"
-      >
-        <i class="bi bi-option"></i>
-        <i class="bi bi-question-lg icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Matrix Quiz"
-        @click="make('quiz-matrix')"
-      >
-        <i class="bi bi-grid-3x3-gap"></i>
-        <i class="bi bi-question-lg icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Gap Text"
-        @click="make('quiz-gap-text')"
-      >
-        <i class="bi bi-body-text"></i>
-        <i class="bi bi-question-lg icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Key"
-        @click="make('keyboard')"
-      >
-        <i class="bi bi-keyboard"></i>
-
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Inline Formula"
-        @click="make('formula-inline')"
-      >
-        <i class="bi bi-currency-dollar"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Formula Block"
-        @click="make('formula')"
-      >
-        <i class="bi bi-currency-dollar"></i>
-        <i class="bi bi-currency-dollar icon-overlay"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Graph"
-        @click="make('graph')"
-      >
-        <i class="bi bi-graph-down"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="ASCII-Art"
-        @click="make('ascii')"
-      >
-        <i class="bi bi-boxes"></i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="Initialize empty document"
-        @click="make('init')"
-      >
-        <i class="bi bi-rocket-takeoff"></i>
-      </button>
-
-    </form>
-  </nav>
-  <div id="liascript-editor">
-  </div>
-</template>
-
 <script lang="ts">
 import * as Y from "yjs";
 
@@ -1254,6 +854,409 @@ I (study) ~[[ am going to study ]]~ harder this term.
   },
 };
 </script>
+
+
+<template>
+  <nav
+    class="navbar navbar-light bg-light"
+    style="border-top: solid lightgray 2px;
+          border-bottom: solid lightgray 2px;
+          padding: 0px;"
+  >
+    <form
+      class="container-fluid justify-content-start"
+      style="padding: 0px"
+    >
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Bold"
+        @click="make('bold')"
+      >
+        <i class="bi bi-type-bold"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Italic"
+        @click="make('italic')"
+      >
+        <i class="bi bi-type-italic"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Heading"
+        @click="make('header')"
+      >
+        <i class="bi bi-type-h1"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Strikethrough"
+        @click="make('strikethrough')"
+      >
+        <i class="bi bi-type-strikethrough"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Underline"
+        @click="make('underline')"
+      >
+        <i class="bi bi-type-underline"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Superscript"
+        @click="make('superscript')"
+      >
+        <i class="bi bi-superscript"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Inline Code"
+        @click="make('code-inline')"
+      >
+        <i class="bi bi-code"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Code Block"
+        @click="make('code')"
+      >
+        <i class="bi bi-code-slash"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Executable Code"
+        @click="make('code-executable')"
+      >
+        <i class="bi bi-terminal"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Executable Code Project"
+        @click="make('code-project')"
+      >
+        <i class="bi bi-terminal-split"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Quote"
+        @click="make('quote')"
+      >
+        <i class="bi bi-quote"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="List"
+        @click="make('list-unordered')"
+      >
+        <i class="bi bi-list-ul"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Numbered List"
+        @click="make('list-ordered')"
+      >
+        <i class="bi bi-list-ol"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Check List"
+        @click="make('list-check')"
+      >
+        <i class="bi bi-check-square"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Link"
+        @click="make('link')"
+      >
+        <i class="bi bi-link-45deg"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Image"
+        @click="make('image')"
+      >
+        <i class="bi bi-image"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Audio"
+        @click="make('audio')"
+      >
+        <i class="bi bi-music-note-beamed"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Movie"
+        @click="make('movie')"
+      >
+        <i class="bi bi-youtube"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="oEmbed"
+        @click="make('oembed')"
+      >
+        <i class="bi bi-magic"></i>
+      </button>
+
+      <input
+        type="file"
+        id="imageInput"
+        style="display: none;"
+        accept="image/*"
+      >
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Upload Image"
+        @click="make('upload-image')"
+      >
+        <i class="bi bi-upload"></i>
+        <i class="bi bi-image icon-overlay"></i>
+      </button>
+
+      <input
+        type="file"
+        id="audioInput"
+        style="display: none;"
+        accept="audio/*"
+      >
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Upload Audio"
+        @click="make('upload-audio')"
+      >
+        <i class="bi bi-upload"></i>
+        <i class="bi bi-music-note-beamed icon-overlay"></i>
+      </button>
+
+      <input
+        type="file"
+        id="movieInput"
+        style="display: none;"
+        accept="video/*"
+      >
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Upload Movie"
+        @click="make('upload-movie')"
+      >
+        <i class="bi bi-upload"></i>
+        <i class="bi bi-youtube icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Table"
+        @click="make('table')"
+      >
+        <i class="bi bi-table"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Horizontal Line"
+        @click="make('line')"
+      >
+        <i class="bi bi-hr"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Animation"
+        @click="make('animation')"
+      >
+        <i class="bi bi-lightning-fill"></i>
+        <i class="bi bi-easel icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Comment"
+        @click="make('comment')"
+      >
+        <i class="bi bi-chat-text"></i>
+        <i class="bi bi-easel icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Speak out loud"
+        @click="make('tts')"
+      >
+        <i class="bi bi-play-circle"></i>
+        <i class="bi bi-easel icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Single Choice Quiz"
+        @click="make('quiz-single-choice')"
+      >
+        <i class="bi bi-x-circle"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Multiple Choice Quiz"
+        @click="make('quiz-multiple-choice')"
+      >
+        <i class="bi bi-x-square"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Text Input Quiz"
+        @click="make('quiz-input')"
+      >
+        <i class="bi bi-input-cursor-text"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Selection Quiz"
+        @click="make('quiz-selection')"
+      >
+        <i class="bi bi-option"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Matrix Quiz"
+        @click="make('quiz-matrix')"
+      >
+        <i class="bi bi-grid-3x3-gap"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Gap Text"
+        @click="make('quiz-gap-text')"
+      >
+        <i class="bi bi-body-text"></i>
+        <i class="bi bi-question-lg icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Key"
+        @click="make('keyboard')"
+      >
+        <i class="bi bi-keyboard"></i>
+
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Inline Formula"
+        @click="make('formula-inline')"
+      >
+        <i class="bi bi-currency-dollar"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Formula Block"
+        @click="make('formula')"
+      >
+        <i class="bi bi-currency-dollar"></i>
+        <i class="bi bi-currency-dollar icon-overlay"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Graph"
+        @click="make('graph')"
+      >
+        <i class="bi bi-graph-down"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="ASCII-Art"
+        @click="make('ascii')"
+      >
+        <i class="bi bi-boxes"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="Initialize empty document"
+        @click="make('init')"
+      >
+        <i class="bi bi-rocket-takeoff"></i>
+      </button>
+
+    </form>
+  </nav>
+  <div id="liascript-editor">
+  </div>
+</template>
+
+
 
 <style>
 #liascript-editor {

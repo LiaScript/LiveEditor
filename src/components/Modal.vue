@@ -1,3 +1,30 @@
+<script lang="ts">
+export default {
+  props: ["modalTitle"],
+
+  data() {
+    return {
+      title: "",
+      body: "",
+    };
+  },
+
+  methods: {
+    show(title: string, body: string) {
+      this.title = title;
+      this.body = body;
+      // @ts-ignore
+      const modal = new bootstrap.Modal(document.getElementById("modal"), {
+        "data-bs-toggle": "modal",
+      });
+
+      modal.show();
+    },
+  },
+};
+</script>
+
+
 <template>
   <div
     class="modal fade"
@@ -36,30 +63,5 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  props: ["modalTitle"],
-
-  data() {
-    return {
-      title: "",
-      body: "",
-    };
-  },
-
-  methods: {
-    show(title: string, body: string) {
-      this.title = title;
-      this.body = body;
-      // @ts-ignore
-      const modal = new bootstrap.Modal(document.getElementById("modal"), {
-        "data-bs-toggle": "modal",
-      });
-
-      modal.show();
-    },
-  },
-};
-</script>
 
 

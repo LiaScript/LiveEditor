@@ -1,18 +1,3 @@
-<template>
-
-  <LiaScript
-    v-if="data"
-    :content="data"
-  >
-  </LiaScript>
-
-  <Toast :hidden="error">
-    You can modify and compile this course with Ctrl+S, but if you want to store your changes permanently you have to fork it!
-  </Toast>
-</template>
-    
-  
-  
 <script lang="ts">
 import * as Shrink from "shrink-string";
 import LiaScript from "./LiaScript.vue";
@@ -55,3 +40,16 @@ export default {
   components: { LiaScript, Toast },
 };
 </script>
+
+<template>
+
+  <LiaScript
+    v-if="data"
+    :content="data"
+  >
+  </LiaScript>
+
+  <Toast :hidden="error">
+    You can modify and compile this course with Ctrl+S, but if you want to store your changes permanently you have to fork it!
+  </Toast>
+</template>

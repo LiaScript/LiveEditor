@@ -1,3 +1,19 @@
+<script lang="ts">
+export default {
+  name: "Toast",
+
+  data() {
+    return { visible: true };
+  },
+
+  methods: {
+    close() {
+      this.visible = false;
+    },
+  },
+};
+</script>
+
 <template>
   <div
     :v-if="visible"
@@ -28,19 +44,3 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-export default {
-  name: "Toast",
-
-  data() {
-    return { visible: true };
-  },
-
-  methods: {
-    close() {
-      this.visible = false;
-    },
-  },
-};
-</script>

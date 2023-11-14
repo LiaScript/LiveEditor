@@ -1,7 +1,3 @@
-<template>
-  Exporting
-</template>
-
 <script lang="ts">
 import Dexie from "../../ts/indexDB";
 import * as Y from "yjs";
@@ -75,3 +71,7 @@ export default {
   },
 };
 </script>
+
+<template>
+  Exporting
+</template>

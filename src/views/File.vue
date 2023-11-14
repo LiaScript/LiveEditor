@@ -1,26 +1,3 @@
-<template>
-
-  <LiaScript
-    v-if="data"
-    :content="data"
-    :file-url="fileUrl"
-  >
-  </LiaScript>
-
-  <Toast>
-    You can modify and compile this course with Ctrl+S, but if you want to store your changes permanently you have to fork it!
-
-    <br>
-    If you want to see the course on LiaScript, click <a
-      :href="'https://LiaScript.github.io/course/?' + fileUrl"
-      target="_blank"
-    >here</a>.
-
-  </Toast>
-</template>
-  
-
-
 <script lang="ts">
 import LiaScript from "./LiaScript.vue";
 import Toast from "../components/Toast.vue";
@@ -77,3 +54,28 @@ export default {
   components: { LiaScript, Toast },
 };
 </script>
+
+
+<template>
+
+  <LiaScript
+    v-if="data"
+    :content="data"
+    :file-url="fileUrl"
+  >
+  </LiaScript>
+
+  <Toast>
+    You can modify and compile this course with Ctrl+S, but if you want to store your changes permanently you have to fork it!
+
+    <br>
+    If you want to see the course on LiaScript, click <a
+      :href="'https://LiaScript.github.io/course/?' + fileUrl"
+      target="_blank"
+    >here</a>.
+
+  </Toast>
+</template>
+  
+
+

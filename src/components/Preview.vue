@@ -1,10 +1,3 @@
-<template>
-  <iframe
-    id="liascript-preview"
-    src="./liascript/index.html?"
-  ></iframe>
-</template>
-
 <script lang="ts">
 const INIT_CODE = `
 var blob = {};
@@ -207,6 +200,15 @@ export default {
   },
 };
 </script>
+
+
+<template>
+  <iframe
+    id="liascript-preview"
+    src="./liascript/index.html?"
+  ></iframe>
+</template>
+
 
 <style scoped>
 #liascript-preview {

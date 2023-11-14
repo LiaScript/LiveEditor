@@ -1,3 +1,32 @@
+<script lang="ts">
+import Footer from "../components/Footer.vue";
+interface Example {
+  title: string;
+  info: string;
+  link: string;
+  logo: string;
+}
+
+export default {
+  name: "Examples",
+  //props: ['examples'],
+  data() {
+    return {
+      examples: [],
+    };
+  },
+  methods: {
+    init: function (examples: Example[]) {
+      for (let i = 0; i < examples.length; i++) {
+        this.examples.push(examples[i]);
+      }
+    },
+  },
+  expose: ["init"],
+  components: { Footer },
+};
+</script>
+
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -58,31 +87,3 @@
   </div>
 </template>
   
-<script lang="ts">
-import Footer from "../components/Footer.vue";
-interface Example {
-  title: string;
-  info: string;
-  link: string;
-  logo: string;
-}
-
-export default {
-  name: "Examples",
-  //props: ['examples'],
-  data() {
-    return {
-      examples: [],
-    };
-  },
-  methods: {
-    init: function (examples: Example[]) {
-      for (let i = 0; i < examples.length; i++) {
-        this.examples.push(examples[i]);
-      }
-    },
-  },
-  expose: ["init"],
-  components: { Footer },
-};
-</script>

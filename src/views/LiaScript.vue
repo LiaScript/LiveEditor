@@ -1,3 +1,378 @@
+<script lang="ts">
+import { tutorial } from "../ts/Tutorial";
+import Dexie from "../ts/indexDB";
+
+import Editor from "../components/Editor.vue";
+import Preview from "../components/Preview.vue";
+import Modal from "../components/Modal.vue";
+import { compress } from "shrink-string";
+
+import pako from "pako";
+import JSZip from "jszip";
+
+// @ts-ignore
+// import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
+// @ts-ignore
+// import CSSWorker from "url:monaco-editor/esm/vs/language/css/css.worker.js";
+// @ts-ignore
+// import HTMLWorker from "url:monaco-editor/esm/vs/language/html/html.worker.js";
+// @ts-ignore
+// import TSWorker from "url:monaco-editor/esm/vs/language/typescript/ts.worker.js";
+// @ts-ignore
+import EditorWorker from "url:monaco-editor/esm/vs/editor/editor.worker.js";
+import { editor } from "monaco-editor";
+
+// @ts-ignore
+window.MonacoEnvironment = {
+  getWorkerUrl: function (moduleId, label) {
+    /*
+    if (label === "json") {
+      return JSONWorker;
+    }
+    if (label === "css" || label === "scss" || label === "less") {
+      return CSSWorker;
+    }
+    if (label === "html" || label === "handlebars" || label === "razor") {
+      return HTMLWorker;
+    }
+    if (label === "typescript" || label === "javascript") {
+      return TSWorker;
+    }
+    */
+    return EditorWorker;
+  },
+};
+
+export default {
+  name: "LiaScript",
+
+  props: ["storageId", "content", "fileUrl", "connection"],
+
+  data() {
+    let database: Dexie | undefined;
+
+    if (this.$props.storageId) {
+      database = new Dexie();
+      database.maybeInit(this.$props.storageId);
+
+      const self = this;
+      database.watch(this.$props.storageId, (meta) => {
+        self.meta = meta;
+      });
+    }
+
+    let connectionType = this.$props.connection || "offline";
+
+    switch (connectionType) {
+      case "webrtc":
+        connectionType = "WebRTC";
+        break;
+      case "websocket":
+        connectionType = "WebSocket";
+        break;
+      default:
+        connectionType = "Offline";
+    }
+
+    return {
+      preview: undefined,
+      previewNotReady: true,
+      compilationCounter: 0,
+      mode: 0,
+      editorIsReady: false,
+      database,
+      meta: {},
+      onlineUsers: 0,
+      lights: false,
+      conn: {
+        type: connectionType,
+        users: 0,
+      },
+    };
+  },
+
+  computed: {
+    lightMode() {
+      return this.lights ? "bi bi-sun" : "bi bi-moon";
+    },
+  },
+
+  methods: {
+    urlPath(path: string[]) {
+      return (
+        window.location.origin +
+        window.location.pathname +
+        "?/" +
+        path.join("/")
+      );
+    },
+
+    online(users: number) {
+      this.conn.users = users;
+    },
+
+    changeMode(mode: number) {
+      this.mode = mode;
+    },
+
+    shareLink() {
+      this.$refs.modal.show(
+        "Collaboration link",
+        `
+        If you share the link below, the editor will be in collaborative mode.
+        Working should also be possible offline, but all connected users will work on the same course.
+        If you did receive this via a collaboration link and want to make a complete new course by yourself, then you will have to click onto the "Fork" button, which will create a complete new version.
+
+        <hr>
+
+        <a target="_blank" href="${window.location.toString()}">
+          ${window.location.toString()}
+        </a>`
+      );
+    },
+
+    shareFile() {
+      const fileUrl = prompt(
+        "please insert the URL of a Markdown file you want to share",
+        ""
+      );
+
+      if (!fileUrl) return;
+
+      this.$refs.modal.show(
+        "External resource",
+        `
+        Use this URL to predefine the content for your share link.
+        In this case the editor will at first try to load the Markdown file and insert its content into the editor.
+        This link will only work if your Markdown file is accessible via the internet.
+                    
+        <hr>
+        
+        <a target="_blank" style="word-break: break-all" href="${this.urlPath([
+          "show",
+          "file",
+          fileUrl,
+        ])}">
+          ${this.urlPath(["show", "file", fileUrl])}
+        </a>`
+      );
+    },
+
+    bytesInfo(url: string) {
+      return `<code>URL-length: ${url.length} bytes</code><br>`;
+    },
+
+    async shareData() {
+      let base64 = "";
+
+      let uriEncode = "";
+      let gzip = "";
+
+      try {
+        base64 =
+          "https://liascript.github.io/course/?data:text/plain;base64," +
+          btoa(this.$refs.editor.getValue());
+
+        base64 =
+          this.bytesInfo(base64) +
+          `<a target="_blank" style="word-break: break-all" href="${base64}">
+          ${base64}
+        </a>`;
+      } catch (e) {}
+
+      try {
+        uriEncode =
+          "https://liascript.github.io/course/?data:text/plain," +
+          encodeURIComponent(this.$refs.editor.getValue());
+
+        uriEncode =
+          this.bytesInfo(uriEncode) +
+          `<a target="_blank" style="word-break: break-all" href="${uriEncode}">
+          ${uriEncode}
+        </a>`;
+      } catch (e) {}
+
+      try {
+        gzip = pako.gzip(this.$refs.editor.getValue());
+        gzip =
+          "https://liascript.github.io/course/?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
+          btoa(String.fromCharCode.apply(null, gzip));
+
+        gzip =
+          this.bytesInfo(gzip) +
+          `<a target="_blank" style="word-break: break-all" href="${gzip}">
+          ${gzip}
+        </a>`;
+      } catch (e) {}
+
+      this.$refs.modal.show(
+        "Data-Protocol",
+        `
+        The entire content of the course is base64 encoded or URI-encoded put into a data-URI.
+        Since base64 might fail for certain languages, the URI-encoded URL is generated as well.
+        However, this works only for short courses, the longer the course the longer the URi.
+        Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
+        Additionally different browser support different lengths of URLs... (Choose the shorter version)
+
+        <hr>
+
+        ${gzip}
+
+        <hr>
+        
+        ${base64}
+        
+        <hr>
+
+        ${uriEncode}
+        `
+      );
+    },
+
+    async shareCode() {
+      const zipCode = this.urlPath([
+        "show",
+        "code",
+        await compress(this.$refs.editor.getValue()),
+      ]);
+
+      this.$refs.modal.show(
+        "Snapshot url",
+        `
+        Snapshots are URLs that contain the entire course defintion.
+        However, this works only for short courses, the longer the course the longer the URL.
+        Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
+        Additionally different browser support different lengths of URLs...
+                    
+        <hr>
+        ${this.bytesInfo(zipCode)}
+        <a target="_blank" style="word-break: break-all" href="${zipCode}">
+          ${zipCode}
+        </a>`
+      );
+    },
+
+    download() {
+      const element = document.createElement("a");
+      element.setAttribute(
+        "href",
+        "data:text/plain;charset=utf-8," +
+          encodeURIComponent(this.$refs.editor.getValue())
+      );
+      element.setAttribute("download", "README.md");
+      element.style.display = "none";
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    },
+
+    downloadZip() {
+      const zip = new JSZip();
+
+      zip.file("README.md", this.$refs.editor.getValue());
+
+      const blobs = this.$refs.editor.getAllBlobs();
+
+      if (blobs) {
+        for (const blob of blobs) {
+          zip.file(blob.name, blob.data);
+        }
+      }
+
+      const fileName =
+        "Project-" +
+        (this.$props?.storageId?.slice(0, 8) || "xxxxxxxx") +
+        ".zip";
+      zip.generateAsync({ type: "blob" }).then(function (content) {
+        let url = URL.createObjectURL(content);
+
+        const element = document.createElement("a");
+        element.href = url;
+        element.setAttribute("download", fileName);
+        element.style.display = "none";
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+        element.addEventListener("click", function () {
+          setTimeout(() => URL.revokeObjectURL(url), 30 * 1000);
+        });
+      });
+    },
+
+    fork() {
+      this.$refs.editor.fork();
+    },
+
+    switchLights() {
+      this.lights = this.$refs.editor.switchLights();
+    },
+
+    compile() {
+      console.log("liascript: compile");
+
+      if (this.preview && this.editorIsReady) {
+        let code = this.$refs.editor.getValue();
+
+        if (code.trim().length == 0) {
+          code = tutorial;
+        }
+
+        this.preview.focusOnMain = false;
+        this.preview.scrollUpOnMain = false;
+
+        this.preview.jit(code);
+      }
+    },
+
+    fetchError(src: string) {
+      return this.$refs.editor.getBlob(src);
+    },
+
+    editorReady() {
+      console.log("liascript: editor ready");
+      this.editorIsReady = true;
+      this.lights = this.$refs.editor.lights;
+      this.compile();
+    },
+
+    previewReady(preview: any) {
+      console.log("liascript: preview ready");
+      this.preview = preview;
+      this.compile();
+    },
+
+    gotoEditor(line: number) {
+      if (this.$refs.editor) {
+        this.$refs.editor.gotoLine(line);
+      }
+    },
+
+    gotoPreview(line: number) {
+      if (this.preview) this.preview.gotoLine(line);
+    },
+
+    previewUpdate(params: any) {
+      console.log("liascript: update");
+
+      this.compilationCounter++;
+      if (this.compilationCounter > 1) {
+        this.previewNotReady = false;
+
+        if (this.$props.storageId) {
+          const titleMatch = this.$refs.editor.getValue().match(/^# (.+)/m);
+
+          if (titleMatch) params.title = titleMatch[1];
+
+          this.database.put(this.$props.storageId, params);
+        }
+      }
+    },
+  },
+
+  components: { Editor, Preview, Modal },
+};
+</script>
+
 <template>
 
   <nav class="navbar navbar-expand-lg bg-light">
@@ -483,381 +858,6 @@
 
   <Modal ref="modal" />
 </template>
-
-<script lang="ts">
-import { tutorial } from "../ts/Tutorial";
-import Dexie from "../ts/indexDB";
-
-import Editor from "../components/Editor.vue";
-import Preview from "../components/Preview.vue";
-import Modal from "../components/Modal.vue";
-import { compress } from "shrink-string";
-
-import pako from "pako";
-import JSZip from "jszip";
-
-// @ts-ignore
-// import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
-// @ts-ignore
-// import CSSWorker from "url:monaco-editor/esm/vs/language/css/css.worker.js";
-// @ts-ignore
-// import HTMLWorker from "url:monaco-editor/esm/vs/language/html/html.worker.js";
-// @ts-ignore
-// import TSWorker from "url:monaco-editor/esm/vs/language/typescript/ts.worker.js";
-// @ts-ignore
-import EditorWorker from "url:monaco-editor/esm/vs/editor/editor.worker.js";
-import { editor } from "monaco-editor";
-
-// @ts-ignore
-window.MonacoEnvironment = {
-  getWorkerUrl: function (moduleId, label) {
-    /*
-    if (label === "json") {
-      return JSONWorker;
-    }
-    if (label === "css" || label === "scss" || label === "less") {
-      return CSSWorker;
-    }
-    if (label === "html" || label === "handlebars" || label === "razor") {
-      return HTMLWorker;
-    }
-    if (label === "typescript" || label === "javascript") {
-      return TSWorker;
-    }
-    */
-    return EditorWorker;
-  },
-};
-
-export default {
-  name: "LiaScript",
-
-  props: ["storageId", "content", "fileUrl", "connection"],
-
-  data() {
-    let database: Dexie | undefined;
-
-    if (this.$props.storageId) {
-      database = new Dexie();
-      database.maybeInit(this.$props.storageId);
-
-      const self = this;
-      database.watch(this.$props.storageId, (meta) => {
-        self.meta = meta;
-      });
-    }
-
-    let connectionType = this.$props.connection || "offline";
-
-    switch (connectionType) {
-      case "webrtc":
-        connectionType = "WebRTC";
-        break;
-      case "websocket":
-        connectionType = "WebSocket";
-        break;
-      default:
-        connectionType = "Offline";
-    }
-
-    return {
-      preview: undefined,
-      previewNotReady: true,
-      compilationCounter: 0,
-      mode: 0,
-      editorIsReady: false,
-      database,
-      meta: {},
-      onlineUsers: 0,
-      lights: false,
-      conn: {
-        type: connectionType,
-        users: 0,
-      },
-    };
-  },
-
-  computed: {
-    lightMode() {
-      return this.lights ? "bi bi-sun" : "bi bi-moon";
-    },
-  },
-
-  methods: {
-    urlPath(path: string[]) {
-      return (
-        window.location.origin +
-        window.location.pathname +
-        "?/" +
-        path.join("/")
-      );
-    },
-
-    online(users: number) {
-      this.conn.users = users;
-    },
-
-    changeMode(mode: number) {
-      this.mode = mode;
-    },
-
-    shareLink() {
-      this.$refs.modal.show(
-        "Collaboration link",
-        `
-        If you share the link below, the editor will be in collaborative mode.
-        Working should also be possible offline, but all connected users will work on the same course.
-        If you did receive this via a collaboration link and want to make a complete new course by yourself, then you will have to click onto the "Fork" button, which will create a complete new version.
-
-        <hr>
-
-        <a target="_blank" href="${window.location.toString()}">
-          ${window.location.toString()}
-        </a>`
-      );
-    },
-
-    shareFile() {
-      const fileUrl = prompt(
-        "please insert the URL of a Markdown file you want to share",
-        ""
-      );
-
-      if (!fileUrl) return;
-
-      this.$refs.modal.show(
-        "External resource",
-        `
-        Use this URL to predefine the content for your share link.
-        In this case the editor will at first try to load the Markdown file and insert its content into the editor.
-        This link will only work if your Markdown file is accessible via the internet.
-                    
-        <hr>
-        
-        <a target="_blank" style="word-break: break-all" href="${this.urlPath([
-          "show",
-          "file",
-          fileUrl,
-        ])}">
-          ${this.urlPath(["show", "file", fileUrl])}
-        </a>`
-      );
-    },
-
-    bytesInfo(url: string) {
-      return `<code>URL-length: ${url.length} bytes</code><br>`;
-    },
-
-    async shareData() {
-      let base64 = "";
-
-      let uriEncode = "";
-      let gzip = "";
-
-      try {
-        base64 =
-          "https://liascript.github.io/course/?data:text/plain;base64," +
-          btoa(this.$refs.editor.getValue());
-
-        base64 =
-          this.bytesInfo(base64) +
-          `<a target="_blank" style="word-break: break-all" href="${base64}">
-          ${base64}
-        </a>`;
-      } catch (e) {}
-
-      try {
-        uriEncode =
-          "https://liascript.github.io/course/?data:text/plain," +
-          encodeURIComponent(this.$refs.editor.getValue());
-
-        uriEncode =
-          this.bytesInfo(uriEncode) +
-          `<a target="_blank" style="word-break: break-all" href="${uriEncode}">
-          ${uriEncode}
-        </a>`;
-      } catch (e) {}
-
-      try {
-        gzip = pako.gzip(this.$refs.editor.getValue());
-        gzip =
-          "https://liascript.github.io/course/?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
-          btoa(String.fromCharCode.apply(null, gzip));
-
-        gzip =
-          this.bytesInfo(gzip) +
-          `<a target="_blank" style="word-break: break-all" href="${gzip}">
-          ${gzip}
-        </a>`;
-      } catch (e) {}
-
-      this.$refs.modal.show(
-        "Data-Protocol",
-        `
-        The entire content of the course is base64 encoded or URI-encoded put into a data-URI.
-        Since base64 might fail for certain languages, the URI-encoded URL is generated as well.
-        However, this works only for short courses, the longer the course the longer the URi.
-        Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
-        Additionally different browser support different lengths of URLs... (Choose the shorter version)
-
-        <hr>
-
-        ${gzip}
-
-        <hr>
-        
-        ${base64}
-        
-        <hr>
-
-        ${uriEncode}
-        `
-      );
-    },
-
-    async shareCode() {
-      const zipCode = this.urlPath([
-        "show",
-        "code",
-        await compress(this.$refs.editor.getValue()),
-      ]);
-
-      this.$refs.modal.show(
-        "Snapshot url",
-        `
-        Snapshots are URLs that contain the entire course defintion.
-        However, this works only for short courses, the longer the course the longer the URL.
-        Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
-        Additionally different browser support different lengths of URLs...
-                    
-        <hr>
-        ${this.bytesInfo(zipCode)}
-        <a target="_blank" style="word-break: break-all" href="${zipCode}">
-          ${zipCode}
-        </a>`
-      );
-    },
-
-    download() {
-      const element = document.createElement("a");
-      element.setAttribute(
-        "href",
-        "data:text/plain;charset=utf-8," +
-          encodeURIComponent(this.$refs.editor.getValue())
-      );
-      element.setAttribute("download", "README.md");
-      element.style.display = "none";
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-    },
-
-    downloadZip() {
-      const zip = new JSZip();
-
-      zip.file("README.md", this.$refs.editor.getValue());
-
-      const blobs = this.$refs.editor.getAllBlobs();
-
-      if (blobs) {
-        for (const blob of blobs) {
-          zip.file(blob.name, blob.data);
-        }
-      }
-
-      const fileName =
-        "Project-" +
-        (this.$props?.storageId?.slice(0, 8) || "xxxxxxxx") +
-        ".zip";
-      zip.generateAsync({ type: "blob" }).then(function (content) {
-        let url = URL.createObjectURL(content);
-
-        const element = document.createElement("a");
-        element.href = url;
-        element.setAttribute("download", fileName);
-        element.style.display = "none";
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-        element.addEventListener("click", function () {
-          setTimeout(() => URL.revokeObjectURL(url), 30 * 1000);
-        });
-      });
-    },
-
-    fork() {
-      this.$refs.editor.fork();
-    },
-
-    switchLights() {
-      this.lights = this.$refs.editor.switchLights();
-    },
-
-    compile() {
-      console.log("liascript: compile");
-
-      if (this.preview && this.editorIsReady) {
-        let code = this.$refs.editor.getValue();
-
-        if (code.trim().length == 0) {
-          code = tutorial;
-        }
-
-        this.preview.focusOnMain = false;
-        this.preview.scrollUpOnMain = false;
-
-        this.preview.jit(code);
-      }
-    },
-
-    fetchError(src: string) {
-      return this.$refs.editor.getBlob(src);
-    },
-
-    editorReady() {
-      console.log("liascript: editor ready");
-      this.editorIsReady = true;
-      this.lights = this.$refs.editor.lights;
-      this.compile();
-    },
-
-    previewReady(preview: any) {
-      console.log("liascript: preview ready");
-      this.preview = preview;
-      this.compile();
-    },
-
-    gotoEditor(line: number) {
-      if (this.$refs.editor) {
-        this.$refs.editor.gotoLine(line);
-      }
-    },
-
-    gotoPreview(line: number) {
-      if (this.preview) this.preview.gotoLine(line);
-    },
-
-    previewUpdate(params: any) {
-      console.log("liascript: update");
-
-      this.compilationCounter++;
-      if (this.compilationCounter > 1) {
-        this.previewNotReady = false;
-
-        if (this.$props.storageId) {
-          const titleMatch = this.$refs.editor.getValue().match(/^# (.+)/m);
-
-          if (titleMatch) params.title = titleMatch[1];
-
-          this.database.put(this.$props.storageId, params);
-        }
-      }
-    },
-  },
-
-  components: { Editor, Preview, Modal },
-};
-</script>
 
 <style scoped>
 #liascript {
