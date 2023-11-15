@@ -216,7 +216,7 @@ export default {
         <div class="col gap-2 d-sm-flex justify-content-end p-1">
           <a
             :href="'./?/edit/' + cardId"
-            class="btn btn-primary btn-sm"
+            class="btn btn-primary btn-sm stretched-link"
             data-link="true"
           >Edit</a>
         </div>
@@ -272,3 +272,8 @@ export default {
 
 </template>
 
+<style scoped>
+.card:hover {
+  box-shadow: 0 0.7rem 1.2rem rgba(28, 30, 179, 0.432) !important;
+}
+</style>
