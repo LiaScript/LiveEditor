@@ -1,4 +1,7 @@
 <script lang="ts">
+import * as Y from "yjs";
+import { IndexeddbPersistence } from "y-indexeddb";
+
 import DateFormat from "date-format-simple";
 
 function mulberry32(a) {
@@ -76,11 +79,36 @@ export default {
 
   data() {
     const dateFormat = new DateFormat(new Date().getTime());
-    const svg = this.$props.cardLogo ? null : generateLines(this.$props.cardId);
+    let url = this.$props.cardLogo;
+    const svg = url ? null : generateLines(this.$props.cardId);
+
+    if (
+      this.$props.cardLogo &&
+      this.$props.cardLogo.match(/\/[a-f,0-9]+\.[^.]*/)
+    ) {
+      const yDoc = new Y.Doc();
+      const indexeddbProvider = new IndexeddbPersistence(
+        this.$props.cardId,
+        yDoc
+      );
+
+      const id = this.$props.cardLogo.slice(1);
+
+      indexeddbProvider.whenSynced.then(() => {
+        const blob = yDoc.getMap("blob").get(id) as Uint8Array;
+        if (blob) {
+          url = URL.createObjectURL(new Blob([blob]));
+
+          // @ts-ignore
+          document.getElementById(this.$props.cardId + "-img").src = url;
+        }
+      });
+    }
 
     return {
       dateFormat,
       svg,
+      url,
     };
   },
 
@@ -106,11 +134,12 @@ export default {
   >
     <div class="card shadow bg-body rounded">
       <img
-        v-if="cardLogo"
-        :src="cardLogo"
+        v-if="url"
+        :src="url"
         class="card-img-top img-fluid"
         style="height: 12rem; object-fit: cover;"
         loading="lazy"
+        :id="cardId+'-img'"
       >
       <svg
         v-if="svg"
