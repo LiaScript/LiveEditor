@@ -10,6 +10,8 @@ import { Snippets } from "../ts/Snippets";
 import * as Utils from "../ts/utils";
 import { navigateTo } from "../index";
 
+import * as MATHJS from "mathjs";
+
 var Editor;
 var provider;
 var isCtrlPressed = false;
@@ -528,6 +530,36 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
           break;
         }
+
+        case "mathjs-evaluate": {
+          try {
+            op.text = MATHJS.format(MATHJS.evaluate(text, {}));
+          } catch (e) {
+            op.text = text;
+          }
+
+          break;
+        }
+
+        case "mathjs-tex": {
+          try {
+            op.text = MATHJS.parse(text).toTex();
+          } catch (e) {
+            op.text = text;
+          }
+
+          break;
+        }
+
+        case "mathjs-simplify": {
+          try {
+            op.text = MATHJS.simplify(text, {}).toTex();
+          } catch (e) {
+            op.text = text;
+          }
+
+          break;
+        }
       }
 
       Editor.executeEdits("", [op]);
@@ -645,6 +677,27 @@ I (study) ~[[ am going to study ]]~ harder this term.
         // @param editor The editor instance is passed in as a convenience
         run: function (_: any) {
           self.$emit("compile");
+        },
+      });
+
+      Editor.addAction({
+        // An unique identifier of the contributed action.
+        id: "evaluate",
+        // A label of the action that will be presented to the user.
+        label: "MathJS evaluate",
+        // An optional array of keybindings for the action.
+        keybindings: [KeyMod.CtrlCmd | KeyCode.KeyB],
+        // A precondition for this action.
+        precondition: undefined,
+        // A rule to evaluate on top of the precondition in order to dispatch the keybindings.
+        keybindingContext: undefined,
+        contextMenuGroupId: "navigation",
+        contextMenuOrder: 1.5,
+        // Method that will be executed when the action is triggered.
+        // @param editor The editor instance is passed in as a convenience
+        run: function (text: any) {
+          //self.$emit("compile");
+          console.warn(text);
         },
       });
 
@@ -1026,16 +1079,16 @@ I (study) ~[[ am going to study ]]~ harder this term.
         title="Movie"
         @click="make('movie')"
       >
-        <i class="bi bi-youtube"></i>
+        <i class="bi bi-film"></i>
       </button>
 
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
-        title="oEmbed"
+        title="Try to embed any kind of link"
         @click="make('oembed')"
       >
-        <i class="bi bi-magic"></i>
+        <i class="bi bi-puzzle"></i>
       </button>
 
       <input
@@ -1083,7 +1136,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         @click="make('upload-movie')"
       >
         <i class="bi bi-upload"></i>
-        <i class="bi bi-youtube icon-overlay"></i>
+        <i class="bi bi-film icon-overlay"></i>
       </button>
 
       <button
@@ -1239,6 +1292,36 @@ I (study) ~[[ am going to study ]]~ harder this term.
         @click="make('ascii')"
       >
         <i class="bi bi-boxes"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="MathJS evaluate expression"
+        @click="make('mathjs-evaluate')"
+      >
+        <i class="bi bi-gear"></i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="MathJS convert to TeX"
+        @click="make('mathjs-tex')"
+      >
+        <i class="bi bi-gear"></i>
+        <i class="bi icon-overlay">TeX</i>
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="MathJS simplify"
+        @click="make('mathjs-simplify')"
+      >
+        <i class="bi bi-gear"></i>
+        <i class="bi bi-lightning-charge icon-overlay"></i>
+
       </button>
 
       <button
