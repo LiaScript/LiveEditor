@@ -7,23 +7,30 @@
     </p>
 
     <small>
-      Follow us on
+      Follow us on:
       <a
         href="https://github.com/LiaScript"
         target="_blank"
-      >GitHub</a>,
+        title="LiaScript on GitHub"
+      >
+        <i class="bi bi-github"></i>
+      </a> -
       <a
         href="https://gitter.im/LiaScript/community"
         target="_blank"
-      >Gitter</a>,
+      >
+        <i class="bi bi-chat-text"></i>
+      </a> -
       <a
         href="https://twitter.com/LiaScript"
         target="_blank"
-      >Twitter</a>, and
+      >
+        <i class="bi bi-twitter"></i>
+      </a> -
       <a
         href="https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg"
         target="_blank"
-      >YouTube</a>.
+      ><i class="bi bi-youtube"></i></a>
     </small>
 
   </div>
