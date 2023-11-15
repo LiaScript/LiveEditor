@@ -39,7 +39,7 @@ function generateLines(id: string) {
     `hsl(${baseHue}, 50%, 100%)`,
   ];
 
-  html += `<rect x='-20' y='-20' width='200' height='100' fill='${bgColor}' stroke='none'></rect>`;
+  html += `<rect x='-100' y='-100' width='300' height='300' fill='${bgColor}' stroke='none'></rect>`;
 
   for (let i = 16; i > 0; i--) {
     const x0 = random() * 100;
