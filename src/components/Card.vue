@@ -41,7 +41,7 @@ function generateLines(id: string) {
 
   html += `<rect x='-20' y='-20' width='200' height='100' fill='${bgColor}' stroke='none'></rect>`;
 
-  for (let i = 10; i > 0; i--) {
+  for (let i = 16; i > 0; i--) {
     const x0 = random() * 100;
     const y0 = random() * 100;
     const x1 = random() * 100;
@@ -154,9 +154,11 @@ export default {
         type="button"
         class="btn btn-close btn-secondary"
         aria-label="Delete"
-        @click="drop"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
         style="position: absolute; top: 3px; right: 4px; z-index: 10; background-color: white;"
       ></button>
+
       <p
         style="padding-left: 5px; position: absolute; top: 10.5rem; left: 0; z-index: 10; background-color: rgba(255, 255, 255, 0.5); width:100%"
         class="mb-0 text-muted"
@@ -217,6 +219,52 @@ export default {
             class="btn btn-primary btn-sm"
             data-link="true"
           >Edit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div
+        class="modal-content border-danger mb-5"
+        style="border-width: 3px;"
+      >
+        <div class="modal-header">
+          <h5
+            class="modal-title"
+            id="exampleModalLabel"
+          >Delete: "{{ cardTitle || "Untitled" }}"</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you that want to delete this document forever?
+          <br>
+          It cannot be restored!
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >Abort</button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            data-bs-dismiss="modal"
+            @click="drop"
+          >Delete</button>
         </div>
       </div>
     </div>
