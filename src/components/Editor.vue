@@ -11,8 +11,11 @@ import * as Utils from "../ts/utils";
 import { navigateTo } from "../index";
 
 import * as MATHJS from "mathjs";
+import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
+import TextEditorInterface from "../ts/TextEditorInterface";
 
 var Editor;
+var tableEditor;
 var provider;
 var isCtrlPressed = false;
 
@@ -553,7 +556,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
         case "mathjs-simplify": {
           try {
-            op.text = MATHJS.simplify(text, {}).toTex();
+            op.text = MATHJS.format(MATHJS.simplify(text));
           } catch (e) {
             op.text = text;
           }
@@ -664,7 +667,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         // An unique identifier of the contributed action.
         id: "compile",
         // A label of the action that will be presented to the user.
-        label: "LiaScript compile",
+        label: "LiaScript - Compile",
         // An optional array of keybindings for the action.
         keybindings: [KeyMod.CtrlCmd | KeyCode.KeyS],
         // A precondition for this action.
@@ -682,22 +685,60 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
       Editor.addAction({
         // An unique identifier of the contributed action.
-        id: "evaluate",
+        id: "mathjs-evaluate",
         // A label of the action that will be presented to the user.
-        label: "MathJS evaluate",
+        label: "MathJS - Evaluate",
         // An optional array of keybindings for the action.
-        keybindings: [KeyMod.CtrlCmd | KeyCode.KeyB],
+        keybindings: [KeyMod.CtrlCmd | KeyCode.KeyE],
         // A precondition for this action.
         precondition: undefined,
         // A rule to evaluate on top of the precondition in order to dispatch the keybindings.
         keybindingContext: undefined,
-        contextMenuGroupId: "navigation",
+        contextMenuGroupId: "1_modifications",
         contextMenuOrder: 1.5,
         // Method that will be executed when the action is triggered.
         // @param editor The editor instance is passed in as a convenience
         run: function (text: any) {
-          //self.$emit("compile");
-          console.warn(text);
+          self.make("mathjs-evaluate");
+        },
+      });
+      Editor.addAction({
+        // An unique identifier of the contributed action.
+        id: "mathjs-simplify",
+        // A label of the action that will be presented to the user.
+        label: "MathJS - to Tex",
+        // An optional array of keybindings for the action.
+        keybindings: [KeyMod.CtrlCmd | KeyCode.KeyM],
+        // A precondition for this action.
+        precondition: undefined,
+        // A rule to evaluate on top of the precondition in order to dispatch the keybindings.
+        keybindingContext: undefined,
+        contextMenuGroupId: "1_modifications",
+        contextMenuOrder: 1.6,
+        // Method that will be executed when the action is triggered.
+        // @param editor The editor instance is passed in as a convenience
+        run: function (text: any) {
+          self.make("mathjs-simplify");
+        },
+      });
+
+      Editor.addAction({
+        // An unique identifier of the contributed action.
+        id: "mathjs-tex",
+        // A label of the action that will be presented to the user.
+        label: "MathJS - to Tex",
+        // An optional array of keybindings for the action.
+        keybindings: [KeyMod.CtrlCmd | KeyCode.KeyO],
+        // A precondition for this action.
+        precondition: undefined,
+        // A rule to evaluate on top of the precondition in order to dispatch the keybindings.
+        keybindingContext: undefined,
+        contextMenuGroupId: "1_modifications",
+        contextMenuOrder: 1.7,
+        // Method that will be executed when the action is triggered.
+        // @param editor The editor instance is passed in as a convenience
+        run: function (text: any) {
+          self.make("mathjs-tex");
         },
       });
 
@@ -763,7 +804,88 @@ I (study) ~[[ am going to study ]]~ harder this term.
         }
       });
 
-      return Editor;
+      return this.toTableEditor(Editor);
+    },
+
+    toTableEditor(textEditor: any = null) {
+      if (!textEditor) return;
+
+      const Interface = new TextEditorInterface(textEditor);
+      tableEditor = new TableEditor(Interface);
+
+      textEditor.addAction({
+        id: "table-format",
+        label: "Table - Format",
+        keybindings: [KeyMod.CtrlCmd | KeyCode.Enter],
+        contextMenuGroupId: "2_modifications",
+        contextMenuOrder: 2,
+
+        run: function (_: any) {
+          if (tableEditor) {
+            if (tableEditor.cursorIsInTable(options({}))) {
+              tableEditor.format(options({}));
+            } else {
+              textEditor.trigger("keyboard", "type", {
+                text: "\n",
+              });
+            }
+          }
+        },
+      });
+
+      textEditor.addAction({
+        id: "table-next",
+        label: "Table - Jump to Next Cell",
+        keybindings: [KeyCode.Tab],
+        contextMenuGroupId: "2_modifications",
+        contextMenuOrder: 2.1,
+
+        run: function (_: any) {
+          if (tableEditor) {
+            if (tableEditor.cursorIsInTable(options({}))) {
+              tableEditor.nextCell(options({}));
+            } else {
+              textEditor.trigger("keyboard", "type", {
+                text: "    ",
+              });
+            }
+          }
+        },
+      });
+
+      textEditor.addAction({
+        id: "table-previous",
+        label: "Table - Jump to Previous Cell",
+        keybindings: [KeyMod.Shift | KeyCode.Tab],
+        contextMenuGroupId: "2_modifications",
+        contextMenuOrder: 2.2,
+
+        run: function (_: any) {
+          if (tableEditor) {
+            if (tableEditor.cursorIsInTable(options({}))) {
+              tableEditor.previousCell(options({}));
+            }
+          }
+        },
+      });
+
+      textEditor.addAction({
+        id: "table-row",
+        label: "Table - Add Row/Line",
+        keybindings: [KeyMod.CtrlCmd | KeyCode.KeyL],
+        contextMenuGroupId: "2_modifications",
+        contextMenuOrder: 2.3,
+
+        run: function (_: any) {
+          if (tableEditor) {
+            if (tableEditor.cursorIsInTable(options({}))) {
+              tableEditor.insertRow(options({}));
+            }
+          }
+        },
+      });
+
+      return textEditor;
     },
 
     loadFromLocalStorage(editor: any, storageId: string) {
@@ -1297,7 +1419,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
-        title="MathJS evaluate expression"
+        title="MathJS evaluate expression (Ctrl+E)"
         @click="make('mathjs-evaluate')"
       >
         <i class="bi bi-gear"></i>
@@ -1306,22 +1428,22 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
-        title="MathJS convert to TeX"
-        @click="make('mathjs-tex')"
-      >
-        <i class="bi bi-gear"></i>
-        <i class="bi icon-overlay">TeX</i>
-      </button>
-
-      <button
-        class="btn btn-sm btn-outline-secondary"
-        type="button"
-        title="MathJS simplify"
+        title="MathJS simplify (Ctrl+M)"
         @click="make('mathjs-simplify')"
       >
         <i class="bi bi-gear"></i>
         <i class="bi bi-lightning-charge icon-overlay"></i>
 
+      </button>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        type="button"
+        title="MathJS convert to TeX (Ctrl+O)"
+        @click="make('mathjs-tex')"
+      >
+        <i class="bi bi-gear"></i>
+        <i class="bi icon-overlay">TeX</i>
       </button>
 
       <button

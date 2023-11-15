@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@liascript/editor": "^1.1.2--0.12.9",
+    "@susisu/mte-kernel": "^2.1.1",
     "mathjs": "^12.0.0",
     "pako": "^2.1.0"
   },
