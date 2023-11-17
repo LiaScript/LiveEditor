@@ -629,9 +629,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
       const yText = yDoc.getText(id);
       const yMap = yDoc.getMap("blob");
 
-      this.blob.forEach((value, key) => {
-        yMap.set(key, value);
-      });
+      if (this.blob !== null) {
+        this.blob.forEach((value, key) => {
+          yMap.set(key, value);
+        });
+      }
 
       yText.insert(0, this.getValue());
 
