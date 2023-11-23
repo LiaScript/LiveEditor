@@ -5,5 +5,5 @@ module.exports = {
   ],
   swSrc: "./src/sw.js",
   swDest: "./dist/sw.js",
-  maximumFileSizeToCacheInBytes: 5000000, 
+  maximumFileSizeToCacheInBytes: 7000000, 
 };
