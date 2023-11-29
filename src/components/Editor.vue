@@ -126,7 +126,11 @@ export default {
         }
 
         case "audio": {
-          op.text = "?[](https://)";
+          if (text) {
+            op.text = `?[](${text})`;
+          } else {
+            op.text = "?[](https://)";
+          }
           move = 2;
           break;
         }
@@ -284,7 +288,11 @@ $$
         }
 
         case "image": {
-          op.text = "![](https://)";
+          if (text) {
+            op.text = `![](${text})`;
+          } else {
+            op.text = "![](https://)";
+          }
           move = 2;
           break;
         }
@@ -364,13 +372,21 @@ $$
         }
 
         case "movie": {
-          op.text = "!?[](https://)";
+          if (text) {
+            op.text = `!?[](${text})`;
+          } else {
+            op.text = `!?[](https://)`;
+          }
           move = 3;
           break;
         }
 
         case "oembed": {
-          op.text = "??[](https://)";
+          if (text) {
+            op.text = `??[](${text})`;
+          } else {
+            op.text = "??[](https://)";
+          }
           move = 3;
           break;
         }
