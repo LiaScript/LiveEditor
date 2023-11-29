@@ -90,7 +90,7 @@ export default class TextEditorInterface extends ITextEditor {
         range: {
           startLineNumber: startRow + 1,
           startColumn: 0,
-          endLineNumber: endRow + 2,
+          endLineNumber: endRow + 1,
           endColumn: 0,
         },
         text: lines.join('\n') + '\n',
