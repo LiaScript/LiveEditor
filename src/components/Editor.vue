@@ -6,11 +6,10 @@ import { WebrtcProvider } from "y-webrtc";
 import { WebsocketProvider } from "y-websocket";
 import { MonacoBinding } from "y-monaco";
 import { editor, KeyMod, KeyCode, languages } from "monaco-editor";
-import { Snippets } from "../ts/Snippets";
 import * as Utils from "../ts/utils";
 import { navigateTo } from "../index";
 
-import * as MATHJS from "mathjs";
+// import * as MATHJS from "mathjs";
 import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
 import TextEditorInterface from "../ts/TextEditorInterface";
 
@@ -18,6 +17,19 @@ var Editor;
 var tableEditor;
 var provider;
 var isCtrlPressed = false;
+var MATHJS
+var Snippets
+
+
+import("mathjs").then((module) => {
+  MATHJS = module;
+});
+
+import("../ts/Snippets").then((module) => {
+  Snippets = module;
+});
+
+
 
 async function fileHash(arrayBuffer) {
   // Use the subtle crypto API to perform a SHA256 Sum of the file's

@@ -7,8 +7,17 @@ import Preview from "../components/Preview.vue";
 import Modal from "../components/Modal.vue";
 import { compress } from "shrink-string";
 
-import pako from "pako";
-import JSZip from "jszip";
+var pako
+var JSZip
+
+import("pako").then((module) => {
+  pako = module;
+});
+
+import("jszip").then((module) => {
+  JSZip = module
+})
+
 
 // @ts-ignore
 // import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
