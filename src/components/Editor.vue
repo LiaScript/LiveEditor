@@ -705,7 +705,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         // An unique identifier of the contributed action.
         id: "mathjs-evaluate",
         // A label of the action that will be presented to the user.
-        label: "MathJS - Evaluate",
+        label: "MathJS - Evaluate Expression",
         // An optional array of keybindings for the action.
         keybindings: [KeyMod.CtrlCmd | KeyCode.KeyE],
         // A precondition for this action.
@@ -724,7 +724,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         // An unique identifier of the contributed action.
         id: "mathjs-simplify",
         // A label of the action that will be presented to the user.
-        label: "MathJS - to Tex",
+        label: "MathJS - Simplify Expression",
         // An optional array of keybindings for the action.
         keybindings: [KeyMod.CtrlCmd | KeyCode.KeyM],
         // A precondition for this action.
@@ -1437,7 +1437,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
-        title="MathJS evaluate expression (Ctrl+E)"
+        title="MathJS - Evaluate Expression (Ctrl+E)"
         @click="make('mathjs-evaluate')"
       >
         <i class="bi bi-gear"></i>
@@ -1446,7 +1446,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
-        title="MathJS simplify (Ctrl+M)"
+        title="MathJS - Simplify Expression (Ctrl+M)"
         @click="make('mathjs-simplify')"
       >
         <i class="bi bi-gear"></i>
@@ -1457,7 +1457,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
-        title="MathJS convert to TeX (Ctrl+O)"
+        title="MathJS - Convert to TeX (Ctrl+O)"
         @click="make('mathjs-tex')"
       >
         <i class="bi bi-gear"></i>
