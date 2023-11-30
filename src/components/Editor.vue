@@ -13,22 +13,18 @@ import { navigateTo } from "../index";
 import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
 import TextEditorInterface from "../ts/TextEditorInterface";
 
+import { Snippets } from "../ts/Snippets.ts";  
+
 var Editor;
 var tableEditor;
 var provider;
 var isCtrlPressed = false;
 var MATHJS
-var Snippets
 
 
 import("mathjs").then((module) => {
   MATHJS = module;
 });
-
-import("../ts/Snippets").then((module) => {
-  Snippets = module;
-});
-
 
 
 async function fileHash(arrayBuffer) {
