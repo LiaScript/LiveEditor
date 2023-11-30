@@ -1,11 +1,13 @@
 <script>
 import LiaScript from "./LiaScript.vue";
 
-export default {
+const Component = {
   name: "LiaScript-EditView",
   props: ["storageId"],
   components: { LiaScript },
 };
+
+export default Component;
 </script>
 
 <template>

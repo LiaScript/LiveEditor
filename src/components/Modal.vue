@@ -1,4 +1,6 @@
 <script lang="ts">
+import { Modal } from "bootstrap/js/index.esm.js"
+
 export default {
   props: ["modalTitle"],
 
@@ -14,7 +16,7 @@ export default {
       this.title = title;
       this.body = body;
       // @ts-ignore
-      const modal = new bootstrap.Modal(document.getElementById("modal"), {
+      const modal = new Modal(document.getElementById("modal"), {
         "data-bs-toggle": "modal",
       });
 

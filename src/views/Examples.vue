@@ -1,5 +1,6 @@
 <script lang="ts">
 import Footer from "../components/Footer.vue";
+
 interface Example {
   title: string;
   info: string;
