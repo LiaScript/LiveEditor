@@ -13,7 +13,8 @@ import { navigateTo } from "../index";
 import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
 import TextEditorInterface from "../ts/TextEditorInterface";
 
-import { Snippets } from "../ts/Snippets.ts";  
+import { Snippets } from "../ts/Snippets.ts";
+import { Emojis } from "../ts/Emojis.ts"; 
 
 var Editor;
 var tableEditor;
@@ -795,6 +796,44 @@ I (study) ~[[ am going to study ]]~ harder this term.
               kind: languages.CompletionItemKind.Text,
               documentation: snippet.documentation,
               insertText: snippet.insertText,
+              range: range,
+              command: {
+                id: "editor.action.insertLineAfter",
+              },
+            });
+          }
+
+          return {
+            suggestions,
+          };
+        },
+      });
+
+      languages.registerCompletionItemProvider("markdown", {
+        triggerCharacters: [':'],
+        provideCompletionItems: function (model, position, context) {
+          const word = model.getWordAtPosition(position);
+
+          const textUntilPosition = model.getValueInRange({
+            startLineNumber: position.lineNumber,
+            startColumn: 1,
+            endLineNumber: position.lineNumber,
+            endColumn: position.column,
+          });
+
+          const range = {
+            startLineNumber: position.lineNumber,
+            endLineNumber: position.lineNumber,
+            startColumn: word?.startColumn || 0,
+            endColumn: word?.endColumn || 0,
+          };
+
+          const suggestions: any[] = [];
+
+          for (const [label, emoji] of Emojis) {
+            suggestions.push({
+              label: label + " - " + emoji,
+              insertText: emoji,
               range: range,
               command: {
                 id: "editor.action.insertLineAfter",
