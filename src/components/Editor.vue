@@ -14,19 +14,17 @@ import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
 import TextEditorInterface from "../ts/TextEditorInterface";
 
 import { Snippets } from "../ts/Snippets.ts";
-import { Emojis } from "../ts/Emojis.ts"; 
+import { Emojis } from "../ts/Emojis.ts";
 
 var Editor;
 var tableEditor;
 var provider;
 var isCtrlPressed = false;
-var MATHJS
-
+var MATHJS;
 
 import("mathjs").then((module) => {
   MATHJS = module;
 });
-
 
 async function fileHash(arrayBuffer) {
   // Use the subtle crypto API to perform a SHA256 Sum of the file's
@@ -98,8 +96,7 @@ export default {
         case "animation": {
           if (text) {
             if (text.match(/\n\s*\n/g)) {
-              op.text =
-                "      {{1}}\n<section>\n\n" + text + "\n\n</section>\n";
+              op.text = "      {{1}}\n<section>\n\n" + text + "\n\n</section>\n";
             } else {
               op.text = "      {{1}}\n" + text;
             }
@@ -156,8 +153,7 @@ export default {
           if (text) {
             op.text = "```\n" + text + "\n```";
           } else {
-            op.text =
-              '``` js\nvar message="Hello World"\nconsole.log(message)\n```';
+            op.text = '``` js\nvar message="Hello World"\nconsole.log(message)\n```';
           }
 
           break;
@@ -290,8 +286,7 @@ $$
             endColumn: 1,
           };
 
-          op.text =
-            "#" + (line.startsWith(" ") || line.startsWith("#") ? "" : " ");
+          op.text = "#" + (line.startsWith(" ") || line.startsWith("#") ? "" : " ");
 
           break;
         }
@@ -507,7 +502,8 @@ I (study) ~[[ am going to study ]]~ harder this term.
               endLineNumber: position.lineNumber || 1,
               endColumn: 1,
             },
-            text: "| Column 1 | Column 2 | Column 3 |\n| -------- | :------: | -------: |\n| Text     |   Text   |     Text |\n\n",
+            text:
+              "| Column 1 | Column 2 | Column 3 |\n| -------- | :------: | -------: |\n| Text     |   Text   |     Text |\n\n",
           };
 
           break;
@@ -772,35 +768,40 @@ I (study) ~[[ am going to study ]]~ harder this term.
       languages.registerCompletionItemProvider("markdown", {
         //triggerCharacters: ['['],
         provideCompletionItems: function (model, position, context) {
+          const suggestions: any[] = [];
           const word = model.getWordAtPosition(position);
 
-          const textUntilPosition = model.getValueInRange({
-            startLineNumber: position.lineNumber,
-            startColumn: 1,
-            endLineNumber: position.lineNumber,
-            endColumn: position.column,
-          });
-
-          const range = {
-            startLineNumber: position.lineNumber,
-            endLineNumber: position.lineNumber,
-            startColumn: word?.startColumn || 0,
-            endColumn: word?.endColumn || 0,
-          };
-
-          const suggestions: any[] = [];
-
-          for (const snippet of Snippets) {
-            suggestions.push({
-              label: snippet.label,
-              kind: languages.CompletionItemKind.Text,
-              documentation: snippet.documentation,
-              insertText: snippet.insertText,
-              range: range,
-              command: {
-                id: "editor.action.insertLineAfter",
-              },
+          if (
+            word.word.startsWith("lia") ||
+            word.word.startsWith("voice") ||
+            word.word.startsWith("hili")
+          ) {
+            const textUntilPosition = model.getValueInRange({
+              startLineNumber: position.lineNumber,
+              startColumn: 1,
+              endLineNumber: position.lineNumber,
+              endColumn: position.column,
             });
+
+            const range = {
+              startLineNumber: position.lineNumber,
+              endLineNumber: position.lineNumber,
+              startColumn: word?.startColumn || 0,
+              endColumn: word?.endColumn || 0,
+            };
+
+            for (const snippet of Snippets) {
+              suggestions.push({
+                label: snippet.label,
+                kind: languages.CompletionItemKind.Text,
+                documentation: snippet.documentation,
+                insertText: snippet.insertText,
+                range: range,
+                command: {
+                  id: "editor.action.insertLineAfter",
+                },
+              });
+            }
           }
 
           return {
@@ -810,12 +811,14 @@ I (study) ~[[ am going to study ]]~ harder this term.
       });
 
       languages.registerCompletionItemProvider("markdown", {
-        triggerCharacters: [':'],
+        triggerCharacters: [":"],
         provideCompletionItems: function (model, position, context) {
           const word = model.getWordAtPosition(position);
 
+          const suggestions: any[] = [];
+
           const textUntilPosition = model.getValueInRange({
-            startLineNumber: position.lineNumber,
+            startLineNumber: position.lineNumber - 1,
             startColumn: 1,
             endLineNumber: position.lineNumber,
             endColumn: position.column,
@@ -824,21 +827,24 @@ I (study) ~[[ am going to study ]]~ harder this term.
           const range = {
             startLineNumber: position.lineNumber,
             endLineNumber: position.lineNumber,
-            startColumn: word?.startColumn || 0,
+            startColumn: (word?.startColumn || 1) - 1,
             endColumn: word?.endColumn || 0,
           };
 
-          const suggestions: any[] = [];
-
-          for (const [label, emoji] of Emojis) {
-            suggestions.push({
-              label: label + " - " + emoji,
-              insertText: emoji,
-              range: range,
-              command: {
-                id: "editor.action.insertLineAfter",
-              },
-            });
+          if (
+            model.getValueInRange(range) == "" ||
+            model.getValueInRange(range).startsWith(":")
+          ) {
+            for (const [label, emoji] of Emojis) {
+              suggestions.push({
+                label: label + " - " + emoji,
+                insertText: emoji,
+                range: range,
+                command: {
+                  id: "editor.action.insertLineAfter",
+                },
+              });
+            }
           }
 
           return {
@@ -1002,9 +1008,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
           // Whenever somebody updates their awareness information,
           // we log all awareness information from all users.
 
-          const online = Array.from(
-            provider.awareness.getStates().values()
-          ).length;
+          const online = Array.from(provider.awareness.getStates().values()).length;
 
           if (online != self.online) {
             self.$emit("online", online);
@@ -1085,28 +1089,22 @@ I (study) ~[[ am going to study ]]~ harder this term.
       this.upload[media] = document.getElementById(media + "Input");
 
       if (this.upload[media])
-        this.upload[media].addEventListener(
-          "change",
-          eventListener(media),
-          false
-        );
+        this.upload[media].addEventListener("change", eventListener(media), false);
     }
   },
 };
 </script>
 
-
 <template>
   <nav
     class="navbar navbar-light bg-light"
-    style="border-top: solid lightgray 2px;
-          border-bottom: solid lightgray 2px;
-          padding: 0px;"
+    style="
+      border-top: solid lightgray 2px;
+      border-bottom: solid lightgray 2px;
+      padding: 0px;
+    "
   >
-    <form
-      class="container-fluid justify-content-start"
-      style="padding: 0px"
-    >
+    <form class="container-fluid justify-content-start" style="padding: 0px">
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
@@ -1278,12 +1276,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         <i class="bi bi-puzzle"></i>
       </button>
 
-      <input
-        type="file"
-        id="imageInput"
-        style="display: none;"
-        accept="image/*"
-      >
+      <input type="file" id="imageInput" style="display: none" accept="image/*" />
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
@@ -1294,12 +1287,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         <i class="bi bi-image icon-overlay"></i>
       </button>
 
-      <input
-        type="file"
-        id="audioInput"
-        style="display: none;"
-        accept="audio/*"
-      >
+      <input type="file" id="audioInput" style="display: none" accept="audio/*" />
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
@@ -1310,12 +1298,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         <i class="bi bi-music-note-beamed icon-overlay"></i>
       </button>
 
-      <input
-        type="file"
-        id="movieInput"
-        style="display: none;"
-        accept="video/*"
-      >
+      <input type="file" id="movieInput" style="display: none" accept="video/*" />
       <button
         class="btn btn-sm btn-outline-secondary"
         type="button"
@@ -1441,7 +1424,6 @@ I (study) ~[[ am going to study ]]~ harder this term.
         @click="make('keyboard')"
       >
         <i class="bi bi-keyboard"></i>
-
       </button>
 
       <button
@@ -1498,7 +1480,6 @@ I (study) ~[[ am going to study ]]~ harder this term.
       >
         <i class="bi bi-gear"></i>
         <i class="bi bi-lightning-charge icon-overlay"></i>
-
       </button>
 
       <button
@@ -1519,14 +1500,10 @@ I (study) ~[[ am going to study ]]~ harder this term.
       >
         <i class="bi bi-rocket-takeoff"></i>
       </button>
-
     </form>
   </nav>
-  <div id="liascript-editor">
-  </div>
+  <div id="liascript-editor"></div>
 </template>
-
-
 
 <style>
 #liascript-editor {
