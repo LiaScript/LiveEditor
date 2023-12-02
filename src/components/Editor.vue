@@ -13,8 +13,32 @@ import { navigateTo } from "../index";
 import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
 import TextEditorInterface from "../ts/TextEditorInterface";
 
-import { Snippets } from "../ts/Snippets.ts";
-import { Emojis } from "../ts/Emojis.ts";
+var Emojis = [];
+import("../ts/Emojis.ts").then((module) => {
+  for (const [label, emoji] of module.Emojis) {
+    Emojis.push({
+      label: label + " " + emoji,
+      insertText: emoji,
+      range: null,
+    });
+  }
+});
+
+var Snippets = [];
+import("../ts/Snippets.ts").then((module) => {
+  for (const snippet of module.Snippets) {
+    Snippets.push({
+      label: snippet.label,
+      kind: languages.CompletionItemKind.Text,
+      documentation: snippet.documentation,
+      insertText: snippet.insertText,
+      range: null,
+      command: {
+        id: "editor.action.insertLineAfter",
+      },
+    });
+  }
+});
 
 var Editor;
 var tableEditor;
@@ -768,7 +792,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       languages.registerCompletionItemProvider("markdown", {
         //triggerCharacters: ['['],
         provideCompletionItems: function (model, position, context) {
-          const suggestions: any[] = [];
+         
           const word = model.getWordAtPosition(position);
 
           if (
@@ -790,22 +814,18 @@ I (study) ~[[ am going to study ]]~ harder this term.
               endColumn: word?.endColumn || 0,
             };
 
-            for (const snippet of Snippets) {
-              suggestions.push({
-                label: snippet.label,
-                kind: languages.CompletionItemKind.Text,
-                documentation: snippet.documentation,
-                insertText: snippet.insertText,
-                range: range,
-                command: {
-                  id: "editor.action.insertLineAfter",
-                },
-              });
+            for (let i=0; i<Snippets.length; i++) {
+              Snippets[i].range = range
+              
             }
+
+            return {
+              suggestions: Snippets,
+            };
           }
 
           return {
-            suggestions,
+            suggestions: [],
           };
         },
       });
@@ -814,8 +834,6 @@ I (study) ~[[ am going to study ]]~ harder this term.
         triggerCharacters: [":"],
         provideCompletionItems: function (model, position, context) {
           const word = model.getWordAtPosition(position);
-
-          const suggestions: any[] = [];
 
           const textUntilPosition = model.getValueInRange({
             startLineNumber: position.lineNumber - 1,
@@ -827,25 +845,25 @@ I (study) ~[[ am going to study ]]~ harder this term.
           const range = {
             startLineNumber: position.lineNumber,
             endLineNumber: position.lineNumber,
-            startColumn: (word?.startColumn || 1) - 1,
-            endColumn: word?.endColumn || 0,
+            startColumn: (word?.startColumn || position.column) - 1,
+            endColumn: word?.endColumn || position.column,
           };
 
           if (
             model.getValueInRange(range) == "" ||
             model.getValueInRange(range).startsWith(":")
           ) {
-            for (const [label, emoji] of Emojis) {
-              suggestions.push({
-                label: emoji + "  " + label,
-                insertText: emoji,
-                range: range,
-              });
+            for (let i = 0; i < Emojis.length; i++) {
+              Emojis[i].range = range;
             }
+
+            return {
+              suggestions: Emojis,
+            };
           }
 
           return {
-            suggestions,
+            suggestions: [],
           };
         },
       });
