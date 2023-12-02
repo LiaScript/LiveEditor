@@ -837,12 +837,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
           ) {
             for (const [label, emoji] of Emojis) {
               suggestions.push({
-                label: label + " - " + emoji,
+                label: emoji + "  " + label,
                 insertText: emoji,
                 range: range,
-                command: {
-                  id: "editor.action.insertLineAfter",
-                },
               });
             }
           }
