@@ -4,7 +4,7 @@
   "description": "LiveEditor for LiaScript",
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
-    "build": "rm -rf dist && npm run build:index && npm run purge && npm run minify:js && npm run sw",
+    "build": "rm -rf dist && npm run build:index && npm run purge && npm run sw",
     "build:index": "npx parcel build src/index.html src/examples.html --log-level verbose --no-source-maps --public-url ./",
     "watch": "rm -rf dist && npx parcel serve src/*.html --no-cache --no-source-maps --open --port 4321",
     "webrtc": "PORT=4444 node node_modules/y-webrtc/bin/server.js",
