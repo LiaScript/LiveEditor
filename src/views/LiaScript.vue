@@ -276,7 +276,7 @@ export default {
     },
 
     downloadZip() {
-      const zip = new JSZip();
+      const zip = JSZip();
 
       zip.file("README.md", this.$refs.editor.getValue());
 
