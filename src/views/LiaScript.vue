@@ -7,16 +7,8 @@ import Preview from "../components/Preview.vue";
 import Modal from "../components/Modal.vue";
 import { compress } from "shrink-string";
 
-var pako
-var JSZip
-
-import("pako").then((module) => {
-  pako = module;
-});
-
-import("jszip").then((module) => {
-  JSZip = module
-})
+import pako from "pako";
+import JSZip from "jszip";
 
 
 // @ts-ignore
