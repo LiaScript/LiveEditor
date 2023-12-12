@@ -980,15 +980,22 @@ I (study) ~[[ am going to study ]]~ harder this term.
       switch (this.$props.connection) {
         case "webrtc": {
           provider = new WebrtcProvider(storageId, yDoc, {
-            signaling: process.env?.SIGNALING_SERVER?.split(" ") || [
+            signaling: process.env.SIGNALING_SERVER.split(" ") || [
               "wss://rooms.deno.dev",
             ],
+            peerOpts: { 
+              config: {
+                iceServers: JSON.parse(process.env.ICE_SERVERS || "[]")
+              }
+            },
           });
+
+          console.warn("XXX liascript: webrtc", provider);
           break;
         }
         case "websocket": {
           provider = new WebsocketProvider(
-            process.env?.WEBSOCKET_SERVER || "wss://aamkeaam.com/" + storageId,
+            process.env.WEBSOCKET_SERVER || "wss://aamkeaam.com/" + storageId,
             storageId,
             yDoc
           );
