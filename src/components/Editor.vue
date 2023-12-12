@@ -989,8 +989,6 @@ I (study) ~[[ am going to study ]]~ harder this term.
               }
             },
           });
-
-          console.warn("XXX liascript: webrtc", provider);
           break;
         }
         case "websocket": {
