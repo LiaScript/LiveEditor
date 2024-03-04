@@ -16,7 +16,7 @@
   "author": "André Dietrich",
   "license": "ISC",
   "dependencies": {
-    "@liascript/editor": "^1.1.3--0.14.9",
+    "@liascript/editor": "^1.1.3--0.14.10",
     "@susisu/mte-kernel": "^2.1.1",
     "mathjs": "^12.0.0",
     "pako": "^2.1.0"
