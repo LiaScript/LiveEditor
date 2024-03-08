@@ -2,22 +2,91 @@
 import Dexie from "../ts/indexDB";
 import Card from "../components/Card.vue";
 import Footer from "../components/Footer.vue";
+import * as Y from "yjs";
+import { IndexeddbPersistence } from "y-indexeddb";
+
+import MiniSearch from "minisearch";
+
+function waitForSync(provider) {
+  return new Promise((resolve) => {
+    if (provider.synced) {
+      resolve();
+    } else {
+      provider.on("synced", () => {
+        resolve();
+      });
+    }
+  });
+}
+
+function getTextFor(id: string) {
+  const yDoc = new Y.Doc();
+  const provider = new IndexeddbPersistence(id, yDoc);
+
+  return new Promise((resolve) => {
+    waitForSync(provider).then(() => {
+      resolve(yDoc.getText(id).toString()); // Now you can safely access the data
+    });
+  });
+}
 
 export default {
   data() {
     const database = new Dexie();
+
     const self = this;
     database.watch(null, (e: any) => {
       self.init();
     });
 
+    const search = new MiniSearch({
+      idField: "id",
+      fields: ["text"],
+      storeFields: [],
+      searchOptions: {
+        boost: { id: 2 },
+      },
+    });
+
     return {
       database,
+      search,
+      results: [],
       courses: [],
+      coursesFiltered: [],
+      searchText: "",
     };
   },
 
+  mounted() {
+    this.initSearch();
+  },
   methods: {
+    handleSearch() {
+      const results = this.search.search(this.searchText, {
+        fuzzy: 0.2,
+        prefix: true,
+        combineWith: "AND",
+      });
+
+      this.coursesFiltered = [];
+      for (const item of results) {
+        const course = this.courses.find((c) => c.id === item.id);
+
+        if (course) this.coursesFiltered.push(course);
+      }
+    },
+
+    async initSearch() {
+      const db = await this.database.getAll();
+
+      for (const item of db) {
+        getTextFor(item.id).then((text) => {
+          this.search.add({ id: item.id, text });
+        });
+      }
+    },
+
     async init() {
       this.courses = await this.database.getAll();
     },
@@ -26,6 +95,12 @@ export default {
       this.database.drop(id);
       window.indexedDB.deleteDatabase(id);
       this.init();
+
+      const self = this;
+
+      setTimeout(() => {
+        self.handleSearch();
+      }, 100);
     },
   },
 
@@ -55,17 +130,40 @@ export default {
   >
     <div class="input-group" style="padding: 2rem 5rem 0rem 5rem">
       <input
-        type="search"
         class="form-control"
-        placeholder=""
-        aria-label="search all notes"
+        placeholder="Type to search..."
+        @input="handleSearch"
+        v-model="searchText"
       />
+
       <div class="input-group-append">
-        <button class="btn btn-secondary" type="button">Search</button>
+        <button class="btn btn-icon" type="button" @click="searchText = ''">
+          <i class="bi bi-x-lg"> </i>
+        </button>
       </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4">
+    <div id="filter" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4"></div>
+
+    <div
+      class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4"
+      v-if="searchText.length > 0"
+    >
+      <Card
+        v-for="item of coursesFiltered"
+        :key="item.id"
+        :card-id="item.id"
+        :card-timestamp="item.timestamp"
+        :card-title="item.meta.title"
+        :card-logo="item.meta.logo"
+        :card-version="item.meta.version"
+        :card-comment="item.meta.macro?.comment"
+        :card-gist="item.meta.gist_url"
+        @drop="drop"
+      />
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4" v-else>
       <Card
         v-for="item of courses"
         :key="item.id"
