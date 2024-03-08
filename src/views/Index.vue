@@ -41,31 +41,31 @@ export default {
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand">
-        <img
-          src="../../assets/logo.png"
-          alt="LiaScript"
-          height="28"
-        >
+        <img src="../../assets/logo.png" alt="LiaScript" height="28" />
         LiaEdit
       </a>
 
-      <a
-        type="button"
-        class="btn btn-primary"
-        href="./?/edit"
-        data-link
-      >
-        New note
-      </a>
+      <a type="button" class="btn btn-primary" href="./?/edit" data-link> New note </a>
     </div>
   </nav>
 
   <div
     class="container mx-0 px-0 pb-5"
-    style="max-width: 100vw !important; height:100%; overflow: scroll"
+    style="max-width: 100vw !important; height: 100%; overflow: scroll"
   >
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-5">
+    <div class="input-group" style="padding: 2rem 5rem 0rem 5rem">
+      <input
+        type="search"
+        class="form-control"
+        placeholder=""
+        aria-label="search all notes"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-secondary" type="button">Search</button>
+      </div>
+    </div>
 
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4">
       <Card
         v-for="item of courses"
         :key="item.id"
@@ -78,28 +78,16 @@ export default {
         :card-gist="item.meta.gist_url"
         @drop="drop"
       />
-
     </div>
 
     <Footer>
-      This is a collaborative online editor for <a
-        href="https://LiaScript.github.io"
-        target="_blank"
-      >LiaScript</a>.
-      All content is stored only within your browser.
-      If you need some inspiration, check out some of our
+      This is a collaborative online editor for
+      <a href="https://LiaScript.github.io" target="_blank">LiaScript</a>. All content is
+      stored only within your browser. If you need some inspiration, check out some of our
       <a href="./examples.html">examples</a>, search for embedable
-      <a
-        href="https://github.com/topics/liascript-template"
-        target="_blank"
-      >templates</a>, or already published
-      <a
-        href="https://github.com/topics/liascript-course"
-        target="_blank"
-      >courses</a>.
+      <a href="https://github.com/topics/liascript-template" target="_blank">templates</a
+      >, or already published
+      <a href="https://github.com/topics/liascript-course" target="_blank">courses</a>.
     </Footer>
   </div>
-
 </template>
-
-
