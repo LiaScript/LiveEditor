@@ -1551,7 +1551,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 }
 
 .btn-sm {
-  padding: 0.25rem;
+  padding: 0.4rem 0.75rem 0.2rem 0.75rem;
 }
 
 .btn-group {
