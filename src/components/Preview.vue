@@ -148,18 +148,14 @@ export default {
 
   methods: {
     onReady(params: any) {
-      const iframe = document.getElementById(
-        "liascript-preview"
-      ) as HTMLIFrameElement;
+      const iframe = document.getElementById("liascript-preview") as HTMLIFrameElement;
 
       if (!this.isReady && iframe && iframe.contentWindow) {
         this.isReady = true;
 
         // only inject if key has been defined
         if (this.responsiveVoiceKey) {
-          iframe.contentWindow["LIA"].injectResposivevoice(
-            this.responsiveVoiceKey
-          );
+          iframe.contentWindow["LIA"].injectResposivevoice(this.responsiveVoiceKey);
         }
 
         // @ts-ignore
@@ -201,14 +197,9 @@ export default {
 };
 </script>
 
-
 <template>
-  <iframe
-    id="liascript-preview"
-    src="./liascript/index.html?"
-  ></iframe>
+  <iframe id="liascript-preview" src="./liascript/index.html?"></iframe>
 </template>
-
 
 <style scoped>
 #liascript-preview {

@@ -10,6 +10,8 @@ import { compress } from "shrink-string";
 import pako from "pako";
 import JSZip from "jszip";
 
+import { Splitpanes, Pane } from "splitpanes";
+import "splitpanes/dist/splitpanes.css";
 
 // @ts-ignore
 // import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
@@ -89,6 +91,7 @@ export default {
         type: connectionType,
         users: 0,
       },
+      resizing: false,
     };
   },
 
@@ -100,12 +103,7 @@ export default {
 
   methods: {
     urlPath(path: string[]) {
-      return (
-        window.location.origin +
-        window.location.pathname +
-        "?/" +
-        path.join("/")
-      );
+      return window.location.origin + window.location.pathname + "?/" + path.join("/");
     },
 
     online(users: number) {
@@ -281,9 +279,7 @@ export default {
       }
 
       const fileName =
-        "Project-" +
-        (this.$props?.storageId?.slice(0, 8) || "xxxxxxxx") +
-        ".zip";
+        "Project-" + (this.$props?.storageId?.slice(0, 8) || "xxxxxxxx") + ".zip";
       zip.generateAsync({ type: "blob" }).then(function (content) {
         let url = URL.createObjectURL(content);
 
@@ -370,24 +366,15 @@ export default {
     },
   },
 
-  components: { Editor, Preview, Modal },
+  components: { Editor, Modal, Pane, Preview, Splitpanes },
 };
 </script>
 
 <template>
-
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a
-        class="navbar-brand"
-        href="./"
-        data-link="true"
-      >
-        <img
-          src="../../assets/logo.png"
-          alt="LiaScript"
-          height="28"
-        >
+      <a class="navbar-brand" href="./" data-link="true">
+        <img src="../../assets/logo.png" alt="LiaScript" height="28" />
         LiaEdit
       </a>
 
@@ -417,12 +404,8 @@ export default {
             id="btnradio1"
             autocomplete="off"
             @click="changeMode(-1)"
-          >
-          <label
-            class="btn btn-outline-secondary"
-            for="btnradio1"
-            title="Editor only"
-          >
+          />
+          <label class="btn btn-outline-secondary" for="btnradio1" title="Editor only">
             <i class="bi bi-pencil"></i>
           </label>
 
@@ -434,12 +417,8 @@ export default {
             autocomplete="off"
             checked
             @click="changeMode(0)"
-          >
-          <label
-            class="btn btn-outline-secondary"
-            for="btnradio2"
-            title="Split view"
-          >
+          />
+          <label class="btn btn-outline-secondary" for="btnradio2" title="Split view">
             <i class="bi bi-layout-split"></i>
           </label>
 
@@ -450,12 +429,8 @@ export default {
             id="btnradio3"
             autocomplete="off"
             @click="changeMode(1)"
-          >
-          <label
-            class="btn btn-outline-secondary"
-            for="btnradio3"
-            title="Preview only"
-          >
+          />
+          <label class="btn btn-outline-secondary" for="btnradio3" title="Preview only">
             <i class="bi bi-eye"></i>
           </label>
         </div>
@@ -484,17 +459,11 @@ export default {
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div
-        class="collapse navbar-collapse"
-        id="navbarSupportedContent"
-      >
-
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- SPAN -->
-        <div class="navbar-nav me-auto mb-lg-0">
-        </div>
+        <div class="navbar-nav me-auto mb-lg-0"></div>
 
         <div class="navbar-nav mb-2 mb-lg-0">
-
           <div class="nav-item nav-item-sm ml-4 me-4">
             <a
               class="nav-link"
@@ -533,9 +502,7 @@ export default {
 
             <ul class="dropdown-menu">
               <li>
-                <h6 class="dropdown-header fw-light">
-                  Share editor ...
-                </h6>
+                <h6 class="dropdown-header fw-light">Share editor ...</h6>
               </li>
               <li>
                 <span
@@ -554,28 +521,20 @@ export default {
                 </span>
               </li>
               <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="shareCode"
-                >
+                <button class="btn dropdown-item btn-link" @click="shareCode">
                   snapshot url
                 </button>
               </li>
               <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="shareFile"
-                >
+                <button class="btn dropdown-item btn-link" @click="shareFile">
                   external resource
                 </button>
               </li>
               <li>
-                <hr class="dropdown-divider">
+                <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">
-                  Share course via ...
-                </h6>
+                <h6 class="dropdown-header fw-light">Share course via ...</h6>
               </li>
               <li>
                 <span
@@ -586,7 +545,7 @@ export default {
                 >
                   <a
                     class="dropdown-item"
-                    :class="{disabled: !meta.meta?.gist_url}"
+                    :class="{ disabled: !meta.meta?.gist_url }"
                     :href="'https://liascript.github.io/course/?' + meta.meta?.gist_url"
                     target="_blank"
                   >
@@ -595,10 +554,7 @@ export default {
                 </span>
               </li>
               <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="shareData"
-                >
+                <button class="btn dropdown-item btn-link" @click="shareData">
                   data-URI
                 </button>
               </li>
@@ -612,7 +568,7 @@ export default {
                 >
                   <a
                     class="btn dropdown-item btn-link"
-                    :class="{disabled: !fileUrl}"
+                    :class="{ disabled: !fileUrl }"
                     :href="'https://LiaScript.github.io/course/?' + fileUrl"
                     target="_blank"
                     title="open this course on LiaScript"
@@ -622,27 +578,19 @@ export default {
                 </div>
               </li>
               <li>
-                <hr class="dropdown-divider">
+                <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">
-                  Download to ...
-                </h6>
+                <h6 class="dropdown-header fw-light">Download to ...</h6>
               </li>
               <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="download"
-                >
+                <button class="btn dropdown-item btn-link" @click="download">
                   README.md
                 </button>
               </li>
               <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="downloadZip"
-                >
-                  Project-{{$props?.storageId?.slice(0,8) || "xxxxxxxx"}}.zip
+                <button class="btn dropdown-item btn-link" @click="downloadZip">
+                  Project-{{ $props?.storageId?.slice(0, 8) || "xxxxxxxx" }}.zip
                 </button>
               </li>
               <!--li>
@@ -681,25 +629,22 @@ export default {
                 </button>
               </li-->
               <li>
-                <hr class="dropdown-divider">
+                <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">
-                  Export to...
-                </h6>
+                <h6 class="dropdown-header fw-light">Export to...</h6>
               </li>
               <li>
                 <span
                   class="d-inline-block"
-                  style="width:100%"
+                  style="width: 100%"
                   tabindex="0"
                   data-toggle="tooltip"
                   title="Fork this document before you can use this function"
                 >
-
                   <a
                     class="btn dropdown-item btn-link"
-                    :class="{disabled: !storageId}"
+                    :class="{ disabled: !storageId }"
                     aria-current="page"
                     target="_blank"
                     :href="urlPath(['export', 'github', storageId])"
@@ -718,12 +663,12 @@ export default {
               :class="conn.users === 0 ? 'bg-secondary' : 'bg-primary'"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              style="width: 100%;"
+              style="width: 100%"
             >
-              {{ conn.type  }}
+              {{ conn.type }}
               <i class="bi bi-people-fill mx-1"></i>
               <span class="mx-1">
-                {{ conn.users > 0 ? conn.users : '' }}
+                {{ conn.users > 0 ? conn.users : "" }}
               </span>
             </button>
 
@@ -731,15 +676,14 @@ export default {
               <li>
                 <span
                   class="d-inline-block"
-                  style="width:100%"
+                  style="width: 100%"
                   tabindex="0"
                   data-toggle="tooltip"
                   title="Fork this document before you can use this function"
                 >
-
                   <a
                     class="btn dropdown-item btn-link"
-                    :class="{disabled: !storageId}"
+                    :class="{ disabled: !storageId }"
                     aria-current="page"
                     :href="this.urlPath(['edit', storageId])"
                     title="Store the document on github"
@@ -752,15 +696,14 @@ export default {
               <li>
                 <span
                   class="d-inline-block"
-                  style="width:100%"
+                  style="width: 100%"
                   tabindex="0"
                   data-toggle="tooltip"
                   title="Fork this document before you can use this function"
                 >
-
                   <a
                     class="btn dropdown-item btn-link"
-                    :class="{disabled: !storageId}"
+                    :class="{ disabled: !storageId }"
                     aria-current="page"
                     :href="this.urlPath(['edit', storageId, 'webrtc'])"
                     title="Store the document on github"
@@ -772,15 +715,14 @@ export default {
               <li>
                 <span
                   class="d-inline-block"
-                  style="width:100%"
+                  style="width: 100%"
                   tabindex="0"
                   data-toggle="tooltip"
                   title="Fork this document before you can use this function"
                 >
-
                   <a
                     class="btn dropdown-item btn-link"
-                    :class="{disabled: !storageId}"
+                    :class="{ disabled: !storageId }"
                     aria-current="page"
                     :href="this.urlPath(['edit', storageId, 'websocket'])"
                     title="Store the document on github"
@@ -789,30 +731,25 @@ export default {
                   </a>
                 </span>
               </li>
-
             </ul>
           </div>
-
         </div>
       </div>
-
     </div>
   </nav>
 
-  <div
-    class="container p-0"
-    style="max-width:100%"
-  >
-    <div
+  <div class="container p-0" style="max-width: 100%">
+    <splitpanes
       id="liascript-ide"
-      class="row align-items-start p-0 m-0 flex-nowrap"
-      style="height: calc(100vh - 56px);"
+      class="default-theme"
+      style="height: calc(100vh - 56px)"
+      @resize="resizing = true"
+      @resized="resizing = false"
     >
-      <div
-        class="col-6 w-50 p-0 h-100"
+      <pane
         :hidden="mode > 0"
-        :class="{'w-50': mode==0, 'w-100': mode!=0}"
-        style="border-right: solid lightgray 2px;"
+        style="border-right: solid lightgray 2px"
+        :style="{ 'min-width': mode < 0 ? '100%' : '0px' }"
       >
         <Editor
           class="col w-100 p-0 h-100"
@@ -826,25 +763,32 @@ export default {
           :connection="$props.connection"
         >
         </Editor>
-      </div>
+      </pane>
 
-      <div
-        class="col-6 w-50 h-100 p-0"
-        :hidden="mode < 0"
-        :class="{'w-50': mode==0, 'w-100': mode!=0}"
-      >
+      <pane :hidden="mode < 0" :style="{ 'min-width': mode > 0 ? '100%' : '0px' }">
         <div
           v-show="previewNotReady"
-          style="position: absolute; background-color: white; width:50%; height: 100%"
+          style="position: absolute; background-color: white; width: 50%; height: 100%"
         >
           <div
             class="spinner-grow"
-            style="width: 5rem; height: 5rem; margin-top: 50%; margin-left: 45%; margin-right: 45%;"
+            style="
+              width: 5rem;
+              height: 5rem;
+              margin-top: 50%;
+              margin-left: 45%;
+              margin-right: 45%;
+            "
             role="status"
           >
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
+
+        <div
+          v-show="resizing"
+          style="position: absolute; width: 100%; height: 100%"
+        ></div>
 
         <Preview
           @ready="previewReady"
@@ -853,19 +797,25 @@ export default {
           :fetchError="fetchError"
           :class="{ invisible: previewNotReady }"
         />
-      </div>
-    </div>
+      </pane>
+    </splitpanes>
   </div>
 
   <Modal ref="modal" />
 </template>
 
-<style scoped>
+<style>
 #liascript {
   height: 100vh;
 }
 
 .invisible {
   visibility: hidden;
+}
+
+.splitpanes__splitter {
+  background-color: #f8f9fa !important;
+  z-index: 1000;
+  width: 25px;
 }
 </style>
