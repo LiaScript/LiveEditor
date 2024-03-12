@@ -74,6 +74,7 @@ export default {
     "cardLogo",
     "cardComment",
     "cardGist",
+    "cardTags",
   ],
   emits: ["drop"],
 
@@ -99,10 +100,16 @@ export default {
       });
     }
 
+    var tags = [];
+    if (this.$props.cardTags) {
+      tags = this.$props.cardTags.split(",").map((e: string) => e.trim().toLowerCase());
+    }
+
     return {
       dateFormat,
       svg,
       url,
+      tags,
     };
   },
 
@@ -177,7 +184,15 @@ export default {
         </div>
       </div>
 
-      <div class="card-body pt-0" style="height: 4rem; overflow: auto">
+      <div class="card-body pt-0" style="height: 6rem; overflow: auto">
+        <div v-if="tags.length" class="mb-0" style="margin-bottom: 6px !important">
+          <span
+            v-for="tag of tags"
+            class="badge rounded-pill bg-secondary"
+            style="margin-right: 0.25rem"
+            >{{ tag }}</span
+          >
+        </div>
         <p class="mb-0">
           <small>
             {{ cardComment || "" }}
@@ -205,10 +220,7 @@ export default {
           </small>
         </p>
         <div class="col gap-2 d-sm-flex justify-content-end p-1">
-          <a
-            :href="'./?/edit/' + cardId"
-            class="btn btn-primary btn-sm stretched-link"
-            data-link="true"
+          <a :href="'./?/edit/' + cardId" class="btn btn-primary btn-sm" data-link="true"
             >Edit</a
           >
         </div>

@@ -159,6 +159,7 @@ export default {
         :card-version="item.meta.version"
         :card-comment="item.meta.macro?.comment"
         :card-gist="item.meta.gist_url"
+        :card-tags="item.meta.macro?.tags"
         @drop="drop"
       />
     </div>
@@ -174,6 +175,7 @@ export default {
         :card-version="item.meta.version"
         :card-comment="item.meta.macro?.comment"
         :card-gist="item.meta.gist_url"
+        :card-tags="item.meta.macro?.tags"
         @drop="drop"
       />
     </div>
