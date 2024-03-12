@@ -55,6 +55,7 @@ export default {
       courses: [],
       coursesFiltered: [],
       searchText: "",
+      tags: [],
     };
   },
 
@@ -75,6 +76,24 @@ export default {
 
         if (course) this.coursesFiltered.push(course);
       }
+
+      const activeTags = this.tags.filter((t) => t.active).map((t) => t.name);
+      if (this.searchText.length === 0 && activeTags.length > 0) {
+        this.coursesFiltered = this.courses;
+      }
+
+      if (activeTags.length > 0) {
+        this.coursesFiltered = this.coursesFiltered.filter((c) => {
+          const localTags = c.meta.macro?.tags;
+          if (localTags) {
+            const localTagsArray = localTags
+              .split(",")
+              .map((t) => t.trim().toLowerCase());
+            return localTagsArray.some((t) => activeTags.includes(t));
+          }
+          return false;
+        });
+      }
     },
 
     async initSearch() {
@@ -89,6 +108,22 @@ export default {
 
     async init() {
       this.courses = await this.database.getAll();
+
+      var tags = new Set();
+      for (const course of this.courses) {
+        let localTags = course.meta.macro?.tags;
+
+        if (localTags) {
+          localTags = localTags.split(",").map((t) => t.trim().toLowerCase());
+          localTags.forEach((t) => tags.add(t));
+        }
+      }
+
+      this.tags = Array.from(tags)
+        .sort()
+        .map((t) => {
+          return { name: t, active: false };
+        });
     },
 
     drop(id: string) {
@@ -143,11 +178,24 @@ export default {
       </div>
     </div>
 
-    <div id="filter" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4"></div>
+    <div :v-if="tags.length > 0" style="text-align: center; padding: 2rem 5rem 0rem 5rem">
+      <button
+        v-for="tag of tags"
+        class="btn badge rounded-pill"
+        :class="{ 'bg-primary': tag.active, 'bg-secondary': !tag.active }"
+        @click="
+          tag.active = !tag.active;
+          handleSearch();
+        "
+        style="margin-right: 0.25rem"
+      >
+        {{ tag.name }}
+      </button>
+    </div>
 
     <div
       class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4"
-      v-if="searchText.length > 0"
+      v-if="searchText.length > 0 || coursesFiltered.length > 0"
     >
       <Card
         v-for="item of coursesFiltered"
