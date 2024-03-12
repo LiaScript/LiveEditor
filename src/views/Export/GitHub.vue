@@ -72,6 +72,4 @@ export default {
 };
 </script>
 
-<template>
-  Exporting
-</template>
+<template>Exporting</template>

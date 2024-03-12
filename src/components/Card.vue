@@ -82,15 +82,9 @@ export default {
     let url = this.$props.cardLogo;
     const svg = url ? null : generateLines(this.$props.cardId);
 
-    if (
-      this.$props.cardLogo &&
-      this.$props.cardLogo.match(/\/[a-f,0-9]+\.[^.]*/)
-    ) {
+    if (this.$props.cardLogo && this.$props.cardLogo.match(/\/[a-f,0-9]+\.[^.]*/)) {
       const yDoc = new Y.Doc();
-      const indexeddbProvider = new IndexeddbPersistence(
-        this.$props.cardId,
-        yDoc
-      );
+      const indexeddbProvider = new IndexeddbPersistence(this.$props.cardId, yDoc);
 
       const id = this.$props.cardLogo.slice(1);
 
@@ -126,27 +120,23 @@ export default {
 };
 </script>
 
-
 <template>
-  <div
-    class="col-12 p-2 col-sm-6 col-md-6 col-lg-4 col-xl-3"
-    style="height: inherit"
-  >
+  <div class="col-12 p-2 col-sm-6 col-md-6 col-lg-4 col-xl-3" style="height: inherit">
     <div class="card shadow bg-body rounded">
       <img
         v-if="url"
         :src="url"
         class="card-img-top img-fluid"
-        style="height: 12rem; object-fit: cover;"
+        style="height: 12rem; object-fit: cover"
         loading="lazy"
-        :id="cardId+'-img'"
-      >
+        :id="cardId + '-img'"
+      />
       <svg
         v-if="svg"
         class="card-img-top img-fluid"
-        xmlns='http://www.w3.org/2000/svg'
-        viewBox='0 0 110 50'
-        style="height: 12rem;"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 110 50"
+        style="height: 12rem"
         v-html="svg"
       ></svg>
 
@@ -156,55 +146,56 @@ export default {
         aria-label="Delete"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
-        style="position: absolute; top: 3px; right: 4px; z-index: 10; background-color: white;"
+        style="
+          position: absolute;
+          top: 3px;
+          right: 4px;
+          z-index: 10;
+          background-color: white;
+        "
       ></button>
 
       <p
-        style="padding-left: 5px; position: absolute; top: 10.5rem; left: 0; z-index: 10; background-color: rgba(255, 255, 255, 0.5); width:100%"
+        style="
+          padding-left: 5px;
+          position: absolute;
+          top: 10.5rem;
+          left: 0;
+          z-index: 10;
+          background-color: rgba(255, 255, 255, 0.5);
+          width: 100%;
+        "
         class="mb-0 text-muted"
-      ><small>ID: {{ cardId }}</small></p>
-      <div
-        class="card-body"
-        style="margin-bottom: -16px"
       >
-
+        <small>ID: {{ cardId }}</small>
+      </p>
+      <div class="card-body" style="margin-bottom: -16px">
         <div class="d-flex justify-content-between">
-          <h6
-            class="h6 text-truncate"
-            style="margin-right: 10px"
-          >
-            {{ cardTitle || 'Untitled'}}
+          <h6 class="h6 text-truncate" style="margin-right: 10px">
+            {{ cardTitle || "Untitled" }}
           </h6>
-
         </div>
       </div>
 
-      <div
-        class="card-body pt-0"
-        style="height: 4rem; overflow: auto"
-      >
+      <div class="card-body pt-0" style="height: 4rem; overflow: auto">
         <p class="mb-0">
           <small>
-            {{ cardComment || '' }}
+            {{ cardComment || "" }}
           </small>
         </p>
 
         <div :hidden="cardGist ? false : true">
-          <hr>
-          <small>
-            Exports:
-          </small>
+          <hr />
+          <small> Exports: </small>
 
           <p class="mb-0">
             <small>
-              <a
-                :href="'https://LiaScript.github.io/course/?' + cardGist"
-                target="_blank"
-              >GitHub gist</a>
+              <a :href="'https://LiaScript.github.io/course/?' + cardGist" target="_blank"
+                >GitHub gist</a
+              >
             </small>
           </p>
         </div>
-
       </div>
 
       <div class="row m-1">
@@ -218,7 +209,8 @@ export default {
             :href="'./?/edit/' + cardId"
             class="btn btn-primary btn-sm stretched-link"
             data-link="true"
-          >Edit</a>
+            >Edit</a
+          >
         </div>
       </div>
     </div>
@@ -232,15 +224,11 @@ export default {
     aria-hidden="true"
   >
     <div class="modal-dialog">
-      <div
-        class="modal-content border-danger mb-5"
-        style="border-width: 3px;"
-      >
+      <div class="modal-content border-danger mb-5" style="border-width: 3px">
         <div class="modal-header">
-          <h5
-            class="modal-title"
-            id="exampleModalLabel"
-          >Delete: "{{ cardTitle || "Untitled" }}"</h5>
+          <h5 class="modal-title" id="exampleModalLabel">
+            Delete: "{{ cardTitle || "Untitled" }}"
+          </h5>
           <button
             type="button"
             class="btn-close"
@@ -250,26 +238,25 @@ export default {
         </div>
         <div class="modal-body">
           Are you sure you that want to delete this document forever?
-          <br>
+          <br />
           It cannot be restored!
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >Abort</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Abort
+          </button>
           <button
             type="button"
             class="btn btn-outline-danger"
             data-bs-dismiss="modal"
             @click="drop"
-          >Delete</button>
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>

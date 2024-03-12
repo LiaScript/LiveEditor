@@ -45,37 +45,22 @@ export default {
       const baseURL = this.fileUrl.replace(/\/[^\/]*$/, "/");
       this.data = replaceURLs(baseURL, this.data);
     } else {
-      this.data = errorMsg(
-        this.fileUrl,
-        response.status + ": " + response.statusText
-      );
+      this.data = errorMsg(this.fileUrl, response.status + ": " + response.statusText);
     }
   },
   components: { LiaScript, Toast },
 };
 </script>
 
-
 <template>
-
-  <LiaScript
-    v-if="data"
-    :content="data"
-    :file-url="fileUrl"
-  >
-  </LiaScript>
+  <LiaScript v-if="data" :content="data" :file-url="fileUrl"> </LiaScript>
 
   <Toast>
-    You can modify and compile this course with Ctrl+S, but if you want to store your changes permanently you have to fork it!
+    You can modify and compile this course with Ctrl+S, but if you want to store your
+    changes permanently you have to fork it!
 
-    <br>
-    If you want to see the course on LiaScript, click <a
-      :href="'https://LiaScript.github.io/course/?' + fileUrl"
-      target="_blank"
-    >here</a>.
-
+    <br />
+    If you want to see the course on LiaScript, click
+    <a :href="'https://LiaScript.github.io/course/?' + fileUrl" target="_blank">here</a>.
   </Toast>
 </template>
-  
-
-

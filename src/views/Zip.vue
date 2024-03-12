@@ -42,14 +42,10 @@ export default {
 </script>
 
 <template>
-
-  <LiaScript
-    v-if="data"
-    :content="data"
-  >
-  </LiaScript>
+  <LiaScript v-if="data" :content="data"> </LiaScript>
 
   <Toast :hidden="error">
-    You can modify and compile this course with Ctrl+S, but if you want to store your changes permanently you have to fork it!
+    You can modify and compile this course with Ctrl+S, but if you want to store your
+    changes permanently you have to fork it!
   </Toast>
 </template>
