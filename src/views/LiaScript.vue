@@ -79,6 +79,8 @@ export default {
 
     return {
       preview: undefined,
+      horizontal:
+        document.documentElement.clientWidth < document.documentElement.clientHeight,
       previewNotReady: true,
       compilationCounter: 0,
       mode: 0,
@@ -99,6 +101,13 @@ export default {
     lightMode() {
       return this.lights ? "bi bi-sun" : "bi bi-moon";
     },
+  },
+
+  mounted() {
+    window.addEventListener("resize", () => {
+      this.horizontal =
+        document.documentElement.clientWidth < document.documentElement.clientHeight;
+    });
   },
 
   methods: {
@@ -419,7 +428,11 @@ export default {
             @click="changeMode(0)"
           />
           <label class="btn btn-outline-secondary" for="btnradio2" title="Split view">
-            <i class="bi bi-layout-split"></i>
+            <i
+              class="bi bi-layout-split"
+              style="display: inline-block"
+              :style="{ transform: horizontal ? 'rotate(90deg)' : 'rotate(0deg)' }"
+            ></i>
           </label>
 
           <input
@@ -745,11 +758,15 @@ export default {
       style="height: calc(100vh - 56px)"
       @resize="resizing = true"
       @resized="resizing = false"
+      :horizontal="horizontal"
     >
       <pane
         :hidden="mode > 0"
         style="border-right: solid lightgray 2px"
-        :style="{ 'min-width': mode < 0 ? '100%' : '0px' }"
+        :class="{
+          fullHeight: mode < 0 && horizontal,
+          fullWidth: mode < 0 && !horizontal,
+        }"
       >
         <Editor
           class="col w-100 p-0 h-100"
@@ -765,7 +782,13 @@ export default {
         </Editor>
       </pane>
 
-      <pane :hidden="mode < 0" :style="{ 'min-width': mode > 0 ? '100%' : '0px' }">
+      <pane
+        :hidden="mode < 0"
+        :class="{
+          fullHeight: mode > 0 && horizontal,
+          fullWidth: mode > 0 && !horizontal,
+        }"
+      >
         <div
           v-show="previewNotReady"
           style="position: absolute; background-color: white; width: 50%; height: 100%"
@@ -815,7 +838,21 @@ export default {
 
 .splitpanes__splitter {
   background-color: #f8f9fa !important;
-  z-index: 1000;
-  width: 25px;
+}
+
+.splitpanes--vertical > .splitpanes__splitter {
+  min-width: 10px;
+}
+
+.splitpanes--horizontal > .splitpanes__splitter {
+  min-height: 10px;
+}
+
+.fullWidth {
+  min-width: 100%;
+}
+
+.fullHeight {
+  min-height: calc(100% - 10px);
 }
 </style>
