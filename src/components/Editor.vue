@@ -1558,6 +1558,16 @@ I (study) ~[[ am going to study ]]~ harder this term.
   margin: 0.1rem 0.3rem 0.1rem 0.2rem;
 }
 
+@media (max-width: 896px) {
+  .btn-sm {
+    padding: 0.1rem 0.25rem 0px 0.15rem;
+  }
+
+  .btn-group {
+    margin: 0.1rem 0.3rem 0.1rem 0.2rem;
+  }
+}
+
 .btn-toolbar {
   flex-wrap: wrap;
   flex-direction: row;
@@ -1566,7 +1576,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
 .icon-overlay {
   top: -8px;
-  scale: 0.6;
+  scale: 0.5;
   left: -3px;
   position: relative;
   display: inline-block;

@@ -384,7 +384,7 @@ export default {
     <div class="container-fluid">
       <a class="navbar-brand" href="./" data-link="true">
         <img src="../../assets/logo.png" alt="LiaScript" height="28" />
-        LiaEdit
+        <span id="lia-edit">LiaEdit</span>
       </a>
 
       <button
@@ -461,7 +461,7 @@ export default {
       <!-- Drop-Down Navigation -->
 
       <button
-        class="navbar-toggler"
+        class="btn btn-outline-secondary me-2 px-3"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent"
@@ -827,7 +827,7 @@ export default {
   <Modal ref="modal" />
 </template>
 
-<style>
+<style scoped>
 #liascript {
   height: 100vh;
 }
@@ -836,6 +836,35 @@ export default {
   visibility: hidden;
 }
 
+.fullWidth {
+  min-width: 100%;
+}
+
+.fullHeight {
+  min-height: calc(100% - 10px);
+}
+
+@media (max-width: 460px) {
+  .btn {
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+#lia-edit {
+  margin-left: 10px;
+}
+
+@media (max-width: 418px) {
+  #lia-edit {
+    display: none;
+  }
+  .btn {
+    padding: 0.2rem 0.4rem;
+  }
+}
+</style>
+
+<style>
 .splitpanes__splitter {
   background-color: #f8f9fa !important;
 }
@@ -846,13 +875,5 @@ export default {
 
 .splitpanes--horizontal > .splitpanes__splitter {
   min-height: 10px;
-}
-
-.fullWidth {
-  min-width: 100%;
-}
-
-.fullHeight {
-  min-height: calc(100% - 10px);
 }
 </style>
