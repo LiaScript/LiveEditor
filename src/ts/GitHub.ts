@@ -92,6 +92,8 @@ export async function gistUpload(
 
   const json = await response.json()
 
+  console.warn('response', json)
+
   // the gist does not exist anymore (has been deleted)
   if (json.message == 'Not Found') {
     return await gistUpload(credentials, title, comment, content)
