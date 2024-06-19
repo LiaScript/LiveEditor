@@ -30,9 +30,12 @@ function replaceURLs(base: string, code: string): string {
 
 export default {
   name: "LiaScript-FileView",
-  props: ["fileUrl"],
+  props: ["fileUrl", "embed"],
   data() {
+    let embed = this.$props.embed || false;
+
     return {
+      embed,
       data: undefined,
     };
   },
@@ -53,12 +56,27 @@ export default {
 </script>
 
 <template>
-  <LiaScript v-if="data" :content="data" :file-url="fileUrl"> </LiaScript>
+  <LiaScript v-if="data" :content="data" :file-url="fileUrl" :embed="embed"> </LiaScript>
 
-  <Toast>
-    You can modify and compile this course with Ctrl+S, but if you want to store your
-    changes permanently you have to fork it!
+  <Toast v-if="!embed">
+    You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, but if you
+    want to store your changes permanently you have to fork it!
 
+    <br />
+    If you want to see the course on LiaScript, click
+    <a :href="'https://LiaScript.github.io/course/?' + fileUrl" target="_blank">here</a>.
+  </Toast>
+
+  <Toast v-else>
+    You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>
+    <br />
+    ... or, open it in the
+    <a
+      :href="'https://LiaScript.github.io/LiveEditor/?/show/file/' + fileUrl"
+      target="_blank"
+      >LiveEditor</a
+    >
+    ...
     <br />
     If you want to see the course on LiaScript, click
     <a :href="'https://LiaScript.github.io/course/?' + fileUrl" target="_blank">here</a>.

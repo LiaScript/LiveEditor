@@ -20,7 +20,7 @@ It resulted with the following error message:
 
 export default {
   name: "LiaScript-ZipView",
-  props: ["zipCode"],
+  props: ["zipCode", "embed"],
   data() {
     return {
       data: undefined,
@@ -42,10 +42,20 @@ export default {
 </script>
 
 <template>
-  <LiaScript v-if="data" :content="data"> </LiaScript>
+  <LiaScript v-if="data" :content="data" :embed="embed"> </LiaScript>
 
-  <Toast :hidden="error">
-    You can modify and compile this course with Ctrl+S, but if you want to store your
-    changes permanently you have to fork it!
+  <Toast v-if="!embed" :hidden="error">
+    You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, but if you
+    want to store your changes permanently you have to fork it!
+  </Toast>
+
+  <Toast v-else :hidden="error">
+    You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, or open it
+    in the
+    <a
+      :href="'https://LiaScript.github.io/LiveEditor/?/show/code/' + zipCode"
+      target="_blank"
+      >LiveEditor</a
+    >.
   </Toast>
 </template>

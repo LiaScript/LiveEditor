@@ -49,7 +49,7 @@ window.MonacoEnvironment = {
 export default {
   name: "LiaScript",
 
-  props: ["storageId", "content", "fileUrl", "connection"],
+  props: ["storageId", "content", "fileUrl", "connection", "embed"],
 
   data() {
     let database: Dexie | undefined;
@@ -382,10 +382,14 @@ export default {
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="./" data-link="true">
+      <a v-if="!embed" class="navbar-brand" href="./" data-link="true">
         <img src="../../assets/logo.png" alt="LiaScript" height="28" />
         <span id="lia-edit">LiaEdit</span>
       </a>
+      <span v-else class="navbar-brand">
+        <img src="../../assets/logo.png" alt="LiaScript" height="28" />
+        <span id="lia-edit">LiaDemo</span>
+      </span>
 
       <button
         type="button"
@@ -461,6 +465,7 @@ export default {
       <!-- Drop-Down Navigation -->
 
       <button
+        v-if="!embed"
         class="btn btn-outline-secondary me-2 px-3"
         type="button"
         data-bs-toggle="collapse"
@@ -472,7 +477,7 @@ export default {
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div v-if="!embed" class="collapse navbar-collapse" id="navbarSupportedContent">
         <!-- SPAN -->
         <div class="navbar-nav me-auto mb-lg-0"></div>
 
@@ -778,6 +783,7 @@ export default {
           :content="$props.content"
           ref="editor"
           :connection="$props.connection"
+          :toolbar="!$props.embed"
         >
         </Editor>
       </pane>

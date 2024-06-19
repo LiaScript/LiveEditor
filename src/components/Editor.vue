@@ -74,14 +74,22 @@ async function fileHash(arrayBuffer) {
 export default {
   name: "Editor",
 
-  props: ["storageId", "content", "lights", "connection"],
+  props: ["storageId", "content", "lights", "connection", "toolbar"],
 
   data() {
     const config = Utils.loadConfig();
 
+    let toolbar = true;
+
+    if (this.$props.toolbar !== undefined) {
+      toolbar = this.$props.toolbar;
+    }
+
     return {
       lights: config.lights,
       user: config.user,
+      toolbar: toolbar,
+
       online: null,
       upload: {
         image: null,
@@ -1115,6 +1123,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
 <template>
   <nav
+    v-if="toolbar"
     class="navbar navbar-light bg-light"
     style="
       border-top: solid lightgray 2px;
