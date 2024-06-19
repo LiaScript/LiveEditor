@@ -20,7 +20,7 @@ It resulted with the following error message:
 
 export default {
   name: "LiaScript-ZipView",
-  props: ["zipCode", "embed"],
+  props: ["zipCode", "embed", "mode"],
   data() {
     return {
       data: undefined,
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-  <LiaScript v-if="data" :content="data" :embed="embed"> </LiaScript>
+  <LiaScript v-if="data" :content="data" :embed="embed" :mode="mode"> </LiaScript>
 
   <Toast v-if="!embed" :hidden="error">
     You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, but if you
@@ -57,5 +57,10 @@ export default {
       target="_blank"
       >LiveEditor</a
     >.
+
+    <div v-if="mode">
+      <hr />
+      Use toolbar to switch between the editor and preview modes.
+    </div>
   </Toast>
 </template>

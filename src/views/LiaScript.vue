@@ -49,7 +49,7 @@ window.MonacoEnvironment = {
 export default {
   name: "LiaScript",
 
-  props: ["storageId", "content", "fileUrl", "connection", "embed"],
+  props: ["storageId", "content", "fileUrl", "connection", "embed", "mode"],
 
   data() {
     let database: Dexie | undefined;
@@ -83,7 +83,7 @@ export default {
         document.documentElement.clientWidth < document.documentElement.clientHeight,
       previewNotReady: true,
       compilationCounter: 0,
-      mode: 0,
+      mode: this.$props.mode || 0,
       editorIsReady: false,
       database,
       meta: {},
@@ -417,6 +417,7 @@ export default {
             id="btnradio1"
             autocomplete="off"
             @click="changeMode(-1)"
+            :checked="mode < 0"
           />
           <label class="btn btn-outline-secondary" for="btnradio1" title="Editor only">
             <i class="bi bi-pencil"></i>
@@ -428,7 +429,7 @@ export default {
             name="btnradio"
             id="btnradio2"
             autocomplete="off"
-            checked
+            :checked="mode === 0"
             @click="changeMode(0)"
           />
           <label class="btn btn-outline-secondary" for="btnradio2" title="Split view">
@@ -446,6 +447,7 @@ export default {
             id="btnradio3"
             autocomplete="off"
             @click="changeMode(1)"
+            :checked="mode > 0"
           />
           <label class="btn btn-outline-secondary" for="btnradio3" title="Preview only">
             <i class="bi bi-eye"></i>

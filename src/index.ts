@@ -55,8 +55,19 @@ const router = async () => {
     { path: '/edit', redirect: '?/edit/' + randomString(24) },
     { path: '/edit/:storageId/:connection', view: Edit },
     { path: '/edit/:storageId', view: Edit },
+    {
+      path: '/embed/code/edit/:zipCode',
+      view: Zip,
+      params: { embed: true, mode: -1 },
+    },
+    {
+      path: '/embed/code/preview/:zipCode',
+      view: Zip,
+      params: { embed: true, mode: 1 },
+    },
     { path: '/embed/code/:zipCode', view: Zip, params: { embed: true } },
     { path: '/embed/file/:fileUrl', view: File, params: { embed: true } },
+
     { path: '/show/code/:zipCode', view: Zip },
     { path: '/show/file/:fileUrl', view: File },
     {

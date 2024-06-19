@@ -30,7 +30,7 @@ function replaceURLs(base: string, code: string): string {
 
 export default {
   name: "LiaScript-FileView",
-  props: ["fileUrl", "embed"],
+  props: ["fileUrl", "embed", "mode"],
   data() {
     let embed = this.$props.embed || false;
 
@@ -56,7 +56,8 @@ export default {
 </script>
 
 <template>
-  <LiaScript v-if="data" :content="data" :file-url="fileUrl" :embed="embed"> </LiaScript>
+  <LiaScript v-if="data" :content="data" :file-url="fileUrl" :embed="embed" :mode="mode">
+  </LiaScript>
 
   <Toast v-if="!embed">
     You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, but if you
@@ -80,5 +81,10 @@ export default {
     <br />
     If you want to see the course on LiaScript, click
     <a :href="'https://LiaScript.github.io/course/?' + fileUrl" target="_blank">here</a>.
+
+    <div v-if="mode">
+      <hr />
+      Use toolbar to switch between the editor and preview modes.
+    </div>
   </Toast>
 </template>
