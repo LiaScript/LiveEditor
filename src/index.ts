@@ -4,7 +4,7 @@ import Edit from './views/Edit.vue'
 import File from './views/File.vue'
 import Zip from './views/Zip.vue'
 import GitHubExporter from './views/Export/GitHub.vue'
-
+import AudioRecorder from 'vue3-mic-recorder'
 import { randomString } from './ts/utils'
 
 var app
@@ -111,6 +111,7 @@ const router = async () => {
   app?.unmount()
 
   app = createApp(view, params)
+  app.use(AudioRecorder)
 
   app.mount(document.body)
 }

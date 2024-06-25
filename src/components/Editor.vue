@@ -71,6 +71,27 @@ async function fileHash(arrayBuffer) {
   return hashAsString;
 }
 
+function blobToUint8Array(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    // Define the onload event handler
+    reader.onload = function (event) {
+      const arrayBuffer = event.target.result;
+      const uint8Array = new Uint8Array(arrayBuffer);
+      resolve(uint8Array);
+    };
+
+    // Define the onerror event handler
+    reader.onerror = function (error) {
+      reject(error);
+    };
+
+    // Read the Blob as an ArrayBuffer
+    reader.readAsArrayBuffer(blob);
+  });
+}
+
 export default {
   name: "Editor",
 
@@ -89,6 +110,7 @@ export default {
       lights: config.lights,
       user: config.user,
       toolbar: toolbar,
+      showRecorder: false,
 
       online: null,
       upload: {
@@ -101,6 +123,25 @@ export default {
   },
 
   methods: {
+    storeAudioFile(record) {
+      if (record.blob) {
+        const self = this;
+        blobToUint8Array(record.blob)
+          .then((uint8Array) => {
+            const date = new Date();
+            const filename = "recording-" + date.toISOString() + ".mp3";
+
+            self.blob.set(filename, uint8Array);
+            self.make("upload-audio", filename);
+          })
+          .catch((error) => {
+            console.warn("Error:", error);
+          });
+      } else {
+        console.warn("could not load file: ", file);
+      }
+    },
+
     getValue() {
       if (Editor) {
         return Editor.getValue();
@@ -144,7 +185,7 @@ export default {
           } else {
             op.text = `\`\`\` ascii
  +------+   +-----+   +-----+   +-----+
- |      |   |     |   |     |   |     |      .----. 
+ |      |   |     |   |     |   |     |      .----.
  | Foo  +-->| Bar +---+ Baz |<--+ Moo |     (  🦖  )
  |  🦅  |   |     |   |     |   |     |      \`----'
  +--+---+   +-----+   +--+--+   +--o--+
@@ -1549,8 +1590,41 @@ I (study) ~[[ am going to study ]]~ harder this term.
           <i class="bi bi-rocket-takeoff"></i>
         </button>
       </div>
+
+      <div class="btn-group" role="group">
+        <button
+          class="btn btn-sm btn-outline-secondary"
+          type="button"
+          title="Open audio recorder"
+          @click="showRecorder = true"
+        >
+          <i class="bi bi-mic-fill"></i>
+        </button>
+      </div>
     </div>
   </nav>
+
+  <div
+    style="
+      z-index: 100;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+    v-if="showRecorder"
+  >
+    <div>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        style="position: absolute; z-index: 101; right: 12px; top: 10px"
+        @click="showRecorder = false"
+      ></button>
+      <audio-recorder :attempts="3" :time="2" :customUploader="storeAudioFile" />
+    </div>
+  </div>
   <div id="liascript-editor"></div>
 </template>
 
@@ -1565,6 +1639,14 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
 .btn-group {
   margin: 0.1rem 0.3rem 0.1rem 0.2rem;
+}
+
+.ar-icon {
+  line-height: 2px !important;
+}
+
+.ar-recorder__records-limit {
+  top: 66px !important;
 }
 
 @media (max-width: 896px) {

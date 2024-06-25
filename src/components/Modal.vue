@@ -1,5 +1,5 @@
 <script lang="ts">
-import { Modal } from "bootstrap/js/index.esm.js"
+import { Modal } from "bootstrap/js/index.esm.js";
 
 export default {
   props: ["modalTitle"],
@@ -26,7 +26,6 @@ export default {
 };
 </script>
 
-
 <template>
   <div
     class="modal fade"
@@ -38,10 +37,7 @@ export default {
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5
-            class="modal-title"
-            id="exampleModalLabel"
-          >{{title}}</h5>
+          <h5 class="modal-title" id="exampleModalLabel">{{ title }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -53,17 +49,12 @@ export default {
           <div v-html="body"></div>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
           <!--button type="button" class="btn btn-primary">Save changes</button-->
         </div>
       </div>
     </div>
   </div>
 </template>
-
-
-
