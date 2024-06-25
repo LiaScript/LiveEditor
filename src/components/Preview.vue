@@ -41,10 +41,14 @@ window.injectHandler = function (param) {
       for (let i = 0; i < nodes.length; i++) {
         let elem = nodes[i]
         if (elem.src == src) {
+          const parent = elem.parentNode
+          if (!parent.paused) {
+            parent.pause()
+          }
+
           elem.src = url
           elem.removeAttribute("onerror")
 
-          const parent = elem.parentNode
           // this forces the player to reload
           parent.innerHTML = elem.outerHTML
           parent.play()
@@ -198,7 +202,7 @@ export default {
 </script>
 
 <template>
-  <iframe id="liascript-preview" src="./liascript/index.html?"></iframe>
+  <iframe id="liascript-preview" src="./liascript/index.html?" allow="autoplay"></iframe>
 </template>
 
 <style scoped>
