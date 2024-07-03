@@ -101,6 +101,18 @@ window.injectHandler = function (param) {
 
 
 window.LIA.fetchError = (tag, src) => {
+  if (src.startsWith("http") || src.startsWith("https")) {
+    fetch(src)
+      .then(response => response.blob())
+      .then(blob => {
+        window.injectHandler({tag, src, data: blob})
+      })
+      .catch(error => {
+        console.error("could not fetch", src, error)
+        parent.postMessage({cmd: 'media.load', param: {tag, src}}, "*")
+      })
+  }
+
   if (blob[src]) {
     window.injectHandler({tag, src})
   } else {

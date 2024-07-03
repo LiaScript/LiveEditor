@@ -28,6 +28,26 @@ function replaceURLs(base: string, code: string): string {
   );
 }
 
+function replaceMacroURLs(macro: string, base: string, code: string): string {
+  // Use the macro parameter to define the script path regex
+  const scriptPathRegex = new RegExp(`${macro}:\\s*(.+?)(?=\\n|$)`, "g");
+
+  // Regex to find HTML comments
+  const htmlCommentRegex = /<!--([\s\S]*?)-->/g;
+
+  // Loop through all HTML comments
+  return code.replace(htmlCommentRegex, (commentMatch, commentContent) => {
+    // Loop through all script paths within the comment
+    return commentMatch.replace(scriptPathRegex, (scriptMatch, scriptPath) => {
+      // Check if the script path needs the base URL added
+      if (!/^(http|https|ipfs):/.test(scriptPath.trim())) {
+        return `${macro}: ${base}${scriptPath.trim()}`;
+      }
+      return scriptMatch;
+    });
+  });
+}
+
 export default {
   name: "LiaScript-FileView",
   props: ["fileUrl", "embed", "mode"],
@@ -47,6 +67,8 @@ export default {
       this.data = await response.text();
       const baseURL = this.fileUrl.replace(/\/[^\/]*$/, "/");
       this.data = replaceURLs(baseURL, this.data);
+      this.data = replaceMacroURLs("script", baseURL, this.data);
+      this.data = replaceMacroURLs("link", baseURL, this.data);
     } else {
       this.data = errorMsg(this.fileUrl, response.status + ": " + response.statusText);
     }
