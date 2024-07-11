@@ -5,7 +5,7 @@ import Toast from "../components/Toast.vue";
 
 function errorMsg(msg: string) {
   return `# Ups, something went wrong
-    
+
 The encoded content within the URL could not be properly parsed.
 It resulted with the following error message:
 
@@ -16,6 +16,26 @@ It resulted with the following error message:
 * This might be the case if the URL is too long or if the "messenger" that was used to transmit this URL performed an automated message truncation.
 * Or, in some cases the URL has been falsely modified...
 `;
+}
+
+function isBase64Encoded(str: string): sting | null {
+  // Check if the length is a multiple of 4
+  if (str.length % 4 !== 0) {
+    return null;
+  }
+
+  // Check for valid base64 characters
+  const base64Regex = /^[A-Za-z0-9+/]*={0,2}$/;
+  if (!base64Regex.test(str)) {
+    return null;
+  }
+
+  // Try to decode the string
+  try {
+    return atob(str);
+  } catch (e) {}
+
+  return null;
 }
 
 export default {
@@ -33,7 +53,12 @@ export default {
       this.data = await Shrink.decompress(this.zipCode);
       this.error = false;
     } catch (e) {
-      this.data = errorMsg(e.message);
+      this.data = isBase64Encoded(this.zipCode);
+
+      if (this.data === null) {
+        this.data = errorMsg(e.message);
+        return;
+      }
     }
   },
 
