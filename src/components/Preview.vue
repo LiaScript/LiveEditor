@@ -4,6 +4,9 @@ var blob = {};
 
 window.injectHandler = function (param) {
   let url
+
+  console.warn("---------", param)
+
   if (blob[param.src]) {
     url = blob[param.src]
   }
@@ -59,7 +62,8 @@ window.injectHandler = function (param) {
     }
 
     case "video": {
-      const nodes = document.querySelectorAll('source')
+      let nodes = document.querySelectorAll('source')
+
       for (let i = 0; i < nodes.length; i++) {
         let elem = nodes[i]
         if (elem.src == src) {
@@ -69,6 +73,22 @@ window.injectHandler = function (param) {
           parent.load()
           parent.onloadeddata = function() {
             parent.play()
+          }
+        }
+      }
+
+      nodes = document.querySelectorAll('video')
+
+      console.log("video", nodes, src, url)
+
+      for (let i = 0; i < nodes.length; i++) {
+        let elem = nodes[i]
+        if (elem.src == src) {
+          console.log("llllllllllll video", elem.src, src)
+          elem.src = url
+          elem.load()
+          elem.onloadeddata = function() {
+            elem.play()
           }
         }
       }
@@ -101,6 +121,7 @@ window.injectHandler = function (param) {
 
 
 window.LIA.fetchError = (tag, src) => {
+
   if (src.startsWith("http") || src.startsWith("https")) {
     fetch(src)
       .then(response => response.blob())

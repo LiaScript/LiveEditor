@@ -13,6 +13,8 @@ import { navigateTo } from "../index";
 import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
 import TextEditorInterface from "../ts/TextEditorInterface";
 
+import Recorder from "./Recorder.vue";
+
 var Emojis = [];
 import("../ts/Emojis.ts").then((module) => {
   for (const [label, emoji] of module.Emojis) {
@@ -94,7 +96,7 @@ function blobToUint8Array(blob) {
 
 export default {
   name: "Editor",
-
+  components: { Recorder },
   props: ["storageId", "content", "lights", "connection", "toolbar"],
 
   data() {
@@ -110,7 +112,7 @@ export default {
       lights: config.lights,
       user: config.user,
       toolbar: toolbar,
-      showRecorder: false,
+      recorder: { audio: false, webcam: false, screen: false },
 
       online: null,
       upload: {
@@ -123,7 +125,7 @@ export default {
   },
 
   methods: {
-    storeAudioFile(record) {
+    storeAudioFile(blob) {
       if (record.blob) {
         const self = this;
         blobToUint8Array(record.blob)
@@ -138,7 +140,26 @@ export default {
             console.warn("Error:", error);
           });
       } else {
-        console.warn("could not load file: ", file);
+        console.warn("could not load file: ", record);
+      }
+    },
+
+    storeVideoFile(blob) {
+      if (blob) {
+        const self = this;
+        blobToUint8Array(blob)
+          .then((uint8Array) => {
+            const date = new Date();
+            const filename = "recording-" + date.toISOString() + ".webm";
+
+            self.blob.set(filename, uint8Array);
+            self.make("upload-movie", filename);
+          })
+          .catch((error) => {
+            console.warn("Error:", error);
+          });
+      } else {
+        console.warn("could not load file: ", blob);
       }
     },
 
@@ -1596,9 +1617,18 @@ I (study) ~[[ am going to study ]]~ harder this term.
           class="btn btn-sm btn-outline-secondary"
           type="button"
           title="Open audio recorder"
-          @click="showRecorder = true"
+          @click="recorder.audio = true"
         >
-          <i class="bi bi-mic-fill"></i>
+          <i class="bi bi-mic"></i>
+        </button>
+
+        <button
+          class="btn btn-sm btn-outline-secondary"
+          type="button"
+          title="Open webcam recorder"
+          @click="recorder.webcam = true"
+        >
+          <i class="bi bi-webcam"></i>
         </button>
       </div>
     </div>
@@ -1612,7 +1642,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       left: 50%;
       transform: translate(-50%, -50%);
     "
-    v-if="showRecorder"
+    v-if="recorder.audio"
   >
     <div>
       <button
@@ -1620,9 +1650,31 @@ I (study) ~[[ am going to study ]]~ harder this term.
         class="btn-close"
         aria-label="Close"
         style="position: absolute; z-index: 101; right: 12px; top: 10px"
-        @click="showRecorder = false"
+        @click="recorder.audio = false"
       ></button>
       <audio-recorder :attempts="3" :time="2" :customUploader="storeAudioFile" />
+    </div>
+  </div>
+
+  <div
+    style="
+      z-index: 100;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+    v-if="recorder.webcam"
+  >
+    <div>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        style="position: absolute; z-index: 101; right: 12px; top: 10px"
+        @click="recorder.webcam = false"
+      ></button>
+      <Recorder :storeBlob="storeVideoFile" />
     </div>
   </div>
   <div id="liascript-editor"></div>
