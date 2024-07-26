@@ -79,12 +79,10 @@ window.injectHandler = function (param) {
 
       nodes = document.querySelectorAll('video')
 
-      console.log("video", nodes, src, url)
-
       for (let i = 0; i < nodes.length; i++) {
         let elem = nodes[i]
+
         if (elem.src == src) {
-          console.log("llllllllllll video", elem.src, src)
           elem.src = url
           elem.load()
           elem.onloadeddata = function() {
@@ -121,7 +119,7 @@ window.injectHandler = function (param) {
 
 
 window.LIA.fetchError = (tag, src) => {
-
+  console.warn("fetchError", tag, src)
   if (src.startsWith("http") || src.startsWith("https")) {
     fetch(src)
       .then(response => response.blob())
