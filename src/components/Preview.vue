@@ -5,8 +5,6 @@ var blob = {};
 window.injectHandler = function (param) {
   let url
 
-  console.warn("---------", param)
-
   if (blob[param.src]) {
     url = blob[param.src]
   }
@@ -119,7 +117,6 @@ window.injectHandler = function (param) {
 
 
 window.LIA.fetchError = (tag, src) => {
-  console.warn("fetchError", tag, src)
   if (src.startsWith("http") || src.startsWith("https")) {
     fetch(src)
       .then(response => response.blob())

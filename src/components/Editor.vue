@@ -112,7 +112,7 @@ export default {
       lights: config.lights,
       user: config.user,
       toolbar: toolbar,
-      recorder: { audio: false, webcam: false, screen: false },
+      recorder: { audio: false, webcam: false, desktop: false },
 
       online: null,
       upload: {
@@ -1630,6 +1630,15 @@ I (study) ~[[ am going to study ]]~ harder this term.
         >
           <i class="bi bi-webcam"></i>
         </button>
+
+        <button
+          class="btn btn-sm btn-outline-secondary"
+          type="button"
+          title="Open desktop recorder"
+          @click="recorder.desktop = true"
+        >
+          <i class="bi bi-camera-reels"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -1674,9 +1683,32 @@ I (study) ~[[ am going to study ]]~ harder this term.
         style="position: absolute; z-index: 101; right: 12px; top: 10px"
         @click="recorder.webcam = false"
       ></button>
-      <Recorder :storeBlob="storeVideoFile" />
+      <Recorder :storeBlob="storeVideoFile" stream="webcam" />
     </div>
   </div>
+
+  <div
+    style="
+      z-index: 100;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+    v-if="recorder.desktop"
+  >
+    <div>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        style="position: absolute; z-index: 101; right: 12px; top: 10px"
+        @click="recorder.desktop = false"
+      ></button>
+      <Recorder :storeBlob="storeVideoFile" stream="desktop" />
+    </div>
+  </div>
+
   <div id="liascript-editor"></div>
 </template>
 

@@ -59,7 +59,7 @@
   },
   "multipleStaticFileCopier": [
     {
-      "origin": "../LiaScript/dist",
+      "origin": "node_modules/@liascript/editor/dist",
       "destination": "dist/liascript"
     }
   ],
