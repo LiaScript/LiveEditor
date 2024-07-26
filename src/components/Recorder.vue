@@ -222,17 +222,24 @@ export default defineComponent({
 
       const blob = new Blob(recordedChunks.value, { type: "video/webm" });
 
-      const quality = selectedQuality.value; // Choose between "ultra-low", "low", "medium", "high"
+      const quality = selectedQuality.value;
 
-      // Compress the video before downloading
-      const compressedBlob = await compressVideo(blob, quality);
+      let downloadBlob;
+      if (quality === "high") {
+        // For high quality, use the original blob without compression
+        downloadBlob = blob;
+      } else {
+        // For other qualities, compress the video before downloading
+        downloadBlob = await compressVideo(blob, quality);
+      }
 
-      const url = URL.createObjectURL(compressedBlob);
+      const url = URL.createObjectURL(downloadBlob);
       const a = document.createElement("a");
       document.body.appendChild(a);
       a.style = "display: none";
       a.href = url;
-      a.download = "webcam-recording-compressed.webm";
+      a.download =
+        quality === "high" ? "recording-original.webm" : "recording-compressed.webm";
       a.click();
       window.URL.revokeObjectURL(url);
 
@@ -246,10 +253,16 @@ export default defineComponent({
       const targetSize = 5000000; // Example target size in bytes
       const quality = selectedQuality.value; // Choose between "ultra-low", "low", "medium", "high"
 
-      // Compress the video before downloading
-      const compressedBlob = await compressVideo(blob, targetSize, quality);
+      let downloadBlob;
+      if (quality === "high") {
+        // For high quality, use the original blob without compression
+        downloadBlob = blob;
+      } else {
+        // For other qualities, compress the video before downloading
+        downloadBlob = await compressVideo(blob, quality);
+      }
 
-      props.storeBlob(compressedBlob);
+      props.storeBlob(downloadBlob);
 
       isDownloading.value = false;
     };
