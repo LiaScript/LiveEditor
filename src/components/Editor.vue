@@ -125,7 +125,7 @@ export default {
   },
 
   methods: {
-    storeAudioFile(blob) {
+    storeAudioFile(record) {
       if (record.blob) {
         const self = this;
         blobToUint8Array(record.blob)
