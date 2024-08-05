@@ -31,6 +31,7 @@ export default defineComponent({
     const isDownloading = ref(false);
     const isPaused = ref(false);
     const selectedQuality = ref("low");
+    const compressionProgress = ref(0);
     let stream = null;
 
     const hasRecording = computed(() => recordedChunks.value.length > 0);
@@ -155,16 +156,14 @@ export default defineComponent({
     };
 
     const compressVideo = async (blob, quality) => {
-      const supportedCodecs = getAllSupportedVideoCodecs();
+      const supportedCodecs = await getAllSupportedVideoCodecs();
       let mimeType = "video/webm";
-
       const codecPreferences = {
         high: ["video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm"],
         medium: ["video/webm;codecs=vp8,opus", "video/webm"],
         low: ["video/webm;codecs=vp8,opus", "video/webm"],
         "ultra-low": ["video/webm;codecs=vp8,opus", "video/webm"],
       };
-
       const preferredCodecs = codecPreferences[quality];
       for (const codec of preferredCodecs) {
         if (supportedCodecs.includes(codec)) {
@@ -177,7 +176,6 @@ export default defineComponent({
       originalVideo.src = URL.createObjectURL(blob);
       await new Promise((resolve) => (originalVideo.onloadedmetadata = resolve));
 
-      // Calculate target size based on quality setting and video duration
       const qualitySettings = {
         "ultra-low": { videoBitsPerSecond: 100000, audioBitsPerSecond: 32000 },
         low: { videoBitsPerSecond: 300000, audioBitsPerSecond: 64000 },
@@ -185,29 +183,25 @@ export default defineComponent({
         high: { videoBitsPerSecond: 2500000, audioBitsPerSecond: 128000 },
       };
       const settings = qualitySettings[quality] || qualitySettings["medium"];
-      const totalBitsPerSecond =
-        settings.videoBitsPerSecond + settings.audioBitsPerSecond;
-      const targetSize = (totalBitsPerSecond * originalVideo.duration) / 8; // Convert bits to bytes
 
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
-      const scaleFactor = Math.sqrt(targetSize / blob.size);
-      canvas.width = originalVideo.videoWidth * scaleFactor;
-      canvas.height = originalVideo.videoHeight * scaleFactor;
+      canvas.width = originalVideo.videoWidth;
+      canvas.height = originalVideo.videoHeight;
 
-      // Rest of the function remains the same
-      const compressedStream = canvas.captureStream();
-      const audioContext = new AudioContext();
-      const source = audioContext.createMediaElementSource(originalVideo);
-      const destination = audioContext.createMediaStreamDestination();
-      source.connect(destination);
-      const audioTracks = destination.stream.getAudioTracks();
-      const combinedStream = new MediaStream([
-        ...compressedStream.getVideoTracks(),
-        ...audioTracks,
-      ]);
+      const stream = canvas.captureStream();
 
-      const mediaRecorder = new MediaRecorder(combinedStream, {
+      // Add audio track
+      let audioTrack;
+      try {
+        const audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioTrack = audioStream.getAudioTracks()[0];
+        stream.addTrack(audioTrack);
+      } catch (error) {
+        console.warn("Unable to capture audio. Compressing without audio.", error);
+      }
+
+      const mediaRecorder = new MediaRecorder(stream, {
         mimeType,
         videoBitsPerSecond: settings.videoBitsPerSecond,
         audioBitsPerSecond: settings.audioBitsPerSecond,
@@ -215,23 +209,47 @@ export default defineComponent({
 
       const chunks = [];
       mediaRecorder.ondataavailable = (e) => chunks.push(e.data);
-      mediaRecorder.start();
+      mediaRecorder.start(100); // Start recording in 100ms chunks
+
+      originalVideo.currentTime = 0;
+      await new Promise((resolve) => (originalVideo.oncanplay = resolve));
       originalVideo.play();
 
-      const drawFrame = () => {
-        ctx.drawImage(originalVideo, 0, 0, canvas.width, canvas.height);
-        if (!originalVideo.paused && !originalVideo.ended) {
-          requestAnimationFrame(drawFrame);
-        } else {
+      compressionProgress.value = 0;
+      const updateInterval = 500; // Update progress every 500ms
+      let lastUpdateTime = 0;
+
+      const processFrame = async () => {
+        if (originalVideo.paused || originalVideo.ended) {
           mediaRecorder.stop();
+          if (audioTrack) audioTrack.stop();
+          return;
         }
+
+        ctx.drawImage(originalVideo, 0, 0, canvas.width, canvas.height);
+
+        const currentTime = Date.now();
+        if (currentTime - lastUpdateTime >= updateInterval) {
+          compressionProgress.value = Math.round(
+            (originalVideo.currentTime / originalVideo.duration) * 100
+          );
+          lastUpdateTime = currentTime;
+        }
+
+        requestAnimationFrame(processFrame);
       };
-      drawFrame();
+
+      processFrame();
 
       return new Promise((resolve) => {
         mediaRecorder.onstop = () => {
-          const compressedBlob = new Blob(chunks, { type: "video/webm" });
+          const compressedBlob = new Blob(chunks, { type: mimeType });
           resolve(compressedBlob);
+        };
+
+        originalVideo.onended = () => {
+          mediaRecorder.stop();
+          if (audioTrack) audioTrack.stop();
         };
       });
     };
@@ -300,6 +318,7 @@ export default defineComponent({
       isPaused,
       hasRecording,
       selectedQuality,
+      compressionProgress,
       startRecording,
       stopRecording,
       togglePause,
@@ -338,7 +357,7 @@ export default defineComponent({
           "
           v-if="isDownloading"
         >
-          Video compression is running please wait...
+          Video compression is running please wait... {{ compressionProgress }}%
         </div>
       </div>
 
