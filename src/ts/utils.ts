@@ -76,7 +76,11 @@ export function storeConfig(config: {
   localStorage.setItem(CONFIG, JSON.stringify(config))
 }
 
-export function getAllSupportedMimeTypes(...mediaTypes: string[]) {
+export function getAllSupportedVideoCodecs() {
+  return getAllSupportedCodecs('video')
+}
+
+export function getAllSupportedCodecs(...mediaTypes: string[]) {
   if (!mediaTypes.length) mediaTypes.push('video', 'audio')
   const CONTAINERS = [
     'webm',

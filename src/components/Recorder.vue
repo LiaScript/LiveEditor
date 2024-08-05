@@ -1,5 +1,6 @@
 <script lang="ts">
 import { ref, computed, onUnmounted, defineComponent } from "vue";
+import { getAllSupportedVideoCodecs } from "../ts/utils.ts";
 
 interface Props {
   storeBlob: (blob: Blob) => void;
@@ -154,6 +155,24 @@ export default defineComponent({
     };
 
     const compressVideo = async (blob, quality) => {
+      const supportedCodecs = getAllSupportedVideoCodecs();
+      let mimeType = "video/webm";
+
+      const codecPreferences = {
+        high: ["video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm"],
+        medium: ["video/webm;codecs=vp8,opus", "video/webm"],
+        low: ["video/webm;codecs=vp8,opus", "video/webm"],
+        "ultra-low": ["video/webm;codecs=vp8,opus", "video/webm"],
+      };
+
+      const preferredCodecs = codecPreferences[quality];
+      for (const codec of preferredCodecs) {
+        if (supportedCodecs.includes(codec)) {
+          mimeType = codec;
+          break;
+        }
+      }
+
       const originalVideo = document.createElement("video");
       originalVideo.src = URL.createObjectURL(blob);
       await new Promise((resolve) => (originalVideo.onloadedmetadata = resolve));
@@ -189,7 +208,7 @@ export default defineComponent({
       ]);
 
       const mediaRecorder = new MediaRecorder(combinedStream, {
-        mimeType: "video/webm;codecs=vp8,opus",
+        mimeType,
         videoBitsPerSecond: settings.videoBitsPerSecond,
         audioBitsPerSecond: settings.audioBitsPerSecond,
       });
