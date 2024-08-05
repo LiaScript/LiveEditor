@@ -39,8 +39,8 @@ export async function access_token(code: string) {
   const response = await fetch(
     proxy(
       addParams('https://github.com/login/oauth/access_token', [
-        ['client_id', process.env.GITHUB_CLIENT_ID],
-        ['client_secret', process.env.GITHUB_CLIENT_SECRET],
+        ['client_id', process.env.GITHUB_CLIENT_ID || ''],
+        ['client_secret', process.env.GITHUB_CLIENT_SECRET || ''],
         ['code', code],
       ])
     ),
