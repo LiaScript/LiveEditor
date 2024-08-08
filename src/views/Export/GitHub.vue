@@ -18,7 +18,7 @@ export default {
     step1(id: string) {
       const config = Utils.loadConfig();
 
-      if (!config.credentials?.github && id) {
+      if (!config.credentials?.github?.scope && id) {
         GitHub.authorize(id);
       } else {
         this.step2(id);
@@ -37,7 +37,7 @@ export default {
         const metaData = await meta;
         const contentData = yDoc.getText(id).toJSON();
 
-        if (!config.credentials?.github) {
+        if (!config.credentials?.github?.scope) {
           config.credentials.github = await GitHub.access_token(code);
           Utils.storeConfig(config);
         }

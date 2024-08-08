@@ -21,6 +21,14 @@ function addParams(url: string, params: [key: string, value: string][]) {
 }
 
 function getParams(params: string) {
+  if (
+    params.startsWith(
+      'data:application/x-www-form-urlencoded; charset=utf-8;base64,'
+    )
+  ) {
+    params = params.split(',')[1]
+    params = atob(params)
+  }
   return Object.fromEntries(params.split('&').map((e) => e.split('=')))
 }
 
@@ -36,23 +44,28 @@ export function authorize(documentId) {
 }
 
 export async function access_token(code: string) {
-  const response = await fetch(
-    proxy(
-      addParams('https://github.com/login/oauth/access_token', [
-        ['client_id', process.env.GITHUB_CLIENT_ID || ''],
-        ['client_secret', process.env.GITHUB_CLIENT_SECRET || ''],
-        ['code', code],
-      ])
-    ),
-    { method: 'post' }
-  )
+  try {
+    const response = await fetch(
+      proxy(
+        addParams('https://github.com/login/oauth/access_token', [
+          ['client_id', process.env.GITHUB_CLIENT_ID || ''],
+          ['client_secret', process.env.GITHUB_CLIENT_SECRET || ''],
+          ['code', code],
+        ])
+      ),
+      { method: 'post' }
+    )
 
-  const json = await response.json()
+    const json = await response.json()
 
-  // headers not working that is why contents has to be split manually
-  const credentials = getParams(json.contents)
+    // headers not working that is why contents has to be split manually
+    const credentials = getParams(json.contents)
 
-  return credentials
+    return credentials
+  } catch (e) {
+    console.warn(e)
+    return
+  }
 }
 
 export async function gistUpload(
@@ -108,7 +121,7 @@ export async function gistUpload(
   return {
     url: json.html_url,
     id: json.id,
-    raw_url: json.files[filename].raw_url,
+    raw_url: json.files[filename]?.raw_url,
     message: json.message,
   }
 }
