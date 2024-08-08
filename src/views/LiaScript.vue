@@ -273,7 +273,7 @@ export default {
         Copy this HTML code into your website to embed the this as an example.
         Optionally you can modify the URL with one of the following, to open the editor or the preview directly:<br>
         
-        <code>?/embed/code/editor</code> or <code>?/embed/code/preview</code> 
+        <code>?/embed/code/edit</code> or <code>?/embed/code/preview</code> 
 
         <hr>
         <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${zipCode}"&gt;&lt;/iframe&gt;</code>`
