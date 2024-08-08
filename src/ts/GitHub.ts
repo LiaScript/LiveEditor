@@ -92,8 +92,6 @@ export async function gistUpload(
 
   const json = await response.json()
 
-  console.warn('response', json)
-
   // the gist does not exist anymore (has been deleted)
   if (json.message == 'Not Found') {
     return await gistUpload(credentials, title, comment, content)
@@ -101,12 +99,16 @@ export async function gistUpload(
   // probably the user has revoked the credentials,
   // need to revoke ...
   else if (json.message == 'Bad credentials') {
-    return { error: 'Bad credentials' }
+    return {
+      error: 'Bad credentials',
+      message: json.message,
+    }
   }
 
   return {
     url: json.html_url,
     id: json.id,
     raw_url: json.files[filename].raw_url,
+    message: json.message,
   }
 }

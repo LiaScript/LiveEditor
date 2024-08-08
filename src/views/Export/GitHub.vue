@@ -8,6 +8,12 @@ import * as Utils from "../../ts/utils";
 export default {
   props: ["stepId1", "code", "stepId2"],
 
+  data() {
+    return {
+      message: "",
+    };
+  },
+
   methods: {
     step1(id: string) {
       const config = Utils.loadConfig();
@@ -47,6 +53,9 @@ export default {
         if (gist.error == "Bad credentials") {
           config.credentials.github = undefined;
           Utils.storeConfig(config);
+
+          this.message = "Bad credentials, reloading page";
+
           window.location.reload();
         }
 
@@ -57,7 +66,11 @@ export default {
           });
         }
 
-        window.location.href = gist.url;
+        this.message = gist.message;
+
+        if (gist.url) {
+          window.location.href = gist.url;
+        }
       });
     },
   },
@@ -72,4 +85,15 @@ export default {
 };
 </script>
 
-<template>Exporting</template>
+<template>
+  Exporting to GitHub gist...
+
+  <p>{{ message }}</p>
+</template>
+
+<style scoped>
+p {
+  margin-top: 20px;
+  white-space: pre-line;
+}
+</style>
