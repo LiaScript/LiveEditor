@@ -2,6 +2,8 @@
 
 Welcome to the official LiaScript collaborative LiveEditor! This advanced editor runs entirely in your browser, offering unique capabilities beyond typical markdown editors.
 
+https://github.com/user-attachments/assets/20e40c28-88b9-4aa8-b50d-cb776ad8707a
+
 Try it out: [LiaScript LiveEditor](https://liascript.github.io/LiveEditor/)
 
 For more information about LiaScript, visit the LiaScript website:
