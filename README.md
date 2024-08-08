@@ -36,7 +36,7 @@ LiaScript is a markdown language that extends the capabilities of traditional ma
 
 ## LiveEditor Features
 
-https://github.com/user-attachments/assets/f4d49604-7e19-4970-a59b-2aabbbab82be
+https://github.com/user-attachments/assets/63494d0f-4885-4fd1-8a07-926797c41b42
 
 LiveEditor offers a range of features to enhance your content creation experience:
 
