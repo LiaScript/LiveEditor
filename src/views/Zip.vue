@@ -32,6 +32,10 @@ function isBase64Encoded(str: string): sting | null {
 
   // Try to decode the string
   try {
+    return decodeURIComponent(escape(atob(str)));
+  } catch (e) {}
+
+  try {
     return atob(str);
   } catch (e) {}
 

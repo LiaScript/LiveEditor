@@ -153,9 +153,9 @@ export default {
         Use this URL to predefine the content for your share link.
         In this case the editor will at first try to load the Markdown file and insert its content into the editor.
         This link will only work if your Markdown file is accessible via the internet.
-                    
+
         <hr>
-        
+
         <a target="_blank" style="word-break: break-all" href="${this.urlPath([
           "show",
           "file",
@@ -227,9 +227,9 @@ export default {
         ${gzip}
 
         <hr>
-        
+
         ${base64}
-        
+
         <hr>
 
         ${uriEncode}
@@ -251,7 +251,7 @@ export default {
         However, this works only for short courses, the longer the course the longer the URL.
         Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
         Additionally different browser support different lengths of URLs...
-                    
+
         <hr>
         ${this.bytesInfo(zipCode)}
         <a target="_blank" style="word-break: break-all" href="${zipCode}">
@@ -267,16 +267,34 @@ export default {
         await compress(this.$refs.editor.getValue()),
       ]);
 
+      const base64 = this.urlPath([
+        "embed",
+        "code",
+        btoa(unescape(encodeURIComponent(this.$refs.editor.getValue()))),
+      ]);
+
       this.$refs.modal.show(
         "Embed Code",
         `
         Copy this HTML code into your website to embed the this as an example.
         Optionally you can modify the URL with one of the following, to open the editor or the preview directly:<br>
-        
-        <code>?/embed/code/edit</code> or <code>?/embed/code/preview</code> 
+
+        <code>?/embed/code/edit</code> or <code>?/embed/code/preview</code>
 
         <hr>
-        <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${zipCode}"&gt;&lt;/iframe&gt;</code>`
+
+        ${this.bytesInfo(zipCode)}
+        <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${zipCode}"&gt;&lt;/iframe&gt;</code>
+
+        <hr>
+        <p>
+          This code can be generated externally via:
+          <code>btoa(unescape(encodeURIComponent(string)))</code>
+        </p>
+
+        ${this.bytesInfo(base64)}
+        <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${base64}"&gt;&lt;/iframe&gt;</code>
+        `
       );
     },
 
