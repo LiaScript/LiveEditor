@@ -100,7 +100,14 @@ export default defineComponent({
         if (props.stream === "webcam") {
           stream = await navigator.mediaDevices.getUserMedia(constraints);
         } else if (props.stream === "desktop") {
-          stream = await navigator.mediaDevices.getDisplayMedia(constraints);
+          const displayStream = await navigator.mediaDevices.getDisplayMedia({
+            video: constraints.video,
+          });
+          const audioStream = await navigator.mediaDevices.getUserMedia({
+            audio: constraints.audio,
+          });
+          const tracks = [...displayStream.getTracks(), ...audioStream.getAudioTracks()];
+          stream = new MediaStream(tracks);
         }
         liveVideoElement.value.srcObject = stream;
         mediaRecorder.value = new MediaRecorder(stream);
@@ -125,7 +132,9 @@ export default defineComponent({
 
     const stopRecording = () => {
       mediaRecorder.value.stop();
-      stream.getTracks().forEach((track) => track.stop());
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
       isRecording.value = false;
       isPaused.value = false;
     };
