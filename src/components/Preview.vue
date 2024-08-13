@@ -159,7 +159,12 @@ export default {
                 this.sendToLia("inject", {
                   tag: param.tag,
                   src: param.src,
-                  data: new Blob([blob]),
+                  data: new Blob(
+                    [blob],
+                    param.src.toLowerCase().endsWith(".svg")
+                      ? { type: "image/svg+xml" }
+                      : {}
+                  ),
                 });
               }
             }
