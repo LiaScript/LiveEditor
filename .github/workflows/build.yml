@@ -4,14 +4,14 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches:
-      - development
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -53,8 +53,6 @@ jobs:
 
           ICE_SERVERS: ${{ secrets.ICE_SERVERS }}
         run: 'npm run build'
-      - name: Minify LiveEditor
-        run: 'npm run minify:js'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -67,8 +65,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     needs:
       - build
     steps:
