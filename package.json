@@ -5,8 +5,8 @@
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
     "build": "rm -rf dist && npm run build:index && npm run purge && npm run sw && npm run build:examples && npm run minify:js",
-    "build:index": "npx parcel build src/index.html --log-level verbose --no-source-maps --public-url ./",
-    "build:examples": "npx parcel build src/examples.html --log-level verbose --no-source-maps --public-url ./",
+    "build:index": "npx parcel build src/index.html --no-source-maps --public-url ./",
+    "build:examples": "npx parcel build src/examples.html --no-source-maps --public-url ./",
     "watch": "rm -rf dist && npx parcel serve src/*.html --no-cache --no-source-maps --open --port 4321",
     "webrtc": "PORT=4444 node node_modules/y-webrtc/bin/server.js",
     "minify:js": "find dist -name \"index*.js\" -print0 | xargs -0 -P 4 -I {} sh -c 'before=$(wc -c < {}); npx minify {} > {}.min && after=$(wc -c < {}.min); if [ ${after} -lt ${before} ]; then mv {}.min {}; reduction=$((${before}-${after})); percent=$(awk \"BEGIN {printf \\\"%.2f\\\", ${reduction}/${before}*100}\"); echo \"{} reduced from ${before} to ${after} bytes (${percent}% reduction)\"; else rm {}.min; echo \"{} no reduction achieved, file size unchanged\"; fi'",
