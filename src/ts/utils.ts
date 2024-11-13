@@ -1,3 +1,8 @@
+export const LiaScriptURL =
+  process.env.LIASCRIPT || 'https://liascript.github.io/course/'
+
+export const LiveEditorURL = window.location.origin + window.location.pathname
+
 /* This function is only required to generate a random string, that is used
 as a personal ID for every peer, since it is not possible at the moment to
 get the own peer ID from the beaker browser.

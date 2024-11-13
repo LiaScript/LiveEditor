@@ -2,6 +2,7 @@
 import * as Shrink from "shrink-string";
 import LiaScript from "./LiaScript.vue";
 import Toast from "../components/Toast.vue";
+import { LiveEditorURL } from "../ts/utils";
 
 function errorMsg(msg: string) {
   return `# Ups, something went wrong
@@ -18,7 +19,7 @@ It resulted with the following error message:
 `;
 }
 
-function isBase64Encoded(str: string): sting | null {
+function isBase64Encoded(str: string): string | null {
   // Check if the length is a multiple of 4
   if (str.length % 4 !== 0) {
     return null;
@@ -49,6 +50,7 @@ export default {
     return {
       data: undefined,
       error: true,
+      LiveEditorURL,
     };
   },
 
@@ -81,11 +83,7 @@ export default {
   <Toast v-else :hidden="error">
     You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, or open it
     in the
-    <a
-      :href="'https://LiaScript.github.io/LiveEditor/?/show/code/' + zipCode"
-      target="_blank"
-      >LiveEditor</a
-    >.
+    <a :href="LiveEditorURL + '?/show/code/' + zipCode" target="_blank">LiveEditor</a>.
 
     <div v-if="mode">
       <hr />

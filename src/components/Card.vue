@@ -1,7 +1,7 @@
 <script lang="ts">
 import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
-
+import { LiaScriptURL } from "../ts/utils";
 import DateFormat from "date-format-simple";
 
 function mulberry32(a) {
@@ -110,6 +110,7 @@ export default {
       svg,
       url,
       tags,
+      LiaScriptURL,
     };
   },
 
@@ -205,9 +206,7 @@ export default {
 
           <p class="mb-0">
             <small>
-              <a :href="'https://LiaScript.github.io/course/?' + cardGist" target="_blank"
-                >GitHub gist</a
-              >
+              <a :href="LiaScriptURL + '?' + cardGist" target="_blank">GitHub gist</a>
             </small>
           </p>
         </div>

@@ -13,6 +13,8 @@ import JSZip from "jszip";
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 
+import { LiaScriptURL } from "../ts/utils";
+
 // @ts-ignore
 // import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
 // @ts-ignore
@@ -94,6 +96,7 @@ export default {
         users: 0,
       },
       resizing: false,
+      LiaScriptURL,
     };
   },
 
@@ -178,8 +181,7 @@ export default {
 
       try {
         base64 =
-          "https://liascript.github.io/course/?data:text/plain;base64," +
-          btoa(this.$refs.editor.getValue());
+          LiaScriptURL + "?data:text/plain;base64," + btoa(this.$refs.editor.getValue());
 
         base64 =
           this.bytesInfo(base64) +
@@ -190,7 +192,8 @@ export default {
 
       try {
         uriEncode =
-          "https://liascript.github.io/course/?data:text/plain," +
+          LiaScriptURL +
+          "?data:text/plain," +
           encodeURIComponent(this.$refs.editor.getValue());
 
         uriEncode =
@@ -203,7 +206,8 @@ export default {
       try {
         gzip = pako.gzip(this.$refs.editor.getValue());
         gzip =
-          "https://liascript.github.io/course/?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
+          LiaScriptURL +
+          "?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
           btoa(String.fromCharCode.apply(null, gzip));
 
         gzip =
@@ -609,7 +613,7 @@ export default {
                   <a
                     class="dropdown-item"
                     :class="{ disabled: !meta.meta?.gist_url }"
-                    :href="'https://liascript.github.io/course/?' + meta.meta?.gist_url"
+                    :href="LiaScriptURL + '?' + meta.meta?.gist_url"
                     target="_blank"
                   >
                     GitHub gist link
@@ -632,7 +636,7 @@ export default {
                   <a
                     class="btn dropdown-item btn-link"
                     :class="{ disabled: !fileUrl }"
-                    :href="'https://LiaScript.github.io/course/?' + fileUrl"
+                    :href="LiaScriptURL + '?' + fileUrl"
                     target="_blank"
                     title="open this course on LiaScript"
                   >

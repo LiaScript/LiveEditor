@@ -1,6 +1,7 @@
 <script lang="ts">
 import LiaScript from "./LiaScript.vue";
 import Toast from "../components/Toast.vue";
+import { LiaScriptURL, LiveEditorURL } from "../ts/utils";
 
 function errorMsg(url: string, response: string) {
   return `# Ups, something went wrong
@@ -57,6 +58,8 @@ export default {
     return {
       embed,
       data: undefined,
+      LiaScriptURL,
+      LiveEditorURL,
     };
   },
 
@@ -87,22 +90,18 @@ export default {
 
     <br />
     If you want to see the course on LiaScript, click
-    <a :href="'https://LiaScript.github.io/course/?' + fileUrl" target="_blank">here</a>.
+    <a :href="LiaScriptURL + '?' + fileUrl" target="_blank">here</a>.
   </Toast>
 
   <Toast v-else>
     You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>
     <br />
     ... or, open it in the
-    <a
-      :href="'https://LiaScript.github.io/LiveEditor/?/show/file/' + fileUrl"
-      target="_blank"
-      >LiveEditor</a
-    >
+    <a :href="LiveEditorURL + '?/show/file/' + fileUrl" target="_blank">LiveEditor</a>
     ...
     <br />
     If you want to see the course on LiaScript, click
-    <a :href="'https://LiaScript.github.io/course/?' + fileUrl" target="_blank">here</a>.
+    <a :href="LiaScriptURL + '?' + fileUrl" target="_blank">here</a>.
 
     <div v-if="mode">
       <hr />

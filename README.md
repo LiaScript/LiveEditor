@@ -85,6 +85,8 @@ npm run build
 In for enabling all features, you will need to have a `.env` file in the root directory of this project, with the following content:
 
 ```ini
+# If you host also the LiaScript website by your own, otherwise ignore this
+LIASCRIPT="https://liascript.github.io/course/"
 # A text-to-speech javascript engine, if tts is not supported by the browser
 RESPONSIVEVOICE_KEY="YOUR RESPONSIVEVOICE_KEY"
 # Add a proxy if external resource-links of external documents are blocked by CORS
