@@ -111,6 +111,7 @@ export default {
       url,
       tags,
       LiaScriptURL,
+      modalId: `modal-${this.$props.cardId}`, // Unique modal ID for each card
     };
   },
 
@@ -153,7 +154,7 @@ export default {
         class="btn btn-close btn-secondary"
         aria-label="Delete"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
+        :data-bs-target="`#${modalId}`"
         style="
           position: absolute;
           top: 3px;
@@ -229,15 +230,15 @@ export default {
 
   <div
     class="modal fade"
-    id="exampleModal"
+    :id="modalId"
     tabindex="-1"
-    aria-labelledby="exampleModalLabel"
+    :aria-labelledby="`${modalId}-label`"
     aria-hidden="true"
   >
     <div class="modal-dialog">
       <div class="modal-content border-danger mb-5" style="border-width: 3px">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
+          <h5 class="modal-title" :id="`${modalId}-label`">
             Delete: "{{ cardTitle || "Untitled" }}"
           </h5>
           <button
