@@ -530,6 +530,19 @@ export default {
             <a
               class="nav-link"
               aria-current="page"
+              href="https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md"
+              title="Open the documentation"
+              target="_blank"
+            >
+              <i class="bi bi-question"></i>
+              Help
+            </a>
+          </div>
+
+          <div class="nav-item nav-item-sm ml-4 me-4">
+            <a
+              class="nav-link"
+              aria-current="page"
               href="./?/edit"
               title="Create a new and empty document"
               data-link
