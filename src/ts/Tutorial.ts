@@ -27,7 +27,33 @@ otherwise we are sorry for interrupting, please go on and create a beautiful cou
 
 If you are new to
 [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet),
-check out some or our [resources](#resources), otherwise start typing ...
+check out some or our [resources](#resources), otherwise start typing ... or copy and paste the following example into the editor:
+
+\`\`\`\` markdown
+# LiaScript Example
+
+This is an example of a simple markdown document.
+
+## Lists
+
+1. First item
+2. Second item
+
+   - Unordered sub-list
+   - ...
+
+3. Third item
+
+## Code
+
+\`\`\` javascript
+console.log("Hello LiaScript!");
+\`\`\`
+<script>@input</script>
+
+\`\`\`\`
+
+
 __WAIT__ ... the preview does not update, right?
 This is not a bug!
 The live update is deactivated to minimize computational costs and to stop errors from being show, when HTML, JavaScript is not fully written down.
