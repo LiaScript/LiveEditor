@@ -160,17 +160,17 @@ or ...
   - Free books: https://github.com/LiaBooks
   - Templates: https://github.com/topics/liascript-template
   - Courses & ...: https://github.com/topics/liascript-course
-  - Blog: https://aizac.herokuapp.com
+  - Blog: https://liascript.github.io/blog
 
 * Editor:
 
   - VSCode: https://code.visualstudio.com/Download
 
-    - HowTo: https://aizac.herokuapp.com/install-visual-studio-code-with-liascript/
+    - HowTo: https://liascript.github.io/blog/install-visual-studio-code-with-liascript
     - Liascript-Preview: https://marketplace.visualstudio.com/items?itemName=LiaScript.liascript-preview
     - Liascript-Snippets: https://marketplace.visualstudio.com/items?itemName=LiaScript.liascript-snippets
 
-  - Atom: https://aizac.herokuapp.com/install-atom-with-liascript/
+  - Atom: https://liascript.github.io/blog/install-atom-with-liascript
 
 * Development-Server: https://www.npmjs.com/package/@liascript/devserver
 
