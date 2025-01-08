@@ -605,17 +605,29 @@ export default {
                 </span>
               </li>
               <li>
-                <button class="btn dropdown-item btn-link" @click="shareCode">
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="shareCode"
+                  aria-label="Share the current course with the editor"
+                >
                   snapshot url
                 </button>
               </li>
               <li>
-                <button class="btn dropdown-item btn-link" @click="embedCode">
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="embedCode"
+                  aria-label="Get the embed code for the current course within the editor"
+                >
                   embed code
                 </button>
               </li>
               <li>
-                <button class="btn dropdown-item btn-link" @click="shareFile">
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="shareFile"
+                  aria-label="Use an external document url for sharing with the editor"
+                >
                   external resource
                 </button>
               </li>
@@ -637,13 +649,18 @@ export default {
                     :class="{ disabled: !meta.meta?.gist_url }"
                     :href="LiaScriptURL + '?' + meta.meta?.gist_url"
                     target="_blank"
+                    aria-label="Load the LiaScript course from a previous export to GitHub gist"
                   >
                     GitHub gist link
                   </a>
                 </span>
               </li>
               <li>
-                <button class="btn dropdown-item btn-link" @click="shareData">
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="shareData"
+                  aria-label="Share the current course at LiaScript, with the content embedded into the URL"
+                >
                   data-URI
                 </button>
               </li>
@@ -677,6 +694,7 @@ export default {
                   class="btn dropdown-item btn-link"
                   @click="download"
                   title="Download the Readme file"
+                  aria-label="Download the Readme file"
                 >
                   README.md
                 </button>
@@ -686,6 +704,7 @@ export default {
                   class="btn dropdown-item btn-link"
                   @click="downloadZip"
                   title="Download the entire project in a zip file"
+                  aria-label="Download the entire project in a zip file"
                 >
                   Project-{{ $props?.storageId?.slice(0, 8) || "xxxxxxxx" }}.zip
                 </button>
@@ -746,6 +765,7 @@ export default {
                     target="_blank"
                     :href="urlPath(['export', 'github', storageId])"
                     title="Store the document on github"
+                    aria-label="Store the document on GitHub as a gist"
                   >
                     GitHub gist
                   </a>
@@ -761,6 +781,11 @@ export default {
               data-bs-toggle="dropdown"
               aria-expanded="false"
               style="width: 100%"
+              :aria-label="
+                conn.type === 'Offline'
+                  ? 'The editor is used in offline mode, which means that you are the only one editing'
+                  : `The editor is in collaborative mode via ${conn.type}, which means that you can share the URL and start editing with others`
+              "
             >
               {{ conn.type }}
               <i class="bi bi-people-fill mx-1"></i>
@@ -771,62 +796,38 @@ export default {
 
             <ul class="dropdown-menu">
               <li>
-                <span
-                  class="d-inline-block"
-                  style="width: 100%"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  title="Fork this document before you can use this function"
+                <a
+                  class="btn dropdown-item btn-link"
+                  :class="{ disabled: !storageId }"
+                  aria-current="page"
+                  :href="this.urlPath(['edit', storageId])"
+                  aria-label="Turn off collaborative editing and switch to offline mode"
                 >
-                  <a
-                    class="btn dropdown-item btn-link"
-                    :class="{ disabled: !storageId }"
-                    aria-current="page"
-                    :href="this.urlPath(['edit', storageId])"
-                    title="Store the document on github"
-                  >
-                    Offline
-                  </a>
-                </span>
+                  Offline
+                </a>
               </li>
 
               <li>
-                <span
-                  class="d-inline-block"
-                  style="width: 100%"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  title="Fork this document before you can use this function"
+                <a
+                  class="btn dropdown-item btn-link"
+                  :class="{ disabled: !storageId }"
+                  aria-current="page"
+                  :href="this.urlPath(['edit', storageId, 'webrtc'])"
+                  aria-label="Switch to collaborative editing via WebRTC"
                 >
-                  <a
-                    class="btn dropdown-item btn-link"
-                    :class="{ disabled: !storageId }"
-                    aria-current="page"
-                    :href="this.urlPath(['edit', storageId, 'webrtc'])"
-                    title="Store the document on github"
-                  >
-                    WebRTC
-                  </a>
-                </span>
+                  WebRTC
+                </a>
               </li>
               <li>
-                <span
-                  class="d-inline-block"
-                  style="width: 100%"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  title="Fork this document before you can use this function"
+                <a
+                  class="btn dropdown-item btn-link"
+                  :class="{ disabled: !storageId }"
+                  aria-current="page"
+                  :href="this.urlPath(['edit', storageId, 'websocket'])"
+                  aria-label="Switch to collaborative editing via Websocket"
                 >
-                  <a
-                    class="btn dropdown-item btn-link"
-                    :class="{ disabled: !storageId }"
-                    aria-current="page"
-                    :href="this.urlPath(['edit', storageId, 'websocket'])"
-                    title="Store the document on github"
-                  >
-                    Websocket
-                  </a>
-                </span>
+                  Websocket
+                </a>
               </li>
             </ul>
           </div>
