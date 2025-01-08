@@ -8,7 +8,7 @@ import { IndexeddbPersistence } from "y-indexeddb";
 import MiniSearch from "minisearch";
 
 function waitForSync(provider) {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     if (provider.synced) {
       resolve();
     } else {
@@ -52,10 +52,30 @@ export default {
       database,
       search,
       results: [],
-      courses: [],
-      coursesFiltered: [],
+      courses: [] as Array<{
+        id: string;
+        timestamp: number;
+        meta: {
+          title: string;
+          logo: string;
+          version: string;
+          macro?: { comment: string; tags: string };
+          gist_url: string;
+        };
+      }>,
+      coursesFiltered: [] as Array<{
+        id: string;
+        timestamp: number;
+        meta: {
+          title: string;
+          logo: string;
+          version: string;
+          macro?: { comment: string; tags: string };
+          gist_url: string;
+        };
+      }>,
       searchText: "",
-      tags: [],
+      tags: [] as Array<{ name: string; active: boolean }>,
     };
   },
 
@@ -155,7 +175,7 @@ export default {
         LiaEdit
       </a>
 
-      <a type="button" class="btn btn-primary" href="./?/edit" data-link> New note </a>
+      <button class="btn btn-primary" data-link="./?/edit">New Course</button>
     </div>
   </nav>
 

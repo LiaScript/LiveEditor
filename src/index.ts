@@ -15,7 +15,7 @@ const pathToRegex = (path) =>
 const getParams = (match) => {
   const values = match.result.slice(1)
   const keys = Array.from(match.route.path.matchAll(/:(\w+)/g)).map(
-    (result) => result[1]
+    (result) => (result as RegExpMatchArray)[1]
   )
 
   let params = Object.fromEntries(
@@ -25,7 +25,12 @@ const getParams = (match) => {
   )
 
   if (match.params) {
-    params = { ...params, ...match.params }
+    params = {
+      ...params,
+      ...match.params,
+      redirect: undefined,
+      params: undefined,
+    }
   }
 
   return params
@@ -97,16 +102,18 @@ const router = async () => {
     match = {
       route: routes[0],
       result: [location.search],
+      redirect: undefined,
+      params: undefined,
     }
   }
 
-  if (match.redirect) {
+  if (match && match.redirect) {
     navigateTo(match.redirect, true)
     return
   }
 
   const params = getParams(match)
-  const view = match.route.view
+  const view = match.route.view as any
 
   app?.unmount()
 
@@ -120,9 +127,24 @@ window.addEventListener('popstate', router)
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('click', (e) => {
-    if (e.target && e.target.matches('[data-link]')) {
+    const target = e.target as Element
+    if (target && target.matches('[data-link]')) {
       e.preventDefault()
-      navigateTo(e.target.href)
+
+      // Try to retrieve the href attribute
+      let destination = (target as HTMLAnchorElement).getAttribute('href')
+
+      // If href doesn't exist, fallback to the data-link attribute
+      if (!destination) {
+        destination = target.getAttribute('data-link')
+      }
+
+      // If a destination was found, navigate to it
+      if (destination) {
+        navigateTo(destination)
+      } else {
+        console.warn('No navigation destination found on the clicked element.')
+      }
     }
   })
 
