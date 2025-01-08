@@ -12,15 +12,26 @@
         <i class="bi bi-github"></i>
       </a>
       -
-      <a href="https://gitter.im/LiaScript/community" target="_blank">
+      <a
+        href="https://gitter.im/LiaScript/community"
+        target="_blank"
+        title="LiaScript gitter community chat"
+      >
         <i class="bi bi-chat-text"></i>
       </a>
       -
-      <a href="https://twitter.com/LiaScript" target="_blank">
+      <a
+        href="https://twitter.com/LiaScript"
+        target="_blank"
+        title="LiaScript on Twitter"
+      >
         <i class="bi bi-twitter"></i>
       </a>
       -
-      <a href="https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg" target="_blank"
+      <a
+        href="https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg"
+        target="_blank"
+        title="LiaScript YouTube channel"
         ><i class="bi bi-youtube"></i
       ></a>
     </small>
