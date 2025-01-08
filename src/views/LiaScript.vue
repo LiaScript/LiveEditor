@@ -114,6 +114,10 @@ export default {
   },
 
   methods: {
+    newCourse() {
+      window.location.href = "./?/edit";
+    },
+
     urlPath(path: string[]) {
       return window.location.origin + window.location.pathname + "?/" + path.join("/");
     },
@@ -127,6 +131,11 @@ export default {
     },
 
     shareLink() {
+      let link = window.location.toString();
+
+      if (!link.endsWith("/webrtc") && !link.endsWith("/websocket")) {
+        link += "/webrtc";
+      }
       this.$refs.modal.show(
         "Collaboration link",
         `
@@ -136,8 +145,8 @@ export default {
 
         <hr>
 
-        <a target="_blank" href="${window.location.toString()}">
-          ${window.location.toString()}
+        <a target="_blank" href="${link}">
+          ${link}
         </a>`
       );
     },
@@ -540,16 +549,15 @@ export default {
           </div>
 
           <div class="nav-item nav-item-sm ml-4 me-4">
-            <a
-              class="nav-link"
+            <button
+              class="btn nav-link btn-link"
               aria-current="page"
-              href="./?/edit"
+              @click="newCourse"
               title="Create a new and empty document"
-              data-link
             >
               <i class="bi bi-plus"></i>
               New
-            </a>
+            </button>
           </div>
 
           <div class="nav-item me-4">
@@ -590,6 +598,7 @@ export default {
                     class="btn dropdown-item btn-link"
                     @click="shareLink"
                     :disabled="!storageId"
+                    title="Share this document with others"
                   >
                     collaboration link
                   </button>
@@ -664,12 +673,20 @@ export default {
                 <h6 class="dropdown-header fw-light">Download to ...</h6>
               </li>
               <li>
-                <button class="btn dropdown-item btn-link" @click="download">
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="download"
+                  title="Download the Readme file"
+                >
                   README.md
                 </button>
               </li>
               <li>
-                <button class="btn dropdown-item btn-link" @click="downloadZip">
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="downloadZip"
+                  title="Download the entire project in a zip file"
+                >
                   Project-{{ $props?.storageId?.slice(0, 8) || "xxxxxxxx" }}.zip
                 </button>
               </li>
