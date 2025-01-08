@@ -126,6 +126,10 @@ export default {
       }
     },
 
+    newCourse() {
+      window.location.href = "./?/edit";
+    },
+
     async init() {
       this.courses = await this.database.getAll();
 
@@ -175,7 +179,7 @@ export default {
         LiaEdit
       </a>
 
-      <button class="btn btn-primary" data-link="./?/edit">New Course</button>
+      <button class="btn btn-primary" @click="newCourse">New Course</button>
     </div>
   </nav>
 
