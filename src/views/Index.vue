@@ -189,10 +189,19 @@ export default {
         placeholder="Type to search..."
         @input="handleSearch"
         v-model="searchText"
+        aria-label="Search input"
+        :disabled="courses.length === 0"
       />
 
       <div class="input-group-append">
-        <button class="btn btn-icon" type="button" @click="searchText = ''">
+        <button
+          class="btn btn-icon"
+          style="border: 0px"
+          type="button"
+          @click="searchText = ''"
+          aria-label="Clear search"
+          :disabled="courses.length === 0 || searchText.length === 0"
+        >
           <i class="bi bi-x-lg"> </i>
         </button>
       </div>
