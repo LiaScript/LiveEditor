@@ -59,6 +59,6 @@ export default {
       </div>
     </div>
 
-    <Footer />
+    <Footer>asdafds</Footer>
   </div>
 </template>
