@@ -265,7 +265,7 @@ export default {
       This is a collaborative online editor for
       <a href="https://LiaScript.github.io" target="_blank">LiaScript</a>. All content is
       stored only within your browser. If you need some inspiration, check out some of our
-      <a href="./examples.html">examples</a>, search for embedable
+      <a href="./examples.html">examples</a>, search for embeddable
       <a href="https://github.com/topics/liascript-template" target="_blank">templates</a
       >, or already published
       <a href="https://github.com/topics/liascript-course" target="_blank">courses</a>.
