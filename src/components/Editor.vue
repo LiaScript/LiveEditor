@@ -2,10 +2,11 @@
 import * as Y from "yjs";
 
 import { IndexeddbPersistence } from "y-indexeddb";
+// @ts-ignore
 import { WebrtcProvider } from "y-webrtc";
 import { WebsocketProvider } from "y-websocket";
 import { MonacoBinding } from "y-monaco";
-import { editor, KeyMod, KeyCode, languages } from "monaco-editor";
+import { editor, KeyMod, KeyCode, languages, IDisposable } from "monaco-editor";
 import * as Utils from "../ts/utils";
 import { navigateTo } from "../index";
 
@@ -15,7 +16,7 @@ import TextEditorInterface from "../ts/TextEditorInterface";
 
 import Recorder from "./Recorder.vue";
 
-var Emojis = [];
+var Emojis: { label: string; insertText: string; range: any }[] = [];
 import("../ts/Emojis.ts").then((module) => {
   for (const [label, emoji] of module.Emojis) {
     Emojis.push({
@@ -26,7 +27,14 @@ import("../ts/Emojis.ts").then((module) => {
   }
 });
 
-var Snippets = [];
+var Snippets: Array<{
+  label: string;
+  kind: languages.CompletionItemKind;
+  documentation: string;
+  insertText: string;
+  range: any;
+  command: { id: string };
+}> = [];
 import("../ts/Snippets.ts").then((module) => {
   for (const snippet of module.Snippets) {
     Snippets.push({
@@ -47,6 +55,8 @@ var tableEditor;
 var provider;
 var isCtrlPressed = false;
 var MATHJS;
+
+let completionProviders: IDisposable[] = [];
 
 import("mathjs").then((module) => {
   MATHJS = module;
@@ -79,9 +89,14 @@ function blobToUint8Array(blob) {
 
     // Define the onload event handler
     reader.onload = function (event) {
-      const arrayBuffer = event.target.result;
-      const uint8Array = new Uint8Array(arrayBuffer);
-      resolve(uint8Array);
+      const arrayBuffer = event.target?.result;
+      if (!arrayBuffer || typeof arrayBuffer === "string") {
+        reject("could not read file");
+      } else {
+        const uint8Array = new Uint8Array(arrayBuffer);
+        resolve(uint8Array);
+        return;
+      }
     };
 
     // Define the onerror event handler
@@ -776,6 +791,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         automaticLayout: true,
         wordWrap: "on",
         renderWhitespace: "boundary",
+        wordBasedSuggestions: false, // disable default word suggestions
       });
 
       const self = this;
@@ -859,23 +875,21 @@ I (study) ~[[ am going to study ]]~ harder this term.
         },
       });
 
-      languages.registerCompletionItemProvider("markdown", {
+      const snippetProvider = languages.registerCompletionItemProvider("markdown", {
         //triggerCharacters: ['['],
-        provideCompletionItems: function (model, position, context) {
+
+        provideCompletionItems: function (
+          model,
+          position,
+          context
+        ): languages.ProviderResult<languages.CompletionList> {
           const word = model.getWordAtPosition(position);
 
           if (
-            word.word.startsWith("lia") ||
-            word.word.startsWith("voice") ||
-            word.word.startsWith("hili")
+            word?.word.startsWith("lia") ||
+            word?.word.startsWith("voice") ||
+            word?.word.startsWith("hili")
           ) {
-            const textUntilPosition = model.getValueInRange({
-              startLineNumber: position.lineNumber,
-              startColumn: 1,
-              endLineNumber: position.lineNumber,
-              endColumn: position.column,
-            });
-
             const range = {
               startLineNumber: position.lineNumber,
               endLineNumber: position.lineNumber,
@@ -889,7 +903,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
             return {
               suggestions: Snippets,
-            };
+            } as languages.ProviderResult<languages.CompletionList>;
           }
 
           return {
@@ -898,17 +912,16 @@ I (study) ~[[ am going to study ]]~ harder this term.
         },
       });
 
-      languages.registerCompletionItemProvider("markdown", {
-        triggerCharacters: [":"],
-        provideCompletionItems: function (model, position, context) {
-          const word = model.getWordAtPosition(position);
+      completionProviders.push(snippetProvider);
 
-          const textUntilPosition = model.getValueInRange({
-            startLineNumber: position.lineNumber - 1,
-            startColumn: 1,
-            endLineNumber: position.lineNumber,
-            endColumn: position.column,
-          });
+      const emojiProvider = languages.registerCompletionItemProvider("markdown", {
+        triggerCharacters: [":"],
+        provideCompletionItems: function (
+          model,
+          position,
+          context
+        ): languages.ProviderResult<languages.CompletionList> {
+          const word = model.getWordAtPosition(position);
 
           const range = {
             startLineNumber: position.lineNumber,
@@ -927,7 +940,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
             return {
               suggestions: Emojis,
-            };
+            } as languages.ProviderResult<languages.CompletionList>;
           }
 
           return {
@@ -935,6 +948,8 @@ I (study) ~[[ am going to study ]]~ harder this term.
           };
         },
       });
+
+      completionProviders.push(emojiProvider);
 
       languages.registerCodeActionProvider("markdown", {
         provideCodeActions(model, range, token) {
@@ -1048,7 +1063,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       switch (this.$props.connection) {
         case "webrtc": {
           provider = new WebrtcProvider(storageId, yDoc, {
-            signaling: process.env.SIGNALING_SERVER.split(" ") || [
+            signaling: (process.env.SIGNALING_SERVER || "").split(" ") || [
               "wss://rooms.deno.dev",
             ],
             peerOpts: {
@@ -1119,6 +1134,10 @@ I (study) ~[[ am going to study ]]~ harder this term.
   unmounted() {
     if (provider) provider.destroy();
 
+    // Dispose completion providers
+    completionProviders.forEach((disposable) => disposable.dispose());
+    completionProviders = []; // Clear the array
+
     Editor = undefined;
   },
 
@@ -1147,6 +1166,15 @@ I (study) ~[[ am going to study ]]~ harder this term.
           const reader = new FileReader();
 
           reader.onload = async function (e) {
+            if (
+              e.target?.result === null ||
+              e.target?.result === undefined ||
+              typeof e.target?.result === "string"
+            ) {
+              console.warn("could not load file: ", file);
+              return;
+            }
+
             const blob = new Uint8Array(e.target?.result);
             const hash = await fileHash(e.target?.result);
 
