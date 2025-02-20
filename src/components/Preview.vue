@@ -180,6 +180,7 @@ export default {
       // @ts-ignore
       responsiveVoiceKey: process.env.RESPONSIVEVOICE_KEY,
       sendToLia: null,
+      origin: window.location.origin + window.location.pathname + "liascript/index.html?",
     };
   },
 
@@ -235,7 +236,7 @@ export default {
 </script>
 
 <template>
-  <iframe id="liascript-preview" src="./liascript/index.html?" allow="autoplay"></iframe>
+  <iframe id="liascript-preview" :src="origin" allow="autoplay"></iframe>
 </template>
 
 <style scoped>
