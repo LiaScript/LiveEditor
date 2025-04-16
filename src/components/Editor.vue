@@ -784,6 +784,129 @@ I (study) ~[[ am going to study ]]~ harder this term.
         return;
       }
 
+      // Drag and drop handler for the editor
+      div.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+
+      div.addEventListener(
+        "drop",
+        async (e) => {
+          // Zuerst prüfen, ob es sich um eine Markdown-Datei oder einen LiaScript-Link handelt
+          let url = e.dataTransfer ? e.dataTransfer.getData("text/uri-list") : null;
+          if (!url) {
+            const textData = e.dataTransfer ? e.dataTransfer.getData("text/plain") : null;
+            // Prüfen, ob der text bereits ein Markdown-Link ist
+            if (textData && !/^\[.*\]\(.*\)$/.test(textData)) {
+              url = textData;
+            }
+          }
+
+          // Frühe Prüfung für Markdown oder LiaScript-Links
+          const isMarkdownFile = url && url.toLowerCase().endsWith(".md");
+          const liaScriptMatch =
+            url && url.match(/https:\/\/liascript\.github\.io\/course\/\?(.*)/);
+
+          // Nur für Markdown oder LiaScript-Links unser eigenes Handling verwenden
+          if ((isMarkdownFile || liaScriptMatch) && Editor) {
+            e.preventDefault();
+            e.stopPropagation(); // Stoppt Weitergabe des Events an Monaco
+
+            try {
+              // Bei LiaScript-Link nehmen wir die eigentliche Markdown-URL
+              const fetchUrl = liaScriptMatch
+                ? decodeURIComponent(liaScriptMatch[1])
+                : url;
+
+              // Laden des Inhalts der Markdown-Datei
+              const response = await fetch(fetchUrl);
+
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+
+              const markdownContent = await response.text();
+
+              // Suche nach der ersten Überschrift und schneide alles davor ab
+              let processedContent = markdownContent;
+              const headingMatch = markdownContent.match(/^#{1,6}\s+.*$/m);
+
+              if (headingMatch) {
+                // Index des ersten Zeichens nach der Zeile mit der Überschrift
+                const headingEndIndex =
+                  markdownContent.indexOf(headingMatch[0]) + headingMatch[0].length;
+                // Alles nach der Überschrift
+                processedContent = markdownContent.substring(headingEndIndex);
+
+                // Entferne führende Leerzeilen
+                processedContent = processedContent.replace(/^\n+/, "");
+              }
+
+              // Aktuelle Cursor-Position
+              const position = Editor.getPosition();
+
+              // Inhalt an Cursor-Position einfügen
+              Editor.executeEdits("", [
+                {
+                  range: {
+                    startLineNumber: position?.lineNumber || 1,
+                    startColumn: position?.column || 1,
+                    endLineNumber: position?.lineNumber || 1,
+                    endColumn: position?.column || 1,
+                  },
+                  text: processedContent,
+                },
+              ]);
+
+              Editor.focus();
+              return false; // Verhindert weitere Verarbeitung
+            } catch (error) {
+              console.error("Could not load markdown:", error);
+
+              // Bei Fehler: Nur für normale Markdown-Dateien als Fallback einen Link einfügen
+              if (isMarkdownFile && !liaScriptMatch) {
+                insertMarkdownLink(url, Editor);
+              }
+            }
+          } else if (url && !isMarkdownFile && !liaScriptMatch && Editor) {
+            // Für normale Links fügen wir einen Markdown-Link ein
+            e.preventDefault();
+            e.stopPropagation();
+            insertMarkdownLink(url, Editor);
+            return false;
+          }
+          // Für alle anderen Fälle: Monaco-Standardverhalten beibehalten
+          return true;
+        },
+        true
+      );
+
+      // Hilfsfunktion zum Einfügen eines Markdown-Links
+      function insertMarkdownLink(url, editor) {
+        const position = editor.getPosition();
+
+        editor.executeEdits("", [
+          {
+            range: {
+              startLineNumber: position.lineNumber,
+              startColumn: position.column,
+              endLineNumber: position.lineNumber,
+              endColumn: position.column,
+            },
+            text: `[](${url})`,
+          },
+        ]);
+
+        // Cursor zwischen die eckigen Klammern setzen
+        editor.setPosition({
+          lineNumber: position.lineNumber,
+          column: position.column + 1,
+        });
+
+        editor.focus();
+      }
+
       const Editor = editor.create(div, {
         value: code,
         language: "markdown",
