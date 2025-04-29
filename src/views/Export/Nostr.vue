@@ -90,6 +90,32 @@
             </div>
           </div>
 
+          <!-- Relay Configuration -->
+          <div class="form-group mb-3 mt-4">
+            <label for="nostrRelays" class="form-label">Relay Servers:</label>
+            <textarea
+              id="nostrRelays"
+              class="form-control"
+              rows="3"
+              v-model="relaysText"
+              placeholder="Enter relay servers (one per line)"
+            ></textarea>
+            <div class="form-text text-muted">
+              Enter relay servers (one per line) to publish your content to.
+            </div>
+            <div class="form-check mt-2">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="storeRelays"
+                v-model="storeRelays"
+              />
+              <label class="form-check-label" for="storeRelays">
+                Remember these relays for future posts
+              </label>
+            </div>
+          </div>
+
           <!-- Warning box when keys are generated -->
           <div v-if="isNewlyGenerated" class="alert alert-warning">
             <div class="d-flex align-items-center mb-2">
@@ -280,6 +306,10 @@ export default {
       storeCredentials: true,
       privateKeyVisible: false,
       isNewlyGenerated: false,
+
+      // Relay management
+      relays: ["wss://relay.damus.io", "wss://relay.nostr.band", "wss://nos.lol"],
+      storeRelays: true,
     };
   },
 
@@ -295,11 +325,24 @@ export default {
     if (savedPrivateKey) {
       this.privateKey = savedPrivateKey;
     }
+
+    // Load saved relays
+    this.loadSavedRelays();
   },
 
   computed: {
     nostrUrl() {
       return this.courseUrl;
+    },
+
+    relaysText: {
+      get() {
+        return this.relays.join("\n");
+      },
+      set(newValue) {
+        const relayArray = newValue.split("\n").filter((relay) => relay.trim() !== "");
+        this.relays = relayArray;
+      },
     },
   },
 
@@ -307,6 +350,9 @@ export default {
     close() {
       // Save credentials if requested
       this.saveCredentials();
+
+      // Save relays if requested
+      this.saveRelays();
 
       // Reset states
       this.isNewlyGenerated = false;
@@ -316,15 +362,29 @@ export default {
       this.$emit("close");
     },
 
+    loadSavedRelays() {
+      const savedRelays = localStorage.getItem("nostrRelays");
+      if (savedRelays) {
+        try {
+          this.relays = JSON.parse(savedRelays);
+        } catch (e) {
+          console.error("Error parsing saved relays:", e);
+        }
+      }
+    },
+
+    saveRelays() {
+      if (this.storeRelays && this.relays.length > 0) {
+        localStorage.setItem("nostrRelays", JSON.stringify(this.relays));
+      } else if (!this.storeRelays) {
+        localStorage.removeItem("nostrRelays");
+      }
+    },
+
     generateKeyPair() {
       try {
-        // Generate a new private key
         const privateKey = generateSecretKey();
-
-        // Derive the public key from it
         const publicKey = getPublicKey(privateKey);
-
-        // Convert to human-readable formats (npub, nsec)
         const npub = nip19.npubEncode(publicKey);
         const nsec = nip19.nsecEncode(privateKey);
 
@@ -343,9 +403,7 @@ export default {
     },
 
     copyToClipboard(text: string) {
-      navigator.clipboard.writeText(text).then(() => {
-        // Could show a small toast notification here
-      });
+      navigator.clipboard.writeText(text).then(() => {});
     },
 
     saveCredentials() {
@@ -379,10 +437,14 @@ export default {
         return;
       }
 
-      // Save credentials if requested
-      this.saveCredentials();
+      if (this.relays.length === 0) {
+        alert("Please enter at least one relay server.");
+        return;
+      }
 
-      // Loading indicator could be added here
+      this.saveCredentials();
+      this.saveRelays();
+
       this.publishStatus = "loading";
 
       const database = new Dexie();
@@ -397,18 +459,9 @@ export default {
           const metaData = await meta;
           const contentData = yDoc.getText(this.storageId).toJSON();
 
-          console.log("Content Data:", contentData);
-          console.log("Meta Data:", metaData);
-
-          // 1. Create a pool for relays
           const pool = new SimplePool();
-          const relays = [
-            "wss://relay.damus.io",
-            "wss://relay.nostr.band",
-            "wss://nos.lol",
-          ];
+          const relays = [...this.relays];
 
-          // 2. Decode the user's public key from npub format
           let pubkey;
           try {
             const decoded = nip19.decode(this.publicKey);
@@ -419,16 +472,14 @@ export default {
             return;
           }
 
-          // 3. Prepare content
           const title = metaData?.title || "LiaScript Course";
 
-          // 4. Create the event (NIP-33 parameterized replaceable event)
           const event = {
-            kind: 30023, // Long-form content
+            kind: 30023,
             pubkey: pubkey,
             created_at: Math.floor(Date.now() / 1000),
             tags: [
-              ["d", this.storageId], // Use storageId as identifier
+              ["d", this.storageId],
               ["title", title],
               ["summary", metaData?.description || "LiaScript course material"],
               ...this.tags.map((tag) => ["t", tag]),
@@ -436,26 +487,18 @@ export default {
             content: contentData,
           };
 
-          // 5. If user has provided private key, sign and publish
           if (this.privateKey) {
             try {
-              // Decode private key
               const decoded = nip19.decode(this.privateKey);
               const privkey = decoded.data;
 
-              // Sign the event - updated approach for newer nostr-tools
               event.id = getEventHash(event);
               const signedEvent = finalizeEvent(event, privkey);
 
-              // Publish to relays
-              console.log("Publishing event:", signedEvent);
-
               const pubs = pool.publish(relays, signedEvent);
 
-              // Wait for at least one successful publish
               await Promise.any(pubs);
 
-              // Create the naddr representation
               const naddr = nip19.naddrEncode({
                 kind: 30023,
                 pubkey: pubkey,
@@ -463,17 +506,11 @@ export default {
                 relays: relays,
               });
 
-              // Set the published course URL
               this.publishedCourseUrl = `https://liascript.github.io/course/?nostr:${naddr}`;
 
-              console.log("Published as naddr:", "nostr:" + naddr);
-              console.log("Published course URL:", this.publishedCourseUrl);
-
-              // Success!
               this.step = "success";
               this.publishStatus = "success";
 
-              // Clear private key after successful publish for security
               this.privateKey = "";
             } catch (e) {
               console.error("Error publishing:", e);
@@ -489,7 +526,6 @@ export default {
           alert("Error processing document data.");
           this.publishStatus = "failed";
         } finally {
-          // Clean up
           provider.destroy();
           yDoc.destroy();
         }
