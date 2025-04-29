@@ -398,9 +398,6 @@ export default {
           // 3. Prepare content
           const title = metaData?.title || "LiaScript Course";
 
-          // Format content as markdown with header
-          const fullContent = `# ${title}\n\n${contentData}`;
-
           // 4. Create the event (NIP-33 parameterized replaceable event)
           const event = {
             kind: 30023, // Long-form content
@@ -412,7 +409,7 @@ export default {
               ["summary", metaData?.description || "LiaScript course material"],
               ...this.tags.map((tag) => ["t", tag]),
             ],
-            content: fullContent,
+            content: contentData,
           };
 
           // 5. If user has provided private key, sign and publish
@@ -439,9 +436,10 @@ export default {
                 kind: 30023,
                 pubkey: pubkey,
                 identifier: this.storageId,
+                relays: relays,
               });
 
-              console.log("Published as naddr:", naddr);
+              console.log("Published as naddr:", "nostr:" + naddr);
 
               // Success!
               this.step = "success";
