@@ -328,7 +328,7 @@ export default {
       storeRelays: true,
 
       // Embed media option
-      embedMedia: true, // Default to true for better portability
+      embedMedia: false, // Default to true for better portability
     };
   },
 
