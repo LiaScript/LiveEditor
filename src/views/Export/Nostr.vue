@@ -308,11 +308,10 @@ export default {
       // Save credentials if requested
       this.saveCredentials();
 
-      // Reset newly generated flag
+      // Reset states
       this.isNewlyGenerated = false;
-
-      // Hide private key when closing
       this.privateKeyVisible = false;
+      this.step = "initial";
 
       this.$emit("close");
     },
