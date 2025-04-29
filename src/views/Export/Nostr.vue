@@ -200,9 +200,33 @@
           <div class="mb-3">
             <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem"></i>
           </div>
-          <h5>Successfully Published!</h5>
-          <p>Your course has been shared to the Nostr network.</p>
-          <button class="btn btn-primary" @click="close">Close</button>
+          <h5>Your course is now published!</h5>
+
+          <div class="form-group mb-4">
+            <label class="form-label">Access your course at:</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                readonly
+                :value="publishedCourseUrl"
+              />
+              <button
+                class="btn btn-outline-secondary"
+                @click="copyToClipboard(publishedCourseUrl)"
+                title="Copy to clipboard"
+              >
+                <i class="bi bi-clipboard"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-3 d-flex justify-content-between">
+            <a :href="publishedCourseUrl" target="_blank" class="btn btn-primary">
+              <i class="bi bi-box-arrow-up-right me-1"></i> Open Course
+            </a>
+            <button class="btn btn-outline-secondary" @click="close">Close</button>
+          </div>
         </div>
       </div>
     </div>
@@ -248,6 +272,7 @@ export default {
       tags: ["liascript", "education"],
       newTag: "",
       publishStatus: null,
+      publishedCourseUrl: "",
 
       // Nostr key management
       publicKey: "",
@@ -439,7 +464,11 @@ export default {
                 relays: relays,
               });
 
+              // Set the published course URL
+              this.publishedCourseUrl = `https://liascript.github.io/course/?nostr:${naddr}`;
+
               console.log("Published as naddr:", "nostr:" + naddr);
+              console.log("Published course URL:", this.publishedCourseUrl);
 
               // Success!
               this.step = "success";
