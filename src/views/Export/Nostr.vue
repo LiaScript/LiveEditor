@@ -154,6 +154,22 @@
             </div>
           </div>
 
+          <div class="form-check mb-3 mt-3">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="embedMedia"
+              v-model="embedMedia"
+            />
+            <label class="form-check-label" for="embedMedia">
+              Embed media files as data URIs
+            </label>
+            <div class="form-text text-muted">
+              Converts images, audio, and video files to embedded data URIs for better
+              portability.
+            </div>
+          </div>
+
           <div class="nostr-actions">
             <button class="btn btn-outline-primary me-2" @click="step = 'customize'">
               <i class="bi bi-pencil-square me-1"></i> Customize Post
@@ -310,6 +326,9 @@ export default {
       // Relay management
       relays: ["wss://relay.damus.io", "wss://relay.nostr.band", "wss://nos.lol"],
       storeRelays: true,
+
+      // Embed media option
+      embedMedia: true, // Default to true for better portability
     };
   },
 
@@ -431,6 +450,141 @@ export default {
       this.tags.splice(index, 1);
     },
 
+    async embedMediaAsDataURIs(content) {
+      try {
+        // Get all blob references from the editor
+        const blobs = this.$parent.$refs.editor.getAllBlobs();
+
+        if (!blobs || blobs.length === 0) {
+          return content; // No media to embed
+        }
+
+        let modifiedContent = content;
+
+        // Process each blob and replace references in the content
+        for (const blob of blobs) {
+          const fileName = blob.name;
+          const fileData = blob.data;
+
+          // Only process media files
+          if (!this.isMediaFile(fileName)) {
+            continue;
+          }
+
+          try {
+            // Determine the MIME type based on file extension
+            const mimeType = this.getMimeType(fileName);
+
+            // Convert the blob data to a base64 data URI
+            const dataUri = await this.blobToDataUri(fileData, mimeType);
+
+            // Replace only the file references with data URIs
+            // Escape special characters in the file name for regex
+            const fileNameEscaped = fileName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+            // Match URLs in markdown patterns
+            // Image syntax: ![alt](fileName)
+            const imgRegex = new RegExp(
+              `(\\!\\[[^\\]]*\\]\\()${fileNameEscaped}(\\))`,
+              "g"
+            );
+            modifiedContent = modifiedContent.replace(imgRegex, `$1${dataUri}$2`);
+
+            // Link syntax: [text](fileName)
+            const linkRegex = new RegExp(
+              `(\\[[^\\]]*\\]\\()${fileNameEscaped}(\\))`,
+              "g"
+            );
+            modifiedContent = modifiedContent.replace(linkRegex, `$1${dataUri}$2`);
+
+            // URL references
+            const urlRegex = new RegExp(
+              `(src="|href="|url\\(|@import ['"]?)${fileNameEscaped}(['"]?\\)|["'])`,
+              "g"
+            );
+            modifiedContent = modifiedContent.replace(urlRegex, `$1${dataUri}$2`);
+          } catch (err) {
+            console.error(`Error converting ${fileName} to data URI:`, err);
+          }
+        }
+
+        return modifiedContent;
+      } catch (error) {
+        console.error("Error embedding media:", error);
+        return content; // Return original content if there was an error
+      }
+    },
+
+    isMediaFile(fileName) {
+      const mediaExtensions = [
+        // Images
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".gif",
+        ".svg",
+        ".webp",
+        ".bmp",
+        // Audio
+        ".mp3",
+        ".wav",
+        ".ogg",
+        ".m4a",
+        // Video
+        ".mp4",
+        ".webm",
+        ".ogv",
+        ".mov",
+      ];
+
+      const extension = "." + fileName.split(".").pop().toLowerCase();
+      return mediaExtensions.includes(extension);
+    },
+
+    getMimeType(fileName) {
+      const extension = fileName.split(".").pop().toLowerCase();
+
+      const mimeTypes = {
+        // Images
+        jpg: "image/jpeg",
+        jpeg: "image/jpeg",
+        png: "image/png",
+        gif: "image/gif",
+        svg: "image/svg+xml",
+        webp: "image/webp",
+        bmp: "image/bmp",
+        // Audio
+        mp3: "audio/mpeg",
+        wav: "audio/wav",
+        ogg: "audio/ogg",
+        m4a: "audio/mp4",
+        // Video
+        mp4: "video/mp4",
+        webm: "video/webm",
+        ogv: "video/ogg",
+        mov: "video/quicktime",
+      };
+
+      return mimeTypes[extension] || "application/octet-stream";
+    },
+
+    blobToDataUri(blob, mimeType) {
+      return new Promise((resolve, reject) => {
+        // Use FileReader's built-in base64 encoding
+        const reader = new FileReader();
+
+        reader.onload = function () {
+          resolve(reader.result);
+        };
+
+        reader.onerror = function () {
+          reject(new Error("Failed to convert file to data URI"));
+        };
+
+        reader.readAsDataURL(new Blob([blob], { type: mimeType }));
+      });
+    },
+
     publishToNostr() {
       if (!this.publicKey || !this.privateKey) {
         alert("Please enter both your public and private keys before publishing.");
@@ -457,7 +611,12 @@ export default {
       provider.on("synced", async (_: any) => {
         try {
           const metaData = await meta;
-          const contentData = yDoc.getText(this.storageId).toJSON();
+          let contentData = yDoc.getText(this.storageId).toJSON();
+
+          // Embed media if option is checked
+          if (this.embedMedia) {
+            contentData = await this.embedMediaAsDataURIs(contentData);
+          }
 
           const pool = new SimplePool();
           const relays = [...this.relays];
