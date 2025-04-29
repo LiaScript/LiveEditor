@@ -14,6 +14,7 @@ import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 
 import { LiaScriptURL } from "../ts/utils";
+import NostrModal from "./Export/Nostr.vue";
 
 // @ts-ignore
 // import JSONWorker from "url:monaco-editor/esm/vs/language/json/json.worker.js";
@@ -97,6 +98,7 @@ export default {
       },
       resizing: false,
       LiaScriptURL,
+      nostrModalVisible: false,
     };
   },
 
@@ -128,6 +130,11 @@ export default {
 
     changeMode(mode: number) {
       this.mode = mode;
+    },
+
+    nostr() {
+      const url = this.urlPath(["nostr", this.$props.storageId]);
+      this.nostrModalVisible = true;
     },
 
     shareLink() {
@@ -426,7 +433,7 @@ export default {
     },
   },
 
-  components: { Editor, Modal, Pane, Preview, Splitpanes },
+  components: { Editor, Modal, Pane, Preview, Splitpanes, NostrModal },
 };
 </script>
 
@@ -771,6 +778,23 @@ export default {
                   </a>
                 </span>
               </li>
+              <li>
+                <span
+                  class="d-inline-block"
+                  style="width: 100%"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  title="Fork this document before you can use this function"
+                >
+                  <button
+                    class="btn dropdown-item btn-link"
+                    @click="nostr"
+                    aria-label="Share the current content on Nostr"
+                  >
+                    Nostr
+                  </button>
+                </span>
+              </li>
             </ul>
           </div>
 
@@ -911,6 +935,11 @@ export default {
   </div>
 
   <Modal ref="modal" />
+  <NostrModal
+    ref="nostrModal"
+    :visible="nostrModalVisible"
+    @close="nostrModalVisible = false"
+  />
 </template>
 
 <style scoped>

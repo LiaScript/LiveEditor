@@ -20,6 +20,7 @@
     "@susisu/mte-kernel": "^2.1.1",
     "mathjs": "^12.0.0",
     "minisearch": "^6.3.0",
+    "nostr-tools": "^2.12.0",
     "pako": "^2.1.0",
     "splitpanes": "^3.1.5"
   },
