@@ -190,7 +190,17 @@
 </template>
 
 <script lang="ts">
-import { generateSecretKey, getPublicKey, nip19 } from "nostr-tools";
+import {
+  generateSecretKey,
+  getPublicKey,
+  nip19,
+  SimplePool,
+  getEventHash,
+} from "nostr-tools";
+import Dexie from "../../ts/indexDB";
+import * as Y from "yjs";
+import { IndexeddbPersistence } from "y-indexeddb";
+import * as Utils from "../../ts/utils";
 
 export default {
   name: "NostrModal",
@@ -303,18 +313,116 @@ export default {
         localStorage.removeItem("nostrPublicKey");
       }
 
-      // Here we would implement the actual Nostr publishing logic
-      // This would use the nostr-tools library to:
-      // 1. Creating a Nostr event with course link
-      // 2. Signing it with the user's private key (if available)
-      // 3. Publishing to relays
+      // Loading indicator could be added here
+      this.publishStatus = "loading";
 
-      // For now, we'll just simulate success
-      setTimeout(() => {
-        this.step = "success";
-        // Clear private key after successful publish for security
-        this.privateKey = "";
-      }, 1000);
+      const database = new Dexie();
+      const meta = database.get(this.storageId);
+      const config = Utils.loadConfig();
+
+      const yDoc = new Y.Doc();
+      const provider = new IndexeddbPersistence(this.storageId, yDoc);
+
+      provider.on("synced", async (_: any) => {
+        try {
+          const metaData = await meta;
+          const contentData = yDoc.getText(this.storageId).toJSON();
+
+          console.log("Content Data:", contentData);
+          console.log("Meta Data:", metaData);
+
+          // 1. Create a pool for relays
+          const pool = new SimplePool();
+          const relays = [
+            "wss://relay.damus.io",
+            "wss://relay.nostr.band",
+            "wss://nos.lol",
+          ];
+
+          // 2. Decode the user's public key from npub format
+          let pubkey;
+          try {
+            const decoded = nip19.decode(this.publicKey);
+            pubkey = decoded.data;
+          } catch (e) {
+            console.error("Error decoding public key:", e);
+            alert("Invalid public key format");
+            return;
+          }
+
+          // 3. Prepare content
+          const title = metaData?.title || "LiaScript Course";
+
+          // Format content as markdown with header
+          const fullContent = `# ${title}\n\n${contentData}`;
+
+          // 4. Create the event (NIP-33 parameterized replaceable event)
+          const event = {
+            kind: 30023, // Long-form content
+            pubkey: pubkey,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [
+              ["d", this.storageId], // Use storageId as identifier
+              ["title", title],
+              ["summary", metaData?.description || "LiaScript course material"],
+              ...this.tags.map((tag) => ["t", tag]),
+            ],
+            content: fullContent,
+          };
+
+          // 5. If user has provided private key, sign and publish
+          if (this.privateKey) {
+            try {
+              // Decode private key
+              const decoded = nip19.decode(this.privateKey);
+              const privkey = decoded.data;
+
+              // Sign the event - updated approach for newer nostr-tools
+              event.id = getEventHash(event);
+              const signedEvent = signEvent(event, privkey);
+
+              // Publish to relays
+              console.log("Publishing event:", signedEvent);
+
+              const pubs = pool.publish(relays, signedEvent);
+
+              // Wait for at least one successful publish
+              await Promise.any(pubs);
+
+              // Create the naddr representation
+              const naddr = nip19.naddrEncode({
+                kind: 30023,
+                pubkey: pubkey,
+                identifier: this.storageId,
+              });
+
+              console.log("Published as naddr:", naddr);
+
+              // Success!
+              this.step = "success";
+              this.publishStatus = "success";
+
+              // Clear private key after successful publish for security
+              this.privateKey = "";
+            } catch (e) {
+              console.error("Error publishing:", e);
+              alert("Failed to publish to Nostr network. Please try again.");
+              this.publishStatus = "failed";
+            }
+          } else {
+            alert("Please provide your private key to sign and publish the post.");
+            this.publishStatus = null;
+          }
+        } catch (error) {
+          console.error("Error processing data:", error);
+          alert("Error processing document data.");
+          this.publishStatus = "failed";
+        } finally {
+          // Clean up
+          provider.destroy();
+          yDoc.destroy();
+        }
+      });
     },
   },
 };

@@ -133,7 +133,6 @@ export default {
     },
 
     nostr() {
-      const url = this.urlPath(["nostr", this.$props.storageId]);
       this.nostrModalVisible = true;
     },
 
@@ -938,6 +937,8 @@ export default {
   <NostrModal
     ref="nostrModal"
     :visible="nostrModalVisible"
+    :storageId="$props.storageId"
+    :courseUrl="LiaScriptURL"
     @close="nostrModalVisible = false"
   />
 </template>
