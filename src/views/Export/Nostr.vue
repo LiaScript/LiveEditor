@@ -14,7 +14,9 @@
       <div class="modal-body">
         <!-- Key Management Section -->
         <div v-if="step === 'initial'" class="key-management mb-4">
-          <h6>Nostr Key</h6>
+          <h6>Nostr Keys</h6>
+
+          <!-- Public Key -->
           <div class="form-group mb-3">
             <label for="nostrPublicKey" class="form-label">Your Public Key (npub):</label>
             <div class="input-group">
@@ -38,32 +40,18 @@
             </div>
           </div>
 
-          <div class="form-check mb-3" v-if="publicKey">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="rememberKey"
-              v-model="rememberKey"
-            />
-            <label class="form-check-label" for="rememberKey">
-              Remember my public key for future posts
-            </label>
-          </div>
-
-          <div v-if="privateKey" class="alert alert-warning">
-            <div class="d-flex align-items-center mb-2">
-              <i class="bi bi-exclamation-triangle-fill me-2"></i>
-              <strong>Important: Save your private key</strong>
-            </div>
-            <p class="mb-2">
-              This private key gives access to your Nostr identity. Save it securely.
-            </p>
+          <!-- Private Key (always visible) -->
+          <div class="form-group mb-3">
+            <label for="nostrPrivateKey" class="form-label"
+              >Your Private Key (nsec):</label
+            >
             <div class="input-group">
               <input
+                id="nostrPrivateKey"
                 :type="privateKeyVisible ? 'text' : 'password'"
                 class="form-control"
                 v-model="privateKey"
-                readonly
+                placeholder="Enter your Nostr private key (nsec...)"
               />
               <button
                 class="btn btn-outline-secondary"
@@ -75,10 +63,42 @@
                 class="btn btn-outline-secondary"
                 @click="copyToClipboard(privateKey)"
                 title="Copy to clipboard"
+                :disabled="!privateKey"
               >
                 <i class="bi bi-clipboard"></i>
               </button>
             </div>
+            <div class="form-text text-muted">
+              Your private key is needed to sign and publish posts. Keep it secure.
+            </div>
+          </div>
+
+          <!-- Store credentials checkbox -->
+          <div class="form-check mb-3" v-if="publicKey || privateKey">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="storeCredentials"
+              v-model="storeCredentials"
+            />
+            <label class="form-check-label" for="storeCredentials">
+              Store credentials in this browser
+            </label>
+            <div class="form-text text-warning">
+              <i class="bi bi-exclamation-triangle-fill me-1"></i>
+              Storing your private key in the browser is convenient but less secure.
+            </div>
+          </div>
+
+          <!-- Warning box when keys are generated -->
+          <div v-if="isNewlyGenerated" class="alert alert-warning">
+            <div class="d-flex align-items-center mb-2">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              <strong>Important: Save your private key</strong>
+            </div>
+            <p class="mb-2">
+              This private key gives access to your Nostr identity. Save it securely.
+            </p>
           </div>
         </div>
 
@@ -115,7 +135,7 @@
             <button
               class="btn btn-primary"
               @click="publishToNostr"
-              :disabled="!publicKey"
+              :disabled="!publicKey || !privateKey"
             >
               <i class="bi bi-lightning-charge me-1"></i> Publish Now
             </button>
@@ -196,6 +216,7 @@ import {
   nip19,
   SimplePool,
   getEventHash,
+  finalizeEvent,
 } from "nostr-tools";
 import Dexie from "../../ts/indexDB";
 import * as Y from "yjs";
@@ -231,16 +252,23 @@ export default {
       // Nostr key management
       publicKey: "",
       privateKey: "",
-      rememberKey: true,
+      storeCredentials: true,
       privateKeyVisible: false,
+      isNewlyGenerated: false,
     };
   },
 
   created() {
-    // Try to load saved public key from localStorage
+    // Try to load saved credentials from localStorage
     const savedPublicKey = localStorage.getItem("nostrPublicKey");
+    const savedPrivateKey = localStorage.getItem("nostrPrivateKey");
+
     if (savedPublicKey) {
       this.publicKey = savedPublicKey;
+    }
+
+    if (savedPrivateKey) {
+      this.privateKey = savedPrivateKey;
     }
   },
 
@@ -252,15 +280,21 @@ export default {
 
   methods: {
     close() {
-      // Clear generated private key when closing the modal for security
-      this.privateKey = "";
+      // Save credentials if requested
+      this.saveCredentials();
+
+      // Reset newly generated flag
+      this.isNewlyGenerated = false;
+
+      // Hide private key when closing
       this.privateKeyVisible = false;
+
       this.$emit("close");
     },
 
     generateKeyPair() {
       try {
-        // Generate a new private key (using the correct function name)
+        // Generate a new private key
         const privateKey = generateSecretKey();
 
         // Derive the public key from it
@@ -273,6 +307,7 @@ export default {
         this.privateKey = nsec;
         this.publicKey = npub;
         this.privateKeyVisible = true;
+        this.isNewlyGenerated = true;
       } catch (error) {
         console.error("Error generating key pair:", error);
         alert("Failed to generate key pair. Please try again.");
@@ -289,6 +324,20 @@ export default {
       });
     },
 
+    saveCredentials() {
+      if (this.storeCredentials) {
+        if (this.publicKey) {
+          localStorage.setItem("nostrPublicKey", this.publicKey);
+        }
+        if (this.privateKey) {
+          localStorage.setItem("nostrPrivateKey", this.privateKey);
+        }
+      } else {
+        localStorage.removeItem("nostrPublicKey");
+        localStorage.removeItem("nostrPrivateKey");
+      }
+    },
+
     addTag() {
       if (this.newTag.trim() && !this.tags.includes(this.newTag.trim())) {
         this.tags.push(this.newTag.trim());
@@ -301,17 +350,13 @@ export default {
     },
 
     publishToNostr() {
-      if (!this.publicKey) {
-        alert("Please enter your public key or generate a new one before publishing.");
+      if (!this.publicKey || !this.privateKey) {
+        alert("Please enter both your public and private keys before publishing.");
         return;
       }
 
-      // Store public key if requested
-      if (this.rememberKey) {
-        localStorage.setItem("nostrPublicKey", this.publicKey);
-      } else {
-        localStorage.removeItem("nostrPublicKey");
-      }
+      // Save credentials if requested
+      this.saveCredentials();
 
       // Loading indicator could be added here
       this.publishStatus = "loading";
@@ -379,7 +424,7 @@ export default {
 
               // Sign the event - updated approach for newer nostr-tools
               event.id = getEventHash(event);
-              const signedEvent = signEvent(event, privkey);
+              const signedEvent = finalizeEvent(event, privkey);
 
               // Publish to relays
               console.log("Publishing event:", signedEvent);
