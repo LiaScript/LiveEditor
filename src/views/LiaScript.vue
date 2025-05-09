@@ -28,6 +28,8 @@ import NostrModal from "./Export/Nostr.vue";
 import EditorWorker from "url:monaco-editor/esm/vs/editor/editor.worker.js";
 import { editor } from "monaco-editor";
 
+import logoImg from "url:../../assets/logo.png";
+
 // @ts-ignore
 window.MonacoEnvironment = {
   getWorkerUrl: function (moduleId, label) {
@@ -81,6 +83,7 @@ export default {
     }
 
     return {
+      logoImg,
       preview: undefined,
       horizontal:
         document.documentElement.clientWidth < document.documentElement.clientHeight,
@@ -440,11 +443,11 @@ export default {
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
       <a v-if="!embed" class="navbar-brand" href="./" data-link="true">
-        <img src="../../assets/logo.png" alt="LiaScript" height="28" />
+        <img :src="logoImg" alt="LiaScript" height="28" />
         <span id="lia-edit">LiaEdit</span>
       </a>
       <span v-else class="navbar-brand">
-        <img src="../../assets/logo.png" alt="LiaScript" height="28" />
+        <img :src="logoImg" alt="LiaScript" height="28" />
         <span id="lia-edit">LiaDemo</span>
       </span>
 

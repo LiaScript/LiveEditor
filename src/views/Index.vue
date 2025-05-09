@@ -7,6 +7,8 @@ import { IndexeddbPersistence } from "y-indexeddb";
 
 import MiniSearch from "minisearch";
 
+import logoImg from "url:../../assets/logo.png";
+
 function waitForSync(provider) {
   return new Promise<void>((resolve) => {
     if (provider.synced) {
@@ -49,6 +51,7 @@ export default {
     });
 
     return {
+      logoImg,
       database,
       search,
       results: [],
@@ -175,7 +178,7 @@ export default {
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand">
-        <img src="../../assets/logo.png" alt="LiaScript" height="28" />
+        <img :src="logoImg" alt="LiaScript" height="28" />
         LiaEdit
       </a>
 
