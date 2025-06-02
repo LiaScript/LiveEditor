@@ -2,7 +2,7 @@
 const INIT_CODE = `
 var blob = {};
 
-// TODO: Hack, so that preferBrowserTTS works as expected
+// TODO: Fix this HACK, so that preferBrowserTTS works as expected
 if (window.LIA.settings?.preferBrowserTTS || false) {
   window.LIA.settings.preferBrowserTTS = false;
   window.LIA.settings.preferBrowserTTS = true;
