@@ -783,6 +783,18 @@ export default {
   padding: 0.25rem 0;
 }
 
+.tags-container .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
+}
+
+.tags-container .btn-close {
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .modal-container {
