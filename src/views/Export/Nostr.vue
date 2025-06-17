@@ -313,6 +313,8 @@ export default {
       customMessage: "",
       tags: ["liascript", "education"],
       newTag: "",
+
+      imageUrl: null,
       publishStatus: null,
       publishedCourseUrl: "",
 
@@ -344,6 +346,25 @@ export default {
     if (savedPrivateKey) {
       this.privateKey = savedPrivateKey;
     }
+
+    const database = new Dexie();
+    database
+      .get(this.storageId)
+      .then((meta: any) => {
+        if (meta) {
+          this.customMessage = meta.meta.macro.comment || "";
+          this.imageUrl = meta.meta.macro.image || null;
+          this.tags = meta.meta.macro.tags?.split(",").map((tag) => tag.trim()) || [
+            "liascript",
+            "education",
+          ];
+        } else {
+          console.warn("No metadata found for this course.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error loading metadata:", error);
+      });
 
     // Load saved relays
     this.loadSavedRelays();
@@ -632,17 +653,22 @@ export default {
           }
 
           const title = metaData?.title || "LiaScript Course";
+          let tags = [
+            ["d", this.storageId],
+            ["title", title],
+            ["summary", this.customMessage || "LiaScript course material"],
+            ...this.tags.map((tag) => ["t", tag]),
+          ];
+
+          if (this.imageUrl) {
+            tags.push(["image", this.imageUrl]);
+          }
 
           const event = {
             kind: 30023,
             pubkey: pubkey,
             created_at: Math.floor(Date.now() / 1000),
-            tags: [
-              ["d", this.storageId],
-              ["title", title],
-              ["summary", metaData?.description || "LiaScript course material"],
-              ...this.tags.map((tag) => ["t", tag]),
-            ],
+            tags,
             content: contentData,
           };
 
