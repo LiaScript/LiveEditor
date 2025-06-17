@@ -703,8 +703,9 @@ export default {
   bottom: 0;
   z-index: 2000;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Changed from center to flex-start */
   justify-content: center;
+  padding: 1rem; /* Add padding for small screens */
 }
 
 .modal-backdrop {
@@ -720,11 +721,15 @@ export default {
   position: relative;
   width: 90%;
   max-width: 600px;
+  max-height: 90vh; /* Limit height to 90% of viewport height */
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   z-index: 2001;
+  margin: 2rem 0; /* Add margin top/bottom */
+  display: flex;
+  flex-direction: column; /* Add flex layout */
 }
 
 .modal-header {
@@ -737,6 +742,8 @@ export default {
 
 .modal-body {
   padding: 1.5rem;
+  overflow-y: auto; /* Make the body scrollable */
+  flex: 1; /* Allow body to take remaining space */
 }
 
 .nostr-actions {
