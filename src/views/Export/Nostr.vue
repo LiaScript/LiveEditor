@@ -664,7 +664,14 @@ export default {
             tags.push(["image", this.imageUrl]);
           }
 
-          const event = {
+          const event: {
+            kind: number;
+            pubkey: string;
+            created_at: number;
+            tags: any[];
+            content: string;
+            id?: string;
+          } = {
             kind: 30023,
             pubkey: pubkey,
             created_at: Math.floor(Date.now() / 1000),

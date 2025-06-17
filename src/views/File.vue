@@ -49,6 +49,56 @@ function replaceMacroURLs(macro: string, base: string, code: string): string {
   });
 }
 
+const defaultRelays = ["wss://relay.damus.io", "wss://relay.nostr.band", "wss://nos.lol"];
+
+async function fetchNostrContent(url: string): Promise<string> {
+  const nostrTools = await import("nostr-tools");
+  const pool = new nostrTools.SimplePool();
+
+  try {
+    // Parse the URI to get the Nostr identifier
+    const identifier = url.substring(6); // Remove 'nostr:'
+    const decoded = nostrTools.nip19.decode(identifier);
+
+    let fetchedEvent;
+    switch (decoded.type) {
+      case "note":
+        fetchedEvent = await pool.get(defaultRelays, {
+          ids: [decoded.data],
+        });
+        break;
+
+      case "nevent":
+        const relays = decoded.data.relays || defaultRelays;
+        fetchedEvent = await pool.get(relays, {
+          ids: [decoded.data.id],
+        });
+        break;
+
+      case "naddr":
+        fetchedEvent = await pool.get(decoded.data.relays, {
+          kinds: [decoded.data.kind],
+          authors: [decoded.data.pubkey],
+          "#d": [decoded.data.identifier],
+        });
+        break;
+
+      default:
+        throw new Error("Unknown Nostr identifier type: " + decoded.type);
+    }
+
+    if (!fetchedEvent) {
+      throw new Error("Content not found on specified relays");
+    }
+
+    return fetchedEvent.content;
+  } catch (error) {
+    throw new Error(`Error fetching Nostr content: ${error.message}`);
+  } finally {
+    pool.close(defaultRelays);
+  }
+}
+
 export default {
   name: "LiaScript-FileView",
   props: ["fileUrl", "embed", "mode"],
@@ -63,17 +113,28 @@ export default {
     };
   },
 
+  // Modify the created hook
   async created() {
-    const response = await fetch(this.fileUrl);
-
-    if (response.ok) {
-      this.data = await response.text();
-      const baseURL = this.fileUrl.replace(/\/[^\/]*$/, "/");
-      this.data = replaceURLs(baseURL, this.data);
-      this.data = replaceMacroURLs("script", baseURL, this.data);
-      this.data = replaceMacroURLs("link", baseURL, this.data);
-    } else {
-      this.data = errorMsg(this.fileUrl, response.status + ": " + response.statusText);
+    try {
+      if (this.fileUrl.startsWith("nostr:")) {
+        this.data = await fetchNostrContent(this.fileUrl);
+      } else {
+        const response = await fetch(this.fileUrl);
+        if (response.ok) {
+          this.data = await response.text();
+          const baseURL = this.fileUrl.replace(/\/[^\/]*$/, "/");
+          this.data = replaceURLs(baseURL, this.data);
+          this.data = replaceMacroURLs("script", baseURL, this.data);
+          this.data = replaceMacroURLs("link", baseURL, this.data);
+        } else {
+          this.data = errorMsg(
+            this.fileUrl,
+            response.status + ": " + response.statusText
+          );
+        }
+      }
+    } catch (error) {
+      this.data = errorMsg(this.fileUrl, error.message);
     }
   },
   components: { LiaScript, Toast },
