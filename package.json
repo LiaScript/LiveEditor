@@ -16,7 +16,7 @@
   "author": "André Dietrich",
   "license": "ISC",
   "dependencies": {
-    "@liascript/editor": "^1.1.34--0.17.10",
+    "@liascript/editor": "^1.1.41--1.0.0",
     "@susisu/mte-kernel": "^2.1.1",
     "mathjs": "^12.0.0",
     "minisearch": "^6.3.0",
@@ -36,7 +36,6 @@
     "bootstrap-icons": "^1.11.3",
     "browserify-zlib": "^0.2.0",
     "buffer": "^5.7.1",
-    "caniuse-lite": "^1.0.30001651",
     "date-format-simple": "^1.1.5",
     "dexie": "^3.2.4",
     "events": "^3.3.0",
