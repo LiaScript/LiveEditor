@@ -412,7 +412,7 @@ $$
 
         case "init": {
           for (const el of Snippets) {
-            if (el.label === "lia-init") {
+            if (el.label === "lia-template") {
               Editor.setValue(el.insertText);
 
               break;
