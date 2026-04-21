@@ -14,7 +14,7 @@
     "analyze": "rm -rf dist && npx parcel build --no-source-maps --reporter @parcel/reporter-bundle-analyzer src/index.html"
   },
   "author": "André Dietrich",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@liascript/editor": "^1.1.41--1.0.6",
     "@susisu/mte-kernel": "^2.1.1",
