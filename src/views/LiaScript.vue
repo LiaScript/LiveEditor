@@ -89,7 +89,7 @@ export default {
         document.documentElement.clientWidth < document.documentElement.clientHeight,
       previewNotReady: true,
       compilationCounter: 0,
-      mode: this.$props.mode || 0,
+      currentMode: this.$props.mode || 0,
       editorIsReady: false,
       database,
       meta: {},
@@ -132,7 +132,7 @@ export default {
     },
 
     changeMode(mode: number) {
-      this.mode = mode;
+      this.currentMode = mode;
     },
 
     nostr() {
@@ -477,7 +477,7 @@ export default {
             id="btnradio1"
             autocomplete="off"
             @click="changeMode(-1)"
-            :checked="mode < 0"
+            :checked="currentMode < 0"
           />
           <label class="btn btn-outline-secondary" for="btnradio1" title="Editor only">
             <i class="bi bi-pencil"></i>
@@ -489,7 +489,7 @@ export default {
             name="btnradio"
             id="btnradio2"
             autocomplete="off"
-            :checked="mode === 0"
+            :checked="currentMode === 0"
             @click="changeMode(0)"
           />
           <label class="btn btn-outline-secondary" for="btnradio2" title="Split view">
@@ -507,7 +507,7 @@ export default {
             id="btnradio3"
             autocomplete="off"
             @click="changeMode(1)"
-            :checked="mode > 0"
+            :checked="currentMode > 0"
           />
           <label class="btn btn-outline-secondary" for="btnradio3" title="Preview only">
             <i class="bi bi-eye"></i>
@@ -872,11 +872,11 @@ export default {
       :horizontal="horizontal"
     >
       <pane
-        :hidden="mode > 0"
+        :hidden="currentMode > 0"
         style="border-right: solid lightgray 2px"
         :class="{
-          fullHeight: mode < 0 && horizontal,
-          fullWidth: mode < 0 && !horizontal,
+          fullHeight: currentMode < 0 && horizontal,
+          fullWidth: currentMode < 0 && !horizontal,
         }"
       >
         <Editor
@@ -895,10 +895,10 @@ export default {
       </pane>
 
       <pane
-        :hidden="mode < 0"
+        :hidden="currentMode < 0"
         :class="{
-          fullHeight: mode > 0 && horizontal,
-          fullWidth: mode > 0 && !horizontal,
+          fullHeight: currentMode > 0 && horizontal,
+          fullWidth: currentMode > 0 && !horizontal,
         }"
       >
         <div

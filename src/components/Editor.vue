@@ -113,21 +113,15 @@ function blobToUint8Array(blob) {
 export default {
   name: "Editor",
   components: { Recorder },
-  props: ["storageId", "content", "lights", "connection", "toolbar"],
+  inheritAttrs: false,
+  props: ["storageId", "content", "connection", "toolbar"],
 
   data() {
     const config = Utils.loadConfig();
 
-    let toolbar = true;
-
-    if (this.$props.toolbar !== undefined) {
-      toolbar = this.$props.toolbar;
-    }
-
     return {
       lights: config.lights,
       user: config.user,
-      toolbar: toolbar,
       recorder: { audio: false, webcam: false, desktop: false },
 
       online: null,
@@ -1340,7 +1334,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
 <template>
   <nav
-    v-if="toolbar"
+    v-if="toolbar !== false"
     class="navbar navbar-light bg-light"
     style="
       border-top: solid lightgray 2px;

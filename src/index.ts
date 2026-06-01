@@ -1,3 +1,10 @@
+// Vue compile-time feature flags — required by the esm-bundler build of Vue.
+// Parcel has no built-in DefinePlugin equivalent, so we set them on globalThis
+// before Vue runs so the typeof-checks in vue/dist/vue.esm-bundler.js resolve.
+(globalThis as any).__VUE_OPTIONS_API__ = true;
+(globalThis as any).__VUE_PROD_DEVTOOLS__ = false;
+(globalThis as any).__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
+
 import { createApp } from 'vue'
 
 // Configure Monaco Editor web workers for Parcel bundler.
