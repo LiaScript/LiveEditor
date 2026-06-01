@@ -1,4 +1,15 @@
 import { createApp } from 'vue'
+
+// Configure Monaco Editor web workers for Parcel bundler.
+// getWorker (not getWorkerUrl) is required so Parcel recognises the
+// new Worker(new URL(...)) pattern and bundles all deps inline into the
+// worker chunk, avoiding shared-chunk require() failures at runtime.
+(window as any).MonacoEnvironment = {
+  getWorker: function (_moduleId: string, _label: string) {
+    return new Worker(new URL('./editor.worker.ts', import.meta.url), { type: 'module' })
+  },
+}
+
 import Index from './views/Index.vue'
 import Edit from './views/Edit.vue'
 import File from './views/File.vue'
