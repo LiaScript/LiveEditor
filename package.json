@@ -16,7 +16,7 @@
   "author": "André Dietrich",
   "license": "MIT",
   "dependencies": {
-    "@liascript/editor": "^1.1.43--1.0.9",
+    "@liascript/editor": "^1.1.43--1.0.10",
     "@susisu/mte-kernel": "^2.1.1",
     "minisearch": "^6.3.0",
     "pako": "^2.1.0",
