@@ -17,11 +17,6 @@ import { createApp } from 'vue'
   },
 }
 
-import Index from './views/Index.vue'
-import Edit from './views/Edit.vue'
-import File from './views/File.vue'
-import Zip from './views/Zip.vue'
-import GitHubExporter from './views/Export/GitHub.vue'
 import AudioRecorder from 'vue3-mic-recorder'
 import { randomString } from './ts/utils'
 
@@ -74,32 +69,32 @@ const router = async () => {
   }
 
   const routes = [
-    { path: '/', view: Index },
+    { path: '/', view: () => import('./views/Index.vue') },
     { path: '/edit', redirect: '?/edit/' + randomString(24) },
-    { path: '/edit/:storageId/:connection', view: Edit },
-    { path: '/edit/:storageId', view: Edit },
+    { path: '/edit/:storageId/:connection', view: () => import('./views/Edit.vue') },
+    { path: '/edit/:storageId', view: () => import('./views/Edit.vue') },
     {
       path: '/embed/code/edit/:zipCode',
-      view: Zip,
+      view: () => import('./views/Zip.vue'),
       params: { embed: true, mode: -1 },
     },
     {
       path: '/embed/code/preview/:zipCode',
-      view: Zip,
+      view: () => import('./views/Zip.vue'),
       params: { embed: true, mode: 1 },
     },
-    { path: '/embed/code/:zipCode', view: Zip, params: { embed: true } },
-    { path: '/embed/file/:fileUrl', view: File, params: { embed: true } },
+    { path: '/embed/code/:zipCode', view: () => import('./views/Zip.vue'), params: { embed: true } },
+    { path: '/embed/file/:fileUrl', view: () => import('./views/File.vue'), params: { embed: true } },
 
-    { path: '/show/code/:zipCode', view: Zip },
-    { path: '/show/file/:fileUrl', view: File },
+    { path: '/show/code/:zipCode', view: () => import('./views/Zip.vue') },
+    { path: '/show/file/:fileUrl', view: () => import('./views/File.vue') },
     {
       path: '/export/github/&code=:code&state=:stepId2',
-      view: GitHubExporter,
+      view: () => import('./views/Export/GitHub.vue'),
     },
     {
       path: '/export/github/:stepId1',
-      view: GitHubExporter,
+      view: () => import('./views/Export/GitHub.vue'),
     },
   ]
 
@@ -131,11 +126,12 @@ const router = async () => {
   }
 
   const params = getParams(match)
-  const view = match.route.view as any
+  const loader = match.route.view as () => Promise<{ default: any }>
 
   app?.unmount()
 
-  app = createApp(view, params)
+  const ViewModule = await loader()
+  app = createApp(ViewModule.default, params)
   app.use(AudioRecorder)
 
   app.mount(document.body)
