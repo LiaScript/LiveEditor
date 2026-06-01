@@ -46,6 +46,7 @@
     "parcel-reporter-multiple-static-file-copier": "^1.0.5",
     "parcel-reporter-static-files-copy": "^1.4.0",
     "parcel-resolver-ignore": "^2.1.3",
+    "peerjs": "^1.5.5",
     "process": "^0.11.10",
     "sass": "^1.97.3",
     "shrink-string": "^3.0.11",
@@ -53,11 +54,10 @@
     "vue": "^3.5.28",
     "vue3-mic-recorder": "github:andre-dietrich/vue3-mic-recorder",
     "workbox-cli": "^7.0.0",
+    "y-generic": "github:andre-dietrich/y-generic",
     "y-indexeddb": "^9.0.9",
     "y-monaco": "^0.1.4",
-    "y-webrtc": "github:disarticulate/y-webrtc",
-    "y-websocket": "^1.5.0",
-    "yjs": "^13.6.29"
+    "yjs": "^13.6.27"
   },
   "multipleStaticFileCopier": [
     {

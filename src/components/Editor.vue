@@ -2,9 +2,10 @@
 import * as Y from "yjs";
 
 import { IndexeddbPersistence } from "y-indexeddb";
-// @ts-ignore
-import { WebrtcProvider } from "y-webrtc";
-import { WebsocketProvider } from "y-websocket";
+import { GenericProvider } from "y-generic";
+import { PeerJSTransport } from "y-generic/dist/providers/peerjs";
+import { WebSocketTransport } from "y-generic/dist/providers/websocket";
+import Peer from "peerjs";
 import { MonacoBinding } from "y-monaco";
 import { editor, KeyMod, KeyCode, languages, IDisposable } from "monaco-editor";
 import * as Utils from "../ts/utils";
@@ -1185,24 +1186,27 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
       switch (this.$props.connection) {
         case "webrtc": {
-          provider = new WebrtcProvider(storageId, yDoc, {
-            signaling: (process.env.SIGNALING_SERVER || "").split(" ") || [
-              "wss://rooms.deno.dev",
-            ],
-            peerOpts: {
+          const peerTransport = new PeerJSTransport({
+            peer: Peer,
+            peerOptions: {
               config: {
                 iceServers: JSON.parse(process.env.ICE_SERVERS || "[]"),
               },
             },
           });
+          provider = new GenericProvider(yDoc, peerTransport);
+          provider.connect({ room: storageId }).catch(console.error);
           break;
         }
         case "websocket": {
-          provider = new WebsocketProvider(
-            process.env.WEBSOCKET_SERVER || "wss://aamkeaam.com/" + storageId,
-            storageId,
-            yDoc
-          );
+          const wsTransport = new WebSocketTransport();
+          provider = new GenericProvider(yDoc, wsTransport, {
+            verifyUpdates: false, // Required for y-websocket server compatibility
+          });
+          provider.connect({
+            serverUrl: process.env.WEBSOCKET_SERVER || "wss://aamkeaam.com",
+            room: storageId,
+          }).catch(console.error);
           break;
         }
         default: {
@@ -1221,8 +1225,8 @@ I (study) ~[[ am going to study ]]~ harder this term.
       if (provider) {
         provider.awareness.setLocalStateField("user", this.user);
 
-        provider.on("status", (event: any) => {
-          if (event.status === "connected") {
+        provider.on("status", (status: any) => {
+          if (status.state === "connected") {
             self.online = 1;
           } else {
             self.online = 0;
