@@ -693,6 +693,31 @@ I (study) ~[[ am going to study ]]~ harder this term.
           break;
         }
 
+        case "gfm-note": {
+          op.text = "> [!NOTE]\n> " + (text ? text.replace(/\n/g, "\n> ") : "");
+          break;
+        }
+
+        case "gfm-tip": {
+          op.text = "> [!TIP]\n> " + (text ? text.replace(/\n/g, "\n> ") : "");
+          break;
+        }
+
+        case "gfm-important": {
+          op.text = "> [!IMPORTANT]\n> " + (text ? text.replace(/\n/g, "\n> ") : "");
+          break;
+        }
+
+        case "gfm-warning": {
+          op.text = "> [!WARNING]\n> " + (text ? text.replace(/\n/g, "\n> ") : "");
+          break;
+        }
+
+        case "gfm-caution": {
+          op.text = "> [!CAUTION]\n> " + (text ? text.replace(/\n/g, "\n> ") : "");
+          break;
+        }
+
         case "strikethrough": {
           op.text = "~" + text + "~";
           if (text === "") {
@@ -1507,6 +1532,16 @@ I (study) ~[[ am going to study ]]~ harder this term.
             <button class="btn-fmt" type="button" title="Horizontal Line" @click="make('line')"><i class="bi bi-hr"></i></button>
           </div>
           <div class="toolbar-label">Absatz</div>
+        </div>
+        <div class="toolbar-section">
+          <div class="toolbar-buttons">
+            <button class="btn-fmt" type="button" title="Note"      @click="make('gfm-note')"><i class="bi bi-info-circle"></i></button>
+            <button class="btn-fmt" type="button" title="Tip"       @click="make('gfm-tip')"><i class="bi bi-lightbulb"></i></button>
+            <button class="btn-fmt" type="button" title="Important" @click="make('gfm-important')"><i class="bi bi-exclamation-circle"></i></button>
+            <button class="btn-fmt" type="button" title="Warning"   @click="make('gfm-warning')"><i class="bi bi-exclamation-triangle"></i></button>
+            <button class="btn-fmt" type="button" title="Caution"   @click="make('gfm-caution')"><i class="bi bi-shield-exclamation"></i></button>
+          </div>
+          <div class="toolbar-label">GFM Alerts</div>
         </div>
       </template>
 
