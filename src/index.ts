@@ -38,6 +38,7 @@ import { createApp } from 'vue'
 
 import AudioRecorder from 'vue3-mic-recorder'
 import { randomString } from './ts/utils'
+import { i18n } from './i18n/index'
 
 var app
 
@@ -152,6 +153,7 @@ const router = async () => {
   const ViewModule = await loader()
   app = createApp(ViewModule.default, params)
   app.use(AudioRecorder)
+  app.use(i18n)
 
   app.mount(document.body)
 }

@@ -133,6 +133,11 @@ export default {
       window.location.href = "./?/edit";
     },
 
+    changeLocale(locale: string) {
+      this.$i18n.locale = locale;
+      localStorage.setItem('locale', locale);
+    },
+
     async init() {
       this.courses = await this.database.getAll();
 
@@ -182,7 +187,24 @@ export default {
         LiaEdit
       </a>
 
-      <button class="btn btn-primary" @click="newCourse">New Course</button>
+      <div class="flex-grow-1 d-flex justify-content-center">
+        <div class="btn-group btn-group-sm" role="group" aria-label="Language">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            :class="{ active: $i18n.locale === 'en' }"
+            @click="changeLocale('en')"
+          >EN</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            :class="{ active: $i18n.locale === 'de' }"
+            @click="changeLocale('de')"
+          >DE</button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" @click="newCourse">{{ $t('index.newCourse') }}</button>
     </div>
   </nav>
 
@@ -193,10 +215,10 @@ export default {
     <div class="input-group" style="padding: 2rem 5rem 0rem 5rem">
       <input
         class="form-control"
-        placeholder="Type to search..."
+        :placeholder="$t('index.searchPlaceholder')"
         @input="handleSearch"
         v-model="searchText"
-        aria-label="Search input"
+        :aria-label="$t('index.searchAriaLabel')"
         :disabled="courses.length === 0"
       />
 
@@ -206,7 +228,7 @@ export default {
           style="border: 0px"
           type="button"
           @click="searchText = ''"
-          aria-label="Clear search"
+          :aria-label="$t('index.clearSearchAria')"
           :disabled="courses.length === 0 || searchText.length === 0"
         >
           <i class="bi bi-x-lg"> </i>
@@ -265,13 +287,20 @@ export default {
     </div>
 
     <Footer>
-      This is a collaborative online editor for
-      <a href="https://LiaScript.github.io" target="_blank">LiaScript</a>. All content is
-      stored only within your browser. If you need some inspiration, check out some of our
-      <a href="./examples.html">examples</a>, search for embeddable
-      <a href="https://github.com/topics/liascript-template" target="_blank">templates</a
-      >, or already published
-      <a href="https://github.com/topics/liascript-course" target="_blank">courses</a>.
+      <i18n-t keypath="index.footer" tag="span">
+        <template #liascript>
+          <a href="https://LiaScript.github.io" target="_blank">LiaScript</a>
+        </template>
+        <template #examples>
+          <a href="./examples.html">{{ $t('index.footerExamples') }}</a>
+        </template>
+        <template #templates>
+          <a href="https://github.com/topics/liascript-template" target="_blank">{{ $t('index.footerTemplates') }}</a>
+        </template>
+        <template #courses>
+          <a href="https://github.com/topics/liascript-course" target="_blank">{{ $t('index.footerCourses') }}</a>
+        </template>
+      </i18n-t>
     </Footer>
   </div>
 </template>

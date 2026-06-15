@@ -6,7 +6,7 @@
       <div class="toolbar-buttons">
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-theme">Dark</label>
+          <label class="editor-setting-label" for="es-theme">{{ $t('editor.dark') }}</label>
           <input
             id="es-theme"
             type="checkbox"
@@ -16,7 +16,7 @@
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-fontsize">Size</label>
+          <label class="editor-setting-label" for="es-fontsize">{{ $t('editor.size') }}</label>
           <input
             id="es-fontsize"
             class="editor-setting-input"
@@ -28,7 +28,7 @@
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-fontfamily">Font</label>
+          <label class="editor-setting-label" for="es-fontfamily">{{ $t('editor.font') }}</label>
           <select
             id="es-fontfamily"
             class="editor-setting-select"
@@ -43,21 +43,21 @@
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-linenumbers">Lines</label>
+          <label class="editor-setting-label" for="es-linenumbers">{{ $t('editor.lines') }}</label>
           <select
             id="es-linenumbers"
             class="editor-setting-select"
             :value="config.lineNumbers"
             @change="set('lineNumbers', $event.target.value)"
           >
-            <option value="on">On</option>
-            <option value="off">Off</option>
-            <option value="relative">Relative</option>
+            <option value="on">{{ $t('editor.on') }}</option>
+            <option value="off">{{ $t('editor.off') }}</option>
+            <option value="relative">{{ $t('editor.relative') }}</option>
           </select>
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-minimap">Minimap</label>
+          <label class="editor-setting-label" for="es-minimap">{{ $t('editor.minimap') }}</label>
           <input
             id="es-minimap"
             type="checkbox"
@@ -67,7 +67,7 @@
         </div>
 
       </div>
-      <div class="toolbar-label">Appearance</div>
+      <div class="toolbar-label">{{ $t('editor.appearance') }}</div>
     </div>
 
     <!-- Editing -->
@@ -75,20 +75,20 @@
       <div class="toolbar-buttons">
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-wordwrap">Wrap</label>
+          <label class="editor-setting-label" for="es-wordwrap">{{ $t('editor.wrap') }}</label>
           <select
             id="es-wordwrap"
             class="editor-setting-select"
             :value="config.wordWrap"
             @change="set('wordWrap', $event.target.value)"
           >
-            <option value="on">On</option>
-            <option value="off">Off</option>
+            <option value="on">{{ $t('editor.on') }}</option>
+            <option value="off">{{ $t('editor.off') }}</option>
           </select>
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-tabsize">Tab</label>
+          <label class="editor-setting-label" for="es-tabsize">{{ $t('editor.tab') }}</label>
           <select
             id="es-tabsize"
             class="editor-setting-select"
@@ -102,7 +102,7 @@
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-spaces">Spaces</label>
+          <label class="editor-setting-label" for="es-spaces">{{ $t('editor.spaces') }}</label>
           <input
             id="es-spaces"
             type="checkbox"
@@ -112,21 +112,21 @@
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-whitespace">Whitespace</label>
+          <label class="editor-setting-label" for="es-whitespace">{{ $t('editor.whitespace') }}</label>
           <select
             id="es-whitespace"
             class="editor-setting-select"
             :value="config.renderWhitespace"
             @change="set('renderWhitespace', $event.target.value)"
           >
-            <option value="none">None</option>
-            <option value="boundary">Boundary</option>
-            <option value="all">All</option>
+            <option value="none">{{ $t('editor.none') }}</option>
+            <option value="boundary">{{ $t('editor.boundary') }}</option>
+            <option value="all">{{ $t('editor.all') }}</option>
           </select>
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-folding">Folding</label>
+          <label class="editor-setting-label" for="es-folding">{{ $t('editor.folding') }}</label>
           <input
             id="es-folding"
             type="checkbox"
@@ -136,7 +136,7 @@
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-brackets">Brackets</label>
+          <label class="editor-setting-label" for="es-brackets">{{ $t('editor.brackets') }}</label>
           <input
             id="es-brackets"
             type="checkbox"
@@ -146,7 +146,7 @@
         </div>
 
       </div>
-      <div class="toolbar-label">Editing</div>
+      <div class="toolbar-label">{{ $t('editor.editing') }}</div>
     </div>
 
     <!-- Behavior -->
@@ -154,7 +154,7 @@
       <div class="toolbar-buttons">
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-smooth">Smooth</label>
+          <label class="editor-setting-label" for="es-smooth">{{ $t('editor.smooth') }}</label>
           <input
             id="es-smooth"
             type="checkbox"
@@ -164,7 +164,7 @@
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-wordsugg">Suggestions</label>
+          <label class="editor-setting-label" for="es-wordsugg">{{ $t('editor.suggestions') }}</label>
           <input
             id="es-wordsugg"
             type="checkbox"
@@ -174,21 +174,21 @@
         </div>
 
         <div class="editor-setting">
-          <label class="editor-setting-label" for="es-cursor">Cursor</label>
+          <label class="editor-setting-label" for="es-cursor">{{ $t('editor.cursor') }}</label>
           <select
             id="es-cursor"
             class="editor-setting-select"
             :value="config.cursorBlinking"
             @change="set('cursorBlinking', $event.target.value)"
           >
-            <option value="blink">Blink</option>
-            <option value="smooth">Smooth</option>
-            <option value="solid">Solid</option>
+            <option value="blink">{{ $t('editor.blink') }}</option>
+            <option value="smooth">{{ $t('editor.smooth') }}</option>
+            <option value="solid">{{ $t('editor.solid') }}</option>
           </select>
         </div>
 
       </div>
-      <div class="toolbar-label">Behavior</div>
+      <div class="toolbar-label">{{ $t('editor.behavior') }}</div>
     </div>
 
   </div>

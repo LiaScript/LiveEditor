@@ -54,7 +54,7 @@ export default {
           config.credentials.github = undefined;
           Utils.storeConfig(config);
 
-          this.message = "Bad credentials, reloading page";
+          this.message = this.$t('github.badCredentials');
 
           window.location.reload();
         }
@@ -86,7 +86,7 @@ export default {
 </script>
 
 <template>
-  Exporting to GitHub gist...
+  {{ $t('github.exporting') }}
 
   <p>{{ message }}</p>
 </template>

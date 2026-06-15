@@ -87,6 +87,11 @@ export default {
       window.location.href = "./?/edit";
     },
 
+    changeLocale(locale: string) {
+      this.$i18n.locale = locale;
+      localStorage.setItem('locale', locale);
+    },
+
     urlPath(path: string[]) {
       return window.location.origin + window.location.pathname + "?/" + path.join("/");
     },
@@ -123,37 +128,22 @@ export default {
         link += "/webrtc";
       }
       this.$refs.modal.show(
-        "Collaboration link",
-        `
-        If you share the link below, the editor will be in collaborative mode.
-        Working should also be possible offline, but all connected users will work on the same course.
-        If you did receive this via a collaboration link and want to make a complete new course by yourself, then you will have to click onto the "Fork" button, which will create a complete new version.
-
+        this.$t('modal.collaborationTitle'),
+        `${this.$t('modal.collaborationBody')}
         <hr>
-
-        <a target="_blank" href="${link}">
-          ${link}
-        </a>`
+        <a target="_blank" href="${link}">${link}</a>`
       );
     },
 
     shareFile() {
-      const fileUrl = prompt(
-        "please insert the URL of a Markdown file you want to share",
-        ""
-      );
+      const fileUrl = prompt(this.$t('prompt.shareFileUrl'), "");
 
       if (!fileUrl) return;
 
       this.$refs.modal.show(
-        "External resource",
-        `
-        Use this URL to predefine the content for your share link.
-        In this case the editor will at first try to load the Markdown file and insert its content into the editor.
-        This link will only work if your Markdown file is accessible via the internet.
-
+        this.$t('modal.externalResourceTitle'),
+        `${this.$t('modal.externalResourceBody')}
         <hr>
-
         <a target="_blank" style="word-break: break-all" href="${this.urlPath([
           "show",
           "file",
@@ -213,26 +203,14 @@ export default {
       } catch (e) {}
 
       this.$refs.modal.show(
-        "Data-Protocol",
-        `
-        The entire content of the course is base64 encoded or URI-encoded put into a data-URI.
-        Since base64 might fail for certain languages, the URI-encoded URL is generated as well.
-        However, this works only for short courses, the longer the course the longer the URi.
-        Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
-        Additionally different browser support different lengths of URLs... (Choose the shorter version)
-
+        this.$t('modal.dataProtocolTitle'),
+        `${this.$t('modal.dataProtocolBody')}
         <hr>
-
         ${gzip}
-
         <hr>
-
         ${base64}
-
         <hr>
-
-        ${uriEncode}
-        `
+        ${uriEncode}`
       );
     },
 
@@ -244,18 +222,11 @@ export default {
       ]);
 
       this.$refs.modal.show(
-        "Snapshot url",
-        `
-        Snapshots are URLs that contain the entire course defintion.
-        However, this works only for short courses, the longer the course the longer the URL.
-        Sharing your editor via a messenger for example, you will have to check first if no parts are truncated!
-        Additionally different browser support different lengths of URLs...
-
+        this.$t('modal.snapshotTitle'),
+        `${this.$t('modal.snapshotBody')}
         <hr>
         ${this.bytesInfo(zipCode)}
-        <a target="_blank" style="word-break: break-all" href="${zipCode}">
-          ${zipCode}
-        </a>`
+        <a target="_blank" style="word-break: break-all" href="${zipCode}">${zipCode}</a>`
       );
     },
 
@@ -273,27 +244,16 @@ export default {
       ]);
 
       this.$refs.modal.show(
-        "Embed Code",
-        `
-        Copy this HTML code into your website to embed the this as an example.
-        Optionally you can modify the URL with one of the following, to open the editor or the preview directly:<br>
-
+        this.$t('modal.embedTitle'),
+        `${this.$t('modal.embedBody')}<br>
         <code>?/embed/code/edit</code> or <code>?/embed/code/preview</code>
-
         <hr>
-
         ${this.bytesInfo(zipCode)}
         <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${zipCode}"&gt;&lt;/iframe&gt;</code>
-
         <hr>
-        <p>
-          This code can be generated externally via:
-          <code>btoa(unescape(encodeURIComponent(string)))</code>
-        </p>
-
+        <p>This code can be generated externally via: <code>btoa(unescape(encodeURIComponent(string)))</code></p>
         ${this.bytesInfo(base64)}
-        <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${base64}"&gt;&lt;/iframe&gt;</code>
-        `
+        <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${base64}"&gt;&lt;/iframe&gt;</code>`
       );
     },
 
@@ -484,22 +444,22 @@ export default {
     <div class="container-fluid">
       <a v-if="!embed" class="navbar-brand" href="./" data-link="true">
         <img :src="logoImg" alt="LiaScript" height="28" />
-        <span id="lia-edit">LiaEdit</span>
+        <span id="lia-edit">{{ $t('app.title') }}</span>
       </a>
       <span v-else class="navbar-brand">
         <img :src="logoImg" alt="LiaScript" height="28" />
-        <span id="lia-edit">LiaDemo</span>
+        <span id="lia-edit">{{ $t('app.demo') }}</span>
       </span>
 
       <div
         class="btn-toolbar btn-group-sm"
         role="toolbar"
-        aria-label="Toolbar with button groups"
+        :aria-label="$t('nav.toolbar.ariaLabel')"
       >
         <div
-          class="btn-group btn-outline-secondary me-2"
+          class="btn-group btn-group-sm btn-outline-secondary me-2"
           role="group"
-          aria-label="Basic radio toggle button group"
+          :aria-label="$t('nav.toolbar.radioGroupAria')"
         >
           <input
             type="radio"
@@ -510,7 +470,7 @@ export default {
             @click="changeMode(-1)"
             :checked="currentMode < 0"
           />
-          <label class="btn btn-outline-secondary" for="btnradio1" title="Editor only">
+          <label class="btn btn-sm btn-outline-secondary" for="btnradio1" :title="$t('nav.toolbar.editorOnly')">
             <i class="bi bi-pencil"></i>
           </label>
 
@@ -523,7 +483,7 @@ export default {
             :checked="currentMode === 0"
             @click="changeMode(0)"
           />
-          <label class="btn btn-outline-secondary" for="btnradio2" title="Split view">
+          <label class="btn btn-sm btn-outline-secondary" for="btnradio2" :title="$t('nav.toolbar.splitView')">
             <i
               class="bi bi-layout-split"
               style="display: inline-block"
@@ -540,7 +500,7 @@ export default {
             @click="changeMode(1)"
             :checked="currentMode > 0"
           />
-          <label class="btn btn-outline-secondary" for="btnradio3" title="Preview only">
+          <label class="btn btn-sm btn-outline-secondary" for="btnradio3" :title="$t('nav.toolbar.previewOnly')">
             <i class="bi bi-eye"></i>
           </label>
         </div>
@@ -548,26 +508,41 @@ export default {
 
       <button
         type="button"
-        class="btn btn-outline-secondary me-2 px-3"
+        class="btn btn-sm btn-outline-secondary me-2"
         @click="compile()"
-        title="Compile (Ctrl+S)"
+        :title="$t('nav.toolbar.compile')"
       >
         <i class="bi bi-arrow-counterclockwise"></i>
       </button>
+
+      <div class="btn-group btn-group-sm me-2" role="group" aria-label="Language">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          :class="{ active: $i18n.locale === 'en' }"
+          @click="changeLocale('en')"
+        >EN</button>
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          :class="{ active: $i18n.locale === 'de' }"
+          @click="changeLocale('de')"
+        >DE</button>
+      </div>
 
       <!-- Drop-Down Navigation -->
 
       <button
         v-if="!embed"
-        class="btn btn-outline-secondary me-2 px-3"
+        class="navbar-toggler btn btn-sm btn-outline-secondary me-2"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
-        aria-label="Toggle navigation"
+        :aria-label="$t('nav.toolbar.toggleNavAria')"
       >
-        <span class="navbar-toggler-icon"></span>
+        <i class="bi bi-list"></i>
       </button>
 
       <div v-if="!embed" class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -580,11 +555,11 @@ export default {
               class="nav-link"
               aria-current="page"
               href="https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md"
-              title="Open the documentation"
+              :title="$t('nav.help')"
               target="_blank"
             >
               <i class="bi bi-question"></i>
-              Help
+              {{ $t('nav.help') }}
             </a>
           </div>
 
@@ -593,10 +568,10 @@ export default {
               class="btn nav-link btn-link"
               aria-current="page"
               @click="newCourse"
-              title="Create a new and empty document"
+              :title="$t('nav.new')"
             >
               <i class="bi bi-plus"></i>
-              New
+              {{ $t('nav.new') }}
             </button>
           </div>
 
@@ -605,10 +580,10 @@ export default {
               type="button"
               class="btn nav-link btn-link"
               @click="fork"
-              title="Create a copy of this document"
+              :title="$t('nav.fork')"
             >
               <i class="bi bi-signpost-split"></i>
-              Fork
+              {{ $t('nav.fork') }}
             </button>
           </div>
 
@@ -620,27 +595,27 @@ export default {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Menu
+              {{ $t('nav.menu') }}
             </a>
 
             <ul class="dropdown-menu">
               <li>
-                <h6 class="dropdown-header fw-light">Share editor ...</h6>
+                <h6 class="dropdown-header fw-light">{{ $t('share.header') }}</h6>
               </li>
               <li>
                 <span
                   class="d-inline-block"
                   tabindex="0"
                   data-toggle="tooltip"
-                  title="Fork this document before you can use this function"
+                  :title="$t('share.collaborationLinkTooltip')"
                 >
                   <button
                     class="btn dropdown-item btn-link"
                     @click="shareLink"
                     :disabled="!storageId"
-                    title="Share this document with others"
+                    :title="$t('share.collaborationLinkTitle')"
                   >
-                    collaboration link
+                    {{ $t('share.collaborationLink') }}
                   </button>
                 </span>
               </li>
@@ -648,50 +623,50 @@ export default {
                 <button
                   class="btn dropdown-item btn-link"
                   @click="shareCode"
-                  aria-label="Share the current course with the editor"
+                  :aria-label="$t('share.snapshotUrlAria')"
                 >
-                  snapshot url
+                  {{ $t('share.snapshotUrl') }}
                 </button>
               </li>
               <li>
                 <button
                   class="btn dropdown-item btn-link"
                   @click="embedCode"
-                  aria-label="Get the embed code for the current course within the editor"
+                  :aria-label="$t('share.embedCodeAria')"
                 >
-                  embed code
+                  {{ $t('share.embedCode') }}
                 </button>
               </li>
               <li>
                 <button
                   class="btn dropdown-item btn-link"
                   @click="shareFile"
-                  aria-label="Use an external document url for sharing with the editor"
+                  :aria-label="$t('share.externalResourceAria')"
                 >
-                  external resource
+                  {{ $t('share.externalResource') }}
                 </button>
               </li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">Share course via ...</h6>
+                <h6 class="dropdown-header fw-light">{{ $t('share.courseHeader') }}</h6>
               </li>
               <li>
                 <span
                   class="d-inline-block"
                   tabindex="0"
                   data-toggle="tooltip"
-                  title="You have to export this file to GitHub gist before you can use this functionality"
+                  :title="$t('share.githubGistLinkTooltip')"
                 >
                   <a
                     class="dropdown-item"
                     :class="{ disabled: !meta.meta?.gist_url }"
                     :href="LiaScriptURL + '?' + meta.meta?.gist_url"
                     target="_blank"
-                    aria-label="Load the LiaScript course from a previous export to GitHub gist"
+                    :aria-label="$t('share.githubGistLinkAria')"
                   >
-                    GitHub gist link
+                    {{ $t('share.githubGistLink') }}
                   </a>
                 </span>
               </li>
@@ -699,9 +674,9 @@ export default {
                 <button
                   class="btn dropdown-item btn-link"
                   @click="shareData"
-                  aria-label="Share the current course at LiaScript, with the content embedded into the URL"
+                  :aria-label="$t('share.dataUriAria')"
                 >
-                  data-URI
+                  {{ $t('share.dataUri') }}
                 </button>
               </li>
               <li>
@@ -710,16 +685,16 @@ export default {
                   tabindex="0"
                   style="width: 100%"
                   data-toggle="tooltip"
-                  title="This function is only available if you have shared an external resource"
+                  :title="$t('share.fileUrlTooltip')"
                 >
                   <a
                     class="btn dropdown-item btn-link"
                     :class="{ disabled: !fileUrl }"
                     :href="LiaScriptURL + '?' + fileUrl"
                     target="_blank"
-                    title="open this course on LiaScript"
+                    :title="$t('share.fileUrlTitle')"
                   >
-                    file URL
+                    {{ $t('share.fileUrl') }}
                   </a>
                 </div>
               </li>
@@ -727,14 +702,14 @@ export default {
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">Download to ...</h6>
+                <h6 class="dropdown-header fw-light">{{ $t('share.downloadHeader') }}</h6>
               </li>
               <li>
                 <button
                   class="btn dropdown-item btn-link"
                   @click="download"
-                  title="Download the Readme file"
-                  aria-label="Download the Readme file"
+                  :title="$t('share.downloadReadme')"
+                  :aria-label="$t('share.downloadReadme')"
                 >
                   README.md
                 </button>
@@ -743,8 +718,8 @@ export default {
                 <button
                   class="btn dropdown-item btn-link"
                   @click="downloadZip"
-                  title="Download the entire project in a zip file"
-                  aria-label="Download the entire project in a zip file"
+                  :title="$t('share.downloadZip')"
+                  :aria-label="$t('share.downloadZip')"
                 >
                   Project-{{ $props?.storageId?.slice(0, 8) || "xxxxxxxx" }}.zip
                 </button>
@@ -788,7 +763,7 @@ export default {
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">Export to...</h6>
+                <h6 class="dropdown-header fw-light">{{ $t('share.exportHeader') }}</h6>
               </li>
               <li>
                 <span
@@ -796,7 +771,7 @@ export default {
                   style="width: 100%"
                   tabindex="0"
                   data-toggle="tooltip"
-                  title="Fork this document before you can use this function"
+                  :title="$t('share.githubGistTooltip')"
                 >
                   <a
                     class="btn dropdown-item btn-link"
@@ -804,10 +779,10 @@ export default {
                     aria-current="page"
                     target="_blank"
                     :href="urlPath(['export', 'github', storageId])"
-                    title="Store the document on github"
-                    aria-label="Store the document on GitHub as a gist"
+                    :title="$t('share.githubGistTitle')"
+                    :aria-label="$t('share.githubGistAria')"
                   >
-                    GitHub gist
+                    {{ $t('share.githubGist') }}
                   </a>
                 </span>
               </li>
@@ -817,12 +792,12 @@ export default {
                   style="width: 100%"
                   tabindex="0"
                   data-toggle="tooltip"
-                  title="Fork this document before you can use this function"
+                  :title="$t('share.githubGistTooltip')"
                 >
                   <button
                     class="btn dropdown-item btn-link"
                     @click="nostr"
-                    aria-label="Share the current content on Nostr"
+                    :aria-label="$t('share.nostrAria')"
                   >
                     Nostr
                   </button>
@@ -831,17 +806,17 @@ export default {
             </ul>
           </div>
 
-          <div class="nav-item dropdown me-4">
+          <div class="nav-item dropdown me-4 d-flex align-items-center">
             <button
-              class="btn badge dropdown-toggle p-3"
+              class="btn btn-sm badge dropdown-toggle"
               :class="conn.users === 0 ? 'bg-secondary' : 'bg-primary'"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               style="width: 100%"
               :aria-label="
                 conn.type === 'Offline'
-                  ? 'The editor is used in offline mode, which means that you are the only one editing'
-                  : `The editor is in collaborative mode via ${conn.type}, which means that you can share the URL and start editing with others`
+                  ? $t('nav.connection.offlineAria')
+                  : $t('nav.connection.onlineAria', { type: conn.type })
               "
             >
               {{ conn.type }}
@@ -858,7 +833,7 @@ export default {
                   :class="{ disabled: !storageId }"
                   aria-current="page"
                   :href="this.urlPath(['edit', storageId])"
-                  aria-label="Turn off collaborative editing and switch to offline mode"
+                  :aria-label="$t('nav.connection.switchOfflineAria')"
                 >
                   Offline
                 </a>
@@ -870,7 +845,7 @@ export default {
                   :class="{ disabled: !storageId }"
                   aria-current="page"
                   :href="this.urlPath(['edit', storageId, 'webrtc'])"
-                  aria-label="Switch to collaborative editing via WebRTC"
+                  :aria-label="$t('nav.connection.switchWebRTCAria')"
                 >
                   WebRTC
                 </a>
@@ -881,7 +856,7 @@ export default {
                   :class="{ disabled: !storageId }"
                   aria-current="page"
                   :href="this.urlPath(['edit', storageId, 'websocket'])"
-                  aria-label="Switch to collaborative editing via Websocket"
+                  :aria-label="$t('nav.connection.switchWebSocketAria')"
                 >
                   Websocket
                 </a>
@@ -916,7 +891,7 @@ export default {
               class="btn btn-sm btn-outline-secondary"
               type="button"
               :class="{ active: showToolbar }"
-              :title="showToolbar ? 'Hide editor toolbar' : 'Show editor toolbar'"
+              :title="showToolbar ? $t('nav.activityBar.hideToolbar') : $t('nav.activityBar.showToolbar')"
               @click="showToolbar = !showToolbar"
             >
               <i class="bi bi-layout-text-window-reverse"></i>
@@ -925,7 +900,7 @@ export default {
               class="btn btn-sm btn-outline-secondary"
               type="button"
               :class="{ active: showFiles }"
-              :title="showFiles ? 'Hide file explorer' : 'Show file explorer'"
+              :title="showFiles ? $t('nav.activityBar.hideFiles') : $t('nav.activityBar.showFiles')"
               @click="showFiles = !showFiles"
             >
               <i class="bi bi-layout-text-sidebar-reverse"></i>
@@ -981,7 +956,7 @@ export default {
             "
             role="status"
           >
-            <span class="visually-hidden">Loading...</span>
+            <span class="visually-hidden">{{ $t('preview.loading') }}</span>
           </div>
         </div>
 

@@ -1552,18 +1552,18 @@ I (study) ~[[ am going to study ]]~ harder this term.
     v-if="isTextActive"
     class="lia-toolbar"
     role="toolbar"
-    aria-label="Markdown formatting toolbar"
+    :aria-label="$t('toolbar.ariaLabel')"
   >
     <!-- Tab bar -->
     <div class="lia-tab-bar">
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'start' }"     @click="activeTab = 'start'">Start</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tabellen' }"  @click="activeTab = 'tabellen'">Tables</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'einfuegen' }" @click="activeTab = 'einfuegen'">Insert</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'liascript' }" @click="activeTab = 'liascript'">LiaScript</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'code' }"      @click="activeTab = 'code'">Code</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'aufnahme' }"  @click="activeTab = 'aufnahme'">Recording</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tutorial' }"  @click="activeTab = 'tutorial'">Tutorial</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'editor' }"    @click="activeTab = 'editor'">Editor</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'start' }"     @click="activeTab = 'start'">{{ $t('toolbar.tabs.start') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tabellen' }"  @click="activeTab = 'tabellen'">{{ $t('toolbar.tabs.tables') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'einfuegen' }" @click="activeTab = 'einfuegen'">{{ $t('toolbar.tabs.insert') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'liascript' }" @click="activeTab = 'liascript'">{{ $t('toolbar.tabs.liascript') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'code' }"      @click="activeTab = 'code'">{{ $t('toolbar.tabs.code') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'aufnahme' }"  @click="activeTab = 'aufnahme'">{{ $t('toolbar.tabs.recording') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tutorial' }"  @click="activeTab = 'tutorial'">{{ $t('toolbar.tabs.tutorial') }}</button>
+      <button class="lia-tab" :class="{ active: activeTab === 'editor' }"    @click="activeTab = 'editor'">{{ $t('toolbar.tabs.editor') }}</button>
     </div>
 
     <!-- Tab content -->
@@ -1573,36 +1573,36 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-if="activeTab === 'start'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Bold"          @click="make('bold')"><i class="bi bi-type-bold"></i></button>
-            <button class="btn-fmt" type="button" title="Italic"        @click="make('italic')"><i class="bi bi-type-italic"></i></button>
-            <button class="btn-fmt" type="button" title="Heading"       @click="make('header')"><i class="bi bi-type-h1"></i></button>
-            <button class="btn-fmt" type="button" title="Strikethrough" @click="make('strikethrough')"><i class="bi bi-type-strikethrough"></i></button>
-            <button class="btn-fmt" type="button" title="Underline"     @click="make('underline')"><i class="bi bi-type-underline"></i></button>
-            <button class="btn-fmt" type="button" title="Superscript"   @click="make('superscript')"><i class="bi bi-superscript"></i></button>
-            <button class="btn-fmt" type="button" title="Inline Code"   @click="make('code-inline')"><i class="bi bi-code"></i></button>
-            <button class="btn-fmt" type="button" title="Keyboard"      @click="make('keyboard')"><i class="bi bi-keyboard"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.bold')"          @click="make('bold')"><i class="bi bi-type-bold"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.italic')"        @click="make('italic')"><i class="bi bi-type-italic"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.heading')"       @click="make('header')"><i class="bi bi-type-h1"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.strikethrough')" @click="make('strikethrough')"><i class="bi bi-type-strikethrough"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.underline')"     @click="make('underline')"><i class="bi bi-type-underline"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.superscript')"   @click="make('superscript')"><i class="bi bi-superscript"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.inlineCode')"    @click="make('code-inline')"><i class="bi bi-code"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.keyboard')"      @click="make('keyboard')"><i class="bi bi-keyboard"></i></button>
           </div>
-          <div class="toolbar-label">Font</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.font') }}</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Quote"          @click="make('quote')"><i class="bi bi-quote"></i></button>
-            <button class="btn-fmt" type="button" title="List"           @click="make('list-unordered')"><i class="bi bi-list-ul"></i></button>
-            <button class="btn-fmt" type="button" title="Numbered List"  @click="make('list-ordered')"><i class="bi bi-list-ol"></i></button>
-            <button class="btn-fmt" type="button" title="Check List"     @click="make('list-check')"><i class="bi bi-check-square"></i></button>
-            <button class="btn-fmt" type="button" title="Horizontal Line" @click="make('line')"><i class="bi bi-hr"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.quote')"          @click="make('quote')"><i class="bi bi-quote"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.list')"           @click="make('list-unordered')"><i class="bi bi-list-ul"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.numberedList')"   @click="make('list-ordered')"><i class="bi bi-list-ol"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.checkList')"      @click="make('list-check')"><i class="bi bi-check-square"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.horizontalLine')" @click="make('line')"><i class="bi bi-hr"></i></button>
           </div>
-          <div class="toolbar-label">Paragraph</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.paragraph') }}</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Note"      @click="make('gfm-note')"><i class="bi bi-info-circle"></i></button>
-            <button class="btn-fmt" type="button" title="Tip"       @click="make('gfm-tip')"><i class="bi bi-lightbulb"></i></button>
-            <button class="btn-fmt" type="button" title="Important" @click="make('gfm-important')"><i class="bi bi-exclamation-circle"></i></button>
-            <button class="btn-fmt" type="button" title="Warning"   @click="make('gfm-warning')"><i class="bi bi-exclamation-triangle"></i></button>
-            <button class="btn-fmt" type="button" title="Caution"   @click="make('gfm-caution')"><i class="bi bi-shield-exclamation"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.note')"      @click="make('gfm-note')"><i class="bi bi-info-circle"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.tip')"       @click="make('gfm-tip')"><i class="bi bi-lightbulb"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.important')" @click="make('gfm-important')"><i class="bi bi-exclamation-circle"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.warning')"   @click="make('gfm-warning')"><i class="bi bi-exclamation-triangle"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.caution')"   @click="make('gfm-caution')"><i class="bi bi-shield-exclamation"></i></button>
           </div>
-          <div class="toolbar-label">GFM Alerts</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.gfmAlerts') }}</div>
         </div>
       </template>
 
@@ -1610,34 +1610,34 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'tabellen'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Insert Table" @click="make('table')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.insertTable')" @click="make('table')">
               <i class="bi bi-table"></i>
             </button>
           </div>
-          <div class="toolbar-label">Insert</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.insert') }}</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Format Table (Ctrl+Enter)" @click="tableAction('format')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.formatTable')" @click="tableAction('format')">
               <i class="bi bi-layout-text-sidebar-reverse"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Insert Row (Ctrl+L)" @click="tableAction('row')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.insertRow')" @click="tableAction('row')">
               <i class="bi bi-table"></i>
               <i class="bi bi-plus-lg icon-overlay"></i>
             </button>
           </div>
-          <div class="toolbar-label">Edit</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.edit') }}</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Previous Cell (Shift+Tab)" @click="tableAction('previous')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.previousCell')" @click="tableAction('previous')">
               <i class="bi bi-arrow-left-square"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Next Cell (Tab)" @click="tableAction('next')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.nextCell')" @click="tableAction('next')">
               <i class="bi bi-arrow-right-square"></i>
             </button>
           </div>
-          <div class="toolbar-label">Navigation</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.navigation') }}</div>
         </div>
       </template>
 
@@ -1645,30 +1645,30 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'einfuegen'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Link"           @click="make('link')"><i class="bi bi-link-45deg"></i></button>
-            <button class="btn-fmt" type="button" title="Image"          @click="make('image')"><i class="bi bi-image"></i></button>
-            <button class="btn-fmt" type="button" title="Audio"          @click="make('audio')"><i class="bi bi-music-note-beamed"></i></button>
-            <button class="btn-fmt" type="button" title="Movie"          @click="make('movie')"><i class="bi bi-film"></i></button>
-            <button class="btn-fmt" type="button" title="Embed any Link" @click="make('oembed')"><i class="bi bi-puzzle"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.link')"      @click="make('link')"><i class="bi bi-link-45deg"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.image')"     @click="make('image')"><i class="bi bi-image"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.audio')"     @click="make('audio')"><i class="bi bi-music-note-beamed"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.movie')"     @click="make('movie')"><i class="bi bi-film"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.embedLink')" @click="make('oembed')"><i class="bi bi-puzzle"></i></button>
           </div>
-          <div class="toolbar-label">Link</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.link') }}</div>
         </div>
         <input type="file" id="imageInput" style="display: none" accept="image/*" />
         <input type="file" id="audioInput" style="display: none" accept="audio/*" />
         <input type="file" id="movieInput" style="display: none" accept="video/*" />
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Upload Image" @click="make('upload-image')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.uploadImage')" @click="make('upload-image')">
               <i class="bi bi-upload"></i><i class="bi bi-image icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Upload Audio" @click="make('upload-audio')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.uploadAudio')" @click="make('upload-audio')">
               <i class="bi bi-upload"></i><i class="bi bi-music-note-beamed icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Upload Movie" @click="make('upload-movie')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.uploadMovie')" @click="make('upload-movie')">
               <i class="bi bi-upload"></i><i class="bi bi-film icon-overlay"></i>
             </button>
           </div>
-          <div class="toolbar-label">Upload</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.upload') }}</div>
         </div>
       </template>
 
@@ -1676,51 +1676,51 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'liascript'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Animation" @click="make('animation')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.animation')" @click="make('animation')">
               <i class="bi bi-lightning-fill"></i><i class="bi bi-easel icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Comment" @click="make('comment')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.comment')" @click="make('comment')">
               <i class="bi bi-chat-text"></i><i class="bi bi-easel icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Text to Speech (TTS)" @click="make('tts')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.tts')" @click="make('tts')">
               <i class="bi bi-play-circle"></i><i class="bi bi-easel icon-overlay"></i>
             </button>
           </div>
-          <div class="toolbar-label">Effects</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.effects') }}</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Single Choice"  @click="make('quiz-single-choice')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.singleChoice')"   @click="make('quiz-single-choice')">
               <i class="bi bi-x-circle"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Multiple Choice" @click="make('quiz-multiple-choice')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.multipleChoice')" @click="make('quiz-multiple-choice')">
               <i class="bi bi-x-square"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Text Input"     @click="make('quiz-input')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.textInput')"      @click="make('quiz-input')">
               <i class="bi bi-input-cursor-text"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Selection"      @click="make('quiz-selection')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.selection')"      @click="make('quiz-selection')">
               <i class="bi bi-option"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Matrix"         @click="make('quiz-matrix')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.matrix')"         @click="make('quiz-matrix')">
               <i class="bi bi-grid-3x3-gap"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Gap Text"       @click="make('quiz-gap-text')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.gapText')"        @click="make('quiz-gap-text')">
               <i class="bi bi-body-text"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
           </div>
-          <div class="toolbar-label">Quiz</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.quiz') }}</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Inline Formula" @click="make('formula-inline')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.inlineFormula')" @click="make('formula-inline')">
               <i class="bi bi-currency-dollar"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Formula Block"  @click="make('formula')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.formulaBlock')"  @click="make('formula')">
               <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar icon-overlay"></i>
             </button>
           </div>
-          <div class="toolbar-label">Formula</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.formula') }}</div>
         </div>
       </template>
 
@@ -1728,32 +1728,32 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'code'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Code Block"       @click="make('code')"><i class="bi bi-code-slash"></i></button>
-            <button class="btn-fmt" type="button" title="Executable Code"  @click="make('code-executable')"><i class="bi bi-terminal"></i></button>
-            <button class="btn-fmt" type="button" title="Code Project"     @click="make('code-project')"><i class="bi bi-terminal-split"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.codeBlock')"      @click="make('code')"><i class="bi bi-code-slash"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.executableCode')" @click="make('code-executable')"><i class="bi bi-terminal"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.codeProject')"    @click="make('code-project')"><i class="bi bi-terminal-split"></i></button>
           </div>
-          <div class="toolbar-label">Code</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.code') }}</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Graph"     @click="make('graph')"><i class="bi bi-graph-down"></i></button>
-            <button class="btn-fmt" type="button" title="ASCII-Art"  @click="make('ascii')"><i class="bi bi-boxes"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.graph')"    @click="make('graph')"><i class="bi bi-graph-down"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.asciiArt')" @click="make('ascii')"><i class="bi bi-boxes"></i></button>
           </div>
-          <div class="toolbar-label">ASCII</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.ascii') }}</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Evaluate Expression (Ctrl+E)" @click="make('mathjs-evaluate')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.evaluateExpr')" @click="make('mathjs-evaluate')">
               <i class="bi bi-gear"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Simplify Expression (Ctrl+M)" @click="make('mathjs-simplify')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.simplifyExpr')" @click="make('mathjs-simplify')">
               <i class="bi bi-gear"></i><i class="bi bi-lightning-charge icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Convert to TeX (Ctrl+O)"      @click="make('mathjs-tex')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.convertTex')"   @click="make('mathjs-tex')">
               <i class="bi bi-gear"></i><i class="bi icon-overlay">TeX</i>
             </button>
           </div>
-          <div class="toolbar-label">MathJS</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.mathjs') }}</div>
         </div>
       </template>
 
@@ -1761,11 +1761,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'aufnahme'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Audio Recording"  @click="recorder.audio = true"><i class="bi bi-mic"></i></button>
-            <button class="btn-fmt" type="button" title="Webcam Recording" @click="recorder.webcam = true"><i class="bi bi-webcam"></i></button>
-            <button class="btn-fmt" type="button" title="Screen Recording" @click="recorder.desktop = true"><i class="bi bi-camera-reels"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.audioRecording')"  @click="recorder.audio = true"><i class="bi bi-mic"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.webcamRecording')" @click="recorder.webcam = true"><i class="bi bi-webcam"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.screenRecording')" @click="recorder.desktop = true"><i class="bi bi-camera-reels"></i></button>
           </div>
-          <div class="toolbar-label">Recording</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.recording') }}</div>
         </div>
       </template>
 
@@ -1773,11 +1773,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'tutorial'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Initialize empty document" @click="make('init')">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.initDocument')" @click="make('init')">
               <i class="bi bi-rocket-takeoff"></i>
             </button>
           </div>
-          <div class="toolbar-label">New</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.new') }}</div>
         </div>
       </template>
 
@@ -1862,7 +1862,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
     <button
       type="button"
       class="btn btn-sm btn-outline-secondary lia-active-close"
-      title="Back to the course (README.md)"
+      :title="$t('toolbar.buttons.backToCourse')"
       @click="openMain()"
     >
       <i class="bi bi-x-lg"></i>
@@ -1882,7 +1882,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
   <div v-show="activeView === 'binary'" class="lia-file-view lia-binary-view">
     <p>
       <i class="bi bi-file-earmark-binary"></i><br />
-      No preview available for this file type.
+      {{ $t('toolbar.noPreview') }}
     </p>
   </div>
 </template>

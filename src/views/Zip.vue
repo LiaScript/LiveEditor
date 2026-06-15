@@ -76,18 +76,21 @@ export default {
   <LiaScript v-if="data" :content="data" :embed="embed" :mode="mode"> </LiaScript>
 
   <Toast v-if="!embed" :hidden="error">
-    You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, but if you
-    want to store your changes permanently you have to fork it!
+    <i18n-t keypath="toast.compileHint" tag="span">
+      <template #ctrl><kbd>Ctrl</kbd>+<kbd>S</kbd></template>
+    </i18n-t>
   </Toast>
 
   <Toast v-else :hidden="error">
-    You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, or open it
-    in the
-    <a :href="LiveEditorURL + '?/show/code/' + zipCode" target="_blank">LiveEditor</a>.
-
+    <i18n-t keypath="toast.compileHintEmbed" tag="span">
+      <template #ctrl><kbd>Ctrl</kbd>+<kbd>S</kbd></template>
+      <template #link>
+        <a :href="LiveEditorURL + '?/show/code/' + zipCode" target="_blank">LiveEditor</a>
+      </template>
+    </i18n-t>
     <div v-if="mode">
       <hr />
-      Use toolbar to switch between the editor and preview modes.
+      {{ $t('toast.toolbarHint') }}
     </div>
   </Toast>
 </template>

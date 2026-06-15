@@ -3,55 +3,53 @@
     <div class="modal-backdrop" @click="close"></div>
     <div class="modal-container">
       <div class="modal-header">
-        <h5 class="modal-title">Share via Nostr</h5>
+        <h5 class="modal-title">{{ $t('nostr.title') }}</h5>
         <button
           type="button"
           class="btn-close"
           @click="close"
-          aria-label="Close"
+          :aria-label="$t('nostr.close')"
         ></button>
       </div>
       <div class="modal-body">
         <!-- Key Management Section -->
         <div v-if="step === 'initial'" class="key-management mb-4">
-          <h6>Nostr Keys</h6>
+          <h6>{{ $t('nostr.keysSection') }}</h6>
 
           <!-- Public Key -->
           <div class="form-group mb-3">
-            <label for="nostrPublicKey" class="form-label">Your Public Key (npub):</label>
+            <label for="nostrPublicKey" class="form-label">{{ $t('nostr.publicKeyLabel') }}</label>
             <div class="input-group">
               <input
                 id="nostrPublicKey"
                 type="text"
                 class="form-control"
                 v-model="publicKey"
-                placeholder="Enter your Nostr public key (npub...)"
+                :placeholder="$t('nostr.publicKeyPlaceholder')"
               />
               <button
                 class="btn btn-outline-secondary"
                 @click="generateKeyPair"
-                title="Generate a new key pair"
+                :title="$t('nostr.generateTitle')"
               >
-                <i class="bi bi-key"></i> Generate New
+                <i class="bi bi-key"></i> {{ $t('nostr.generateNew') }}
               </button>
             </div>
             <div class="form-text text-muted">
-              Your public key is used to identify you on the Nostr network.
+              {{ $t('nostr.publicKeyHint') }}
             </div>
           </div>
 
           <!-- Private Key (always visible) -->
           <div class="form-group mb-3">
-            <label for="nostrPrivateKey" class="form-label"
-              >Your Private Key (nsec):</label
-            >
+            <label for="nostrPrivateKey" class="form-label">{{ $t('nostr.privateKeyLabel') }}</label>
             <div class="input-group">
               <input
                 id="nostrPrivateKey"
                 :type="privateKeyVisible ? 'text' : 'password'"
                 class="form-control"
                 v-model="privateKey"
-                placeholder="Enter your Nostr private key (nsec...)"
+                :placeholder="$t('nostr.privateKeyPlaceholder')"
               />
               <button
                 class="btn btn-outline-secondary"
@@ -62,14 +60,14 @@
               <button
                 class="btn btn-outline-secondary"
                 @click="copyToClipboard(privateKey)"
-                title="Copy to clipboard"
+                :title="$t('nostr.copyToClipboard')"
                 :disabled="!privateKey"
               >
                 <i class="bi bi-clipboard"></i>
               </button>
             </div>
             <div class="form-text text-muted">
-              Your private key is needed to sign and publish posts. Keep it secure.
+              {{ $t('nostr.privateKeyHint') }}
             </div>
           </div>
 
@@ -82,26 +80,26 @@
               v-model="storeCredentials"
             />
             <label class="form-check-label" for="storeCredentials">
-              Store credentials in this browser
+              {{ $t('nostr.storeCredentials') }}
             </label>
             <div class="form-text text-warning">
               <i class="bi bi-exclamation-triangle-fill me-1"></i>
-              Storing your private key in the browser is convenient but less secure.
+              {{ $t('nostr.storeCredentialsWarning') }}
             </div>
           </div>
 
           <!-- Relay Configuration -->
           <div class="form-group mb-3 mt-4">
-            <label for="nostrRelays" class="form-label">Relay Servers:</label>
+            <label for="nostrRelays" class="form-label">{{ $t('nostr.relayServersLabel') }}</label>
             <textarea
               id="nostrRelays"
               class="form-control"
               rows="3"
               v-model="relaysText"
-              placeholder="Enter relay servers (one per line)"
+              :placeholder="$t('nostr.relayPlaceholder')"
             ></textarea>
             <div class="form-text text-muted">
-              Enter relay servers (one per line) to publish your content to.
+              {{ $t('nostr.relayHint') }}
             </div>
             <div class="form-check mt-2">
               <input
@@ -111,7 +109,7 @@
                 v-model="storeRelays"
               />
               <label class="form-check-label" for="storeRelays">
-                Remember these relays for future posts
+                {{ $t('nostr.rememberRelays') }}
               </label>
             </div>
           </div>
@@ -120,22 +118,19 @@
           <div v-if="isNewlyGenerated" class="alert alert-warning">
             <div class="d-flex align-items-center mb-2">
               <i class="bi bi-exclamation-triangle-fill me-2"></i>
-              <strong>Important: Save your private key</strong>
+              <strong>{{ $t('nostr.saveKeyWarningTitle') }}</strong>
             </div>
             <p class="mb-2">
-              This private key gives access to your Nostr identity. Save it securely.
+              {{ $t('nostr.saveKeyWarningBody') }}
             </p>
           </div>
         </div>
 
         <div v-if="step === 'initial'" class="initial-view">
-          <p>
-            Share your course with the Nostr community. You can publish directly or
-            customize your post first.
-          </p>
+          <p>{{ $t('nostr.intro') }}</p>
 
           <div class="form-group mb-3">
-            <label for="nostrUrl" class="form-label">Nostr link for your course:</label>
+            <label for="nostrUrl" class="form-label">{{ $t('nostr.nostrLinkLabel') }}</label>
             <div class="input-group">
               <input
                 id="nostrUrl"
@@ -147,7 +142,7 @@
               <button
                 class="btn btn-outline-secondary"
                 @click="copyToClipboard(nostrUrl)"
-                title="Copy to clipboard"
+                :title="$t('nostr.copyToClipboard')"
               >
                 <i class="bi bi-clipboard"></i>
               </button>
@@ -162,42 +157,41 @@
               v-model="embedMedia"
             />
             <label class="form-check-label" for="embedMedia">
-              Embed media files as data URIs
+              {{ $t('nostr.embedMedia') }}
             </label>
             <div class="form-text text-muted">
-              Converts images, audio, and video files to embedded data URIs for better
-              portability.
+              {{ $t('nostr.embedMediaHint') }}
             </div>
           </div>
 
           <div class="nostr-actions">
             <button class="btn btn-outline-primary me-2" @click="step = 'customize'">
-              <i class="bi bi-pencil-square me-1"></i> Customize Post
+              <i class="bi bi-pencil-square me-1"></i> {{ $t('nostr.customizePost') }}
             </button>
             <button
               class="btn btn-primary"
               @click="publishToNostr"
               :disabled="!publicKey || !privateKey"
             >
-              <i class="bi bi-lightning-charge me-1"></i> Publish Now
+              <i class="bi bi-lightning-charge me-1"></i> {{ $t('nostr.publishNow') }}
             </button>
           </div>
         </div>
 
         <div v-if="step === 'customize'" class="customize-view">
           <div class="form-group mb-3">
-            <label for="nostrMessage" class="form-label">Message (optional):</label>
+            <label for="nostrMessage" class="form-label">{{ $t('nostr.messageLabel') }}</label>
             <textarea
               id="nostrMessage"
               class="form-control"
               rows="3"
               v-model="customMessage"
-              placeholder="Add a message to accompany your Nostr post..."
+              :placeholder="$t('nostr.messagePlaceholder')"
             ></textarea>
           </div>
 
           <div class="form-group mb-3">
-            <label class="form-label d-block">Tags:</label>
+            <label class="form-label d-block">{{ $t('nostr.tagsLabel') }}</label>
             <div class="tags-container mb-2">
               <span
                 v-for="(tag, index) in tags"
@@ -216,24 +210,24 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Add a tag..."
+                :placeholder="$t('nostr.addTagPlaceholder')"
                 v-model="newTag"
                 @keydown.enter.prevent="addTag"
               />
-              <button class="btn btn-outline-secondary" @click="addTag">Add</button>
+              <button class="btn btn-outline-secondary" @click="addTag">{{ $t('nostr.addTagBtn') }}</button>
             </div>
           </div>
 
           <div class="nostr-actions">
             <button class="btn btn-outline-secondary me-2" @click="step = 'initial'">
-              <i class="bi bi-arrow-left me-1"></i> Back
+              <i class="bi bi-arrow-left me-1"></i> {{ $t('nostr.backBtn') }}
             </button>
             <button
               class="btn btn-primary"
               @click="publishToNostr"
               :disabled="!publicKey"
             >
-              <i class="bi bi-lightning-charge me-1"></i> Publish to Nostr
+              <i class="bi bi-lightning-charge me-1"></i> {{ $t('nostr.publishBtn') }}
             </button>
           </div>
         </div>
@@ -242,10 +236,10 @@
           <div class="mb-3">
             <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem"></i>
           </div>
-          <h5>Your course is now published!</h5>
+          <h5>{{ $t('nostr.successTitle') }}</h5>
 
           <div class="form-group mb-4">
-            <label class="form-label">Access your course at:</label>
+            <label class="form-label">{{ $t('nostr.accessAtLabel') }}</label>
             <div class="input-group">
               <input
                 type="text"
@@ -256,7 +250,7 @@
               <button
                 class="btn btn-outline-secondary"
                 @click="copyToClipboard(publishedCourseUrl)"
-                title="Copy to clipboard"
+                :title="$t('nostr.copyToClipboard')"
               >
                 <i class="bi bi-clipboard"></i>
               </button>
@@ -265,9 +259,9 @@
 
           <div class="mt-3 d-flex justify-content-between">
             <a :href="publishedCourseUrl" target="_blank" class="btn btn-primary">
-              <i class="bi bi-box-arrow-up-right me-1"></i> Open Course
+              <i class="bi bi-box-arrow-up-right me-1"></i> {{ $t('nostr.openCourse') }}
             </a>
-            <button class="btn btn-outline-secondary" @click="close">Close</button>
+            <button class="btn btn-outline-secondary" @click="close">{{ $t('nostr.close') }}</button>
           </div>
         </div>
       </div>
@@ -434,7 +428,7 @@ export default {
         this.isNewlyGenerated = true;
       } catch (error) {
         console.error("Error generating key pair:", error);
-        alert("Failed to generate key pair. Please try again.");
+        alert(this.$t('nostr.alertGenerateFailed'));
       }
     },
 
@@ -608,12 +602,12 @@ export default {
 
     publishToNostr() {
       if (!this.publicKey || !this.privateKey) {
-        alert("Please enter both your public and private keys before publishing.");
+        alert(this.$t('nostr.alertMissingKeys'));
         return;
       }
 
       if (this.relays.length === 0) {
-        alert("Please enter at least one relay server.");
+        alert(this.$t('nostr.alertMissingRelay'));
         return;
       }
 
@@ -648,7 +642,7 @@ export default {
             pubkey = decoded.data;
           } catch (e) {
             console.error("Error decoding public key:", e);
-            alert("Invalid public key format");
+            alert(this.$t('nostr.alertInvalidKey'));
             return;
           }
 
@@ -706,16 +700,16 @@ export default {
               this.privateKey = "";
             } catch (e) {
               console.error("Error publishing:", e);
-              alert("Failed to publish to Nostr network. Please try again.");
+              alert(this.$t('nostr.alertPublishFailed'));
               this.publishStatus = "failed";
             }
           } else {
-            alert("Please provide your private key to sign and publish the post.");
+            alert(this.$t('nostr.alertMissingPrivateKey'));
             this.publishStatus = null;
           }
         } catch (error) {
           console.error("Error processing data:", error);
-          alert("Error processing document data.");
+          alert(this.$t('nostr.alertProcessingError'));
           this.publishStatus = "failed";
         } finally {
           provider.destroy();

@@ -146,27 +146,36 @@ export default {
   </LiaScript>
 
   <Toast v-if="!embed">
-    You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>, but if you
-    want to store your changes permanently you have to fork it!
-
+    <i18n-t keypath="toast.compileHint" tag="span">
+      <template #ctrl><kbd>Ctrl</kbd>+<kbd>S</kbd></template>
+    </i18n-t>
     <br />
-    If you want to see the course on LiaScript, click
-    <a :href="LiaScriptURL + '?' + fileUrl" target="_blank">here</a>.
+    <i18n-t keypath="toast.viewOnLiaScript" tag="span">
+      <template #here>
+        <a :href="LiaScriptURL + '?' + fileUrl" target="_blank">{{ $t('toast.viewHere') }}</a>
+      </template>
+    </i18n-t>
   </Toast>
 
   <Toast v-else>
-    You can modify and compile this course with <kbd>Ctrl</kbd>+<kbd>S</kbd>
+    <i18n-t keypath="toast.compileHintEmbedOnly" tag="span">
+      <template #ctrl><kbd>Ctrl</kbd>+<kbd>S</kbd></template>
+    </i18n-t>
     <br />
-    ... or, open it in the
-    <a :href="LiveEditorURL + '?/show/file/' + fileUrl" target="_blank">LiveEditor</a>
-    ...
+    <i18n-t keypath="toast.openInEditor" tag="span">
+      <template #link>
+        <a :href="LiveEditorURL + '?/show/file/' + fileUrl" target="_blank">LiveEditor</a>
+      </template>
+    </i18n-t>
     <br />
-    If you want to see the course on LiaScript, click
-    <a :href="LiaScriptURL + '?' + fileUrl" target="_blank">here</a>.
-
+    <i18n-t keypath="toast.viewOnLiaScript" tag="span">
+      <template #here>
+        <a :href="LiaScriptURL + '?' + fileUrl" target="_blank">{{ $t('toast.viewHere') }}</a>
+      </template>
+    </i18n-t>
     <div v-if="mode">
       <hr />
-      Use toolbar to switch between the editor and preview modes.
+      {{ $t('toast.toolbarHint') }}
     </div>
   </Toast>
 </template>

@@ -28,11 +28,11 @@ export default {
       aria-atomic="true"
     >
       <div class="toast-header">
-        <strong class="me-auto">Information</strong>
+        <strong class="me-auto">{{ $t('toast.information') }}</strong>
         <button
           type="button"
           class="btn-close"
-          aria-label="Close"
+          :aria-label="$t('toast.close')"
           @click="close"
         ></button>
       </div>

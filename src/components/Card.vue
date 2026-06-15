@@ -152,7 +152,7 @@ export default {
       <button
         type="button"
         class="btn btn-close btn-secondary"
-        aria-label="Delete"
+        :aria-label="$t('card.deleteAria')"
         data-bs-toggle="modal"
         :data-bs-target="`#${modalId}`"
         style="
@@ -181,7 +181,7 @@ export default {
       <div class="card-body" style="margin-bottom: -16px">
         <div class="d-flex justify-content-between">
           <h6 class="h6 text-truncate" style="margin-right: 10px">
-            {{ cardTitle || "Untitled" }}
+            {{ cardTitle || $t('card.untitled') }}
           </h6>
         </div>
       </div>
@@ -203,7 +203,7 @@ export default {
 
         <div :hidden="cardGist ? false : true">
           <hr />
-          <small> Exports: </small>
+          <small> {{ $t('card.exports') }} </small>
 
           <p class="mb-0">
             <small>
@@ -221,7 +221,7 @@ export default {
         </p>
         <div class="col gap-2 d-sm-flex justify-content-end p-1">
           <a :href="'./?/edit/' + cardId" class="btn btn-primary btn-sm" data-link="true"
-            >Edit</a
+            >{{ $t('card.edit') }}</a
           >
         </div>
       </div>
@@ -239,23 +239,23 @@ export default {
       <div class="modal-content border-danger mb-5" style="border-width: 3px">
         <div class="modal-header">
           <h5 class="modal-title" :id="`${modalId}-label`">
-            Delete: "{{ cardTitle || "Untitled" }}"
+            {{ $t('card.deleteTitle', { title: cardTitle || $t('card.untitled') }) }}
           </h5>
           <button
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
-            aria-label="Close"
+            :aria-label="$t('card.close')"
           ></button>
         </div>
         <div class="modal-body">
-          Are you sure you that want to delete this document forever?
+          {{ $t('card.deleteConfirm') }}
           <br />
-          It cannot be restored!
+          {{ $t('card.deleteWarning') }}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Abort
+            {{ $t('card.abort') }}
           </button>
           <button
             type="button"
@@ -263,7 +263,7 @@ export default {
             data-bs-dismiss="modal"
             @click="drop"
           >
-            Delete
+            {{ $t('card.delete') }}
           </button>
         </div>
       </div>

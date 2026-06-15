@@ -7,7 +7,7 @@
     </p>
 
     <small>
-      Follow us on:
+      {{ $t('footer.followUs') }}
       <a href="https://github.com/LiaScript" target="_blank" title="LiaScript on GitHub">
         <i class="bi bi-github"></i>
       </a>
