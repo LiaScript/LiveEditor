@@ -843,16 +843,24 @@ I (study) ~[[ am going to study ]]~ harder this term.
     getAllBlobs() {
       const blobs: any[] = [];
 
+      // legacy inline media (hash-keyed)
       this.blob?.forEach((data, name) => {
         blobs.push({ name, data });
       });
 
-      // also include files managed by the file explorer so exports are complete
-      this.projectDoc?.fileData.forEach((data, path) => {
-        if (data && data.byteLength) {
-          blobs.push({ name: path, data });
-        }
-      });
+      // all files from the explorer — readFileData handles both binary files
+      // (fileData) and editable text files (fileText, e.g. .js/.cpp), so exports
+      // are complete.
+      if (this.projectDoc) {
+        const project = this.projectDoc;
+        project.files.forEach((meta, path) => {
+          if (meta.type !== "file") return;
+          const data = project.readFileData(path);
+          if (data) {
+            blobs.push({ name: path, data });
+          }
+        });
+      }
 
       return blobs;
     },
