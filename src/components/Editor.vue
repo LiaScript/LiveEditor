@@ -1497,11 +1497,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
     <!-- Tab bar -->
     <div class="lia-tab-bar">
       <button class="lia-tab" :class="{ active: activeTab === 'start' }"     @click="activeTab = 'start'">Start</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'tabellen' }"  @click="activeTab = 'tabellen'">Tabellen</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'einfuegen' }" @click="activeTab = 'einfuegen'">Einfügen</button>
+      <button class="lia-tab" :class="{ active: activeTab === 'tabellen' }"  @click="activeTab = 'tabellen'">Tables</button>
+      <button class="lia-tab" :class="{ active: activeTab === 'einfuegen' }" @click="activeTab = 'einfuegen'">Insert</button>
       <button class="lia-tab" :class="{ active: activeTab === 'liascript' }" @click="activeTab = 'liascript'">LiaScript</button>
       <button class="lia-tab" :class="{ active: activeTab === 'code' }"      @click="activeTab = 'code'">Code</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'aufnahme' }"  @click="activeTab = 'aufnahme'">Aufnahme</button>
+      <button class="lia-tab" :class="{ active: activeTab === 'aufnahme' }"  @click="activeTab = 'aufnahme'">Recording</button>
       <button class="lia-tab" :class="{ active: activeTab === 'tutorial' }"  @click="activeTab = 'tutorial'">Tutorial</button>
     </div>
 
@@ -1521,7 +1521,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
             <button class="btn-fmt" type="button" title="Inline Code"   @click="make('code-inline')"><i class="bi bi-code"></i></button>
             <button class="btn-fmt" type="button" title="Keyboard"      @click="make('keyboard')"><i class="bi bi-keyboard"></i></button>
           </div>
-          <div class="toolbar-label">Schrift</div>
+          <div class="toolbar-label">Font</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
@@ -1531,7 +1531,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
             <button class="btn-fmt" type="button" title="Check List"     @click="make('list-check')"><i class="bi bi-check-square"></i></button>
             <button class="btn-fmt" type="button" title="Horizontal Line" @click="make('line')"><i class="bi bi-hr"></i></button>
           </div>
-          <div class="toolbar-label">Absatz</div>
+          <div class="toolbar-label">Paragraph</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
@@ -1545,34 +1545,34 @@ I (study) ~[[ am going to study ]]~ harder this term.
         </div>
       </template>
 
-      <!-- ── Tabellen ──────────────────────────────────────── -->
+      <!-- ── Tables ───────────────────────────────────────── -->
       <template v-else-if="activeTab === 'tabellen'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Tabelle einfügen" @click="make('table')">
+            <button class="btn-fmt" type="button" title="Insert Table" @click="make('table')">
               <i class="bi bi-table"></i>
             </button>
           </div>
-          <div class="toolbar-label">Einfügen</div>
+          <div class="toolbar-label">Insert</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Tabelle formatieren (Ctrl+Enter)" @click="tableAction('format')">
+            <button class="btn-fmt" type="button" title="Format Table (Ctrl+Enter)" @click="tableAction('format')">
               <i class="bi bi-layout-text-sidebar-reverse"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Zeile einfügen (Ctrl+L)" @click="tableAction('row')">
+            <button class="btn-fmt" type="button" title="Insert Row (Ctrl+L)" @click="tableAction('row')">
               <i class="bi bi-table"></i>
               <i class="bi bi-plus-lg icon-overlay"></i>
             </button>
           </div>
-          <div class="toolbar-label">Bearbeiten</div>
+          <div class="toolbar-label">Edit</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Vorherige Zelle (Shift+Tab)" @click="tableAction('previous')">
+            <button class="btn-fmt" type="button" title="Previous Cell (Shift+Tab)" @click="tableAction('previous')">
               <i class="bi bi-arrow-left-square"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Nächste Zelle (Tab)" @click="tableAction('next')">
+            <button class="btn-fmt" type="button" title="Next Cell (Tab)" @click="tableAction('next')">
               <i class="bi bi-arrow-right-square"></i>
             </button>
           </div>
@@ -1580,30 +1580,30 @@ I (study) ~[[ am going to study ]]~ harder this term.
         </div>
       </template>
 
-      <!-- ── Einfügen ──────────────────────────────────────── -->
+      <!-- ── Insert ───────────────────────────────────────── -->
       <template v-else-if="activeTab === 'einfuegen'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Link"                        @click="make('link')"><i class="bi bi-link-45deg"></i></button>
-            <button class="btn-fmt" type="button" title="Image"                       @click="make('image')"><i class="bi bi-image"></i></button>
-            <button class="btn-fmt" type="button" title="Audio"                       @click="make('audio')"><i class="bi bi-music-note-beamed"></i></button>
-            <button class="btn-fmt" type="button" title="Movie"                       @click="make('movie')"><i class="bi bi-film"></i></button>
-            <button class="btn-fmt" type="button" title="Beliebigen Link einbetten"   @click="make('oembed')"><i class="bi bi-puzzle"></i></button>
+            <button class="btn-fmt" type="button" title="Link"           @click="make('link')"><i class="bi bi-link-45deg"></i></button>
+            <button class="btn-fmt" type="button" title="Image"          @click="make('image')"><i class="bi bi-image"></i></button>
+            <button class="btn-fmt" type="button" title="Audio"          @click="make('audio')"><i class="bi bi-music-note-beamed"></i></button>
+            <button class="btn-fmt" type="button" title="Movie"          @click="make('movie')"><i class="bi bi-film"></i></button>
+            <button class="btn-fmt" type="button" title="Embed any Link" @click="make('oembed')"><i class="bi bi-puzzle"></i></button>
           </div>
-          <div class="toolbar-label">Verknüpfen</div>
+          <div class="toolbar-label">Link</div>
         </div>
         <input type="file" id="imageInput" style="display: none" accept="image/*" />
         <input type="file" id="audioInput" style="display: none" accept="audio/*" />
         <input type="file" id="movieInput" style="display: none" accept="video/*" />
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Bild hochladen"  @click="make('upload-image')">
+            <button class="btn-fmt" type="button" title="Upload Image" @click="make('upload-image')">
               <i class="bi bi-upload"></i><i class="bi bi-image icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Audio hochladen" @click="make('upload-audio')">
+            <button class="btn-fmt" type="button" title="Upload Audio" @click="make('upload-audio')">
               <i class="bi bi-upload"></i><i class="bi bi-music-note-beamed icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Video hochladen" @click="make('upload-movie')">
+            <button class="btn-fmt" type="button" title="Upload Movie" @click="make('upload-movie')">
               <i class="bi bi-upload"></i><i class="bi bi-film icon-overlay"></i>
             </button>
           </div>
@@ -1615,17 +1615,17 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'liascript'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Animation"     @click="make('animation')">
+            <button class="btn-fmt" type="button" title="Animation" @click="make('animation')">
               <i class="bi bi-lightning-fill"></i><i class="bi bi-easel icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Kommentar"     @click="make('comment')">
+            <button class="btn-fmt" type="button" title="Comment" @click="make('comment')">
               <i class="bi bi-chat-text"></i><i class="bi bi-easel icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Vorlesen (TTS)" @click="make('tts')">
+            <button class="btn-fmt" type="button" title="Text to Speech (TTS)" @click="make('tts')">
               <i class="bi bi-play-circle"></i><i class="bi bi-easel icon-overlay"></i>
             </button>
           </div>
-          <div class="toolbar-label">Effekte</div>
+          <div class="toolbar-label">Effects</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
@@ -1635,16 +1635,16 @@ I (study) ~[[ am going to study ]]~ harder this term.
             <button class="btn-fmt" type="button" title="Multiple Choice" @click="make('quiz-multiple-choice')">
               <i class="bi bi-x-square"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Texteingabe"    @click="make('quiz-input')">
+            <button class="btn-fmt" type="button" title="Text Input"     @click="make('quiz-input')">
               <i class="bi bi-input-cursor-text"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Auswahl"        @click="make('quiz-selection')">
+            <button class="btn-fmt" type="button" title="Selection"      @click="make('quiz-selection')">
               <i class="bi bi-option"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
             <button class="btn-fmt" type="button" title="Matrix"         @click="make('quiz-matrix')">
               <i class="bi bi-grid-3x3-gap"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Lückentext"     @click="make('quiz-gap-text')">
+            <button class="btn-fmt" type="button" title="Gap Text"       @click="make('quiz-gap-text')">
               <i class="bi bi-body-text"></i><i class="bi bi-question-lg icon-overlay"></i>
             </button>
           </div>
@@ -1652,14 +1652,14 @@ I (study) ~[[ am going to study ]]~ harder this term.
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Inline-Formel"  @click="make('formula-inline')">
+            <button class="btn-fmt" type="button" title="Inline Formula" @click="make('formula-inline')">
               <i class="bi bi-currency-dollar"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Formel-Block"   @click="make('formula')">
+            <button class="btn-fmt" type="button" title="Formula Block"  @click="make('formula')">
               <i class="bi bi-currency-dollar"></i><i class="bi bi-currency-dollar icon-overlay"></i>
             </button>
           </div>
-          <div class="toolbar-label">Formel</div>
+          <div class="toolbar-label">Formula</div>
         </div>
       </template>
 
@@ -1667,28 +1667,28 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'code'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Code-Block"            @click="make('code')"><i class="bi bi-code-slash"></i></button>
-            <button class="btn-fmt" type="button" title="Ausführbarer Code"     @click="make('code-executable')"><i class="bi bi-terminal"></i></button>
-            <button class="btn-fmt" type="button" title="Code-Projekt"          @click="make('code-project')"><i class="bi bi-terminal-split"></i></button>
+            <button class="btn-fmt" type="button" title="Code Block"       @click="make('code')"><i class="bi bi-code-slash"></i></button>
+            <button class="btn-fmt" type="button" title="Executable Code"  @click="make('code-executable')"><i class="bi bi-terminal"></i></button>
+            <button class="btn-fmt" type="button" title="Code Project"     @click="make('code-project')"><i class="bi bi-terminal-split"></i></button>
           </div>
           <div class="toolbar-label">Code</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Graph"    @click="make('graph')"><i class="bi bi-graph-down"></i></button>
-            <button class="btn-fmt" type="button" title="ASCII-Art" @click="make('ascii')"><i class="bi bi-boxes"></i></button>
+            <button class="btn-fmt" type="button" title="Graph"     @click="make('graph')"><i class="bi bi-graph-down"></i></button>
+            <button class="btn-fmt" type="button" title="ASCII-Art"  @click="make('ascii')"><i class="bi bi-boxes"></i></button>
           </div>
           <div class="toolbar-label">ASCII</div>
         </div>
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Ausdruck auswerten (Ctrl+E)"  @click="make('mathjs-evaluate')">
+            <button class="btn-fmt" type="button" title="Evaluate Expression (Ctrl+E)" @click="make('mathjs-evaluate')">
               <i class="bi bi-gear"></i>
             </button>
-            <button class="btn-fmt" type="button" title="Vereinfachen (Ctrl+M)"         @click="make('mathjs-simplify')">
+            <button class="btn-fmt" type="button" title="Simplify Expression (Ctrl+M)" @click="make('mathjs-simplify')">
               <i class="bi bi-gear"></i><i class="bi bi-lightning-charge icon-overlay"></i>
             </button>
-            <button class="btn-fmt" type="button" title="In TeX umwandeln (Ctrl+O)"     @click="make('mathjs-tex')">
+            <button class="btn-fmt" type="button" title="Convert to TeX (Ctrl+O)"      @click="make('mathjs-tex')">
               <i class="bi bi-gear"></i><i class="bi icon-overlay">TeX</i>
             </button>
           </div>
@@ -1696,15 +1696,15 @@ I (study) ~[[ am going to study ]]~ harder this term.
         </div>
       </template>
 
-      <!-- ── Aufnahme ──────────────────────────────────────── -->
+      <!-- ── Recording ─────────────────────────────────────── -->
       <template v-else-if="activeTab === 'aufnahme'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Audioaufnahme"   @click="recorder.audio = true"><i class="bi bi-mic"></i></button>
-            <button class="btn-fmt" type="button" title="Webcam-Aufnahme" @click="recorder.webcam = true"><i class="bi bi-webcam"></i></button>
-            <button class="btn-fmt" type="button" title="Bildschirmaufnahme" @click="recorder.desktop = true"><i class="bi bi-camera-reels"></i></button>
+            <button class="btn-fmt" type="button" title="Audio Recording"  @click="recorder.audio = true"><i class="bi bi-mic"></i></button>
+            <button class="btn-fmt" type="button" title="Webcam Recording" @click="recorder.webcam = true"><i class="bi bi-webcam"></i></button>
+            <button class="btn-fmt" type="button" title="Screen Recording" @click="recorder.desktop = true"><i class="bi bi-camera-reels"></i></button>
           </div>
-          <div class="toolbar-label">Aufnahme</div>
+          <div class="toolbar-label">Recording</div>
         </div>
       </template>
 
@@ -1712,11 +1712,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'tutorial'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" title="Leeres Dokument initialisieren" @click="make('init')">
+            <button class="btn-fmt" type="button" title="Initialize empty document" @click="make('init')">
               <i class="bi bi-rocket-takeoff"></i>
             </button>
           </div>
-          <div class="toolbar-label">Neu</div>
+          <div class="toolbar-label">New</div>
         </div>
       </template>
 
