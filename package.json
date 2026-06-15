@@ -35,7 +35,7 @@
     "browserify-zlib": "^0.2.0",
     "buffer": "^5.7.1",
     "date-format-simple": "^1.1.5",
-    "dexie": "^3.2.4",
+    "dexie": "^4.4.3",
     "events": "^3.3.0",
     "jszip": "^3.10.1",
     "mathjs": "^15.2.0",
