@@ -12,8 +12,27 @@ import { createApp } from 'vue'
 // new Worker(new URL(...)) pattern and bundles all deps inline into the
 // worker chunk, avoiding shared-chunk require() failures at runtime.
 (window as any).MonacoEnvironment = {
-  getWorker: function (_moduleId: string, _label: string) {
-    return new Worker(new URL('./editor.worker.ts', import.meta.url), { type: 'module' })
+  getWorker: function (_moduleId: string, label: string) {
+    // Each language service ships its own worker; returning the generic
+    // editor.worker for every label makes the TS/JS/JSON/CSS/HTML services call
+    // loadForeignModule on a worker that doesn't support it ("Unexpected usage").
+    switch (label) {
+      case 'json':
+        return new Worker(new URL('./json.worker.ts', import.meta.url), { type: 'module' })
+      case 'css':
+      case 'scss':
+      case 'less':
+        return new Worker(new URL('./css.worker.ts', import.meta.url), { type: 'module' })
+      case 'html':
+      case 'handlebars':
+      case 'razor':
+        return new Worker(new URL('./html.worker.ts', import.meta.url), { type: 'module' })
+      case 'typescript':
+      case 'javascript':
+        return new Worker(new URL('./ts.worker.ts', import.meta.url), { type: 'module' })
+      default:
+        return new Worker(new URL('./editor.worker.ts', import.meta.url), { type: 'module' })
+    }
   },
 }
 
