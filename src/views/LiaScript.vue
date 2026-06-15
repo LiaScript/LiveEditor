@@ -71,6 +71,7 @@ export default {
       LiaScriptURL,
       nostrModalVisible: false,
       showFiles: false,
+      showToolbar: true,
     };
   },
 
@@ -914,11 +915,20 @@ export default {
             <button
               class="btn btn-sm btn-outline-secondary"
               type="button"
+              :class="{ active: showToolbar }"
+              :title="showToolbar ? 'Hide editor toolbar' : 'Show editor toolbar'"
+              @click="showToolbar = !showToolbar"
+            >
+              <i class="bi bi-layout-text-window-reverse"></i>
+            </button>
+            <button
+              class="btn btn-sm btn-outline-secondary"
+              type="button"
               :class="{ active: showFiles }"
               :title="showFiles ? 'Hide file explorer' : 'Show file explorer'"
               @click="showFiles = !showFiles"
             >
-              <i class="bi bi-layout-sidebar"></i>
+              <i class="bi bi-layout-text-sidebar-reverse"></i>
             </button>
           </div>
 
@@ -942,7 +952,7 @@ export default {
               :content="$props.content"
               ref="editor"
               :connection="$props.connection"
-              :toolbar="!$props.embed"
+              :toolbar="!$props.embed && ($props.storageId ? showToolbar : true)"
             >
             </Editor>
           </div>
@@ -1034,6 +1044,7 @@ export default {
   padding: 4px;
   background-color: #ececec;
   border-right: solid lightgray 1px;
+  gap: 4px;
 }
 
 .lia-activity-bar .btn.active {
