@@ -2,6 +2,26 @@
 const INIT_CODE = `
 var blob = {};
 
+// Sofort ausführen, um den Patch zu aktivieren
+(() => {
+  const patch = (proto, prop) => {
+    const d = Object.getOwnPropertyDescriptor(proto, prop);
+    Object.defineProperty(proto, prop, {
+      get: d.get,
+      set(value) {
+        // --- Minimaler Fix ---------------------------------------------------
+        if (value.startsWith('/./')) value = './' + value.slice(3);
+        // ---------------------------------------------------------------------
+        console.warn("intercepted", prop, value);
+        d.set.call(this, value);     // Original-Setter ausführen
+      }
+    });
+  };
+
+  patch(HTMLScriptElement.prototype, 'src');   // <script src="…">
+  patch(HTMLLinkElement.prototype,  'href');   // <link rel="stylesheet" href="…">
+})();
+
 // TODO: Fix this HACK, so that preferBrowserTTS works as expected
 if (window.LIA.settings?.preferBrowserTTS || false) {
   window.LIA.settings.preferBrowserTTS = false;
@@ -10,6 +30,8 @@ if (window.LIA.settings?.preferBrowserTTS || false) {
 
 window.injectHandler = function (param) {
   let url
+
+  console.log("injecting", param)
 
   if (blob[param.src]) {
     url = blob[param.src]
@@ -123,20 +145,30 @@ window.injectHandler = function (param) {
 
 
 window.LIA.fetchError = (tag, src) => {
-  if (src.startsWith("http") || src.startsWith("https")) {
+  // already resolved once -> reuse the cached object URL
+  if (blob[src]) {
+    window.injectHandler({tag, src})
+    return
+  }
+
+  // Only truly EXTERNAL resources are fetched over the network. Same-origin
+  // URLs (e.g. http://localhost:4321/repo.js) would resolve to the dev server
+  // / SPA fallback and inject garbage, so we resolve those from the editor's
+  // virtual file system via the parent instead.
+  const sameOrigin = src.indexOf(window.location.origin) === 0
+  const isExternal =
+    !sameOrigin && (src.indexOf("http://") === 0 || src.indexOf("https://") === 0)
+
+  if (isExternal) {
     fetch(src)
       .then(response => response.blob())
-      .then(blob => {
-        window.injectHandler({tag, src, data: blob})
+      .then(data => {
+        window.injectHandler({tag, src, data})
       })
       .catch(error => {
         console.error("could not fetch", src, error)
         parent.postMessage({cmd: 'media.load', param: {tag, src}}, "*")
       })
-  }
-
-  if (blob[src]) {
-    window.injectHandler({tag, src})
   } else {
     parent.postMessage({cmd: 'media.load', param: {tag, src}}, "*")
   }

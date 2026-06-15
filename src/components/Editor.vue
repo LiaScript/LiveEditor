@@ -2,11 +2,14 @@
 import * as Y from "yjs";
 
 import { IndexeddbPersistence } from "y-indexeddb";
-import { GenericProvider } from "y-generic";
-import { PeerJSTransport } from "y-generic/dist/providers/peerjs";
-import { WebSocketTransport } from "y-generic/dist/providers/websocket";
-import Peer from "peerjs";
 import { MonacoBinding } from "y-monaco";
+import {
+  getProjectDoc,
+  releaseProjectDoc,
+  ProjectDoc,
+  isTextFile,
+  isImageFile,
+} from "../ts/ProjectDoc";
 import { editor, KeyMod, KeyCode, languages, IDisposable } from "monaco-editor";
 import * as Utils from "../ts/utils";
 import { navigateTo } from "../index";
@@ -54,6 +57,8 @@ import("../ts/Snippets.ts").then((module) => {
 var Editor;
 var tableEditor;
 var provider;
+var currentBinding: any = null;
+var currentModel: any = null;
 var isCtrlPressed = false;
 var MATHJS;
 
@@ -62,27 +67,6 @@ let completionProviders: IDisposable[] = [];
 import("mathjs").then((module) => {
   MATHJS = module;
 });
-
-async function fileHash(arrayBuffer) {
-  // Use the subtle crypto API to perform a SHA256 Sum of the file's
-  // Array Buffer. The resulting hash is stored in an array buffer
-  const hashAsArrayBuffer = await crypto.subtle.digest("SHA-1", arrayBuffer);
-
-  // To display it as a string we will get the hexadecimal value of
-  // each byte of the array buffer. This gets us an array where each byte
-  // of the array buffer becomes one item in the array
-  const uint8ViewOfHash = new Uint8Array(hashAsArrayBuffer);
-
-  // We then convert it to a regular array so we can convert each item
-  // to hexadecimal strings, where characters of 0-9 or a-f represent
-  // a number between 0 and 15, containing 4 bits of information,
-  // so 2 of them is 8 bits (1 byte).
-  const hashAsString = Array.from(uint8ViewOfHash)
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-
-  return hashAsString;
-}
 
 function blobToUint8Array(blob) {
   return new Promise((resolve, reject) => {
@@ -131,10 +115,37 @@ export default {
         movie: null,
       },
       blob: null,
+      projectDoc: null as ProjectDoc | null,
+      activePath: "",
+      activeMime: "",
+      activeView: "text" as "text" | "image" | "binary",
+      imageUrl: "",
     };
   },
 
+  computed: {
+    // The toolbar (Markdown formatting/upload buttons) is only relevant when a
+    // Markdown document is being edited.
+    isMarkdownActive(): boolean {
+      if (this.activeView !== "text") return false;
+      if (this.activePath === "") return true;
+      const ext = this.activePath.split(".").pop()?.toLowerCase();
+      return ext === "md" || ext === "markdown" || ext === "lia";
+    },
+  },
+
   methods: {
+    // Store an uploaded media file under its original name so it shows up in
+    // the file explorer, and return the path to reference it in the markdown.
+    // Falls back to the legacy hash/blob storage when no project doc exists.
+    storeUpload(filename: string, data: Uint8Array, mime?: string): string {
+      if (this.projectDoc) {
+        return this.projectDoc.addUpload(filename, data, mime);
+      }
+      (this.blob as any)?.set(filename, data);
+      return filename;
+    },
+
     storeAudioFile(record) {
       if (record.blob) {
         const self = this;
@@ -143,8 +154,8 @@ export default {
             const date = new Date();
             const filename = "recording-" + date.toISOString() + ".mp3";
 
-            self.blob.set(filename, uint8Array);
-            self.make("upload-audio", filename);
+            const path = self.storeUpload(filename, uint8Array as Uint8Array, "audio/mpeg");
+            self.make("upload-audio", path);
           })
           .catch((error) => {
             console.warn("Error:", error);
@@ -162,8 +173,8 @@ export default {
             const date = new Date();
             const filename = "recording-" + date.toISOString() + ".webm";
 
-            self.blob.set(filename, uint8Array);
-            self.make("upload-movie", filename);
+            const path = self.storeUpload(filename, uint8Array as Uint8Array, "video/webm");
+            self.make("upload-movie", path);
           })
           .catch((error) => {
             console.warn("Error:", error);
@@ -177,6 +188,104 @@ export default {
       if (Editor) {
         return Editor.getValue();
       }
+    },
+
+    // The preview always renders the main LiaScript course, regardless of which
+    // file is currently active in the editor.
+    getMainValue() {
+      if (this.projectDoc) {
+        return this.projectDoc.content.toString();
+      }
+      return this.getValue();
+    },
+
+    // ----- multi-file editing -------------------------------------------------
+
+    languageFor(path: string): string {
+      const ext = path.split(".").pop()?.toLowerCase() || "";
+      const map: Record<string, string> = {
+        md: "markdown", markdown: "markdown", lia: "markdown",
+        js: "javascript", mjs: "javascript", cjs: "javascript", jsx: "javascript",
+        ts: "typescript", tsx: "typescript", json: "json", jsonc: "json",
+        css: "css", scss: "scss", less: "less", html: "html", htm: "html",
+        xml: "xml", svg: "xml", yaml: "yaml", yml: "yaml",
+        py: "python", rb: "ruby", php: "php", java: "java", c: "c", h: "c",
+        cpp: "cpp", hpp: "cpp", cs: "csharp", go: "go", rs: "rust",
+        sh: "shell", bash: "shell", zsh: "shell", sql: "sql", lua: "lua",
+        r: "r", toml: "ini", ini: "ini", vue: "html",
+      };
+      return map[ext] || "plaintext";
+    },
+
+    setImage(url: string) {
+      if (this.imageUrl && this.imageUrl !== url) {
+        URL.revokeObjectURL(this.imageUrl);
+      }
+      this.imageUrl = url;
+    },
+
+    // Swap the Monaco model + collaborative binding to a different Y.Text.
+    bindDoc(yText: any, language: string) {
+      if (!Editor) return;
+      if (currentBinding) {
+        currentBinding.destroy();
+        currentBinding = null;
+      }
+      const old = currentModel;
+      currentModel = editor.createModel("", language);
+      Editor.setModel(currentModel);
+      currentBinding = new MonacoBinding(
+        yText,
+        currentModel,
+        new Set([Editor]),
+        provider ? provider.awareness : null
+      );
+      if (old) {
+        try {
+          old.dispose();
+        } catch (e) {
+          /* ignore */
+        }
+      }
+    },
+
+    // Open the main course document for editing.
+    openMain() {
+      if (!this.projectDoc) return;
+      this.setImage("");
+      this.activePath = "";
+      this.activeMime = "";
+      this.activeView = "text";
+      this.bindDoc(this.projectDoc.content, "markdown");
+      if (Editor) Editor.focus();
+    },
+
+    // Open a file from the explorer: text files become editable, images are
+    // displayed, everything else shows a download hint.
+    openPath(path: string, mime?: string) {
+      if (!this.projectDoc) return;
+      this.activePath = path;
+      this.activeMime = mime || "";
+
+      if (isImageFile(path, mime)) {
+        const data = this.projectDoc.readFileData(path);
+        this.setImage(
+          data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "" })) : ""
+        );
+        this.activeView = "image";
+        return;
+      }
+
+      if (isTextFile(path, mime)) {
+        this.setImage("");
+        this.activeView = "text";
+        this.bindDoc(this.projectDoc.getText(path), this.languageFor(path));
+        if (Editor) Editor.focus();
+        return;
+      }
+
+      this.setImage("");
+      this.activeView = "binary";
     },
 
     make(cmd: string, data: any = null) {
@@ -719,22 +828,30 @@ I (study) ~[[ am going to study ]]~ harder this term.
     },
 
     getBlob(hash: string) {
-      if (!this.blob) return;
-
       if (hash.startsWith("/")) {
         hash = hash.slice(1);
       }
 
-      return this.blob.get(hash);
+      // 1) legacy inline media (toolbar uploads), keyed by `hash+ending`
+      const inline = this.blob?.get(hash);
+      if (inline) return inline;
+
+      // 2) files added through the file explorer, keyed by their path
+      return this.projectDoc?.readFileData(hash);
     },
 
     getAllBlobs() {
-      if (!this.blob) return;
-
       const blobs: any[] = [];
 
-      this.blob.forEach((data, name) => {
+      this.blob?.forEach((data, name) => {
         blobs.push({ name, data });
+      });
+
+      // also include files managed by the file explorer so exports are complete
+      this.projectDoc?.fileData.forEach((data, path) => {
+        if (data && data.byteLength) {
+          blobs.push({ name: path, data });
+        }
       });
 
       return blobs;
@@ -1175,46 +1292,26 @@ I (study) ~[[ am going to study ]]~ harder this term.
       return textEditor;
     },
 
-    loadFromLocalStorage(editor: any, storageId: string) {
-      const yDoc = new Y.Doc();
+    loadFromLocalStorage(storageId: string) {
+      // The Y.Doc, its network provider and IndexedDB persistence are owned by
+      // the shared ProjectDoc service so the file explorer can use the very
+      // same document. We just acquire it here and bind Monaco to its content.
+      const project = getProjectDoc(storageId, this.$props.connection);
+      this.projectDoc = project;
 
-      switch (this.$props.connection) {
-        case "webrtc": {
-          const peerTransport = new PeerJSTransport({
-            peer: Peer,
-            peerOptions: {
-              config: {
-                iceServers: JSON.parse(process.env.ICE_SERVERS || "[]"),
-              },
-            },
-          });
-          provider = new GenericProvider(yDoc, peerTransport);
-          provider.connect({ room: storageId }).catch(console.error);
-          break;
-        }
-        case "websocket": {
-          const wsTransport = new WebSocketTransport();
-          provider = new GenericProvider(yDoc, wsTransport, {
-            verifyUpdates: false, // Required for y-websocket server compatibility
-          });
-          provider.connect({
-            serverUrl: process.env.WEBSOCKET_SERVER || "wss://aamkeaam.com",
-            room: storageId,
-          }).catch(console.error);
-          break;
-        }
-        default: {
-          provider = null;
-        }
-      }
-
-      const indexeddbProvider = new IndexeddbPersistence(storageId, yDoc);
+      provider = project.provider;
+      this.blob = project.blob;
 
       const self = this;
-      indexeddbProvider.on("synced", (event: any) => {
+      project.idb.on("synced", (event: any) => {
         console.log("liascript: content from the database is loaded");
         self.$emit("ready");
       });
+      // If persistence already synced before this listener was attached
+      // (shared doc reused), make sure the editor still becomes ready.
+      if (project.idb.synced) {
+        self.$emit("ready");
+      }
 
       if (provider) {
         provider.awareness.setLocalStateField("user", this.user);
@@ -1240,20 +1337,35 @@ I (study) ~[[ am going to study ]]~ harder this term.
           }
         });
       }
-      const content = yDoc.getText(storageId);
-      this.blob = yDoc.getMap("blob");
 
-      const monacoBinding = new MonacoBinding(
-        content,
-        editor.getModel(),
-        new Set([editor]),
-        provider ? provider.awareness : null
-      );
+      // Bind Monaco to the main course document (this also creates the model).
+      this.openMain();
     },
   },
 
   unmounted() {
-    if (provider) provider.destroy();
+    // Tear down the active model/binding.
+    if (currentBinding) {
+      currentBinding.destroy();
+      currentBinding = null;
+    }
+    if (currentModel) {
+      try {
+        currentModel.dispose();
+      } catch (e) {
+        /* ignore */
+      }
+      currentModel = null;
+    }
+    this.setImage("");
+
+    // Release our reference to the shared document; it is destroyed once both
+    // the editor and the file explorer have released it.
+    if (this.projectDoc) {
+      releaseProjectDoc(this.projectDoc.storageId);
+      this.projectDoc = null;
+    }
+    provider = undefined;
 
     // Dispose completion providers
     completionProviders.forEach((disposable) => disposable.dispose());
@@ -1267,12 +1379,12 @@ I (study) ~[[ am going to study ]]~ harder this term.
   mounted() {
     Editor = this.initEditor(this.content || "");
 
-    if (provider) {
-      provider.destroy();
-    }
+    // The provider lifecycle is managed by the shared ProjectDoc service
+    // (reference counted), so we must NOT destroy it here — the file explorer
+    // may hold the same document.
 
     if (this.storageId) {
-      this.loadFromLocalStorage(Editor, this.storageId);
+      this.loadFromLocalStorage(this.storageId);
     } else {
       this.$emit("ready");
     }
@@ -1297,21 +1409,14 @@ I (study) ~[[ am going to study ]]~ harder this term.
             }
 
             const blob = new Uint8Array(e.target?.result);
-            const hash = await fileHash(e.target?.result);
-
-            let fileEnding = file.name.split(".").pop();
-
-            if (fileEnding) {
-              fileEnding = "." + fileEnding.toLowerCase();
-            } else {
-              fileEnding = "";
-            }
 
             console.warn("liascript: upload", e.target);
 
             if (blob) {
-              self.blob.set(hash + fileEnding, blob);
-              self.make("upload-" + media, hash + fileEnding);
+              // Keep the original file name (visible in the file explorer)
+              // instead of a hash-based one.
+              const path = self.storeUpload(file.name, blob, file.type);
+              self.make("upload-" + media, path);
             } else {
               console.warn("could not load file: ", file);
             }
@@ -1334,7 +1439,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
 <template>
   <nav
-    v-if="toolbar !== false"
+    v-if="toolbar !== false && isMarkdownActive"
     class="navbar navbar-light bg-light"
     style="
       border-top: solid lightgray 2px;
@@ -1858,12 +1963,85 @@ I (study) ~[[ am going to study ]]~ harder this term.
     </div>
   </div>
 
-  <div id="liascript-editor"></div>
+  <!-- Bar showing the currently active non-main file -->
+  <div v-if="activePath" class="lia-active-bar">
+    <i class="bi bi-file-earmark-text"></i>
+    <span class="lia-active-name" :title="activePath">{{ activePath }}</span>
+    <button
+      type="button"
+      class="btn btn-sm btn-outline-secondary lia-active-close"
+      title="Back to the course (README.md)"
+      @click="openMain()"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <div id="liascript-editor" v-show="activeView === 'text'"></div>
+
+  <div v-show="activeView === 'image'" class="lia-file-view lia-image-view">
+    <img :src="imageUrl" :alt="activePath" />
+  </div>
+
+  <div v-show="activeView === 'binary'" class="lia-file-view lia-binary-view">
+    <p>
+      <i class="bi bi-file-earmark-binary"></i><br />
+      No preview available for this file type.
+    </p>
+  </div>
 </template>
 
 <style>
 #liascript-editor {
   height: 100vh;
+}
+
+.lia-active-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background-color: #ececec;
+  border-bottom: solid lightgray 1px;
+  font-size: 13px;
+}
+
+.lia-active-name {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lia-active-close {
+  flex: 0 0 auto;
+  padding: 0 6px;
+  line-height: 1.4;
+}
+
+.lia-file-view {
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2d2d2d;
+}
+
+.lia-image-view img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.lia-binary-view {
+  background-color: #f6f6f6;
+  color: #777;
+  text-align: center;
+}
+
+.lia-binary-view .bi {
+  font-size: 2rem;
 }
 
 .btn-sm {

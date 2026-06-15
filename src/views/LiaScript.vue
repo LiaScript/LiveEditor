@@ -3,6 +3,7 @@ import { tutorial } from "../ts/Tutorial";
 import Dexie from "../ts/indexDB";
 
 import Editor from "../components/Editor.vue";
+import FileExplorer from "../components/FileExplorer.vue";
 import Preview from "../components/Preview.vue";
 import Modal from "../components/Modal.vue";
 import { compress } from "shrink-string";
@@ -70,6 +71,7 @@ export default {
       resizing: false,
       LiaScriptURL,
       nostrModalVisible: false,
+      showFiles: false,
     };
   },
 
@@ -97,6 +99,19 @@ export default {
 
     online(users: number) {
       this.conn.users = users;
+    },
+
+    // Open the main course document in the editor.
+    openMainDoc() {
+      (this.$refs.editor as any)?.openMain();
+      if (this.currentMode > 0) this.currentMode = 0;
+    },
+
+    // Open a file selected in the explorer as the active document: text files
+    // become editable, images are displayed.
+    openAsset(asset: { path: string; mime?: string }) {
+      (this.$refs.editor as any)?.openPath(asset.path, asset.mime);
+      if (this.currentMode > 0) this.currentMode = 0;
     },
 
     changeMode(mode: number) {
@@ -167,7 +182,7 @@ export default {
 
       try {
         base64 =
-          LiaScriptURL + "?data:text/plain;base64," + btoa(this.$refs.editor.getValue());
+          LiaScriptURL + "?data:text/plain;base64," + btoa(this.$refs.editor.getMainValue());
 
         base64 =
           this.bytesInfo(base64) +
@@ -180,7 +195,7 @@ export default {
         uriEncode =
           LiaScriptURL +
           "?data:text/plain," +
-          encodeURIComponent(this.$refs.editor.getValue());
+          encodeURIComponent(this.$refs.editor.getMainValue());
 
         uriEncode =
           this.bytesInfo(uriEncode) +
@@ -190,7 +205,7 @@ export default {
       } catch (e) {}
 
       try {
-        gzip = pako.gzip(this.$refs.editor.getValue());
+        gzip = pako.gzip(this.$refs.editor.getMainValue());
         gzip =
           LiaScriptURL +
           "?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
@@ -231,7 +246,7 @@ export default {
       const zipCode = this.urlPath([
         "show",
         "code",
-        await compress(this.$refs.editor.getValue()),
+        await compress(this.$refs.editor.getMainValue()),
       ]);
 
       this.$refs.modal.show(
@@ -254,13 +269,13 @@ export default {
       const zipCode = this.urlPath([
         "embed",
         "code",
-        await compress(this.$refs.editor.getValue()),
+        await compress(this.$refs.editor.getMainValue()),
       ]);
 
       const base64 = this.urlPath([
         "embed",
         "code",
-        btoa(unescape(encodeURIComponent(this.$refs.editor.getValue()))),
+        btoa(unescape(encodeURIComponent(this.$refs.editor.getMainValue()))),
       ]);
 
       this.$refs.modal.show(
@@ -293,7 +308,7 @@ export default {
       element.setAttribute(
         "href",
         "data:text/plain;charset=utf-8," +
-          encodeURIComponent(this.$refs.editor.getValue())
+          encodeURIComponent(this.$refs.editor.getMainValue())
       );
       element.setAttribute("download", "README.md");
       element.style.display = "none";
@@ -305,7 +320,7 @@ export default {
     downloadZip() {
       const zip = JSZip();
 
-      zip.file("README.md", this.$refs.editor.getValue());
+      zip.file("README.md", this.$refs.editor.getMainValue());
 
       const blobs = this.$refs.editor.getAllBlobs();
 
@@ -345,7 +360,8 @@ export default {
       console.log("liascript: compile");
 
       if (this.preview && this.editorIsReady) {
-        let code = this.$refs.editor.getValue();
+        // Always render the main course, no matter which file is active.
+        let code = this.$refs.editor.getMainValue();
 
         if (code.trim().length == 0) {
           code = tutorial;
@@ -354,11 +370,78 @@ export default {
         this.preview.focusOnMain = false;
         this.preview.scrollUpOnMain = false;
 
-        this.preview.jit(code);
+        this.preview.jit(this.rewriteLocalResources(code));
       }
     },
 
+    // The dev/prod server answers unknown paths with the SPA index.html (status
+    // 200), so a `<script src="repo.js">` "loads" the wrong content and never
+    // fires onerror -> the fetchError redirect can't kick in. To make local
+    // libraries/styles work, we inline `script:`/`link:` header references that
+    // point to project files as self-contained data: URLs before compiling.
+    rewriteLocalResources(code: string) {
+      const header = code.match(/<!--[\s\S]*?-->/);
+      if (!header) return code;
+
+      const rewritten = header[0].replace(
+        /^([ \t]*(?:script|link):[ \t]*)(\S+)[ \t]*$/gim,
+        (full: string, prefix: string, value: string) => {
+          const url = this.localDataUrl(value);
+          return url ? prefix + url : full;
+        }
+      );
+
+      return rewritten === header[0] ? code : code.replace(header[0], rewritten);
+    },
+
+    localDataUrl(value: string): string | null {
+      // leave remote/embedded references untouched
+      if (/^(https?:|data:|blob:|\/\/)/i.test(value)) return null;
+
+      const bytes = (this.$refs.editor as any)?.getBlob(value);
+      if (!bytes) return null;
+
+      return "data:" + this.mimeForPath(value) + ";base64," + this.bytesToBase64(bytes);
+    },
+
+    mimeForPath(path: string): string {
+      switch (path.split(".").pop()?.toLowerCase()) {
+        case "js":
+        case "mjs":
+        case "cjs":
+          return "text/javascript";
+        case "css":
+          return "text/css";
+        case "json":
+          return "application/json";
+        case "svg":
+          return "image/svg+xml";
+        default:
+          return "application/octet-stream";
+      }
+    },
+
+    bytesToBase64(bytes: Uint8Array): string {
+      let binary = "";
+      const chunk = 0x8000;
+      for (let i = 0; i < bytes.length; i += chunk) {
+        binary += String.fromCharCode.apply(
+          null,
+          bytes.subarray(i, i + chunk) as unknown as number[]
+        );
+      }
+      return btoa(binary);
+    },
+
     fetchError(src: string) {
+      // Local resources (script:/link:/images) are requested by LiaScript as
+      // absolute same-origin URLs, e.g. "http://localhost:4321/repo.js". Map
+      // them back to a project-relative path so they can be resolved from the
+      // editor's virtual file system (yjs).
+      const origin = window.location.origin;
+      if (src.indexOf(origin) === 0) {
+        src = src.slice(origin.length);
+      }
       return this.$refs.editor.getBlob(src);
     },
 
@@ -393,7 +476,7 @@ export default {
         this.previewNotReady = false;
 
         if (this.$props.storageId) {
-          const titleMatch = this.$refs.editor.getValue().match(/^# (.+)/m);
+          const titleMatch = this.$refs.editor.getMainValue().match(/^# (.+)/m);
 
           if (titleMatch) params.title = titleMatch[1];
 
@@ -403,7 +486,7 @@ export default {
     },
   },
 
-  components: { Editor, Modal, Pane, Preview, Splitpanes, NostrModal },
+  components: { Editor, FileExplorer, Modal, Pane, Preview, Splitpanes, NostrModal },
 };
 </script>
 
@@ -847,19 +930,44 @@ export default {
           fullWidth: currentMode < 0 && !horizontal,
         }"
       >
-        <Editor
-          class="col w-100 p-0 h-100"
-          @compile="compile"
-          @ready="editorReady"
-          @online="online"
-          @goto="gotoPreview"
-          :storage-id="$props.storageId"
-          :content="$props.content"
-          ref="editor"
-          :connection="$props.connection"
-          :toolbar="!$props.embed"
-        >
-        </Editor>
+        <div class="lia-editor-area">
+          <div v-if="$props.storageId && !$props.embed" class="lia-activity-bar">
+            <button
+              class="btn btn-sm btn-outline-secondary"
+              type="button"
+              :class="{ active: showFiles }"
+              :title="showFiles ? 'Hide file explorer' : 'Show file explorer'"
+              @click="showFiles = !showFiles"
+            >
+              <i class="bi bi-layout-sidebar"></i>
+            </button>
+          </div>
+
+          <FileExplorer
+            v-if="$props.storageId && !$props.embed"
+            v-show="showFiles"
+            class="lia-files-panel"
+            :storage-id="$props.storageId"
+            :connection="$props.connection"
+            @open-main="openMainDoc"
+            @open-asset="openAsset"
+          />
+
+          <div class="lia-editor-pane">
+            <Editor
+              @compile="compile"
+              @ready="editorReady"
+              @online="online"
+              @goto="gotoPreview"
+              :storage-id="$props.storageId"
+              :content="$props.content"
+              ref="editor"
+              :connection="$props.connection"
+              :toolbar="!$props.embed"
+            >
+            </Editor>
+          </div>
+        </div>
       </pane>
 
       <pane
@@ -929,6 +1037,43 @@ export default {
 
 .fullHeight {
   min-height: calc(100% - 10px);
+}
+
+.lia-editor-area {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.lia-activity-bar {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  background-color: #ececec;
+  border-right: solid lightgray 1px;
+}
+
+.lia-activity-bar .btn.active {
+  background-color: var(--bs-secondary, #6c757d);
+  color: #fff;
+}
+
+.lia-files-panel {
+  flex: 0 0 240px;
+  width: 240px;
+  max-width: 50%;
+  height: 100%;
+}
+
+.lia-editor-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 @media (max-width: 460px) {
