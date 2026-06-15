@@ -34,8 +34,14 @@
 
   <body>
     <script type="module">
+      // Vue compile-time feature flags required by the esm-bundler build
+      globalThis.__VUE_OPTIONS_API__ = true
+      globalThis.__VUE_PROD_DEVTOOLS__ = false
+      globalThis.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false
+
       import { createApp } from 'vue'
       import App from './views/Examples.vue'
+      import { i18n } from './i18n/index.ts'
 
       const examples = [
         {
@@ -110,7 +116,9 @@
         },
       ]
 
-      const app = createApp(App).mount(document.body)
+      const vueApp = createApp(App)
+      vueApp.use(i18n)
+      const app = vueApp.mount(document.body)
       app.init(examples)
     </script>
   </body>

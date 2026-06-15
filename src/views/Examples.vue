@@ -1,5 +1,6 @@
 <script lang="ts">
 import Footer from "../components/Footer.vue";
+import logoImg from "url:../../assets/logo.png";
 
 interface Example {
   title: string;
@@ -10,9 +11,9 @@ interface Example {
 
 export default {
   name: "Examples",
-  //props: ['examples'],
   data() {
     return {
+      logoImg,
       examples: [],
     };
   },
@@ -21,6 +22,10 @@ export default {
       for (let i = 0; i < examples.length; i++) {
         this.examples.push(examples[i]);
       }
+    },
+    changeLocale(locale: string) {
+      this.$i18n.locale = locale;
+      localStorage.setItem('locale', locale);
     },
   },
   expose: ["init"],
@@ -32,11 +37,28 @@ export default {
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="./" data-link="">
-        <img src="../../assets/logo.png" alt="LiaScript" height="28" />
-        LiaEdit
+        <img :src="logoImg" alt="LiaScript" height="28" />
+        {{ $t('app.title') }}
       </a>
 
-      <a type="button" class="btn btn-primary" href="./?/edit" data-link> New note </a>
+      <div class="flex-grow-1 d-flex justify-content-center">
+        <div class="btn-group btn-group-sm" role="group" aria-label="Language">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            :class="{ active: $i18n.locale === 'en' }"
+            @click="changeLocale('en')"
+          >EN</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            :class="{ active: $i18n.locale === 'de' }"
+            @click="changeLocale('de')"
+          >DE</button>
+        </div>
+      </div>
+
+      <a type="button" class="btn btn-primary" href="./?/edit" data-link>{{ $t('index.newCourse') }}</a>
     </div>
   </nav>
 
@@ -53,19 +75,24 @@ export default {
           <div class="card-body">
             <h5 class="card-title">{{ item.title }}</h5>
             <p class="card-text">{{ item.info }}</p>
-            <a :href="'./?/show/file/' + item.link" class="stretched-link">Show</a>
+            <a :href="'./?/show/file/' + item.link" class="stretched-link">{{ $t('examples.show') }}</a>
           </div>
         </div>
       </div>
     </div>
 
     <Footer>
-      This is a collaborative online editor for
-      <a href="https://LiaScript.github.io" target="_blank">LiaScript</a>. All content is
-      stored only within your browser. If you need some inspiration search for embeddable
-      <a href="https://github.com/topics/liascript-template" target="_blank">templates</a>
-      or already published
-      <a href="https://github.com/topics/liascript-course" target="_blank">courses</a>.
+      <i18n-t keypath="examples.footer" tag="span">
+        <template #liascript>
+          <a href="https://LiaScript.github.io" target="_blank">LiaScript</a>
+        </template>
+        <template #templates>
+          <a href="https://github.com/topics/liascript-template" target="_blank">{{ $t('index.footerTemplates') }}</a>
+        </template>
+        <template #courses>
+          <a href="https://github.com/topics/liascript-course" target="_blank">{{ $t('index.footerCourses') }}</a>
+        </template>
+      </i18n-t>
     </Footer>
   </div>
 </template>
