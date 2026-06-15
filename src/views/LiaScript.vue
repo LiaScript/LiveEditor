@@ -63,7 +63,6 @@ export default {
       database,
       meta: {},
       onlineUsers: 0,
-      lights: false,
       conn: {
         type: connectionType,
         users: 0,
@@ -73,12 +72,6 @@ export default {
       nostrModalVisible: false,
       showFiles: false,
     };
-  },
-
-  computed: {
-    lightMode() {
-      return this.lights ? "bi bi-sun" : "bi bi-moon";
-    },
   },
 
   mounted() {
@@ -352,10 +345,6 @@ export default {
       this.$refs.editor.fork();
     },
 
-    switchLights() {
-      this.lights = this.$refs.editor.switchLights();
-    },
-
     compile() {
       console.log("liascript: compile");
 
@@ -448,7 +437,6 @@ export default {
     editorReady() {
       console.log("liascript: editor ready");
       this.editorIsReady = true;
-      this.lights = this.$refs.editor.lights;
       this.compile();
     },
 
@@ -501,15 +489,6 @@ export default {
         <img :src="logoImg" alt="LiaScript" height="28" />
         <span id="lia-edit">LiaDemo</span>
       </span>
-
-      <button
-        type="button"
-        class="btn btn-outline-secondary me-2 px-3"
-        @click="switchLights()"
-        title="Switch between light and dark mode"
-      >
-        <i :class="lightMode"></i>
-      </button>
 
       <div
         class="btn-toolbar btn-group-sm"

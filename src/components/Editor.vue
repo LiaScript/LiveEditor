@@ -13,6 +13,8 @@ import {
 } from "../ts/ProjectDoc";
 import { editor, KeyMod, KeyCode, languages, IDisposable } from "monaco-editor";
 import * as Utils from "../ts/utils";
+import type { EditorConfig } from "../ts/utils";
+import EditorSettingsTab from "./EditorSettingsTab.vue";
 import { navigateTo } from "../index";
 
 // import * as MATHJS from "mathjs";
@@ -97,7 +99,7 @@ function blobToUint8Array(blob) {
 
 export default {
   name: "Editor",
-  components: { Recorder },
+  components: { Recorder, EditorSettingsTab },
   inheritAttrs: false,
   props: ["storageId", "content", "connection", "toolbar"],
 
@@ -107,6 +109,7 @@ export default {
     return {
       lights: config.lights,
       user: config.user,
+      editorConfig: { ...config.editor } as EditorConfig,
       recorder: { audio: false, webcam: false, desktop: false },
 
       activeTab: "start",
@@ -128,13 +131,23 @@ export default {
   },
 
   computed: {
-    // The toolbar (Markdown formatting/upload buttons) is only relevant when a
-    // Markdown document is being edited.
+    isTextActive(): boolean {
+      if (this.toolbar === false) return false;
+      return this.activeView === "text";
+    },
     isMarkdownActive(): boolean {
       if (this.activeView !== "text") return false;
       if (this.activePath === "") return true;
       const ext = this.activePath.split(".").pop()?.toLowerCase();
       return ext === "md" || ext === "markdown" || ext === "lia";
+    },
+  },
+
+  watch: {
+    isMarkdownActive(val: boolean) {
+      if (!val && this.activeTab !== "editor") {
+        this.activeTab = "editor";
+      }
     },
   },
 
@@ -875,6 +888,30 @@ I (study) ~[[ am going to study ]]~ harder this term.
       if (Editor) Editor.focus();
     },
 
+    applyEditorConfig(cfg: EditorConfig) {
+      this.editorConfig = cfg;
+      if (Editor) {
+        Editor.updateOptions({
+          fontSize: cfg.fontSize,
+          fontFamily: cfg.fontFamily,
+          lineNumbers: cfg.lineNumbers,
+          minimap: { enabled: cfg.minimap },
+          wordWrap: cfg.wordWrap,
+          tabSize: cfg.tabSize,
+          insertSpaces: cfg.insertSpaces,
+          renderWhitespace: cfg.renderWhitespace,
+          folding: cfg.folding,
+          bracketPairColorization: { enabled: cfg.bracketPairColorization },
+          smoothScrolling: cfg.smoothScrolling,
+          wordBasedSuggestions: cfg.wordBasedSuggestions ? "allDocuments" : false,
+          cursorBlinking: cfg.cursorBlinking,
+        });
+      }
+      const config = Utils.loadConfig();
+      config.editor = { ...cfg };
+      Utils.storeConfig(config);
+    },
+
     switchLights() {
       if (Editor) {
         const config = Utils.loadConfig();
@@ -1097,10 +1134,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
         language: "markdown",
         theme: this.lights ? "vs-light" : "vs-dark",
         automaticLayout: true,
-        wordWrap: "on",
-        renderWhitespace: "boundary",
-        wordBasedSuggestions: false, // disable default word suggestions
       });
+
+      this.applyEditorConfig(this.editorConfig);
 
       const self = this;
 
@@ -1513,20 +1549,21 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
 <template>
   <div
-    v-if="toolbar !== false && isMarkdownActive"
+    v-if="isTextActive"
     class="lia-toolbar"
     role="toolbar"
     aria-label="Markdown formatting toolbar"
   >
     <!-- Tab bar -->
     <div class="lia-tab-bar">
-      <button class="lia-tab" :class="{ active: activeTab === 'start' }"     @click="activeTab = 'start'">Start</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'tabellen' }"  @click="activeTab = 'tabellen'">Tables</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'einfuegen' }" @click="activeTab = 'einfuegen'">Insert</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'liascript' }" @click="activeTab = 'liascript'">LiaScript</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'code' }"      @click="activeTab = 'code'">Code</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'aufnahme' }"  @click="activeTab = 'aufnahme'">Recording</button>
-      <button class="lia-tab" :class="{ active: activeTab === 'tutorial' }"  @click="activeTab = 'tutorial'">Tutorial</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'start' }"     @click="activeTab = 'start'">Start</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tabellen' }"  @click="activeTab = 'tabellen'">Tables</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'einfuegen' }" @click="activeTab = 'einfuegen'">Insert</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'liascript' }" @click="activeTab = 'liascript'">LiaScript</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'code' }"      @click="activeTab = 'code'">Code</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'aufnahme' }"  @click="activeTab = 'aufnahme'">Recording</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tutorial' }"  @click="activeTab = 'tutorial'">Tutorial</button>
+      <button class="lia-tab" :class="{ active: activeTab === 'editor' }"    @click="activeTab = 'editor'">Editor</button>
     </div>
 
     <!-- Tab content -->
@@ -1744,6 +1781,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
         </div>
       </template>
 
+      <!-- ── Editor Settings ────────────────────────────────── -->
+      <template v-else-if="activeTab === 'editor'">
+        <EditorSettingsTab :config="editorConfig" :lights="lights" @update:config="applyEditorConfig" @toggle-lights="switchLights" />
+      </template>
+
     </div>
   </div>
 
@@ -1919,11 +1961,21 @@ I (study) ~[[ am going to study ]]~ harder this term.
   background: #e8e8e8;
   border-bottom: 1px solid #c8c8c8;
   padding: 0 4px;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: #bbb #e8e8e8;
 }
 
 .lia-tab-bar::-webkit-scrollbar {
-  display: none;
+  height: 3px;
+}
+
+.lia-tab-bar::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 2px;
+}
+
+.lia-tab-bar::-webkit-scrollbar-track {
+  background: #e8e8e8;
 }
 
 .lia-tab {
@@ -1958,11 +2010,21 @@ I (study) ~[[ am going to study ]]~ harder this term.
   overflow-x: auto;
   align-items: stretch;
   padding: 3px 2px 0 2px;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: #bbb #f3f3f3;
 }
 
 .lia-tab-content::-webkit-scrollbar {
-  display: none;
+  height: 3px;
+}
+
+.lia-tab-content::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 2px;
+}
+
+.lia-tab-content::-webkit-scrollbar-track {
+  background: #f3f3f3;
 }
 
 .toolbar-section {

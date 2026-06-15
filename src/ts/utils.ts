@@ -32,6 +32,38 @@ export function urlPath(path: string[]) {
 
 const CONFIG = 'config'
 
+export interface EditorConfig {
+  fontSize: number
+  fontFamily: string
+  lineNumbers: 'on' | 'off' | 'relative'
+  minimap: boolean
+  wordWrap: 'on' | 'off'
+  tabSize: number
+  insertSpaces: boolean
+  renderWhitespace: 'none' | 'boundary' | 'all'
+  folding: boolean
+  bracketPairColorization: boolean
+  smoothScrolling: boolean
+  wordBasedSuggestions: boolean
+  cursorBlinking: 'blink' | 'smooth' | 'solid'
+}
+
+const DEFAULT_EDITOR_CONFIG: EditorConfig = {
+  fontSize: 14,
+  fontFamily: 'Monospace',
+  lineNumbers: 'on',
+  minimap: false,
+  wordWrap: 'on',
+  tabSize: 4,
+  insertSpaces: true,
+  renderWhitespace: 'boundary',
+  folding: true,
+  bracketPairColorization: true,
+  smoothScrolling: false,
+  wordBasedSuggestions: false,
+  cursorBlinking: 'blink',
+}
+
 export function loadConfig(): {
   lights: boolean
   mode: number
@@ -40,6 +72,7 @@ export function loadConfig(): {
     color: string
   }
   credentials: any
+  editor: EditorConfig
 } {
   const configString = localStorage.getItem(CONFIG)
 
@@ -52,6 +85,11 @@ export function loadConfig(): {
       config.credentials = {}
       storeConfig(config)
     }
+
+    if (!config.editor) {
+      config.editor = { ...DEFAULT_EDITOR_CONFIG }
+      storeConfig(config)
+    }
   } else {
     config = {
       lights: false,
@@ -61,6 +99,7 @@ export function loadConfig(): {
         color: randomColor(),
       },
       credentials: {},
+      editor: { ...DEFAULT_EDITOR_CONFIG },
     }
 
     storeConfig(config)
@@ -77,6 +116,7 @@ export function storeConfig(config: {
     color: string
   }
   credentials: any
+  editor?: EditorConfig
 }) {
   localStorage.setItem(CONFIG, JSON.stringify(config))
 }
