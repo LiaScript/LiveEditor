@@ -9,6 +9,53 @@ export interface TreeNode {
   children: TreeNode[];
 }
 
+const EXT_ICONS: Record<string, string> = {
+  // Markup / Docs
+  md: "bi-filetype-md", markdown: "bi-filetype-md", lia: "bi-filetype-md",
+  txt: "bi-filetype-txt", text: "bi-filetype-txt", log: "bi-filetype-txt",
+  pdf: "bi-filetype-pdf",
+  csv: "bi-filetype-csv", tsv: "bi-filetype-csv",
+  // Web
+  html: "bi-filetype-html", htm: "bi-filetype-html",
+  css: "bi-filetype-css",
+  scss: "bi-filetype-scss",
+  sass: "bi-filetype-sass",
+  xml: "bi-filetype-xml",
+  svg: "bi-filetype-svg",
+  // JavaScript / TypeScript
+  js: "bi-filetype-js", mjs: "bi-filetype-js", cjs: "bi-filetype-js",
+  jsx: "bi-filetype-jsx",
+  ts: "bi-filetype-tsx", tsx: "bi-filetype-tsx",
+  // Data
+  json: "bi-filetype-json", jsonc: "bi-filetype-json",
+  yml: "bi-filetype-yml", yaml: "bi-filetype-yml",
+  // Languages
+  py: "bi-filetype-py",
+  php: "bi-filetype-php",
+  rb: "bi-filetype-rb",
+  java: "bi-filetype-java",
+  sh: "bi-filetype-sh", bash: "bi-filetype-sh", zsh: "bi-filetype-sh",
+  sql: "bi-filetype-sql",
+  // Images
+  png: "bi-filetype-png",
+  jpg: "bi-filetype-jpg", jpeg: "bi-filetype-jpg",
+  gif: "bi-filetype-gif",
+  bmp: "bi-file-earmark-image", webp: "bi-file-earmark-image",
+  avif: "bi-file-earmark-image", ico: "bi-file-earmark-image",
+  // Videos
+  mp4: "bi-filetype-mp4",
+  mov: "bi-filetype-mov",
+  webm: "bi-file-earmark-play",
+  ogv: "bi-file-earmark-play", ogg: "bi-file-earmark-play",
+  avi: "bi-file-earmark-play", mkv: "bi-file-earmark-play", m4v: "bi-file-earmark-play",
+  // Audio
+  mp3: "bi-filetype-mp3",
+  wav: "bi-filetype-wav",
+  aac: "bi-file-earmark-music",
+  // Code (generic)
+  vue: "bi-file-earmark-code",
+};
+
 export default defineComponent({
   name: "FileNode",
 
@@ -33,10 +80,13 @@ export default defineComponent({
       return 6 + this.depth * 12 + "px";
     },
     icon(): string {
-      if (this.isFolder) {
-        return this.expanded ? "bi-folder2-open" : "bi-folder";
-      }
-      return "bi-file-earmark";
+      if (this.isFolder) return this.expanded ? "bi-folder2-open" : "bi-folder";
+      const mime = (this.node.mime || "").toLowerCase();
+      if (mime.startsWith("image/")) return "bi-file-earmark-image";
+      if (mime.startsWith("video/")) return "bi-file-earmark-play";
+      if (mime.startsWith("audio/")) return "bi-file-earmark-music";
+      const ext = this.node.name.split(".").pop()?.toLowerCase() || "";
+      return EXT_ICONS[ext] ?? "bi-file-earmark";
     },
   },
 
