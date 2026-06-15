@@ -21,7 +21,11 @@ import { navigateTo } from "../index";
 import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
 import TextEditorInterface from "../ts/TextEditorInterface";
 
-import Recorder from "./Recorder.vue";
+import { defineAsyncComponent } from "vue";
+// Recorder (webcam/desktop capture, incl. its media stream code) is only shown
+// behind a v-if when the user starts a recording, so it is loaded on demand to
+// keep it out of the editor's startup bundle.
+const Recorder = defineAsyncComponent(() => import("./Recorder.vue"));
 
 var Emojis: { label: string; insertText: string; range: any }[] = [];
 import("../ts/Emojis.ts").then((module) => {
@@ -62,6 +66,8 @@ var tableEditor: any;
 var provider;
 var currentBinding: any = null;
 var currentModel: any = null;
+var currentYText: any = null;
+var currentLanguage: string = "markdown";
 var isCtrlPressed = false;
 var MATHJS;
 
@@ -251,6 +257,10 @@ export default {
     // Swap the Monaco model + collaborative binding to a different Y.Text.
     bindDoc(yText: any, language: string) {
       if (!Editor) return;
+      // Remember the active binding so it can be re-created with awareness once
+      // the network provider arrives (webrtc loads peerjs asynchronously).
+      currentYText = yText;
+      currentLanguage = language;
       if (currentBinding) {
         currentBinding.destroy();
         currentBinding = null;
@@ -1408,7 +1418,6 @@ I (study) ~[[ am going to study ]]~ harder this term.
       const project = getProjectDoc(storageId, this.$props.connection);
       this.projectDoc = project;
 
-      provider = project.provider;
       this.blob = project.blob;
 
       const self = this;
@@ -1422,10 +1431,18 @@ I (study) ~[[ am going to study ]]~ harder this term.
         self.$emit("ready");
       }
 
-      if (provider) {
-        provider.awareness.setLocalStateField("user", this.user);
+      // The network provider may arrive asynchronously (webrtc loads peerjs on
+      // demand), so wire awareness via onProvider() rather than reading it now.
+      project.onProvider((p: any) => {
+        provider = p;
+        // If a document is already bound (with null awareness, because the
+        // provider arrived late), re-bind it so remote cursors appear.
+        if (currentBinding && currentYText) {
+          self.bindDoc(currentYText, currentLanguage);
+        }
+        p.awareness.setLocalStateField("user", self.user);
 
-        provider.on("status", (status: any) => {
+        p.on("status", (status: any) => {
           if (status.state === "connected") {
             self.online = 1;
           } else {
@@ -1434,18 +1451,18 @@ I (study) ~[[ am going to study ]]~ harder this term.
           self.$emit("online", self.online);
         });
 
-        provider.awareness.on("change", (changes: any) => {
+        p.awareness.on("change", (changes: any) => {
           // Whenever somebody updates their awareness information,
           // we log all awareness information from all users.
 
-          const online = Array.from(provider.awareness.getStates().values()).length;
+          const online = Array.from(p.awareness.getStates().values()).length;
 
           if (online != self.online) {
             self.$emit("online", online);
             self.online = online;
           }
         });
-      }
+      });
 
       // Bind Monaco to the main course document (this also creates the model).
       this.openMain();
@@ -1487,17 +1504,23 @@ I (study) ~[[ am going to study ]]~ harder this term.
   emits: ["compile", "ready", "online", "goto"],
 
   mounted() {
-    Editor = this.initEditor(this.content || "");
+    // Defer the (expensive, synchronous) Monaco creation by one frame so the
+    // surrounding toolbar / splitpanes layout can paint first. This removes the
+    // long main-thread block on startup that made the editor feel like it
+    // "stutters" before becoming interactive.
+    requestAnimationFrame(() => {
+      Editor = this.initEditor(this.content || "");
 
-    // The provider lifecycle is managed by the shared ProjectDoc service
-    // (reference counted), so we must NOT destroy it here — the file explorer
-    // may hold the same document.
+      // The provider lifecycle is managed by the shared ProjectDoc service
+      // (reference counted), so we must NOT destroy it here — the file explorer
+      // may hold the same document.
 
-    if (this.storageId) {
-      this.loadFromLocalStorage(this.storageId);
-    } else {
-      this.$emit("ready");
-    }
+      if (this.storageId) {
+        this.loadFromLocalStorage(this.storageId);
+      } else {
+        this.$emit("ready");
+      }
+    });
 
     const self = this;
 

@@ -4,7 +4,9 @@ import { IndexeddbPersistence } from "y-indexeddb";
 import { GenericProvider } from "y-generic";
 import { PeerJSTransport } from "y-generic/dist/providers/peerjs";
 import { WebSocketTransport } from "y-generic/dist/providers/websocket";
-import Peer from "peerjs";
+// peerjs is heavy (WebRTC) and only needed for the "webrtc" connection mode, so
+// it is loaded on demand in the constructor to keep it out of the editor's
+// startup bundle (see the "webrtc" case below).
 
 function bytesEqual(a: Uint8Array, b: Uint8Array): boolean {
   if (a.byteLength !== b.byteLength) return false;
@@ -93,7 +95,10 @@ export interface FileEntry {
 export class ProjectDoc {
   readonly storageId: string;
   readonly ydoc: Y.Doc;
-  readonly provider: any | null;
+  // Not readonly: for the "webrtc" connection the provider is created
+  // asynchronously (peerjs is loaded on demand, see constructor), so it starts
+  // as null and is set later via setProvider().
+  provider: any | null = null;
   readonly idb: IndexeddbPersistence;
   readonly content: Y.Text;
   readonly blob: Y.Map<any>;
@@ -104,6 +109,25 @@ export class ProjectDoc {
   /** internal reference counter for shared lifetime management */
   refCount = 0;
 
+  /** callbacks waiting for the network provider (may arrive asynchronously) */
+  private providerCallbacks: ((provider: any) => void)[] = [];
+
+  /**
+   * Register a callback for when the network provider becomes available. Fires
+   * immediately if the provider already exists (websocket / no connection),
+   * or later once the lazily-loaded webrtc provider is ready.
+   */
+  onProvider(cb: (provider: any) => void) {
+    if (this.provider) cb(this.provider);
+    else this.providerCallbacks.push(cb);
+  }
+
+  private setProvider(provider: any) {
+    this.provider = provider;
+    this.providerCallbacks.forEach((cb) => cb(provider));
+    this.providerCallbacks = [];
+  }
+
   constructor(storageId: string, connection?: string) {
     this.storageId = storageId;
     this.ydoc = new Y.Doc();
@@ -112,16 +136,23 @@ export class ProjectDoc {
 
     switch (connection) {
       case "webrtc": {
-        const peerTransport = new PeerJSTransport({
-          peer: Peer,
-          peerOptions: {
-            config: {
-              iceServers: JSON.parse(process.env.ICE_SERVERS || "[]"),
-            },
-          },
-        });
-        provider = new GenericProvider(this.ydoc, peerTransport);
-        provider.connect({ room: storageId }).catch(console.error);
+        // Load peerjs lazily; provider stays null until it resolves and is then
+        // published via setProvider() to any onProvider() subscribers.
+        import("peerjs")
+          .then(({ default: Peer }) => {
+            const peerTransport = new PeerJSTransport({
+              peer: Peer,
+              peerOptions: {
+                config: {
+                  iceServers: JSON.parse(process.env.ICE_SERVERS || "[]"),
+                },
+              },
+            });
+            const p = new GenericProvider(this.ydoc, peerTransport);
+            p.connect({ room: storageId }).catch(console.error);
+            this.setProvider(p);
+          })
+          .catch(console.error);
         break;
       }
       case "websocket": {

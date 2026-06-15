@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
-import JSZip from "jszip";
+// jszip is only used for the folder-download action — load it on demand
+// (see downloadFolderZip) instead of in the startup bundle.
 
 import {
   getProjectDoc,
@@ -183,6 +184,7 @@ export default defineComponent({
 
     async downloadFolderZip(folder: TreeNode) {
       if (!this.doc) return;
+      const JSZip = (await import("jszip")).default;
       const zip = new JSZip();
       const prefix = folder.path + "/";
       this.doc.files.forEach((meta, path) => {

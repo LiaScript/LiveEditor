@@ -6,10 +6,9 @@ import Editor from "../components/Editor.vue";
 import FileExplorer from "../components/FileExplorer.vue";
 import Preview from "../components/Preview.vue";
 import Modal from "../components/Modal.vue";
-import { compress } from "shrink-string";
-
-import pako from "pako";
-import JSZip from "jszip";
+// shrink-string, pako and jszip are only needed for the export/share actions,
+// so they are loaded on demand (see shareData/shareCode/embedCode/downloadZip)
+// to keep them out of the editor's startup bundle.
 
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
@@ -57,6 +56,10 @@ export default {
       horizontal:
         document.documentElement.clientWidth < document.documentElement.clientHeight,
       previewNotReady: true,
+      // Gate the (heavy) LiaScript preview iframe so its runtime only boots once
+      // the editor is interactive — see editorReady(). Avoids both competing for
+      // the main thread on startup.
+      loadPreview: false,
       compilationCounter: 0,
       currentMode: this.$props.mode || 0,
       editorIsReady: false,
@@ -189,6 +192,7 @@ export default {
       } catch (e) {}
 
       try {
+        const pako = (await import("pako")).default;
         gzip = pako.gzip(this.$refs.editor.getMainValue());
         gzip =
           LiaScriptURL +
@@ -215,6 +219,7 @@ export default {
     },
 
     async shareCode() {
+      const { compress } = await import("shrink-string");
       const zipCode = this.urlPath([
         "show",
         "code",
@@ -231,6 +236,7 @@ export default {
     },
 
     async embedCode() {
+      const { compress } = await import("shrink-string");
       const zipCode = this.urlPath([
         "embed",
         "code",
@@ -271,7 +277,8 @@ export default {
       document.body.removeChild(element);
     },
 
-    downloadZip() {
+    async downloadZip() {
+      const JSZip = (await import("jszip")).default;
       const zip = JSZip();
 
       zip.file("README.md", this.$refs.editor.getMainValue());
@@ -307,9 +314,9 @@ export default {
     },
 
     compile() {
-      console.log("liascript: compile");
-
       if (this.preview && this.editorIsReady) {
+        console.log("liascript: compile");
+
         // Always render the main course, no matter which file is active.
         let code = this.$refs.editor.getMainValue();
 
@@ -398,7 +405,14 @@ export default {
     editorReady() {
       console.log("liascript: editor ready");
       this.editorIsReady = true;
+      // compile() guards on (preview && editorIsReady); whichever of editor /
+      // preview becomes ready last triggers the single initial compile.
       this.compile();
+      // Boot the preview iframe (LiaScript runtime) only now that the editor is
+      // interactive, one frame later so the editor can paint first.
+      requestAnimationFrame(() => {
+        this.loadPreview = true;
+      });
     },
 
     previewReady(preview: any) {
@@ -966,6 +980,7 @@ export default {
         ></div>
 
         <Preview
+          v-if="loadPreview"
           @ready="previewReady"
           @update="previewUpdate"
           @goto="gotoEditor"
