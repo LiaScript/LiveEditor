@@ -20,7 +20,7 @@
     "@susisu/mte-kernel": "^2.1.1",
     "minisearch": "^7.2.0",
     "pako": "^2.1.0",
-    "splitpanes": "^3.1.5"
+    "splitpanes": "^4.1.2"
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.16.4",
