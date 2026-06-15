@@ -30,6 +30,11 @@ const IMAGE_EXTENSIONS = new Set([
   "png", "jpg", "jpeg", "gif", "webp", "bmp", "avif", "ico", "svg",
 ]);
 
+/** File extensions that should be played as a video. */
+const VIDEO_EXTENSIONS = new Set([
+  "webm", "mp4", "ogv", "ogg", "mov", "avi", "mkv", "m4v",
+]);
+
 function extensionOf(path: string): string {
   const name = path.split("/").pop() || "";
   const dot = name.lastIndexOf(".");
@@ -53,6 +58,12 @@ export function isTextFile(path: string, mime?: string): boolean {
 export function isImageFile(path: string, mime?: string): boolean {
   if ((mime || "").toLowerCase().startsWith("image/")) return true;
   return IMAGE_EXTENSIONS.has(extensionOf(path));
+}
+
+/** Decide whether a path should be played as a video. */
+export function isVideoFile(path: string, mime?: string): boolean {
+  if ((mime || "").toLowerCase().startsWith("video/")) return true;
+  return VIDEO_EXTENSIONS.has(extensionOf(path));
 }
 
 export type FileType = "file" | "folder";

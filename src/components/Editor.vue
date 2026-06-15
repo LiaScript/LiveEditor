@@ -9,6 +9,7 @@ import {
   ProjectDoc,
   isTextFile,
   isImageFile,
+  isVideoFile,
 } from "../ts/ProjectDoc";
 import { editor, KeyMod, KeyCode, languages, IDisposable } from "monaco-editor";
 import * as Utils from "../ts/utils";
@@ -120,8 +121,9 @@ export default {
       projectDoc: null as ProjectDoc | null,
       activePath: "",
       activeMime: "",
-      activeView: "text" as "text" | "image" | "binary",
+      activeView: "text" as "text" | "image" | "video" | "binary",
       imageUrl: "",
+      videoUrl: "",
     };
   },
 
@@ -226,6 +228,13 @@ export default {
       this.imageUrl = url;
     },
 
+    setVideo(url: string) {
+      if (this.videoUrl && this.videoUrl !== url) {
+        URL.revokeObjectURL(this.videoUrl);
+      }
+      this.videoUrl = url;
+    },
+
     // Swap the Monaco model + collaborative binding to a different Y.Text.
     bindDoc(yText: any, language: string) {
       if (!Editor) return;
@@ -255,6 +264,7 @@ export default {
     openMain() {
       if (!this.projectDoc) return;
       this.setImage("");
+      this.setVideo("");
       this.activePath = "";
       this.activeMime = "";
       this.activeView = "text";
@@ -271,6 +281,7 @@ export default {
 
       if (isImageFile(path, mime)) {
         const data = this.projectDoc.readFileData(path);
+        this.setVideo("");
         this.setImage(
           data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "" })) : ""
         );
@@ -278,8 +289,19 @@ export default {
         return;
       }
 
+      if (isVideoFile(path, mime)) {
+        const data = this.projectDoc.readFileData(path);
+        this.setImage("");
+        this.setVideo(
+          data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "video/webm" })) : ""
+        );
+        this.activeView = "video";
+        return;
+      }
+
       if (isTextFile(path, mime)) {
         this.setImage("");
+        this.setVideo("");
         this.activeView = "text";
         this.bindDoc(this.projectDoc.getText(path), this.languageFor(path));
         if (Editor) Editor.focus();
@@ -287,6 +309,7 @@ export default {
       }
 
       this.setImage("");
+      this.setVideo("");
       this.activeView = "binary";
     },
 
@@ -1408,6 +1431,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       currentModel = null;
     }
     this.setImage("");
+    this.setVideo("");
 
     // Release our reference to the shared document; it is destroyed once both
     // the editor and the file explorer have released it.
@@ -1809,6 +1833,10 @@ I (study) ~[[ am going to study ]]~ harder this term.
     <img :src="imageUrl" :alt="activePath" />
   </div>
 
+  <div v-show="activeView === 'video'" class="lia-file-view lia-video-view">
+    <video v-if="videoUrl" :src="videoUrl" controls></video>
+  </div>
+
   <div v-show="activeView === 'binary'" class="lia-file-view lia-binary-view">
     <p>
       <i class="bi bi-file-earmark-binary"></i><br />
@@ -1858,6 +1886,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+.lia-video-view video {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .lia-binary-view {
