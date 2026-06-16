@@ -38,20 +38,17 @@ export default {
       @click.stop="open = !open"
       :aria-expanded="open"
     >{{ $i18n.locale.toUpperCase() }}</button>
-    <ul class="dropdown-menu" :class="{ show: open }" style="z-index: 1000; left: 50%; transform: translateX(-50%)">
-      <li>
+    <ul
+      class="dropdown-menu"
+      :class="{ show: open }"
+      style="z-index: 1000; left: 50%; transform: translateX(-50%)"
+    >
+      <li v-for="locale in $i18n.availableLocales" :key="locale">
         <button
           class="dropdown-item"
-          :class="{ active: $i18n.locale === 'en' }"
-          @click="changeLocale('en')"
-        >EN</button>
-      </li>
-      <li>
-        <button
-          class="dropdown-item"
-          :class="{ active: $i18n.locale === 'de' }"
-          @click="changeLocale('de')"
-        >DE</button>
+          :class="{ active: $i18n.locale === locale }"
+          @click="changeLocale(locale)"
+        >{{ locale.toUpperCase() }}</button>
       </li>
     </ul>
   </div>
