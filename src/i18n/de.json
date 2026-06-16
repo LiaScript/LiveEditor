@@ -122,7 +122,8 @@
   },
   "github": {
     "exporting": "Wird zu GitHub Gist exportiert...",
-    "badCredentials": "Ungültige Anmeldedaten, Seite wird neu geladen"
+    "badCredentials": "Ungültige Anmeldedaten, Seite wird neu geladen",
+    "error": "Der Export zu GitHub ist fehlgeschlagen:"
   },
   "nostr": {
     "title": "Via Nostr teilen",

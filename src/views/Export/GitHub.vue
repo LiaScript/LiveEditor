@@ -34,42 +34,65 @@ export default {
       const provider = new IndexeddbPersistence(id, yDoc);
 
       provider.on("synced", async (_: any) => {
-        const metaData = await meta;
-        const contentData = yDoc.getText(id).toJSON();
+        try {
+          const metaData = await meta;
+          const contentData = yDoc.getText(id).toJSON();
 
-        if (!config.credentials?.github?.scope) {
-          config.credentials.github = await GitHub.access_token(code);
-          Utils.storeConfig(config);
-        }
+          if (!config.credentials?.github?.scope) {
+            const credentials = await GitHub.access_token(code);
 
-        const gist = await GitHub.gistUpload(
-          config.credentials.github,
-          metaData.meta.title,
-          metaData.meta.macro?.comment || "",
-          contentData,
-          metaData.meta.gist_id
-        );
+            // could not obtain a token (e.g. expired/invalid OAuth code)
+            if (credentials?.error) {
+              config.credentials.github = undefined;
+              Utils.storeConfig(config);
 
-        if (gist.error == "Bad credentials") {
-          config.credentials.github = undefined;
-          Utils.storeConfig(config);
+              this.message = this.$t('github.error') + "\n" + credentials.message;
+              return;
+            }
 
-          this.message = this.$t('github.badCredentials');
+            config.credentials.github = credentials;
+            Utils.storeConfig(config);
+          }
 
-          window.location.reload();
-        }
+          const gist = await GitHub.gistUpload(
+            config.credentials.github,
+            metaData.meta.title,
+            metaData.meta.macro?.comment || "",
+            contentData,
+            metaData.meta.gist_id
+          );
 
-        if (metaData.meta.gist_id != gist.id) {
-          await database.put(id, {
-            gist_id: gist.id,
-            gist_url: gist.raw_url,
-          });
-        }
+          if (gist.error == "Bad credentials") {
+            config.credentials.github = undefined;
+            Utils.storeConfig(config);
 
-        this.message = gist.message;
+            this.message = this.$t('github.badCredentials');
 
-        if (gist.url) {
-          window.location.href = gist.url;
+            window.location.reload();
+            return;
+          }
+
+          // any other upload/network error: show it instead of hanging
+          if (gist.error) {
+            this.message = this.$t('github.error') + "\n" + gist.message;
+            return;
+          }
+
+          if (metaData.meta.gist_id != gist.id) {
+            await database.put(id, {
+              gist_id: gist.id,
+              gist_url: gist.raw_url,
+            });
+          }
+
+          this.message = gist.message;
+
+          if (gist.url) {
+            window.location.href = gist.url;
+          }
+        } catch (e) {
+          console.warn(e);
+          this.message = this.$t('github.error') + "\n" + (e?.message || e);
         }
       });
     },

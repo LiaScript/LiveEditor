@@ -122,7 +122,8 @@
   },
   "github": {
     "exporting": "Exporting to GitHub gist...",
-    "badCredentials": "Bad credentials, reloading page"
+    "badCredentials": "Bad credentials, reloading page",
+    "error": "The export to GitHub failed:"
   },
   "nostr": {
     "title": "Share via Nostr",
