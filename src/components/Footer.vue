@@ -34,6 +34,13 @@
         title="LiaScript YouTube channel"
         ><i class="bi bi-youtube"></i
       ></a>
+       -
+      <a
+        href="https://www.linkedin.com/in/andr%C3%A9-dietrich-73949415/"
+        target="_blank"
+        title="LinkedIn"
+        ><i class="bi bi-linkedin"></i
+      ></a>
     </small>
   </div>
 </template>
