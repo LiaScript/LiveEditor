@@ -2,26 +2,6 @@
 const INIT_CODE = `
 var blob = {};
 
-// Sofort ausführen, um den Patch zu aktivieren
-(() => {
-  const patch = (proto, prop) => {
-    const d = Object.getOwnPropertyDescriptor(proto, prop);
-    Object.defineProperty(proto, prop, {
-      get: d.get,
-      set(value) {
-        // --- Minimaler Fix ---------------------------------------------------
-        if (value.startsWith('/./')) value = './' + value.slice(3);
-        // ---------------------------------------------------------------------
-        console.warn("intercepted", prop, value);
-        d.set.call(this, value);     // Original-Setter ausführen
-      }
-    });
-  };
-
-  patch(HTMLScriptElement.prototype, 'src');   // <script src="…">
-  patch(HTMLLinkElement.prototype,  'href');   // <link rel="stylesheet" href="…">
-})();
-
 // TODO: Fix this HACK, so that preferBrowserTTS works as expected
 if (window.LIA.settings?.preferBrowserTTS || false) {
   window.LIA.settings.preferBrowserTTS = false;
