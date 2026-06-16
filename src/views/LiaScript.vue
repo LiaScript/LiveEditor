@@ -564,7 +564,7 @@ export default {
         <div class="navbar-nav me-auto mb-lg-0"></div>
 
         <div class="navbar-nav mb-2 mb-lg-0">
-          <div class="nav-item nav-item-sm ml-4 me-4">
+          <div class="nav-item nav-item-sm ms-2 me-2">
             <a
               class="nav-link"
               aria-current="page"
@@ -577,7 +577,7 @@ export default {
             </a>
           </div>
 
-          <div class="nav-item nav-item-sm ml-4 me-4">
+          <div class="nav-item nav-item-sm ms-2 me-2">
             <button
               class="btn nav-link btn-link"
               aria-current="page"
@@ -589,7 +589,7 @@ export default {
             </button>
           </div>
 
-          <div class="nav-item me-4">
+          <div class="nav-item ms-2 me-2">
             <button
               type="button"
               class="btn nav-link btn-link"
@@ -601,7 +601,7 @@ export default {
             </button>
           </div>
 
-          <div class="nav-item dropdown me-4">
+          <div class="nav-item dropdown ms-2 me-2">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -820,11 +820,12 @@ export default {
             </ul>
           </div>
 
-          <div class="nav-item dropdown me-4 d-flex align-items-center">
+          <div class="nav-item dropdown ms-2 me-2 d-flex align-items-center flex-wrap">
             <button
               class="btn btn-sm dropdown-toggle text-white"
               :class="conn.users === 0 ? 'bg-secondary' : 'bg-primary'"
               data-bs-toggle="dropdown"
+              data-bs-display="static"
               aria-expanded="false"
               style="width: 100%"
               :aria-label="
