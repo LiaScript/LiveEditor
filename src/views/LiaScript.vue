@@ -822,7 +822,7 @@ export default {
 
           <div class="nav-item dropdown me-4 d-flex align-items-center">
             <button
-              class="btn btn-sm badge dropdown-toggle"
+              class="btn btn-sm dropdown-toggle text-white"
               :class="conn.users === 0 ? 'bg-secondary' : 'bg-primary'"
               data-bs-toggle="dropdown"
               aria-expanded="false"
