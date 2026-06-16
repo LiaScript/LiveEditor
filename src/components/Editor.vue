@@ -16,6 +16,7 @@ import * as Utils from "../ts/utils";
 import type { EditorConfig } from "../ts/utils";
 import EditorSettingsTab from "./EditorSettingsTab.vue";
 import { navigateTo } from "../index";
+import { tutorial } from "../ts/Tutorial";
 
 // import * as MATHJS from "mathjs";
 import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
@@ -564,13 +565,46 @@ $$
 
         case "init": {
           for (const el of Snippets) {
-            if (el.label === "lia-template") {
+            if (el.label === "lia-init") {
               Editor.setValue(el.insertText);
-
               break;
             }
           }
+          break;
+        }
 
+        case "init-welcome": {
+          Editor.setValue(tutorial);
+          break;
+        }
+
+        case "init-full": {
+          for (const el of Snippets) {
+            if (el.label === "lia-template-full") {
+              Editor.setValue(el.insertText);
+              break;
+            }
+          }
+          break;
+        }
+
+        case "init-en": {
+          for (const el of Snippets) {
+            if (el.label === "lia-template") {
+              Editor.setValue(el.insertText);
+              break;
+            }
+          }
+          break;
+        }
+
+        case "init-de": {
+          for (const el of Snippets) {
+            if (el.label === "lia-template-de") {
+              Editor.setValue(el.insertText);
+              break;
+            }
+          }
           break;
         }
 
@@ -1580,11 +1614,11 @@ I (study) ~[[ am going to study ]]~ harder this term.
     <!-- Tab bar -->
     <div class="lia-tab-bar">
       <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'start' }"     @click="activeTab = 'start'">{{ $t('toolbar.tabs.start') }}</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tabellen' }"  @click="activeTab = 'tabellen'">{{ $t('toolbar.tabs.tables') }}</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'einfuegen' }" @click="activeTab = 'einfuegen'">{{ $t('toolbar.tabs.insert') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tables' }"  @click="activeTab = 'tables'">{{ $t('toolbar.tabs.tables') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'insert' }" @click="activeTab = 'insert'">{{ $t('toolbar.tabs.insert') }}</button>
       <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'liascript' }" @click="activeTab = 'liascript'">{{ $t('toolbar.tabs.liascript') }}</button>
       <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'code' }"      @click="activeTab = 'code'">{{ $t('toolbar.tabs.code') }}</button>
-      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'aufnahme' }"  @click="activeTab = 'aufnahme'">{{ $t('toolbar.tabs.recording') }}</button>
+      <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'recording' }"  @click="activeTab = 'recording'">{{ $t('toolbar.tabs.recording') }}</button>
       <button v-if="isMarkdownActive" class="lia-tab" :class="{ active: activeTab === 'tutorial' }"  @click="activeTab = 'tutorial'">{{ $t('toolbar.tabs.tutorial') }}</button>
       <button class="lia-tab" :class="{ active: activeTab === 'editor' }"    @click="activeTab = 'editor'">{{ $t('toolbar.tabs.editor') }}</button>
     </div>
@@ -1630,7 +1664,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       </template>
 
       <!-- ── Tables ───────────────────────────────────────── -->
-      <template v-else-if="activeTab === 'tabellen'">
+      <template v-else-if="activeTab === 'tables'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
             <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.insertTable')" @click="make('table')">
@@ -1665,7 +1699,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       </template>
 
       <!-- ── Insert ───────────────────────────────────────── -->
-      <template v-else-if="activeTab === 'einfuegen'">
+      <template v-else-if="activeTab === 'insert'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
             <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.link')"      @click="make('link')"><i class="bi bi-link-45deg"></i></button>
@@ -1781,7 +1815,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       </template>
 
       <!-- ── Recording ─────────────────────────────────────── -->
-      <template v-else-if="activeTab === 'aufnahme'">
+      <template v-else-if="activeTab === 'recording'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
             <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.audioRecording')"  @click="recorder.audio = true"><i class="bi bi-mic"></i></button>
@@ -1799,8 +1833,30 @@ I (study) ~[[ am going to study ]]~ harder this term.
             <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.initDocument')" @click="make('init')">
               <i class="bi bi-rocket-takeoff"></i>
             </button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.initWelcome')" @click="make('init-welcome')">
+              <i class="bi bi-book"></i>
+            </button>
           </div>
-          <div class="toolbar-label">{{ $t('toolbar.sections.new') }}</div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.init') }}</div>
+        </div>
+        <div class="toolbar-section">
+          <div class="toolbar-buttons">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.initDocumentFull')" @click="make('init-full')">
+              <i class="bi bi-journals"></i>
+            </button>
+          </div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.tutorial') }}</div>
+        </div>
+        <div class="toolbar-section">
+          <div class="toolbar-buttons">
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.initDocumentEn')" @click="make('init-en')">
+              🇬🇧
+            </button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.initDocumentDe')" @click="make('init-de')">
+              🇩🇪
+            </button>
+          </div>
+          <div class="toolbar-label">{{ $t('toolbar.sections.shorts') }}</div>
         </div>
       </template>
 

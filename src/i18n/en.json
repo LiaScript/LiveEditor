@@ -197,6 +197,9 @@
       "ascii": "ASCII",
       "mathjs": "MathJS",
       "new": "New",
+      "init": "Init",
+      "tutorial": "Tutorial",
+      "shorts": "Shorts",
       "recording": "Recording"
     },
     "buttons": {
@@ -253,7 +256,11 @@
       "audioRecording": "Audio Recording",
       "webcamRecording": "Webcam Recording",
       "screenRecording": "Screen Recording",
-      "initDocument": "Initialize empty document",
+      "initDocument": "Init – minimal LiaScript starter",
+      "initWelcome": "Welcome – editor introduction",
+      "initDocumentFull": "Tutorial – comprehensive template",
+      "initDocumentEn": "Short template (English)",
+      "initDocumentDe": "Short template (Deutsch)",
       "backToCourse": "Back to the course (README.md)"
     },
     "noPreview": "No preview available for this file type."
