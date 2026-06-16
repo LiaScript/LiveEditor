@@ -2,6 +2,7 @@
 import Dexie from "../ts/indexDB";
 import Card from "../components/Card.vue";
 import Footer from "../components/Footer.vue";
+import LanguageDropdown from "../components/LanguageDropdown.vue";
 import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
 
@@ -133,11 +134,6 @@ export default {
       window.location.href = "./?/edit";
     },
 
-    changeLocale(locale: string) {
-      this.$i18n.locale = locale;
-      localStorage.setItem('locale', locale);
-    },
-
     async init() {
       this.courses = await this.database.getAll();
 
@@ -175,7 +171,7 @@ export default {
     await this.init();
   },
 
-  components: { Card, Footer },
+  components: { Card, Footer, LanguageDropdown },
 };
 </script>
 
@@ -188,20 +184,7 @@ export default {
       </a>
 
       <div class="flex-grow-1 d-flex justify-content-center">
-        <div class="btn-group btn-group-sm" role="group" aria-label="Language">
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            :class="{ active: $i18n.locale === 'en' }"
-            @click="changeLocale('en')"
-          >EN</button>
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            :class="{ active: $i18n.locale === 'de' }"
-            @click="changeLocale('de')"
-          >DE</button>
-        </div>
+        <LanguageDropdown />
       </div>
 
       <button class="btn btn-primary" @click="newCourse">{{ $t('index.newCourse') }}</button>

@@ -1,5 +1,6 @@
 <script lang="ts">
 import Footer from "../components/Footer.vue";
+import LanguageDropdown from "../components/LanguageDropdown.vue";
 import logoImg from "url:../../assets/logo.png";
 
 interface Example {
@@ -23,13 +24,9 @@ export default {
         this.examples.push(examples[i]);
       }
     },
-    changeLocale(locale: string) {
-      this.$i18n.locale = locale;
-      localStorage.setItem('locale', locale);
-    },
   },
   expose: ["init"],
-  components: { Footer },
+  components: { Footer, LanguageDropdown },
 };
 </script>
 
@@ -42,20 +39,7 @@ export default {
       </a>
 
       <div class="flex-grow-1 d-flex justify-content-center">
-        <div class="btn-group btn-group-sm" role="group" aria-label="Language">
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            :class="{ active: $i18n.locale === 'en' }"
-            @click="changeLocale('en')"
-          >EN</button>
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            :class="{ active: $i18n.locale === 'de' }"
-            @click="changeLocale('de')"
-          >DE</button>
-        </div>
+        <LanguageDropdown />
       </div>
 
       <a type="button" class="btn btn-primary" href="./?/edit" data-link>{{ $t('index.newCourse') }}</a>

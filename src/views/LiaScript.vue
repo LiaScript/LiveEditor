@@ -6,6 +6,7 @@ import Editor from "../components/Editor.vue";
 import FileExplorer from "../components/FileExplorer.vue";
 import Preview from "../components/Preview.vue";
 import Modal from "../components/Modal.vue";
+import LanguageDropdown from "../components/LanguageDropdown.vue";
 // shrink-string, pako and jszip are only needed for the export/share actions,
 // so they are loaded on demand (see shareData/shareCode/embedCode/downloadZip)
 // to keep them out of the editor's startup bundle.
@@ -90,10 +91,6 @@ export default {
       window.location.href = "./?/edit";
     },
 
-    changeLocale(locale: string) {
-      this.$i18n.locale = locale;
-      localStorage.setItem('locale', locale);
-    },
 
     urlPath(path: string[]) {
       return window.location.origin + window.location.pathname + "?/" + path.join("/");
@@ -449,7 +446,7 @@ export default {
     },
   },
 
-  components: { Editor, FileExplorer, Modal, Pane, Preview, Splitpanes, NostrModal },
+  components: { Editor, FileExplorer, Modal, Pane, Preview, Splitpanes, NostrModal, LanguageDropdown },
 };
 </script>
 
@@ -529,19 +526,8 @@ export default {
         <i class="bi bi-arrow-counterclockwise"></i>
       </button>
 
-      <div class="btn-group btn-group-sm me-2" role="group" aria-label="Language">
-        <button
-          type="button"
-          class="btn btn-outline-secondary"
-          :class="{ active: $i18n.locale === 'en' }"
-          @click="changeLocale('en')"
-        >EN</button>
-        <button
-          type="button"
-          class="btn btn-outline-secondary"
-          :class="{ active: $i18n.locale === 'de' }"
-          @click="changeLocale('de')"
-        >DE</button>
+      <div class="flex-grow-1 d-flex justify-content-center">
+        <LanguageDropdown />
       </div>
 
       <!-- Drop-Down Navigation -->
@@ -559,7 +545,7 @@ export default {
         <i class="bi bi-list"></i>
       </button>
 
-      <div v-if="!embed" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div v-if="!embed" class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
         <!-- SPAN -->
         <div class="navbar-nav me-auto mb-lg-0"></div>
 

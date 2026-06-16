@@ -6,6 +6,7 @@
 (globalThis as any).__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = false;
 
 import { createApp } from 'vue'
+import 'bootstrap/js/dist/dropdown'
 
 // Configure Monaco Editor web workers for Parcel bundler.
 // getWorker (not getWorkerUrl) is required so Parcel recognises the
