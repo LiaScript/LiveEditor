@@ -1,6 +1,6 @@
 {
   "name": "liaeditor",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "LiaScript LiveEditor",
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
