@@ -291,5 +291,17 @@
     "all": "Alla",
     "blink": "Blinka",
     "solid": "Fast"
+  },
+  "fileExplorer": {
+    "title": "FILER",
+    "newFile": "Ny fil",
+    "newFolder": "Ny mapp",
+    "upload": "Ladda upp filer",
+    "newFileName": "Nytt filnamn:",
+    "newFolderName": "Nytt mappnamn:",
+    "renameTo": "Byt namn till:",
+    "labelFile": "fil",
+    "labelFolder": "mapp (och dess innehåll)",
+    "deleteConfirm": "Ta bort {label} \"{path}\"?"
   }
 }

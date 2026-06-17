@@ -291,5 +291,16 @@
     "all": "ሁሉም",
     "blink": "ብልጭታ",
     "solid": "ጠንካራ"
+  },
+  "fileExplorer": {
+    "title": "ፋይሎች",
+    "newFile": "አዲስ ፋይል",
+    "newFolder": "አዲስ አቃፊ",
+    "upload": "ፋይሎችን ስቀል",
+    "newFileName": "የአዲሱ ፋይል ስም:",
+    "renameTo": "ዳግም ሰይም ወደ:",
+    "labelFile": "ፋይሉን",
+    "labelFolder": "አቃፊውን (እና ይዘቱን)",
+    "deleteConfirm": "{label} \"{path}\" ሰርዝ?"
   }
 }

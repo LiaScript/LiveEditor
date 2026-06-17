@@ -291,5 +291,17 @@
     "all": "Zote",
     "blink": "Pepesa",
     "solid": "Imara"
+  },
+  "fileExplorer": {
+    "title": "FAILI",
+    "newFile": "Faili mpya",
+    "newFolder": "Folda mpya",
+    "upload": "Pakia faili",
+    "newFileName": "Jina la faili jipya:",
+    "newFolderName": "Jina la folda mpya:",
+    "renameTo": "Badilisha jina kuwa:",
+    "labelFile": "faili",
+    "labelFolder": "folda (na maudhui yake)",
+    "deleteConfirm": "Futa {label} \"{path}\"?"
   }
 }

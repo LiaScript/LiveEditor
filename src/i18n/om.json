@@ -291,5 +291,17 @@
     "all": "Hunda",
     "blink": "Liphsuu",
     "solid": "Jabaa"
+  },
+  "fileExplorer": {
+    "title": "FAAYILOTA",
+    "newFile": "Faayila haaraa",
+    "newFolder": "Dirree haaraa",
+    "upload": "Faayilota fe'i",
+    "newFileName": "Maqaa faayila haaraa:",
+    "newFolderName": "Maqaa dirree haaraa:",
+    "renameTo": "Maqaa geeddaruuf:",
+    "labelFile": "faayila",
+    "labelFolder": "dirree (fi waan keessa jiru)",
+    "deleteConfirm": "{label} \"{path}\" haqii?"
   }
 }

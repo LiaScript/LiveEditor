@@ -291,5 +291,17 @@
     "all": "Tudo",
     "blink": "Piscando",
     "solid": "Fixo"
+  },
+  "fileExplorer": {
+    "title": "ARQUIVOS",
+    "newFile": "Novo arquivo",
+    "newFolder": "Nova pasta",
+    "upload": "Enviar arquivos",
+    "newFileName": "Nome do novo arquivo:",
+    "newFolderName": "Nome da nova pasta:",
+    "renameTo": "Renomear para:",
+    "labelFile": "arquivo",
+    "labelFolder": "pasta (e seu conteúdo)",
+    "deleteConfirm": "Excluir {label} \"{path}\"?"
   }
 }

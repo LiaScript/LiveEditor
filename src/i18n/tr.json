@@ -291,5 +291,17 @@
     "all": "Tümü",
     "blink": "Yanıp sönme",
     "solid": "Sabit"
+  },
+  "fileExplorer": {
+    "title": "DOSYALAR",
+    "newFile": "Yeni dosya",
+    "newFolder": "Yeni klasör",
+    "upload": "Dosya yükle",
+    "newFileName": "Yeni dosya adı:",
+    "newFolderName": "Yeni klasör adı:",
+    "renameTo": "Yeniden adlandır:",
+    "labelFile": "dosyayı",
+    "labelFolder": "klasörü (ve içeriğini)",
+    "deleteConfirm": "{label} \"{path}\" silinsin mi?"
   }
 }

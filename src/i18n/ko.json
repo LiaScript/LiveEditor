@@ -291,5 +291,17 @@
     "all": "전체",
     "blink": "깜박임",
     "solid": "고정"
+  },
+  "fileExplorer": {
+    "title": "파일",
+    "newFile": "새 파일",
+    "newFolder": "새 폴더",
+    "upload": "파일 업로드",
+    "newFileName": "새 파일 이름:",
+    "newFolderName": "새 폴더 이름:",
+    "renameTo": "이름 변경:",
+    "labelFile": "파일",
+    "labelFolder": "폴더(및 해당 내용)",
+    "deleteConfirm": "{label} \"{path}\"을(를) 삭제하시겠습니까?"
   }
 }

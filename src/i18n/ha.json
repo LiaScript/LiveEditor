@@ -291,5 +291,17 @@
     "all": "Duka",
     "blink": "Ƙyalli",
     "solid": "Ƙarfi"
+  },
+  "fileExplorer": {
+    "title": "FAYILOLI",
+    "newFile": "Sabon fayil",
+    "newFolder": "Sabon folder",
+    "upload": "Loda fayiloli",
+    "newFileName": "Sunan sabon fayil:",
+    "newFolderName": "Sunan sabon folder:",
+    "renameTo": "Sake sanya suna:",
+    "labelFile": "fayil",
+    "labelFolder": "folder (da abincinsa)",
+    "deleteConfirm": "Share {label} \"{path}\"?"
   }
 }

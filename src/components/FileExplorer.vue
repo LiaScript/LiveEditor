@@ -135,7 +135,7 @@ export default defineComponent({
     // -- operations ----------------------------------------------------------
 
     createFile(folder = "") {
-      const name = window.prompt("New file name:", "untitled.txt");
+      const name = window.prompt(this.$t("fileExplorer.newFileName"), this.$t("fileExplorer.newFileDefault"));
       if (!name) return;
       const path = folder ? folder + "/" + name : name;
       const created = this.doc?.createFile(path) || path;
@@ -146,7 +146,7 @@ export default defineComponent({
     },
 
     createFolder(folder = "") {
-      const name = window.prompt("New folder name:", "folder");
+      const name = window.prompt(this.$t("fileExplorer.newFolderName"), this.$t("fileExplorer.newFolderDefault"));
       if (!name) return;
       const path = folder ? folder + "/" + name : name;
       this.doc?.createFolder(path);
@@ -155,7 +155,7 @@ export default defineComponent({
     },
 
     rename(node: TreeNode) {
-      const next = window.prompt("Rename to:", node.name);
+      const next = window.prompt(this.$t("fileExplorer.renameTo"), node.name);
       if (!next || next === node.name) return;
       const parent = node.path.split("/").slice(0, -1).join("/");
       const target = parent ? parent + "/" + next : next;
@@ -163,8 +163,10 @@ export default defineComponent({
     },
 
     remove(node: TreeNode) {
-      const label = node.type === "folder" ? "folder (and its contents)" : "file";
-      if (!window.confirm(`Delete ${label} "${node.path}"?`)) return;
+      const label = node.type === "folder"
+        ? this.$t("fileExplorer.labelFolder")
+        : this.$t("fileExplorer.labelFile");
+      if (!window.confirm(this.$t("fileExplorer.deleteConfirm", { label, path: node.path }))) return;
       this.doc?.deletePath(node.path);
     },
 
@@ -252,19 +254,19 @@ export default defineComponent({
     @drop="onRootDrop"
   >
     <div class="lia-explorer-header">
-      <span class="lia-explorer-title">FILES</span>
+      <span class="lia-explorer-title">{{ $t('fileExplorer.title') }}</span>
       <span class="lia-explorer-tools">
         <i
           class="bi bi-file-earmark-plus"
-          title="New file"
+          :title="$t('fileExplorer.newFile')"
           @click="createFile('')"
         ></i>
         <i
           class="bi bi-folder-plus"
-          title="New folder"
+          :title="$t('fileExplorer.newFolder')"
           @click="createFolder('')"
         ></i>
-        <i class="bi bi-upload" title="Upload files" @click="triggerUpload"></i>
+        <i class="bi bi-upload" :title="$t('fileExplorer.upload')" @click="triggerUpload"></i>
       </span>
     </div>
 

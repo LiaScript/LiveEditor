@@ -291,5 +291,17 @@
     "all": "Vše",
     "blink": "Blikání",
     "solid": "Plný"
+  },
+  "fileExplorer": {
+    "title": "SOUBORY",
+    "newFile": "Nový soubor",
+    "newFolder": "Nová složka",
+    "upload": "Nahrát soubory",
+    "newFileName": "Název nového souboru:",
+    "newFolderName": "Název nové složky:",
+    "renameTo": "Přejmenovat na:",
+    "labelFile": "soubor",
+    "labelFolder": "složku (a její obsah)",
+    "deleteConfirm": "Smazat {label} \"{path}\"?"
   }
 }

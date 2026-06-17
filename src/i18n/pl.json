@@ -291,5 +291,17 @@
     "all": "Wszystko",
     "blink": "Miganie",
     "solid": "Stały"
+  },
+  "fileExplorer": {
+    "title": "PLIKI",
+    "newFile": "Nowy plik",
+    "newFolder": "Nowy folder",
+    "upload": "Prześlij pliki",
+    "newFileName": "Nazwa nowego pliku:",
+    "newFolderName": "Nazwa nowego folderu:",
+    "renameTo": "Zmień nazwę na:",
+    "labelFile": "plik",
+    "labelFolder": "folder (i jego zawartość)",
+    "deleteConfirm": "Usuń {label} \"{path}\"?"
   }
 }

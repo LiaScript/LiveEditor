@@ -291,5 +291,17 @@
     "all": "Tout",
     "blink": "Clignotement",
     "solid": "Fixe"
+  },
+  "fileExplorer": {
+    "title": "FICHIERS",
+    "newFile": "Nouveau fichier",
+    "newFolder": "Nouveau dossier",
+    "upload": "Téléverser des fichiers",
+    "newFileName": "Nom du nouveau fichier :",
+    "newFolderName": "Nom du nouveau dossier :",
+    "renameTo": "Renommer en :",
+    "labelFile": "fichier",
+    "labelFolder": "dossier (et son contenu)",
+    "deleteConfirm": "Supprimer {label} « {path} » ?"
   }
 }

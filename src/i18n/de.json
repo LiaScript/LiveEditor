@@ -292,5 +292,17 @@
     "all": "Alle",
     "blink": "Blinken",
     "solid": "Fest"
+  },
+  "fileExplorer": {
+    "title": "DATEIEN",
+    "newFile": "Neue Datei",
+    "newFolder": "Neuer Ordner",
+    "upload": "Dateien hochladen",
+    "newFileName": "Name der neuen Datei:",
+    "newFolderName": "Name des neuen Ordners:",
+    "renameTo": "Umbenennen in:",
+    "labelFile": "Datei",
+    "labelFolder": "Ordner (und seinen Inhalt)",
+    "deleteConfirm": "{label} \"{path}\" löschen?"
   }
 }

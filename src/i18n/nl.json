@@ -291,5 +291,17 @@
     "all": "Alles",
     "blink": "Knipperen",
     "solid": "Vast"
+  },
+  "fileExplorer": {
+    "title": "BESTANDEN",
+    "newFile": "Nieuw bestand",
+    "newFolder": "Nieuwe map",
+    "upload": "Bestanden uploaden",
+    "newFileName": "Naam nieuw bestand:",
+    "newFolderName": "Naam nieuwe map:",
+    "renameTo": "Hernoemen naar:",
+    "labelFile": "bestand",
+    "labelFolder": "map (en de inhoud ervan)",
+    "deleteConfirm": "{label} \"{path}\" verwijderen?"
   }
 }

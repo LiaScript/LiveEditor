@@ -291,5 +291,17 @@
     "all": "Todo",
     "blink": "Parpadeo",
     "solid": "Sólido"
+  },
+  "fileExplorer": {
+    "title": "ARCHIVOS",
+    "newFile": "Nuevo archivo",
+    "newFolder": "Nueva carpeta",
+    "upload": "Subir archivos",
+    "newFileName": "Nombre del nuevo archivo:",
+    "newFolderName": "Nombre de la nueva carpeta:",
+    "renameTo": "Renombrar a:",
+    "labelFile": "archivo",
+    "labelFolder": "carpeta (y su contenido)",
+    "deleteConfirm": "¿Eliminar {label} \"{path}\"?"
   }
 }

@@ -291,5 +291,17 @@
     "all": "Gbogbo",
     "blink": "Seju",
     "solid": "Dídúró"
+  },
+  "fileExplorer": {
+    "title": "AWỌN FAILI",
+    "newFile": "Faili tuntun",
+    "newFolder": "Àpò tuntun",
+    "upload": "Gbe awọn faili sori",
+    "newFileName": "Orukọ faili tuntun:",
+    "newFolderName": "Orukọ àpò tuntun:",
+    "renameTo": "Tún orukọ sí:",
+    "labelFile": "faili",
+    "labelFolder": "àpò (àti àwọn ohun tó wà nínú rẹ̀)",
+    "deleteConfirm": "Paarẹ {label} \"{path}\"?"
   }
 }

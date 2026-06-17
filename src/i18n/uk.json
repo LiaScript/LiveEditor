@@ -291,5 +291,17 @@
     "all": "Всі",
     "blink": "Блимання",
     "solid": "Суцільний"
+  },
+  "fileExplorer": {
+    "title": "ФАЙЛИ",
+    "newFile": "Новий файл",
+    "newFolder": "Нова папка",
+    "upload": "Завантажити файли",
+    "newFileName": "Ім'я нового файлу:",
+    "newFolderName": "Ім'я нової папки:",
+    "renameTo": "Перейменувати на:",
+    "labelFile": "файл",
+    "labelFolder": "папку (та її вміст)",
+    "deleteConfirm": "Видалити {label} \"{path}\"?"
   }
 }

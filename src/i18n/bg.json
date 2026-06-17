@@ -291,5 +291,17 @@
     "all": "Всички",
     "blink": "Мигане",
     "solid": "Плътен"
+  },
+  "fileExplorer": {
+    "title": "ФАЙЛОВЕ",
+    "newFile": "Нов файл",
+    "newFolder": "Нова папка",
+    "upload": "Качване на файлове",
+    "newFileName": "Име на новия файл:",
+    "newFolderName": "Име на новата папка:",
+    "renameTo": "Преименуване на:",
+    "labelFile": "файл",
+    "labelFolder": "папка (и нейното съдържание)",
+    "deleteConfirm": "Изтриване на {label} \"{path}\"?"
   }
 }

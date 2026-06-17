@@ -291,5 +291,17 @@
     "all": "Mind",
     "blink": "Villogás",
     "solid": "Folyamatos"
+  },
+  "fileExplorer": {
+    "title": "FÁJLOK",
+    "newFile": "Új fájl",
+    "newFolder": "Új mappa",
+    "upload": "Fájlok feltöltése",
+    "newFileName": "Új fájl neve:",
+    "newFolderName": "Új mappa neve:",
+    "renameTo": "Átnevezés erre:",
+    "labelFile": "fájlt",
+    "labelFolder": "mappát (és tartalmát)",
+    "deleteConfirm": "{label} törlése: \"{path}\"?"
   }
 }

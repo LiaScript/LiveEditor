@@ -292,5 +292,19 @@
     "all": "All",
     "blink": "Blink",
     "solid": "Solid"
+  },
+  "fileExplorer": {
+    "title": "FILES",
+    "newFile": "New file",
+    "newFolder": "New folder",
+    "upload": "Upload files",
+    "newFileName": "New file name:",
+    "newFileDefault": "untitled.txt",
+    "newFolderName": "New folder name:",
+    "newFolderDefault": "folder",
+    "renameTo": "Rename to:",
+    "labelFile": "file",
+    "labelFolder": "folder (and its contents)",
+    "deleteConfirm": "Delete {label} \"{path}\"?"
   }
 }

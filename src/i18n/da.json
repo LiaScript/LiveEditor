@@ -291,5 +291,17 @@
     "all": "Alle",
     "blink": "Blink",
     "solid": "Fast"
+  },
+  "fileExplorer": {
+    "title": "FILER",
+    "newFile": "Ny fil",
+    "newFolder": "Ny mappe",
+    "upload": "Upload filer",
+    "newFileName": "Nyt filnavn:",
+    "newFolderName": "Nyt mappenavn:",
+    "renameTo": "Omdøb til:",
+    "labelFile": "fil",
+    "labelFolder": "mappe (og dens indhold)",
+    "deleteConfirm": "Slet {label} \"{path}\"?"
   }
 }

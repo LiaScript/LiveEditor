@@ -291,5 +291,17 @@
     "all": "Fof",
     "blink": "Ɓilɓil",
     "solid": "Tiiɗɗo"
+  },
+  "fileExplorer": {
+    "title": "DOSIYEEJI",
+    "newFile": "Dosiye keso",
+    "newFolder": "Siflorde keso",
+    "upload": "Soodnu dosiyeeji",
+    "newFileName": "Innde dosiye keso:",
+    "newFolderName": "Innde siflorde keso:",
+    "renameTo": "Innde heɓtu:",
+    "labelFile": "dosiye",
+    "labelFolder": "siflorde (e huunde ndee nder mum)",
+    "deleteConfirm": "Suus {label} \"{path}\"?"
   }
 }

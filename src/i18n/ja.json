@@ -291,5 +291,17 @@
     "all": "すべて",
     "blink": "点滅",
     "solid": "固定"
+  },
+  "fileExplorer": {
+    "title": "ファイル",
+    "newFile": "新規ファイル",
+    "newFolder": "新規フォルダ",
+    "upload": "ファイルをアップロード",
+    "newFileName": "新しいファイル名：",
+    "newFolderName": "新しいフォルダ名：",
+    "renameTo": "名前を変更：",
+    "labelFile": "ファイル",
+    "labelFolder": "フォルダ（およびその内容）",
+    "deleteConfirm": "{label}「{path}」を削除しますか？"
   }
 }

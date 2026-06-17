@@ -291,5 +291,17 @@
     "all": "Tutto",
     "blink": "Lampeggio",
     "solid": "Fisso"
+  },
+  "fileExplorer": {
+    "title": "FILE",
+    "newFile": "Nuovo file",
+    "newFolder": "Nuova cartella",
+    "upload": "Carica file",
+    "newFileName": "Nome del nuovo file:",
+    "newFolderName": "Nome della nuova cartella:",
+    "renameTo": "Rinomina in:",
+    "labelFile": "file",
+    "labelFolder": "cartella (e il suo contenuto)",
+    "deleteConfirm": "Eliminare {label} \"{path}\"?"
   }
 }

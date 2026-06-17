@@ -291,5 +291,17 @@
     "all": "Niile",
     "blink": "Na-egbuke",
     "solid": "Siri ike"
+  },
+  "fileExplorer": {
+    "title": "FAỊLỤ",
+    "newFile": "Faịlụ ọhụrụ",
+    "newFolder": "Nchekwa ọhụrụ",
+    "upload": "Bufee faịlụ",
+    "newFileName": "Aha faịlụ ọhụrụ:",
+    "newFolderName": "Aha nchekwa ọhụrụ:",
+    "renameTo": "Tụgharia aha gaa:",
+    "labelFile": "faịlụ",
+    "labelFolder": "nchekwa (na ihe dị n'ime ya)",
+    "deleteConfirm": "Hichapụ {label} \"{path}\"?"
   }
 }

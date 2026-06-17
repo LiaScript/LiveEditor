@@ -291,5 +291,17 @@
     "all": "全部",
     "blink": "闪烁",
     "solid": "实心"
+  },
+  "fileExplorer": {
+    "title": "文件",
+    "newFile": "新建文件",
+    "newFolder": "新建文件夹",
+    "upload": "上传文件",
+    "newFileName": "新文件名：",
+    "newFolderName": "新文件夹名：",
+    "renameTo": "重命名为：",
+    "labelFile": "文件",
+    "labelFolder": "文件夹（及其内容）",
+    "deleteConfirm": "删除{label}「{path}」？"
   }
 }

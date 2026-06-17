@@ -291,5 +291,17 @@
     "all": "Όλα",
     "blink": "Αναβοσβήσιμο",
     "solid": "Σταθερό"
+  },
+  "fileExplorer": {
+    "title": "ΑΡΧΕΙΑ",
+    "newFile": "Νέο αρχείο",
+    "newFolder": "Νέος φάκελος",
+    "upload": "Μεταφόρτωση αρχείων",
+    "newFileName": "Όνομα νέου αρχείου:",
+    "newFolderName": "Όνομα νέου φακέλου:",
+    "renameTo": "Μετονομασία σε:",
+    "labelFile": "αρχείο",
+    "labelFolder": "φάκελο (και το περιεχόμενό του)",
+    "deleteConfirm": "Διαγραφή {label} \"{path}\";"
   }
 }

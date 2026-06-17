@@ -291,5 +291,16 @@
     "all": "الكل",
     "blink": "وميض",
     "solid": "ثابت"
+  },
+  "fileExplorer": {
+    "title": "الملفات",
+    "newFile": "ملف جديد",
+    "newFolder": "مجلد جديد",
+    "upload": "رفع الملفات",
+    "newFileName": "اسم الملف الجديد:",
+    "renameTo": "إعادة التسمية إلى:",
+    "labelFile": "ملف",
+    "labelFolder": "مجلد (ومحتوياته)",
+    "deleteConfirm": "حذف {label} \"{path}\"؟"
   }
 }
