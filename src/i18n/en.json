@@ -152,7 +152,9 @@
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
-      "backHome": "Back to start"
+      "backHome": "Back to start",
+      "emptyRepo": "This repository is empty. An empty README.md will be created to start your project.",
+      "createEmpty": "Create empty README.md"
     },
     "tree": {
       "large": "large",

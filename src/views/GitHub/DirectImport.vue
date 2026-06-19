@@ -6,7 +6,7 @@ import { randomString, getGithubPat } from "../../ts/utils";
 import { getProjectDoc, releaseProjectDoc } from "../../ts/ProjectDoc";
 import * as GitHub from "../../ts/GitHubRepo";
 import type { TreeItem } from "../../ts/GitHubRepo";
-import { importPaths } from "../../ts/githubImport";
+import { importPaths, seedEmptyReadme } from "../../ts/githubImport";
 import PatHelp from "../../components/GitHub/PatHelp.vue";
 
 // Full-page view for the ?/github/owner/repo route: creates a brand new project
@@ -58,17 +58,10 @@ export default defineComponent({
       this.patReason = "";
       const pat = getGithubPat();
 
-      const info = await GitHub.getRepoInfo(this.owner, this.repo, pat);
-      if (GitHub.isError(info)) return this.handleError(info);
-      const branch = info.default_branch;
+      const repo = await GitHub.loadRepoTree(this.owner, this.repo, undefined, pat);
+      if (GitHub.isError(repo)) return this.handleError(repo);
 
-      const head = await GitHub.getRef(this.owner, this.repo, branch, pat);
-      if (GitHub.isError(head)) return this.handleError(head);
-
-      const tree = await GitHub.getTree(this.owner, this.repo, head, pat);
-      if (GitHub.isError(tree)) return this.handleError(tree);
-
-      const paths = tree.items
+      const paths = repo.items
         .filter(
           (i: TreeItem) =>
             i.type === "blob" &&
@@ -84,24 +77,29 @@ export default defineComponent({
       const doc = getProjectDoc(storageId);
       this.status = "importing";
 
-      const result = await importPaths(
-        doc,
-        this.owner,
-        this.repo,
-        tree.items,
-        paths,
-        pat,
-        (p) => (this.progress = p)
-      );
-      if (GitHub.isError(result)) {
-        releaseProjectDoc(storageId);
-        return this.handleError(result);
+      if (repo.empty) {
+        // empty repository: start the project with an empty README.md
+        seedEmptyReadme(doc);
+      } else {
+        const result = await importPaths(
+          doc,
+          this.owner,
+          this.repo,
+          repo.items,
+          paths,
+          pat,
+          (p) => (this.progress = p)
+        );
+        if (GitHub.isError(result)) {
+          releaseProjectDoc(storageId);
+          return this.handleError(result);
+        }
       }
 
       const database = new Dexie();
       await database.put(storageId, {
         title: this.repo,
-        github: { owner: this.owner, repo: this.repo, branch, commitSha: head },
+        github: { owner: this.owner, repo: this.repo, branch: repo.branch, commitSha: repo.commitSha },
       });
 
       navigateTo("?/edit/" + storageId);

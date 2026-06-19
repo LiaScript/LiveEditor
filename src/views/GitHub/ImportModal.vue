@@ -6,7 +6,7 @@ import { randomString, getGithubPat } from "../../ts/utils";
 import { getProjectDoc, releaseProjectDoc } from "../../ts/ProjectDoc";
 import * as GitHub from "../../ts/GitHubRepo";
 import type { TreeItem } from "../../ts/GitHubRepo";
-import { importPaths } from "../../ts/githubImport";
+import { importPaths, seedEmptyReadme } from "../../ts/githubImport";
 import GitHubModal from "../../components/GitHub/GitHubModal.vue";
 import GitHubFileTree from "../../components/GitHub/GitHubFileTree.vue";
 import PatHelp from "../../components/GitHub/PatHelp.vue";
@@ -37,6 +37,7 @@ export default defineComponent({
       commitSha: "",
       items: [] as TreeItem[],
       truncated: false,
+      emptyRepo: false,
       selected: [] as string[],
       // import progress
       progress: { done: 0, total: 0, path: "" },
@@ -62,6 +63,7 @@ export default defineComponent({
       this.items = [];
       this.selected = [];
       this.truncated = false;
+      this.emptyRepo = false;
       this.errorMessage = "";
       this.patReason = "";
     },
@@ -97,40 +99,24 @@ export default defineComponent({
       this.owner = ref.owner;
       this.repo = ref.repo;
 
-      let branch = ref.branch;
-      if (!branch) {
-        const info = await GitHub.getRepoInfo(ref.owner, ref.repo, pat);
-        if (GitHub.isError(info)) {
-          this.busy = false;
-          this.handleError(info);
-          return;
-        }
-        branch = info.default_branch;
-      }
-      this.branch = branch!;
-
-      const head = await GitHub.getRef(ref.owner, ref.repo, branch!, pat);
-      if (GitHub.isError(head)) {
-        this.busy = false;
-        this.handleError(head);
-        return;
-      }
-      this.commitSha = head;
-
-      const tree = await GitHub.getTree(ref.owner, ref.repo, head, pat);
+      const result = await GitHub.loadRepoTree(ref.owner, ref.repo, ref.branch, pat);
       this.busy = false;
-      if (GitHub.isError(tree)) {
-        this.handleError(tree);
+      if (GitHub.isError(result)) {
+        this.handleError(result);
         return;
       }
 
-      let items = tree.items;
+      this.branch = result.branch;
+      this.commitSha = result.commitSha;
+      this.emptyRepo = result.empty;
+
+      let items = result.items;
       if (ref.path) {
         const prefix = ref.path.replace(/\/$/, "") + "/";
         items = items.filter((i) => i.path === ref.path || i.path.startsWith(prefix));
       }
       this.items = items;
-      this.truncated = tree.truncated;
+      this.truncated = result.truncated;
       this.step = "select";
     },
 
@@ -143,7 +129,7 @@ export default defineComponent({
     },
 
     async startImport() {
-      if (this.selected.length === 0) return;
+      if (!this.emptyRepo && this.selected.length === 0) return;
       this.step = "importing";
       this.busy = true;
       this.errorMessage = "";
@@ -159,24 +145,30 @@ export default defineComponent({
       let release = !isNew;
 
       try {
-        const result = await importPaths(
-          doc,
-          this.owner,
-          this.repo,
-          this.items,
-          this.selected,
-          getGithubPat(),
-          (p) => (this.progress = p)
-        );
+        if (this.emptyRepo) {
+          // empty repository: start the project with an empty README.md
+          seedEmptyReadme(doc);
+          this.importedCount = 1;
+        } else {
+          const result = await importPaths(
+            doc,
+            this.owner,
+            this.repo,
+            this.items,
+            this.selected,
+            getGithubPat(),
+            (p) => (this.progress = p)
+          );
 
-        if (GitHub.isError(result)) {
-          this.busy = false;
-          this.step = "select";
-          this.handleError(result);
-          return;
+          if (GitHub.isError(result)) {
+            this.busy = false;
+            this.step = "select";
+            this.handleError(result);
+            return;
+          }
+
+          this.importedCount = result.imported;
         }
-
-        this.importedCount = result.imported;
 
         // persist the repo link so push/pull can target it automatically
         const database = new Dexie();
@@ -245,23 +237,29 @@ export default defineComponent({
         <span class="badge bg-secondary">{{ branch }}</span>
       </div>
 
-      <div v-if="truncated" class="alert alert-warning py-1 px-2 small">
-        {{ $t("github.import.truncated") }}
+      <div v-if="emptyRepo" class="alert alert-info">
+        {{ $t("github.import.emptyRepo") }}
       </div>
 
-      <div class="d-flex gap-2 mb-2">
-        <button class="btn btn-sm btn-outline-secondary" @click="selectAll(true)">
-          {{ $t("github.import.selectAll") }}
-        </button>
-        <button class="btn btn-sm btn-outline-secondary" @click="selectAll(false)">
-          {{ $t("github.import.selectNone") }}
-        </button>
-        <span class="ms-auto small text-muted align-self-center">
-          {{ $t("github.import.selectedCount", { n: selected.length }) }}
-        </span>
-      </div>
+      <template v-else>
+        <div v-if="truncated" class="alert alert-warning py-1 px-2 small">
+          {{ $t("github.import.truncated") }}
+        </div>
 
-      <GitHubFileTree ref="tree" :items="items" @change="onSelectionChange" />
+        <div class="d-flex gap-2 mb-2">
+          <button class="btn btn-sm btn-outline-secondary" @click="selectAll(true)">
+            {{ $t("github.import.selectAll") }}
+          </button>
+          <button class="btn btn-sm btn-outline-secondary" @click="selectAll(false)">
+            {{ $t("github.import.selectNone") }}
+          </button>
+          <span class="ms-auto small text-muted align-self-center">
+            {{ $t("github.import.selectedCount", { n: selected.length }) }}
+          </span>
+        </div>
+
+        <GitHubFileTree ref="tree" :items="items" @change="onSelectionChange" />
+      </template>
 
       <div v-if="storageId" class="mt-3">
         <label class="form-label small d-block">{{ $t("github.import.targetLabel") }}</label>
@@ -308,10 +306,10 @@ export default defineComponent({
       <button
         v-if="step === 'select'"
         class="btn btn-primary"
-        :disabled="busy || selected.length === 0"
+        :disabled="busy || (!emptyRepo && selected.length === 0)"
         @click="startImport"
       >
-        {{ $t("github.import.importBtn", { n: selected.length }) }}
+        {{ emptyRepo ? $t("github.import.createEmpty") : $t("github.import.importBtn", { n: selected.length }) }}
       </button>
       <button v-if="step === 'done'" class="btn btn-primary" @click="close">
         {{ $t("github.close") }}

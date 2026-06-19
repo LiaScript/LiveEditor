@@ -170,6 +170,63 @@ export async function getTree(
   return { items, truncated: !!json.truncated }
 }
 
+export interface RepoTree {
+  branch: string
+  // head commit sha; "" when the repository is empty (no commits yet)
+  commitSha: string
+  items: TreeItem[]
+  truncated: boolean
+  empty: boolean
+}
+
+/**
+ * Resolve a repository's branch + recursive file tree in one call. An *empty*
+ * repository (no commits/branch yet) is reported as `empty: true` with an empty
+ * item list rather than as an error, so callers can seed an empty README.md
+ * instead of failing.
+ */
+export async function loadRepoTree(
+  owner: string,
+  repo: string,
+  branchHint: string | undefined,
+  pat?: string
+): Promise<RepoTree | GitHubError> {
+  let branch = branchHint
+  if (!branch) {
+    const info = await getRepoInfo(owner, repo, pat)
+    if (isError(info)) return info
+    branch = info.default_branch || 'main'
+  }
+
+  const head = await getRef(owner, repo, branch, pat)
+  if (isError(head)) {
+    // A missing ref can mean either the repository is empty or it does not
+    // exist / is inaccessible. Confirm via the repo endpoint to disambiguate.
+    if (head.error === 'not_found') {
+      const info = await getRepoInfo(owner, repo, pat)
+      if (isError(info)) return info
+      return { branch, commitSha: '', items: [], truncated: false, empty: true }
+    }
+    return head
+  }
+
+  const tree = await getTree(owner, repo, head, pat)
+  if (isError(tree)) {
+    if (tree.error === 'not_found') {
+      return { branch, commitSha: head, items: [], truncated: false, empty: true }
+    }
+    return tree
+  }
+
+  return {
+    branch,
+    commitSha: head,
+    items: tree.items,
+    truncated: tree.truncated,
+    empty: tree.items.length === 0,
+  }
+}
+
 function base64ToBytes(b64: string): Uint8Array {
   const clean = b64.replace(/\s/g, '')
   const binary = atob(clean)

@@ -99,23 +99,17 @@ export default defineComponent({
       const pat = getGithubPat();
       const { owner, repo, branch } = this.github;
 
-      const head = await GitHub.getRef(owner, repo, branch, pat);
-      if (GitHub.isError(head)) {
-        this.handleError(head);
+      const result = await GitHub.loadRepoTree(owner, repo, branch, pat);
+      if (GitHub.isError(result)) {
+        this.handleError(result);
         this.step = "review";
         return;
       }
-      this.headSha = head;
+      this.headSha = result.commitSha;
+      this.items = result.items;
 
-      const tree = await GitHub.getTree(owner, repo, head, pat);
-      if (GitHub.isError(tree)) {
-        this.handleError(tree);
-        this.step = "review";
-        return;
-      }
-      this.items = tree.items;
-
-      const changes = await computeChanges(this.doc!, tree.items);
+      // empty repository: nothing to pull, treat as up to date instead of erroring
+      const changes = result.empty ? [] : await computeChanges(this.doc!, result.items);
       // "deleted" (local-centric) means the file exists only on the remote -> new;
       // "modified" means the remote differs. Both are things we can pull in.
       this.incoming = changes

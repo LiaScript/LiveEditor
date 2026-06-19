@@ -84,6 +84,8 @@ export interface FileMeta {
   type: FileType;
   mime?: string;
   size?: number;
+  /** True for the entry backed by the main course document (see mainPath). */
+  main?: boolean;
 }
 
 export interface FileEntry {
@@ -115,6 +117,8 @@ export class ProjectDoc {
   readonly files: Y.Map<FileMeta>;
   readonly fileData: Y.Map<Uint8Array>;
   readonly fileText: Y.Map<Y.Text>;
+  /** project-level settings; currently holds `mainPath` (see getMainPath). */
+  readonly meta: Y.Map<any>;
 
   /** internal reference counter for shared lifetime management */
   refCount = 0;
@@ -191,6 +195,34 @@ export class ProjectDoc {
     this.files = this.ydoc.getMap("files");
     this.fileData = this.ydoc.getMap("fileData");
     this.fileText = this.ydoc.getMap("fileText");
+    this.meta = this.ydoc.getMap("projectMeta");
+  }
+
+  // ---------------------------------------------------------------------------
+  // main document — the single legacy course text lives in ydoc.getText(storageId)
+  // (this.content) and must stay there for backwards compatibility. It is still
+  // surfaced as a normal, renameable file in the explorer via `mainPath`, and
+  // all text/data accessors below transparently route that path to `content`.
+  // ---------------------------------------------------------------------------
+
+  /** Path under which the main course document appears in the explorer. */
+  getMainPath(): string {
+    const p = this.meta.get("mainPath");
+    return ProjectDoc.normalize(typeof p === "string" && p ? p : "README.md");
+  }
+
+  private setMainPathInternal(path: string) {
+    this.meta.set("mainPath", ProjectDoc.normalize(path));
+  }
+
+  /** Whether `path` resolves to the main course document. */
+  isMain(path: string): boolean {
+    return ProjectDoc.normalize(path) === this.getMainPath();
+  }
+
+  /** A path is "taken" if a real file/folder exists OR it is the main path. */
+  private taken(norm: string): boolean {
+    return this.files.has(norm) || norm === this.getMainPath();
   }
 
   // ---------------------------------------------------------------------------
@@ -222,7 +254,7 @@ export class ProjectDoc {
   }
 
   exists(path: string): boolean {
-    return this.files.has(ProjectDoc.normalize(path));
+    return this.taken(ProjectDoc.normalize(path));
   }
 
   createFile(path: string, mime?: string): string {
@@ -246,6 +278,10 @@ export class ProjectDoc {
 
   deletePath(path: string) {
     const norm = ProjectDoc.normalize(path);
+    // Never delete the main course document — legacy code depends on its text
+    // (ydoc.getText(storageId)). This also guards a folder that contains it.
+    const mainPath = this.getMainPath();
+    if (norm === mainPath || mainPath.startsWith(norm + "/")) return;
     const prefix = norm + "/";
     this.ydoc.transact(() => {
       for (const key of Array.from(this.files.keys())) {
@@ -262,11 +298,21 @@ export class ProjectDoc {
   renamePath(from: string, to: string) {
     const src = ProjectDoc.normalize(from);
     const dst = ProjectDoc.normalize(to);
-    if (src === dst || !this.files.has(src)) return;
+    if (src === dst) return;
+    // The main document may not have an explicit `files` entry (it is injected
+    // by entries()), so allow renaming it / a folder containing it as well.
+    const mainPath = this.getMainPath();
+    const mainAffected = mainPath === src || mainPath.startsWith(src + "/");
+    if (!this.files.has(src) && !mainAffected) return;
 
     const srcPrefix = src + "/";
     this.ydoc.transact(() => {
       this.ensureParents(dst);
+      // keep the main document's path in sync (content itself never moves)
+      if (mainAffected) {
+        const newMain = mainPath === src ? dst : dst + "/" + mainPath.slice(srcPrefix.length);
+        this.setMainPathInternal(newMain);
+      }
       for (const key of Array.from(this.files.keys())) {
         let target: string | null = null;
         if (key === src) {
@@ -313,7 +359,7 @@ export class ProjectDoc {
   /** Find a free path by appending `-1`, `-2`, ... before the extension. */
   uniquePath(path: string): string {
     const norm = ProjectDoc.normalize(path);
-    if (!this.files.has(norm)) return norm;
+    if (!this.taken(norm)) return norm;
 
     const slash = norm.lastIndexOf("/");
     const dir = slash >= 0 ? norm.slice(0, slash + 1) : "";
@@ -327,7 +373,7 @@ export class ProjectDoc {
     do {
       candidate = `${dir}${stem}-${i}${ext}`;
       i++;
-    } while (this.files.has(candidate));
+    } while (this.taken(candidate));
     return candidate;
   }
 
@@ -349,6 +395,10 @@ export class ProjectDoc {
 
   writeFileData(path: string, data: Uint8Array, mime?: string): string {
     const norm = ProjectDoc.normalize(path);
+    // The main document is always text backed by `content`; decode into it.
+    if (norm === this.getMainPath()) {
+      return this.setText(norm, new TextDecoder().decode(data), mime || "text/markdown");
+    }
     this.ydoc.transact(() => {
       this.ensureParents(norm);
       this.files.set(norm, { type: "file", mime, size: data.byteLength });
@@ -360,6 +410,10 @@ export class ProjectDoc {
 
   readFileData(path: string): Uint8Array | undefined {
     const norm = ProjectDoc.normalize(path);
+    // the main document's text lives in `content` (legacy ydoc.getText(storageId))
+    if (norm === this.getMainPath()) {
+      return new TextEncoder().encode(this.content.toString());
+    }
     const bytes = this.fileData.get(norm);
     if (bytes) return bytes;
     // text files are stored as Y.Text -> encode them back to bytes on demand
@@ -379,6 +433,8 @@ export class ProjectDoc {
    */
   getText(path: string): Y.Text {
     const norm = ProjectDoc.normalize(path);
+    // the main document is the legacy course text in `content`
+    if (norm === this.getMainPath()) return this.content;
     let yt = this.fileText.get(norm);
     if (!yt) {
       const created = new Y.Text();
@@ -401,6 +457,14 @@ export class ProjectDoc {
   /** Replace the content of a text file (creating it if necessary). */
   setText(path: string, text: string, mime?: string): string {
     const norm = ProjectDoc.normalize(path);
+    // route the main document to the legacy `content` text
+    if (norm === this.getMainPath()) {
+      this.ydoc.transact(() => {
+        if (this.content.length) this.content.delete(0, this.content.length);
+        if (text) this.content.insert(0, text);
+      });
+      return norm;
+    }
     this.ydoc.transact(() => {
       this.ensureParents(norm);
       this.files.set(norm, { type: "file", mime, size: text.length });
@@ -429,10 +493,30 @@ export class ProjectDoc {
     return this.writeFileData(norm, data, mime);
   }
 
-  /** All explorer entries as a flat list (sorted by path). */
+  /** All explorer entries as a flat list (sorted by path). Always includes the
+   *  main course document as a regular file entry (marked `main: true`), even
+   *  when it has no explicit `files` record. */
   entries(): FileEntry[] {
     const list: FileEntry[] = [];
     this.files.forEach((meta, path) => list.push({ path, meta }));
+
+    const mainPath = this.getMainPath();
+    const existing = list.find((e) => e.path === mainPath);
+    if (existing) {
+      existing.meta = { ...existing.meta, type: "file", main: true };
+    } else {
+      // ensure the folders leading to the main document are visible too
+      const segments = mainPath.split("/");
+      let prefix = "";
+      for (let i = 0; i < segments.length - 1; i++) {
+        prefix = prefix ? prefix + "/" + segments[i] : segments[i];
+        if (!list.some((e) => e.path === prefix)) {
+          list.push({ path: prefix, meta: { type: "folder" } });
+        }
+      }
+      list.push({ path: mainPath, meta: { type: "file", mime: "text/markdown", main: true } });
+    }
+
     list.sort((a, b) => a.path.localeCompare(b.path));
     return list;
   }

@@ -76,6 +76,15 @@ export async function computeChanges(
   return changes;
 }
 
+/**
+ * Used when importing from an empty repository: the main course document
+ * (README.md by default) already exists implicitly and starts empty, so the
+ * project simply opens with that editable starter file. Returns its path.
+ */
+export function seedEmptyReadme(doc: ProjectDoc): string {
+  return doc.getMainPath();
+}
+
 export interface ImportProgress {
   done: number;
   total: number;

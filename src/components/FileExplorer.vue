@@ -37,6 +37,7 @@ export default defineComponent({
     const self = this as any;
     return {
       explorer: {
+        isActive: (path: string) => self.activePath === path,
         isExpanded: (path: string) => self.expandedSet.has(path),
         toggle: (path: string) => self.toggle(path),
         open: (node: TreeNode) => self.openNode(node),
@@ -52,13 +53,18 @@ export default defineComponent({
 
   created() {
     this.doc = getProjectDoc(this.storageId, this.connection);
+    // highlight the main course document by default (the editor opens it first)
+    this.activePath = this.doc.getMainPath();
     this.rebuild();
     this.doc.files.observe(this.rebuild);
+    // the main document's path lives in `meta` (rename updates it there)
+    this.doc.meta.observe(this.rebuild);
   },
 
   unmounted() {
     if (this.doc) {
       this.doc.files.unobserve(this.rebuild);
+      this.doc.meta.unobserve(this.rebuild);
       releaseProjectDoc(this.storageId);
       this.doc = null;
     }
@@ -97,6 +103,7 @@ export default defineComponent({
         // the final node carries the real metadata
         parent.type = meta.type;
         parent.mime = meta.mime;
+        parent.main = (meta as any).main;
       }
 
       const sort = (nodes: TreeNode[]) => {
@@ -118,18 +125,19 @@ export default defineComponent({
       }
     },
 
-    selectMain() {
-      this.activePath = "";
-      this.$emit("open-main");
-    },
-
     openNode(node: TreeNode) {
       if (node.type === "folder") {
         this.toggle(node.path);
         return;
       }
       this.activePath = node.path;
-      this.$emit("open-asset", { path: node.path, mime: node.mime });
+      // the main course document opens through the dedicated editor path so the
+      // preview/compile keep their "main" semantics, even after a rename
+      if (node.main) {
+        this.$emit("open-main");
+      } else {
+        this.$emit("open-asset", { path: node.path, mime: node.mime });
+      }
     },
 
     // -- operations ----------------------------------------------------------
@@ -271,19 +279,6 @@ export default defineComponent({
     </div>
 
     <ul class="lia-explorer-tree">
-      <li class="lia-node">
-        <div
-          class="lia-node-row main-doc"
-          :class="{ active: activePath === '' }"
-          style="padding-left: 6px"
-          @click="selectMain"
-        >
-          <span class="lia-chevron"></span>
-          <i class="bi bi-markdown"></i>
-          <span class="lia-node-label">{{ mainName }}</span>
-        </div>
-      </li>
-
       <FileNode v-for="node in tree" :key="node.path" :node="node" :depth="0" />
     </ul>
 

@@ -6,6 +6,8 @@ export interface TreeNode {
   path: string;
   type: "file" | "folder";
   mime?: string;
+  /** True for the node backed by the main course document. */
+  main?: boolean;
   children: TreeNode[];
 }
 
@@ -122,7 +124,7 @@ export default defineComponent({
   <li class="lia-node">
     <div
       class="lia-node-row"
-      :class="{ folder: isFolder }"
+      :class="{ folder: isFolder, active: api.isActive(node.path) }"
       :style="{ paddingLeft: indent }"
       draggable="true"
       @click="onClick"
@@ -139,6 +141,11 @@ export default defineComponent({
 
       <i class="bi" :class="icon"></i>
       <span class="lia-node-label" :title="node.path">{{ node.name }}</span>
+      <i
+        v-if="node.main"
+        class="bi bi-house-door-fill lia-main-badge"
+        :title="'main course document'"
+      ></i>
 
       <span class="lia-node-actions">
         <i
@@ -164,6 +171,7 @@ export default defineComponent({
           @click.stop="api.download(node)"
         ></i>
         <i
+          v-if="!node.main"
           class="bi bi-trash"
           title="Delete"
           @click.stop="api.remove(node)"
@@ -207,6 +215,10 @@ export default defineComponent({
   background-color: rgba(0, 0, 0, 0.06);
 }
 
+.lia-node-row.active {
+  background-color: rgba(13, 110, 253, 0.12);
+}
+
 .lia-chevron {
   display: inline-block;
   width: 12px;
@@ -219,6 +231,13 @@ export default defineComponent({
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 1 1 auto;
+}
+
+.lia-main-badge {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: var(--bs-primary, #0d6efd);
+  opacity: 0.7;
 }
 
 .lia-node-actions {
