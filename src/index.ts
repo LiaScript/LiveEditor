@@ -111,11 +111,11 @@ const router = async () => {
     { path: '/show/file/:fileUrl', view: () => import('./views/File.vue') },
     {
       path: '/export/github/&code=:code&state=:stepId2',
-      view: () => import('./views/Export/GitHub.vue'),
+      view: () => import('./views/Export/GitHub/Gist.vue'),
     },
     {
       path: '/export/github/:stepId1',
-      view: () => import('./views/Export/GitHub.vue'),
+      view: () => import('./views/Export/GitHub/Gist.vue'),
     },
   ]
 

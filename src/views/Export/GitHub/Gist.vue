@@ -1,9 +1,9 @@
 <script lang="ts">
-import Dexie from "../../ts/indexDB";
+import Dexie from "../../../ts/indexDB";
 import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
-import * as GitHub from "../../ts/GitHub";
-import * as Utils from "../../ts/utils";
+import * as GitHub from "../../../ts/Gist";
+import * as Utils from "../../../ts/utils";
 
 export default {
   props: ["stepId1", "code", "stepId2"],
