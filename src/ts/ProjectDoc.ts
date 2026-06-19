@@ -32,6 +32,11 @@ const IMAGE_EXTENSIONS = new Set([
   "png", "jpg", "jpeg", "gif", "webp", "bmp", "avif", "ico", "svg",
 ]);
 
+/** File extensions that should be played as audio. */
+const AUDIO_EXTENSIONS = new Set([
+  "mp3", "ogg", "wav", "flac", "aac", "opus", "m4a",
+]);
+
 /** File extensions that should be played as a video. */
 const VIDEO_EXTENSIONS = new Set([
   "webm", "mp4", "ogv", "ogg", "mov", "avi", "mkv", "m4v",
@@ -60,6 +65,11 @@ export function isTextFile(path: string, mime?: string): boolean {
 export function isImageFile(path: string, mime?: string): boolean {
   if ((mime || "").toLowerCase().startsWith("image/")) return true;
   return IMAGE_EXTENSIONS.has(extensionOf(path));
+}
+
+export function isAudioFile(path: string, mime?: string): boolean {
+  if ((mime || "").toLowerCase().startsWith("audio/")) return true;
+  return AUDIO_EXTENSIONS.has(extensionOf(path));
 }
 
 /** Decide whether a path should be played as a video. */

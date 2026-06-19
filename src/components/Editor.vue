@@ -9,6 +9,7 @@ import {
   ProjectDoc,
   isTextFile,
   isImageFile,
+  isAudioFile,
   isVideoFile,
 } from "../ts/ProjectDoc";
 import { editor, KeyMod, KeyCode, languages, IDisposable } from "monaco-editor";
@@ -131,9 +132,10 @@ export default {
       projectDoc: null as ProjectDoc | null,
       activePath: "",
       activeMime: "",
-      activeView: "text" as "text" | "image" | "video" | "binary",
+      activeView: "text" as "text" | "image" | "video" | "audio" | "binary",
       imageUrl: "",
       videoUrl: "",
+      audioUrl: "",
     };
   },
 
@@ -248,6 +250,13 @@ export default {
       this.imageUrl = url;
     },
 
+    setAudio(url: string) {
+      if (this.audioUrl && this.audioUrl !== url) {
+        URL.revokeObjectURL(this.audioUrl);
+      }
+      this.audioUrl = url;
+    },
+
     setVideo(url: string) {
       if (this.videoUrl && this.videoUrl !== url) {
         URL.revokeObjectURL(this.videoUrl);
@@ -306,6 +315,7 @@ export default {
       if (isImageFile(path, mime)) {
         const data = this.projectDoc.readFileData(path);
         this.setVideo("");
+        this.setAudio("");
         this.setImage(
           data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "" })) : ""
         );
@@ -313,9 +323,21 @@ export default {
         return;
       }
 
+       if (isAudioFile(path, mime)) {
+        const data = this.projectDoc.readFileData(path);
+        this.setImage("");
+        this.setVideo("");
+        this.setAudio(
+          data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "audio/mpeg" })) : ""
+        );
+        this.activeView = "audio";
+        return;
+      }
+
       if (isVideoFile(path, mime)) {
         const data = this.projectDoc.readFileData(path);
         this.setImage("");
+        this.setAudio("");
         this.setVideo(
           data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "video/webm" })) : ""
         );
@@ -326,6 +348,7 @@ export default {
       if (isTextFile(path, mime)) {
         this.setImage("");
         this.setVideo("");
+        this.setAudio("");
         this.activeView = "text";
         this.bindDoc(this.projectDoc.getText(path), this.languageFor(path));
         if (Editor) Editor.focus();
@@ -1954,8 +1977,12 @@ I (study) ~[[ am going to study ]]~ harder this term.
     <img :src="imageUrl" :alt="activePath" />
   </div>
 
+  <div v-show="activeView === 'audio'" class="lia-file-view lia-audio-view">
+    <audio v-if="audioUrl" :key="audioUrl" :src="audioUrl" controls></audio>
+  </div>
+
   <div v-show="activeView === 'video'" class="lia-file-view lia-video-view">
-    <video v-if="videoUrl" :src="videoUrl" controls></video>
+    <video v-if="videoUrl" :key="videoUrl" :src="videoUrl" controls></video>
   </div>
 
   <div v-show="activeView === 'binary'" class="lia-file-view lia-binary-view">
@@ -1995,7 +2022,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 }
 
 .lia-file-view {
-  height: 100vh;
+  height: 100%;
   overflow: auto;
   display: flex;
   align-items: center;
