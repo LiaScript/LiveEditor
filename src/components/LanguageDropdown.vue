@@ -76,7 +76,7 @@ export default {
     <ul
       class="dropdown-menu"
       :class="{ show: open }"
-      style="z-index: 1000; left: 50%; transform: translateX(-50%)"
+      style="left: 50%; transform: translateX(-50%); max-height: calc(100vh - 4rem); overflow-y: auto; overscroll-behavior: contain;"
     >
       <li v-for="locale in $i18n.availableLocales" :key="locale">
         <button
