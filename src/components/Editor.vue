@@ -131,6 +131,7 @@ export default {
       blob: null,
       projectDoc: null as ProjectDoc | null,
       activePath: "",
+      previewPath: "",
       activeMime: "",
       activeView: "text" as "text" | "image" | "video" | "audio" | "binary",
       imageUrl: "",
@@ -216,13 +217,33 @@ export default {
       }
     },
 
-    // The preview always renders the main LiaScript course, regardless of which
-    // file is currently active in the editor.
+    // The main LiaScript course (exported as README.md), regardless of which
+    // file is currently active in the editor. Used for export/download.
     getMainValue() {
       if (this.projectDoc) {
         return this.projectDoc.content.toString();
       }
       return this.getValue();
+    },
+
+    // The markdown document currently shown in the preview. Defaults to the main
+    // course (previewPath === ""); switching to another markdown file repoints
+    // it. Read straight from Yjs so it stays current even when the editor is
+    // showing a non-markdown file (whose preview keeps the last markdown).
+    getPreviewValue() {
+      if (!this.projectDoc) return this.getValue();
+      if (this.previewPath === "") return this.projectDoc.content.toString();
+      const yt = this.projectDoc.getText(this.previewPath);
+      return yt ? yt.toString() : this.projectDoc.content.toString();
+    },
+
+    // Repoint the preview to a markdown document and trigger a recompile, but
+    // only when it actually changes (opening assets/code leaves it untouched).
+    setPreviewPath(path: string) {
+      if (path !== this.previewPath) {
+        this.previewPath = path;
+        this.$emit("compile");
+      }
     },
 
     // ----- multi-file editing -------------------------------------------------
@@ -302,6 +323,7 @@ export default {
       this.activeMime = "";
       this.activeView = "text";
       this.bindDoc(this.projectDoc.content, "markdown");
+      this.setPreviewPath("");
       if (Editor) Editor.focus();
     },
 
@@ -350,7 +372,9 @@ export default {
         this.setVideo("");
         this.setAudio("");
         this.activeView = "text";
-        this.bindDoc(this.projectDoc.getText(path), this.languageFor(path));
+        const language = this.languageFor(path);
+        this.bindDoc(this.projectDoc.getText(path), language);
+        if (language === "markdown") this.setPreviewPath(path);
         if (Editor) Editor.focus();
         return;
       }

@@ -314,8 +314,9 @@ export default {
       if (this.preview && this.editorIsReady) {
         console.log("liascript: compile");
 
-        // Always render the main course, no matter which file is active.
-        let code = this.$refs.editor.getMainValue();
+        // Render the markdown document currently selected for preview (the main
+        // course by default; another markdown file once the user switches).
+        let code = this.$refs.editor.getPreviewValue();
 
         if (code.trim().length == 0) {
           code = tutorial;
