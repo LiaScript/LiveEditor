@@ -123,7 +123,86 @@
   "github": {
     "exporting": "Exporting to GitHub gist...",
     "badCredentials": "Bad credentials, reloading page",
-    "error": "The export to GitHub failed:"
+    "error": "The export to GitHub failed:",
+    "close": "Close",
+    "back": "Back",
+    "menu": {
+      "header": "GitHub repository",
+      "import": "Import from GitHub",
+      "importTooltip": "Import files from a GitHub repository",
+      "push": "Push to GitHub",
+      "pushTooltip": "Commit and push changes to the linked repository",
+      "pull": "Pull from GitHub",
+      "pullTooltip": "Fetch changes from the linked repository"
+    },
+    "import": {
+      "title": "Import from GitHub",
+      "repoLabel": "Repository",
+      "repoPlaceholder": "owner/repo or https://github.com/owner/repo",
+      "repoHint": "Public repositories can be imported without a token.",
+      "load": "Load",
+      "loadingRepo": "Loading repository…",
+      "truncated": "This repository is very large; the file list was truncated by GitHub.",
+      "selectAll": "Select all",
+      "selectNone": "Select none",
+      "selectedCount": "{n} selected",
+      "targetLabel": "Import into",
+      "targetCurrent": "Current project",
+      "targetNew": "New project",
+      "importing": "Importing files…",
+      "importBtn": "Import {n} file(s)",
+      "done": "Imported {n} file(s).",
+      "backHome": "Back to start"
+    },
+    "tree": {
+      "large": "large",
+      "tooBig": "too big"
+    },
+    "push": {
+      "title": "Push to GitHub",
+      "computing": "Computing changes…",
+      "noChanges": "No local changes to push.",
+      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "added": "added",
+      "modified": "modified",
+      "deleted": "deleted",
+      "viewDiff": "Diff",
+      "diffHint": "left: GitHub · right: local",
+      "commitMessage": "Commit message",
+      "defaultMessage": "Update from LiaScript LiveEdit",
+      "pushing": "Pushing to GitHub…",
+      "pushBtn": "Commit & push {n} file(s)",
+      "done": "Changes pushed successfully."
+    },
+    "pull": {
+      "title": "Pull from GitHub",
+      "checking": "Checking for changes…",
+      "upToDate": "Your project is up to date with GitHub.",
+      "changesFound": "{n} file(s) changed on GitHub.",
+      "added": "new",
+      "modified": "changed",
+      "importing": "Importing changes…",
+      "pullBtn": "Pull {n} file(s)",
+      "done": "Pulled {n} file(s)."
+    },
+    "pat": {
+      "rateLimitTitle": "GitHub rate limit reached",
+      "authTitle": "Authentication required",
+      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "howtoToggle": "How do I create a token?",
+      "step1": "Open {link}.",
+      "step2": "Choose a name and an expiration, then select the repositories you want to use.",
+      "step3Read": "Under \"Repository permissions\" set \"Contents\" to \"Read-only\".",
+      "step3Write": "Under \"Repository permissions\" set \"Contents\" to \"Read and write\".",
+      "step4": "Generate the token, copy it and paste it below.",
+      "placeholder": "github_pat_…",
+      "save": "Save"
+    },
+    "errors": {
+      "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",
+      "notFound": "Repository, branch or file not found.",
+      "network": "Could not reach GitHub. Please check your connection."
+    }
   },
   "nostr": {
     "title": "Share via Nostr",

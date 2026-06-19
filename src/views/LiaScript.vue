@@ -17,6 +17,9 @@ import "splitpanes/dist/splitpanes.css";
 import { defineAsyncComponent } from "vue";
 import { LiaScriptURL } from "../ts/utils";
 const NostrModal = defineAsyncComponent(() => import("./Export/Nostr.vue"));
+const GitHubImportModal = defineAsyncComponent(() => import("./GitHub/ImportModal.vue"));
+const GitHubPushModal = defineAsyncComponent(() => import("./GitHub/PushModal.vue"));
+const GitHubPullModal = defineAsyncComponent(() => import("./GitHub/PullModal.vue"));
 
 import logoImg from "url:../../assets/logo.png";
 
@@ -74,6 +77,9 @@ export default {
       resizing: false,
       LiaScriptURL,
       nostrModalVisible: false,
+      githubImportVisible: false,
+      githubPushVisible: false,
+      githubPullVisible: false,
       showFiles: false,
       showToolbar: true,
     };
@@ -119,6 +125,24 @@ export default {
 
     nostr() {
       this.nostrModalVisible = true;
+    },
+
+    githubImport() {
+      this.githubImportVisible = true;
+    },
+
+    githubPush() {
+      if ((this.meta as any)?.meta?.github) this.githubPushVisible = true;
+    },
+
+    githubPull() {
+      if ((this.meta as any)?.meta?.github) this.githubPullVisible = true;
+    },
+
+    // keep the locally stored repo link in sync after a push/pull
+    onGithubUpdated(link: any) {
+      const meta = (this.meta as any)?.meta;
+      if (meta) meta.github = link;
     },
 
     shareLink() {
@@ -447,7 +471,19 @@ export default {
     },
   },
 
-  components: { Editor, FileExplorer, Modal, Pane, Preview, Splitpanes, NostrModal, LanguageDropdown },
+  components: {
+    Editor,
+    FileExplorer,
+    Modal,
+    Pane,
+    Preview,
+    Splitpanes,
+    NostrModal,
+    LanguageDropdown,
+    GitHubImportModal,
+    GitHubPushModal,
+    GitHubPullModal,
+  },
 };
 </script>
 
@@ -804,6 +840,42 @@ export default {
                   </button>
                 </span>
               </li>
+
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <h6 class="dropdown-header fw-light">{{ $t('github.menu.header') }}</h6>
+              </li>
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  @click="githubImport"
+                  :title="$t('github.menu.importTooltip')"
+                >
+                  <i class="bi bi-github"></i> {{ $t('github.menu.import') }}
+                </button>
+              </li>
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  :class="{ disabled: !meta?.meta?.github }"
+                  @click="githubPush"
+                  :title="$t('github.menu.pushTooltip')"
+                >
+                  <i class="bi bi-arrow-up-circle"></i> {{ $t('github.menu.push') }}
+                </button>
+              </li>
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  :class="{ disabled: !meta?.meta?.github }"
+                  @click="githubPull"
+                  :title="$t('github.menu.pullTooltip')"
+                >
+                  <i class="bi bi-arrow-down-circle"></i> {{ $t('github.menu.pull') }}
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -986,6 +1058,30 @@ export default {
     :storageId="$props.storageId"
     :courseUrl="LiaScriptURL"
     @close="nostrModalVisible = false"
+  />
+  <GitHubImportModal
+    :visible="githubImportVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    @close="githubImportVisible = false"
+  />
+  <GitHubPushModal
+    v-if="meta?.meta?.github"
+    :visible="githubPushVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    :github="meta.meta.github"
+    @close="githubPushVisible = false"
+    @updated="onGithubUpdated"
+  />
+  <GitHubPullModal
+    v-if="meta?.meta?.github"
+    :visible="githubPullVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    :github="meta.meta.github"
+    @close="githubPullVisible = false"
+    @updated="onGithubUpdated"
   />
 </template>
 

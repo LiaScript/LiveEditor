@@ -123,7 +123,86 @@
   "github": {
     "exporting": "Wird zu GitHub Gist exportiert...",
     "badCredentials": "Ungültige Anmeldedaten, Seite wird neu geladen",
-    "error": "Der Export zu GitHub ist fehlgeschlagen:"
+    "error": "Der Export zu GitHub ist fehlgeschlagen:",
+    "close": "Schließen",
+    "back": "Zurück",
+    "menu": {
+      "header": "GitHub-Repository",
+      "import": "Von GitHub importieren",
+      "importTooltip": "Dateien aus einem GitHub-Repository importieren",
+      "push": "Zu GitHub pushen",
+      "pushTooltip": "Änderungen committen und ins verknüpfte Repository pushen",
+      "pull": "Von GitHub pullen",
+      "pullTooltip": "Änderungen aus dem verknüpften Repository holen"
+    },
+    "import": {
+      "title": "Von GitHub importieren",
+      "repoLabel": "Repository",
+      "repoPlaceholder": "owner/repo oder https://github.com/owner/repo",
+      "repoHint": "Öffentliche Repositories können ohne Token importiert werden.",
+      "load": "Laden",
+      "loadingRepo": "Repository wird geladen…",
+      "truncated": "Dieses Repository ist sehr groß; die Dateiliste wurde von GitHub gekürzt.",
+      "selectAll": "Alle auswählen",
+      "selectNone": "Auswahl aufheben",
+      "selectedCount": "{n} ausgewählt",
+      "targetLabel": "Importieren nach",
+      "targetCurrent": "Aktuelles Projekt",
+      "targetNew": "Neues Projekt",
+      "importing": "Dateien werden importiert…",
+      "importBtn": "{n} Datei(en) importieren",
+      "done": "{n} Datei(en) importiert.",
+      "backHome": "Zurück zum Start"
+    },
+    "tree": {
+      "large": "groß",
+      "tooBig": "zu groß"
+    },
+    "push": {
+      "title": "Zu GitHub pushen",
+      "computing": "Änderungen werden ermittelt…",
+      "noChanges": "Keine lokalen Änderungen zum Pushen.",
+      "remoteDrift": "Das Repository auf GitHub hat sich seit der letzten Synchronisierung geändert. Ziehe ggf. zuerst die Änderungen (Pull); unveränderte Remote-Dateien bleiben erhalten.",
+      "added": "hinzugefügt",
+      "modified": "geändert",
+      "deleted": "gelöscht",
+      "viewDiff": "Diff",
+      "diffHint": "links: GitHub · rechts: lokal",
+      "commitMessage": "Commit-Nachricht",
+      "defaultMessage": "Aktualisierung aus LiaScript LiveEdit",
+      "pushing": "Wird zu GitHub gepusht…",
+      "pushBtn": "{n} Datei(en) committen & pushen",
+      "done": "Änderungen erfolgreich gepusht."
+    },
+    "pull": {
+      "title": "Von GitHub pullen",
+      "checking": "Suche nach Änderungen…",
+      "upToDate": "Dein Projekt ist auf dem Stand von GitHub.",
+      "changesFound": "{n} Datei(en) auf GitHub geändert.",
+      "added": "neu",
+      "modified": "geändert",
+      "importing": "Änderungen werden importiert…",
+      "pullBtn": "{n} Datei(en) pullen",
+      "done": "{n} Datei(en) übernommen."
+    },
+    "pat": {
+      "rateLimitTitle": "GitHub-Kontingent erreicht",
+      "authTitle": "Authentifizierung erforderlich",
+      "intro": "Hinterlege einen Personal Access Token (PAT), um das Kontingent zu erhöhen und auf private Repositories zuzugreifen oder Änderungen zu pushen.",
+      "howtoToggle": "Wie erstelle ich einen Token?",
+      "step1": "Öffne {link}.",
+      "step2": "Wähle einen Namen und eine Gültigkeitsdauer und wähle die zu verwendenden Repositories aus.",
+      "step3Read": "Setze unter „Repository permissions\" die Berechtigung „Contents\" auf „Read-only\".",
+      "step3Write": "Setze unter „Repository permissions\" die Berechtigung „Contents\" auf „Read and write\".",
+      "step4": "Erzeuge den Token, kopiere ihn und füge ihn unten ein.",
+      "placeholder": "github_pat_…",
+      "save": "Speichern"
+    },
+    "errors": {
+      "badUrl": "Bitte gib ein gültiges Repository an (owner/repo oder eine GitHub-URL).",
+      "notFound": "Repository, Branch oder Datei nicht gefunden.",
+      "network": "GitHub ist nicht erreichbar. Bitte prüfe deine Verbindung."
+    }
   },
   "nostr": {
     "title": "Via Nostr teilen",

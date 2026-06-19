@@ -117,6 +117,10 @@ const router = async () => {
       path: '/export/github/:stepId1',
       view: () => import('./views/Export/GitHub/Gist.vue'),
     },
+    {
+      path: '/github/:owner/:repo',
+      view: () => import('./views/GitHub/DirectImport.vue'),
+    },
   ]
 
   const potentialMatches = routes.map((route) => {

@@ -121,6 +121,19 @@ export function storeConfig(config: {
   localStorage.setItem(CONFIG, JSON.stringify(config))
 }
 
+/** GitHub Personal Access Token used for the repository import/push/pull.
+ *  Stored separately from the OAuth gist credentials. */
+export function getGithubPat(): string | undefined {
+  return loadConfig().credentials?.githubPat || undefined
+}
+
+export function setGithubPat(pat: string | undefined) {
+  const config = loadConfig()
+  if (!config.credentials) config.credentials = {}
+  config.credentials.githubPat = pat || undefined
+  storeConfig(config)
+}
+
 export function getAllSupportedVideoCodecs() {
   return getAllSupportedCodecs('video')
 }
