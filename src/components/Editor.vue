@@ -226,6 +226,34 @@ export default {
       return this.getValue();
     },
 
+    // The text document currently open in the editor (e.g. for the snapshot
+    // URL). Falls back to the main course when no text file is active (an image
+    // or other binary is being shown) or when there is no project doc.
+    getActiveValue() {
+      if (!this.projectDoc) return this.getValue();
+      if (this.activeView !== "text") return this.getMainValue();
+      if (this.activePath === "") return this.projectDoc.content.toString();
+      const yt = this.projectDoc.getText(this.activePath);
+      return yt ? yt.toString() : this.getMainValue();
+    },
+
+    // The currently shown file as raw bytes + filename, for download. Works for
+    // the main course, editable text files and binary assets (image/audio/...)
+    // alike; falls back to the main course (README.md) when nothing is active.
+    getActiveDownload(): { name: string; data: Uint8Array; mime: string } {
+      if (!this.projectDoc) {
+        return {
+          name: "README.md",
+          data: new TextEncoder().encode(this.getValue() || ""),
+          mime: "text/markdown",
+        };
+      }
+      const path = this.activePath === "" ? this.projectDoc.getMainPath() : this.activePath;
+      const data = this.projectDoc.readFileData(path) || new Uint8Array();
+      const name = path.split("/").pop() || "README.md";
+      return { name, data, mime: this.activeMime || "" };
+    },
+
     // The markdown document currently shown in the preview. Defaults to the main
     // course (previewPath === ""); switching to another markdown file repoints
     // it. Read straight from Yjs so it stays current even when the editor is
@@ -324,6 +352,7 @@ export default {
       this.activeView = "text";
       this.bindDoc(this.projectDoc.content, "markdown");
       this.setPreviewPath("");
+      this.$emit("active", this.projectDoc.getMainPath().split("/").pop() || "README.md");
       if (Editor) Editor.focus();
     },
 
@@ -333,6 +362,7 @@ export default {
       if (!this.projectDoc) return;
       this.activePath = path;
       this.activeMime = mime || "";
+      this.$emit("active", path.split("/").pop() || path);
 
       if (isImageFile(path, mime)) {
         const data = this.projectDoc.readFileData(path);
@@ -1582,7 +1612,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
     Editor = undefined;
   },
 
-  emits: ["compile", "ready", "online", "goto"],
+  emits: ["compile", "ready", "online", "goto", "active"],
 
   mounted() {
     // Defer the (expensive, synchronous) Monaco creation by one frame so the

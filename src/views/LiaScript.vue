@@ -76,6 +76,7 @@ export default {
       },
       resizing: false,
       LiaScriptURL,
+      activeFileName: "README.md",
       nostrModalVisible: false,
       githubImportVisible: false,
       githubPushVisible: false,
@@ -188,9 +189,11 @@ export default {
       let uriEncode = "";
       let gzip = "";
 
+      const activeValue = this.$refs.editor.getActiveValue();
+
       try {
         base64 =
-          LiaScriptURL + "?data:text/plain;base64," + btoa(this.$refs.editor.getMainValue());
+          LiaScriptURL + "?data:text/plain;base64," + btoa(activeValue);
 
         base64 =
           this.bytesInfo(base64) +
@@ -203,7 +206,7 @@ export default {
         uriEncode =
           LiaScriptURL +
           "?data:text/plain," +
-          encodeURIComponent(this.$refs.editor.getMainValue());
+          encodeURIComponent(activeValue);
 
         uriEncode =
           this.bytesInfo(uriEncode) +
@@ -214,7 +217,7 @@ export default {
 
       try {
         const pako = (await import("pako")).default;
-        gzip = pako.gzip(this.$refs.editor.getMainValue());
+        gzip = pako.gzip(activeValue);
         gzip =
           LiaScriptURL +
           "?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
@@ -244,7 +247,7 @@ export default {
       const zipCode = this.urlPath([
         "show",
         "code",
-        await compress(this.$refs.editor.getMainValue()),
+        await compress(this.$refs.editor.getActiveValue()),
       ]);
 
       this.$refs.modal.show(
@@ -258,16 +261,17 @@ export default {
 
     async embedCode() {
       const { compress } = await import("shrink-string");
+      const activeValue = this.$refs.editor.getActiveValue();
       const zipCode = this.urlPath([
         "embed",
         "code",
-        await compress(this.$refs.editor.getMainValue()),
+        await compress(activeValue),
       ]);
 
       const base64 = this.urlPath([
         "embed",
         "code",
-        btoa(unescape(encodeURIComponent(this.$refs.editor.getMainValue()))),
+        btoa(unescape(encodeURIComponent(activeValue))),
       ]);
 
       this.$refs.modal.show(
@@ -285,17 +289,21 @@ export default {
     },
 
     download() {
+      // download whatever file is currently active (markdown, code, image,
+      // audio, ...), falling back to the main course document
+      const file = this.$refs.editor.getActiveDownload();
+      const blob = new Blob([file.data], {
+        type: file.mime || "application/octet-stream",
+      });
+      const url = URL.createObjectURL(blob);
       const element = document.createElement("a");
-      element.setAttribute(
-        "href",
-        "data:text/plain;charset=utf-8," +
-          encodeURIComponent(this.$refs.editor.getMainValue())
-      );
-      element.setAttribute("download", "README.md");
+      element.href = url;
+      element.download = file.name;
       element.style.display = "none";
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     },
 
     async downloadZip() {
@@ -748,7 +756,7 @@ export default {
                   :title="$t('share.downloadReadme')"
                   :aria-label="$t('share.downloadReadme')"
                 >
-                  README.md
+                  {{ activeFileName }}
                 </button>
               </li>
               <li>
@@ -997,6 +1005,7 @@ export default {
               @ready="editorReady"
               @online="online"
               @goto="gotoPreview"
+              @active="activeFileName = $event"
               :storage-id="$props.storageId"
               :content="$props.content"
               ref="editor"
