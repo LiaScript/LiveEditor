@@ -78,6 +78,7 @@ export default {
       resizing: false,
       LiaScriptURL,
       activeFilePath: "README.md",
+      openSection: "",
       nostrModalVisible: false,
       githubImportVisible: false,
       githubPushVisible: false,
@@ -148,6 +149,12 @@ export default {
 
     nostr() {
       this.nostrModalVisible = true;
+    },
+
+    // expand/collapse a section of the (otherwise very long) share menu so it
+    // fits on small screens; only one section is open at a time (accordion)
+    toggleSection(name: string) {
+      this.openSection = this.openSection === name ? "" : name;
     },
 
     githubImport() {
@@ -622,6 +629,7 @@ export default {
         <div class="navbar-nav me-auto mb-lg-0"></div>
 
         <div class="navbar-nav mb-2 mb-lg-0">
+          <div class="nav-actions-row">
           <div class="nav-item nav-item-sm ms-2 me-2">
             <a
               class="nav-link"
@@ -658,6 +666,7 @@ export default {
               {{ $t('nav.fork') }}
             </button>
           </div>
+          </div>
 
           <div class="nav-item dropdown ms-2 me-2">
             <a
@@ -665,6 +674,7 @@ export default {
               href="#"
               role="button"
               data-bs-toggle="dropdown"
+              data-bs-auto-close="outside"
               aria-expanded="false"
             >
               {{ $t('nav.menu') }}
@@ -672,8 +682,16 @@ export default {
 
             <ul class="dropdown-menu">
               <li>
-                <h6 class="dropdown-header fw-light">{{ $t('share.header') }}</h6>
+                <button
+                  type="button"
+                  class="dropdown-header fw-light section-toggle"
+                  @click.stop="toggleSection('editor')"
+                >
+                  <i class="bi" :class="openSection === 'editor' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
+                  {{ $t('share.header') }}
+                </button>
               </li>
+              <template v-if="openSection === 'editor'">
               <li>
                 <span
                   class="d-inline-block"
@@ -718,12 +736,21 @@ export default {
                   {{ $t('share.externalResource') }}
                 </button>
               </li>
+              </template>
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">{{ $t('share.courseHeader') }}</h6>
+                <button
+                  type="button"
+                  class="dropdown-header fw-light section-toggle"
+                  @click.stop="toggleSection('course')"
+                >
+                  <i class="bi" :class="openSection === 'course' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
+                  {{ $t('share.courseHeader') }}
+                </button>
               </li>
+              <template v-if="openSection === 'course'">
               <li>
                 <span
                   class="d-inline-block"
@@ -789,12 +816,21 @@ export default {
                   </a>
                 </div>
               </li>
+              </template>
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">{{ $t('share.downloadHeader') }}</h6>
+                <button
+                  type="button"
+                  class="dropdown-header fw-light section-toggle"
+                  @click.stop="toggleSection('download')"
+                >
+                  <i class="bi" :class="openSection === 'download' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
+                  {{ $t('share.downloadHeader') }}
+                </button>
               </li>
+              <template v-if="openSection === 'download'">
               <li>
                 <button
                   class="btn dropdown-item btn-link"
@@ -850,12 +886,21 @@ export default {
                   Project.zip
                 </button>
               </li-->
+              </template>
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">{{ $t('share.exportHeader') }}</h6>
+                <button
+                  type="button"
+                  class="dropdown-header fw-light section-toggle"
+                  @click.stop="toggleSection('export')"
+                >
+                  <i class="bi" :class="openSection === 'export' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
+                  {{ $t('share.exportHeader') }}
+                </button>
               </li>
+              <template v-if="openSection === 'export'">
               <li>
                 <span
                   class="d-inline-block"
@@ -895,12 +940,21 @@ export default {
                 </span>
               </li>
 
+              </template>
               <li>
                 <hr class="dropdown-divider" />
               </li>
               <li>
-                <h6 class="dropdown-header fw-light">{{ $t('github.menu.header') }}</h6>
+                <button
+                  type="button"
+                  class="dropdown-header fw-light section-toggle"
+                  @click.stop="toggleSection('github')"
+                >
+                  <i class="bi" :class="openSection === 'github' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
+                  {{ $t('github.menu.header') }}
+                </button>
               </li>
+              <template v-if="openSection === 'github'">
               <li>
                 <button
                   class="btn dropdown-item btn-link"
@@ -940,6 +994,7 @@ export default {
                   <i class="bi bi-arrow-down-circle"></i> {{ $t('github.menu.pull') }}
                 </button>
               </li>
+              </template>
             </ul>
           </div>
 
@@ -1162,6 +1217,47 @@ export default {
 <style scoped>
 #liascript {
   height: 100vh;
+}
+
+/* help / new / fork in one row */
+.nav-actions-row {
+  display: flex;
+}
+
+/* below the navbar breakpoint (lg) the menu is stacked: keep these three in a
+   single row and let them share the full width equally */
+@media (max-width: 991.98px) {
+  .nav-actions-row {
+    width: 100%;
+  }
+  .nav-actions-row > .nav-item {
+    flex: 1 1 0;
+    margin-left: 0.25rem !important;
+    margin-right: 0.25rem !important;
+  }
+  .nav-actions-row > .nav-item .nav-link {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* collapsible section headers inside the share menu */
+.section-toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.section-toggle:hover {
+  color: var(--bs-primary, #0d6efd);
+}
+
+.section-toggle .bi {
+  font-size: 0.7rem;
+  margin-right: 2px;
 }
 
 .invisible {
