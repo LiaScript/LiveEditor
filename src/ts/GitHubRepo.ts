@@ -146,6 +146,57 @@ export async function getRepoInfo(owner: string, repo: string, pat?: string) {
   return request(`${API}/repos/${owner}/${repo}`, pat)
 }
 
+/** The authenticated user (requires a PAT). */
+export async function getAuthUser(pat: string): Promise<{ login: string } | GitHubError> {
+  const json = await request(`${API}/user`, pat)
+  if (isError(json)) return json
+  return { login: json.login }
+}
+
+/** Organizations the authenticated user belongs to. */
+export async function listOrgs(pat: string): Promise<{ login: string }[] | GitHubError> {
+  const json = await request(`${API}/user/orgs?per_page=100`, pat)
+  if (isError(json)) return json
+  return (json || []).map((o: any) => ({ login: o.login }))
+}
+
+export interface CreateRepoOptions {
+  private?: boolean
+  description?: string
+  // create under an organization (POST /orgs/{owner}/repos) instead of the user
+  isOrg?: boolean
+}
+
+/**
+ * Create a new repository (initialised with a README so the first push is a
+ * normal update). Returns its owner/repo/default branch. Requires a PAT with
+ * permission to create repositories.
+ */
+export async function createRepo(
+  owner: string,
+  name: string,
+  opts: CreateRepoOptions,
+  pat: string
+): Promise<{ owner: string; repo: string; branch: string; htmlUrl: string } | GitHubError> {
+  const url = opts.isOrg ? `${API}/orgs/${owner}/repos` : `${API}/user/repos`
+  const json = await request(url, pat, {
+    method: 'POST',
+    body: JSON.stringify({
+      name,
+      private: !!opts.private,
+      description: opts.description || '',
+      auto_init: true,
+    }),
+  })
+  if (isError(json)) return json
+  return {
+    owner: json.owner?.login || owner,
+    repo: json.name || name,
+    branch: json.default_branch || 'main',
+    htmlUrl: json.html_url,
+  }
+}
+
 /**
  * Fetch the full recursive tree for `ref` (a branch name, tag or commit sha —
  * GitHub resolves branch names here). Returns only blob/tree entries.

@@ -59,7 +59,9 @@
     "githubGistTitle": "Das Dokument auf GitHub speichern",
     "githubGistAria": "Das Dokument als GitHub-Gist speichern",
     "githubGistTooltip": "Forke das Dokument, bevor du diese Funktion nutzt",
-    "nostrAria": "Den aktuellen Inhalt auf Nostr teilen"
+    "nostrAria": "Den aktuellen Inhalt auf Nostr teilen",
+    "githubRepoFile": "GitHub-Kurs: {file}",
+    "githubRepoFileTooltip": "Die aktive Datei als LiaScript-Kurs aus dem verknüpften GitHub-Repository öffnen (zuerst Änderungen pushen). Nur für mit GitHub verknüpfte Projekte verfügbar."
   },
   "modal": {
     "close": "Schließen",
@@ -133,7 +135,9 @@
       "push": "Zu GitHub pushen",
       "pushTooltip": "Änderungen committen und ins verknüpfte Repository pushen",
       "pull": "Von GitHub pullen",
-      "pullTooltip": "Änderungen aus dem verknüpften Repository holen"
+      "pullTooltip": "Änderungen aus dem verknüpften Repository holen",
+      "publish": "In neues Repository publizieren",
+      "publishTooltip": "Ein neues GitHub-Repository anlegen und alle Projektdateien hochladen"
     },
     "import": {
       "title": "Von GitHub importieren",
@@ -204,6 +208,19 @@
       "badUrl": "Bitte gib ein gültiges Repository an (owner/repo oder eine GitHub-URL).",
       "notFound": "Repository, Branch oder Datei nicht gefunden.",
       "network": "GitHub ist nicht erreichbar. Bitte prüfe deine Verbindung."
+    },
+    "publish": {
+      "title": "In ein neues Repository publizieren",
+      "intro": "Ein neues GitHub-Repository anlegen und alle Projektdateien hineinladen.",
+      "owner": "Eigentümer",
+      "repoName": "Repository-Name",
+      "description": "Beschreibung (optional)",
+      "private": "Privates Repository",
+      "publishBtn": "Anlegen & publizieren",
+      "creating": "Repository wird angelegt…",
+      "pushing": "Dateien werden hochgeladen…",
+      "commitMessage": "Erstveröffentlichung aus LiaScript LiveEdit",
+      "done": "Repository angelegt und Dateien publiziert."
     }
   },
   "nostr": {

@@ -65,6 +65,7 @@ export default {
           version: string;
           macro?: { comment: string; tags: string };
           gist_url: string;
+          github?: { owner: string; repo: string; branch: string; commitSha: string };
         };
       }>,
       coursesFiltered: [] as Array<{
@@ -76,6 +77,7 @@ export default {
           version: string;
           macro?: { comment: string; tags: string };
           gist_url: string;
+          github?: { owner: string; repo: string; branch: string; commitSha: string };
         };
       }>,
       searchText: "",
@@ -248,6 +250,7 @@ export default {
         :card-version="item.meta.version"
         :card-comment="item.meta.macro?.comment"
         :card-gist="item.meta.gist_url"
+        :card-github="item.meta.github"
         :card-tags="item.meta.macro?.tags"
         @drop="drop"
       />
@@ -264,6 +267,7 @@ export default {
         :card-version="item.meta.version"
         :card-comment="item.meta.macro?.comment"
         :card-gist="item.meta.gist_url"
+        :card-github="item.meta.github"
         :card-tags="item.meta.macro?.tags"
         @drop="drop"
       />

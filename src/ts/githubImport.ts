@@ -7,6 +7,50 @@ import type { TreeItem, GitHubError } from "./GitHubRepo";
 
 export type ChangeStatus = "added" | "modified" | "deleted";
 
+/**
+ * Commit a set of changes to a branch via the Git Data API (blob -> tree ->
+ * commit -> ref). Shared by the push and publish dialogs. Returns the new head
+ * commit sha, or a GitHubError on the first failed request.
+ */
+export async function pushChanges(
+  doc: ProjectDoc,
+  owner: string,
+  repo: string,
+  branch: string,
+  message: string,
+  changes: { path: string; status: ChangeStatus }[],
+  pat: string
+): Promise<{ commitSha: string } | GitHubError> {
+  const head = await GitHub.getRef(owner, repo, branch, pat);
+  if (GitHub.isError(head)) return head;
+
+  const base = await GitHub.getCommit(owner, repo, head, pat);
+  if (GitHub.isError(base)) return base;
+
+  const treeChanges: GitHub.TreeChange[] = [];
+  for (const change of changes) {
+    if (change.status === "deleted") {
+      treeChanges.push({ path: change.path, sha: null });
+      continue;
+    }
+    const bytes = doc.readFileData(change.path) || new Uint8Array();
+    const sha = await GitHub.createBlob(owner, repo, bytes, pat);
+    if (GitHub.isError(sha)) return sha;
+    treeChanges.push({ path: change.path, sha });
+  }
+
+  const newTree = await GitHub.createTree(owner, repo, base.treeSha, treeChanges, pat);
+  if (GitHub.isError(newTree)) return newTree;
+
+  const newCommit = await GitHub.createCommit(owner, repo, message, newTree, head, pat);
+  if (GitHub.isError(newCommit)) return newCommit;
+
+  const updated = await GitHub.updateRef(owner, repo, branch, newCommit, pat);
+  if (GitHub.isError(updated)) return updated;
+
+  return { commitSha: newCommit };
+}
+
 export interface FileChange {
   path: string;
   status: ChangeStatus;

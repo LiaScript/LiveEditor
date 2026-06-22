@@ -74,6 +74,7 @@ export default {
     "cardLogo",
     "cardComment",
     "cardGist",
+    "cardGithub",
     "cardTags",
   ],
   emits: ["drop"],
@@ -201,13 +202,23 @@ export default {
           </small>
         </p>
 
-        <div :hidden="cardGist ? false : true">
+        <div :hidden="cardGist || cardGithub ? false : true">
           <hr />
           <small> {{ $t('card.exports') }} </small>
 
-          <p class="mb-0">
+          <p v-if="cardGist" class="mb-0">
             <small>
               <a :href="LiaScriptURL + '?' + cardGist" target="_blank">GitHub gist</a>
+            </small>
+          </p>
+          <p v-if="cardGithub" class="mb-0">
+            <small>
+              <a
+                :href="'https://github.com/' + cardGithub.owner + '/' + cardGithub.repo"
+                target="_blank"
+              >
+                <i class="bi bi-github"></i> {{ cardGithub.owner }}/{{ cardGithub.repo }}
+              </a>
             </small>
           </p>
         </div>

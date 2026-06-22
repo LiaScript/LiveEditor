@@ -20,6 +20,7 @@ const NostrModal = defineAsyncComponent(() => import("./Export/Nostr.vue"));
 const GitHubImportModal = defineAsyncComponent(() => import("./GitHub/ImportModal.vue"));
 const GitHubPushModal = defineAsyncComponent(() => import("./GitHub/PushModal.vue"));
 const GitHubPullModal = defineAsyncComponent(() => import("./GitHub/PullModal.vue"));
+const GitHubPublishModal = defineAsyncComponent(() => import("./GitHub/PublishModal.vue"));
 
 import logoImg from "url:../../assets/logo.png";
 
@@ -76,11 +77,12 @@ export default {
       },
       resizing: false,
       LiaScriptURL,
-      activeFileName: "README.md",
+      activeFilePath: "README.md",
       nostrModalVisible: false,
       githubImportVisible: false,
       githubPushVisible: false,
       githubPullVisible: false,
+      githubPublishVisible: false,
       showFiles: false,
       showToolbar: true,
     };
@@ -91,6 +93,26 @@ export default {
       this.horizontal =
         document.documentElement.clientWidth < document.documentElement.clientHeight;
     });
+  },
+
+  computed: {
+    // basename of the active file (shown on the download menu entry)
+    activeFileName(): string {
+      return this.activeFilePath.split("/").pop() || this.activeFilePath;
+    },
+
+    // A LiaScript course link to the currently active file, served from the
+    // linked GitHub repository's raw URL. Empty when the project is not a repo.
+    githubCourseUrl(): string {
+      const gh = (this.meta as any)?.meta?.github;
+      if (!gh?.owner || !gh?.repo || !gh?.branch) return "";
+      const path = this.activeFilePath
+        .split("/")
+        .map((s: string) => encodeURIComponent(s))
+        .join("/");
+      const raw = `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${path}`;
+      return this.LiaScriptURL + "?" + raw;
+    },
   },
 
   methods: {
@@ -130,6 +152,10 @@ export default {
 
     githubImport() {
       this.githubImportVisible = true;
+    },
+
+    githubPublish() {
+      this.githubPublishVisible = true;
     },
 
     githubPush() {
@@ -491,6 +517,7 @@ export default {
     GitHubImportModal,
     GitHubPushModal,
     GitHubPullModal,
+    GitHubPublishModal,
   },
 };
 </script>
@@ -716,6 +743,25 @@ export default {
                 </span>
               </li>
               <li>
+                <span
+                  class="d-inline-block"
+                  style="width: 100%"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  :title="$t('share.githubRepoFileTooltip')"
+                >
+                  <a
+                    class="btn dropdown-item btn-link"
+                    :class="{ disabled: !githubCourseUrl }"
+                    :href="githubCourseUrl"
+                    target="_blank"
+                    :aria-label="$t('share.githubRepoFile')"
+                  >
+                    {{ $t('share.githubRepoFile', { file: activeFileName }) }}
+                  </a>
+                </span>
+              </li>
+              <li>
                 <button
                   class="btn dropdown-item btn-link"
                   @click="shareData"
@@ -867,6 +913,16 @@ export default {
               <li>
                 <button
                   class="btn dropdown-item btn-link"
+                  :class="{ disabled: !storageId }"
+                  @click="githubPublish"
+                  :title="$t('github.menu.publishTooltip')"
+                >
+                  <i class="bi bi-cloud-upload"></i> {{ $t('github.menu.publish') }}
+                </button>
+              </li>
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
                   :class="{ disabled: !meta?.meta?.github }"
                   @click="githubPush"
                   :title="$t('github.menu.pushTooltip')"
@@ -1005,7 +1061,7 @@ export default {
               @ready="editorReady"
               @online="online"
               @goto="gotoPreview"
-              @active="activeFileName = $event"
+              @active="activeFilePath = $event"
               :storage-id="$props.storageId"
               :content="$props.content"
               ref="editor"
@@ -1073,6 +1129,15 @@ export default {
     :storageId="$props.storageId"
     :connection="$props.connection"
     @close="githubImportVisible = false"
+  />
+  <GitHubPublishModal
+    v-if="$props.storageId"
+    :visible="githubPublishVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    :title="meta?.meta?.title"
+    @close="githubPublishVisible = false"
+    @updated="onGithubUpdated"
   />
   <GitHubPushModal
     v-if="meta?.meta?.github"

@@ -59,7 +59,9 @@
     "githubGistTitle": "Store the document on github",
     "githubGistAria": "Store the document on GitHub as a gist",
     "githubGistTooltip": "Fork this document before you can use this function",
-    "nostrAria": "Share the current content on Nostr"
+    "nostrAria": "Share the current content on Nostr",
+    "githubRepoFile": "GitHub course: {file}",
+    "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects."
   },
   "modal": {
     "close": "Close",
@@ -133,7 +135,9 @@
       "push": "Push to GitHub",
       "pushTooltip": "Commit and push changes to the linked repository",
       "pull": "Pull from GitHub",
-      "pullTooltip": "Fetch changes from the linked repository"
+      "pullTooltip": "Fetch changes from the linked repository",
+      "publish": "Publish to new repository",
+      "publishTooltip": "Create a new GitHub repository and push all project files"
     },
     "import": {
       "title": "Import from GitHub",
@@ -204,6 +208,19 @@
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",
       "notFound": "Repository, branch or file not found.",
       "network": "Could not reach GitHub. Please check your connection."
+    },
+    "publish": {
+      "title": "Publish to a new repository",
+      "intro": "Create a new GitHub repository and push all project files into it.",
+      "owner": "Owner",
+      "repoName": "Repository name",
+      "description": "Description (optional)",
+      "private": "Private repository",
+      "publishBtn": "Create & publish",
+      "creating": "Creating repository…",
+      "pushing": "Uploading files…",
+      "commitMessage": "Initial publish from LiaScript LiveEdit",
+      "done": "Repository created and files published."
     }
   },
   "nostr": {

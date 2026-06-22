@@ -5,7 +5,7 @@ import Dexie from "../../ts/indexDB";
 import { getGithubPat } from "../../ts/utils";
 import { getProjectDoc, releaseProjectDoc, ProjectDoc } from "../../ts/ProjectDoc";
 import * as GitHub from "../../ts/GitHubRepo";
-import { computeChanges, type FileChange } from "../../ts/githubImport";
+import { computeChanges, pushChanges, type FileChange } from "../../ts/githubImport";
 import { formatBytes } from "../../ts/fileIcons";
 import GitHubModal from "../../components/GitHub/GitHubModal.vue";
 import PatHelp from "../../components/GitHub/PatHelp.vue";
@@ -215,43 +215,23 @@ export default defineComponent({
       const { owner, repo, branch } = this.github;
 
       try {
-        const treeChanges: GitHub.TreeChange[] = [];
-        for (const change of selected) {
-          if (change.status === "deleted") {
-            treeChanges.push({ path: change.path, sha: null });
-            continue;
-          }
-          const bytes = this.doc!.readFileData(change.path) || new Uint8Array();
-          const sha = await GitHub.createBlob(owner, repo, bytes, pat);
-          if (GitHub.isError(sha)) return this.fail(sha);
-          treeChanges.push({ path: change.path, sha });
-        }
-
-        const base = await GitHub.getCommit(owner, repo, this.headSha, pat);
-        if (GitHub.isError(base)) return this.fail(base);
-
-        const newTree = await GitHub.createTree(owner, repo, base.treeSha, treeChanges, pat);
-        if (GitHub.isError(newTree)) return this.fail(newTree);
-
-        const newCommit = await GitHub.createCommit(
+        const result = await pushChanges(
+          this.doc!,
           owner,
           repo,
+          branch,
           this.commitMessage || this.$t("github.push.defaultMessage"),
-          newTree,
-          this.headSha,
+          selected,
           pat
         );
-        if (GitHub.isError(newCommit)) return this.fail(newCommit);
-
-        const updated = await GitHub.updateRef(owner, repo, branch, newCommit, pat);
-        if (GitHub.isError(updated)) return this.fail(updated);
+        if (GitHub.isError(result)) return this.fail(result);
 
         // persist the new head so future push/pull diff against it
         const database = new Dexie();
         await database.put(this.storageId, {
-          github: { owner, repo, branch, commitSha: newCommit },
+          github: { owner, repo, branch, commitSha: result.commitSha },
         });
-        this.$emit("updated", { ...this.github, commitSha: newCommit });
+        this.$emit("updated", { ...this.github, commitSha: result.commitSha });
 
         this.busy = false;
         this.step = "done";

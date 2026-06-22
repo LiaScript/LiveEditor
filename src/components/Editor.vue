@@ -352,7 +352,7 @@ export default {
       this.activeView = "text";
       this.bindDoc(this.projectDoc.content, "markdown");
       this.setPreviewPath("");
-      this.$emit("active", this.projectDoc.getMainPath().split("/").pop() || "README.md");
+      this.$emit("active", this.projectDoc.getMainPath());
       if (Editor) Editor.focus();
     },
 
@@ -362,7 +362,7 @@ export default {
       if (!this.projectDoc) return;
       this.activePath = path;
       this.activeMime = mime || "";
-      this.$emit("active", path.split("/").pop() || path);
+      this.$emit("active", path);
 
       if (isImageFile(path, mime)) {
         const data = this.projectDoc.readFileData(path);
