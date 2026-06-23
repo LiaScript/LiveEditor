@@ -8,6 +8,10 @@ export interface TreeNode {
   mime?: string;
   /** True for the node backed by the main course document. */
   main?: boolean;
+  /** True when this file has been exported as a GitHub gist. */
+  sharedGist?: boolean;
+  /** True when this file has been published to Nostr. */
+  sharedNostr?: boolean;
   children: TreeNode[];
 }
 
@@ -146,6 +150,16 @@ export default defineComponent({
         class="bi bi-house-door-fill lia-main-badge"
         :title="'main course document'"
       ></i>
+      <i
+        v-if="node.sharedGist"
+        class="bi bi-github lia-share-badge"
+        title="Shared as GitHub gist"
+      ></i>
+      <i
+        v-if="node.sharedNostr"
+        class="bi bi-lightning-charge-fill lia-share-badge nostr"
+        title="Published on Nostr"
+      ></i>
 
       <span class="lia-node-actions">
         <i
@@ -238,6 +252,17 @@ export default defineComponent({
   font-size: 10px;
   color: var(--bs-primary, #0d6efd);
   opacity: 0.7;
+}
+
+.lia-share-badge {
+  flex: 0 0 auto;
+  font-size: 10px;
+  color: #6c757d;
+  opacity: 0.85;
+}
+
+.lia-share-badge.nostr {
+  color: #8e44ad;
 }
 
 .lia-node-actions {

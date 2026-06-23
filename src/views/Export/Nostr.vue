@@ -281,7 +281,6 @@ import {
 import Dexie from "../../ts/indexDB";
 import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
-import * as Utils from "../../ts/utils";
 
 export default {
   name: "NostrModal",
@@ -298,6 +297,11 @@ export default {
     courseUrl: {
       type: String,
       required: true,
+    },
+    // resolved path of the file currently shown in the preview (empty = main)
+    exportPath: {
+      type: String,
+      default: "",
     },
   },
 
@@ -600,7 +604,60 @@ export default {
       });
     },
 
-    publishToNostr() {
+    /**
+     * Resolve the markdown that is currently shown in the preview together with
+     * a stable per-file identifier. This makes multi-file projects export the
+     * active document instead of always the main README.md. The identifier is
+     * used as the replaceable event's `d` tag, so different files map to
+     * different addressable events instead of overwriting each other; the main
+     * document keeps `storageId` for backwards compatibility.
+     * Falls back to reading the main document straight from IndexedDB when the
+     * editor isn't reachable (e.g. embedded views).
+     */
+    async resolveExportContent(): Promise<{
+      content: string;
+      identifier: string;
+      path: string;
+      fileName: string;
+    }> {
+      const editor: any = this.$parent?.$refs?.editor;
+
+      if (editor && typeof editor.getPreviewValue === "function") {
+        const projectDoc: any = editor.projectDoc;
+        const path: string =
+          this.exportPath || projectDoc?.getMainPath() || "README.md";
+        const isMain = projectDoc ? projectDoc.isMain(path) : false;
+        return {
+          content: editor.getPreviewValue(),
+          // the main document keeps `storageId` as its addressable identifier
+          // (backwards compatible); sub-files get a per-file identifier so they
+          // don't overwrite each other on the relay
+          identifier: isMain ? this.storageId : `${this.storageId}/${path}`,
+          path,
+          fileName: isMain ? "" : path.split("/").pop() || "",
+        };
+      }
+
+      const content: string = await new Promise((resolve) => {
+        const yDoc = new Y.Doc();
+        const provider = new IndexeddbPersistence(this.storageId, yDoc);
+        provider.on("synced", () => {
+          const text = yDoc.getText(this.storageId).toJSON();
+          provider.destroy();
+          yDoc.destroy();
+          resolve(text);
+        });
+      });
+
+      return {
+        content,
+        identifier: this.storageId,
+        path: this.exportPath || "README.md",
+        fileName: "",
+      };
+    },
+
+    async publishToNostr() {
       if (!this.publicKey || !this.privateKey) {
         alert(this.$t('nostr.alertMissingKeys'));
         return;
@@ -616,106 +673,91 @@ export default {
 
       this.publishStatus = "loading";
 
-      const database = new Dexie();
-      const meta = database.get(this.storageId);
-      const config = Utils.loadConfig();
+      try {
+        const database = new Dexie();
+        const metaData = await database.get(this.storageId);
 
-      const yDoc = new Y.Doc();
-      const provider = new IndexeddbPersistence(this.storageId, yDoc);
+        let { content: contentData, identifier, path, fileName } =
+          await this.resolveExportContent();
 
-      provider.on("synced", async (_: any) => {
-        try {
-          const metaData = await meta;
-          let contentData = yDoc.getText(this.storageId).toJSON();
-
-          // Embed media if option is checked
-          if (this.embedMedia) {
-            contentData = await this.embedMediaAsDataURIs(contentData);
-          }
-
-          const pool = new SimplePool();
-          const relays = [...this.relays];
-
-          let pubkey;
-          try {
-            const decoded = nip19.decode(this.publicKey);
-            pubkey = decoded.data;
-          } catch (e) {
-            console.error("Error decoding public key:", e);
-            alert(this.$t('nostr.alertInvalidKey'));
-            return;
-          }
-
-          const title = metaData?.title || "LiaScript Course";
-          let tags = [
-            ["d", this.storageId],
-            ["title", title],
-            ["summary", this.customMessage || "LiaScript course material"],
-            ...this.tags.map((tag) => ["t", tag]),
-          ];
-
-          if (this.imageUrl) {
-            tags.push(["image", this.imageUrl]);
-          }
-
-          const event: {
-            kind: number;
-            pubkey: string;
-            created_at: number;
-            tags: any[];
-            content: string;
-            id?: string;
-          } = {
-            kind: 30023,
-            pubkey: pubkey,
-            created_at: Math.floor(Date.now() / 1000),
-            tags,
-            content: contentData,
-          };
-
-          if (this.privateKey) {
-            try {
-              const decoded = nip19.decode(this.privateKey);
-              const privkey = decoded.data;
-
-              event.id = getEventHash(event);
-              const signedEvent = finalizeEvent(event, privkey);
-
-              const pubs = pool.publish(relays, signedEvent);
-
-              await Promise.any(pubs);
-
-              const naddr = nip19.naddrEncode({
-                kind: 30023,
-                pubkey: pubkey,
-                identifier: this.storageId,
-                relays: relays,
-              });
-
-              this.publishedCourseUrl = `https://liascript.github.io/course/?nostr:${naddr}`;
-
-              this.step = "success";
-              this.publishStatus = "success";
-
-              this.privateKey = "";
-            } catch (e) {
-              console.error("Error publishing:", e);
-              alert(this.$t('nostr.alertPublishFailed'));
-              this.publishStatus = "failed";
-            }
-          } else {
-            alert(this.$t('nostr.alertMissingPrivateKey'));
-            this.publishStatus = null;
-          }
-        } catch (error) {
-          console.error("Error processing data:", error);
-          alert(this.$t('nostr.alertProcessingError'));
-          this.publishStatus = "failed";
-        } finally {
-          provider.destroy();
-          yDoc.destroy();
+        // Embed media if option is checked
+        if (this.embedMedia) {
+          contentData = await this.embedMediaAsDataURIs(contentData);
         }
-      });
+
+        let pubkey;
+        try {
+          pubkey = nip19.decode(this.publicKey).data;
+        } catch (e) {
+          console.error("Error decoding public key:", e);
+          alert(this.$t('nostr.alertInvalidKey'));
+          this.publishStatus = "failed";
+          return;
+        }
+
+        // Use the file name as title for sub-files, otherwise the project title.
+        const title = fileName || metaData?.meta?.title || "LiaScript Course";
+        const tags: any[] = [
+          ["d", identifier],
+          ["title", title],
+          ["summary", this.customMessage || "LiaScript course material"],
+          ...this.tags.map((tag) => ["t", tag]),
+        ];
+
+        if (this.imageUrl) {
+          tags.push(["image", this.imageUrl]);
+        }
+
+        const event: {
+          kind: number;
+          pubkey: string;
+          created_at: number;
+          tags: any[];
+          content: string;
+          id?: string;
+        } = {
+          kind: 30023,
+          pubkey: pubkey,
+          created_at: Math.floor(Date.now() / 1000),
+          tags,
+          content: contentData,
+        };
+
+        const privkey = nip19.decode(this.privateKey).data;
+        event.id = getEventHash(event);
+        const signedEvent = finalizeEvent(event, privkey);
+
+        const pool = new SimplePool();
+        const relays = [...this.relays];
+        await Promise.any(pool.publish(relays, signedEvent));
+
+        const naddr = nip19.naddrEncode({
+          kind: 30023,
+          pubkey: pubkey,
+          identifier: identifier,
+          relays: relays,
+        });
+
+        this.publishedCourseUrl = `https://liascript.github.io/course/?nostr:${naddr}`;
+
+        // remember the published address per file so the editor can show which
+        // documents have been shared on Nostr and link back to them
+        await database.put(this.storageId, {
+          nostr_files: {
+            ...(metaData?.meta?.nostr_files || {}),
+            [path]: { naddr, url: this.publishedCourseUrl },
+          },
+        });
+
+        this.step = "success";
+        this.publishStatus = "success";
+
+        this.privateKey = "";
+      } catch (e) {
+        console.error("Error publishing:", e);
+        alert(this.$t('nostr.alertPublishFailed'));
+        this.publishStatus = "failed";
+      }
     },
   },
 };

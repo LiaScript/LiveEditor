@@ -79,6 +79,9 @@ export default {
       resizing: false,
       LiaScriptURL,
       activeFilePath: "README.md",
+      // resolved path of the document currently shown in the preview; used to
+      // export the right file and to surface its gist/nostr share state
+      previewFilePath: "",
       openSection: "",
       nostrModalVisible: false,
       exporterVisible: false,
@@ -116,6 +119,20 @@ export default {
       const raw = `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${path}`;
       return this.LiaScriptURL + "?" + raw;
     },
+
+    // Gist raw URL of the file currently shown in the preview, if it has been
+    // exported as a gist before (empty otherwise). Keyed per file so that each
+    // document in a multi-file project keeps its own gist.
+    gistLink(): string {
+      const raw = (this.meta as any)?.meta?.gist_files?.[this.previewFilePath]?.raw_url;
+      return raw ? this.LiaScriptURL + "?" + raw : "";
+    },
+
+    // LiaScript course URL of the file currently shown in the preview, if it has
+    // been published to Nostr before (empty otherwise).
+    nostrLink(): string {
+      return (this.meta as any)?.meta?.nostr_files?.[this.previewFilePath]?.url || "";
+    },
   },
 
   methods: {
@@ -151,6 +168,18 @@ export default {
 
     nostr() {
       this.nostrModalVisible = true;
+    },
+
+    // Persist which file is currently shown in the preview, then open the Gist
+    // export route in a new tab. Storing the path in IndexedDB lets the separate
+    // export page (and the GitHub OAuth round-trip) pick up the active document
+    // instead of always exporting the main README.md.
+    async githubGist() {
+      if (!this.$props.storageId) return;
+      await this.database?.put(this.$props.storageId, {
+        gist_export_path: this.previewFilePath,
+      });
+      window.open(this.urlPath(["export", "github", this.$props.storageId]), "_blank");
     },
 
     // expand/collapse a section of the (otherwise very long) share menu so it
@@ -758,12 +787,30 @@ export default {
                 >
                   <a
                     class="dropdown-item"
-                    :class="{ disabled: !meta.meta?.gist_url }"
-                    :href="LiaScriptURL + '?' + meta.meta?.gist_url"
+                    :class="{ disabled: !gistLink }"
+                    :href="gistLink"
                     target="_blank"
                     :aria-label="$t('share.githubGistLinkAria')"
                   >
                     {{ $t('share.githubGistLink') }}
+                  </a>
+                </span>
+              </li>
+              <li>
+                <span
+                  class="d-inline-block"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  :title="$t('share.nostrLinkTooltip')"
+                >
+                  <a
+                    class="dropdown-item"
+                    :class="{ disabled: !nostrLink }"
+                    :href="nostrLink"
+                    target="_blank"
+                    :aria-label="$t('share.nostrLinkAria')"
+                  >
+                    {{ $t('share.nostrLink') }}
                   </a>
                 </span>
               </li>
@@ -907,17 +954,15 @@ export default {
                   data-toggle="tooltip"
                   :title="$t('share.githubGistTooltip')"
                 >
-                  <a
+                  <button
                     class="btn dropdown-item btn-link"
                     :class="{ disabled: !storageId }"
-                    aria-current="page"
-                    target="_blank"
-                    :href="urlPath(['export', 'github', storageId])"
+                    @click="githubGist"
                     :title="$t('share.githubGistTitle')"
                     :aria-label="$t('share.githubGistAria')"
                   >
                     {{ $t('share.githubGist') }}
-                  </a>
+                  </button>
                 </span>
               </li>
               <li>
@@ -1133,6 +1178,7 @@ export default {
               @online="online"
               @goto="gotoPreview"
               @active="activeFilePath = $event"
+              @preview="previewFilePath = $event"
               :storage-id="$props.storageId"
               :content="$props.content"
               ref="editor"
@@ -1193,6 +1239,7 @@ export default {
     :visible="nostrModalVisible"
     :storageId="$props.storageId"
     :courseUrl="LiaScriptURL"
+    :exportPath="previewFilePath"
     @close="nostrModalVisible = false"
   />
   <ExporterModal

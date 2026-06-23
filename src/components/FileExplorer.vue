@@ -9,6 +9,7 @@ import {
   ProjectDoc,
   type FileEntry,
 } from "../ts/ProjectDoc";
+import Dexie from "../ts/indexDB";
 import FileNode, { type TreeNode } from "./FileNode.vue";
 
 export default defineComponent({
@@ -30,6 +31,9 @@ export default defineComponent({
       tree: [] as TreeNode[],
       expandedSet: new Set<string>(),
       activePath: "" as string,
+      // share state read from the Dexie meta (keyed by resolved file path)
+      gistFiles: {} as Record<string, any>,
+      nostrFiles: {} as Record<string, any>,
     };
   },
 
@@ -59,6 +63,15 @@ export default defineComponent({
     this.doc.files.observe(this.rebuild);
     // the main document's path lives in `meta` (rename updates it there)
     this.doc.meta.observe(this.rebuild);
+
+    // track gist/nostr share state (stored in the Dexie meta, not in Yjs) so the
+    // tree can show a badge on files that have been shared
+    const database = new Dexie();
+    database.watch(this.storageId, (entry: any) => {
+      this.gistFiles = entry?.meta?.gist_files || {};
+      this.nostrFiles = entry?.meta?.nostr_files || {};
+      this.rebuild();
+    });
   },
 
   unmounted() {
@@ -104,6 +117,8 @@ export default defineComponent({
         parent.type = meta.type;
         parent.mime = meta.mime;
         parent.main = (meta as any).main;
+        parent.sharedGist = !!this.gistFiles[path];
+        parent.sharedNostr = !!this.nostrFiles[path];
       }
 
       const sort = (nodes: TreeNode[]) => {

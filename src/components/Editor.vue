@@ -353,6 +353,9 @@ export default {
       this.bindDoc(this.projectDoc.content, "markdown");
       this.setPreviewPath("");
       this.$emit("active", this.projectDoc.getMainPath());
+      // report the resolved path of the document now shown in the preview so
+      // exporters / share indicators can key off the actual file
+      this.$emit("preview", this.projectDoc.getMainPath());
       if (Editor) Editor.focus();
     },
 
@@ -404,7 +407,10 @@ export default {
         this.activeView = "text";
         const language = this.languageFor(path);
         this.bindDoc(this.projectDoc.getText(path), language);
-        if (language === "markdown") this.setPreviewPath(path);
+        if (language === "markdown") {
+          this.setPreviewPath(path);
+          this.$emit("preview", path);
+        }
         if (Editor) Editor.focus();
         return;
       }
@@ -1612,7 +1618,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
     Editor = undefined;
   },
 
-  emits: ["compile", "ready", "online", "goto", "active"],
+  emits: ["compile", "ready", "online", "goto", "active", "preview"],
 
   mounted() {
     // Defer the (expensive, synchronous) Monaco creation by one frame so the
