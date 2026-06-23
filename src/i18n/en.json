@@ -60,6 +60,9 @@
     "githubGistAria": "Store the document on GitHub as a gist",
     "githubGistTooltip": "Fork this document before you can use this function",
     "nostrAria": "Share the current content on Nostr",
+    "exporter": "LiaScript Exporter",
+    "exporterAria": "Send the whole project to a LiaScript Exporter to convert it to SCORM, PDF, APK, ...",
+    "exporterTooltip": "Hand the entire project to a local or remote LiaScript Exporter for conversion",
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects."
   },
@@ -121,6 +124,23 @@
     "viewOnLiaScript": "If you want to see the course on LiaScript, click {here}.",
     "viewHere": "here",
     "toolbarHint": "Use toolbar to switch between the editor and preview modes."
+  },
+  "exporter": {
+    "title": "LiaScript Exporter",
+    "close": "Close",
+    "urlLabel": "Exporter server URL",
+    "urlPlaceholder": "http://localhost:3000",
+    "urlHint": "Start the exporter locally with 'liaex serve', or enter the address of a hosted exporter. The project is sent to this server and converted there.",
+    "connect": "Connect",
+    "resend": "Resend",
+    "resendTitle": "Send the current project to the exporter again",
+    "sending": "Sending project to the exporter...",
+    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. http://localhost:3000",
+    "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
+    "errorNoHandshake": "Could not reach the exporter. Make sure it is running ('liaex serve') and reachable at this URL, and that it allows being embedded.",
+    "errorNoProject": "No active project found to export.",
+    "errorSend": "Failed to package and send the project."
   },
   "github": {
     "exporting": "Exporting to GitHub gist...",

@@ -134,6 +134,52 @@ export function setGithubPat(pat: string | undefined) {
   storeConfig(config)
 }
 
+/** A binary project file as returned by `Editor.getAllBlobs()`. */
+export interface ProjectBlob {
+  name: string
+  data: Uint8Array | ArrayBuffer | Blob
+}
+
+/** Bundle the whole project (main document + all explorer files) into a single
+ *  ZIP. The main document is written as `README.md`, matching what the
+ *  LiaScript-Exporter expects as the entry point. Returns a `File` so it can be
+ *  downloaded or posted/postMessage'd as-is.
+ *
+ *  Shared by the "download as ZIP" menu action and the LiaScript-Exporter
+ *  integration so both ship exactly the same content. */
+export async function buildProjectZip(
+  mainContent: string,
+  blobs: ProjectBlob[] | undefined | null,
+  fileName = 'project.zip'
+): Promise<File> {
+  // jszip is a CommonJS module; depending on the bundler/interop the dynamic
+  // import exposes the constructor either as the namespace itself or under
+  // `.default` (and dev vs prod builds can differ), so pick whichever is
+  // actually callable.
+  const mod: any = await import('jszip')
+  const JSZip =
+    typeof mod === 'function'
+      ? mod
+      : typeof mod.default === 'function'
+        ? mod.default
+        : mod.default && typeof mod.default.default === 'function'
+          ? mod.default.default
+          : undefined
+  if (!JSZip) throw new Error('Could not load JSZip')
+  const zip = new JSZip()
+
+  zip.file('README.md', mainContent)
+
+  if (blobs) {
+    for (const blob of blobs) {
+      zip.file(blob.name, blob.data as any)
+    }
+  }
+
+  const content = await zip.generateAsync({ type: 'blob' })
+  return new File([content], fileName, { type: 'application/zip' })
+}
+
 export function getAllSupportedVideoCodecs() {
   return getAllSupportedCodecs('video')
 }

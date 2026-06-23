@@ -60,6 +60,9 @@
     "githubGistAria": "Das Dokument als GitHub-Gist speichern",
     "githubGistTooltip": "Forke das Dokument, bevor du diese Funktion nutzt",
     "nostrAria": "Den aktuellen Inhalt auf Nostr teilen",
+    "exporter": "LiaScript Exporter",
+    "exporterAria": "Das gesamte Projekt an einen LiaScript Exporter senden, um es in SCORM, PDF, APK, ... umzuwandeln",
+    "exporterTooltip": "Das gesamte Projekt zur Konvertierung an einen lokalen oder entfernten LiaScript Exporter übergeben",
     "githubRepoFile": "GitHub-Kurs: {file}",
     "githubRepoFileTooltip": "Die aktive Datei als LiaScript-Kurs aus dem verknüpften GitHub-Repository öffnen (zuerst Änderungen pushen). Nur für mit GitHub verknüpfte Projekte verfügbar."
   },
@@ -121,6 +124,23 @@
     "viewOnLiaScript": "Um den Kurs auf LiaScript anzusehen, klicke {here}.",
     "viewHere": "hier",
     "toolbarHint": "Über die Symbolleiste zwischen Editor- und Vorschaumodus wechseln."
+  },
+  "exporter": {
+    "title": "LiaScript Exporter",
+    "close": "Schließen",
+    "urlLabel": "Exporter-Server-URL",
+    "urlPlaceholder": "http://localhost:3000",
+    "urlHint": "Starte den Exporter lokal mit 'liaex serve' oder gib die Adresse eines gehosteten Exporters ein. Das Projekt wird an diesen Server gesendet und dort konvertiert.",
+    "connect": "Verbinden",
+    "resend": "Erneut senden",
+    "resendTitle": "Das aktuelle Projekt erneut an den Exporter senden",
+    "sending": "Projekt wird an den Exporter gesendet...",
+    "handed": "Projekt an den Exporter übergeben. Wähle unten ein Format/Preset und starte den Export.",
+    "errorInvalidUrl": "Ungültige URL. Bitte eine vollständige Adresse eingeben, z. B. http://localhost:3000",
+    "errorMixedContent": "Dieser Editor läuft über HTTPS und kann keinen unsicheren HTTP-Exporter einbetten (außer localhost). Bitte eine HTTPS-Exporter-URL verwenden.",
+    "errorNoHandshake": "Der Exporter konnte nicht erreicht werden. Stelle sicher, dass er läuft ('liaex serve'), unter dieser URL erreichbar ist und das Einbetten erlaubt.",
+    "errorNoProject": "Kein aktives Projekt zum Exportieren gefunden.",
+    "errorSend": "Das Projekt konnte nicht verpackt und gesendet werden."
   },
   "github": {
     "exporting": "Wird zu GitHub Gist exportiert...",

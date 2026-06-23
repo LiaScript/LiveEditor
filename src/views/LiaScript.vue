@@ -15,8 +15,9 @@ import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 
 import { defineAsyncComponent } from "vue";
-import { LiaScriptURL } from "../ts/utils";
+import { LiaScriptURL, buildProjectZip } from "../ts/utils";
 const NostrModal = defineAsyncComponent(() => import("./Export/Nostr.vue"));
+const ExporterModal = defineAsyncComponent(() => import("./Export/Exporter.vue"));
 const GitHubImportModal = defineAsyncComponent(() => import("./GitHub/ImportModal.vue"));
 const GitHubPushModal = defineAsyncComponent(() => import("./GitHub/PushModal.vue"));
 const GitHubPullModal = defineAsyncComponent(() => import("./GitHub/PullModal.vue"));
@@ -80,6 +81,7 @@ export default {
       activeFilePath: "README.md",
       openSection: "",
       nostrModalVisible: false,
+      exporterVisible: false,
       githubImportVisible: false,
       githubPushVisible: false,
       githubPullVisible: false,
@@ -340,35 +342,30 @@ export default {
     },
 
     async downloadZip() {
-      const JSZip = (await import("jszip")).default;
-      const zip = JSZip();
-
-      zip.file("README.md", this.$refs.editor.getMainValue());
-
-      const blobs = this.$refs.editor.getAllBlobs();
-
-      if (blobs) {
-        for (const blob of blobs) {
-          zip.file(blob.name, blob.data);
-        }
-      }
-
       const fileName =
         "Project-" + (this.$props?.storageId?.slice(0, 8) || "xxxxxxxx") + ".zip";
-      zip.generateAsync({ type: "blob" }).then(function (content) {
-        let url = URL.createObjectURL(content);
 
-        const element = document.createElement("a");
-        element.href = url;
-        element.setAttribute("download", fileName);
-        element.style.display = "none";
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
-        element.addEventListener("click", function () {
-          setTimeout(() => URL.revokeObjectURL(url), 30 * 1000);
-        });
-      });
+      // buildProjectZip bundles the main document (as README.md) plus all
+      // explorer files — the same bundle the LiaScript-Exporter integration ships.
+      const file = await buildProjectZip(
+        this.$refs.editor.getMainValue(),
+        this.$refs.editor.getAllBlobs(),
+        fileName
+      );
+
+      const url = URL.createObjectURL(file);
+      const element = document.createElement("a");
+      element.href = url;
+      element.setAttribute("download", fileName);
+      element.style.display = "none";
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+      setTimeout(() => URL.revokeObjectURL(url), 30 * 1000);
+    },
+
+    exporter() {
+      this.exporterVisible = true;
     },
 
     fork() {
@@ -520,6 +517,7 @@ export default {
     Preview,
     Splitpanes,
     NostrModal,
+    ExporterModal,
     LanguageDropdown,
     GitHubImportModal,
     GitHubPushModal,
@@ -939,6 +937,24 @@ export default {
                   </button>
                 </span>
               </li>
+              <li>
+                <span
+                  class="d-inline-block"
+                  style="width: 100%"
+                  tabindex="0"
+                  data-toggle="tooltip"
+                  :title="$t('share.exporterTooltip')"
+                >
+                  <button
+                    class="btn dropdown-item btn-link"
+                    :class="{ disabled: !storageId }"
+                    @click="exporter"
+                    :aria-label="$t('share.exporterAria')"
+                  >
+                    <i class="bi bi-box-arrow-up-right"></i> {{ $t('share.exporter') }}
+                  </button>
+                </span>
+              </li>
 
               </template>
               <li>
@@ -1178,6 +1194,12 @@ export default {
     :storageId="$props.storageId"
     :courseUrl="LiaScriptURL"
     @close="nostrModalVisible = false"
+  />
+  <ExporterModal
+    :visible="exporterVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    @close="exporterVisible = false"
   />
   <GitHubImportModal
     :visible="githubImportVisible"

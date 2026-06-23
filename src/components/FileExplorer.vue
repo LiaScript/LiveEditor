@@ -194,7 +194,10 @@ export default defineComponent({
 
     async downloadFolderZip(folder: TreeNode) {
       if (!this.doc) return;
-      const JSZip = (await import("jszip")).default;
+      // jszip's browser build exposes the constructor as the imported namespace
+      // itself (not under `.default`), so pick whichever is callable.
+      const mod: any = await import("jszip");
+      const JSZip = typeof mod === "function" ? mod : mod.default;
       const zip = new JSZip();
       const prefix = folder.path + "/";
       this.doc.files.forEach((meta, path) => {
