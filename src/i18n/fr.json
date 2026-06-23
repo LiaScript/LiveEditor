@@ -89,7 +89,30 @@
     "footer": "Ceci est un éditeur collaboratif en ligne pour {liascript}. Tout le contenu est stocké uniquement dans votre navigateur. Si vous cherchez de l'inspiration, consultez nos {examples}, recherchez des {templates} intégrables ou des {courses} déjà publiés.",
     "footerExamples": "exemples",
     "footerTemplates": "modèles",
-    "footerCourses": "cours"
+    "footerCourses": "cours",
+    "import": {
+      "heading": "Importer depuis",
+      "more": "Plus d'options",
+      "submit": "Importer",
+      "new": "Nouveau",
+      "upload": "Téléverser un fichier (Markdown / ZIP)",
+      "github": "Dépôt GitHub",
+      "url": "Depuis une URL (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo ou https://github.com/owner/repo",
+      "githubHint": "Choisissez les fichiers à importer à l'étape suivante.",
+      "urlPlaceholder": "https://.../README.md ou .../project.zip",
+      "urlHint": "Charge un fichier Markdown ou une archive ZIP dans un nouveau projet.",
+      "gistPlaceholder": "ID du gist ou https://gist.github.com/user/<id>",
+      "gistHint": "Importe tous les fichiers du gist dans un nouveau projet.",
+      "errors": {
+        "generic": "Échec de l'import. Vérifiez votre saisie et réessayez.",
+        "invalidRepo": "Aucun dépôt GitHub n'a été reconnu dans cette saisie.",
+        "invalidUrl": "Veuillez saisir une URL http(s) valide.",
+        "invalidGist": "Aucun gist trouvé pour cet ID.",
+        "fetchFailed": "Impossible de charger la ressource. Vérifiez l'URL et votre connexion."
+      }
+    }
   },
   "card": {
     "untitled": "Sans titre",
@@ -101,7 +124,15 @@
     "deleteWarning": "Il ne pourra pas être restauré.",
     "abort": "Annuler",
     "delete": "Supprimer",
-    "close": "Fermer"
+    "close": "Fermer",
+    "menu": {
+      "label": "Actions du cours"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Local"
+    }
   },
   "footer": {
     "followUs": "Suivez-nous sur :"

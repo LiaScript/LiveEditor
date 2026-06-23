@@ -89,7 +89,30 @@
     "footer": "هذا محرر تعاوني على الإنترنت لـ {liascript}. يتم تخزين كل المحتوى داخل متصفحك فقط. إذا كنت بحاجة إلى بعض الإلهام، فاطلع على بعض {examples} لدينا، أو ابحث عن {templates} قابلة للتضمين، أو {courses} منشورة مسبقا.",
     "footerExamples": "أمثلة",
     "footerTemplates": "قوالب",
-    "footerCourses": "دورات"
+    "footerCourses": "دورات",
+    "import": {
+      "heading": "استيراد من",
+      "more": "خيارات أخرى",
+      "submit": "استيراد",
+      "new": "جديد",
+      "upload": "رفع ملف (Markdown / ZIP)",
+      "github": "مستودع GitHub",
+      "url": "من رابط (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo أو https://github.com/owner/repo",
+      "githubHint": "اختر الملفات المراد استيرادها في الشاشة التالية.",
+      "urlPlaceholder": "https://.../README.md أو .../project.zip",
+      "urlHint": "يحمّل ملف Markdown أو أرشيف ZIP في مشروع جديد.",
+      "gistPlaceholder": "معرّف gist أو https://gist.github.com/user/<id>",
+      "gistHint": "يستورد جميع ملفات الـ gist في مشروع جديد.",
+      "errors": {
+        "generic": "فشل الاستيراد. تحقق من إدخالك وحاول مرة أخرى.",
+        "invalidRepo": "لم يتم التعرّف على مستودع GitHub في هذا الإدخال.",
+        "invalidUrl": "يرجى إدخال رابط http(s) صالح.",
+        "invalidGist": "لم يتم العثور على gist لهذا المعرّف.",
+        "fetchFailed": "تعذّر تحميل المورد. تحقق من الرابط واتصالك."
+      }
+    }
   },
   "card": {
     "untitled": "بلا عنوان",
@@ -101,7 +124,15 @@
     "deleteWarning": "لا يمكن استعادته!",
     "abort": "إلغاء",
     "delete": "حذف",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "menu": {
+      "label": "إجراءات الدورة"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "محلي"
+    }
   },
   "footer": {
     "followUs": "تابعنا على:"

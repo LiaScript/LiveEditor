@@ -88,6 +88,29 @@
   },
   "index": {
     "newCourse": "Neuer Kurs",
+    "import": {
+      "heading": "Importieren von",
+      "more": "Weitere Optionen",
+      "submit": "Importieren",
+      "new": "Neu",
+      "upload": "Datei hochladen (Markdown / ZIP)",
+      "github": "GitHub-Repository",
+      "url": "Von URL (Markdown / ZIP)",
+      "gist": "GitHub-Gist",
+      "githubPlaceholder": "owner/repo oder https://github.com/owner/repo",
+      "githubHint": "Im nächsten Schritt wählst du die zu importierenden Dateien aus.",
+      "urlPlaceholder": "https://.../README.md oder .../project.zip",
+      "urlHint": "Lädt eine Markdown-Datei oder ein ZIP-Archiv in ein neues Projekt.",
+      "gistPlaceholder": "Gist-ID oder https://gist.github.com/user/<id>",
+      "gistHint": "Importiert alle Dateien des Gists in ein neues Projekt.",
+      "errors": {
+        "generic": "Import fehlgeschlagen. Bitte überprüfe deine Eingabe und versuche es erneut.",
+        "invalidRepo": "In der Eingabe wurde kein GitHub-Repository erkannt.",
+        "invalidUrl": "Bitte gib eine gültige http(s)-URL ein.",
+        "invalidGist": "Zu dieser ID wurde kein Gist gefunden.",
+        "fetchFailed": "Die Ressource konnte nicht geladen werden. Prüfe die URL und deine Verbindung."
+      }
+    },
     "searchPlaceholder": "Suche eingeben...",
     "searchAriaLabel": "Sucheingabe",
     "clearSearchAria": "Suche löschen",
@@ -101,6 +124,14 @@
     "deleteAria": "Löschen",
     "exports": "Exporte:",
     "edit": "Bearbeiten",
+    "menu": {
+      "label": "Kursaktionen"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Lokal"
+    },
     "deleteTitle": "Löschen: \"{title}\"",
     "deleteConfirm": "Bist du sicher, dass du dieses Dokument dauerhaft löschen möchtest?",
     "deleteWarning": "Es kann nicht wiederhergestellt werden!",

@@ -89,7 +89,30 @@
     "footer": "Este é um editor colaborativo online para {liascript}. Todo o conteúdo é armazenado apenas no seu navegador. Se precisar de inspiração, veja alguns dos nossos {examples}, procure {templates} incorporáveis ou {courses} já publicados.",
     "footerExamples": "exemplos",
     "footerTemplates": "modelos",
-    "footerCourses": "cursos"
+    "footerCourses": "cursos",
+    "import": {
+      "heading": "Importar de",
+      "more": "Mais opções",
+      "submit": "Importar",
+      "new": "Novo",
+      "upload": "Enviar ficheiro (Markdown / ZIP)",
+      "github": "Repositório do GitHub",
+      "url": "De URL (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo ou https://github.com/owner/repo",
+      "githubHint": "Escolhe os ficheiros a importar no passo seguinte.",
+      "urlPlaceholder": "https://.../README.md ou .../project.zip",
+      "urlHint": "Carrega um ficheiro Markdown ou um ZIP num novo projeto.",
+      "gistPlaceholder": "ID do gist ou https://gist.github.com/user/<id>",
+      "gistHint": "Importa todos os ficheiros do gist para um novo projeto.",
+      "errors": {
+        "generic": "Falha na importação. Verifica a tua entrada e tenta novamente.",
+        "invalidRepo": "Nenhum repositório do GitHub foi reconhecido nessa entrada.",
+        "invalidUrl": "Introduz um URL http(s) válido.",
+        "invalidGist": "Não foi encontrado nenhum gist para esse ID.",
+        "fetchFailed": "Não foi possível carregar o recurso. Verifica o URL e a tua ligação."
+      }
+    }
   },
   "card": {
     "untitled": "Sem título",
@@ -101,7 +124,15 @@
     "deleteWarning": "Ele não poderá ser restaurado!",
     "abort": "Cancelar",
     "delete": "Excluir",
-    "close": "Fechar"
+    "close": "Fechar",
+    "menu": {
+      "label": "Ações do curso"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Local"
+    }
   },
   "footer": {
     "followUs": "Siga-nos em:"

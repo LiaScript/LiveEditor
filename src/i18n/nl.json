@@ -89,7 +89,30 @@
     "footer": "Dit is een samenwerkende online editor voor {liascript}. Alle inhoud wordt alleen in je browser opgeslagen. Als je inspiratie nodig hebt, bekijk dan enkele van onze {examples}, zoek naar insluitbare {templates} of al gepubliceerde {courses}.",
     "footerExamples": "voorbeelden",
     "footerTemplates": "sjablonen",
-    "footerCourses": "cursussen"
+    "footerCourses": "cursussen",
+    "import": {
+      "heading": "Importeren uit",
+      "more": "Meer opties",
+      "submit": "Importeren",
+      "new": "Nieuw",
+      "upload": "Bestand uploaden (Markdown / ZIP)",
+      "github": "GitHub-repository",
+      "url": "Van URL (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo of https://github.com/owner/repo",
+      "githubHint": "Kies in het volgende scherm de te importeren bestanden.",
+      "urlPlaceholder": "https://.../README.md of .../project.zip",
+      "urlHint": "Laadt een Markdown-bestand of een ZIP-archief in een nieuw project.",
+      "gistPlaceholder": "Gist-ID of https://gist.github.com/user/<id>",
+      "gistHint": "Importeert alle bestanden van de gist in een nieuw project.",
+      "errors": {
+        "generic": "Importeren mislukt. Controleer je invoer en probeer het opnieuw.",
+        "invalidRepo": "Geen GitHub-repository herkend in die invoer.",
+        "invalidUrl": "Voer een geldige http(s)-URL in.",
+        "invalidGist": "Geen gist gevonden voor dat ID.",
+        "fetchFailed": "Kan de bron niet laden. Controleer de URL en je verbinding."
+      }
+    }
   },
   "card": {
     "untitled": "Naamloos",
@@ -101,7 +124,15 @@
     "deleteWarning": "Het kan niet worden hersteld!",
     "abort": "Afbreken",
     "delete": "Verwijderen",
-    "close": "Sluiten"
+    "close": "Sluiten",
+    "menu": {
+      "label": "Cursusacties"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Lokaal"
+    }
   },
   "footer": {
     "followUs": "Volg ons op:"

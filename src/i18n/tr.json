@@ -89,7 +89,30 @@
     "footer": "Bu, {liascript} için iş birliğine dayalı çevrimiçi bir editördür. Tüm içerik yalnızca tarayıcınızda saklanır. İlham gerekiyorsa bazı {examples} örneklerimize bakın, yerleştirilebilir {templates} veya daha önce yayımlanmış {courses} arayın.",
     "footerExamples": "örnekler",
     "footerTemplates": "şablonlar",
-    "footerCourses": "kurslar"
+    "footerCourses": "kurslar",
+    "import": {
+      "heading": "Şuradan içe aktar",
+      "more": "Diğer seçenekler",
+      "submit": "İçe aktar",
+      "new": "Yeni",
+      "upload": "Dosya yükle (Markdown / ZIP)",
+      "github": "GitHub deposu",
+      "url": "URL'den (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo veya https://github.com/owner/repo",
+      "githubHint": "İçe aktarılacak dosyaları sonraki ekranda seçin.",
+      "urlPlaceholder": "https://.../README.md veya .../project.zip",
+      "urlHint": "Yeni bir projeye bir Markdown dosyası veya ZIP arşivi yükler.",
+      "gistPlaceholder": "Gist kimliği veya https://gist.github.com/user/<id>",
+      "gistHint": "Gist'teki tüm dosyaları yeni bir projeye aktarır.",
+      "errors": {
+        "generic": "İçe aktarma başarısız. Girişinizi kontrol edip tekrar deneyin.",
+        "invalidRepo": "Bu girişte bir GitHub deposu tanınamadı.",
+        "invalidUrl": "Lütfen geçerli bir http(s) URL'si girin.",
+        "invalidGist": "Bu kimliğe ait bir gist bulunamadı.",
+        "fetchFailed": "Kaynak yüklenemedi. URL'yi ve bağlantınızı kontrol edin."
+      }
+    }
   },
   "card": {
     "untitled": "Başlıksız",
@@ -101,7 +124,15 @@
     "deleteWarning": "Geri yüklenemez!",
     "abort": "İptal",
     "delete": "Sil",
-    "close": "Kapat"
+    "close": "Kapat",
+    "menu": {
+      "label": "Kurs işlemleri"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Yerel"
+    }
   },
   "footer": {
     "followUs": "Bizi takip edin:"

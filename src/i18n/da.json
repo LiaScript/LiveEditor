@@ -89,7 +89,30 @@
     "footer": "Dette er en kollaborativ online editor til {liascript}. Alt indhold gemmes kun i din browser. Hvis du har brug for inspiration, kan du se nogle af vores {examples}, søge efter indlejrbare {templates} eller allerede offentliggjorte {courses}.",
     "footerExamples": "eksempler",
     "footerTemplates": "skabeloner",
-    "footerCourses": "kurser"
+    "footerCourses": "kurser",
+    "import": {
+      "heading": "Importér fra",
+      "more": "Flere muligheder",
+      "submit": "Importér",
+      "new": "Ny",
+      "upload": "Upload fil (Markdown / ZIP)",
+      "github": "GitHub-arkiv",
+      "url": "Fra URL (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo eller https://github.com/owner/repo",
+      "githubHint": "Vælg de filer, der skal importeres, i næste trin.",
+      "urlPlaceholder": "https://.../README.md eller .../project.zip",
+      "urlHint": "Indlæser en Markdown-fil eller et ZIP-arkiv i et nyt projekt.",
+      "gistPlaceholder": "Gist-ID eller https://gist.github.com/user/<id>",
+      "gistHint": "Importerer alle filer i gisten til et nyt projekt.",
+      "errors": {
+        "generic": "Import mislykkedes. Tjek din indtastning, og prøv igen.",
+        "invalidRepo": "Der blev ikke genkendt noget GitHub-arkiv i indtastningen.",
+        "invalidUrl": "Indtast en gyldig http(s)-URL.",
+        "invalidGist": "Der blev ikke fundet nogen gist for det ID.",
+        "fetchFailed": "Ressourcen kunne ikke indlæses. Tjek URL'en og din forbindelse."
+      }
+    }
   },
   "card": {
     "untitled": "Uden titel",
@@ -101,7 +124,15 @@
     "deleteWarning": "Det kan ikke gendannes!",
     "abort": "Afbryd",
     "delete": "Slet",
-    "close": "Luk"
+    "close": "Luk",
+    "menu": {
+      "label": "Kursushandlinger"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Lokal"
+    }
   },
   "footer": {
     "followUs": "Følg os på:"

@@ -89,7 +89,30 @@
     "footer": "これは {liascript} 用の共同オンラインエディターです。すべての内容はあなたのブラウザー内にのみ保存されます。インスピレーションが必要な場合は、{examples} を確認したり、埋め込み可能な {templates} や公開済みの {courses} を検索したりできます。",
     "footerExamples": "例",
     "footerTemplates": "テンプレート",
-    "footerCourses": "コース"
+    "footerCourses": "コース",
+    "import": {
+      "heading": "インポート元",
+      "more": "その他のオプション",
+      "submit": "インポート",
+      "new": "新規",
+      "upload": "ファイルをアップロード（Markdown / ZIP）",
+      "github": "GitHub リポジトリ",
+      "url": "URL から（Markdown / ZIP）",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo または https://github.com/owner/repo",
+      "githubHint": "次の画面でインポートするファイルを選択します。",
+      "urlPlaceholder": "https://.../README.md または .../project.zip",
+      "urlHint": "Markdown ファイルまたは ZIP アーカイブを新しいプロジェクトに読み込みます。",
+      "gistPlaceholder": "Gist ID または https://gist.github.com/user/<id>",
+      "gistHint": "gist のすべてのファイルを新しいプロジェクトにインポートします。",
+      "errors": {
+        "generic": "インポートに失敗しました。入力を確認して再試行してください。",
+        "invalidRepo": "入力から GitHub リポジトリを認識できませんでした。",
+        "invalidUrl": "有効な http(s) URL を入力してください。",
+        "invalidGist": "その ID の gist が見つかりませんでした。",
+        "fetchFailed": "リソースを読み込めませんでした。URL と接続を確認してください。"
+      }
+    }
   },
   "card": {
     "untitled": "無題",
@@ -101,7 +124,15 @@
     "deleteWarning": "復元できません！",
     "abort": "中止",
     "delete": "削除",
-    "close": "閉じる"
+    "close": "閉じる",
+    "menu": {
+      "label": "コース操作"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "ローカル"
+    }
   },
   "footer": {
     "followUs": "フォロー："

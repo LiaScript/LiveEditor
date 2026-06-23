@@ -89,7 +89,30 @@
     "footer": "Toto je společný online editor pro {liascript}. Veškerý obsah je uložen pouze ve vašem prohlížeči. Pokud potřebujete inspiraci, podívejte se na naše {examples}, hledejte vložitelné {templates} nebo již publikované {courses}.",
     "footerExamples": "příklady",
     "footerTemplates": "šablony",
-    "footerCourses": "kurzy"
+    "footerCourses": "kurzy",
+    "import": {
+      "heading": "Importovat z",
+      "more": "Další možnosti",
+      "submit": "Importovat",
+      "new": "Nový",
+      "upload": "Nahrát soubor (Markdown / ZIP)",
+      "github": "Repozitář GitHub",
+      "url": "Z adresy URL (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo nebo https://github.com/owner/repo",
+      "githubHint": "Soubory k importu vyberte v dalším kroku.",
+      "urlPlaceholder": "https://.../README.md nebo .../project.zip",
+      "urlHint": "Načte soubor Markdown nebo archiv ZIP do nového projektu.",
+      "gistPlaceholder": "ID gistu nebo https://gist.github.com/user/<id>",
+      "gistHint": "Importuje všechny soubory gistu do nového projektu.",
+      "errors": {
+        "generic": "Import se nezdařil. Zkontrolujte zadání a zkuste to znovu.",
+        "invalidRepo": "V zadání nebyl rozpoznán žádný repozitář GitHub.",
+        "invalidUrl": "Zadejte platnou adresu URL http(s).",
+        "invalidGist": "Pro toto ID nebyl nalezen žádný gist.",
+        "fetchFailed": "Zdroj se nepodařilo načíst. Zkontrolujte URL a připojení."
+      }
+    }
   },
   "card": {
     "untitled": "Bez názvu",
@@ -101,7 +124,15 @@
     "deleteWarning": "Nelze jej obnovit!",
     "abort": "Zrušit",
     "delete": "Smazat",
-    "close": "Zavřít"
+    "close": "Zavřít",
+    "menu": {
+      "label": "Akce kurzu"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Místní"
+    }
   },
   "footer": {
     "followUs": "Sledujte nás na:"

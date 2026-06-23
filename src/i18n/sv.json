@@ -89,7 +89,30 @@
     "footer": "Detta är en samarbetsbaserad online-editor för {liascript}. Allt innehåll lagras endast i din webbläsare. Om du behöver inspiration kan du titta på några av våra {examples}, söka efter inbäddningsbara {templates} eller redan publicerade {courses}.",
     "footerExamples": "exempel",
     "footerTemplates": "mallar",
-    "footerCourses": "kurser"
+    "footerCourses": "kurser",
+    "import": {
+      "heading": "Importera från",
+      "more": "Fler alternativ",
+      "submit": "Importera",
+      "new": "Ny",
+      "upload": "Ladda upp fil (Markdown / ZIP)",
+      "github": "GitHub-arkiv",
+      "url": "Från URL (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo eller https://github.com/owner/repo",
+      "githubHint": "Välj filerna att importera i nästa steg.",
+      "urlPlaceholder": "https://.../README.md eller .../project.zip",
+      "urlHint": "Laddar en Markdown-fil eller ett ZIP-arkiv till ett nytt projekt.",
+      "gistPlaceholder": "Gist-ID eller https://gist.github.com/user/<id>",
+      "gistHint": "Importerar alla filer i gisten till ett nytt projekt.",
+      "errors": {
+        "generic": "Importen misslyckades. Kontrollera din inmatning och försök igen.",
+        "invalidRepo": "Inget GitHub-arkiv kunde kännas igen i inmatningen.",
+        "invalidUrl": "Ange en giltig http(s)-URL.",
+        "invalidGist": "Ingen gist hittades för det ID:t.",
+        "fetchFailed": "Kunde inte ladda resursen. Kontrollera URL:en och din anslutning."
+      }
+    }
   },
   "card": {
     "untitled": "Namnlös",
@@ -101,7 +124,15 @@
     "deleteWarning": "Det kan inte återställas!",
     "abort": "Avbryt",
     "delete": "Radera",
-    "close": "Stäng"
+    "close": "Stäng",
+    "menu": {
+      "label": "Kursåtgärder"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Lokal"
+    }
   },
   "footer": {
     "followUs": "Följ oss på:"

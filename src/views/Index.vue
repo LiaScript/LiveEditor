@@ -3,6 +3,7 @@ import Dexie from "../ts/indexDB";
 import Card from "../components/Card.vue";
 import Footer from "../components/Footer.vue";
 import LanguageDropdown from "../components/LanguageDropdown.vue";
+import ImportMenu from "../components/ImportMenu.vue";
 import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
 
@@ -132,10 +133,6 @@ export default {
       }
     },
 
-    newCourse() {
-      window.location.href = "./?/edit";
-    },
-
     async init() {
       this.courses = await this.database.getAll();
 
@@ -173,7 +170,7 @@ export default {
     await this.init();
   },
 
-  components: { Card, Footer, LanguageDropdown },
+  components: { Card, Footer, LanguageDropdown, ImportMenu },
 };
 </script>
 
@@ -189,7 +186,7 @@ export default {
         <LanguageDropdown />
       </div>
 
-      <button class="btn btn-primary" @click="newCourse">{{ $t('index.newCourse') }}</button>
+      <ImportMenu />
     </div>
   </nav>
 
@@ -237,7 +234,7 @@ export default {
     </div>
 
     <div
-      class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4"
+      class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 m-4"
       v-if="searchText.length > 0 || coursesFiltered.length > 0"
     >
       <Card
@@ -256,7 +253,7 @@ export default {
       />
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-8 m-4" v-else>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 m-4" v-else>
       <Card
         v-for="item of courses"
         :key="item.id"

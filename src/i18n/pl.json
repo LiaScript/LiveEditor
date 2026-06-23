@@ -89,7 +89,30 @@
     "footer": "To jest współdzielony edytor online dla {liascript}. Cała zawartość jest przechowywana tylko w twojej przeglądarce. Jeśli potrzebujesz inspiracji, sprawdź nasze {examples}, szukaj osadzalnych {templates} lub już opublikowanych {courses}.",
     "footerExamples": "przykłady",
     "footerTemplates": "szablony",
-    "footerCourses": "kursy"
+    "footerCourses": "kursy",
+    "import": {
+      "heading": "Importuj z",
+      "more": "Więcej opcji",
+      "submit": "Importuj",
+      "new": "Nowy",
+      "upload": "Prześlij plik (Markdown / ZIP)",
+      "github": "Repozytorium GitHub",
+      "url": "Z adresu URL (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo lub https://github.com/owner/repo",
+      "githubHint": "Wybierz pliki do zaimportowania na następnym ekranie.",
+      "urlPlaceholder": "https://.../README.md lub .../project.zip",
+      "urlHint": "Ładuje plik Markdown lub archiwum ZIP do nowego projektu.",
+      "gistPlaceholder": "ID gista lub https://gist.github.com/user/<id>",
+      "gistHint": "Importuje wszystkie pliki gista do nowego projektu.",
+      "errors": {
+        "generic": "Import nie powiódł się. Sprawdź dane i spróbuj ponownie.",
+        "invalidRepo": "Nie rozpoznano repozytorium GitHub w podanych danych.",
+        "invalidUrl": "Podaj prawidłowy adres URL http(s).",
+        "invalidGist": "Nie znaleziono gista o tym ID.",
+        "fetchFailed": "Nie można załadować zasobu. Sprawdź adres URL i połączenie."
+      }
+    }
   },
   "card": {
     "untitled": "Bez tytułu",
@@ -101,7 +124,15 @@
     "deleteWarning": "Nie można go przywrócić!",
     "abort": "Anuluj",
     "delete": "Usuń",
-    "close": "Zamknij"
+    "close": "Zamknij",
+    "menu": {
+      "label": "Akcje kursu"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Lokalnie"
+    }
   },
   "footer": {
     "followUs": "Obserwuj nas na:"

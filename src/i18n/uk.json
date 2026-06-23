@@ -89,7 +89,30 @@
     "footer": "Це спільний онлайн-редактор для {liascript}. Весь вміст зберігається лише у вашому браузері. Для натхнення перегляньте наші {examples}, шукайте вбудовувані {templates} або вже опубліковані {courses}.",
     "footerExamples": "приклади",
     "footerTemplates": "шаблони",
-    "footerCourses": "курси"
+    "footerCourses": "курси",
+    "import": {
+      "heading": "Імпортувати з",
+      "more": "Більше опцій",
+      "submit": "Імпортувати",
+      "new": "Новий",
+      "upload": "Завантажити файл (Markdown / ZIP)",
+      "github": "Репозиторій GitHub",
+      "url": "З URL (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo або https://github.com/owner/repo",
+      "githubHint": "Оберіть файли для імпорту на наступному кроці.",
+      "urlPlaceholder": "https://.../README.md або .../project.zip",
+      "urlHint": "Завантажує файл Markdown або архів ZIP у новий проєкт.",
+      "gistPlaceholder": "ID gist або https://gist.github.com/user/<id>",
+      "gistHint": "Імпортує всі файли gist у новий проєкт.",
+      "errors": {
+        "generic": "Не вдалося імпортувати. Перевірте введені дані та спробуйте ще раз.",
+        "invalidRepo": "У введених даних не розпізнано репозиторій GitHub.",
+        "invalidUrl": "Введіть дійсну http(s)-URL-адресу.",
+        "invalidGist": "Не знайдено gist за цим ID.",
+        "fetchFailed": "Не вдалося завантажити ресурс. Перевірте URL і з'єднання."
+      }
+    }
   },
   "card": {
     "untitled": "Без назви",
@@ -101,7 +124,15 @@
     "deleteWarning": "Його неможливо відновити!",
     "abort": "Скасувати",
     "delete": "Видалити",
-    "close": "Закрити"
+    "close": "Закрити",
+    "menu": {
+      "label": "Дії курсу"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "Локально"
+    }
   },
   "footer": {
     "followUs": "Слідкуйте за нами:"

@@ -89,7 +89,30 @@
     "footer": "这是一个用于 {liascript} 的协作式在线编辑器。所有内容只存储在你的浏览器中。如果你需要灵感，可以查看我们的 {examples}，搜索可嵌入的 {templates} 或已发布的 {courses}。",
     "footerExamples": "示例",
     "footerTemplates": "模板",
-    "footerCourses": "课程"
+    "footerCourses": "课程",
+    "import": {
+      "heading": "导入来源",
+      "more": "更多选项",
+      "submit": "导入",
+      "new": "新建",
+      "upload": "上传文件（Markdown / ZIP）",
+      "github": "GitHub 仓库",
+      "url": "从 URL（Markdown / ZIP）",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo 或 https://github.com/owner/repo",
+      "githubHint": "在下一步选择要导入的文件。",
+      "urlPlaceholder": "https://.../README.md 或 .../project.zip",
+      "urlHint": "将 Markdown 文件或 ZIP 压缩包加载到新项目中。",
+      "gistPlaceholder": "Gist ID 或 https://gist.github.com/user/<id>",
+      "gistHint": "将该 gist 的所有文件导入到新项目中。",
+      "errors": {
+        "generic": "导入失败。请检查输入后重试。",
+        "invalidRepo": "无法在该输入中识别出 GitHub 仓库。",
+        "invalidUrl": "请输入有效的 http(s) URL。",
+        "invalidGist": "找不到该 ID 对应的 gist。",
+        "fetchFailed": "无法加载资源。请检查 URL 和网络连接。"
+      }
+    }
   },
   "card": {
     "untitled": "无标题",
@@ -101,7 +124,15 @@
     "deleteWarning": "它无法恢复！",
     "abort": "取消",
     "delete": "删除",
-    "close": "关闭"
+    "close": "关闭",
+    "menu": {
+      "label": "课程操作"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "本地"
+    }
   },
   "footer": {
     "followUs": "关注我们："

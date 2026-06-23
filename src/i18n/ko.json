@@ -89,7 +89,30 @@
     "footer": "이것은 {liascript}용 협업 온라인 편집기입니다. 모든 내용은 브라우저 안에만 저장됩니다. 영감이 필요하다면 {examples}를 확인하거나, 임베드 가능한 {templates} 또는 이미 게시된 {courses}를 검색하세요.",
     "footerExamples": "예제",
     "footerTemplates": "템플릿",
-    "footerCourses": "과정"
+    "footerCourses": "과정",
+    "import": {
+      "heading": "가져오기 소스",
+      "more": "추가 옵션",
+      "submit": "가져오기",
+      "new": "새로 만들기",
+      "upload": "파일 업로드 (Markdown / ZIP)",
+      "github": "GitHub 저장소",
+      "url": "URL에서 (Markdown / ZIP)",
+      "gist": "GitHub Gist",
+      "githubPlaceholder": "owner/repo 또는 https://github.com/owner/repo",
+      "githubHint": "다음 화면에서 가져올 파일을 선택하세요.",
+      "urlPlaceholder": "https://.../README.md 또는 .../project.zip",
+      "urlHint": "Markdown 파일이나 ZIP 아카이브를 새 프로젝트로 불러옵니다.",
+      "gistPlaceholder": "Gist ID 또는 https://gist.github.com/user/<id>",
+      "gistHint": "gist의 모든 파일을 새 프로젝트로 가져옵니다.",
+      "errors": {
+        "generic": "가져오기에 실패했습니다. 입력을 확인하고 다시 시도하세요.",
+        "invalidRepo": "입력에서 GitHub 저장소를 인식하지 못했습니다.",
+        "invalidUrl": "유효한 http(s) URL을 입력하세요.",
+        "invalidGist": "해당 ID의 gist를 찾을 수 없습니다.",
+        "fetchFailed": "리소스를 불러올 수 없습니다. URL과 연결을 확인하세요."
+      }
+    }
   },
   "card": {
     "untitled": "제목 없음",
@@ -101,7 +124,15 @@
     "deleteWarning": "복원할 수 없습니다!",
     "abort": "취소",
     "delete": "삭제",
-    "close": "닫기"
+    "close": "닫기",
+    "menu": {
+      "label": "코스 작업"
+    },
+    "source": {
+      "github": "GitHub",
+      "gist": "Gist",
+      "local": "로컬"
+    }
   },
   "footer": {
     "followUs": "팔로우:"
