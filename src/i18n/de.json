@@ -100,6 +100,7 @@
       "github": "GitHub-Repository",
       "url": "Von URL (Markdown / ZIP)",
       "gist": "GitHub-Gist",
+      "localFolder": "Lokaler Ordner",
       "githubPlaceholder": "owner/repo oder https://github.com/owner/repo",
       "githubHint": "Im nächsten Schritt wählst du die zu importierenden Dateien aus.",
       "urlPlaceholder": "https://.../README.md oder .../project.zip",
@@ -275,6 +276,37 @@
       "pushing": "Dateien werden hochgeladen…",
       "commitMessage": "Erstveröffentlichung aus LiaScript LiveEdit",
       "done": "Repository angelegt und Dateien publiziert."
+    }
+  },
+  "localFolder": {
+    "close": "Schließen",
+    "menu": {
+      "header": "Lokaler Ordner",
+      "open": "Ordner öffnen…",
+      "openTooltip": "Einen Ordner auf deinem Computer mit diesem Projekt verbinden",
+      "sync": "Synchronisieren…",
+      "syncNamed": "„{name}“ synchronisieren…",
+      "syncTooltip": "Dieses Projekt mit dem verbundenen Ordner vergleichen und abgleichen"
+    },
+    "direction": {
+      "push": "zum Ordner",
+      "pull": "zum Editor",
+      "conflict": "Konflikt"
+    },
+    "sync": {
+      "title": "Mit lokalem Ordner synchronisieren",
+      "computing": "Dateien werden verglichen…",
+      "inSync": "Editor und Ordner sind bereits synchron.",
+      "applying": "Synchronisiere…",
+      "done": "Synchronisierung abgeschlossen.",
+      "applyBtn": "{n} Datei(en) synchronisieren",
+      "keepEditor": "Editor behalten",
+      "keepDisk": "Ordner übernehmen",
+      "grant": "Zugriff erlauben"
+    },
+    "errors": {
+      "noFolder": "Mit diesem Projekt ist noch kein Ordner verbunden.",
+      "permission": "Der Zugriff auf den Ordner wurde verweigert. Bitte erlaube den Zugriff, um fortzufahren."
     }
   },
   "nostr": {

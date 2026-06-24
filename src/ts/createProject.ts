@@ -20,6 +20,22 @@ export interface ProjectMeta {
   title?: string;
   gist_url?: string;
   github?: { owner: string; repo: string; branch: string; commitSha: string };
+  localFolder?: { name: string };
+}
+
+/**
+ * sessionStorage key carrying the storageId of a project that should pop its
+ * local-folder sync dialog as soon as the editor opens (set by the index page's
+ * "local folder" import, consumed once in LiaScript.vue's mounted hook).
+ */
+export const SYNC_ON_OPEN_KEY = "liaeditor:syncOnOpen";
+
+export interface CreateProjectOptions {
+  /** Run after the project is set up but before navigating to the editor —
+   *  e.g. to persist a linked folder handle while the storageId is known. */
+  onReady?: (storageId: string) => void | Promise<void>;
+  /** Auto-open the local-folder sync dialog when the editor mounts. */
+  syncOnOpen?: boolean;
 }
 
 /**
@@ -32,7 +48,8 @@ export interface ProjectMeta {
  */
 export async function createProjectFromFiles(
   files: ImportFile[],
-  meta: ProjectMeta = {}
+  meta: ProjectMeta = {},
+  opts: CreateProjectOptions = {}
 ): Promise<string> {
   const storageId = randomString(24);
   const doc = getProjectDoc(storageId);
@@ -43,6 +60,9 @@ export async function createProjectFromFiles(
 
   const database = new Dexie();
   await database.put(storageId, { title: "", ...meta });
+
+  if (opts.onReady) await opts.onReady(storageId);
+  if (opts.syncOnOpen) sessionStorage.setItem(SYNC_ON_OPEN_KEY, storageId);
 
   navigateTo("?/edit/" + storageId);
   return storageId;

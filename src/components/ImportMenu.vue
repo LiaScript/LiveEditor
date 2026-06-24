@@ -24,7 +24,9 @@ export default defineComponent({
 
   computed: {
     extraSources(): ImportSource[] {
-      return this.sources.filter((s) => s.id !== "new");
+      return this.sources.filter(
+        (s) => s.id !== "new" && (s.available ? s.available() : true)
+      );
     },
   },
 

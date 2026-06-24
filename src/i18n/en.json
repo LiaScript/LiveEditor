@@ -100,6 +100,7 @@
       "github": "GitHub repository",
       "url": "From URL (Markdown / ZIP)",
       "gist": "GitHub Gist",
+      "localFolder": "Local folder",
       "githubPlaceholder": "owner/repo or https://github.com/owner/repo",
       "githubHint": "Pick the files to import on the next screen.",
       "urlPlaceholder": "https://.../README.md or .../project.zip",
@@ -275,6 +276,37 @@
       "pushing": "Uploading files…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
       "done": "Repository created and files published."
+    }
+  },
+  "localFolder": {
+    "close": "Close",
+    "menu": {
+      "header": "Local folder",
+      "open": "Open folder…",
+      "openTooltip": "Link a folder on your computer to this project",
+      "sync": "Synchronize…",
+      "syncNamed": "Synchronize “{name}”…",
+      "syncTooltip": "Compare and sync this project with the linked folder"
+    },
+    "direction": {
+      "push": "to folder",
+      "pull": "to editor",
+      "conflict": "conflict"
+    },
+    "sync": {
+      "title": "Synchronize with local folder",
+      "computing": "Comparing files…",
+      "inSync": "Editor and folder are already in sync.",
+      "applying": "Synchronizing…",
+      "done": "Synchronization complete.",
+      "applyBtn": "Synchronize {n} file(s)",
+      "keepEditor": "Keep editor",
+      "keepDisk": "Keep folder",
+      "grant": "Grant access"
+    },
+    "errors": {
+      "noFolder": "No folder is linked to this project yet.",
+      "permission": "Access to the folder was denied. Please grant permission to continue."
     }
   },
   "nostr": {

@@ -6,7 +6,9 @@
 import { navigateTo } from "../index";
 import { getGithubPat } from "./utils";
 import { parseRepoUrl } from "./GitHubRepo";
-import { createProjectFromFiles, filesFromZip, ImportFile } from "./createProject";
+import { createProjectFromFiles, filesFromZip, ImportFile, ProjectMeta } from "./createProject";
+import * as LocalFolder from "./LocalFolder";
+import { detectGitHubRemote } from "./localFolderSync";
 
 export type SourceKind = "navigate" | "fileInput" | "modal";
 
@@ -29,6 +31,8 @@ export interface ImportSource {
   onSubmit?: (input: string) => Promise<void>;
   /** navigate: simple action without further input (e.g. new empty course). */
   onSelect?: () => void;
+  /** optional gate: hide the source when it returns false (e.g. unsupported). */
+  available?: () => boolean;
 }
 
 const MD_EXT = /\.(md|markdown)$/i;
@@ -177,6 +181,39 @@ export const importSources: ImportSource[] = [
         title: gist.description || mainFile.filename,
         // makes the card's "Gist" badge + export link work
         gist_url: mainFile.raw_url,
+      });
+    },
+  },
+
+  {
+    id: "localFolder",
+    icon: "bi-folder2-open",
+    labelKey: "index.import.localFolder",
+    kind: "navigate",
+    // File System Access API is Chromium-only.
+    available: () => LocalFolder.isSupported(),
+    async onSelect() {
+      let handle: LocalFolder.DirHandle;
+      try {
+        handle = await LocalFolder.pickFolder();
+      } catch {
+        return; // user dismissed the picker
+      }
+
+      const meta: ProjectMeta = {
+        title: handle.name,
+        localFolder: { name: handle.name },
+      };
+      // if the folder is a GitHub clone, link it so the user can push directly
+      const repo = await detectGitHubRemote(handle);
+      if (repo) meta.github = repo;
+
+      // Create an empty project linked to the folder and open the sync dialog in
+      // the editor (with an empty manifest, every file on disk shows up as a
+      // pull) — exactly like opening a folder from inside an existing project.
+      await createProjectFromFiles([], meta, {
+        syncOnOpen: true,
+        onReady: (storageId) => LocalFolder.saveHandle(storageId, handle),
       });
     },
   },

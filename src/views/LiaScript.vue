@@ -22,6 +22,11 @@ const GitHubImportModal = defineAsyncComponent(() => import("./GitHub/ImportModa
 const GitHubPushModal = defineAsyncComponent(() => import("./GitHub/PushModal.vue"));
 const GitHubPullModal = defineAsyncComponent(() => import("./GitHub/PullModal.vue"));
 const GitHubPublishModal = defineAsyncComponent(() => import("./GitHub/PublishModal.vue"));
+const LocalFolderSyncModal = defineAsyncComponent(() => import("./LocalFolder/SyncModal.vue"));
+
+import * as LocalFolder from "../ts/LocalFolder";
+import { detectGitHubRemote } from "../ts/localFolderSync";
+import { SYNC_ON_OPEN_KEY } from "../ts/createProject";
 
 import logoImg from "url:../../assets/logo.png";
 
@@ -89,6 +94,7 @@ export default {
       githubPushVisible: false,
       githubPullVisible: false,
       githubPublishVisible: false,
+      localFolderSyncVisible: false,
       showFiles: false,
       showToolbar: true,
     };
@@ -99,12 +105,27 @@ export default {
       this.horizontal =
         document.documentElement.clientWidth < document.documentElement.clientHeight;
     });
+
+    // Opened straight from the index page's "local folder" import: pop the sync
+    // dialog so the user can pull the folder's files into the fresh project.
+    if (
+      this.$props.storageId &&
+      sessionStorage.getItem(SYNC_ON_OPEN_KEY) === this.$props.storageId
+    ) {
+      sessionStorage.removeItem(SYNC_ON_OPEN_KEY);
+      this.localFolderSyncVisible = true;
+    }
   },
 
   computed: {
     // basename of the active file (shown on the download menu entry)
     activeFileName(): string {
       return this.activeFilePath.split("/").pop() || this.activeFilePath;
+    },
+
+    // File System Access API is Chromium-only; gate the menu segment on it.
+    localFolderSupported(): boolean {
+      return LocalFolder.isSupported();
     },
 
     // A LiaScript course link to the currently active file, served from the
@@ -208,6 +229,33 @@ export default {
     onGithubUpdated(link: any) {
       const meta = (this.meta as any)?.meta;
       if (meta) meta.github = link;
+    },
+
+    // --- local folder (File System Access API) -------------------------------
+    // Pick a folder and link it to this project. The handle is persisted (in a
+    // separate IndexedDB store) so the link survives reloads; only the display
+    // name is stored in the project meta to surface the "connected" state.
+    async openLocalFolder() {
+      if (!this.$props.storageId) return;
+      try {
+        const handle = await LocalFolder.pickFolder();
+        await LocalFolder.saveHandle(this.$props.storageId, handle);
+        const update: any = { localFolder: { name: handle.name } };
+        // If the folder is a GitHub clone and the project isn't linked to a repo
+        // yet, adopt that link so the user can push straight to GitHub.
+        if (!(this.meta as any)?.meta?.github) {
+          const repo = await detectGitHubRemote(handle);
+          if (repo) update.github = repo;
+        }
+        await this.database?.put(this.$props.storageId, update);
+        this.localFolderSyncVisible = true;
+      } catch (e) {
+        // user dismissed the picker — nothing to do
+      }
+    },
+
+    localFolderSync() {
+      if ((this.meta as any)?.meta?.localFolder) this.localFolderSyncVisible = true;
     },
 
     shareLink() {
@@ -552,6 +600,7 @@ export default {
     GitHubPushModal,
     GitHubPullModal,
     GitHubPublishModal,
+    LocalFolderSyncModal,
   },
 };
 </script>
@@ -1056,6 +1105,45 @@ export default {
                 </button>
               </li>
               </template>
+
+              <template v-if="localFolderSupported">
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-header fw-light section-toggle"
+                  @click.stop="toggleSection('localFolder')"
+                >
+                  <i class="bi" :class="openSection === 'localFolder' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
+                  {{ $t('localFolder.menu.header') }}
+                </button>
+              </li>
+              <template v-if="openSection === 'localFolder'">
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  :class="{ disabled: !storageId }"
+                  @click="openLocalFolder"
+                  :title="$t('localFolder.menu.openTooltip')"
+                >
+                  <i class="bi bi-folder2-open"></i> {{ $t('localFolder.menu.open') }}
+                </button>
+              </li>
+              <li>
+                <button
+                  class="btn dropdown-item btn-link"
+                  :class="{ disabled: !meta?.meta?.localFolder }"
+                  @click="localFolderSync"
+                  :title="$t('localFolder.menu.syncTooltip')"
+                >
+                  <i class="bi bi-arrow-down-up"></i>
+                  {{ meta?.meta?.localFolder ? $t('localFolder.menu.syncNamed', { name: meta.meta.localFolder.name }) : $t('localFolder.menu.sync') }}
+                </button>
+              </li>
+              </template>
+              </template>
             </ul>
           </div>
 
@@ -1280,6 +1368,14 @@ export default {
     :github="meta.meta.github"
     @close="githubPullVisible = false"
     @updated="onGithubUpdated"
+  />
+  <LocalFolderSyncModal
+    v-if="$props.storageId"
+    :visible="localFolderSyncVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    :folderName="meta?.meta?.localFolder?.name"
+    @close="localFolderSyncVisible = false"
   />
 </template>
 
