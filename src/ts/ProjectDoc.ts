@@ -78,6 +78,12 @@ export function isVideoFile(path: string, mime?: string): boolean {
   return VIDEO_EXTENSIONS.has(extensionOf(path));
 }
 
+/** Decide whether a path should be displayed as a PDF document. */
+export function isPdfFile(path: string, mime?: string): boolean {
+  if ((mime || "").toLowerCase() === "application/pdf") return true;
+  return extensionOf(path) === "pdf";
+}
+
 export type FileType = "file" | "folder";
 
 export interface FileMeta {

@@ -11,6 +11,7 @@ import {
   isImageFile,
   isAudioFile,
   isVideoFile,
+  isPdfFile,
 } from "../ts/ProjectDoc";
 import { editor, KeyMod, KeyCode, languages, IDisposable } from "monaco-editor";
 import * as Utils from "../ts/utils";
@@ -133,10 +134,11 @@ export default {
       activePath: "",
       previewPath: "",
       activeMime: "",
-      activeView: "text" as "text" | "image" | "video" | "audio" | "binary",
+      activeView: "text" as "text" | "image" | "video" | "audio" | "pdf" | "binary",
       imageUrl: "",
       videoUrl: "",
       audioUrl: "",
+      pdfUrl: "",
     };
   },
 
@@ -313,6 +315,13 @@ export default {
       this.videoUrl = url;
     },
 
+    setPdf(url: string) {
+      if (this.pdfUrl && this.pdfUrl !== url) {
+        URL.revokeObjectURL(this.pdfUrl);
+      }
+      this.pdfUrl = url;
+    },
+
     // Swap the Monaco model + collaborative binding to a different Y.Text.
     bindDoc(yText: any, language: string) {
       if (!Editor) return;
@@ -347,6 +356,8 @@ export default {
       if (!this.projectDoc) return;
       this.setImage("");
       this.setVideo("");
+      this.setAudio("");
+      this.setPdf("");
       this.activePath = "";
       this.activeMime = "";
       this.activeView = "text";
@@ -371,6 +382,7 @@ export default {
         const data = this.projectDoc.readFileData(path);
         this.setVideo("");
         this.setAudio("");
+        this.setPdf("");
         this.setImage(
           data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "" })) : ""
         );
@@ -382,6 +394,7 @@ export default {
         const data = this.projectDoc.readFileData(path);
         this.setImage("");
         this.setVideo("");
+        this.setPdf("");
         this.setAudio(
           data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "audio/mpeg" })) : ""
         );
@@ -393,6 +406,7 @@ export default {
         const data = this.projectDoc.readFileData(path);
         this.setImage("");
         this.setAudio("");
+        this.setPdf("");
         this.setVideo(
           data ? URL.createObjectURL(new Blob([data as BlobPart], { type: mime || "video/webm" })) : ""
         );
@@ -400,10 +414,23 @@ export default {
         return;
       }
 
+      if (isPdfFile(path, mime)) {
+        const data = this.projectDoc.readFileData(path);
+        this.setImage("");
+        this.setAudio("");
+        this.setVideo("");
+        this.setPdf(
+          data ? URL.createObjectURL(new Blob([data as BlobPart], { type: "application/pdf" })) : ""
+        );
+        this.activeView = "pdf";
+        return;
+      }
+
       if (isTextFile(path, mime)) {
         this.setImage("");
         this.setVideo("");
         this.setAudio("");
+        this.setPdf("");
         this.activeView = "text";
         const language = this.languageFor(path);
         this.bindDoc(this.projectDoc.getText(path), language);
@@ -417,6 +444,8 @@ export default {
 
       this.setImage("");
       this.setVideo("");
+      this.setAudio("");
+      this.setPdf("");
       this.activeView = "binary";
     },
 
@@ -2045,6 +2074,10 @@ I (study) ~[[ am going to study ]]~ harder this term.
     <video v-if="videoUrl" :key="videoUrl" :src="videoUrl" controls></video>
   </div>
 
+  <div v-show="activeView === 'pdf'" class="lia-file-view lia-pdf-view">
+    <iframe v-if="pdfUrl" :key="pdfUrl" :src="pdfUrl" :title="activePath"></iframe>
+  </div>
+
   <div v-show="activeView === 'binary'" class="lia-file-view lia-binary-view">
     <p>
       <i class="bi bi-file-earmark-binary"></i><br />
@@ -2099,6 +2132,16 @@ I (study) ~[[ am going to study ]]~ harder this term.
 .lia-video-view video {
   max-width: 100%;
   max-height: 100%;
+}
+
+.lia-pdf-view {
+  padding: 0;
+}
+
+.lia-pdf-view iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .lia-binary-view {
