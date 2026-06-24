@@ -487,6 +487,8 @@
     "renameTo": "Umbenennen in:",
     "labelFile": "Datei",
     "labelFolder": "Ordner (und seinen Inhalt)",
-    "deleteConfirm": "{label} \"{path}\" löschen?"
+    "deleteConfirm": "{label} \"{path}\" löschen?",
+    "newFileDefault": "untitled.txt",
+    "newFolderDefault": "folder"
   }
 }
