@@ -11,7 +11,7 @@ if (window.LIA.settings?.preferBrowserTTS || false) {
 window.injectHandler = function (param) {
   let url
 
-  console.log("injecting", param)
+  console.log("injecting ->", param)
 
   if (blob[param.src]) {
     url = blob[param.src]
@@ -24,6 +24,11 @@ window.injectHandler = function (param) {
   }
 
   const src = window.location.origin + param.src
+
+  // Media fragment (e.g. "#t=0,5") that has to be re-applied to the blob URL so
+  // the author's start/stop time keeps working. Blob URLs lose any fragment.
+  const hashIndex = param.src.indexOf("#")
+  const fragment = hashIndex >= 0 ? param.src.slice(hashIndex) : ""
 
   switch (param.tag) {
     case "img": {
@@ -49,13 +54,13 @@ window.injectHandler = function (param) {
 
       for (let i = 0; i < nodes.length; i++) {
         let elem = nodes[i]
-        if (elem.src == src) {
+        if (elem.src == src + fragment) {
           const parent = elem.parentNode
           if (!parent.paused) {
             parent.pause()
           }
 
-          elem.src = url
+          elem.src = url + fragment
           elem.removeAttribute("onerror")
 
           // this forces the player to reload
@@ -72,10 +77,10 @@ window.injectHandler = function (param) {
 
       for (let i = 0; i < nodes.length; i++) {
         let elem = nodes[i]
-        if (elem.src == src) {
+        if (elem.src == src + fragment) {
           const parent = elem.parentNode
-          parent.src = url
-          elem.src = url
+          parent.src = url + fragment
+          elem.src = url + fragment
           parent.load()
           parent.onloadeddata = function() {
             parent.play()
@@ -89,7 +94,7 @@ window.injectHandler = function (param) {
         let elem = nodes[i]
 
         if (elem.src == src) {
-          elem.src = url
+          elem.src = url + fragment
           elem.load()
           elem.onloadeddata = function() {
             elem.play()
@@ -171,8 +176,11 @@ export default {
             const param = event.data.param;
 
             if (this.fetchError) {
-              const blob = this.fetchError(param.src);
-              //(param.tag, param.src);
+              // Strip any media fragment (e.g. "#t=0,5") so the virtual file
+              // system can find the file by its real path. The fragment stays
+              // in param.src so injectHandler can re-apply it to the blob URL.
+              const lookupSrc = param.src.split("#")[0];
+              const blob = this.fetchError(lookupSrc);
               if (blob) {
                 this.sendToLia("inject", {
                   tag: param.tag,
