@@ -18,6 +18,8 @@ export interface ImportSource {
   icon: string;
   /** i18n key for the menu label. */
   labelKey: string;
+  /** i18n key for the longer card description shown in the chooser modal. */
+  descriptionKey?: string;
   kind: SourceKind;
   /** fileInput: accepted file extensions/mime for the <input accept>. */
   accept?: string;
@@ -68,6 +70,7 @@ export const importSources: ImportSource[] = [
     id: "new",
     icon: "bi-file-earmark-plus",
     labelKey: "index.import.new",
+    descriptionKey: "index.import.newDesc",
     kind: "navigate",
     onSelect: () => navigateTo("?/edit"),
   },
@@ -76,6 +79,7 @@ export const importSources: ImportSource[] = [
     id: "upload",
     icon: "bi-upload",
     labelKey: "index.import.upload",
+    descriptionKey: "index.import.uploadDesc",
     kind: "fileInput",
     accept: ".md,.markdown,.zip",
     async onFiles(list) {
@@ -91,6 +95,7 @@ export const importSources: ImportSource[] = [
     id: "github",
     icon: "bi-github",
     labelKey: "index.import.github",
+    descriptionKey: "index.import.githubDesc",
     kind: "modal",
     placeholderKey: "index.import.githubPlaceholder",
     hintKey: "index.import.githubHint",
@@ -105,6 +110,7 @@ export const importSources: ImportSource[] = [
     id: "url",
     icon: "bi-link-45deg",
     labelKey: "index.import.url",
+    descriptionKey: "index.import.urlDesc",
     kind: "modal",
     placeholderKey: "index.import.urlPlaceholder",
     hintKey: "index.import.urlHint",
@@ -132,6 +138,7 @@ export const importSources: ImportSource[] = [
     id: "gist",
     icon: "bi-filetype-md",
     labelKey: "index.import.gist",
+    descriptionKey: "index.import.gistDesc",
     kind: "modal",
     placeholderKey: "index.import.gistPlaceholder",
     hintKey: "index.import.gistHint",
@@ -189,6 +196,7 @@ export const importSources: ImportSource[] = [
     id: "localFolder",
     icon: "bi-folder2-open",
     labelKey: "index.import.localFolder",
+    descriptionKey: "index.import.localFolderDesc",
     kind: "navigate",
     // File System Access API is Chromium-only.
     available: () => LocalFolder.isSupported(),
