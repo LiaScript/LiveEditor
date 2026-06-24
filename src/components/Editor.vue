@@ -124,11 +124,6 @@ export default {
       activeTab: "start",
 
       online: null,
-      upload: {
-        image: null,
-        audio: null,
-        movie: null,
-      },
       blob: null,
       projectDoc: null as ProjectDoc | null,
       activePath: "",
@@ -211,6 +206,45 @@ export default {
       } else {
         console.warn("could not load file: ", blob);
       }
+    },
+
+    // Handle the file selection from one of the hidden upload <input> elements.
+    // Bound via @change in the template so the listener is (re)attached every
+    // time the "insert" tab — and thus the inputs — is rendered.
+    uploadFile(media: string, event) {
+      const file = event.target.files[0];
+
+      if (!file) return;
+
+      const self = this;
+      const reader = new FileReader();
+
+      reader.onload = async function (e) {
+        if (
+          e.target?.result === null ||
+          e.target?.result === undefined ||
+          typeof e.target?.result === "string"
+        ) {
+          console.warn("could not load file: ", file);
+          return;
+        }
+
+        const blob = new Uint8Array(e.target?.result);
+
+        if (blob) {
+          // Keep the original file name (visible in the file explorer)
+          // instead of a hash-based one.
+          const path = self.storeUpload(file.name, blob, file.type);
+          self.make("upload-" + media, path);
+        } else {
+          console.warn("could not load file: ", file);
+        }
+      };
+
+      reader.readAsArrayBuffer(file);
+
+      // Reset so selecting the same file again re-triggers @change.
+      event.target.value = "";
     },
 
     getValue() {
@@ -959,7 +993,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
             op.text = `?[](${data})`;
             move = 2;
           } else {
-            this.upload.audio.click();
+            (document.getElementById("audioInput") as HTMLInputElement)?.click();
           }
 
           break;
@@ -970,7 +1004,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
             op.text = `![](${data})`;
             move = 2;
           } else {
-            this.upload.image.click();
+            (document.getElementById("imageInput") as HTMLInputElement)?.click();
           }
 
           break;
@@ -981,7 +1015,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
             op.text = `!?[](${data})`;
             move = 3;
           } else {
-            this.upload.movie.click();
+            (document.getElementById("movieInput") as HTMLInputElement)?.click();
           }
 
           break;
@@ -1668,50 +1702,6 @@ I (study) ~[[ am going to study ]]~ harder this term.
       }
     });
 
-    const self = this;
-
-    const eventListener = function (media: string) {
-      return function (event) {
-        const file = event.target.files[0];
-
-        if (file) {
-          const reader = new FileReader();
-
-          reader.onload = async function (e) {
-            if (
-              e.target?.result === null ||
-              e.target?.result === undefined ||
-              typeof e.target?.result === "string"
-            ) {
-              console.warn("could not load file: ", file);
-              return;
-            }
-
-            const blob = new Uint8Array(e.target?.result);
-
-            console.warn("liascript: upload", e.target);
-
-            if (blob) {
-              // Keep the original file name (visible in the file explorer)
-              // instead of a hash-based one.
-              const path = self.storeUpload(file.name, blob, file.type);
-              self.make("upload-" + media, path);
-            } else {
-              console.warn("could not load file: ", file);
-            }
-          };
-
-          reader.readAsArrayBuffer(file);
-        }
-      };
-    };
-
-    for (let media of ["image", "audio", "movie"]) {
-      this.upload[media] = document.getElementById(media + "Input");
-
-      if (this.upload[media])
-        this.upload[media].addEventListener("change", eventListener(media), false);
-    }
   },
 };
 </script>
@@ -1822,9 +1812,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
           </div>
           <div class="toolbar-label">{{ $t('toolbar.sections.link') }}</div>
         </div>
-        <input type="file" id="imageInput" style="display: none" accept="image/*" />
-        <input type="file" id="audioInput" style="display: none" accept="audio/*" />
-        <input type="file" id="movieInput" style="display: none" accept="video/*" />
+        <input type="file" id="imageInput" style="display: none" accept="image/*" @change="uploadFile('image', $event)" />
+        <input type="file" id="audioInput" style="display: none" accept="audio/*" @change="uploadFile('audio', $event)" />
+        <input type="file" id="movieInput" style="display: none" accept="video/*" @change="uploadFile('movie', $event)" />
         <div class="toolbar-section">
           <div class="toolbar-buttons">
             <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.uploadImage')" @click="make('upload-image')">
