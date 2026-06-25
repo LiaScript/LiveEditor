@@ -319,10 +319,14 @@ export default {
           <span class="spinner-border spinner-border-sm me-2"></span>{{ $t('exporter.sending') }}
         </div>
 
-        <!-- Embedded exporter UI -->
-        <div class="frame-wrap">
+        <!-- Embedded exporter UI. The iframe must stay in the layout (not
+             display:none) so the browser actually loads it and it can run the
+             'ready' handshake / receive the project. Until that handshake
+             confirms the exporter is reachable, we simply cover it with an
+             opaque overlay so the user never sees the bare exporter UI before
+             the connection succeeded. -->
+        <div class="frame-wrap" v-if="activeUrl">
           <iframe
-            v-if="activeUrl"
             :key="reloadKey"
             ref="frame"
             :src="activeUrl"
@@ -330,6 +334,12 @@ export default {
             :title="$t('exporter.title')"
             @load="onFrameLoad"
           ></iframe>
+
+          <!-- Connecting overlay, hidden once 'ready' arrives or on error
+               (the error/status alert above already explains failures). -->
+          <div v-if="!iframeReady && !errorKey" class="frame-overlay">
+            <span class="spinner-border spinner-border-sm me-2"></span>{{ $t('exporter.connecting') }}
+          </div>
         </div>
       </div>
     </div>
@@ -385,6 +395,7 @@ export default {
 }
 
 .frame-wrap {
+  position: relative;
   flex: 1 1 auto;
   min-height: 0;
   margin-top: 0.5rem;
@@ -398,5 +409,15 @@ export default {
   height: 100%;
   border: 0;
   display: block;
+}
+
+.frame-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bs-body-bg, #fff);
+  color: var(--bs-secondary-color, #6c757d);
 }
 </style>

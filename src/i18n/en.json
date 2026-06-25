@@ -191,6 +191,7 @@
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
+    "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
     "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. http://localhost:3000",
