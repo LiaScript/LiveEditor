@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Partager l'éditeur ...",
+    "modalTitle": "Partage et actions",
+    "publishedHeading": "Ouvrir une publication existante",
+    "nostr": "Nostr",
+    "downloadZipLabel": "Archive ZIP",
+    "downloadReadmeLabel": "Fichier Readme",
+    "downloadActiveFileInfo": "Télécharge uniquement le fichier actuellement ouvert",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Publier",
+      "published": "Liens publiés",
+      "export": "Exporter",
+      "github": "GitHub",
+      "localFolder": "Dossier local"
+    },
     "collaborationLink": "Lien de collaboration",
     "collaborationLinkTitle": "Partager ce document avec d'autres personnes",
     "collaborationLinkTooltip": "Faites un fork de ce document avant d'utiliser cette fonction",

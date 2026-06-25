@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Sdílet editor ...",
+    "modalTitle": "Sdílení a akce",
+    "publishedHeading": "Otevřít existující publikaci",
+    "nostr": "Nostr",
+    "downloadZipLabel": "Archiv ZIP",
+    "downloadReadmeLabel": "Soubor Readme",
+    "downloadActiveFileInfo": "Stáhne pouze aktuálně otevřený soubor",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Publikovat",
+      "published": "Publikované odkazy",
+      "export": "Exportovat",
+      "github": "GitHub",
+      "localFolder": "Místní složka"
+    },
     "collaborationLink": "odkaz pro spolupráci",
     "collaborationLinkTitle": "Sdílet tento dokument s ostatními",
     "collaborationLinkTooltip": "Před použitím této funkce vytvořte fork tohoto dokumentu",

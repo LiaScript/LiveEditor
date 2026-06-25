@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Udostępnij edytor ...",
+    "modalTitle": "Udostępnianie i akcje",
+    "publishedHeading": "Otwórz istniejącą publikację",
+    "nostr": "Nostr",
+    "downloadZipLabel": "Archiwum ZIP",
+    "downloadReadmeLabel": "Plik Readme",
+    "downloadActiveFileInfo": "Pobiera tylko aktualnie otwarty plik",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Publikuj",
+      "published": "Opublikowane linki",
+      "export": "Eksportuj",
+      "github": "GitHub",
+      "localFolder": "Folder lokalny"
+    },
     "collaborationLink": "link do współpracy",
     "collaborationLinkTitle": "Udostępnij ten dokument innym",
     "collaborationLinkTooltip": "Zrób fork tego dokumentu, zanim użyjesz tej funkcji",

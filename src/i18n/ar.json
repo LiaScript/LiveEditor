@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "مشاركة المحرر ...",
+    "modalTitle": "المشاركة والإجراءات",
+    "publishedHeading": "فتح منشور موجود",
+    "nostr": "Nostr",
+    "downloadZipLabel": "أرشيف ZIP",
+    "downloadReadmeLabel": "ملف Readme",
+    "downloadActiveFileInfo": "ينزّل الملف المفتوح حاليًا فقط",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "نشر",
+      "published": "الروابط المنشورة",
+      "export": "تصدير",
+      "github": "GitHub",
+      "localFolder": "مجلد محلي"
+    },
     "collaborationLink": "رابط التعاون",
     "collaborationLinkTitle": "مشاركة هذا المستند مع الآخرين",
     "collaborationLinkTooltip": "أنشئ Fork لهذا المستند قبل استخدام هذه الوظيفة",

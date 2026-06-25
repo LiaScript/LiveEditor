@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Поділитися редактором ...",
+    "modalTitle": "Поширення та дії",
+    "publishedHeading": "Відкрити наявну публікацію",
+    "nostr": "Nostr",
+    "downloadZipLabel": "Архів ZIP",
+    "downloadReadmeLabel": "Файл Readme",
+    "downloadActiveFileInfo": "Завантажує лише поточний відкритий файл",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Опублікувати",
+      "published": "Опубліковані посилання",
+      "export": "Експорт",
+      "github": "GitHub",
+      "localFolder": "Локальна тека"
+    },
     "collaborationLink": "Посилання для співпраці",
     "collaborationLinkTitle": "Поділитися цим документом з іншими",
     "collaborationLinkTooltip": "Спочатку зробіть форк документа, щоб скористатися цією функцією",

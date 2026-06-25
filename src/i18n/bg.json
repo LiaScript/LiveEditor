@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Споделяне на редактора ...",
+    "modalTitle": "Споделяне и действия",
+    "publishedHeading": "Отваряне на съществуваща публикация",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP архив",
+    "downloadReadmeLabel": "Файл Readme",
+    "downloadActiveFileInfo": "Изтегля само текущо отворения файл",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Публикуване",
+      "published": "Публикувани връзки",
+      "export": "Експортиране",
+      "github": "GitHub",
+      "localFolder": "Локална папка"
+    },
     "collaborationLink": "връзка за съвместна работа",
     "collaborationLinkTitle": "Споделяне на този документ с други",
     "collaborationLinkTooltip": "Направете fork на този документ, преди да използвате тази функция",

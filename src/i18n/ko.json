@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "편집기 공유 ...",
+    "modalTitle": "공유 및 작업",
+    "publishedHeading": "기존 게시물 열기",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP 아카이브",
+    "downloadReadmeLabel": "Readme 파일",
+    "downloadActiveFileInfo": "현재 열려 있는 파일만 다운로드합니다",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "게시",
+      "published": "게시된 링크",
+      "export": "내보내기",
+      "github": "GitHub",
+      "localFolder": "로컬 폴더"
+    },
     "collaborationLink": "협업 링크",
     "collaborationLinkTitle": "이 문서를 다른 사람과 공유",
     "collaborationLinkTooltip": "이 기능을 사용하기 전에 이 문서를 포크하세요",

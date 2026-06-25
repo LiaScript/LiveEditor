@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Szerkesztő megosztása ...",
+    "modalTitle": "Megosztás és műveletek",
+    "publishedHeading": "Meglévő közzététel megnyitása",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP-archívum",
+    "downloadReadmeLabel": "Readme fájl",
+    "downloadActiveFileInfo": "Csak a jelenleg megnyitott fájlt tölti le",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Közzététel",
+      "published": "Közzétett hivatkozások",
+      "export": "Exportálás",
+      "github": "GitHub",
+      "localFolder": "Helyi mappa"
+    },
     "collaborationLink": "együttműködési hivatkozás",
     "collaborationLinkTitle": "Dokumentum megosztása másokkal",
     "collaborationLinkTooltip": "A funkció használata előtt készíts forkot erről a dokumentumról",

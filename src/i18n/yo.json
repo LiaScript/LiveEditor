@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Pin olootu ...",
+    "modalTitle": "Share & actions",
+    "publishedHeading": "Open existing publication",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP archive",
+    "downloadReadmeLabel": "Readme file",
+    "downloadActiveFileInfo": "Downloads only the currently open file",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Publish",
+      "published": "Published links",
+      "export": "Export",
+      "github": "GitHub",
+      "localFolder": "Local folder"
+    },
     "collaborationLink": "ọna asopọ ifowosowopo",
     "collaborationLinkTitle": "Pin iwe yii pẹlu awọn omiiran",
     "collaborationLinkTooltip": "Ṣe fork iwe yii ṣaaju ki o to lo iṣẹ yii",

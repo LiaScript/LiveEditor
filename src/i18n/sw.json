@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Shiriki kihariri ...",
+    "modalTitle": "Kushiriki na vitendo",
+    "publishedHeading": "Fungua chapisho lililopo",
+    "nostr": "Nostr",
+    "downloadZipLabel": "Kumbukumbu ya ZIP",
+    "downloadReadmeLabel": "Faili la Readme",
+    "downloadActiveFileInfo": "Hupakua faili iliyo wazi sasa pekee",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Chapisha",
+      "published": "Viungo vilivyochapishwa",
+      "export": "Hamisha",
+      "github": "GitHub",
+      "localFolder": "Folda ya ndani"
+    },
     "collaborationLink": "kiungo cha ushirikiano",
     "collaborationLinkTitle": "Shiriki hati hii na wengine",
     "collaborationLinkTooltip": "Fanya fork ya hati hii kabla ya kutumia kipengele hiki",

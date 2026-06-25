@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Del editor ...",
+    "modalTitle": "Deling og handlinger",
+    "publishedHeading": "Åbn eksisterende udgivelse",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP-arkiv",
+    "downloadReadmeLabel": "Readme-fil",
+    "downloadActiveFileInfo": "Downloader kun den aktuelt åbne fil",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Udgiv",
+      "published": "Udgivne links",
+      "export": "Eksportér",
+      "github": "GitHub",
+      "localFolder": "Lokal mappe"
+    },
     "collaborationLink": "samarbejdslink",
     "collaborationLinkTitle": "Del dette dokument med andre",
     "collaborationLinkTooltip": "Fork dette dokument, før du kan bruge denne funktion",

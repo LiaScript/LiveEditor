@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Editor delen ...",
+    "modalTitle": "Delen en acties",
+    "publishedHeading": "Bestaande publicatie openen",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP-archief",
+    "downloadReadmeLabel": "Readme-bestand",
+    "downloadActiveFileInfo": "Downloadt alleen het momenteel geopende bestand",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Publiceren",
+      "published": "Gepubliceerde links",
+      "export": "Exporteren",
+      "github": "GitHub",
+      "localFolder": "Lokale map"
+    },
     "collaborationLink": "samenwerkingslink",
     "collaborationLinkTitle": "Dit document met anderen delen",
     "collaborationLinkTooltip": "Maak eerst een fork van dit document voordat je deze functie gebruikt",

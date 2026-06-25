@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Editörü paylaş ...",
+    "modalTitle": "Paylaşım ve işlemler",
+    "publishedHeading": "Mevcut yayını aç",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP arşivi",
+    "downloadReadmeLabel": "Readme dosyası",
+    "downloadActiveFileInfo": "Yalnızca şu anda açık olan dosyayı indirir",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Yayınla",
+      "published": "Yayınlanan bağlantılar",
+      "export": "Dışa aktar",
+      "github": "GitHub",
+      "localFolder": "Yerel klasör"
+    },
     "collaborationLink": "iş birliği bağlantısı",
     "collaborationLinkTitle": "Bu belgeyi başkalarıyla paylaş",
     "collaborationLinkTooltip": "Bu işlevi kullanmadan önce bu belgeyi fork edin",

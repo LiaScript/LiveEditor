@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Raba edita ...",
+    "modalTitle": "Share & actions",
+    "publishedHeading": "Open existing publication",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP archive",
+    "downloadReadmeLabel": "Readme file",
+    "downloadActiveFileInfo": "Downloads only the currently open file",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Publish",
+      "published": "Published links",
+      "export": "Export",
+      "github": "GitHub",
+      "localFolder": "Local folder"
+    },
     "collaborationLink": "haɗin haɗin gwiwa",
     "collaborationLinkTitle": "Raba wannan takarda da wasu",
     "collaborationLinkTooltip": "Yi fork na wannan takarda kafin amfani da wannan aiki",

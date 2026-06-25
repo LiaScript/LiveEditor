@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "エディターを共有 ...",
+    "modalTitle": "共有とアクション",
+    "publishedHeading": "既存の公開を開く",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP アーカイブ",
+    "downloadReadmeLabel": "Readme ファイル",
+    "downloadActiveFileInfo": "現在開いているファイルのみをダウンロードします",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "公開",
+      "published": "公開済みリンク",
+      "export": "エクスポート",
+      "github": "GitHub",
+      "localFolder": "ローカルフォルダー"
+    },
     "collaborationLink": "共同編集リンク",
     "collaborationLinkTitle": "このドキュメントを他の人と共有",
     "collaborationLinkTooltip": "この機能を使う前に、このドキュメントをフォークしてください",

@@ -7,6 +7,8 @@ import FileExplorer from "../components/FileExplorer.vue";
 import Preview from "../components/Preview.vue";
 import Modal from "../components/Modal.vue";
 import LanguageDropdown from "../components/LanguageDropdown.vue";
+import ImportMenu from "../components/ImportMenu.vue";
+import ShareModal from "../components/ShareModal.vue";
 // shrink-string, pako and jszip are only needed for the export/share actions,
 // so they are loaded on demand (see shareData/shareCode/embedCode/downloadZip)
 // to keep them out of the editor's startup bundle.
@@ -87,7 +89,6 @@ export default {
       // resolved path of the document currently shown in the preview; used to
       // export the right file and to surface its gist/nostr share state
       previewFilePath: "",
-      openSection: "",
       nostrModalVisible: false,
       exporterVisible: false,
       githubImportVisible: false,
@@ -154,13 +155,136 @@ export default {
     nostrLink(): string {
       return (this.meta as any)?.meta?.nostr_files?.[this.previewFilePath]?.url || "";
     },
+
+    // Tabbed structure consumed by ShareModal. Labels/descriptions reuse the
+    // existing share.* / github.menu.* / localFolder.menu.* keys; `disabled`
+    // mirrors the gates of the old dropdown (need a project / linked repo /
+    // linked folder / a previous export). `href` items open an external link.
+    shareTabs(): any[] {
+      const noProject = !this.$props.storageId;
+      const noRepo = !(this.meta as any)?.meta?.github;
+      const noFolder = !(this.meta as any)?.meta?.localFolder;
+
+      const tabs: any[] = [
+        {
+          id: "collaborate",
+          labelKey: "share.tabs.collaborate",
+          sections: [
+            {
+              items: [
+                { id: "collaborationLink", icon: "bi-people", labelKey: "share.collaborationLink", descriptionKey: "share.collaborationLinkTitle", disabled: noProject },
+                { id: "snapshotUrl", icon: "bi-camera", labelKey: "share.snapshotUrl", descriptionKey: "share.snapshotUrlAria" },
+                { id: "embedCode", icon: "bi-code-slash", labelKey: "share.embedCode", descriptionKey: "share.embedCodeAria" },
+                { id: "externalResource", icon: "bi-link-45deg", labelKey: "share.externalResource", descriptionKey: "share.externalResourceAria" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "publish",
+          labelKey: "share.tabs.publish",
+          sections: [
+            {
+              items: [
+                { id: "githubGist", icon: "bi-github", labelKey: "share.githubGist", descriptionKey: "share.githubGistTooltip", disabled: noProject },
+                { id: "nostr", icon: "bi-broadcast", labelKey: "share.nostr", descriptionKey: "share.nostrAria" },
+                { id: "dataUri", icon: "bi-link", labelKey: "share.dataUri", descriptionKey: "share.dataUriAria" },
+              ],
+            },
+          ],
+        },
+        {
+          id: "published",
+          labelKey: "share.tabs.published",
+          sections: [
+            {
+              items: [
+                { id: "githubGistLink", icon: "bi-box-arrow-up-right", labelKey: "share.githubGistLink", descriptionKey: "share.githubGistLinkTooltip", href: this.gistLink, disabled: !this.gistLink },
+                { id: "nostrLink", icon: "bi-box-arrow-up-right", labelKey: "share.nostrLink", descriptionKey: "share.nostrLinkTooltip", href: this.nostrLink, disabled: !this.nostrLink },
+                { id: "githubRepoFile", icon: "bi-box-arrow-up-right", label: this.$t("share.githubRepoFile", { file: this.activeFileName }), descriptionKey: "share.githubRepoFileTooltip", href: this.githubCourseUrl, disabled: !this.githubCourseUrl },
+                { id: "fileUrl", icon: "bi-box-arrow-up-right", labelKey: "share.fileUrl", descriptionKey: "share.fileUrlTooltip", href: this.$props.fileUrl ? this.LiaScriptURL + "?" + this.$props.fileUrl : "", disabled: !this.$props.fileUrl },
+              ],
+            },
+          ],
+        },
+        {
+          id: "github",
+          labelKey: "share.tabs.github",
+          sections: [
+            {
+              items: [
+                { id: "githubImport", icon: "bi-box-arrow-in-down", labelKey: "github.menu.import", descriptionKey: "github.menu.importTooltip" },
+                { id: "githubPublish", icon: "bi-cloud-upload", labelKey: "github.menu.publish", descriptionKey: "github.menu.publishTooltip", disabled: noProject },
+                { id: "githubPush", icon: "bi-arrow-up-circle", labelKey: "github.menu.push", descriptionKey: "github.menu.pushTooltip", disabled: noRepo },
+                { id: "githubPull", icon: "bi-arrow-down-circle", labelKey: "github.menu.pull", descriptionKey: "github.menu.pullTooltip", disabled: noRepo },
+              ],
+            },
+          ],
+        },
+      ];
+
+      if (this.localFolderSupported) {
+        tabs.push({
+          id: "localFolder",
+          labelKey: "share.tabs.localFolder",
+          sections: [
+            {
+              items: [
+                { id: "openLocalFolder", icon: "bi-folder2-open", labelKey: "localFolder.menu.open", descriptionKey: "localFolder.menu.openTooltip", disabled: noProject },
+                { id: "localFolderSync", icon: "bi-arrow-down-up", labelKey: "localFolder.menu.sync", descriptionKey: "localFolder.menu.syncTooltip", disabled: noFolder },
+              ],
+            },
+          ],
+        });
+      }
+
+      // Export is the last tab: the LiaScript Exporter (format conversion) plus
+      // the plain file downloads — i.e. every way to get the content "out".
+      tabs.push({
+        id: "export",
+        labelKey: "share.tabs.export",
+        sections: [
+          {
+            items: [
+              { id: "exporter", icon: "bi-box-arrow-up-right", labelKey: "share.exporter", descriptionKey: "share.exporterTooltip", disabled: noProject },
+              { id: "downloadZip", icon: "bi-file-zip", labelKey: "share.downloadZipLabel", descriptionKey: "share.downloadZip" },
+              { id: "downloadReadme", icon: "bi-file-earmark-text", label: this.activeFileName, descriptionKey: "share.downloadActiveFileInfo" },
+            ],
+          },
+        ],
+      });
+
+      return tabs;
+    },
   },
 
   methods: {
-    newCourse() {
-      window.location.href = "./?/edit";
+    openShare() {
+      (this.$refs.shareModal as any)?.open();
     },
 
+    // Map a card id from ShareModal back to the existing action methods.
+    onShareAction(id: string) {
+      const actions: Record<string, () => void> = {
+        collaborationLink: () => this.shareLink(),
+        snapshotUrl: () => this.shareCode(),
+        embedCode: () => this.embedCode(),
+        externalResource: () => this.shareFile(),
+        githubGist: () => this.githubGist(),
+        nostr: () => this.nostr(),
+        exporter: () => this.exporter(),
+        dataUri: () => this.shareData(),
+        downloadZip: () => this.downloadZip(),
+        downloadReadme: () => this.download(),
+        githubImport: () => this.githubImport(),
+        githubPublish: () => this.githubPublish(),
+        githubPush: () => this.githubPush(),
+        githubPull: () => this.githubPull(),
+        openLocalFolder: () => this.openLocalFolder(),
+        localFolderSync: () => this.localFolderSync(),
+      };
+      actions[id]?.();
+    },
 
     urlPath(path: string[]) {
       return window.location.origin + window.location.pathname + "?/" + path.join("/");
@@ -201,12 +325,6 @@ export default {
         gist_export_path: this.previewFilePath,
       });
       window.open(this.urlPath(["export", "github", this.$props.storageId]), "_blank");
-    },
-
-    // expand/collapse a section of the (otherwise very long) share menu so it
-    // fits on small screens; only one section is open at a time (accordion)
-    toggleSection(name: string) {
-      this.openSection = this.openSection === name ? "" : name;
     },
 
     githubImport() {
@@ -596,6 +714,8 @@ export default {
     NostrModal,
     ExporterModal,
     LanguageDropdown,
+    ImportMenu,
+    ShareModal,
     GitHubImportModal,
     GitHubPushModal,
     GitHubPullModal,
@@ -719,16 +839,8 @@ export default {
             </a>
           </div>
 
-          <div class="nav-item nav-item-sm ms-2 me-2">
-            <button
-              class="btn nav-link btn-link"
-              aria-current="page"
-              @click="newCourse"
-              :title="$t('nav.new')"
-            >
-              <i class="bi bi-plus"></i>
-              {{ $t('nav.new') }}
-            </button>
+          <div class="nav-item nav-item-sm ms-2 me-2 d-flex align-items-center">
+            <ImportMenu />
           </div>
 
           <div class="nav-item ms-2 me-2">
@@ -744,407 +856,16 @@ export default {
           </div>
           </div>
 
-          <div class="nav-item dropdown ms-2 me-2">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              data-bs-auto-close="outside"
-              aria-expanded="false"
+          <div class="nav-item ms-2 me-2 d-flex align-items-center">
+            <button
+              type="button"
+              class="btn nav-link btn-link"
+              @click="openShare"
+              :title="$t('nav.menu')"
             >
+              <i class="bi bi-box-arrow-up"></i>
               {{ $t('nav.menu') }}
-            </a>
-
-            <ul class="dropdown-menu">
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-header fw-light section-toggle"
-                  @click.stop="toggleSection('editor')"
-                >
-                  <i class="bi" :class="openSection === 'editor' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
-                  {{ $t('share.header') }}
-                </button>
-              </li>
-              <template v-if="openSection === 'editor'">
-              <li>
-                <span
-                  class="d-inline-block"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  :title="$t('share.collaborationLinkTooltip')"
-                >
-                  <button
-                    class="btn dropdown-item btn-link"
-                    @click="shareLink"
-                    :disabled="!storageId"
-                    :title="$t('share.collaborationLinkTitle')"
-                  >
-                    {{ $t('share.collaborationLink') }}
-                  </button>
-                </span>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="shareCode"
-                  :aria-label="$t('share.snapshotUrlAria')"
-                >
-                  {{ $t('share.snapshotUrl') }}
-                </button>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="embedCode"
-                  :aria-label="$t('share.embedCodeAria')"
-                >
-                  {{ $t('share.embedCode') }}
-                </button>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="shareFile"
-                  :aria-label="$t('share.externalResourceAria')"
-                >
-                  {{ $t('share.externalResource') }}
-                </button>
-              </li>
-              </template>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-header fw-light section-toggle"
-                  @click.stop="toggleSection('course')"
-                >
-                  <i class="bi" :class="openSection === 'course' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
-                  {{ $t('share.courseHeader') }}
-                </button>
-              </li>
-              <template v-if="openSection === 'course'">
-              <li>
-                <span
-                  class="d-inline-block"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  :title="$t('share.githubGistLinkTooltip')"
-                >
-                  <a
-                    class="dropdown-item"
-                    :class="{ disabled: !gistLink }"
-                    :href="gistLink"
-                    target="_blank"
-                    :aria-label="$t('share.githubGistLinkAria')"
-                  >
-                    {{ $t('share.githubGistLink') }}
-                  </a>
-                </span>
-              </li>
-              <li>
-                <span
-                  class="d-inline-block"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  :title="$t('share.nostrLinkTooltip')"
-                >
-                  <a
-                    class="dropdown-item"
-                    :class="{ disabled: !nostrLink }"
-                    :href="nostrLink"
-                    target="_blank"
-                    :aria-label="$t('share.nostrLinkAria')"
-                  >
-                    {{ $t('share.nostrLink') }}
-                  </a>
-                </span>
-              </li>
-              <li>
-                <span
-                  class="d-inline-block"
-                  style="width: 100%"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  :title="$t('share.githubRepoFileTooltip')"
-                >
-                  <a
-                    class="btn dropdown-item btn-link"
-                    :class="{ disabled: !githubCourseUrl }"
-                    :href="githubCourseUrl"
-                    target="_blank"
-                    :aria-label="$t('share.githubRepoFile')"
-                  >
-                    {{ $t('share.githubRepoFile', { file: activeFileName }) }}
-                  </a>
-                </span>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="shareData"
-                  :aria-label="$t('share.dataUriAria')"
-                >
-                  {{ $t('share.dataUri') }}
-                </button>
-              </li>
-              <li>
-                <div
-                  class="d-inline-block"
-                  tabindex="0"
-                  style="width: 100%"
-                  data-toggle="tooltip"
-                  :title="$t('share.fileUrlTooltip')"
-                >
-                  <a
-                    class="btn dropdown-item btn-link"
-                    :class="{ disabled: !fileUrl }"
-                    :href="LiaScriptURL + '?' + fileUrl"
-                    target="_blank"
-                    :title="$t('share.fileUrlTitle')"
-                  >
-                    {{ $t('share.fileUrl') }}
-                  </a>
-                </div>
-              </li>
-              </template>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-header fw-light section-toggle"
-                  @click.stop="toggleSection('download')"
-                >
-                  <i class="bi" :class="openSection === 'download' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
-                  {{ $t('share.downloadHeader') }}
-                </button>
-              </li>
-              <template v-if="openSection === 'download'">
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="download"
-                  :title="$t('share.downloadReadme')"
-                  :aria-label="$t('share.downloadReadme')"
-                >
-                  {{ activeFileName }}
-                </button>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="downloadZip"
-                  :title="$t('share.downloadZip')"
-                  :aria-label="$t('share.downloadZip')"
-                >
-                  Project-{{ $props?.storageId?.slice(0, 8) || "xxxxxxxx" }}.zip
-                </button>
-              </li>
-              <!--li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <h6 class="dropdown-header fw-light">
-                  Upload from ...
-                </h6>
-              </li>
-
-              <li>
-                <input
-                  type="file"
-                  id="uploadMarkdown"
-                  style="display: none;"
-                >
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="upload"
-                >
-                  README.md
-                </button>
-              </li>
-              <li>
-                <input
-                  type="file"
-                  id="uploadZip"
-                  style="display: none;"
-                >
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="uploadZip"
-                >
-                  Project.zip
-                </button>
-              </li-->
-              </template>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-header fw-light section-toggle"
-                  @click.stop="toggleSection('export')"
-                >
-                  <i class="bi" :class="openSection === 'export' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
-                  {{ $t('share.exportHeader') }}
-                </button>
-              </li>
-              <template v-if="openSection === 'export'">
-              <li>
-                <span
-                  class="d-inline-block"
-                  style="width: 100%"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  :title="$t('share.githubGistTooltip')"
-                >
-                  <button
-                    class="btn dropdown-item btn-link"
-                    :class="{ disabled: !storageId }"
-                    @click="githubGist"
-                    :title="$t('share.githubGistTitle')"
-                    :aria-label="$t('share.githubGistAria')"
-                  >
-                    {{ $t('share.githubGist') }}
-                  </button>
-                </span>
-              </li>
-              <li>
-                <span
-                  class="d-inline-block"
-                  style="width: 100%"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  :title="$t('share.githubGistTooltip')"
-                >
-                  <button
-                    class="btn dropdown-item btn-link"
-                    @click="nostr"
-                    :aria-label="$t('share.nostrAria')"
-                  >
-                    Nostr
-                  </button>
-                </span>
-              </li>
-              <li>
-                <span
-                  class="d-inline-block"
-                  style="width: 100%"
-                  tabindex="0"
-                  data-toggle="tooltip"
-                  :title="$t('share.exporterTooltip')"
-                >
-                  <button
-                    class="btn dropdown-item btn-link"
-                    :class="{ disabled: !storageId }"
-                    @click="exporter"
-                    :aria-label="$t('share.exporterAria')"
-                  >
-                    <i class="bi bi-box-arrow-up-right"></i> {{ $t('share.exporter') }}
-                  </button>
-                </span>
-              </li>
-
-              </template>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-header fw-light section-toggle"
-                  @click.stop="toggleSection('github')"
-                >
-                  <i class="bi" :class="openSection === 'github' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
-                  {{ $t('github.menu.header') }}
-                </button>
-              </li>
-              <template v-if="openSection === 'github'">
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  @click="githubImport"
-                  :title="$t('github.menu.importTooltip')"
-                >
-                  <i class="bi bi-github"></i> {{ $t('github.menu.import') }}
-                </button>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  :class="{ disabled: !storageId }"
-                  @click="githubPublish"
-                  :title="$t('github.menu.publishTooltip')"
-                >
-                  <i class="bi bi-cloud-upload"></i> {{ $t('github.menu.publish') }}
-                </button>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  :class="{ disabled: !meta?.meta?.github }"
-                  @click="githubPush"
-                  :title="$t('github.menu.pushTooltip')"
-                >
-                  <i class="bi bi-arrow-up-circle"></i> {{ $t('github.menu.push') }}
-                </button>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  :class="{ disabled: !meta?.meta?.github }"
-                  @click="githubPull"
-                  :title="$t('github.menu.pullTooltip')"
-                >
-                  <i class="bi bi-arrow-down-circle"></i> {{ $t('github.menu.pull') }}
-                </button>
-              </li>
-              </template>
-
-              <template v-if="localFolderSupported">
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="dropdown-header fw-light section-toggle"
-                  @click.stop="toggleSection('localFolder')"
-                >
-                  <i class="bi" :class="openSection === 'localFolder' ? 'bi-chevron-down' : 'bi-chevron-right'"></i>
-                  {{ $t('localFolder.menu.header') }}
-                </button>
-              </li>
-              <template v-if="openSection === 'localFolder'">
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  :class="{ disabled: !storageId }"
-                  @click="openLocalFolder"
-                  :title="$t('localFolder.menu.openTooltip')"
-                >
-                  <i class="bi bi-folder2-open"></i> {{ $t('localFolder.menu.open') }}
-                </button>
-              </li>
-              <li>
-                <button
-                  class="btn dropdown-item btn-link"
-                  :class="{ disabled: !meta?.meta?.localFolder }"
-                  @click="localFolderSync"
-                  :title="$t('localFolder.menu.syncTooltip')"
-                >
-                  <i class="bi bi-arrow-down-up"></i>
-                  {{ meta?.meta?.localFolder ? $t('localFolder.menu.syncNamed', { name: meta.meta.localFolder.name }) : $t('localFolder.menu.sync') }}
-                </button>
-              </li>
-              </template>
-              </template>
-            </ul>
+            </button>
           </div>
 
           <div class="nav-item dropdown ms-2 me-2 d-flex align-items-center flex-wrap">
@@ -1322,6 +1043,7 @@ export default {
   </div>
 
   <Modal ref="modal" />
+  <ShareModal ref="shareModal" :tabs="shareTabs" @action="onShareAction" />
   <NostrModal
     ref="nostrModal"
     :visible="nostrModalVisible"
@@ -1404,25 +1126,6 @@ export default {
     width: 100%;
     text-align: center;
   }
-}
-
-/* collapsible section headers inside the share menu */
-.section-toggle {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: none;
-  border: 0;
-  cursor: pointer;
-}
-
-.section-toggle:hover {
-  color: var(--bs-primary, #0d6efd);
-}
-
-.section-toggle .bi {
-  font-size: 0.7rem;
-  margin-right: 2px;
 }
 
 .invisible {

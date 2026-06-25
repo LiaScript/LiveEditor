@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Kekọrịta ndezi ...",
+    "modalTitle": "Share & actions",
+    "publishedHeading": "Open existing publication",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP archive",
+    "downloadReadmeLabel": "Readme file",
+    "downloadActiveFileInfo": "Downloads only the currently open file",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Publish",
+      "published": "Published links",
+      "export": "Export",
+      "github": "GitHub",
+      "localFolder": "Local folder"
+    },
     "collaborationLink": "njikọ imekọrịta",
     "collaborationLinkTitle": "Kekọrịta akwụkwọ a na ndị ọzọ",
     "collaborationLinkTooltip": "Mee fork nke akwụkwọ a tupu iji ọrụ a",

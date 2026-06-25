@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Editor teilen ...",
+    "modalTitle": "Teilen & Aktionen",
+    "publishedHeading": "Vorhandene Veröffentlichung öffnen",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP-Archiv",
+    "downloadReadmeLabel": "Readme-Datei",
+    "downloadActiveFileInfo": "Lädt nur die aktuell geöffnete Datei herunter",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Publizieren",
+      "published": "Veröffentlichte Links",
+      "export": "Export",
+      "github": "GitHub",
+      "localFolder": "Lokaler Ordner"
+    },
     "collaborationLink": "Kollaborationslink",
     "collaborationLinkTitle": "Dieses Dokument mit anderen teilen",
     "collaborationLinkTooltip": "Forke das Dokument, bevor du diese Funktion nutzt",

@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "分享编辑器 ...",
+    "modalTitle": "共享与操作",
+    "publishedHeading": "打开已有发布",
+    "nostr": "Nostr",
+    "downloadZipLabel": "ZIP 压缩包",
+    "downloadReadmeLabel": "Readme 文件",
+    "downloadActiveFileInfo": "仅下载当前打开的文件",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "发布",
+      "published": "已发布链接",
+      "export": "导出",
+      "github": "GitHub",
+      "localFolder": "本地文件夹"
+    },
     "collaborationLink": "协作链接",
     "collaborationLinkTitle": "与他人分享此文档",
     "collaborationLinkTooltip": "使用此功能前请先 Fork 此文档",

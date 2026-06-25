@@ -35,6 +35,8 @@ export interface ImportSource {
   onSelect?: () => void;
   /** optional gate: hide the source when it returns false (e.g. unsupported). */
   available?: () => boolean;
+  /** visually highlight this card as the primary option (e.g. blank document). */
+  featured?: boolean;
 }
 
 const MD_EXT = /\.(md|markdown)$/i;
@@ -72,6 +74,7 @@ export const importSources: ImportSource[] = [
     labelKey: "index.import.new",
     descriptionKey: "index.import.newDesc",
     kind: "navigate",
+    featured: true,
     onSelect: () => navigateTo("?/edit"),
   },
 

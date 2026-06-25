@@ -33,6 +33,20 @@
   },
   "share": {
     "header": "Κοινή χρήση επεξεργαστή ...",
+    "modalTitle": "Κοινή χρήση και ενέργειες",
+    "publishedHeading": "Άνοιγμα υπάρχουσας δημοσίευσης",
+    "nostr": "Nostr",
+    "downloadZipLabel": "Αρχείο ZIP",
+    "downloadReadmeLabel": "Αρχείο Readme",
+    "downloadActiveFileInfo": "Λήψη μόνο του τρέχοντος ανοικτού αρχείου",
+    "tabs": {
+      "collaborate": "Editor",
+      "publish": "Δημοσίευση",
+      "published": "Δημοσιευμένοι σύνδεσμοι",
+      "export": "Εξαγωγή",
+      "github": "GitHub",
+      "localFolder": "Τοπικός φάκελος"
+    },
     "collaborationLink": "σύνδεσμος συνεργασίας",
     "collaborationLinkTitle": "Κοινή χρήση αυτού του εγγράφου με άλλους",
     "collaborationLinkTooltip": "Κάντε fork αυτού του εγγράφου πριν χρησιμοποιήσετε αυτή τη λειτουργία",

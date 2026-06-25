@@ -65,7 +65,10 @@ export default defineComponent({
               <button
                 type="button"
                 class="import-card"
-                :class="{ 'import-card--disabled': isDisabled(source) }"
+                :class="{
+                  'import-card--disabled': isDisabled(source),
+                  'import-card--featured': source.featured,
+                }"
                 :disabled="isDisabled(source)"
                 @click="pick(source)"
               >
@@ -109,6 +112,13 @@ export default defineComponent({
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   border-color: var(--bs-primary, #0d6efd);
   outline: none;
+}
+
+/* the primary "blank document" card stands out even without hover */
+.import-card--featured {
+  border-color: var(--bs-primary, #0d6efd);
+  border-width: 2px;
+  background: rgba(13, 110, 253, 0.06);
 }
 
 .import-card--disabled {
