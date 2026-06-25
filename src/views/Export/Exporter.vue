@@ -125,12 +125,15 @@ export default {
         return;
       }
 
-      // (Re)load the iframe by pointing it at the exporter. We push the project
-      // as soon as the iframe fires its load event (onFrameLoad) — that is the
-      // reliable signal that the exporter UI has initialised. The 'ready'
-      // postMessage handshake (onMessage) is a redundant fast path. A fallback
-      // timer only flags a real connectivity/embedding problem if *neither* the
-      // load event nor the handshake ever arrives.
+      // (Re)load the iframe by pointing it at the exporter. We only push the
+      // project once the exporter answers with the 'ready' postMessage handshake
+      // (onMessage) — that is the *only* reliable signal that its scripts ran and
+      // it can accept files. The iframe's load event (onFrameLoad) is NOT proof:
+      // it also fires for a browser error page when the exporter server isn't
+      // running (connection refused), and postMessage to that dead frame would
+      // silently "succeed" and falsely report the project as handed over. A
+      // fallback timer flags the connectivity/embedding problem if the handshake
+      // never arrives.
       //
       // Bump reloadKey so the iframe reloads even when the URL is unchanged
       // (e.g. the user starts the exporter after opening this modal and clicks
@@ -140,7 +143,7 @@ export default {
 
       this.clearHandshakeTimer();
       this.handshakeTimer = setTimeout(() => {
-        if (!this.loaded && !this.iframeReady) {
+        if (!this.iframeReady) {
           this.errorKey = "exporter.errorNoHandshake";
         }
       }, 12000);
@@ -148,12 +151,13 @@ export default {
 
     onFrameLoad() {
       this.loaded = true;
-      this.errorKey = "";
-      this.clearHandshakeTimer();
 
-      // Nudge the embedded UI (so exporters that answer pings reply with
-      // 'ready'), then push the project. The load event guarantees the
-      // exporter's scripts have run and can accept files now.
+      // The load event fires even for a browser error page (e.g. the exporter
+      // server isn't running -> connection refused), so it is NOT proof that the
+      // exporter is alive — we must not auto-send or report success here. Just
+      // nudge the embedded UI with a ping; an exporter that is actually running
+      // answers with 'ready' (onMessage), which is what triggers the send. If no
+      // 'ready' arrives, the handshake timer reports the connection problem.
       const iframe = this.$refs.frame as HTMLIFrameElement | undefined;
       if (iframe?.contentWindow && this.activeOrigin) {
         iframe.contentWindow.postMessage(
@@ -161,7 +165,6 @@ export default {
           this.activeOrigin
         );
       }
-      this.autoSend();
     },
 
     onMessage(event: MessageEvent) {
@@ -290,7 +293,7 @@ export default {
             <button
               class="btn btn-outline-secondary"
               @click="resend"
-              :disabled="(!loaded && !iframeReady) || sending"
+              :disabled="!iframeReady || sending"
               :title="$t('exporter.resendTitle')"
             >
               <i class="bi bi-arrow-repeat"></i> {{ $t('exporter.resend') }}
