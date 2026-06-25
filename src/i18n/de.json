@@ -278,6 +278,8 @@
       "step2": "Wähle einen Namen und eine Gültigkeitsdauer und wähle die zu verwendenden Repositories aus.",
       "step3Read": "Setze unter „Repository permissions\" die Berechtigung „Contents\" auf „Read-only\".",
       "step3Write": "Setze unter „Repository permissions\" die Berechtigung „Contents\" auf „Read and write\".",
+      "step2Classic": "Stelle sicher, dass der „repo\"-Scope ausgewählt ist (zum Anlegen eines Repositories wird ein klassischer Token benötigt – fine-grained Tokens können das nicht).",
+      "step3Classic": "Wähle einen Namen und eine Gültigkeitsdauer.",
       "step4": "Erzeuge den Token, kopiere ihn und füge ihn unten ein.",
       "placeholder": "github_pat_…",
       "save": "Speichern"

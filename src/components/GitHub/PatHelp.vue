@@ -14,6 +14,10 @@ export default defineComponent({
     reason: { type: String, default: "auth" },
     // whether write access (Contents: read & write) is required (push)
     needWrite: { type: Boolean, default: false },
+    // whether the operation creates a new repository. Fine-grained tokens can
+    // only target existing repos, so creating one requires a *classic* token
+    // with the "repo" scope — we point the user to a different page in that case.
+    needCreate: { type: Boolean, default: false },
   },
 
   emits: ["saved"],
@@ -49,7 +53,25 @@ export default defineComponent({
       {{ $t("github.pat.howtoToggle") }}
     </button>
 
-    <ol v-if="expanded" class="small">
+    <ol v-if="expanded && needCreate" class="small">
+      <li>
+        <i18n-t keypath="github.pat.step1" tag="span">
+          <template #link>
+            <a
+              href="https://github.com/settings/tokens/new?scopes=repo&description=LiaScript"
+              target="_blank"
+            >
+              github.com/settings/tokens
+            </a>
+          </template>
+        </i18n-t>
+      </li>
+      <li>{{ $t("github.pat.step2Classic") }}</li>
+      <li>{{ $t("github.pat.step3Classic") }}</li>
+      <li>{{ $t("github.pat.step4") }}</li>
+    </ol>
+
+    <ol v-else-if="expanded" class="small">
       <li>
         <i18n-t keypath="github.pat.step1" tag="span">
           <template #link>

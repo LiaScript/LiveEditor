@@ -241,7 +241,13 @@ export default defineComponent({
       </div>
     </template>
 
-    <PatHelp v-if="patReason" :reason="patReason" :need-write="true" @saved="onPatSaved" />
+    <PatHelp
+      v-if="patReason"
+      :reason="patReason"
+      :need-write="true"
+      :need-create="true"
+      @saved="onPatSaved"
+    />
     <div v-if="errorMessage" class="alert alert-danger mt-2 mb-0">{{ errorMessage }}</div>
 
     <template #footer>
