@@ -839,9 +839,7 @@ export default {
             </a>
           </div>
 
-          <div class="nav-item nav-item-sm ms-2 me-2 d-flex align-items-center">
-            <ImportMenu />
-          </div>
+         
 
           <div class="nav-item ms-2 me-2">
             <button
@@ -850,20 +848,20 @@ export default {
               @click="fork"
               :title="$t('nav.fork')"
             >
-              <i class="bi bi-signpost-split"></i>
+              <i class="bi bi-copy"></i>
               {{ $t('nav.fork') }}
             </button>
           </div>
           </div>
 
-          <div class="nav-item ms-2 me-2 d-flex align-items-center">
+          <div class="nav-item ms-2 me-2">
             <button
               type="button"
               class="btn nav-link btn-link"
               @click="openShare"
               :title="$t('nav.menu')"
             >
-              <i class="bi bi-box-arrow-up"></i>
+              <i class="bi bi-three-dots-vertical"></i>
               {{ $t('nav.menu') }}
             </button>
           </div>
@@ -925,6 +923,10 @@ export default {
                 </a>
               </li>
             </ul>
+          </div>
+
+          <div class="nav-item nav-item-sm ms-2 me-2 d-flex align-items-center">
+            <ImportMenu />
           </div>
         </div>
       </div>

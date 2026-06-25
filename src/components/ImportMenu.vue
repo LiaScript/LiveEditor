@@ -59,7 +59,7 @@ export default defineComponent({
 <template>
   <div>
     <button
-      class="btn btn-primary"
+      class="btn btn-primary btn-sm"
       type="button"
       :disabled="busy"
       @click="openChooser"
