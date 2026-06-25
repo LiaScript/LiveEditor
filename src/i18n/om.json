@@ -260,6 +260,8 @@
       "step2": "Choose a name and an expiration, then select the repositories you want to use.",
       "step3Read": "Under \"Repository permissions\" set \"Contents\" to \"Read-only\".",
       "step3Write": "Under \"Repository permissions\" set \"Contents\" to \"Read and write\".",
+      "step2Classic": "Make sure the \"repo\" scope is checked (creating a repository needs a classic token — fine-grained tokens cannot do this).",
+      "step3Classic": "Choose a name and an expiration.",
       "step4": "Generate the token, copy it and paste it below.",
       "placeholder": "github_pat_…",
       "save": "Save"
