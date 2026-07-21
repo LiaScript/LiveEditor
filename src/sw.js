@@ -14,16 +14,24 @@ workbox.setConfig({
 // self.skipWaiting()
 workbox.core.clientsClaim()
 
-// workbox.googleAnalytics.initialize();
-workbox.routing.registerRoute(
-  // Match all navigation requests, except those for URLs whose
-  // path starts with '/admin/'
-  ({request, url}) => request.mode === 'navigate' && url.pathname.startsWith('/course/'),
-  new workbox.strategies.CacheFirst()
-);
+// Precache the shell/assets. Must run before the nav route so
+// createHandlerBoundToURL can resolve the cached index.html.
+workbox.precaching.precacheAndRoute(self.__WB_MANIFEST)
 
-//workbox.routing.registerRoute(/\/*/, new workbox.strategies.NetworkFirst())
-workbox.routing.registerRoute(/.*/, new workbox.strategies.CacheFirst())
+// SPA nav fallback: routes live in the query string, so serve the cached shell
+// for all navigations. denylist: the same-origin preview iframe navigates to
+// liascript/index.html and must get the runtime's own shell, not the editor's.
+const shellHandler = workbox.precaching.createHandlerBoundToURL('index.html')
+workbox.routing.registerRoute(
+  new workbox.routing.NavigationRoute(shellHandler, { denylist: [/liascript\//] })
+)
+
+// Same-origin assets: StaleWhileRevalidate so a miss falls through to network
+// (CacheFirst throws no-response offline on a miss).
+workbox.routing.registerRoute(
+  ({url}) => url.origin === self.location.origin,
+  new workbox.strategies.StaleWhileRevalidate()
+)
 
 
 workbox.routing.registerRoute(
@@ -35,5 +43,3 @@ workbox.routing.registerRoute(
   'https://storage.googleapis.com/workbox-cdn/releases/7.0.0/workbox-sw.js',
   new workbox.strategies.CacheFirst()
 )
-
-workbox.precaching.precacheAndRoute(self.__WB_MANIFEST)

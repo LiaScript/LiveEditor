@@ -165,6 +165,16 @@ const router = async () => {
 
 window.addEventListener('popstate', router)
 
+// Register the workbox-built service worker (offline/PWA)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    const base = new URL('.', window.location.href)
+    navigator.serviceWorker
+      .register(base.href + 'sw.js', { scope: base.pathname })
+      .catch((err) => console.warn('SW registration failed:', err))
+  })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('click', (e) => {
     const target = e.target as Element
