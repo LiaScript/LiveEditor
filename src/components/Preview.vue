@@ -158,6 +158,13 @@ window.LIA.fetchError = (tag, src) => {
     parent.postMessage({cmd: 'media.load', param: {tag, src}}, "*")
   }
 }
+
+// Line-sync (preview cursor -> editor). The runtime only calls window.LIA.lineGoto
+// when the parent has assigned it. Same-origin the parent could set it directly;
+// cross-origin it cannot reach into this frame, so bridge it over postMessage here.
+window.LIA.lineGoto = function (line) {
+  parent.postMessage({cmd: 'lia-line', param: line}, "*")
+}
 `;
 
 export default {
@@ -168,94 +175,123 @@ export default {
   props: { fetchError: Function },
 
   data() {
-    window.addEventListener(
-      "message",
-      (event) => {
-        switch (event.data.cmd) {
-          case "media.load": {
-            const param = event.data.param;
-
-            if (this.fetchError) {
-              // Strip any media fragment (e.g. "#t=0,5") so the virtual file
-              // system can find the file by its real path. The fragment stays
-              // in param.src so injectHandler can re-apply it to the blob URL.
-              const lookupSrc = param.src.split("#")[0];
-              const blob = this.fetchError(lookupSrc);
-              if (blob) {
-                this.sendToLia("inject", {
-                  tag: param.tag,
-                  src: param.src,
-                  data: new Blob(
-                    [blob],
-                    param.src.toLowerCase().endsWith(".svg")
-                      ? { type: "image/svg+xml" }
-                      : {}
-                  ),
-                });
-              }
-            }
-            break;
-          }
-        }
-      },
-      false
-    );
+    const previewOrigin: string | undefined = process.env.PREVIEW_ORIGIN;
+    let src: string;
+    let targetOrigin: string;
+    if (previewOrigin) {
+      const base = previewOrigin.replace(/\/+$/, "");
+      src = base + "/index.html?";
+      targetOrigin = new URL(base).origin;
+    } else {
+      src = window.location.origin + window.location.pathname + "liascript/index.html?";
+      // Same-origin fallback: any origin is fine as a target.
+      targetOrigin = "*";
+    }
 
     return {
       isReady: false,
       // @ts-ignore
       responsiveVoiceKey: process.env.RESPONSIVEVOICE_KEY,
-      sendToLia: null,
-      origin: window.location.origin + window.location.pathname + "liascript/index.html?",
+      messageHandler: null as null | ((event: MessageEvent) => void),
+      origin: src,
+      targetOrigin,
     };
   },
 
   methods: {
-    onReady(params: any) {
+    // Post a command into the preview iframe (which lives on a separate origin).
+    // targetOrigin pins the message to the preview host; inbound messages are
+    // validated by event.source (see the mounted() listener).
+    postToLia(cmd: string, param: any) {
       const iframe = document.getElementById("liascript-preview") as HTMLIFrameElement;
+      iframe?.contentWindow?.postMessage({ cmd, param }, this.targetOrigin);
+    },
 
-      if (!this.isReady && iframe && iframe.contentWindow) {
+    // Called once the runtime signals readiness (via the "lia-ready" message).
+    // Wires up the outbound bridge and hands the parent a small proxy instead of
+    // the runtime's real LIA object (which is now unreachable cross-origin).
+    handleReady(definition: any) {
+      if (!this.isReady) {
         this.isReady = true;
+
+        // Inject the media/line-sync bridge into the runtime. `eval` is an
+        // inbound command the runtime supports.
+        this.postToLia("eval", INIT_CODE);
 
         // only inject if key has been defined
         if (this.responsiveVoiceKey) {
-          iframe.contentWindow["LIA"].injectResposivevoice(this.responsiveVoiceKey);
+          this.postToLia("responsivevoice", this.responsiveVoiceKey);
         }
 
-        // @ts-ignore
-        this.$emit("ready", iframe.contentWindow["LIA"]);
-
-        const self = this;
-        iframe.contentWindow["LIA"].lineGoto = function (line: number) {
-          self.$emit("goto", line);
+        // Proxy exposing just the methods LiaScript.vue drives, forwarded over
+        // postMessage. `jit` (re)renders; `gotoLine` scrolls the preview.
+        const proxy = {
+          jit: (code: string) => this.postToLia("jit", code),
+          gotoLine: (line: number) => this.postToLia("goto", line),
         };
-
-        this.sendToLia = function (cmd: string, param: any) {
-          iframe.contentWindow?.postMessage({ cmd, param }, "*");
-        };
-
-        this.sendToLia("eval", INIT_CODE);
+        this.$emit("ready", proxy);
       }
 
-      if (params) {
-        this.$emit("update", params);
+      if (definition) {
+        this.$emit("update", definition);
       }
     },
   },
 
   mounted() {
-    const iframe = document.getElementById("liascript-preview");
+    // Single message listener for everything the preview iframe sends back.
+    // Accept only messages from our own preview frame, and — when the preview is
+    // on a known separate origin — only from that origin.
+    this.messageHandler = (event: MessageEvent) => {
+      const iframe = document.getElementById("liascript-preview") as HTMLIFrameElement;
+      if (!iframe || event.source !== iframe.contentWindow) return;
+      if (this.targetOrigin !== "*" && event.origin !== this.targetOrigin) return;
 
-    // @ts-ignore
-    if (iframe && iframe.contentWindow) {
-      // @ts-ignore
-      if (!iframe.contentWindow["LIA"]) {
-        // @ts-ignore
-        iframe.contentWindow["LIA"] = {};
+      const data = event.data || {};
+      switch (data.cmd) {
+        case "lia-ready": {
+          this.handleReady(data.param);
+          break;
+        }
+
+        case "lia-line": {
+          this.$emit("goto", data.param);
+          break;
+        }
+
+        case "media.load": {
+          const param = data.param;
+          if (this.fetchError) {
+            // Strip any media fragment (e.g. "#t=0,5") so the virtual file
+            // system can find the file by its real path. The fragment stays
+            // in param.src so injectHandler can re-apply it to the blob URL.
+            const lookupSrc = param.src.split("#")[0];
+            const blob = this.fetchError(lookupSrc);
+            if (blob) {
+              this.postToLia("inject", {
+                tag: param.tag,
+                src: param.src,
+                data: new Blob(
+                  [blob],
+                  param.src.toLowerCase().endsWith(".svg")
+                    ? { type: "image/svg+xml" }
+                    : {}
+                ),
+              });
+            }
+          }
+          break;
+        }
       }
+    };
 
-      // @ts-ignore
-      iframe.contentWindow["LIA"].onReady = this.onReady;
+    window.addEventListener("message", this.messageHandler, false);
+  },
+
+  beforeUnmount() {
+    if (this.messageHandler) {
+      window.removeEventListener("message", this.messageHandler);
+      this.messageHandler = null;
     }
   },
 };

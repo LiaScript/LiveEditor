@@ -579,9 +579,8 @@ export default {
           code = tutorial;
         }
 
-        this.preview.focusOnMain = false;
-        this.preview.scrollUpOnMain = false;
-
+        // Note: focusOnMain/scrollUpOnMain are reset by the runtime's own `jit`
+        // handler now that the preview is driven over postMessage (sandboxed).
         this.preview.jit(this.rewriteLocalResources(code));
       }
     },
