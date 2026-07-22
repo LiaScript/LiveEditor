@@ -3,3 +3,4 @@ dist/
 node_modules/
 parcel-bundle-reports/
 .env
+scripts/preview-sw/preview/
