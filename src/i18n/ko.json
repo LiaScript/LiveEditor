@@ -252,19 +252,16 @@
       "done": "Pulled {n} file(s)."
     },
     "pat": {
-      "rateLimitTitle": "GitHub rate limit reached",
-      "authTitle": "Authentication required",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
-      "howtoToggle": "How do I create a token?",
-      "step1": "Open {link}.",
-      "step2": "Choose a name and an expiration, then select the repositories you want to use.",
-      "step3Read": "Under \"Repository permissions\" set \"Contents\" to \"Read-only\".",
-      "step3Write": "Under \"Repository permissions\" set \"Contents\" to \"Read and write\".",
-      "step2Classic": "Make sure the \"repo\" scope is checked (creating a repository needs a classic token — fine-grained tokens cannot do this).",
-      "step3Classic": "Choose a name and an expiration.",
-      "step4": "Generate the token, copy it and paste it below.",
-      "placeholder": "github_pat_…",
-      "save": "Save"
+      "rateLimitTitle": "GitHub 요청 한도에 도달했습니다",
+      "authTitle": "인증이 필요합니다",
+      "intro": "한도를 늘리고 비공개 저장소에 접근하거나 변경 사항을 푸시하려면 개인 액세스 토큰(PAT)을 추가하세요.",
+      "howtoToggle": "토큰은 어떻게 만드나요?",
+      "step1": "{link}을(를) 엽니다.",
+      "step2Classic": "\"repo\" 범위가 선택되어 있는지 확인하세요.",
+      "step3Classic": "이름과 만료 기간을 선택하세요.",
+      "step4": "토큰을 생성하세요. GitHub는 토큰을 한 번만 보여줍니다 — 지금 복사해서 아래에 붙여넣으세요.",
+      "placeholder": "ghp_…",
+      "save": "저장"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

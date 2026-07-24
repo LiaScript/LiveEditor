@@ -252,19 +252,16 @@
       "done": "Pulled {n} file(s)."
     },
     "pat": {
-      "rateLimitTitle": "GitHub rate limit reached",
-      "authTitle": "Authentication required",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
-      "howtoToggle": "How do I create a token?",
-      "step1": "Open {link}.",
-      "step2": "Choose a name and an expiration, then select the repositories you want to use.",
-      "step3Read": "Under \"Repository permissions\" set \"Contents\" to \"Read-only\".",
-      "step3Write": "Under \"Repository permissions\" set \"Contents\" to \"Read and write\".",
-      "step2Classic": "Make sure the \"repo\" scope is checked (creating a repository needs a classic token — fine-grained tokens cannot do this).",
-      "step3Classic": "Choose a name and an expiration.",
-      "step4": "Generate the token, copy it and paste it below.",
-      "placeholder": "github_pat_…",
-      "save": "Save"
+      "rateLimitTitle": "Erutela oke GitHub",
+      "authTitle": "Achọrọ nkwenye",
+      "intro": "Tinye Token Ohere Onwe (PAT) iji bulie oke ahụ ma nweta ohere ịbanye na ebe nchekwa nzuzo ma ọ bụ zipu mgbanwe.",
+      "howtoToggle": "Kedu ka m ga-esi mepụta token?",
+      "step1": "Meghee {link}.",
+      "step2Classic": "Gbaa mbọ hụ na ahọpụtala \"repo\" scope.",
+      "step3Classic": "Họrọ aha na oge ngwụcha.",
+      "step4": "Mepụta token ahụ. GitHub na-egosi ya naanị otu ugbo — depụta ya ugbu a ma tinye ya n'okpuru.",
+      "placeholder": "ghp_…",
+      "save": "Chekwaa"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

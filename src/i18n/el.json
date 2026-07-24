@@ -252,19 +252,16 @@
       "done": "Pulled {n} file(s)."
     },
     "pat": {
-      "rateLimitTitle": "GitHub rate limit reached",
-      "authTitle": "Authentication required",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
-      "howtoToggle": "How do I create a token?",
-      "step1": "Open {link}.",
-      "step2": "Choose a name and an expiration, then select the repositories you want to use.",
-      "step3Read": "Under \"Repository permissions\" set \"Contents\" to \"Read-only\".",
-      "step3Write": "Under \"Repository permissions\" set \"Contents\" to \"Read and write\".",
-      "step2Classic": "Make sure the \"repo\" scope is checked (creating a repository needs a classic token — fine-grained tokens cannot do this).",
-      "step3Classic": "Choose a name and an expiration.",
-      "step4": "Generate the token, copy it and paste it below.",
-      "placeholder": "github_pat_…",
-      "save": "Save"
+      "rateLimitTitle": "Το όριο του GitHub έχει εξαντληθεί",
+      "authTitle": "Απαιτείται έλεγχος ταυτότητας",
+      "intro": "Προσθέστε ένα προσωπικό διακριτικό πρόσβασης (PAT) για να αυξήσετε το όριο και να αποκτήσετε πρόσβαση σε ιδιωτικά αποθετήρια ή να στείλετε αλλαγές.",
+      "howtoToggle": "Πώς δημιουργώ ένα διακριτικό;",
+      "step1": "Ανοίξτε το {link}.",
+      "step2Classic": "Βεβαιωθείτε ότι είναι επιλεγμένο το πεδίο εμβέλειας \"repo\".",
+      "step3Classic": "Επιλέξτε όνομα και ημερομηνία λήξης.",
+      "step4": "Δημιουργήστε το διακριτικό. Το GitHub το εμφανίζει μόνο μία φορά — αντιγράψτε το τώρα και επικολλήστε το παρακάτω.",
+      "placeholder": "ghp_…",
+      "save": "Αποθήκευση"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

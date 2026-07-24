@@ -252,19 +252,16 @@
       "done": "Pulled {n} file(s)."
     },
     "pat": {
-      "rateLimitTitle": "GitHub rate limit reached",
-      "authTitle": "Authentication required",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
-      "howtoToggle": "How do I create a token?",
-      "step1": "Open {link}.",
-      "step2": "Choose a name and an expiration, then select the repositories you want to use.",
-      "step3Read": "Under \"Repository permissions\" set \"Contents\" to \"Read-only\".",
-      "step3Write": "Under \"Repository permissions\" set \"Contents\" to \"Read and write\".",
-      "step2Classic": "Make sure the \"repo\" scope is checked (creating a repository needs a classic token — fine-grained tokens cannot do this).",
-      "step3Classic": "Choose a name and an expiration.",
-      "step4": "Generate the token, copy it and paste it below.",
-      "placeholder": "github_pat_…",
-      "save": "Save"
+      "rateLimitTitle": "GitHubの利用上限に達しました",
+      "authTitle": "認証が必要です",
+      "intro": "上限を引き上げ、プライベートリポジトリへのアクセスや変更のプッシュを行うには、パーソナルアクセストークン（PAT）を追加してください。",
+      "howtoToggle": "トークンの作成方法は?",
+      "step1": "{link}を開きます。",
+      "step2Classic": "「repo」スコープが選択されていることを確認します。",
+      "step3Classic": "名前と有効期限を選択します。",
+      "step4": "トークンを生成します。GitHubはトークンを一度しか表示しません。今すぐコピーして、下に貼り付けてください。",
+      "placeholder": "ghp_…",
+      "save": "保存"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

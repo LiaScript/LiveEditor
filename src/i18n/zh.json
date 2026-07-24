@@ -252,19 +252,16 @@
       "done": "Pulled {n} file(s)."
     },
     "pat": {
-      "rateLimitTitle": "GitHub rate limit reached",
-      "authTitle": "Authentication required",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
-      "howtoToggle": "How do I create a token?",
-      "step1": "Open {link}.",
-      "step2": "Choose a name and an expiration, then select the repositories you want to use.",
-      "step3Read": "Under \"Repository permissions\" set \"Contents\" to \"Read-only\".",
-      "step3Write": "Under \"Repository permissions\" set \"Contents\" to \"Read and write\".",
-      "step2Classic": "Make sure the \"repo\" scope is checked (creating a repository needs a classic token — fine-grained tokens cannot do this).",
-      "step3Classic": "Choose a name and an expiration.",
-      "step4": "Generate the token, copy it and paste it below.",
-      "placeholder": "github_pat_…",
-      "save": "Save"
+      "rateLimitTitle": "已达到 GitHub 限制",
+      "authTitle": "需要身份验证",
+      "intro": "添加个人访问令牌（PAT）以提高限制，并访问私有仓库或推送更改。",
+      "howtoToggle": "如何创建令牌？",
+      "step1": "打开{link}。",
+      "step2Classic": "确保已勾选 \"repo\" 范围。",
+      "step3Classic": "选择名称和过期时间。",
+      "step4": "生成令牌。GitHub 只会显示一次——请立即复制并粘贴到下面。",
+      "placeholder": "ghp_…",
+      "save": "保存"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

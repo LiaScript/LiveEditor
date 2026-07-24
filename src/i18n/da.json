@@ -252,19 +252,16 @@
       "done": "Pulled {n} file(s)."
     },
     "pat": {
-      "rateLimitTitle": "GitHub rate limit reached",
-      "authTitle": "Authentication required",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
-      "howtoToggle": "How do I create a token?",
-      "step1": "Open {link}.",
-      "step2": "Choose a name and an expiration, then select the repositories you want to use.",
-      "step3Read": "Under \"Repository permissions\" set \"Contents\" to \"Read-only\".",
-      "step3Write": "Under \"Repository permissions\" set \"Contents\" to \"Read and write\".",
-      "step2Classic": "Make sure the \"repo\" scope is checked (creating a repository needs a classic token — fine-grained tokens cannot do this).",
-      "step3Classic": "Choose a name and an expiration.",
-      "step4": "Generate the token, copy it and paste it below.",
-      "placeholder": "github_pat_…",
-      "save": "Save"
+      "rateLimitTitle": "GitHub-grænsen er nået",
+      "authTitle": "Godkendelse påkrævet",
+      "intro": "Tilføj en personlig adgangstoken (PAT) for at hæve grænsen og få adgang til private repositories eller push ændringer.",
+      "howtoToggle": "Hvordan opretter jeg en token?",
+      "step1": "Åbn {link}.",
+      "step2Classic": "Sørg for, at scopet \"repo\" er markeret.",
+      "step3Classic": "Vælg et navn og en udløbsdato.",
+      "step4": "Generér token'en. GitHub viser den kun én gang — kopiér den nu, og indsæt den nedenfor.",
+      "placeholder": "ghp_…",
+      "save": "Gem"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",
