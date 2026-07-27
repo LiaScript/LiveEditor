@@ -92,5 +92,24 @@ export async function filesFromZip(data: Uint8Array): Promise<ImportFile[]> {
     files.push({ path: entry.name, bytes });
   }
 
+  // Many zips (GitHub's "Download ZIP", or simply archiving a folder) wrap
+  // everything in a single top-level folder, e.g. "01-grundlagen-ideen/README.md"
+  // instead of "README.md". Unwrap it so the main document lands at the
+  // project root, matching what a folder-less zip would produce.
+  const root = commonRootFolder(files.map((f) => f.path));
+  if (root) {
+    for (const file of files) file.path = file.path.slice(root.length);
+  }
+
   return files;
+}
+
+/** If every path shares the same single top-level folder, return that folder's
+ *  prefix (e.g. "name/"); otherwise null. */
+function commonRootFolder(paths: string[]): string | null {
+  if (paths.length === 0) return null;
+  const first = paths[0].split("/")[0];
+  if (!first) return null;
+  const prefix = first + "/";
+  return paths.every((p) => p.startsWith(prefix)) ? prefix : null;
 }
