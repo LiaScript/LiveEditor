@@ -45,6 +45,7 @@
       "published": "Публикувани връзки",
       "export": "Експортиране",
       "github": "GitHub",
+      "gitlab": "GitLab",
       "localFolder": "Локална папка"
     },
     "collaborationLink": "връзка за съвместна работа",
@@ -81,7 +82,9 @@
     "exporterAria": "Send the whole project to a LiaScript Exporter to convert it to SCORM, PDF, APK, ...",
     "exporterTooltip": "Hand the entire project to a local or remote LiaScript Exporter for conversion",
     "githubRepoFile": "GitHub course: {file}",
-    "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects."
+    "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
+    "gitlabRepoFile": "GitLab course: {file}",
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
   },
   "modal": {
     "close": "Затваряне",
@@ -119,6 +122,10 @@
       "new": "New",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
+      "gitlab": "GitLab repository",
+      "gitlabDesc": "Import the files of a public GitLab repository (gitlab.com or self-hosted).",
+      "gitlabPlaceholder": "https://gitlab.com/group/project",
+      "gitlabHint": "Pick the files to import on the next screen.",
       "url": "From URL (Markdown / ZIP)",
       "gist": "GitHub Gist",
       "localFolder": "Local folder",
@@ -139,6 +146,7 @@
       "errors": {
         "generic": "Import failed. Please check your input and try again.",
         "invalidRepo": "Could not recognise a GitHub repository in that input.",
+        "invalidGitlabRepo": "Could not recognise a GitLab repository URL in that input.",
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
@@ -161,6 +169,7 @@
     },
     "source": {
       "github": "GitHub",
+      "gitlab": "GitLab",
       "gist": "Gist",
       "local": "Local"
     }
@@ -271,6 +280,105 @@
     "publish": {
       "title": "Publish to a new repository",
       "intro": "Create a new GitHub repository and push all project files into it.",
+      "owner": "Owner",
+      "repoName": "Repository name",
+      "description": "Description (optional)",
+      "private": "Private repository",
+      "publishBtn": "Create & publish",
+      "creating": "Creating repository…",
+      "pushing": "Uploading files…",
+      "commitMessage": "Initial publish from LiaScript LiveEdit",
+      "done": "Repository created and files published."
+    }
+  },
+  "gitlab": {
+    "close": "Close",
+    "back": "Back",
+    "menu": {
+      "header": "GitLab repository",
+      "import": "Import from GitLab",
+      "importTooltip": "Import files from a GitLab repository",
+      "push": "Push to GitLab",
+      "pushTooltip": "Commit and push changes to the linked repository",
+      "pull": "Pull from GitLab",
+      "pullTooltip": "Fetch changes from the linked repository",
+      "publish": "Publish to new repository",
+      "publishTooltip": "Create a new GitLab repository and push all project files"
+    },
+    "import": {
+      "title": "Import from GitLab",
+      "repoLabel": "Repository URL",
+      "repoPlaceholder": "https://gitlab.com/group/project",
+      "repoHint": "Include the full URL with host, e.g. https://gitlab.com/group/project or https://gitlab.example.com/group/subgroup/project. Public repositories can be imported without a token.",
+      "load": "Load",
+      "loadingRepo": "Loading repository…",
+      "truncated": "This repository is very large; the file list was truncated by GitLab.",
+      "selectAll": "Select all",
+      "selectNone": "Select none",
+      "selectedCount": "{n} selected",
+      "targetLabel": "Import into",
+      "targetCurrent": "Current project",
+      "targetNew": "New project",
+      "importing": "Importing files…",
+      "importBtn": "Import {n} file(s)",
+      "done": "Imported {n} file(s).",
+      "backHome": "Back to start",
+      "emptyRepo": "This repository is empty. An empty README.md will be created to start your project.",
+      "createEmpty": "Create empty README.md"
+    },
+    "push": {
+      "title": "Push to GitLab",
+      "computing": "Computing changes…",
+      "noChanges": "No local changes to push.",
+      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "added": "added",
+      "modified": "modified",
+      "deleted": "deleted",
+      "viewDiff": "Diff",
+      "diffHint": "left: GitLab · right: local",
+      "commitMessage": "Commit message",
+      "defaultMessage": "Update from LiaScript LiveEdit",
+      "pushing": "Pushing to GitLab…",
+      "pushBtn": "Commit & push {n} file(s)",
+      "done": "Changes pushed successfully."
+    },
+    "pull": {
+      "title": "Pull from GitLab",
+      "checking": "Checking for changes…",
+      "upToDate": "Your project is up to date with GitLab.",
+      "changesFound": "{n} file(s) changed on GitLab.",
+      "added": "new",
+      "modified": "changed",
+      "importing": "Importing changes…",
+      "pullBtn": "Pull {n} file(s)",
+      "done": "Pulled {n} file(s)."
+    },
+    "pat": {
+      "rateLimitTitle": "GitLab rate limit reached",
+      "authTitle": "Authentication required",
+      "manageTitle": "Manage access token",
+      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "howtoToggle": "How do I create a token?",
+      "step1": "Open {link}.",
+      "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
+      "step3": "Make sure the \"api\" scope is checked (the link above preselects it).",
+      "step4": "Choose a name and an expiration.",
+      "step5": "Generate the token. GitLab shows it only once — copy it now and paste it below.",
+      "placeholder": "glpat-…",
+      "save": "Save",
+      "clear": "Remove stored token"
+    },
+    "errors": {
+      "badUrl": "Please enter a valid repository URL, including the host (e.g. https://gitlab.com/group/project).",
+      "notFound": "Repository, branch or file not found.",
+      "network": "Could not reach GitLab. Please check your connection."
+    },
+    "publish": {
+      "title": "Publish to a new repository",
+      "intro": "Create a new GitLab repository and push all project files into it.",
+      "host": "GitLab host",
+      "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
+      "continue": "Continue",
       "owner": "Owner",
       "repoName": "Repository name",
       "description": "Description (optional)",
