@@ -6,9 +6,10 @@
 import { navigateTo } from "../index";
 import { getGithubPat } from "./utils";
 import { parseRepoUrl } from "./GitHubRepo";
+import { parseGitLabUrl } from "./GitLabRepo";
 import { createProjectFromFiles, filesFromZip, ImportFile, ProjectMeta } from "./createProject";
 import * as LocalFolder from "./LocalFolder";
-import { detectGitHubRemote } from "./localFolderSync";
+import { detectGitHubRemote, detectGitLabRemote } from "./localFolderSync";
 
 export type SourceKind = "navigate" | "fileInput" | "modal";
 
@@ -106,6 +107,21 @@ export const importSources: ImportSource[] = [
       const ref = parseRepoUrl(input);
       if (!ref) throw new Error("invalidRepo");
       navigateTo("?/github/" + ref.owner + "/" + ref.repo);
+    },
+  },
+
+  {
+    id: "gitlab",
+    icon: "bi-gitlab",
+    labelKey: "index.import.gitlab",
+    descriptionKey: "index.import.gitlabDesc",
+    kind: "modal",
+    placeholderKey: "index.import.gitlabPlaceholder",
+    hintKey: "index.import.gitlabHint",
+    async onSubmit(input) {
+      const ref = parseGitLabUrl(input);
+      if (!ref) throw new Error("invalidGitlabRepo");
+      navigateTo("?/gitlab/" + ref.host + "/" + ref.projectPath);
     },
   },
 
@@ -215,9 +231,13 @@ export const importSources: ImportSource[] = [
         title: handle.name,
         localFolder: { name: handle.name },
       };
-      // if the folder is a GitHub clone, link it so the user can push directly
+      // if the folder is a GitHub/GitLab clone, link it so the user can push directly
       const repo = await detectGitHubRemote(handle);
       if (repo) meta.github = repo;
+      else {
+        const glRepo = await detectGitLabRemote(handle);
+        if (glRepo) meta.gitlab = glRepo;
+      }
 
       // Create an empty project linked to the folder and open the sync dialog in
       // the editor (with an empty manifest, every file on disk shows up as a

@@ -10,6 +10,7 @@ export default defineComponent({
   props: {
     visible: { type: Boolean, default: false },
     title: { type: String, default: "" },
+    icon: { type: String, default: "bi-github" },
   },
 
   emits: ["close"],
@@ -22,7 +23,7 @@ export default defineComponent({
     <div class="modal-container">
       <div class="modal-header">
         <h5 class="modal-title">
-          <i class="bi bi-github"></i> {{ title }}
+          <i class="bi" :class="icon"></i> {{ title }}
         </h5>
         <button type="button" class="btn-close" @click="$emit('close')"></button>
       </div>

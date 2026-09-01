@@ -134,6 +134,35 @@ export function setGithubPat(pat: string | undefined) {
   storeConfig(config)
 }
 
+/** GitLab Personal Access Tokens, keyed by host since the host is
+ *  user-configurable (gitlab.com, a self-hosted instance, ...) unlike GitHub's
+ *  single fixed host. */
+export function getGitlabPat(host: string): string | undefined {
+  return loadConfig().credentials?.gitlabPats?.[host] || undefined
+}
+
+export function setGitlabPat(host: string, pat: string | undefined) {
+  const config = loadConfig()
+  if (!config.credentials) config.credentials = {}
+  if (!config.credentials.gitlabPats) config.credentials.gitlabPats = {}
+  if (pat) config.credentials.gitlabPats[host] = pat
+  else delete config.credentials.gitlabPats[host]
+  storeConfig(config)
+}
+
+/** Last GitLab host used for Publish (which has no existing URL to source a
+ *  host from), so the field can be prefilled on the next use. */
+export function getLastGitlabHost(): string {
+  return loadConfig().credentials?.gitlabHost || 'gitlab.com'
+}
+
+export function setLastGitlabHost(host: string) {
+  const config = loadConfig()
+  if (!config.credentials) config.credentials = {}
+  config.credentials.gitlabHost = host
+  storeConfig(config)
+}
+
 /** A binary project file as returned by `Editor.getAllBlobs()`. */
 export interface ProjectBlob {
   name: string

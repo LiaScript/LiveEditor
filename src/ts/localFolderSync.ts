@@ -8,6 +8,7 @@
 import { ProjectDoc, isTextFile } from "./ProjectDoc";
 import * as LocalFolder from "./LocalFolder";
 import { parseRepoUrl } from "./GitHubRepo";
+import { parseGitLabUrl } from "./GitLabRepo";
 
 export type SyncDirection = "push" | "pull" | "conflict";
 /** The change relative to the last sync (for display/labelling only). */
@@ -183,8 +184,8 @@ export async function applySync(
 }
 
 // -----------------------------------------------------------------------------
-// detect an existing GitHub repository from a folder's .git metadata, so a
-// project opened from disk can be pushed straight back to GitHub
+// detect an existing GitHub/GitLab repository from a folder's .git metadata,
+// so a project opened from disk can be pushed straight back to it
 // -----------------------------------------------------------------------------
 
 export interface DetectedRepo {
@@ -194,8 +195,15 @@ export interface DetectedRepo {
   commitSha: string;
 }
 
-/** Extract a GitHub remote URL from a raw .git/config (origin preferred). */
-function gitConfigGitHubUrl(config: string): string | undefined {
+export interface DetectedGitLabRepo {
+  host: string;
+  projectPath: string;
+  branch: string;
+  commitSha: string;
+}
+
+/** Extract every remote's URL from a raw .git/config, keyed by remote name. */
+function parseGitConfigRemotes(config: string): Record<string, string> {
   const remotes: Record<string, string> = {};
   const re = /\[remote\s+"([^"]+)"\]([^[]*)/g;
   let m: RegExpExecArray | null;
@@ -203,9 +211,27 @@ function gitConfigGitHubUrl(config: string): string | undefined {
     const url = m[2].match(/^\s*url\s*=\s*(.+?)\s*$/m);
     if (url) remotes[m[1]] = url[1].trim();
   }
+  return remotes;
+}
+
+/** Extract a GitHub remote URL from a raw .git/config (origin preferred). */
+function gitConfigGitHubUrl(config: string): string | undefined {
+  const remotes = parseGitConfigRemotes(config);
   const isGitHub = (u?: string) => !!u && /github\.com/i.test(u);
   if (isGitHub(remotes["origin"])) return remotes["origin"];
   return Object.values(remotes).find(isGitHub);
+}
+
+/** Extract a GitLab remote URL from a raw .git/config (origin preferred).
+ *  ponytail: substring heuristic on the hostname, not a real host check (no
+ *  network probe here) — misses self-hosted GitLab on a domain without
+ *  "gitlab" in it; upgrade to an API probe (GET /api/v4/version) if that turns
+ *  out to matter in practice. */
+function gitConfigGitLabUrl(config: string): string | undefined {
+  const remotes = parseGitConfigRemotes(config);
+  const isGitLab = (u?: string) => !!u && /gitlab/i.test(u) && !/github\.com/i.test(u);
+  if (isGitLab(remotes["origin"])) return remotes["origin"];
+  return Object.values(remotes).find(isGitLab);
 }
 
 /**
@@ -238,4 +264,33 @@ export async function detectGitHubRemote(
   if (shaBytes) commitSha = new TextDecoder().decode(shaBytes).trim();
 
   return { owner: ref.owner, repo: ref.repo, branch, commitSha };
+}
+
+/**
+ * Same as detectGitHubRemote, for a GitLab clone (any host). Returns
+ * undefined for non-git or non-GitLab folders.
+ */
+export async function detectGitLabRemote(
+  handle: LocalFolder.DirHandle
+): Promise<DetectedGitLabRepo | undefined> {
+  const configBytes = await LocalFolder.readBytes(handle, ".git/config");
+  if (!configBytes) return undefined;
+  const url = gitConfigGitLabUrl(new TextDecoder().decode(configBytes));
+  if (!url) return undefined;
+  const ref = parseGitLabUrl(url);
+  if (!ref) return undefined;
+
+  let branch = ref.branch || "main";
+  const headBytes = await LocalFolder.readBytes(handle, ".git/HEAD");
+  if (headBytes) {
+    const head = new TextDecoder().decode(headBytes).trim();
+    const match = head.match(/ref:\s*refs\/heads\/(.+)$/);
+    if (match) branch = match[1].trim();
+  }
+
+  let commitSha = "";
+  const shaBytes = await LocalFolder.readBytes(handle, ".git/refs/heads/" + branch);
+  if (shaBytes) commitSha = new TextDecoder().decode(shaBytes).trim();
+
+  return { host: ref.host, projectPath: ref.projectPath, branch, commitSha };
 }

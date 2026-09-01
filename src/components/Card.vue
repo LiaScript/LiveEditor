@@ -76,6 +76,7 @@ export default {
     "cardComment",
     "cardGist",
     "cardGithub",
+    "cardGitlab",
     "cardTags",
   ],
   emits: ["drop"],
@@ -111,6 +112,8 @@ export default {
     source(): { label: string; icon: string; cls: string } {
       if (this.cardGithub)
         return { label: this.$t("card.source.github"), icon: "bi-github", cls: "lia-source-github" };
+      if (this.cardGitlab)
+        return { label: this.$t("card.source.gitlab"), icon: "bi-gitlab", cls: "lia-source-gitlab" };
       if (this.cardGist)
         return { label: this.$t("card.source.gist"), icon: "bi-git", cls: "lia-source-gist" };
       return { label: this.$t("card.source.local"), icon: "bi-hdd", cls: "lia-source-local" };
@@ -269,6 +272,15 @@ export default {
                 <i class="bi bi-github me-2"></i>{{ cardGithub.owner }}/{{ cardGithub.repo }}
               </a>
             </li>
+            <li v-if="cardGitlab">
+              <a
+                class="dropdown-item"
+                :href="'https://' + cardGitlab.host + '/' + cardGitlab.projectPath"
+                target="_blank"
+              >
+                <i class="bi bi-gitlab me-2"></i>{{ cardGitlab.projectPath }}
+              </a>
+            </li>
             <li v-if="cardGist">
               <a class="dropdown-item" :href="LiaScriptURL + '?' + cardGist" target="_blank">
                 <i class="bi bi-git me-2"></i>GitHub gist
@@ -409,6 +421,9 @@ export default {
 
 .lia-source-github {
   background-color: rgba(33, 37, 41, 0.85);
+}
+.lia-source-gitlab {
+  background-color: rgba(226, 67, 41, 0.85);
 }
 .lia-source-gist {
   background-color: rgba(111, 66, 193, 0.85);

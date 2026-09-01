@@ -121,6 +121,10 @@ const router = async () => {
       path: '/github/:owner/:repo',
       view: () => import('./views/GitHub/DirectImport.vue'),
     },
+    {
+      path: '/gitlab/:target',
+      view: () => import('./views/GitLab/DirectImport.vue'),
+    },
   ]
 
   const potentialMatches = routes.map((route) => {

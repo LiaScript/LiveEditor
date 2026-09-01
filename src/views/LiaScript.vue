@@ -24,10 +24,14 @@ const GitHubImportModal = defineAsyncComponent(() => import("./GitHub/ImportModa
 const GitHubPushModal = defineAsyncComponent(() => import("./GitHub/PushModal.vue"));
 const GitHubPullModal = defineAsyncComponent(() => import("./GitHub/PullModal.vue"));
 const GitHubPublishModal = defineAsyncComponent(() => import("./GitHub/PublishModal.vue"));
+const GitLabImportModal = defineAsyncComponent(() => import("./GitLab/ImportModal.vue"));
+const GitLabPushModal = defineAsyncComponent(() => import("./GitLab/PushModal.vue"));
+const GitLabPullModal = defineAsyncComponent(() => import("./GitLab/PullModal.vue"));
+const GitLabPublishModal = defineAsyncComponent(() => import("./GitLab/PublishModal.vue"));
 const LocalFolderSyncModal = defineAsyncComponent(() => import("./LocalFolder/SyncModal.vue"));
 
 import * as LocalFolder from "../ts/LocalFolder";
-import { detectGitHubRemote } from "../ts/localFolderSync";
+import { detectGitHubRemote, detectGitLabRemote } from "../ts/localFolderSync";
 import { SYNC_ON_OPEN_KEY } from "../ts/createProject";
 
 import logoImg from "url:../../assets/logo.png";
@@ -95,6 +99,10 @@ export default {
       githubPushVisible: false,
       githubPullVisible: false,
       githubPublishVisible: false,
+      gitlabImportVisible: false,
+      gitlabPushVisible: false,
+      gitlabPullVisible: false,
+      gitlabPublishVisible: false,
       localFolderSyncVisible: false,
       showFiles: false,
       showToolbar: true,
@@ -142,6 +150,18 @@ export default {
       return this.LiaScriptURL + "?" + raw;
     },
 
+    // Same as githubCourseUrl, for a linked GitLab project.
+    gitlabCourseUrl(): string {
+      const gl = (this.meta as any)?.meta?.gitlab;
+      if (!gl?.host || !gl?.projectPath || !gl?.branch) return "";
+      const path = this.activeFilePath
+        .split("/")
+        .map((s: string) => encodeURIComponent(s))
+        .join("/");
+      const raw = `https://${gl.host}/${gl.projectPath}/-/raw/${gl.branch}/${path}`;
+      return this.LiaScriptURL + "?" + raw;
+    },
+
     // Gist raw URL of the file currently shown in the preview, if it has been
     // exported as a gist before (empty otherwise). Keyed per file so that each
     // document in a multi-file project keeps its own gist.
@@ -163,6 +183,7 @@ export default {
     shareTabs(): any[] {
       const noProject = !this.$props.storageId;
       const noRepo = !(this.meta as any)?.meta?.github;
+      const noGitlabRepo = !(this.meta as any)?.meta?.gitlab;
       const noFolder = !(this.meta as any)?.meta?.localFolder;
 
       const tabs: any[] = [
@@ -202,6 +223,7 @@ export default {
                 { id: "githubGistLink", icon: "bi-box-arrow-up-right", labelKey: "share.githubGistLink", descriptionKey: "share.githubGistLinkTooltip", href: this.gistLink, disabled: !this.gistLink },
                 { id: "nostrLink", icon: "bi-box-arrow-up-right", labelKey: "share.nostrLink", descriptionKey: "share.nostrLinkTooltip", href: this.nostrLink, disabled: !this.nostrLink },
                 { id: "githubRepoFile", icon: "bi-box-arrow-up-right", label: this.$t("share.githubRepoFile", { file: this.activeFileName }), descriptionKey: "share.githubRepoFileTooltip", href: this.githubCourseUrl, disabled: !this.githubCourseUrl },
+                { id: "gitlabRepoFile", icon: "bi-box-arrow-up-right", label: this.$t("share.gitlabRepoFile", { file: this.activeFileName }), descriptionKey: "share.gitlabRepoFileTooltip", href: this.gitlabCourseUrl, disabled: !this.gitlabCourseUrl },
                 { id: "fileUrl", icon: "bi-box-arrow-up-right", labelKey: "share.fileUrl", descriptionKey: "share.fileUrlTooltip", href: this.$props.fileUrl ? this.LiaScriptURL + "?" + this.$props.fileUrl : "", disabled: !this.$props.fileUrl },
               ],
             },
@@ -217,6 +239,20 @@ export default {
                 { id: "githubPublish", icon: "bi-cloud-upload", labelKey: "github.menu.publish", descriptionKey: "github.menu.publishTooltip", disabled: noProject },
                 { id: "githubPush", icon: "bi-arrow-up-circle", labelKey: "github.menu.push", descriptionKey: "github.menu.pushTooltip", disabled: noRepo },
                 { id: "githubPull", icon: "bi-arrow-down-circle", labelKey: "github.menu.pull", descriptionKey: "github.menu.pullTooltip", disabled: noRepo },
+              ],
+            },
+          ],
+        },
+        {
+          id: "gitlab",
+          labelKey: "share.tabs.gitlab",
+          sections: [
+            {
+              items: [
+                { id: "gitlabImport", icon: "bi-box-arrow-in-down", labelKey: "gitlab.menu.import", descriptionKey: "gitlab.menu.importTooltip" },
+                { id: "gitlabPublish", icon: "bi-cloud-upload", labelKey: "gitlab.menu.publish", descriptionKey: "gitlab.menu.publishTooltip", disabled: noProject },
+                { id: "gitlabPush", icon: "bi-arrow-up-circle", labelKey: "gitlab.menu.push", descriptionKey: "gitlab.menu.pushTooltip", disabled: noGitlabRepo },
+                { id: "gitlabPull", icon: "bi-arrow-down-circle", labelKey: "gitlab.menu.pull", descriptionKey: "gitlab.menu.pullTooltip", disabled: noGitlabRepo },
               ],
             },
           ],
@@ -280,6 +316,10 @@ export default {
         githubPublish: () => this.githubPublish(),
         githubPush: () => this.githubPush(),
         githubPull: () => this.githubPull(),
+        gitlabImport: () => this.gitlabImport(),
+        gitlabPublish: () => this.gitlabPublish(),
+        gitlabPush: () => this.gitlabPush(),
+        gitlabPull: () => this.gitlabPull(),
         openLocalFolder: () => this.openLocalFolder(),
         localFolderSync: () => this.localFolderSync(),
       };
@@ -349,6 +389,27 @@ export default {
       if (meta) meta.github = link;
     },
 
+    gitlabImport() {
+      this.gitlabImportVisible = true;
+    },
+
+    gitlabPublish() {
+      this.gitlabPublishVisible = true;
+    },
+
+    gitlabPush() {
+      if ((this.meta as any)?.meta?.gitlab) this.gitlabPushVisible = true;
+    },
+
+    gitlabPull() {
+      if ((this.meta as any)?.meta?.gitlab) this.gitlabPullVisible = true;
+    },
+
+    onGitlabUpdated(link: any) {
+      const meta = (this.meta as any)?.meta;
+      if (meta) meta.gitlab = link;
+    },
+
     // --- local folder (File System Access API) -------------------------------
     // Pick a folder and link it to this project. The handle is persisted (in a
     // separate IndexedDB store) so the link survives reloads; only the display
@@ -359,11 +420,15 @@ export default {
         const handle = await LocalFolder.pickFolder();
         await LocalFolder.saveHandle(this.$props.storageId, handle);
         const update: any = { localFolder: { name: handle.name } };
-        // If the folder is a GitHub clone and the project isn't linked to a repo
-        // yet, adopt that link so the user can push straight to GitHub.
-        if (!(this.meta as any)?.meta?.github) {
+        // If the folder is a GitHub/GitLab clone and the project isn't linked to
+        // a repo yet, adopt that link so the user can push straight to it.
+        if (!(this.meta as any)?.meta?.github && !(this.meta as any)?.meta?.gitlab) {
           const repo = await detectGitHubRemote(handle);
           if (repo) update.github = repo;
+          else {
+            const glRepo = await detectGitLabRemote(handle);
+            if (glRepo) update.gitlab = glRepo;
+          }
         }
         await this.database?.put(this.$props.storageId, update);
         this.localFolderSyncVisible = true;
@@ -720,6 +785,10 @@ export default {
     GitHubPushModal,
     GitHubPullModal,
     GitHubPublishModal,
+    GitLabImportModal,
+    GitLabPushModal,
+    GitLabPullModal,
+    GitLabPublishModal,
     LocalFolderSyncModal,
   },
 };
@@ -1092,6 +1161,39 @@ export default {
     :github="meta.meta.github"
     @close="githubPullVisible = false"
     @updated="onGithubUpdated"
+  />
+  <GitLabImportModal
+    :visible="gitlabImportVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    @close="gitlabImportVisible = false"
+  />
+  <GitLabPublishModal
+    v-if="$props.storageId"
+    :visible="gitlabPublishVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    :title="meta?.meta?.title"
+    @close="gitlabPublishVisible = false"
+    @updated="onGitlabUpdated"
+  />
+  <GitLabPushModal
+    v-if="meta?.meta?.gitlab"
+    :visible="gitlabPushVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    :gitlab="meta.meta.gitlab"
+    @close="gitlabPushVisible = false"
+    @updated="onGitlabUpdated"
+  />
+  <GitLabPullModal
+    v-if="meta?.meta?.gitlab"
+    :visible="gitlabPullVisible"
+    :storageId="$props.storageId"
+    :connection="$props.connection"
+    :gitlab="meta.meta.gitlab"
+    @close="gitlabPullVisible = false"
+    @updated="onGitlabUpdated"
   />
   <LocalFolderSyncModal
     v-if="$props.storageId"

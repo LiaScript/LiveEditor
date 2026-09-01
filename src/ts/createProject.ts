@@ -20,6 +20,7 @@ export interface ProjectMeta {
   title?: string;
   gist_url?: string;
   github?: { owner: string; repo: string; branch: string; commitSha: string };
+  gitlab?: { host: string; projectPath: string; branch: string; commitSha: string };
   localFolder?: { name: string };
 }
 

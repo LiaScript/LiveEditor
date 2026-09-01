@@ -67,6 +67,7 @@ export default {
           macro?: { comment: string; tags: string };
           gist_url: string;
           github?: { owner: string; repo: string; branch: string; commitSha: string };
+          gitlab?: { host: string; projectPath: string; branch: string; commitSha: string };
         };
       }>,
       coursesFiltered: [] as Array<{
@@ -79,6 +80,7 @@ export default {
           macro?: { comment: string; tags: string };
           gist_url: string;
           github?: { owner: string; repo: string; branch: string; commitSha: string };
+          gitlab?: { host: string; projectPath: string; branch: string; commitSha: string };
         };
       }>,
       searchText: "",
@@ -248,6 +250,7 @@ export default {
         :card-comment="item.meta.macro?.comment"
         :card-gist="item.meta.gist_url"
         :card-github="item.meta.github"
+        :card-gitlab="item.meta.gitlab"
         :card-tags="item.meta.macro?.tags"
         @drop="drop"
       />
@@ -265,6 +268,7 @@ export default {
         :card-comment="item.meta.macro?.comment"
         :card-gist="item.meta.gist_url"
         :card-github="item.meta.github"
+        :card-gitlab="item.meta.gitlab"
         :card-tags="item.meta.macro?.tags"
         @drop="drop"
       />
