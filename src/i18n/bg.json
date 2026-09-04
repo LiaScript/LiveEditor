@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Достигнат е лимитът на GitHub",
       "authTitle": "Изисква се удостоверяване",
+      "manageTitle": "Manage access token",
       "intro": "Добавете личен токен за достъп (PAT), за да увеличите лимита и да получите достъп до частни хранилища или да изпращате промени.",
       "howtoToggle": "Как да създам токен?",
       "step1": "Отворете {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Изберете име и срок на валидност.",
       "step4": "Генерирайте токена. GitHub го показва само веднъж — копирайте го сега и го поставете по-долу.",
       "placeholder": "ghp_…",
-      "save": "Запази"
+      "save": "Запази",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

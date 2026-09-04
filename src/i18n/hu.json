@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Elérted a GitHub korlátot",
       "authTitle": "Hitelesítés szükséges",
+      "manageTitle": "Manage access token",
       "intro": "Adj hozzá egy személyes hozzáférési tokent (PAT) a korlát növeléséhez, valamint privát tárolók eléréséhez vagy változtatások feltöltéséhez.",
       "howtoToggle": "Hogyan hozok létre tokent?",
       "step1": "Nyisd meg: {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Válassz nevet és lejárati dátumot.",
       "step4": "Generáld a tokent. A GitHub csak egyszer mutatja meg — másold ki most, és illeszd be alább.",
       "placeholder": "ghp_…",
-      "save": "Mentés"
+      "save": "Mentés",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

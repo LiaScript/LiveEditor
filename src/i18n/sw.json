@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Kikomo cha GitHub kimefikiwa",
       "authTitle": "Uthibitishaji unahitajika",
+      "manageTitle": "Manage access token",
       "intro": "Ongeza Token ya Ufikiaji Binafsi (PAT) ili kuongeza kikomo na kufikia hazina za faragha au kusukuma mabadiliko.",
       "howtoToggle": "Ninawezaje kuunda token?",
       "step1": "Fungua {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Chagua jina na tarehe ya mwisho.",
       "step4": "Tengeneza token. GitHub inaionyesha mara moja tu — inakili sasa na uibandike hapa chini.",
       "placeholder": "ghp_…",
-      "save": "Hifadhi"
+      "save": "Hifadhi",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

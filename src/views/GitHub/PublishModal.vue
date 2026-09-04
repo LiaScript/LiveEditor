@@ -68,6 +68,11 @@ export default defineComponent({
       return cleaned || "liascript-course";
     },
 
+    manageToken() {
+      this.errorMessage = "";
+      this.patReason = "manage";
+    },
+
     handleError(err: GitHub.GitHubError) {
       if (err.error === "rate_limit" || err.error === "auth") {
         this.patReason = err.error;
@@ -196,7 +201,18 @@ export default defineComponent({
     </div>
 
     <template v-else-if="step === 'form'">
-      <p class="small text-muted">{{ $t("github.publish.intro") }}</p>
+      <div class="d-flex justify-content-between align-items-start mb-1">
+        <p class="small text-muted mb-0">{{ $t("github.publish.intro") }}</p>
+        <button
+          v-if="owners.length"
+          class="btn btn-sm btn-link p-0 flex-shrink-0 ms-2"
+          type="button"
+          :title="$t('github.pat.manageTitle')"
+          @click="manageToken"
+        >
+          <i class="bi bi-key"></i>
+        </button>
+      </div>
 
       <template v-if="owners.length">
         <div class="mb-2">

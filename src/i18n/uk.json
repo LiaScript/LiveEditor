@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Досягнуто ліміту GitHub",
       "authTitle": "Потрібна автентифікація",
+      "manageTitle": "Manage access token",
       "intro": "Додайте персональний токен доступу (PAT), щоб підвищити ліміт і отримати доступ до приватних репозиторіїв або надсилати зміни.",
       "howtoToggle": "Як створити токен?",
       "step1": "Відкрийте {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Виберіть назву та термін дії.",
       "step4": "Згенеруйте токен. GitHub показує його лише один раз — скопіюйте його зараз і вставте нижче.",
       "placeholder": "ghp_…",
-      "save": "Зберегти"
+      "save": "Зберегти",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

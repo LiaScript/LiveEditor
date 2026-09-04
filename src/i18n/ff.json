@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Dogal GitHub yottike",
       "authTitle": "Fellitagol ɗacngal",
+      "manageTitle": "Manage access token",
       "intro": "Ɓeydu Token Jokkorgol Neɗɗanke (PAT) ngam ɓeydude dogal ngal e naatde e jaŋdeeji suuɗiiɗi walla nawde waylitte.",
       "howtoToggle": "No mi hebsira token?",
       "step1": "Uddit {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Suɓo innde e happu timmingol.",
       "step4": "Hebsu token on. GitHub hollirta mo tan gootel — natto mo jooni pooɗu mo les.",
       "placeholder": "ghp_…",
-      "save": "Danndu"
+      "save": "Danndu",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

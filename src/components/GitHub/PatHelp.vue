@@ -3,14 +3,17 @@ import { defineComponent } from "vue";
 import { getGithubPat, setGithubPat } from "../../ts/utils";
 
 // Shown inside the GitHub dialogs whenever an operation fails because of an
-// exhausted rate limit or missing authentication. Explains how to create a
-// classic Personal Access Token and lets the user store it. After saving,
-// the parent re-runs the failed operation (see @saved).
+// exhausted rate limit or missing/invalid authentication, and also on demand
+// (reason "manage") so a stored token can be replaced or cleared before it
+// ever fails — e.g. because it expired or was mistyped. Explains how to
+// create a classic Personal Access Token and lets the user store it. After
+// saving, the parent re-runs the failed operation (see @saved).
 export default defineComponent({
   name: "PatHelp",
 
   props: {
-    // why the help is shown: "rate_limit" | "auth" — only changes the intro text
+    // why the help is shown: "rate_limit" | "auth" | "manage" — only changes
+    // the title/intro text and alert color, "manage" is the neutral on-demand case
     reason: { type: String, default: "auth" },
   },
 
@@ -19,8 +22,27 @@ export default defineComponent({
   data() {
     return {
       pat: getGithubPat() || "",
-      expanded: false,
+      // jump straight to the how-to when the user asked to manage the token
+      // themselves; a reactive error already has their attention, so it stays collapsed
+      expanded: this.reason === "manage",
     };
+  },
+
+  computed: {
+    alertClass(): string {
+      return this.reason === "rate_limit"
+        ? "alert-warning"
+        : this.reason === "manage"
+        ? "alert-secondary"
+        : "alert-danger";
+    },
+    title(): string {
+      return this.reason === "rate_limit"
+        ? this.$t("github.pat.rateLimitTitle")
+        : this.reason === "manage"
+        ? this.$t("github.pat.manageTitle")
+        : this.$t("github.pat.authTitle");
+    },
   },
 
   methods: {
@@ -29,16 +51,20 @@ export default defineComponent({
       setGithubPat(value || undefined);
       this.$emit("saved", value || undefined);
     },
+
+    clear() {
+      this.pat = "";
+      setGithubPat(undefined);
+      this.$emit("saved", undefined);
+    },
   },
 });
 </script>
 
 <template>
-  <div class="alert" :class="reason === 'rate_limit' ? 'alert-warning' : 'alert-danger'">
+  <div class="alert" :class="alertClass">
     <p class="mb-2">
-      <strong>
-        {{ reason === "rate_limit" ? $t("github.pat.rateLimitTitle") : $t("github.pat.authTitle") }}
-      </strong>
+      <strong>{{ title }}</strong>
     </p>
     <p class="mb-2 small">{{ $t("github.pat.intro") }}</p>
 
@@ -78,5 +104,13 @@ export default defineComponent({
         {{ $t("github.pat.save") }}
       </button>
     </div>
+    <button
+      v-if="pat.trim()"
+      class="btn btn-sm btn-link text-danger p-0 mt-2"
+      type="button"
+      @click="clear"
+    >
+      {{ $t("github.pat.clear") }}
+    </button>
   </div>
 </template>

@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "An kai iyakar GitHub",
       "authTitle": "Ana buƙatar tabbatarwa",
+      "manageTitle": "Manage access token",
       "intro": "Ƙara Token na Samun Dama na Kai (PAT) don ƙara iyaka da kuma samun dama zuwa ma'ajiyoyi masu zaman kansu ko turo canje-canje.",
       "howtoToggle": "Yaya zan ƙirƙiri token?",
       "step1": "Buɗe {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Zaɓi suna da ranar ƙarewa.",
       "step4": "Ƙirƙiri token ɗin. GitHub yana nuna shi sau ɗaya kawai — kwafe shi yanzu ka manna a ƙasa.",
       "placeholder": "ghp_…",
-      "save": "Ajiye"
+      "save": "Ajiye",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

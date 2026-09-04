@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "تم الوصول إلى حد GitHub",
       "authTitle": "المصادقة مطلوبة",
+      "manageTitle": "Manage access token",
       "intro": "أضف رمز وصول شخصي (PAT) لرفع الحد المسموح به والوصول إلى المستودعات الخاصة أو دفع التغييرات.",
       "howtoToggle": "كيف أنشئ رمزًا؟",
       "step1": "افتح {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "اختر اسمًا وتاريخ انتهاء الصلاحية.",
       "step4": "أنشئ الرمز. يعرضه GitHub مرة واحدة فقط — انسخه الآن والصقه أدناه.",
       "placeholder": "ghp_…",
-      "save": "حفظ"
+      "save": "حفظ",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

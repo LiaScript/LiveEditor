@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Limite GitHub atteinte",
       "authTitle": "Authentification requise",
+      "manageTitle": "Manage access token",
       "intro": "Ajoutez un jeton d'accès personnel (PAT) pour augmenter la limite et accéder aux dépôts privés ou envoyer des modifications.",
       "howtoToggle": "Comment créer un jeton ?",
       "step1": "Ouvrez {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Choisissez un nom et une date d'expiration.",
       "step4": "Générez le jeton. GitHub ne l'affiche qu'une seule fois — copiez-le maintenant et collez-le ci-dessous.",
       "placeholder": "ghp_…",
-      "save": "Enregistrer"
+      "save": "Enregistrer",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

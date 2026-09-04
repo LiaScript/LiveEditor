@@ -281,6 +281,7 @@
     "pat": {
       "rateLimitTitle": "GitHub-Kontingent erreicht",
       "authTitle": "Authentifizierung erforderlich",
+      "manageTitle": "Zugriffstoken verwalten",
       "intro": "Hinterlege einen Personal Access Token (PAT), um das Kontingent zu erhöhen und auf private Repositories zuzugreifen oder Änderungen zu pushen.",
       "howtoToggle": "Wie erstelle ich einen Token?",
       "step1": "Öffne {link}.",
@@ -288,7 +289,8 @@
       "step3Classic": "Wähle einen Namen und eine Gültigkeitsdauer.",
       "step4": "Erzeuge den Token. GitHub zeigt ihn nur einmal an — kopiere ihn sofort und füge ihn unten ein.",
       "placeholder": "ghp_…",
-      "save": "Speichern"
+      "save": "Speichern",
+      "clear": "Gespeicherten Token entfernen"
     },
     "errors": {
       "badUrl": "Bitte gib ein gültiges Repository an (owner/repo oder eine GitHub-URL).",

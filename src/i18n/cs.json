@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Byl dosažen limit GitHubu",
       "authTitle": "Vyžadováno ověření",
+      "manageTitle": "Manage access token",
       "intro": "Přidejte osobní přístupový token (PAT) pro zvýšení limitu a přístup k soukromým repozitářům nebo pro odesílání změn.",
       "howtoToggle": "Jak vytvořím token?",
       "step1": "Otevřete {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Zvolte název a datum vypršení platnosti.",
       "step4": "Vygenerujte token. GitHub jej zobrazí pouze jednou — nyní jej zkopírujte a vložte níže.",
       "placeholder": "ghp_…",
-      "save": "Uložit"
+      "save": "Uložit",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

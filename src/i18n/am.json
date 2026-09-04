@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "የGitHub ገደብ ላይ ደርሷል",
       "authTitle": "ማረጋገጫ ያስፈልጋል",
+      "manageTitle": "Manage access token",
       "intro": "ገደቡን ለማሳደግ እና የግል ማከማቻዎችን ለመድረስ ወይም ለውጦችን ለመግፋት የግል መዳረሻ ቶከን (PAT) ያክሉ።",
       "howtoToggle": "ቶከን እንዴት እፈጥራለሁ?",
       "step1": "{link} ይክፈቱ።",
@@ -270,7 +271,8 @@
       "step3Classic": "ስም እና የማብቂያ ጊዜ ይምረጡ።",
       "step4": "ቶከኑን ይፍጠሩ። GitHub አንድ ጊዜ ብቻ ያሳየዋል — አሁኑኑ ገልብጠው ከዚህ በታች ይለጥፉ።",
       "placeholder": "ghp_…",
-      "save": "አስቀምጥ"
+      "save": "አስቀምጥ",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

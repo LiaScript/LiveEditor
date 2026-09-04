@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Το όριο του GitHub έχει εξαντληθεί",
       "authTitle": "Απαιτείται έλεγχος ταυτότητας",
+      "manageTitle": "Manage access token",
       "intro": "Προσθέστε ένα προσωπικό διακριτικό πρόσβασης (PAT) για να αυξήσετε το όριο και να αποκτήσετε πρόσβαση σε ιδιωτικά αποθετήρια ή να στείλετε αλλαγές.",
       "howtoToggle": "Πώς δημιουργώ ένα διακριτικό;",
       "step1": "Ανοίξτε το {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Επιλέξτε όνομα και ημερομηνία λήξης.",
       "step4": "Δημιουργήστε το διακριτικό. Το GitHub το εμφανίζει μόνο μία φορά — αντιγράψτε το τώρα και επικολλήστε το παρακάτω.",
       "placeholder": "ghp_…",
-      "save": "Αποθήκευση"
+      "save": "Αποθήκευση",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

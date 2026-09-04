@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "已达到 GitHub 限制",
       "authTitle": "需要身份验证",
+      "manageTitle": "Manage access token",
       "intro": "添加个人访问令牌（PAT）以提高限制，并访问私有仓库或推送更改。",
       "howtoToggle": "如何创建令牌？",
       "step1": "打开{link}。",
@@ -270,7 +271,8 @@
       "step3Classic": "选择名称和过期时间。",
       "step4": "生成令牌。GitHub 只会显示一次——请立即复制并粘贴到下面。",
       "placeholder": "ghp_…",
-      "save": "保存"
+      "save": "保存",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

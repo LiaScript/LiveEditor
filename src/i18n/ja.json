@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "GitHubの利用上限に達しました",
       "authTitle": "認証が必要です",
+      "manageTitle": "Manage access token",
       "intro": "上限を引き上げ、プライベートリポジトリへのアクセスや変更のプッシュを行うには、パーソナルアクセストークン（PAT）を追加してください。",
       "howtoToggle": "トークンの作成方法は?",
       "step1": "{link}を開きます。",
@@ -270,7 +271,8 @@
       "step3Classic": "名前と有効期限を選択します。",
       "step4": "トークンを生成します。GitHubはトークンを一度しか表示しません。今すぐコピーして、下に貼り付けてください。",
       "placeholder": "ghp_…",
-      "save": "保存"
+      "save": "保存",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

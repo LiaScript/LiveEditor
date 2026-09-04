@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "GitHub-gränsen har nåtts",
       "authTitle": "Autentisering krävs",
+      "manageTitle": "Manage access token",
       "intro": "Lägg till en personlig åtkomsttoken (PAT) för att höja gränsen och komma åt privata repositories eller pusha ändringar.",
       "howtoToggle": "Hur skapar jag en token?",
       "step1": "Öppna {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Välj ett namn och ett utgångsdatum.",
       "step4": "Generera token. GitHub visar den bara en gång — kopiera den nu och klistra in den nedan.",
       "placeholder": "ghp_…",
-      "save": "Spara"
+      "save": "Spara",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

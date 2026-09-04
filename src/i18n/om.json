@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Daangaa GitHub gahame",
       "authTitle": "Mirkaneessi barbaachisa",
+      "manageTitle": "Manage access token",
       "intro": "Daangaa dabaluu fi kuusaa dhuunfaa seenuuf ykn jijjiirama ergu Token Argannoo Dhuunfaa (PAT) dabali.",
       "howtoToggle": "Akkamittin token uumu?",
       "step1": "{link} bani.",
@@ -270,7 +271,8 @@
       "step3Classic": "Maqaa fi guyyaa dhumaa filadhu.",
       "step4": "Token uumi. GitHub yeroo tokko qofa isa argisiisa — amma garagalchii gadi maxxansi.",
       "placeholder": "ghp_…",
-      "save": "Ol kaa'i"
+      "save": "Ol kaa'i",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

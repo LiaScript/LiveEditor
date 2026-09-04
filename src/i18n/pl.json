@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Osiągnięto limit GitHub",
       "authTitle": "Wymagane uwierzytelnienie",
+      "manageTitle": "Manage access token",
       "intro": "Dodaj osobisty token dostępu (PAT), aby zwiększyć limit i uzyskać dostęp do prywatnych repozytoriów lub wysyłać zmiany.",
       "howtoToggle": "Jak utworzyć token?",
       "step1": "Otwórz {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Wybierz nazwę i datę wygaśnięcia.",
       "step4": "Wygeneruj token. GitHub pokazuje go tylko raz — skopiuj go teraz i wklej poniżej.",
       "placeholder": "ghp_…",
-      "save": "Zapisz"
+      "save": "Zapisz",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

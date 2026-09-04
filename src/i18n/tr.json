@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "GitHub sınırına ulaşıldı",
       "authTitle": "Kimlik doğrulama gerekli",
+      "manageTitle": "Manage access token",
       "intro": "Sınırı yükseltmek ve özel depolara erişmek veya değişiklikleri göndermek için bir Kişisel Erişim Belirteci (PAT) ekleyin.",
       "howtoToggle": "Belirteci nasıl oluştururum?",
       "step1": "{link} adresini açın.",
@@ -270,7 +271,8 @@
       "step3Classic": "Bir ad ve son kullanma tarihi seçin.",
       "step4": "Belirteci oluşturun. GitHub bunu yalnızca bir kez gösterir — hemen kopyalayın ve aşağıya yapıştırın.",
       "placeholder": "ghp_…",
-      "save": "Kaydet"
+      "save": "Kaydet",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

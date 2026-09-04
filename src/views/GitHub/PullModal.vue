@@ -138,6 +138,11 @@ export default defineComponent({
       return this.$t("github.pull." + status);
     },
 
+    manageToken() {
+      this.errorMessage = "";
+      this.patReason = "manage";
+    },
+
     statusClass(status: string): string {
       return status === "added" ? "text-success" : "text-warning";
     },
@@ -201,7 +206,17 @@ export default defineComponent({
   <GitHubModal :visible="visible" :title="$t('github.pull.title')" @close="close">
     <div v-if="github" class="d-flex justify-content-between align-items-center mb-2">
       <strong>{{ github.owner }}/{{ github.repo }}</strong>
-      <span class="badge bg-secondary">{{ github.branch }}</span>
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge bg-secondary">{{ github.branch }}</span>
+        <button
+          class="btn btn-sm btn-link p-0"
+          type="button"
+          :title="$t('github.pat.manageTitle')"
+          @click="manageToken"
+        >
+          <i class="bi bi-key"></i>
+        </button>
+      </div>
     </div>
 
     <div v-if="step === 'loading'" class="text-center py-3">

@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "GitHub-limiet bereikt",
       "authTitle": "Authenticatie vereist",
+      "manageTitle": "Manage access token",
       "intro": "Voeg een Personal Access Token (PAT) toe om de limiet te verhogen en toegang te krijgen tot privérepository's of wijzigingen te pushen.",
       "howtoToggle": "Hoe maak ik een token aan?",
       "step1": "Open {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Kies een naam en een vervaldatum.",
       "step4": "Genereer de token. GitHub toont deze maar één keer — kopieer hem nu en plak hem hieronder.",
       "placeholder": "ghp_…",
-      "save": "Opslaan"
+      "save": "Opslaan",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

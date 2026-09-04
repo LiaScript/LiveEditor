@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Erutela oke GitHub",
       "authTitle": "Achọrọ nkwenye",
+      "manageTitle": "Manage access token",
       "intro": "Tinye Token Ohere Onwe (PAT) iji bulie oke ahụ ma nweta ohere ịbanye na ebe nchekwa nzuzo ma ọ bụ zipu mgbanwe.",
       "howtoToggle": "Kedu ka m ga-esi mepụta token?",
       "step1": "Meghee {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Họrọ aha na oge ngwụcha.",
       "step4": "Mepụta token ahụ. GitHub na-egosi ya naanị otu ugbo — depụta ya ugbu a ma tinye ya n'okpuru.",
       "placeholder": "ghp_…",
-      "save": "Chekwaa"
+      "save": "Chekwaa",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

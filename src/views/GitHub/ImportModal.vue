@@ -128,6 +128,11 @@ export default defineComponent({
       (this.$refs.tree as any)?.selectAll(value);
     },
 
+    manageToken() {
+      this.errorMessage = "";
+      this.patReason = "manage";
+    },
+
     async startImport() {
       if (!this.emptyRepo && this.selected.length === 0) return;
       this.step = "importing";
@@ -234,7 +239,17 @@ export default defineComponent({
     <template v-else-if="step === 'select'">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <strong>{{ owner }}/{{ repo }}</strong>
-        <span class="badge bg-secondary">{{ branch }}</span>
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-secondary">{{ branch }}</span>
+          <button
+            class="btn btn-sm btn-link p-0"
+            type="button"
+            :title="$t('github.pat.manageTitle')"
+            @click="manageToken"
+          >
+            <i class="bi bi-key"></i>
+          </button>
+        </div>
       </div>
 
       <div v-if="emptyRepo" class="alert alert-info">

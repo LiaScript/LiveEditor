@@ -263,6 +263,7 @@
     "pat": {
       "rateLimitTitle": "Ààlà GitHub ti dé",
       "authTitle": "Ìfọwọ́sí nílò",
+      "manageTitle": "Manage access token",
       "intro": "Fi Àmì Ìwọlé Àdáni (PAT) kún un láti gbé ààlà náà sókè àti láti wọlé sí àwọn ibi ìpamọ́ àdáni tàbí láti fi àwọn ìyípadà ránṣẹ́.",
       "howtoToggle": "Báwo ni mo ṣe lè ṣẹ̀dá àmì kan?",
       "step1": "Ṣí {link}.",
@@ -270,7 +271,8 @@
       "step3Classic": "Yan orúkọ àti ọjọ́ tí yóò parí.",
       "step4": "Ṣẹ̀dá àmì náà. GitHub máa fi hàn ẹ̀ẹ̀kan ṣoṣo — dà á kọ ní báyìí kí o sì lẹ̀ ẹ́ sí ìsàlẹ̀.",
       "placeholder": "ghp_…",
-      "save": "Fi pamọ́"
+      "save": "Fi pamọ́",
+      "clear": "Remove stored token"
     },
     "errors": {
       "badUrl": "Please enter a valid repository (owner/repo or a GitHub URL).",

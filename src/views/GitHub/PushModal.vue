@@ -145,6 +145,11 @@ export default defineComponent({
       return this.$t("github.push." + status);
     },
 
+    manageToken() {
+      this.errorMessage = "";
+      this.patReason = "manage";
+    },
+
     // ---- Monaco diff for modified text files --------------------------------
     async openDiff(change: FileChange) {
       if (!change.isText || change.status === "added") return;
@@ -262,7 +267,17 @@ export default defineComponent({
   <GitHubModal :visible="visible" :title="$t('github.push.title')" @close="close">
     <div v-if="github" class="d-flex justify-content-between align-items-center mb-2">
       <strong>{{ github.owner }}/{{ github.repo }}</strong>
-      <span class="badge bg-secondary">{{ github.branch }}</span>
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge bg-secondary">{{ github.branch }}</span>
+        <button
+          class="btn btn-sm btn-link p-0"
+          type="button"
+          :title="$t('github.pat.manageTitle')"
+          @click="manageToken"
+        >
+          <i class="bi bi-key"></i>
+        </button>
+      </div>
     </div>
 
     <div v-if="step === 'loading'" class="text-center py-3">

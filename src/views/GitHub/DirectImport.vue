@@ -84,6 +84,11 @@ export default defineComponent({
       (this.$refs.tree as any)?.selectAll(value);
     },
 
+    manageToken() {
+      this.errorMessage = "";
+      this.patReason = "manage";
+    },
+
     async startImport() {
       if (!this.emptyRepo && this.selected.length === 0) return;
 
@@ -161,6 +166,14 @@ export default defineComponent({
               </button>
               <button class="btn btn-sm btn-outline-secondary" @click="selectAll(false)">
                 {{ $t("github.import.selectNone") }}
+              </button>
+              <button
+                class="btn btn-sm btn-link p-0"
+                type="button"
+                :title="$t('github.pat.manageTitle')"
+                @click="manageToken"
+              >
+                <i class="bi bi-key"></i>
               </button>
             </div>
             <span class="ms-auto small text-muted">
