@@ -3,7 +3,7 @@ import { buildProjectZip } from "../../ts/utils";
 import { getProjectDoc, releaseProjectDoc } from "../../ts/ProjectDoc";
 
 const STORAGE_KEY = "liaexporter.url";
-const DEFAULT_URL = "http://localhost:3000";
+const DEFAULT_URL = "https://liascript.github.io/LiaScript-Exporter";
 
 export default {
   name: "ExporterModal",
