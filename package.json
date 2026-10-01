@@ -1,6 +1,6 @@
 {
   "name": "liaeditor",
-  "version": "2.0.1--2.0.1",
+  "version": "2.0.1--2.1.0",
   "description": "LiaScript LiveEditor",
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
@@ -16,7 +16,7 @@
   "author": "André Dietrich",
   "license": "MIT",
   "dependencies": {
-    "@liascript/editor": "^1.1.43--2.0.1",
+    "@liascript/editor": "^1.1.43--2.1.0",
     "@susisu/mte-kernel": "^2.1.1",
     "minisearch": "^7.2.0",
     "pako": "^2.1.0",
@@ -72,5 +72,11 @@
   ],
   "browserslist": [
     "cover 80.0%"
-  ]
+  ],
+  "allowScripts": {
+    "@parcel/watcher@2.5.1": true,
+    "msgpackr-extract@3.0.4": true,
+    "lmdb@2.8.5": true,
+    "@swc/core@1.15.41": true
+  }
 }
