@@ -109,3 +109,11 @@
 .form-range::-moz-range-thumb {
   background-color: var(--lia-accent);
 }
+
+/* plain checkboxes/radios without Bootstrap classes (e.g. the repository
+   file tree) use the browser's own control, tinted here */
+input[type="checkbox"],
+input[type="radio"],
+progress {
+  accent-color: var(--lia-accent);
+}

@@ -936,7 +936,7 @@ export default {
           <span class="lia-course-title" :title="courseTitle">{{ courseTitle }}</span>
         </div>
         <span v-else class="fw-semibold d-none d-sm-inline">
-          {{ embed ? $t('app.demo') : $t('app.title') }}
+          {{ $t('app.title') }}
         </span>
       </div>
 

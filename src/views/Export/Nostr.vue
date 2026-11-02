@@ -340,24 +340,25 @@ export default {
       this.privateKey = savedPrivateKey;
     }
 
-    const database = new Dexie();
-    database
-      .get(this.storageId)
-      .then((meta: any) => {
-        if (meta) {
-          this.customMessage = meta.meta.macro.comment || "";
-          this.imageUrl = meta.meta.macro.image || null;
-          this.tags = meta.meta.macro.tags?.split(",").map((tag) => tag.trim()) || [
+    // Embedded/shown courses have no storageId, and a fresh course has no
+    // macro data yet until the first preview; both are normal.
+    if (this.storageId) {
+      new Dexie()
+        .get(this.storageId)
+        .then((meta: any) => {
+          const macro = meta?.meta?.macro;
+          if (!macro) return;
+          this.customMessage = macro.comment || "";
+          this.imageUrl = macro.image || null;
+          this.tags = macro.tags?.split(",").map((tag) => tag.trim()) || [
             "liascript",
             "education",
           ];
-        } else {
-          console.warn("No metadata found for this course.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error loading metadata:", error);
-      });
+        })
+        .catch((error) => {
+          console.error("Error loading metadata:", error);
+        });
+    }
 
     // Load saved relays
     this.loadSavedRelays();

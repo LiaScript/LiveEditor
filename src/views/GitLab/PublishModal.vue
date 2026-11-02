@@ -240,12 +240,12 @@ export default defineComponent({
       <div v-if="owners.length" class="d-flex justify-content-between align-items-center mb-2">
         <span class="small text-muted">{{ host }}</span>
         <button
-          class="btn btn-sm btn-link p-0"
+          class="btn btn-sm btn-link p-0 small text-decoration-none"
           type="button"
           :title="$t('gitlab.pat.manageTitle')"
           @click="manageToken"
         >
-          <i class="bi bi-key"></i>
+          <i class="bi bi-key"></i> {{ $t('gitlab.pat.manageTitle') }}
         </button>
       </div>
 

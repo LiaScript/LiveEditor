@@ -1,7 +1,6 @@
 {
   "app": {
-    "title": "LiaEdit",
-    "demo": "LiaDemo"
+    "title": "LiaEdit"
   },
   "nav": {
     "help": "Hjälp",

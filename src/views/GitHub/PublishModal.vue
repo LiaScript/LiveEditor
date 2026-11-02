@@ -205,12 +205,12 @@ export default defineComponent({
         <p class="small text-muted mb-0">{{ $t("github.publish.intro") }}</p>
         <button
           v-if="owners.length"
-          class="btn btn-sm btn-link p-0 flex-shrink-0 ms-2"
+          class="btn btn-sm btn-link p-0 flex-shrink-0 ms-3 small text-decoration-none"
           type="button"
           :title="$t('github.pat.manageTitle')"
           @click="manageToken"
         >
-          <i class="bi bi-key"></i>
+          <i class="bi bi-key"></i> {{ $t('github.pat.manageTitle') }}
         </button>
       </div>
 

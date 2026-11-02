@@ -374,6 +374,7 @@ export default {
       }
       const old = currentModel;
       currentModel = editor.createModel("", language);
+      currentModel.updateOptions(this.modelOptions(this.editorConfig));
       Editor.setModel(currentModel);
       currentBinding = new MonacoBinding(
         yText,
@@ -1085,25 +1086,45 @@ I (study) ~[[ am going to study ]]~ harder this term.
       if (Editor) Editor.focus();
     },
 
+    // Monaco options for the stored editor settings. Passed to editor.create()
+    // so they apply right away, and to updateOptions() when they change.
+    monacoOptions(cfg: EditorConfig) {
+      return {
+        fontSize: cfg.fontSize,
+        fontFamily: cfg.fontFamily,
+        lineNumbers: cfg.lineNumbers,
+        minimap: { enabled: cfg.minimap },
+        wordWrap: cfg.wordWrap,
+        tabSize: cfg.tabSize,
+        insertSpaces: cfg.insertSpaces,
+        // otherwise Monaco guesses the indentation from the text and
+        // overrides the tab size / spaces chosen in the settings
+        detectIndentation: false,
+        renderWhitespace: cfg.renderWhitespace,
+        folding: cfg.folding,
+        bracketPairColorization: { enabled: cfg.bracketPairColorization },
+        smoothScrolling: cfg.smoothScrolling,
+        wordBasedSuggestions: cfg.wordBasedSuggestions,
+        cursorBlinking: cfg.cursorBlinking,
+      };
+    },
+
+    // Settings Monaco keeps per document (model) instead of per editor.
+    modelOptions(cfg: EditorConfig) {
+      return {
+        tabSize: cfg.tabSize,
+        insertSpaces: cfg.insertSpaces,
+        bracketColorizationOptions: {
+          enabled: cfg.bracketPairColorization,
+          independentColorPoolPerBracketType: false,
+        },
+      };
+    },
+
     applyEditorConfig(cfg: EditorConfig) {
       this.editorConfig = cfg;
-      if (Editor) {
-        Editor.updateOptions({
-          fontSize: cfg.fontSize,
-          fontFamily: cfg.fontFamily,
-          lineNumbers: cfg.lineNumbers,
-          minimap: { enabled: cfg.minimap },
-          wordWrap: cfg.wordWrap,
-          tabSize: cfg.tabSize,
-          insertSpaces: cfg.insertSpaces,
-          renderWhitespace: cfg.renderWhitespace,
-          folding: cfg.folding,
-          bracketPairColorization: { enabled: cfg.bracketPairColorization },
-          smoothScrolling: cfg.smoothScrolling,
-          wordBasedSuggestions: cfg.wordBasedSuggestions ? "allDocuments" : false,
-          cursorBlinking: cfg.cursorBlinking,
-        });
-      }
+      if (Editor) Editor.updateOptions(this.monacoOptions(cfg));
+      if (currentModel) currentModel.updateOptions(this.modelOptions(cfg));
       const config = Utils.loadConfig();
       config.editor = { ...cfg };
       Utils.storeConfig(config);
@@ -1327,13 +1348,12 @@ I (study) ~[[ am going to study ]]~ harder this term.
       }
 
       const Editor = editor.create(div, {
+        ...this.monacoOptions(this.editorConfig),
         value: code,
         language: "markdown",
         theme: this.lights ? "vs-light" : "vs-dark",
         automaticLayout: true,
       });
-
-      this.applyEditorConfig(this.editorConfig);
 
       const self = this;
 
@@ -1555,9 +1575,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
             if (tableEditor.cursorIsInTable(options({}))) {
               tableEditor.nextCell(options({}));
             } else {
-              textEditor.trigger("keyboard", "type", {
-                text: "    ",
-              });
+              // Monaco's own Tab: respects tab size / spaces and indents a
+              // multi-line selection instead of replacing it
+              textEditor.trigger("keyboard", "tab", null);
             }
           }
         },
@@ -1574,6 +1594,8 @@ I (study) ~[[ am going to study ]]~ harder this term.
           if (tableEditor) {
             if (tableEditor.cursorIsInTable(options({}))) {
               tableEditor.previousCell(options({}));
+            } else {
+              textEditor.trigger("keyboard", "outdent", null);
             }
           }
         },

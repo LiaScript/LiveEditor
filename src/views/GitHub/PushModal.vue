@@ -275,12 +275,12 @@ export default defineComponent({
       <div class="d-flex align-items-center gap-2">
         <span class="badge bg-secondary">{{ github.branch }}</span>
         <button
-          class="btn btn-sm btn-link p-0"
+          class="btn btn-sm btn-link p-0 small text-decoration-none"
           type="button"
           :title="$t('github.pat.manageTitle')"
           @click="manageToken"
         >
-          <i class="bi bi-key"></i>
+          <i class="bi bi-key"></i> {{ $t('github.pat.manageTitle') }}
         </button>
       </div>
     </div>

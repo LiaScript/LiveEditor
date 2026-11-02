@@ -1,7 +1,6 @@
 {
   "app": {
-    "title": "LiaEdit",
-    "demo": "LiaDemo"
+    "title": "LiaEdit"
   },
   "nav": {
     "help": "Help",
@@ -309,9 +308,9 @@
     "information": "Information",
     "close": "Close",
     "compileHint": "You can try out changes here and refresh the preview with {ctrl}. To keep them, make a copy: ⋮ menu → “Make a copy”.",
-    "compileHintEmbed": "You can try out changes and refresh the preview with {ctrl}, or open the course in the {link}.",
+    "compileHintEmbed": "You can try out changes and refresh the preview with {ctrl}, or open the course in {link}.",
     "compileHintEmbedOnly": "You can try out changes and refresh the preview with {ctrl}.",
-    "openInEditor": "… or open it in the {link}.",
+    "openInEditor": "… or open it in {link}.",
     "viewOnLiaScript": "If you want to see the course on LiaScript, click {here}.",
     "viewHere": "here",
     "toolbarHint": "The buttons at the top switch between writing, both and preview."

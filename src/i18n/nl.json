@@ -1,7 +1,6 @@
 {
   "app": {
-    "title": "LiaEdit",
-    "demo": "LiaDemo"
+    "title": "LiaEdit"
   },
   "nav": {
     "help": "Help",
@@ -309,9 +308,9 @@
     "information": "Informatie",
     "close": "Sluiten",
     "compileHint": "Je kunt hier wijzigingen uitproberen en het voorbeeld vernieuwen met {ctrl}. Wil je ze bewaren, maak dan een kopie: ⋮-menu → ‘Kopie maken’.",
-    "compileHintEmbed": "Je kunt wijzigingen uitproberen en het voorbeeld vernieuwen met {ctrl}, of de cursus openen in de {link}.",
+    "compileHintEmbed": "Je kunt wijzigingen uitproberen en het voorbeeld vernieuwen met {ctrl}, of de cursus openen in {link}.",
     "compileHintEmbedOnly": "Je kunt wijzigingen uitproberen en het voorbeeld vernieuwen met {ctrl}.",
-    "openInEditor": "… of open hem in de {link}.",
+    "openInEditor": "… of open hem in {link}.",
     "viewOnLiaScript": "Als je de cursus op LiaScript wilt zien, klik dan {here}.",
     "viewHere": "hier",
     "toolbarHint": "Met de knoppen bovenaan wissel je tussen ‘Schrijven’, ‘Beide’ en ‘Voorbeeld’."

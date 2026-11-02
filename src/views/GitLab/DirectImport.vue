@@ -8,6 +8,8 @@ import * as GitLab from "../../ts/GitLabRepo";
 import type { TreeItem } from "../../ts/GitLabRepo";
 import { importPaths, seedEmptyReadme } from "../../ts/gitlabImport";
 import GitHubFileTree from "../../components/GitHub/GitHubFileTree.vue";
+import LanguageDropdown from "../../components/LanguageDropdown.vue";
+import logoImg from "url:../../../assets/logo.png";
 import PatHelp from "../../components/GitLab/PatHelp.vue";
 
 // Full-page view for the ?/gitlab/<host>/<projectPath> route: lets the user
@@ -16,7 +18,7 @@ import PatHelp from "../../components/GitLab/PatHelp.vue";
 export default defineComponent({
   name: "GitLabDirectImport",
 
-  components: { GitHubFileTree, PatHelp },
+  components: { GitHubFileTree, PatHelp, LanguageDropdown },
 
   props: {
     // the whole route tail, e.g. "gitlab.com/group/subgroup/project"
@@ -25,6 +27,7 @@ export default defineComponent({
 
   data() {
     return {
+      logoImg,
       host: "",
       projectPath: "",
       step: "loading" as "loading" | "select" | "importing" | "error",
@@ -157,101 +160,171 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="gl-direct">
-    <div class="gl-direct-box">
-      <h4 class="mb-3"><i class="bi bi-gitlab"></i> {{ projectPath }}</h4>
+  <div class="lia-direct">
+    <nav class="navbar bg-white border-bottom">
+      <div class="container-fluid gap-2">
+        <a class="navbar-brand d-flex align-items-center gap-2 me-auto" href="./">
+          <img :src="logoImg" alt="" height="28" />
+          <span class="fw-semibold">{{ $t('app.title') }}</span>
+        </a>
+        <LanguageDropdown align="end" />
+      </div>
+    </nav>
 
-      <template v-if="step === 'loading'">
-        <div class="text-center">
-          <span class="spinner-border"></span>
-          <p class="mt-2 text-muted">{{ $t("gitlab.import.loadingRepo") }}</p>
-        </div>
-      </template>
+    <main class="lia-direct-main">
+      <a class="lia-back" href="./">
+        <i class="bi bi-arrow-left" aria-hidden="true"></i> {{ $t('nav.myCourses') }}
+      </a>
 
-      <template v-else-if="step === 'select'">
-        <div v-if="emptyRepo" class="alert alert-info text-start">
-          {{ $t("gitlab.import.emptyRepo") }}
-        </div>
+      <section class="lia-direct-card">
+        <header class="lia-direct-head">
+          <i class="bi bi-gitlab lia-direct-icon" aria-hidden="true"></i>
+          <div class="min-w-0">
+            <h1 class="h5 fw-bold mb-0">{{ $t("gitlab.import.title") }}</h1>
+            <p class="small text-body-secondary mb-0 mt-1 text-break">{{ projectPath }}</p>
+          </div>
+        </header>
 
-        <template v-else>
-          <div class="d-flex align-items-center mb-2">
-            <span class="badge bg-secondary me-2">{{ branch }}</span>
-            <div class="d-flex gap-2">
-              <button class="btn btn-sm btn-outline-secondary" @click="selectAll(true)">
-                {{ $t("gitlab.import.selectAll") }}
-              </button>
-              <button class="btn btn-sm btn-outline-secondary" @click="selectAll(false)">
-                {{ $t("gitlab.import.selectNone") }}
-              </button>
-              <button
-                class="btn btn-sm btn-link p-0"
-                type="button"
-                :title="$t('gitlab.pat.manageTitle')"
-                @click="manageToken"
-              >
-                <i class="bi bi-key"></i>
-              </button>
+        <div class="lia-direct-body">
+          <div v-if="step === 'loading'" class="text-center py-4">
+            <span class="spinner-border"></span>
+            <p class="mt-2 text-muted">{{ $t("gitlab.import.loadingRepo") }}</p>
+          </div>
+
+          <template v-else-if="step === 'select'">
+            <div v-if="emptyRepo" class="alert alert-info">
+              {{ $t("gitlab.import.emptyRepo") }}
             </div>
-            <span class="ms-auto small text-muted">
-              {{ $t("gitlab.import.selectedCount", { n: selected.length }) }}
-            </span>
-          </div>
 
-          <div v-if="truncated" class="alert alert-warning py-1 px-2 small text-start">
-            {{ $t("gitlab.import.truncated") }}
-          </div>
+            <template v-else>
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                <span class="badge bg-secondary">{{ branch }}</span>
+                <button class="btn btn-sm btn-outline-secondary" @click="selectAll(true)">
+                  {{ $t("gitlab.import.selectAll") }}
+                </button>
+                <button class="btn btn-sm btn-outline-secondary" @click="selectAll(false)">
+                  {{ $t("gitlab.import.selectNone") }}
+                </button>
+                <span class="ms-auto small text-muted">
+                  {{ $t("gitlab.import.selectedCount", { n: selected.length }) }}
+                </span>
+              </div>
 
-          <GitHubFileTree ref="tree" :items="items" @change="onSelectionChange" />
-        </template>
+              <div v-if="truncated" class="alert alert-warning py-1 px-2 small">
+                {{ $t("gitlab.import.truncated") }}
+              </div>
 
-        <PatHelp v-if="patReason" :reason="patReason" :host="host" class="mt-3 text-start" @saved="onPatSaved" />
+              <GitHubFileTree ref="tree" :items="items" @change="onSelectionChange" />
+            </template>
 
-        <div class="d-flex justify-content-between mt-3">
-          <a class="btn btn-secondary" href="./">{{ $t("gitlab.import.backHome") }}</a>
+            <p class="small text-muted mt-3 mb-0">
+              {{ $t("gitlab.import.targetLabel") }}: <strong>{{ $t("gitlab.import.targetNew") }}</strong>
+            </p>
+
+            <PatHelp v-if="patReason" :reason="patReason" :host="host" class="mt-3" @saved="onPatSaved" />
+          </template>
+
+          <template v-else-if="step === 'importing'">
+            <p>{{ $t("gitlab.import.importing") }}</p>
+            <div class="progress">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                :style="{ width: progress.total ? (progress.done / progress.total) * 100 + '%' : '0%' }"
+              >
+                {{ progress.done }} / {{ progress.total }}
+              </div>
+            </div>
+            <p class="small text-muted mt-2 text-truncate">{{ progress.path }}</p>
+          </template>
+
+          <template v-else-if="step === 'error'">
+            <PatHelp v-if="patReason" :reason="patReason" :host="host" @saved="onPatSaved" />
+            <div v-if="errorMessage" class="alert alert-danger mb-0">{{ errorMessage }}</div>
+          </template>
+        </div>
+
+        <footer v-if="step === 'select' || step === 'error'" class="lia-direct-foot">
           <button
+            class="btn btn-sm btn-link p-0 me-auto small text-decoration-none"
+            type="button"
+            :title="$t('gitlab.pat.manageTitle')"
+            @click="manageToken"
+          >
+            <i class="bi bi-key"></i> {{ $t('gitlab.pat.manageTitle') }}
+          </button>
+          <a class="btn btn-outline-secondary" href="./">{{ $t("gitlab.import.backHome") }}</a>
+          <button
+            v-if="step === 'select'"
             class="btn btn-primary"
             :disabled="!emptyRepo && selected.length === 0"
             @click="startImport"
           >
             {{ emptyRepo ? $t("gitlab.import.createEmpty") : $t("gitlab.import.importBtn", { n: selected.length }) }}
           </button>
-        </div>
-      </template>
-
-      <template v-else-if="step === 'importing'">
-        <p>{{ $t("gitlab.import.importing") }}</p>
-        <div class="progress">
-          <div
-            class="progress-bar progress-bar-striped progress-bar-animated"
-            :style="{ width: progress.total ? (progress.done / progress.total) * 100 + '%' : '0%' }"
-          >
-            {{ progress.done }} / {{ progress.total }}
-          </div>
-        </div>
-        <p class="small text-muted mt-2 text-truncate">{{ progress.path }}</p>
-      </template>
-
-      <template v-else-if="step === 'error'">
-        <PatHelp v-if="patReason" :reason="patReason" :host="host" class="text-start" @saved="onPatSaved" />
-        <div v-if="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-        <a class="btn btn-secondary" href="./">{{ $t("gitlab.import.backHome") }}</a>
-      </template>
-    </div>
+        </footer>
+      </section>
+    </main>
   </div>
 </template>
 
 <style scoped>
-.gl-direct {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+.lia-direct {
   min-height: 100vh;
-  padding: 2rem 1rem;
+  background: var(--lia-ground);
 }
 
-.gl-direct-box {
-  width: 100%;
-  max-width: 680px;
-  text-align: center;
+.lia-direct-main {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+.lia-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.lia-direct-card {
+  margin-top: 0.75rem;
+  background: #fff;
+  border: 1px solid var(--lia-line);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.lia-direct-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--lia-line);
+}
+
+.lia-direct-icon {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--lia-accent);
+}
+
+.min-w-0 {
+  min-width: 0;
+}
+
+.lia-direct-body {
+  padding: 1.25rem;
+}
+
+.lia-direct-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid var(--lia-line);
+  background: #fafbfb;
 }
 </style>

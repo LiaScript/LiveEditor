@@ -1,7 +1,6 @@
 {
   "app": {
-    "title": "LiaEdit",
-    "demo": "LiaDemo"
+    "title": "LiaEdit"
   },
   "nav": {
     "help": "Hilfe",
@@ -309,9 +308,9 @@
     "information": "Information",
     "close": "Schließen",
     "compileHint": "Du kannst hier Änderungen ausprobieren und die Vorschau mit {ctrl} aktualisieren. Um sie zu behalten, lege eine Kopie an: ⋮-Menü → „Kopie anlegen“.",
-    "compileHintEmbed": "Du kannst Änderungen ausprobieren und die Vorschau mit {ctrl} aktualisieren, oder den Kurs im {link} öffnen.",
+    "compileHintEmbed": "Du kannst Änderungen ausprobieren und die Vorschau mit {ctrl} aktualisieren, oder den Kurs in {link} öffnen.",
     "compileHintEmbedOnly": "Du kannst Änderungen ausprobieren und die Vorschau mit {ctrl} aktualisieren.",
-    "openInEditor": "… oder im {link} öffnen.",
+    "openInEditor": "… oder in {link} öffnen.",
     "viewOnLiaScript": "Um den Kurs auf LiaScript anzusehen, klicke {here}.",
     "viewHere": "hier",
     "toolbarHint": "Die Knöpfe oben wechseln zwischen Schreiben, Beides und Vorschau."
