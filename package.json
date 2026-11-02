@@ -1,6 +1,6 @@
 {
   "name": "liaeditor",
-  "version": "2.0.1--2.5.0",
+  "version": "2.0.1--2.6.0",
   "description": "LiaEdit – the LiaScript editor",
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
