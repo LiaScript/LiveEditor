@@ -74,7 +74,10 @@ var currentLanguage: string = "markdown";
 var isCtrlPressed = false;
 var MATHJS;
 
-let completionProviders: IDisposable[] = [];
+// Monaco registrations to undo on unmount. editor.dispose() does NOT remove
+// addAction()'s global commands; their run() closures would keep the whole
+// component (and its project) alive.
+let disposables: IDisposable[] = [];
 
 function blobToUint8Array(blob) {
   return new Promise((resolve, reject) => {
@@ -1334,7 +1337,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
       const self = this;
 
-      Editor.addAction({
+      disposables.push(Editor.addAction({
         // An unique identifier of the contributed action.
         id: "compile",
         // A label of the action that will be presented to the user.
@@ -1352,9 +1355,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
         run: function (_: any) {
           self.$emit("compile");
         },
-      });
+      }));
 
-      Editor.addAction({
+      disposables.push(Editor.addAction({
         // An unique identifier of the contributed action.
         id: "mathjs-evaluate",
         // A label of the action that will be presented to the user.
@@ -1372,8 +1375,8 @@ I (study) ~[[ am going to study ]]~ harder this term.
         run: function (text: any) {
           self.make("mathjs-evaluate");
         },
-      });
-      Editor.addAction({
+      }));
+      disposables.push(Editor.addAction({
         // An unique identifier of the contributed action.
         id: "mathjs-simplify",
         // A label of the action that will be presented to the user.
@@ -1391,9 +1394,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
         run: function (text: any) {
           self.make("mathjs-simplify");
         },
-      });
+      }));
 
-      Editor.addAction({
+      disposables.push(Editor.addAction({
         // An unique identifier of the contributed action.
         id: "mathjs-tex",
         // A label of the action that will be presented to the user.
@@ -1411,7 +1414,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         run: function (text: any) {
           self.make("mathjs-tex");
         },
-      });
+      }));
 
       const snippetProvider = languages.registerCompletionItemProvider("markdown", {
         //triggerCharacters: ['['],
@@ -1450,7 +1453,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
         },
       });
 
-      completionProviders.push(snippetProvider);
+      disposables.push(snippetProvider);
 
       const emojiProvider = languages.registerCompletionItemProvider("markdown", {
         triggerCharacters: [":"],
@@ -1487,9 +1490,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
         },
       });
 
-      completionProviders.push(emojiProvider);
+      disposables.push(emojiProvider);
 
-      completionProviders.push(languages.registerCodeActionProvider("markdown", {
+      disposables.push(languages.registerCodeActionProvider("markdown", {
         provideCodeActions(model, range, token) {
           if (isCtrlPressed) {
             isCtrlPressed = false;
@@ -1520,7 +1523,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       const Interface = new TextEditorInterface(textEditor);
       tableEditor = new TableEditor(Interface);
 
-      textEditor.addAction({
+      disposables.push(textEditor.addAction({
         id: "table-format",
         label: "Table - Format",
         keybindings: [KeyMod.CtrlCmd | KeyCode.Enter],
@@ -1538,9 +1541,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
             }
           }
         },
-      });
+      }));
 
-      textEditor.addAction({
+      disposables.push(textEditor.addAction({
         id: "table-next",
         label: "Table - Jump to Next Cell",
         keybindings: [KeyCode.Tab],
@@ -1558,9 +1561,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
             }
           }
         },
-      });
+      }));
 
-      textEditor.addAction({
+      disposables.push(textEditor.addAction({
         id: "table-previous",
         label: "Table - Jump to Previous Cell",
         keybindings: [KeyMod.Shift | KeyCode.Tab],
@@ -1574,9 +1577,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
             }
           }
         },
-      });
+      }));
 
-      textEditor.addAction({
+      disposables.push(textEditor.addAction({
         id: "table-row",
         label: "Table - Add Row/Line",
         keybindings: [KeyMod.CtrlCmd | KeyCode.KeyL],
@@ -1590,7 +1593,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
             }
           }
         },
-      });
+      }));
 
       return textEditor;
     },
@@ -1659,6 +1662,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       currentBinding.destroy();
       currentBinding = null;
     }
+    currentYText = null; // module-level: would keep the last project alive
     if (currentModel) {
       try {
         currentModel.dispose();
@@ -1680,9 +1684,8 @@ I (study) ~[[ am going to study ]]~ harder this term.
     }
     provider = undefined;
 
-    // Dispose completion providers
-    completionProviders.forEach((disposable) => disposable.dispose());
-    completionProviders = []; // Clear the array
+    disposables.forEach((disposable) => disposable.dispose());
+    disposables = [];
 
     Editor?.dispose();
     Editor = undefined;

@@ -3,7 +3,7 @@ import { defineComponent } from "vue";
 import Dexie from "../../ts/indexDB";
 import { navigateTo } from "../../index";
 import { randomString, getGithubPat } from "../../ts/utils";
-import { getProjectDoc, releaseProjectDoc } from "../../ts/ProjectDoc";
+import { getProjectDoc, releaseProjectDoc, handOffProjectDoc } from "../../ts/ProjectDoc";
 import * as GitHub from "../../ts/GitHubRepo";
 import type { TreeItem } from "../../ts/GitHubRepo";
 import { importPaths, seedEmptyReadme } from "../../ts/githubImport";
@@ -144,10 +144,11 @@ export default defineComponent({
       const isNew = this.target === "new";
       const targetId = isNew ? randomString(24) : this.storageId;
       const doc = getProjectDoc(targetId, isNew ? undefined : this.connection);
-      // For a NEW project we keep our reference until the editor view has taken
-      // over: releasing it here (refCount -> 0) would destroy the Yjs doc and its
-      // IndexedDB persistence before the freshly imported data is handed off.
-      let release = !isNew;
+      // A NEW project's reference is handed off to the editor view on success:
+      // releasing it here (refCount -> 0) would destroy the Yjs doc before the
+      // editor has acquired it. In every other case (existing project, failed
+      // import) our reference is released.
+      let handedOff = false;
 
       try {
         if (this.emptyRepo) {
@@ -191,11 +192,13 @@ export default defineComponent({
         this.step = "done";
 
         if (isNew) {
-          // hand the new project (and our still-held reference) over to the editor
+          // hand the new project (and our reference) over to the editor
+          handOffProjectDoc(targetId);
+          handedOff = true;
           navigateTo("?/edit/" + targetId);
         }
       } finally {
-        if (release) releaseProjectDoc(targetId);
+        if (!handedOff) releaseProjectDoc(targetId);
       }
     },
 

@@ -3,7 +3,7 @@ import { defineComponent } from "vue";
 import Dexie from "../../ts/indexDB";
 import { navigateTo } from "../../index";
 import { randomString, getGitlabPat } from "../../ts/utils";
-import { getProjectDoc, releaseProjectDoc } from "../../ts/ProjectDoc";
+import { getProjectDoc, releaseProjectDoc, handOffProjectDoc } from "../../ts/ProjectDoc";
 import * as GitLab from "../../ts/GitLabRepo";
 import type { TreeItem } from "../../ts/GitLabRepo";
 import { importPaths, seedEmptyReadme } from "../../ts/gitlabImport";
@@ -103,9 +103,9 @@ export default defineComponent({
       if (!this.emptyRepo && this.selected.length === 0) return;
 
       const storageId = randomString(24);
-      // We intentionally keep this reference: the editor view (after navigateTo)
-      // acquires the same shared ProjectDoc, so it is never destroyed in between
-      // and the freshly imported data stays persisted.
+      // This reference is handed off to the editor view on success (see
+      // handOffProjectDoc), so the doc is never destroyed in between and the
+      // freshly imported data stays persisted.
       const doc = getProjectDoc(storageId);
       this.step = "importing";
       this.patReason = "";
@@ -138,6 +138,7 @@ export default defineComponent({
         gitlab: { host: this.host, projectPath: this.projectPath, branch: this.branch, commitSha: this.commitSha },
       });
 
+      handOffProjectDoc(storageId); // the editor view takes over our reference
       navigateTo("?/edit/" + storageId);
     },
 

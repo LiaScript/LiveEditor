@@ -160,6 +160,8 @@ export class ProjectDoc {
   /** internal reference counter for shared lifetime management */
   refCount = 0;
   destroyed = false;
+  /** set by handOffProjectDoc(): the next acquirer takes over a reference */
+  handoff = false;
 
   /** callbacks waiting for the network provider (may arrive asynchronously) */
   private providerCallbacks: ((provider: any) => void)[] = [];
@@ -598,8 +600,20 @@ export function getProjectDoc(storageId: string, connection?: string): ProjectDo
     doc = new ProjectDoc(storageId, connection);
     registry.set(storageId, doc);
   }
-  doc.refCount++;
+  if (doc.handoff) doc.handoff = false; // take over the creator's reference
+  else doc.refCount++;
   return doc;
+}
+
+/**
+ * Pass the caller's reference on to whoever acquires the doc next (the editor
+ * view after navigateTo). Releasing it instead would hit refCount 0 before the
+ * editor has acquired the doc and destroy it mid-transition; keeping it would
+ * leave the whole project (incl. media) in memory for the rest of the session.
+ */
+export function handOffProjectDoc(storageId: string) {
+  const doc = registry.get(storageId);
+  if (doc) doc.handoff = true;
 }
 
 /** Release a previously acquired ProjectDoc; destroys it once unused. */

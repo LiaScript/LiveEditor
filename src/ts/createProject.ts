@@ -6,7 +6,7 @@
 import Dexie from "./indexDB";
 import { navigateTo } from "../index";
 import { randomString, loadJSZip } from "./utils";
-import { getProjectDoc } from "./ProjectDoc";
+import { getProjectDoc, handOffProjectDoc } from "./ProjectDoc";
 
 export interface ImportFile {
   /** Path inside the project, e.g. "README.md" or "img/logo.png". */
@@ -41,9 +41,9 @@ export interface CreateProjectOptions {
 
 /**
  * Create a new project, import every file into it, persist its index metadata
- * and navigate to the editor. The ProjectDoc reference is intentionally kept
- * (never released here): the editor view acquires the same shared instance, so
- * the freshly imported data stays persisted across the navigation.
+ * and navigate to the editor. The ProjectDoc reference is handed off to the
+ * editor view (not released), so the freshly imported data stays persisted
+ * across the navigation.
  *
  * Returns the new storageId.
  */
@@ -65,6 +65,7 @@ export async function createProjectFromFiles(
   if (opts.onReady) await opts.onReady(storageId);
   if (opts.syncOnOpen) sessionStorage.setItem(SYNC_ON_OPEN_KEY, storageId);
 
+  handOffProjectDoc(storageId);
   navigateTo("?/edit/" + storageId);
   return storageId;
 }
