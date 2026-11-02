@@ -147,7 +147,7 @@ export const importSources: ImportSource[] = [
 
       const bytes = new Uint8Array(await response.arrayBuffer());
       const contentType = (response.headers.get("content-type") || "").split(";")[0].trim();
-      const name = url.split("/").pop() || "README.md";
+      const name = new URL(url).pathname.split("/").pop() || "README.md";
       const files = await filesFromSingle(name, bytes, contentType);
       await createProjectFromFiles(files, { title: baseName(name) || "Import" });
     },

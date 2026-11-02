@@ -108,7 +108,8 @@ function mapError(response: Response, body: any): GitLabError {
   }
   if (response.status === 401) return { error: 'auth', message }
   if (response.status === 403) {
-    return response.headers.get('ratelimit-remaining') !== null
+    // gitlab.com sends RateLimit headers on every response; only 0 means exhausted
+    return response.headers.get('ratelimit-remaining') === '0'
       ? { error: 'rate_limit', message }
       : { error: 'auth', message }
   }
@@ -239,6 +240,7 @@ export async function getTree(
     )
     if (isError(r)) return r
     for (const t of r.json || []) {
+      if (t.type === 'commit') continue // submodule: no blob to fetch
       items.push({ path: t.path, type: t.type === 'tree' ? 'tree' : 'blob', sha: t.id })
     }
     const next = r.response.headers.get('x-next-page')

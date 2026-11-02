@@ -128,6 +128,7 @@ export class ProjectDoc {
 
   /** internal reference counter for shared lifetime management */
   refCount = 0;
+  destroyed = false;
 
   /** callbacks waiting for the network provider (may arrive asynchronously) */
   private providerCallbacks: ((provider: any) => void)[] = [];
@@ -160,6 +161,8 @@ export class ProjectDoc {
         // published via setProvider() to any onProvider() subscribers.
         import("peerjs")
           .then(({ default: Peer }) => {
+            // released while peerjs was loading: don't join the room anymore
+            if (this.destroyed) return;
             const peerTransport = new PeerJSTransport({
               peer: Peer,
               peerOptions: {
@@ -310,6 +313,8 @@ export class ProjectDoc {
     const mainPath = this.getMainPath();
     const mainAffected = mainPath === src || mainPath.startsWith(src + "/");
     if (!this.files.has(src) && !mainAffected) return;
+    // never overwrite an existing file/folder (it would be silently lost)
+    if (this.taken(dst)) return;
 
     const srcPrefix = src + "/";
     this.ydoc.transact(() => {
@@ -551,6 +556,7 @@ export function releaseProjectDoc(storageId: string) {
   if (!doc) return;
   doc.refCount--;
   if (doc.refCount <= 0) {
+    doc.destroyed = true;
     if (doc.provider) doc.provider.destroy();
     doc.idb.destroy();
     doc.ydoc.destroy();

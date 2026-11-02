@@ -571,6 +571,7 @@
     "labelFile": "faili",
     "labelFolder": "folda (na maudhui yake)",
     "deleteConfirm": "Futa {label} \"{path}\"?",
+    "exists": "\"{path}\" tayari ipo.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

@@ -571,6 +571,7 @@
     "labelFile": "dosiye",
     "labelFolder": "siflorde (e huunde ndee nder mum)",
     "deleteConfirm": "Suus {label} \"{path}\"?",
+    "exists": "\"{path}\" ina woodi kadi.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

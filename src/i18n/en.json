@@ -621,6 +621,7 @@
     "renameTo": "Rename to:",
     "labelFile": "file",
     "labelFolder": "folder (and its contents)",
-    "deleteConfirm": "Delete {label} \"{path}\"?"
+    "deleteConfirm": "Delete {label} \"{path}\"?",
+    "exists": "\"{path}\" already exists."
   }
 }

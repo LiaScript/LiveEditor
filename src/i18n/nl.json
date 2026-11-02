@@ -571,6 +571,7 @@
     "labelFile": "bestand",
     "labelFolder": "map (en de inhoud ervan)",
     "deleteConfirm": "{label} \"{path}\" verwijderen?",
+    "exists": "\"{path}\" bestaat al.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

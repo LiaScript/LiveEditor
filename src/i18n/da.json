@@ -571,6 +571,7 @@
     "labelFile": "fil",
     "labelFolder": "mappe (og dens indhold)",
     "deleteConfirm": "Slet {label} \"{path}\"?",
+    "exists": "\"{path}\" findes allerede.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

@@ -1,4 +1,6 @@
 <script lang="ts">
+import { locales, setLocale } from '../i18n/index'
+
 const localeNames: Record<string, string> = {
   en: 'English',
   de: 'Deutsch',
@@ -33,12 +35,12 @@ export default {
   name: 'LanguageDropdown',
 
   data() {
-    return { open: false }
+    return { open: false, locales }
   },
 
   methods: {
-    changeLocale(locale: string) {
-      this.$i18n.locale = locale;
+    async changeLocale(locale: string) {
+      await setLocale(locale);
       localStorage.setItem('locale', locale);
       this.open = false;
     },
@@ -78,7 +80,7 @@ export default {
       :class="{ show: open }"
       style="left: 50%; transform: translateX(-50%); max-height: calc(100vh - 4rem); overflow-y: auto; overscroll-behavior: contain;"
     >
-      <li v-for="locale in $i18n.availableLocales" :key="locale">
+      <li v-for="locale in locales" :key="locale">
         <button
           class="dropdown-item"
           :class="{ active: $i18n.locale === locale }"

@@ -76,10 +76,6 @@ var MATHJS;
 
 let completionProviders: IDisposable[] = [];
 
-import("mathjs").then((module) => {
-  MATHJS = module;
-});
-
 function blobToUint8Array(blob) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -168,6 +164,12 @@ export default {
       }
       (this.blob as any)?.set(filename, data);
       return filename;
+    },
+
+    // vue3-mic-recorder (incl. its mp3 encoder) is registered on first use only.
+    async openAudioRecorder() {
+      this.$.appContext.app.use((await import("vue3-mic-recorder")).default);
+      this.recorder.audio = true;
     },
 
     storeAudioFile(record) {
@@ -483,8 +485,10 @@ export default {
       this.activeView = "binary";
     },
 
-    make(cmd: string, data: any = null) {
+    async make(cmd: string, data: any = null) {
       if (!Editor) return;
+      if (cmd.startsWith("mathjs-") && !MATHJS) MATHJS = await import("mathjs");
+      if (!Editor) return; // unmounted while mathjs was loading
 
       const position = Editor.getPosition();
       const selection = Editor.getSelection();
@@ -1485,7 +1489,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
 
       completionProviders.push(emojiProvider);
 
-      languages.registerCodeActionProvider("markdown", {
+      completionProviders.push(languages.registerCodeActionProvider("markdown", {
         provideCodeActions(model, range, token) {
           if (isCtrlPressed) {
             isCtrlPressed = false;
@@ -1493,7 +1497,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
           }
           return undefined;
         },
-      });
+      }));
 
       Editor.onKeyDown((e) => {
         if (e.keyCode == 5) {
@@ -1665,6 +1669,8 @@ I (study) ~[[ am going to study ]]~ harder this term.
     }
     this.setImage("");
     this.setVideo("");
+    this.setAudio("");
+    this.setPdf("");
 
     // Release our reference to the shared document; it is destroyed once both
     // the editor and the file explorer have released it.
@@ -1678,7 +1684,9 @@ I (study) ~[[ am going to study ]]~ harder this term.
     completionProviders.forEach((disposable) => disposable.dispose());
     completionProviders = []; // Clear the array
 
+    Editor?.dispose();
     Editor = undefined;
+    tableEditor = undefined;
   },
 
   emits: ["compile", "ready", "online", "goto", "active", "preview"],
@@ -1920,7 +1928,7 @@ I (study) ~[[ am going to study ]]~ harder this term.
       <template v-else-if="activeTab === 'recording'">
         <div class="toolbar-section">
           <div class="toolbar-buttons">
-            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.audioRecording')"  @click="recorder.audio = true"><i class="bi bi-mic"></i></button>
+            <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.audioRecording')"  @click="openAudioRecorder"><i class="bi bi-mic"></i></button>
             <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.webcamRecording')" @click="recorder.webcam = true"><i class="bi bi-webcam"></i></button>
             <button class="btn-fmt" type="button" :title="$t('toolbar.buttons.screenRecording')" @click="recorder.desktop = true"><i class="bi bi-camera-reels"></i></button>
           </div>

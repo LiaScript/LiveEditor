@@ -49,7 +49,7 @@ export default {
       database.maybeInit(this.$props.storageId);
 
       const self = this;
-      database.watch(this.$props.storageId, (meta) => {
+      this.unwatch = database.watch(this.$props.storageId, (meta) => {
         self.meta = meta;
       });
     }
@@ -109,11 +109,13 @@ export default {
     };
   },
 
+  unmounted() {
+    window.removeEventListener("resize", this.onResize);
+    this.unwatch?.();
+  },
+
   mounted() {
-    window.addEventListener("resize", () => {
-      this.horizontal =
-        document.documentElement.clientWidth < document.documentElement.clientHeight;
-    });
+    window.addEventListener("resize", this.onResize);
 
     // Opened straight from the index page's "local folder" import: pop the sync
     // dialog so the user can pull the folder's files into the fresh project.
@@ -630,6 +632,11 @@ export default {
 
     fork() {
       this.$refs.editor.fork();
+    },
+
+    onResize() {
+      this.horizontal =
+        document.documentElement.clientWidth < document.documentElement.clientHeight;
     },
 
     compile() {

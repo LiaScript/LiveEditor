@@ -571,6 +571,7 @@
     "labelFile": "fil",
     "labelFolder": "mapp (och dess innehåll)",
     "deleteConfirm": "Ta bort {label} \"{path}\"?",
+    "exists": "\"{path}\" finns redan.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

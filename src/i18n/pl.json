@@ -571,6 +571,7 @@
     "labelFile": "plik",
     "labelFolder": "folder (i jego zawartość)",
     "deleteConfirm": "Usuń {label} \"{path}\"?",
+    "exists": "„{path}” już istnieje.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

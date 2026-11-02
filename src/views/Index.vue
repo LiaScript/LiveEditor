@@ -23,15 +23,16 @@ function waitForSync(provider) {
   });
 }
 
-function getTextFor(id: string) {
+// Loads the whole project (incl. media), so it is closed again right after
+// reading the course text.
+async function getTextFor(id: string) {
   const yDoc = new Y.Doc();
   const provider = new IndexeddbPersistence(id, yDoc);
-
-  return new Promise((resolve) => {
-    waitForSync(provider).then(() => {
-      resolve(yDoc.getText(id).toString()); // Now you can safely access the data
-    });
-  });
+  await waitForSync(provider);
+  const text = yDoc.getText(id).toString();
+  provider.destroy();
+  yDoc.destroy();
+  return text;
 }
 
 export default {
@@ -39,7 +40,7 @@ export default {
     const database = new Dexie();
 
     const self = this;
-    database.watch(null, (e: any) => {
+    this.unwatch = database.watch(null, (e: any) => {
       self.init();
     });
 
@@ -91,6 +92,10 @@ export default {
   mounted() {
     this.initSearch();
   },
+
+  unmounted() {
+    this.unwatch?.();
+  },
   methods: {
     handleSearch() {
       const results = this.search.search(this.searchText, {
@@ -128,10 +133,10 @@ export default {
     async initSearch() {
       const db = await this.database.getAll();
 
+      // one project at a time, so only one is in memory at once
       for (const item of db) {
-        getTextFor(item.id).then((text) => {
-          this.search.add({ id: item.id, text });
-        });
+        const text = await getTextFor(item.id);
+        this.search.add({ id: item.id, text });
       }
     },
 
@@ -220,7 +225,7 @@ export default {
       </div>
     </div>
 
-    <div :v-if="tags.length > 0" style="text-align: center; padding: 2rem 5rem 0rem 5rem">
+    <div v-if="tags.length > 0" style="text-align: center; padding: 2rem 5rem 0rem 5rem">
       <button
         v-for="tag of tags"
         class="btn badge rounded-pill"

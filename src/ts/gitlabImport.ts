@@ -140,7 +140,15 @@ export async function importPaths(
 ): Promise<{ imported: number } | GitLabError> {
   const byPath = new Map(items.map((i) => [i.path, i]));
   let done = 0;
-  let imported = 0;
+  // Written in one Yjs transaction at the end (one persist/sync/explorer
+  // rebuild instead of one per file); files fetched before an error are kept.
+  const fetched: [string, Uint8Array][] = [];
+  const flush = () =>
+    doc.ydoc.transact(() => {
+      // mime is left undefined: ProjectDoc.importFile decides text-vs-binary
+      // from the file extension, which is what we want for README/js/images.
+      for (const [path, bytes] of fetched) doc.importFile(path, bytes);
+    });
 
   for (const path of paths) {
     const item = byPath.get(path);
@@ -149,13 +157,13 @@ export async function importPaths(
     onProgress?.({ done, total: paths.length, path });
 
     const bytes = await GitLab.getBlob(host, projectPath, item.sha, pat);
-    if (GitLab.isError(bytes)) return bytes;
-
-    // mime is left undefined: ProjectDoc.importFile decides text-vs-binary from
-    // the file extension, which is what we want for README/js/images/audio.
-    doc.importFile(path, bytes);
-    imported++;
+    if (GitLab.isError(bytes)) {
+      flush();
+      return bytes;
+    }
+    fetched.push([path, bytes]);
   }
 
-  return { imported };
+  flush();
+  return { imported: fetched.length };
 }

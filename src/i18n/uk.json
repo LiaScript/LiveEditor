@@ -571,6 +571,7 @@
     "labelFile": "файл",
     "labelFolder": "папку (та її вміст)",
     "deleteConfirm": "Видалити {label} \"{path}\"?",
+    "exists": "«{path}» вже існує.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

@@ -168,39 +168,6 @@ export default {
   props: { fetchError: Function },
 
   data() {
-    window.addEventListener(
-      "message",
-      (event) => {
-        switch (event.data.cmd) {
-          case "media.load": {
-            const param = event.data.param;
-
-            if (this.fetchError) {
-              // Strip any media fragment (e.g. "#t=0,5") so the virtual file
-              // system can find the file by its real path. The fragment stays
-              // in param.src so injectHandler can re-apply it to the blob URL.
-              const lookupSrc = param.src.split("#")[0];
-              const blob = this.fetchError(lookupSrc);
-              if (blob) {
-                this.sendToLia("inject", {
-                  tag: param.tag,
-                  src: param.src,
-                  data: new Blob(
-                    [blob],
-                    param.src.toLowerCase().endsWith(".svg")
-                      ? { type: "image/svg+xml" }
-                      : {}
-                  ),
-                });
-              }
-            }
-            break;
-          }
-        }
-      },
-      false
-    );
-
     return {
       isReady: false,
       // @ts-ignore
@@ -211,6 +178,35 @@ export default {
   },
 
   methods: {
+    onMessage(event: MessageEvent) {
+      switch (event.data?.cmd) {
+        case "media.load": {
+          const param = event.data.param;
+
+          if (this.fetchError) {
+            // Strip any media fragment (e.g. "#t=0,5") so the virtual file
+            // system can find the file by its real path. The fragment stays
+            // in param.src so injectHandler can re-apply it to the blob URL.
+            const lookupSrc = param.src.split("#")[0];
+            const blob = this.fetchError(lookupSrc);
+            if (blob) {
+              this.sendToLia("inject", {
+                tag: param.tag,
+                src: param.src,
+                data: new Blob(
+                  [blob],
+                  param.src.toLowerCase().endsWith(".svg")
+                    ? { type: "image/svg+xml" }
+                    : {}
+                ),
+              });
+            }
+          }
+          break;
+        }
+      }
+    },
+
     onReady(params: any) {
       const iframe = document.getElementById("liascript-preview") as HTMLIFrameElement;
 
@@ -243,7 +239,12 @@ export default {
     },
   },
 
+  unmounted() {
+    window.removeEventListener("message", this.onMessage);
+  },
+
   mounted() {
+    window.addEventListener("message", this.onMessage);
     const iframe = document.getElementById("liascript-preview");
 
     // @ts-ignore

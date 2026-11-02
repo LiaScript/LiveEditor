@@ -29,7 +29,7 @@ export default class {
   }
 
   async exists(id: string) {
-    const item = this.get(id)
+    const item = await this.get(id)
 
     return item ? true : false
   }
@@ -58,6 +58,7 @@ export default class {
     this.db.data.delete(id)
   }
 
+  /** Live-query the entry (or all entries); returns an unsubscribe function. */
   watch(
     id: string | null,
     callbackOk: (_: any) => void,
@@ -76,5 +77,6 @@ export default class {
       },
       error: (result) => callbackError(result),
     })
+    return () => subscription.unsubscribe()
   }
 }

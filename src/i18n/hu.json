@@ -571,6 +571,7 @@
     "labelFile": "fájlt",
     "labelFolder": "mappát (és tartalmát)",
     "deleteConfirm": "{label} törlése: \"{path}\"?",
+    "exists": "„{path}” már létezik.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

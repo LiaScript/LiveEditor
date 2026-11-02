@@ -1,76 +1,65 @@
 import { createI18n } from 'vue-i18n'
 import en from './en.json'
-import de from './de.json'
-import uk from './uk.json'
-import es from './es.json'
-import fr from './fr.json'
-import zh from './zh.json'
-import ja from './ja.json'
-import ko from './ko.json'
-import ar from './ar.json'
-import pt from './pt.json'
-import bg from './bg.json'
-import cs from './cs.json'
-import da from './da.json'
-import el from './el.json'
-import hu from './hu.json'
-import it from './it.json'
-import nl from './nl.json'
-import pl from './pl.json'
-import sv from './sv.json'
-import tr from './tr.json'
-import sw from './sw.json'
-import ha from './ha.json'
-import am from './am.json'
-import yo from './yo.json'
-import om from './om.json'
-import ff from './ff.json'
-import ig from './ig.json'
 
-const messages = {
-  en,
-  de,
-  uk,
-  es,
-  fr,
-  zh,
-  ja,
-  ko,
-  ar,
-  pt,
-  bg,
-  cs,
-  da,
-  el,
-  hu,
-  it,
-  nl,
-  pl,
-  sv,
-  tr,
-  sw,
-  ha,
-  am,
-  yo,
-  om,
-  ff,
-  ig,
+// Only English (the fallback) is bundled; every other locale is its own chunk,
+// loaded on demand, so the startup bundle doesn't carry ~640 KB of translations.
+const loaders: Record<string, () => Promise<any>> = {
+  de: () => import('./de.json'),
+  uk: () => import('./uk.json'),
+  es: () => import('./es.json'),
+  fr: () => import('./fr.json'),
+  zh: () => import('./zh.json'),
+  ja: () => import('./ja.json'),
+  ko: () => import('./ko.json'),
+  ar: () => import('./ar.json'),
+  pt: () => import('./pt.json'),
+  bg: () => import('./bg.json'),
+  cs: () => import('./cs.json'),
+  da: () => import('./da.json'),
+  el: () => import('./el.json'),
+  hu: () => import('./hu.json'),
+  it: () => import('./it.json'),
+  nl: () => import('./nl.json'),
+  pl: () => import('./pl.json'),
+  sv: () => import('./sv.json'),
+  tr: () => import('./tr.json'),
+  sw: () => import('./sw.json'),
+  ha: () => import('./ha.json'),
+  am: () => import('./am.json'),
+  yo: () => import('./yo.json'),
+  om: () => import('./om.json'),
+  ff: () => import('./ff.json'),
+  ig: () => import('./ig.json'),
 }
-type Locale = keyof typeof messages
 
-function detectLocale(): Locale {
-  const saved = localStorage.getItem('locale') as Locale | null
-  if (saved && saved in messages) return saved
+export const locales = ['en', ...Object.keys(loaders)].sort()
 
-  const browser = navigator.language.split('-')[0] as Locale
-  if (browser in messages) return browser
+function detectLocale(): string {
+  const saved = localStorage.getItem('locale')
+  if (saved && locales.includes(saved)) return saved
+
+  const browser = navigator.language.split('-')[0]
+  if (locales.includes(browser)) return browser
 
   return 'en'
 }
 
 export const i18n = createI18n({
   legacy: true,
-  locale: detectLocale(),
+  locale: 'en',
   fallbackLocale: 'en',
-  messages,
+  messages: { en },
 })
+
+/** Load a locale's messages (once) and switch to it. */
+export async function setLocale(locale: string) {
+  const global = i18n.global as any
+  if (!global.availableLocales.includes(locale) && loaders[locale]) {
+    const mod = await loaders[locale]()
+    global.setLocaleMessage(locale, mod.default ?? mod)
+  }
+  global.locale = locale
+}
+
+/** Resolves once the detected startup locale is loaded. */
+export const i18nReady = setLocale(detectLocale()).catch(console.error)

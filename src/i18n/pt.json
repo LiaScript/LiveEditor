@@ -571,6 +571,7 @@
     "labelFile": "arquivo",
     "labelFolder": "pasta (e seu conteúdo)",
     "deleteConfirm": "Excluir {label} \"{path}\"?",
+    "exists": "\"{path}\" já existe.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

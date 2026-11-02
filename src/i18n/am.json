@@ -570,6 +570,7 @@
     "labelFile": "ፋይሉን",
     "labelFolder": "አቃፊውን (እና ይዘቱን)",
     "deleteConfirm": "{label} \"{path}\" ሰርዝ?",
+    "exists": "\"{path}\" አስቀድሞ አለ።",
     "newFileDefault": "untitled.txt",
     "newFolderName": "New folder name:",
     "newFolderDefault": "folder"

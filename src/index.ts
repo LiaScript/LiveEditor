@@ -37,9 +37,8 @@ import 'bootstrap/js/dist/modal'
   },
 }
 
-import AudioRecorder from 'vue3-mic-recorder'
 import { randomString } from './ts/utils'
-import { i18n } from './i18n/index'
+import { i18n, i18nReady } from './i18n/index'
 
 var app
 
@@ -159,9 +158,8 @@ const router = async () => {
 
   app?.unmount()
 
-  const ViewModule = await loader()
+  const [ViewModule] = await Promise.all([loader(), i18nReady])
   app = createApp(ViewModule.default, params)
-  app.use(AudioRecorder)
   app.use(i18n)
 
   app.mount(document.body)

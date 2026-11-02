@@ -571,6 +571,7 @@
     "labelFile": "file",
     "labelFolder": "cartella (e il suo contenuto)",
     "deleteConfirm": "Eliminare {label} \"{path}\"?",
+    "exists": "\"{path}\" esiste già.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

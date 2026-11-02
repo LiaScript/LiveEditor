@@ -571,6 +571,7 @@
     "labelFile": "faịlụ",
     "labelFolder": "nchekwa (na ihe dị n'ime ya)",
     "deleteConfirm": "Hichapụ {label} \"{path}\"?",
+    "exists": "\"{path}\" adịlarị.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

@@ -571,6 +571,7 @@
     "labelFile": "파일",
     "labelFolder": "폴더(및 해당 내용)",
     "deleteConfirm": "{label} \"{path}\"을(를) 삭제하시겠습니까?",
+    "exists": "\"{path}\"이(가) 이미 존재합니다.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

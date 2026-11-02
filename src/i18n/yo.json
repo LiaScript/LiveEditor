@@ -571,6 +571,7 @@
     "labelFile": "faili",
     "labelFolder": "àpò (àti àwọn ohun tó wà nínú rẹ̀)",
     "deleteConfirm": "Paarẹ {label} \"{path}\"?",
+    "exists": "\"{path}\" ti wà tẹ́lẹ̀.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

@@ -571,6 +571,7 @@
     "labelFile": "fayil",
     "labelFolder": "folder (da abincinsa)",
     "deleteConfirm": "Share {label} \"{path}\"?",
+    "exists": "\"{path}\" ya riga ya wanzu.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

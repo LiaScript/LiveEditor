@@ -252,6 +252,11 @@ export default defineComponent({
     },
 
     onPatSaved() {
+      // just managing the token must not start a push/import/pull
+      if (this.patReason === "manage") {
+        this.patReason = "";
+        return;
+      }
       if (this.step === "review" && this.changes.length === 0) this.load();
       else this.push();
     },

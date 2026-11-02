@@ -55,9 +55,9 @@ export async function createProjectFromFiles(
   const storageId = randomString(24);
   const doc = getProjectDoc(storageId);
 
-  for (const file of files) {
-    doc.importFile(file.path, file.bytes, file.mime);
-  }
+  doc.ydoc.transact(() => {
+    for (const file of files) doc.importFile(file.path, file.bytes, file.mime);
+  });
 
   const database = new Dexie();
   await database.put(storageId, { title: "", ...meta });
@@ -88,7 +88,8 @@ export async function filesFromZip(data: Uint8Array): Promise<ImportFile[]> {
 
   const entries = Object.values(zip.files) as any[];
   for (const entry of entries) {
-    if (entry.dir) continue;
+    // skip macOS Finder junk; it would also break the root-folder unwrap below
+    if (entry.dir || entry.name.startsWith("__MACOSX/") || entry.name.endsWith(".DS_Store")) continue;
     const bytes = new Uint8Array(await entry.async("uint8array"));
     files.push({ path: entry.name, bytes });
   }

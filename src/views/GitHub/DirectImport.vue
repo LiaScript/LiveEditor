@@ -132,6 +132,11 @@ export default defineComponent({
     },
 
     onPatSaved() {
+      // just managing the token must not start a push/import/pull
+      if (this.patReason === "manage") {
+        this.patReason = "";
+        return;
+      }
       // retry whichever stage failed
       if (this.step === "select") this.startImport();
       else this.load();

@@ -143,41 +143,51 @@ export async function applySync(
 ): Promise<Map<string, string>> {
   const result = new Map(manifest);
   let done = 0;
+  // editor-side changes are applied in one Yjs transaction at the end
+  const pulls: [string, Uint8Array | undefined][] = [];
 
-  for (const entry of entries) {
-    done++;
-    onProgress?.({ done, total: entries.length, path: entry.path });
+  try {
+    for (const entry of entries) {
+      done++;
+      onProgress?.({ done, total: entries.length, path: entry.path });
 
-    // resolve the effective direction; skip unresolved conflicts
-    let direction: "push" | "pull";
-    if (entry.direction === "conflict") {
-      if (!entry.resolution) continue;
-      direction = entry.resolution === "disk" ? "pull" : "push";
-    } else {
-      direction = entry.direction;
-    }
-
-    if (direction === "push") {
-      // make disk match the editor
-      const bytes = doc.readFileData(entry.path);
-      if (bytes) {
-        await LocalFolder.writeBytes(handle, entry.path, bytes);
-        result.set(entry.path, await LocalFolder.hashBytes(bytes));
+      // resolve the effective direction; skip unresolved conflicts
+      let direction: "push" | "pull";
+      if (entry.direction === "conflict") {
+        if (!entry.resolution) continue;
+        direction = entry.resolution === "disk" ? "pull" : "push";
       } else {
-        await LocalFolder.removePath(handle, entry.path);
-        result.delete(entry.path);
+        direction = entry.direction;
       }
-    } else {
-      // make the editor match disk
-      const bytes = await LocalFolder.readBytes(handle, entry.path);
-      if (bytes) {
-        doc.importFile(entry.path, bytes);
-        result.set(entry.path, await LocalFolder.hashBytes(bytes));
+
+      if (direction === "push") {
+        // make disk match the editor
+        const bytes = doc.readFileData(entry.path);
+        if (bytes) {
+          await LocalFolder.writeBytes(handle, entry.path, bytes);
+          result.set(entry.path, await LocalFolder.hashBytes(bytes));
+        } else {
+          await LocalFolder.removePath(handle, entry.path);
+          result.delete(entry.path);
+        }
       } else {
-        doc.deletePath(entry.path);
-        result.delete(entry.path);
+        // make the editor match disk
+        const bytes = await LocalFolder.readBytes(handle, entry.path);
+        pulls.push([entry.path, bytes]);
+        if (bytes) {
+          result.set(entry.path, await LocalFolder.hashBytes(bytes));
+        } else {
+          result.delete(entry.path);
+        }
       }
     }
+  } finally {
+    doc.ydoc.transact(() => {
+      for (const [path, bytes] of pulls) {
+        if (bytes) doc.importFile(path, bytes);
+        else doc.deletePath(path);
+      }
+    });
   }
 
   return result;

@@ -571,6 +571,7 @@
     "labelFile": "fichier",
     "labelFolder": "dossier (et son contenu)",
     "deleteConfirm": "Supprimer {label} « {path} » ?",
+    "exists": "« {path} » existe déjà.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

@@ -570,6 +570,7 @@
     "labelFile": "ملف",
     "labelFolder": "مجلد (ومحتوياته)",
     "deleteConfirm": "حذف {label} \"{path}\"؟",
+    "exists": "\"{path}\" موجود بالفعل.",
     "newFileDefault": "untitled.txt",
     "newFolderName": "اسم المجلد الجديد:",
     "newFolderDefault": "folder"

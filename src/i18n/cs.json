@@ -571,6 +571,7 @@
     "labelFile": "soubor",
     "labelFolder": "složku (a její obsah)",
     "deleteConfirm": "Smazat {label} \"{path}\"?",
+    "exists": "„{path}“ již existuje.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

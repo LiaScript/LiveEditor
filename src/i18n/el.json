@@ -571,6 +571,7 @@
     "labelFile": "αρχείο",
     "labelFolder": "φάκελο (και το περιεχόμενό του)",
     "deleteConfirm": "Διαγραφή {label} \"{path}\";",
+    "exists": "Το «{path}» υπάρχει ήδη.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

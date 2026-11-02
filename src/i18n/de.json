@@ -620,6 +620,7 @@
     "labelFile": "Datei",
     "labelFolder": "Ordner (und seinen Inhalt)",
     "deleteConfirm": "{label} \"{path}\" löschen?",
+    "exists": "„{path}“ existiert bereits.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   }

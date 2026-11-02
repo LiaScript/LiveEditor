@@ -571,6 +571,7 @@
     "labelFile": "ファイル",
     "labelFolder": "フォルダ（およびその内容）",
     "deleteConfirm": "{label}「{path}」を削除しますか？",
+    "exists": "「{path}」は既に存在します。",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

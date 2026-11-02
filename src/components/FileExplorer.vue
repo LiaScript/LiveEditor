@@ -67,7 +67,7 @@ export default defineComponent({
     // track gist/nostr share state (stored in the Dexie meta, not in Yjs) so the
     // tree can show a badge on files that have been shared
     const database = new Dexie();
-    database.watch(this.storageId, (entry: any) => {
+    this.unwatch = database.watch(this.storageId, (entry: any) => {
       this.gistFiles = entry?.meta?.gist_files || {};
       this.nostrFiles = entry?.meta?.nostr_files || {};
       this.rebuild();
@@ -75,6 +75,7 @@ export default defineComponent({
   },
 
   unmounted() {
+    this.unwatch?.();
     if (this.doc) {
       this.doc.files.unobserve(this.rebuild);
       this.doc.meta.unobserve(this.rebuild);
@@ -161,6 +162,7 @@ export default defineComponent({
       const name = window.prompt(this.$t("fileExplorer.newFileName"), this.$t("fileExplorer.newFileDefault"));
       if (!name) return;
       const path = folder ? folder + "/" + name : name;
+      if (this.isTaken(path)) return;
       const created = this.doc?.createFile(path) || path;
       if (folder) this.expandedSet.add(folder);
       // open the freshly created file for editing
@@ -172,6 +174,7 @@ export default defineComponent({
       const name = window.prompt(this.$t("fileExplorer.newFolderName"), this.$t("fileExplorer.newFolderDefault"));
       if (!name) return;
       const path = folder ? folder + "/" + name : name;
+      if (this.isTaken(path)) return;
       this.doc?.createFolder(path);
       this.expandedSet.add(path);
       if (folder) this.expandedSet.add(folder);
@@ -182,7 +185,15 @@ export default defineComponent({
       if (!next || next === node.name) return;
       const parent = node.path.split("/").slice(0, -1).join("/");
       const target = parent ? parent + "/" + next : next;
+      if (this.isTaken(target)) return;
       this.doc?.renamePath(node.path, target);
+    },
+
+    // Creating/renaming onto an existing path would overwrite it.
+    isTaken(path: string): boolean {
+      if (!this.doc?.exists(path)) return false;
+      window.alert(this.$t("fileExplorer.exists", { path }));
+      return true;
     },
 
     remove(node: TreeNode) {
@@ -194,6 +205,9 @@ export default defineComponent({
     },
 
     move(from: string, toFolder: string) {
+      const base = from.split("/").pop();
+      const dst = toFolder ? toFolder + "/" + base : base;
+      if (dst !== from && this.isTaken(dst)) return;
       this.doc?.movePath(from, toFolder);
       if (toFolder) this.expandedSet.add(toFolder);
     },
@@ -260,14 +274,18 @@ export default defineComponent({
 
     async uploadFiles(files: File[], folder = "") {
       if (!this.doc) return;
-      for (const file of files) {
-        const buffer = await file.arrayBuffer();
-        const desired = folder ? folder + "/" + file.name : file.name;
-        // Avoid clobbering existing files; text files become editable Y.Text,
-        // binary files (images, ...) are stored as bytes.
-        const path = this.doc.uniquePath(desired);
-        this.doc.importFile(path, new Uint8Array(buffer), file.type);
-      }
+      const buffers = await Promise.all(files.map((f) => f.arrayBuffer()));
+      const doc = this.doc;
+      // one transaction -> one persist/sync/tree rebuild for the whole drop
+      doc.ydoc.transact(() => {
+        files.forEach((file, i) => {
+          const desired = folder ? folder + "/" + file.name : file.name;
+          // Avoid clobbering existing files; text files become editable Y.Text,
+          // binary files (images, ...) are stored as bytes.
+          const path = doc.uniquePath(desired);
+          doc.importFile(path, new Uint8Array(buffers[i]), file.type);
+        });
+      });
     },
   },
 });

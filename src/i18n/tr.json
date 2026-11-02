@@ -571,6 +571,7 @@
     "labelFile": "dosyayı",
     "labelFolder": "klasörü (ve içeriğini)",
     "deleteConfirm": "{label} \"{path}\" silinsin mi?",
+    "exists": "\"{path}\" zaten var.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

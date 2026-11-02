@@ -111,9 +111,11 @@ export default defineComponent({
     },
 
     onDrop(event: DragEvent) {
+      const from = event.dataTransfer?.getData("application/x-lia-path");
+      // external files bubble up to the explorer's upload handler
+      if (!from) return;
       event.preventDefault();
       event.stopPropagation();
-      const from = event.dataTransfer?.getData("application/x-lia-path");
       // dropping onto a folder moves into it, onto a file moves next to it
       const targetFolder = this.isFolder
         ? this.node.path

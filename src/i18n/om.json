@@ -571,6 +571,7 @@
     "labelFile": "faayila",
     "labelFolder": "dirree (fi waan keessa jiru)",
     "deleteConfirm": "{label} \"{path}\" haqii?",
+    "exists": "\"{path}\" duraan jira.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

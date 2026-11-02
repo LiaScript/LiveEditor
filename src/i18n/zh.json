@@ -571,6 +571,7 @@
     "labelFile": "文件",
     "labelFolder": "文件夹（及其内容）",
     "deleteConfirm": "删除{label}「{path}」？",
+    "exists": "“{path}”已存在。",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },

@@ -571,6 +571,7 @@
     "labelFile": "archivo",
     "labelFolder": "carpeta (y su contenido)",
     "deleteConfirm": "¿Eliminar {label} \"{path}\"?",
+    "exists": "«{path}» ya existe.",
     "newFileDefault": "untitled.txt",
     "newFolderDefault": "folder"
   },
