@@ -267,8 +267,9 @@
     "shareFileUrl": "공유하려는 Markdown 파일의 URL을 입력하세요"
   },
   "examples": {
-    "show": "표시",
-    "footer": "이것은 {liascript}용 협업 온라인 편집기입니다. 모든 내용은 브라우저 안에만 저장됩니다. 임베드 가능한 {templates} 또는 이미 게시된 {courses}를 검색하세요."
+    "show": "편집기에서 열기",
+    "footer": "이것은 {liascript}용 협업 온라인 편집기입니다. 모든 내용은 브라우저 안에만 저장됩니다. 임베드 가능한 {templates} 또는 이미 게시된 {courses}를 검색하세요.",
+    "intro": "살펴보고 직접 사용해 볼 수 있는 완성된 과정입니다. 편집기에서 열어 보세요 – 내 과정은 그대로 유지됩니다."
   },
   "index": {
     "newCourse": "새 과정",
@@ -334,7 +335,12 @@
     },
     "courses": "내 과정",
     "courseCount": "과정 {n}개 | 과정 {n}개",
-    "newCourseDesc": "템플릿, 파일 또는 가져오기"
+    "newCourseDesc": "템플릿, 파일 또는 가져오기",
+    "sort": {
+      "label": "정렬",
+      "recent": "최근에 연 순서",
+      "title": "제목 A–Z"
+    }
   },
   "card": {
     "untitled": "제목 없음",
@@ -358,7 +364,8 @@
       "folder": "폴더"
     },
     "linkedTitle": "이 브라우저 밖에도 저장됨",
-    "localTitle": "이 브라우저에만 저장됨 – “공유 및 내보내기”에서 백업하세요"
+    "localTitle": "이 브라우저에만 저장됨 – “공유 및 내보내기”에서 백업하세요",
+    "backup": "백업"
   },
   "footer": {
     "followUs": "팔로우:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "이 과정",
+      "targetNew": "새 과정",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "GitHub에 변경 사항 업로드",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "업로드할 것이 없습니다 – 마지막 업로드 이후 바뀐 것이 없습니다.",
+      "remoteDrift": "마지막 업로드 이후 누군가 GitHub의 저장소를 변경했습니다. 그 변경 사항을 유지하려면 먼저 가져오세요. 변경하지 않은 파일은 GitHub에서 그대로 유지됩니다.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "차이점",
+      "diffHint": "왼쪽: GitHub · 오른쪽: 이 편집기",
+      "commitMessage": "무엇을 변경했는지 짧은 메모",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "GitHub에 업로드 중…",
+      "pushBtn": "파일 {n}개 업로드",
+      "done": "변경 사항을 업로드했습니다."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "GitHub에서 변경 사항 가져오기",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "과정이 GitHub와 같은 최신 상태입니다.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "파일 {n}개 반영",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitHub 요청 한도에 도달했습니다",
-      "authTitle": "인증이 필요합니다",
+      "authTitle": "GitHub 로그인 필요",
       "manageTitle": "Manage access token",
-      "intro": "한도를 늘리고 비공개 저장소에 접근하거나 변경 사항을 푸시하려면 개인 액세스 토큰(PAT)을 추가하세요.",
+      "intro": "변경 사항을 업로드하거나, 저장소를 만들거나, 비공개 저장소를 열거나, 더 자주 불러오려면 GitHub 액세스 토큰(앱용 비밀번호 같은 것)이 필요합니다.",
       "howtoToggle": "토큰은 어떻게 만드나요?",
       "step1": "{link}을(를) 엽니다.",
       "step2Classic": "\"repo\" 범위가 선택되어 있는지 확인하세요.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "새 저장소에 게시",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "계정 또는 조직",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "저장소 만들기",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "파일 업로드 중…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "저장소를 만들고 모든 파일을 업로드했습니다."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "이 과정",
+      "targetNew": "새 과정",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "GitLab에 변경 사항 업로드",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "업로드할 것이 없습니다 – 마지막 업로드 이후 바뀐 것이 없습니다.",
+      "remoteDrift": "마지막 업로드 이후 누군가 GitLab의 저장소를 변경했습니다. 그 변경 사항을 유지하려면 먼저 가져오세요. 변경하지 않은 파일은 GitLab에서 그대로 유지됩니다.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "차이점",
+      "diffHint": "왼쪽: GitLab · 오른쪽: 이 편집기",
+      "commitMessage": "무엇을 변경했는지 짧은 메모",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "GitLab에 업로드 중…",
+      "pushBtn": "파일 {n}개 업로드",
+      "done": "변경 사항을 업로드했습니다."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "GitLab에서 변경 사항 가져오기",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "과정이 GitLab과 같은 최신 상태입니다.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "파일 {n}개 반영",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "GitLab 로그인 필요",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "변경 사항을 업로드하거나, 저장소를 만들거나, 비공개 저장소를 열거나, 더 자주 불러오려면 GitLab 액세스 토큰(앱용 비밀번호 같은 것)이 필요합니다.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "새 저장소에 게시",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "계정 또는 조직",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "저장소 만들기",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "파일 업로드 중…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "저장소를 만들고 모든 파일을 업로드했습니다."
     }
   },
   "nostr": {
-    "title": "Nostr로 공유",
-    "keysSection": "Nostr 키",
+    "title": "Nostr에 게시",
+    "keysSection": "내 Nostr ID",
     "publicKeyLabel": "공개 키 (npub):",
     "publicKeyPlaceholder": "Nostr 공개 키 입력 (npub...)",
     "generateNew": "새로 생성",
@@ -592,7 +599,7 @@
     "privateKeyHint": "개인 키는 게시물을 서명하고 게시하는 데 필요합니다. 안전하게 보관하세요.",
     "storeCredentials": "이 브라우저에 자격 증명 저장",
     "storeCredentialsWarning": "개인 키를 브라우저에 저장하면 편리하지만 보안성은 낮아집니다.",
-    "relayServersLabel": "Relay 서버:",
+    "relayServersLabel": "릴레이(게시물을 배포하는 서버):",
     "relayPlaceholder": "Relay 서버 입력 (한 줄에 하나)",
     "relayHint": "콘텐츠를 게시할 Relay 서버를 입력하세요 (한 줄에 하나).",
     "rememberRelays": "향후 게시를 위해 이 Relay 서버 기억",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "이 개인 키는 Nostr 신원에 접근할 수 있게 합니다. 안전하게 보관하세요.",
     "intro": "Nostr 커뮤니티와 과정을 공유하세요. 바로 게시하거나 먼저 게시물을 사용자 지정할 수 있습니다.",
     "nostrLinkLabel": "과정의 Nostr 링크:",
-    "embedMedia": "미디어 파일을 데이터 URI로 임베드",
-    "embedMediaHint": "이미지, 오디오, 비디오 파일을 임베드된 데이터 URI로 변환하여 이식성을 높입니다.",
+    "embedMedia": "이미지, 오디오, 동영상을 게시물에 포함",
+    "embedMediaHint": "그러면 이 편집기 없이도 과정이 작동하지만 게시물이 커집니다.",
     "customizePost": "게시물 사용자 지정",
     "publishNow": "지금 게시",
     "messageLabel": "메시지 (선택 사항):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "학습 플랫폼용으로 변환",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Exporter 주소",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "보통은 여기서 바꿀 것이 없습니다. 직접 Exporter를 실행한다면(예: http://localhost:3000 에서 'liaex serve') 여기에 그 주소를 입력하세요.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "프로젝트를 넘겼습니다. 아래에서 형식(예: Moodle용 SCORM)을 선택하고 내보내기를 시작하세요.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporter에 연결할 수 없습니다. 아래 주소를 확인하세요 – 직접 실행하는 Exporter라면 'liaex serve'가 실행 중이어야 합니다.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "다른 Exporter 사용"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "편집기 → 폴더",
+      "pull": "폴더 → 편집기",
+      "conflict": "양쪽에서 변경됨 – 선택하세요"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "폴더와 동기화",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "편집기와 폴더가 같습니다. 할 일이 없습니다.",
+      "applying": "동기화 중…",
+      "done": "완료 – 이제 편집기와 폴더가 같습니다.",
+      "applyBtn": "파일 {n}개 동기화",
+      "keepEditor": "편집기 버전 유지",
+      "keepDisk": "폴더 버전 사용",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "폴더를 열려면 브라우저에 권한을 허용해야 합니다."
     }
   },
   "result": {

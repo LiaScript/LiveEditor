@@ -267,8 +267,9 @@
     "shareFileUrl": "tiiɗno naatnu URL piilol Markdown ngo aɗa yiɗi lollinde"
   },
   "examples": {
-    "show": "Hollu",
-    "footer": "Ɗum ko taƴtorde geese gollondiral ngam {liascript}. Loowdi fof ena danndaa tan e browser maa. Yiylo {templates} naatnotooɗe walla {courses} bayyinaaɗe kisa."
+    "show": "Uddit e taƴtorde",
+    "footer": "Ɗum ko taƴtorde geese gollondiral ngam {liascript}. Loowdi fof ena danndaa tan e browser maa. Yiylo {templates} naatnotooɗe walla {courses} bayyinaaɗe kisa.",
+    "intro": "Janngirɗe timmuɗe ngam ndaarde e ƴeewtaade. Uddit gooto e taƴtorde – janngirɗe maa keeriiɗe waylataa."
   },
   "index": {
     "newCourse": "Janngirde hesere",
@@ -334,7 +335,12 @@
     },
     "courses": "Janngirɗe am",
     "courseCount": "janngirde {n} | janngirɗe {n}",
-    "newCourseDesc": "Moolde, piilol walla naatnugol"
+    "newCourseDesc": "Moolde, piilol walla naatnugol",
+    "sort": {
+      "label": "Toɗɗu doggol",
+      "recent": "Udditaaɗe sakkitiiɗe",
+      "title": "Tiitoonde A–Z"
+    }
   },
   "card": {
     "untitled": "Alaa tiitoonde",
@@ -358,7 +364,8 @@
       "folder": "Siflorde"
     },
     "linkedTitle": "Danndaama kadi caggal ndee browser",
-    "localTitle": "Danndaama e ndee browser tan – danndu ɗum rewde e “Lollin & yaltin”"
+    "localTitle": "Danndaama e ndee browser tan – danndu ɗum rewde e “Lollin & yaltin”",
+    "backup": "Danndu"
   },
   "footer": {
     "followUs": "Rewindo min e:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Ndee janngirde",
+      "targetNew": "Janngirde kesere",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Soodnu waylooji e GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Alaa ko soodnetee – alaa ko waylii gila soodnugol sakkitiingol.",
+      "remoteDrift": "Goɗɗo waylii depoo oo e GitHub gila soodnugol maa sakkitiingol. Adii addu ɗee waylooji so a yiɗi jogaade ɗi. Piile ɗe a waylaani ena heddoo no ɗe ngonri e GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Ceerdeeli",
+      "diffHint": "nano: GitHub · ñaamo: ndee taƴtorde",
+      "commitMessage": "Tinndinol rabbiŋngol e ko a waylii",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Ena soodnee e GitHub…",
+      "pushBtn": "Soodnu piile {n}",
+      "done": "Waylooji ɗii soodnaama."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Addu waylooji iwde e GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Janngirde maa ena fotondi e GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Ƴettu piile {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Dogal GitHub yottike",
-      "authTitle": "Fellitagol ɗacngal",
+      "authTitle": "Naatgol e GitHub ena soklaa",
       "manageTitle": "Manage access token",
-      "intro": "Ɓeydu Token Jokkorgol Neɗɗanke (PAT) ngam ɓeydude dogal ngal e naatde e jaŋdeeji suuɗiiɗi walla nawde waylitte.",
+      "intro": "GitHub ena sokli token naatirgol – wano finnde ngam jaaɓnirɗe – ngam soodnude waylooji, sosde depooji, udditde depooji suuɗiiɗi walla loowde ɓuri ko woowaa.",
       "howtoToggle": "No mi hebsira token?",
       "step1": "Uddit {link}.",
       "step2Classic": "Hunnu ko \"repo\" suɓaama.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Bayyin e depoo kesoowo",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Konte walla fedde",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Sos depoo",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Ena soodnee piile…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Depoo oo sosaama tee piile ɗee fof soodnaama."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Ndee janngirde",
+      "targetNew": "Janngirde kesere",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Soodnu waylooji e GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Alaa ko soodnetee – alaa ko waylii gila soodnugol sakkitiingol.",
+      "remoteDrift": "Goɗɗo waylii depoo oo e GitLab gila soodnugol maa sakkitiingol. Adii addu ɗee waylooji so a yiɗi jogaade ɗi. Piile ɗe a waylaani ena heddoo no ɗe ngonri e GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Ceerdeeli",
+      "diffHint": "nano: GitLab · ñaamo: ndee taƴtorde",
+      "commitMessage": "Tinndinol rabbiŋngol e ko a waylii",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Ena soodnee e GitLab…",
+      "pushBtn": "Soodnu piile {n}",
+      "done": "Waylooji ɗii soodnaama."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Addu waylooji iwde e GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Janngirde maa ena fotondi e GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Ƴettu piile {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Naatgol e GitLab ena soklaa",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab ena sokli token naatirgol – wano finnde ngam jaaɓnirɗe – ngam soodnude waylooji, sosde depooji, udditde depooji suuɗiiɗi walla loowde ɓuri ko woowaa.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Bayyin e depoo kesoowo",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Konte walla fedde",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Sos depoo",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Ena soodnee piile…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Depoo oo sosaama tee piile ɗee fof soodnaama."
     }
   },
   "nostr": {
-    "title": "Lollin rewde e Nostr",
-    "keysSection": "Kelme Nostr",
+    "title": "Bayyin e Nostr",
+    "keysSection": "Innital maa Nostr",
     "publicKeyLabel": "Kelal maa peñcu (npub):",
     "publicKeyPlaceholder": "Naatnu kelal Nostr peñcu maa (npub...)",
     "generateNew": "Sos kesum",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Kelal maa suturo ena soklaa ngam siifde tee bayyinde binndanɗe. Danndu ngal e kisal.",
     "storeCredentials": "Danndu keɓe seŋorde e ndee browser",
     "storeCredentialsWarning": "Danndude kelal suturo e browser ena newi kono kisal mum ina famɗi.",
-    "relayServersLabel": "Serweruuji relay:",
+    "relayServersLabel": "Relay (serweruuji sanktooɗi binndannde maa):",
     "relayPlaceholder": "Naatnu serweruuji relay (gooto e kala doggol)",
     "relayHint": "Naatnu serweruuji relay (gooto e kala doggol) ɗi loowdi maa bayyinte.",
     "rememberRelays": "Siiftor ɗee relay ngam binndanɗe garooje",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Ngal kelal suturo ena hokka naatde e innital maa Nostr. Danndu ngal e kisal.",
     "intro": "Lollin janngirde maa e renndo Nostr. Aɗa waawi bayyinde beɗɗo walla adii taƴtaade binndannde maa.",
     "nostrLinkLabel": "Jokkorde Nostr ngam janngirde maa:",
-    "embedMedia": "Naatnu piille media no data URI",
-    "embedMediaHint": "Wayla nate, ojooji e widewoo e data URI naatnaaɗi ngam ɓurnde weeɓtude lollinde.",
+    "embedMedia": "Naatnu nate, sawtu e widewoo e binndannde ndee",
+    "embedMediaHint": "Ndeen janngirde ndee ena gollira kadi tawa alaa ndee taƴtorde, kono binndannde ndee ena mawna.",
     "customizePost": "Taƴto binndannde",
     "publishNow": "Bayyin jooni",
     "messageLabel": "Ɓatakuru (cuɓorgal):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Waylu ngam palatfoorm jaŋde",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Ñiiɓirde Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Ko ɓuri heewde alaa ko waylotoo ɗoo. So aɗa huutoroo Exporter maa (wano 'liaex serve' e http://localhost:3000), naatnu ñiiɓirde mum.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Pirooje maa nawtaama. Suɓo mbaadi les ɗoo (wano SCORM ngam Moodle) tee fuɗɗo yaltingol ngol.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporter oo heɓotaake. Ƴeewto ñiiɓirde les ɗoo – so ko Exporter maa, 'liaex serve' ena foti huuwde.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Huutoro Exporter goɗɗo"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "taƴtorde → siflorde",
+      "pull": "siflorde → taƴtorde",
+      "conflict": "waylaama e fannuuji ɗiɗi – suɓo, tiiɗno"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Fotondin e siflorde ndee",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Taƴtorde e siflorde ena fotondi – alaa ko waɗetee.",
+      "applying": "Ena fotondina…",
+      "done": "Gasii – taƴtorde e siflorde ena fotondi jooni.",
+      "applyBtn": "Fotondin piile {n}",
+      "keepEditor": "Jogo yamre taƴtorde",
+      "keepDisk": "Ƴettu yamre siflorde",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Browser oo ena sokli yamiroore maa ngam udditde siflorde ndee."
     }
   },
   "result": {

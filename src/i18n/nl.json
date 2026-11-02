@@ -267,8 +267,9 @@
     "shareFileUrl": "voer de URL in van een Markdown-bestand dat je wilt delen"
   },
   "examples": {
-    "show": "Tonen",
-    "footer": "Dit is een samenwerkende online editor voor {liascript}. Alle inhoud wordt alleen in je browser opgeslagen. Zoek naar insluitbare {templates} of al gepubliceerde {courses}."
+    "show": "Openen in de editor",
+    "footer": "Dit is een samenwerkende online editor voor {liascript}. Alle inhoud wordt alleen in je browser opgeslagen. Zoek naar insluitbare {templates} of al gepubliceerde {courses}.",
+    "intro": "Kant-en-klare cursussen om te bekijken en uit te proberen. Open er een in de editor – je eigen cursussen blijven ongewijzigd."
   },
   "index": {
     "newCourse": "Nieuwe cursus",
@@ -334,7 +335,12 @@
     },
     "courses": "Mijn cursussen",
     "courseCount": "{n} cursus | {n} cursussen",
-    "newCourseDesc": "Sjabloon, bestand of import"
+    "newCourseDesc": "Sjabloon, bestand of import",
+    "sort": {
+      "label": "Sorteren",
+      "recent": "Laatst geopend",
+      "title": "Titel A–Z"
+    }
   },
   "card": {
     "untitled": "Naamloos",
@@ -358,7 +364,8 @@
       "folder": "Map"
     },
     "linkedTitle": "Ook buiten deze browser opgeslagen",
-    "localTitle": "Alleen in deze browser opgeslagen – maak een back-up via ‘Delen & exporteren’"
+    "localTitle": "Alleen in deze browser opgeslagen – maak een back-up via ‘Delen & exporteren’",
+    "backup": "Back-up maken"
   },
   "footer": {
     "followUs": "Volg ons op:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Deze cursus",
+      "targetNew": "Een nieuwe cursus",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Wijzigingen uploaden naar GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Niets te uploaden – er is niets veranderd sinds de laatste upload.",
+      "remoteDrift": "Iemand heeft sinds je laatste upload de repository op GitHub gewijzigd. Haal die wijzigingen eerst op als je ze wilt behouden. Bestanden die je niet hebt gewijzigd, blijven op GitHub zoals ze zijn.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Verschillen",
+      "diffHint": "links: GitHub · rechts: deze editor",
+      "commitMessage": "Korte notitie over wat je hebt gewijzigd",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Uploaden naar GitHub…",
+      "pushBtn": "{n} bestand(en) uploaden",
+      "done": "Wijzigingen geüpload."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Wijzigingen ophalen van GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Je cursus is up-to-date met GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "{n} bestand(en) overnemen",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitHub-limiet bereikt",
-      "authTitle": "Authenticatie vereist",
+      "authTitle": "Aanmelden bij GitHub nodig",
       "manageTitle": "Manage access token",
-      "intro": "Voeg een Personal Access Token (PAT) toe om de limiet te verhogen en toegang te krijgen tot privérepository's of wijzigingen te pushen.",
+      "intro": "GitHub heeft een toegangstoken nodig – een soort wachtwoord voor apps – om wijzigingen te uploaden, repository's aan te maken, privérepository's te openen of vaker te laden.",
       "howtoToggle": "Hoe maak ik een token aan?",
       "step1": "Open {link}.",
       "step2Classic": "Zorg dat de scope \"repo\" is aangevinkt.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Publiceren in een nieuwe repository",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Account of organisatie",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Repository maken",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Bestanden uploaden…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Repository gemaakt en alle bestanden geüpload."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Deze cursus",
+      "targetNew": "Een nieuwe cursus",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Wijzigingen uploaden naar GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Niets te uploaden – er is niets veranderd sinds de laatste upload.",
+      "remoteDrift": "Iemand heeft sinds je laatste upload de repository op GitLab gewijzigd. Haal die wijzigingen eerst op als je ze wilt behouden. Bestanden die je niet hebt gewijzigd, blijven op GitLab zoals ze zijn.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Verschillen",
+      "diffHint": "links: GitLab · rechts: deze editor",
+      "commitMessage": "Korte notitie over wat je hebt gewijzigd",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Uploaden naar GitLab…",
+      "pushBtn": "{n} bestand(en) uploaden",
+      "done": "Wijzigingen geüpload."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Wijzigingen ophalen van GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Je cursus is up-to-date met GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "{n} bestand(en) overnemen",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Aanmelden bij GitLab nodig",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab heeft een toegangstoken nodig – een soort wachtwoord voor apps – om wijzigingen te uploaden, repository's aan te maken, privérepository's te openen of vaker te laden.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Publiceren in een nieuwe repository",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Account of organisatie",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Repository maken",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Bestanden uploaden…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Repository gemaakt en alle bestanden geüpload."
     }
   },
   "nostr": {
-    "title": "Delen via Nostr",
-    "keysSection": "Nostr-sleutels",
+    "title": "Publiceren op Nostr",
+    "keysSection": "Je Nostr-identiteit",
     "publicKeyLabel": "Je openbare sleutel (npub):",
     "publicKeyPlaceholder": "Voer je openbare Nostr-sleutel in (npub...)",
     "generateNew": "Nieuwe genereren",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Je privésleutel is nodig om berichten te ondertekenen en te publiceren. Bewaar hem veilig.",
     "storeCredentials": "Inloggegevens in deze browser opslaan",
     "storeCredentialsWarning": "Je privésleutel in de browser opslaan is handig, maar minder veilig.",
-    "relayServersLabel": "Relayservers:",
+    "relayServersLabel": "Relays (servers die je bericht verspreiden):",
     "relayPlaceholder": "Voer relayservers in (één per regel)",
     "relayHint": "Voer relayservers in (één per regel) waarop je inhoud wordt gepubliceerd.",
     "rememberRelays": "Deze relays onthouden voor toekomstige berichten",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Deze privésleutel geeft toegang tot je Nostr-identiteit. Bewaar hem veilig.",
     "intro": "Deel je cursus met de Nostr-community. Je kunt direct publiceren of eerst je bericht aanpassen.",
     "nostrLinkLabel": "Nostr-link voor je cursus:",
-    "embedMedia": "Mediabestanden insluiten als data-URI's",
-    "embedMediaHint": "Zet afbeeldingen, audio en video's om naar ingesloten data-URI's voor betere overdraagbaarheid.",
+    "embedMedia": "Afbeeldingen, audio en video in het bericht opnemen",
+    "embedMediaHint": "Dan werkt de cursus ook zonder deze editor, maar het bericht wordt groter.",
     "customizePost": "Bericht aanpassen",
     "publishNow": "Nu publiceren",
     "messageLabel": "Bericht (optioneel):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Omzetten voor een leerplatform",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Adres van de Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Meestal hoef je hier niets te veranderen. Als je een eigen Exporter draait (bijvoorbeeld met 'liaex serve' op http://localhost:3000), vul dan hier het adres in.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Je project is overgedragen. Kies hieronder een formaat (bijvoorbeeld SCORM voor Moodle) en start de export.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "De Exporter is niet bereikbaar. Controleer het adres hieronder – bij een eigen Exporter moet 'liaex serve' draaien.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Andere Exporter gebruiken"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "editor → map",
+      "pull": "map → editor",
+      "conflict": "aan beide kanten gewijzigd – kies er een"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Synchroniseren met de map",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Editor en map zijn gelijk – niets te doen.",
+      "applying": "Synchroniseren…",
+      "done": "Klaar – editor en map zijn nu gelijk.",
+      "applyBtn": "{n} bestand(en) synchroniseren",
+      "keepEditor": "Editorversie behouden",
+      "keepDisk": "Mapversie overnemen",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "De browser heeft je toestemming nodig om de map te openen."
     }
   },
   "result": {

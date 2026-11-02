@@ -7,14 +7,14 @@ import { getProjectDoc, releaseProjectDoc, handOffProjectDoc } from "../../ts/Pr
 import * as GitLab from "../../ts/GitLabRepo";
 import type { TreeItem } from "../../ts/GitLabRepo";
 import { importPaths, seedEmptyReadme } from "../../ts/gitlabImport";
-import GitHubModal from "../../components/GitHub/GitHubModal.vue";
+import AppDialog from "../../components/AppDialog.vue";
 import GitHubFileTree from "../../components/GitHub/GitHubFileTree.vue";
 import PatHelp from "../../components/GitLab/PatHelp.vue";
 
 export default defineComponent({
   name: "GitLabImportModal",
 
-  components: { GitHubModal, GitHubFileTree, PatHelp },
+  components: { AppDialog, GitHubFileTree, PatHelp },
 
   props: {
     visible: { type: Boolean, default: false },
@@ -223,7 +223,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <GitHubModal :visible="visible" :title="$t('gitlab.import.title')" icon="bi-gitlab" @close="close">
+  <AppDialog :visible="visible" :title="$t('gitlab.import.title')" icon="bi-gitlab" @close="close">
     <!-- step: enter repository -->
     <template v-if="step === 'input'">
       <label class="form-label small">{{ $t("gitlab.import.repoLabel") }}</label>
@@ -338,5 +338,5 @@ export default defineComponent({
         {{ $t("gitlab.close") }}
       </button>
     </template>
-  </GitHubModal>
+  </AppDialog>
 </template>

@@ -5,7 +5,7 @@ import { getGitlabPat, getLastGitlabHost, setLastGitlabHost } from "../../ts/uti
 import { getProjectDoc, releaseProjectDoc, ProjectDoc } from "../../ts/ProjectDoc";
 import * as GitLab from "../../ts/GitLabRepo";
 import { computeChanges, pushChanges } from "../../ts/gitlabImport";
-import GitHubModal from "../../components/GitHub/GitHubModal.vue";
+import AppDialog from "../../components/AppDialog.vue";
 import PatHelp from "../../components/GitLab/PatHelp.vue";
 
 // "Publish" dialog: creates a brand new GitLab project (under the user or one
@@ -15,7 +15,7 @@ import PatHelp from "../../components/GitLab/PatHelp.vue";
 export default defineComponent({
   name: "GitLabPublishModal",
 
-  components: { GitHubModal, PatHelp },
+  components: { AppDialog, PatHelp },
 
   props: {
     visible: { type: Boolean, default: false },
@@ -218,7 +218,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <GitHubModal :visible="visible" :title="$t('gitlab.publish.title')" icon="bi-gitlab" @close="close">
+  <AppDialog :visible="visible" :title="$t('gitlab.publish.title')" icon="bi-gitlab" @close="close">
     <template v-if="step === 'host'">
       <p class="small text-muted">{{ $t("gitlab.publish.intro") }}</p>
       <label class="form-label small">{{ $t("gitlab.publish.host") }}</label>
@@ -316,5 +316,5 @@ export default defineComponent({
         {{ $t("gitlab.close") }}
       </button>
     </template>
-  </GitHubModal>
+  </AppDialog>
 </template>

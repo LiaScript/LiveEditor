@@ -7,7 +7,7 @@ import * as GitLab from "../../ts/GitLabRepo";
 import type { TreeItem } from "../../ts/GitLabRepo";
 import { computeChanges, importPaths, type FileChange } from "../../ts/gitlabImport";
 import { formatBytes } from "../../ts/fileIcons";
-import GitHubModal from "../../components/GitHub/GitHubModal.vue";
+import AppDialog from "../../components/AppDialog.vue";
 import PatHelp from "../../components/GitLab/PatHelp.vue";
 
 interface RepoLink {
@@ -20,7 +20,7 @@ interface RepoLink {
 export default defineComponent({
   name: "GitLabPullModal",
 
-  components: { GitHubModal, PatHelp },
+  components: { AppDialog, PatHelp },
 
   props: {
     visible: { type: Boolean, default: false },
@@ -208,7 +208,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <GitHubModal :visible="visible" :title="$t('gitlab.pull.title')" icon="bi-gitlab" @close="close">
+  <AppDialog :visible="visible" :title="$t('gitlab.pull.title')" icon="bi-gitlab" @close="close">
     <div v-if="gitlab" class="d-flex justify-content-between align-items-center mb-2">
       <strong>{{ gitlab.projectPath }}</strong>
       <div class="d-flex align-items-center gap-2">
@@ -285,7 +285,7 @@ export default defineComponent({
         {{ $t("gitlab.close") }}
       </button>
     </template>
-  </GitHubModal>
+  </AppDialog>
 </template>
 
 <style scoped>

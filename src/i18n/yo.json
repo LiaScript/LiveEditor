@@ -267,8 +267,9 @@
     "shareFileUrl": "jọwọ tẹ URL faili Markdown ti o fẹ pin"
   },
   "examples": {
-    "show": "Fihan",
-    "footer": "Eyi jẹ olootu ori ayelujara fun ifowosowopo fun {liascript}. Gbogbo akoonu wa ni ipamọ ninu aṣawakiri rẹ nikan. Wa {templates} ti a le fi sii tabi {courses} ti a ti tẹjade tẹlẹ."
+    "show": "Ṣi ninu olootu",
+    "footer": "Eyi jẹ olootu ori ayelujara fun ifowosowopo fun {liascript}. Gbogbo akoonu wa ni ipamọ ninu aṣawakiri rẹ nikan. Wa {templates} ti a le fi sii tabi {courses} ti a ti tẹjade tẹlẹ.",
+    "intro": "Awọn iṣẹ-ẹkọ ti o ti pari lati wo ati gbiyanju. Ṣi ọkan ninu olootu – awọn iṣẹ-ẹkọ tirẹ ko ni yipada."
   },
   "index": {
     "newCourse": "Iṣẹ-ẹkọ tuntun",
@@ -334,7 +335,12 @@
     },
     "courses": "Awọn iṣẹ-ẹkọ mi",
     "courseCount": "iṣẹ-ẹkọ {n} | awọn iṣẹ-ẹkọ {n}",
-    "newCourseDesc": "Awoṣe, faili tabi gbigbe wọle"
+    "newCourseDesc": "Awoṣe, faili tabi gbigbe wọle",
+    "sort": {
+      "label": "To lẹsẹsẹ",
+      "recent": "Ti a ṣi laipẹ",
+      "title": "Akọle A–Z"
+    }
   },
   "card": {
     "untitled": "Laisi akọle",
@@ -358,7 +364,8 @@
       "folder": "Àpò"
     },
     "linkedTitle": "Tun wa ni ipamọ ni ita aṣawakiri yii",
-    "localTitle": "Wa ni ipamọ ninu aṣawakiri yii nikan – ṣe afẹyinti nipasẹ “Pin & gbe jade”"
+    "localTitle": "Wa ni ipamọ ninu aṣawakiri yii nikan – ṣe afẹyinti nipasẹ “Pin & gbe jade”",
+    "backup": "Ṣe afẹyinti"
   },
   "footer": {
     "followUs": "Tẹle wa lori:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Iṣẹ-ẹkọ yii",
+      "targetNew": "Iṣẹ-ẹkọ tuntun kan",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Gbe awọn ayipada soke si GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Ko si nkankan lati gbe soke – ko si ohun ti o yipada lati igba ti o gbe soke kẹhin.",
+      "remoteDrift": "Ẹnikan ti yi ibi ipamọ naa pada lori GitHub lati igba ti o gbe soke kẹhin. Kọkọ mu awọn ayipada yẹn wa ti o ba fẹ tọju wọn. Awọn faili ti o ko yipada yoo wa bi wọn ṣe wa lori GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Awọn iyatọ",
+      "diffHint": "osi: GitHub · ọtun: olootu yii",
+      "commitMessage": "Akọsilẹ kukuru nipa ohun ti o yipada",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Ń gbe soke si GitHub…",
+      "pushBtn": "Gbe faili {n} soke",
+      "done": "A ti gbe awọn ayipada soke."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Mu awọn ayipada wa lati GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Iṣẹ-ẹkọ rẹ ti wa ni ibamu pẹlu GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Gba faili {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Ààlà GitHub ti dé",
-      "authTitle": "Ìfọwọ́sí nílò",
+      "authTitle": "O nilo lati wọle si GitHub",
       "manageTitle": "Manage access token",
-      "intro": "Fi Àmì Ìwọlé Àdáni (PAT) kún un láti gbé ààlà náà sókè àti láti wọlé sí àwọn ibi ìpamọ́ àdáni tàbí láti fi àwọn ìyípadà ránṣẹ́.",
+      "intro": "GitHub nilo àmì iwọle – iru ọrọ igbaniwọle fun awọn ohun elo – lati gbe awọn ayipada soke, ṣẹda awọn ibi ipamọ, ṣi awọn ibi ipamọ aladani tabi lati gba data nigbagbogbo sii.",
       "howtoToggle": "Báwo ni mo ṣe lè ṣẹ̀dá àmì kan?",
       "step1": "Ṣí {link}.",
       "step2Classic": "Rí i dájú pé a ti yan àyè \"repo\".",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Tẹjade si ibi ipamọ tuntun",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Akọọlẹ tabi agbari",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Ṣẹda ibi ipamọ",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Ń gbe awọn faili soke…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "A ti ṣẹda ibi ipamọ naa a si ti gbe gbogbo awọn faili soke."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Iṣẹ-ẹkọ yii",
+      "targetNew": "Iṣẹ-ẹkọ tuntun kan",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Gbe awọn ayipada soke si GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Ko si nkankan lati gbe soke – ko si ohun ti o yipada lati igba ti o gbe soke kẹhin.",
+      "remoteDrift": "Ẹnikan ti yi ibi ipamọ naa pada lori GitLab lati igba ti o gbe soke kẹhin. Kọkọ mu awọn ayipada yẹn wa ti o ba fẹ tọju wọn. Awọn faili ti o ko yipada yoo wa bi wọn ṣe wa lori GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Awọn iyatọ",
+      "diffHint": "osi: GitLab · ọtun: olootu yii",
+      "commitMessage": "Akọsilẹ kukuru nipa ohun ti o yipada",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Ń gbe soke si GitLab…",
+      "pushBtn": "Gbe faili {n} soke",
+      "done": "A ti gbe awọn ayipada soke."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Mu awọn ayipada wa lati GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Iṣẹ-ẹkọ rẹ ti wa ni ibamu pẹlu GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Gba faili {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "O nilo lati wọle si GitLab",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab nilo àmì iwọle – iru ọrọ igbaniwọle fun awọn ohun elo – lati gbe awọn ayipada soke, ṣẹda awọn ibi ipamọ, ṣi awọn ibi ipamọ aladani tabi lati gba data nigbagbogbo sii.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Tẹjade si ibi ipamọ tuntun",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Akọọlẹ tabi agbari",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Ṣẹda ibi ipamọ",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Ń gbe awọn faili soke…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "A ti ṣẹda ibi ipamọ naa a si ti gbe gbogbo awọn faili soke."
     }
   },
   "nostr": {
-    "title": "Pin nipasẹ Nostr",
-    "keysSection": "Awọn bọtini Nostr",
+    "title": "Tẹjade lori Nostr",
+    "keysSection": "Idanimọ Nostr rẹ",
     "publicKeyLabel": "Bọtini gbangba rẹ (npub):",
     "publicKeyPlaceholder": "Tẹ bọtini gbangba Nostr rẹ (npub...)",
     "generateNew": "Ṣẹda tuntun",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Bọtini ikọkọ rẹ nilo lati fọwọsi ati tẹjade awọn ifiweranṣẹ. Pa a mọ lailewu.",
     "storeCredentials": "Fi awọn iwe eri pamọ ninu aṣawakiri yii",
     "storeCredentialsWarning": "Fifi bọtini ikọkọ pamọ ninu aṣawakiri rọrun, ṣugbọn ko ni aabo to.",
-    "relayServersLabel": "Awọn olupin relay:",
+    "relayServersLabel": "Relay (awọn olupin ti n pin ifiweranṣẹ rẹ):",
     "relayPlaceholder": "Tẹ awọn olupin relay (ọkan fun ila)",
     "relayHint": "Tẹ awọn olupin relay (ọkan fun ila) ti a o tẹjade akoonu rẹ si.",
     "rememberRelays": "Ranti awọn relay wọnyi fun awọn ifiweranṣẹ ọjọ iwaju",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Bọtini ikọkọ yii funni ni wiwọle si idanimọ Nostr rẹ. Fi pamọ lailewu.",
     "intro": "Pin iṣẹ-ẹkọ rẹ pẹlu agbegbe Nostr. O le tẹjade taara tabi kọkọ ṣe akanṣe ifiweranṣẹ rẹ.",
     "nostrLinkLabel": "Ọna asopọ Nostr fun iṣẹ-ẹkọ rẹ:",
-    "embedMedia": "Fi awọn faili media sii bi data URI",
-    "embedMediaHint": "Yi awọn aworan, ohun ati fidio pada si data URI ti a fi sii fun gbigbe dara julọ.",
+    "embedMedia": "Fi awọn aworan, ohun ati fidio sinu ifiweranṣẹ naa",
+    "embedMediaHint": "Lẹhinna iṣẹ-ẹkọ naa yoo ṣiṣẹ paapaa laisi olootu yii, ṣugbọn ifiweranṣẹ naa yoo tobi sii.",
     "customizePost": "Ṣe akanṣe ifiweranṣẹ",
     "publishNow": "Tẹjade bayi",
     "messageLabel": "Ifiranṣẹ (aṣayan):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Yi pada fun pẹpẹ ikẹkọ",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Adirẹsi Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Nigbagbogbo ko si nkankan lati yipada nibi. Ti o ba n ṣiṣẹ Exporter tirẹ (fun apẹẹrẹ pẹlu 'liaex serve' ni http://localhost:3000), tẹ adirẹsi rẹ sii.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "A ti fi iṣẹ akanṣe rẹ le Exporter lọwọ. Yan ọna kika ni isalẹ (fun apẹẹrẹ SCORM fun Moodle) ki o bẹrẹ gbigbe jade.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Ko ṣee ṣe lati de ọdọ Exporter naa. Ṣayẹwo adirẹsi ni isalẹ – fun Exporter tirẹ, 'liaex serve' gbọdọ maa ṣiṣẹ.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Lo Exporter miiran"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "olootu → àpò",
+      "pull": "àpò → olootu",
+      "conflict": "a yipada ni ẹgbẹ mejeeji – jọwọ yan"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Muṣiṣẹpọ pẹlu àpò naa",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Olootu ati àpò naa jẹ kanna – ko si nkankan lati ṣe.",
+      "applying": "Ń muṣiṣẹpọ…",
+      "done": "O ti pari – olootu ati àpò naa ti jẹ kanna bayi.",
+      "applyBtn": "Muṣiṣẹpọ faili {n}",
+      "keepEditor": "Tọju ẹya olootu",
+      "keepDisk": "Gba ẹya àpò",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Aṣawakiri nilo igbanilaaye rẹ lati ṣi àpò naa."
     }
   },
   "result": {

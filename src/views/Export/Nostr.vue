@@ -1,17 +1,11 @@
 <template>
-  <div class="nostr-modal" v-if="visible">
-    <div class="modal-backdrop" @click="close"></div>
-    <div class="modal-container">
-      <div class="modal-header">
-        <h5 class="modal-title">{{ $t('nostr.title') }}</h5>
-        <button
-          type="button"
-          class="btn-close"
-          @click="close"
-          :aria-label="$t('nostr.close')"
-        ></button>
-      </div>
-      <div class="modal-body">
+  <AppDialog
+    :visible="visible"
+    icon="bi-broadcast"
+    :title="$t('nostr.title')"
+    :subtitle="$t('share.items.nostr.desc')"
+    @close="close"
+  >
         <!-- Key Management Section -->
         <div v-if="step === 'initial'" class="key-management mb-4">
           <h6>{{ $t('nostr.keysSection') }}</h6>
@@ -264,9 +258,7 @@
             <button class="btn btn-outline-secondary" @click="close">{{ $t('nostr.close') }}</button>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+  </AppDialog>
 </template>
 
 <script lang="ts">
@@ -279,11 +271,14 @@ import {
   finalizeEvent,
 } from "nostr-tools";
 import Dexie from "../../ts/indexDB";
+import AppDialog from "../../components/AppDialog.vue";
 import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
 
 export default {
   name: "NostrModal",
+
+  components: { AppDialog },
 
   props: {
     visible: {
@@ -764,57 +759,6 @@ export default {
 </script>
 
 <style scoped>
-.nostr-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2000;
-  display: flex;
-  align-items: flex-start; /* Changed from center to flex-start */
-  justify-content: center;
-  padding: 1rem; /* Add padding for small screens */
-}
-
-.modal-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-container {
-  position: relative;
-  width: 90%;
-  max-width: 600px;
-  max-height: 90vh; /* Limit height to 90% of viewport height */
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  z-index: 2001;
-  margin: 2rem 0; /* Add margin top/bottom */
-  display: flex;
-  flex-direction: column; /* Add flex layout */
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.modal-body {
-  padding: 1.5rem;
-  overflow-y: auto; /* Make the body scrollable */
-  flex: 1; /* Allow body to take remaining space */
-}
-
 .nostr-actions {
   display: flex;
   justify-content: flex-end;
@@ -836,21 +780,5 @@ export default {
   padding: 0.25rem;
   margin-left: 0.5rem;
   font-size: 0.75rem;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .modal-container {
-    background-color: #343a40;
-    color: #f8f9fa;
-  }
-
-  .modal-header {
-    border-bottom-color: #495057;
-  }
-
-  .btn-close {
-    filter: invert(1) grayscale(100%) brightness(200%);
-  }
 }
 </style>

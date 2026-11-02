@@ -4,6 +4,7 @@ import { getProjectDoc, releaseProjectDoc, ProjectDoc } from "../../ts/ProjectDo
 import * as LocalFolder from "../../ts/LocalFolder";
 import { computeSync, applySync, type SyncEntry } from "../../ts/localFolderSync";
 import { formatBytes } from "../../ts/fileIcons";
+import AppDialog from "../../components/AppDialog.vue";
 
 // Bidirectional sync dialog between the editor (ProjectDoc) and a linked local
 // folder. Mirrors the GitHub PushModal structure but needs no auth and no
@@ -11,6 +12,8 @@ import { formatBytes } from "../../ts/fileIcons";
 // user resolve conflicts that the 3-way diff detected.
 export default defineComponent({
   name: "LocalFolderSyncModal",
+
+  components: { AppDialog },
 
   props: {
     visible: { type: Boolean, default: false },
@@ -191,20 +194,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="lf-modal" v-if="visible">
-    <div class="modal-backdrop" @click="close"></div>
-    <div class="modal-container">
-      <div class="modal-header">
-        <h5 class="modal-title">
-          <i class="bi bi-folder2-open"></i> {{ $t("localFolder.sync.title") }}
-        </h5>
-        <button type="button" class="btn-close" @click="close"></button>
-      </div>
-
-      <div class="modal-body">
-        <div v-if="folderName" class="d-flex justify-content-between align-items-center mb-2">
-          <strong><i class="bi bi-folder"></i> {{ folderName }}</strong>
-        </div>
+  <AppDialog
+    :visible="visible"
+    icon="bi-folder2-open"
+    :title="$t('localFolder.sync.title')"
+    :subtitle="folderName || ''"
+    @close="close"
+  >
 
         <div v-if="step === 'loading'" class="text-center py-3">
           <span class="spinner-border"></span>
@@ -274,9 +270,8 @@ export default defineComponent({
         </div>
 
         <div v-if="errorMessage" class="alert alert-danger mt-2 mb-0">{{ errorMessage }}</div>
-      </div>
 
-      <div class="modal-footer-bar">
+    <template #footer>
         <button
           v-if="step === 'denied'"
           class="btn btn-primary"
@@ -295,76 +290,11 @@ export default defineComponent({
         <button v-if="step === 'done'" class="btn btn-primary" @click="close">
           {{ $t("localFolder.close") }}
         </button>
-      </div>
-    </div>
-  </div>
+    </template>
+  </AppDialog>
 </template>
 
 <style scoped>
-.lf-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2000;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.modal-backdrop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-container {
-  position: relative;
-  width: 90%;
-  max-width: 680px;
-  max-height: 90vh;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  z-index: 2001;
-  margin: 2rem 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.modal-body {
-  padding: 1.25rem;
-  overflow-y: auto;
-  flex: 1;
-}
-
-.modal-footer-bar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  border-top: 1px solid #dee2e6;
-}
-
-.modal-footer-bar:empty {
-  display: none;
-}
-
 .lf-changes {
   max-height: 45vh;
   overflow: auto;
@@ -393,19 +323,5 @@ export default defineComponent({
 
 .lf-resolve {
   flex: 0 0 auto;
-}
-
-@media (prefers-color-scheme: dark) {
-  .modal-container {
-    background-color: #343a40;
-    color: #f8f9fa;
-  }
-  .modal-header,
-  .modal-footer-bar {
-    border-color: #495057;
-  }
-  .btn-close {
-    filter: invert(1) grayscale(100%) brightness(200%);
-  }
 }
 </style>

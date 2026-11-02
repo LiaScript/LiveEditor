@@ -267,8 +267,9 @@
     "shareFileUrl": "add meg a megosztani kívánt Markdown fájl URL-jét"
   },
   "examples": {
-    "show": "Megjelenítés",
-    "footer": "Ez egy együttműködő online szerkesztő a {liascript} számára. Minden tartalom csak a böngésződben tárolódik. Keress beágyazható {templates} vagy már közzétett {courses} elemeket."
+    "show": "Megnyitás a szerkesztőben",
+    "footer": "Ez egy együttműködő online szerkesztő a {liascript} számára. Minden tartalom csak a böngésződben tárolódik. Keress beágyazható {templates} vagy már közzétett {courses} elemeket.",
+    "intro": "Kész kurzusok megnézésre és kipróbálásra. Nyiss meg egyet a szerkesztőben – a saját kurzusaid érintetlenek maradnak."
   },
   "index": {
     "newCourse": "Új kurzus",
@@ -334,7 +335,12 @@
     },
     "courses": "Kurzusaim",
     "courseCount": "{n} kurzus | {n} kurzus",
-    "newCourseDesc": "Sablon, fájl vagy importálás"
+    "newCourseDesc": "Sablon, fájl vagy importálás",
+    "sort": {
+      "label": "Rendezés",
+      "recent": "Legutóbb megnyitott",
+      "title": "Cím A–Z"
+    }
   },
   "card": {
     "untitled": "Cím nélkül",
@@ -358,7 +364,8 @@
       "folder": "Mappa"
     },
     "linkedTitle": "Ezen a böngészőn kívül is tárolva",
-    "localTitle": "Csak ebben a böngészőben tárolva – ments róla másolatot a „Megosztás és exportálás” menüben"
+    "localTitle": "Csak ebben a böngészőben tárolva – ments róla másolatot a „Megosztás és exportálás” menüben",
+    "backup": "Biztonsági mentés"
   },
   "footer": {
     "followUs": "Kövess minket:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Ez a kurzus",
+      "targetNew": "Egy új kurzus",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Változtatások feltöltése a GitHubra",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Nincs mit feltölteni – a legutóbbi feltöltés óta semmi sem változott.",
+      "remoteDrift": "Valaki módosította a tárolót a GitHubon a legutóbbi feltöltésed óta. Ha meg akarod tartani ezeket a változtatásokat, előbb kérd le őket. Azok a fájlok, amelyeken nem változtattál, a GitHubon változatlanok maradnak.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Különbségek",
+      "diffHint": "bal: GitHub · jobb: ez a szerkesztő",
+      "commitMessage": "Rövid megjegyzés arról, mit változtattál",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Feltöltés a GitHubra…",
+      "pushBtn": "Fájlok feltöltése: {n}",
+      "done": "A változtatások feltöltve."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Változtatások lekérése a GitHubról",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "A kurzusod naprakész a GitHubhoz képest.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Fájlok átvétele: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Elérted a GitHub korlátot",
-      "authTitle": "Hitelesítés szükséges",
+      "authTitle": "GitHub-bejelentkezés szükséges",
       "manageTitle": "Manage access token",
-      "intro": "Adj hozzá egy személyes hozzáférési tokent (PAT) a korlát növeléséhez, valamint privát tárolók eléréséhez vagy változtatások feltöltéséhez.",
+      "intro": "A GitHubnak hozzáférési tokenre – egyfajta jelszóra alkalmazásokhoz – van szüksége a változtatások feltöltéséhez, tárolók létrehozásához, privát tárolók megnyitásához vagy a gyakoribb betöltéshez.",
       "howtoToggle": "Hogyan hozok létre tokent?",
       "step1": "Nyisd meg: {link}.",
       "step2Classic": "Győződj meg róla, hogy a „repo\" hatókör be van jelölve.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Közzététel új tárolóban",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Fiók vagy szervezet",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Tároló létrehozása",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Fájlok feltöltése…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "A tároló elkészült, és minden fájl feltöltve."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Ez a kurzus",
+      "targetNew": "Egy új kurzus",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Változtatások feltöltése a GitLabra",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Nincs mit feltölteni – a legutóbbi feltöltés óta semmi sem változott.",
+      "remoteDrift": "Valaki módosította a tárolót a GitLabon a legutóbbi feltöltésed óta. Ha meg akarod tartani ezeket a változtatásokat, előbb kérd le őket. Azok a fájlok, amelyeken nem változtattál, a GitLabon változatlanok maradnak.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Különbségek",
+      "diffHint": "bal: GitLab · jobb: ez a szerkesztő",
+      "commitMessage": "Rövid megjegyzés arról, mit változtattál",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Feltöltés a GitLabra…",
+      "pushBtn": "Fájlok feltöltése: {n}",
+      "done": "A változtatások feltöltve."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Változtatások lekérése a GitLabról",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "A kurzusod naprakész a GitLabhoz képest.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Fájlok átvétele: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "GitLab-bejelentkezés szükséges",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "A GitLabnak hozzáférési tokenre – egyfajta jelszóra alkalmazásokhoz – van szüksége a változtatások feltöltéséhez, tárolók létrehozásához, privát tárolók megnyitásához vagy a gyakoribb betöltéshez.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Közzététel új tárolóban",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Fiók vagy szervezet",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Tároló létrehozása",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Fájlok feltöltése…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "A tároló elkészült, és minden fájl feltöltve."
     }
   },
   "nostr": {
-    "title": "Megosztás Nostr-on",
-    "keysSection": "Nostr kulcsok",
+    "title": "Közzététel a Nostron",
+    "keysSection": "A Nostr-identitásod",
     "publicKeyLabel": "Nyilvános kulcsod (npub):",
     "publicKeyPlaceholder": "Add meg a Nostr nyilvános kulcsodat (npub...)",
     "generateNew": "Új generálása",
@@ -592,7 +599,7 @@
     "privateKeyHint": "A privát kulcsod a bejegyzések aláírásához és közzétételéhez szükséges. Tartsd biztonságban.",
     "storeCredentials": "Hitelesítő adatok tárolása ebben a böngészőben",
     "storeCredentialsWarning": "A privát kulcs böngészőben való tárolása kényelmes, de kevésbé biztonságos.",
-    "relayServersLabel": "Relay szerverek:",
+    "relayServersLabel": "Relayek (szerverek, amelyek terjesztik a bejegyzésedet):",
     "relayPlaceholder": "Add meg a relay szervereket (soronként egyet)",
     "relayHint": "Add meg a relay szervereket (soronként egyet), amelyekre a tartalmat közzéteszed.",
     "rememberRelays": "Relay szerverek megjegyzése jövőbeli bejegyzésekhez",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Ez a privát kulcs hozzáférést ad a Nostr identitásodhoz. Tárold biztonságosan.",
     "intro": "Oszd meg a kurzusodat a Nostr közösséggel. Közzéteheted közvetlenül, vagy előbb testreszabhatod a bejegyzést.",
     "nostrLinkLabel": "Nostr hivatkozás a kurzusodhoz:",
-    "embedMedia": "Médiafájlok beágyazása data URI-ként",
-    "embedMediaHint": "A képeket, hang- és videófájlokat beágyazott data URI-vá alakítja a jobb hordozhatóság érdekében.",
+    "embedMedia": "Képek, hang és videó beillesztése a bejegyzésbe",
+    "embedMediaHint": "Így a kurzus e szerkesztő nélkül is működik, de a bejegyzés nagyobb lesz.",
     "customizePost": "Bejegyzés testreszabása",
     "publishNow": "Közzététel most",
     "messageLabel": "Üzenet (opcionális):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Átalakítás tanulási platformhoz",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Az exporter címe",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Általában itt nincs mit módosítani. Ha saját exportert futtatsz (például a 'liaex serve' paranccsal a http://localhost:3000 címen), itt add meg a címét.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "A projektedet átadtuk. Válassz lent egy formátumot (például SCORM a Moodle számára), és indítsd el az exportálást.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Az exporter nem érhető el. Ellenőrizd a lenti címet – saját exporter esetén futnia kell a 'liaex serve' parancsnak.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Másik exporter használata"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "szerkesztő → mappa",
+      "pull": "mappa → szerkesztő",
+      "conflict": "mindkét oldalon módosult – kérlek, válassz"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Szinkronizálás a mappával",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "A szerkesztő és a mappa megegyezik – nincs teendő.",
+      "applying": "Szinkronizálás…",
+      "done": "Kész – a szerkesztő és a mappa most már megegyezik.",
+      "applyBtn": "Fájlok szinkronizálása: {n}",
+      "keepEditor": "Szerkesztő verziójának megtartása",
+      "keepDisk": "Mappa verziójának átvétele",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "A böngészőnek az engedélyedre van szüksége a mappa megnyitásához."
     }
   },
   "result": {

@@ -267,8 +267,9 @@
     "shareFileUrl": "insira a URL de um arquivo Markdown que você deseja compartilhar"
   },
   "examples": {
-    "show": "Mostrar",
-    "footer": "Este é um editor colaborativo online para {liascript}. Todo o conteúdo é armazenado apenas no seu navegador. Procure {templates} incorporáveis ou {courses} já publicados."
+    "show": "Abrir no editor",
+    "footer": "Este é um editor colaborativo online para {liascript}. Todo o conteúdo é armazenado apenas no seu navegador. Procure {templates} incorporáveis ou {courses} já publicados.",
+    "intro": "Cursos prontos para ver e experimentar. Abra um no editor – seus próprios cursos não são alterados."
   },
   "index": {
     "newCourse": "Novo curso",
@@ -334,7 +335,12 @@
     },
     "courses": "Meus cursos",
     "courseCount": "{n} curso | {n} cursos",
-    "newCourseDesc": "Modelo, arquivo ou importação"
+    "newCourseDesc": "Modelo, arquivo ou importação",
+    "sort": {
+      "label": "Ordenar",
+      "recent": "Abertos recentemente",
+      "title": "Título A–Z"
+    }
   },
   "card": {
     "untitled": "Sem título",
@@ -358,7 +364,8 @@
       "folder": "Pasta"
     },
     "linkedTitle": "Também salvo fora deste navegador",
-    "localTitle": "Salvo apenas neste navegador – faça backup em “Compartilhar e exportar”"
+    "localTitle": "Salvo apenas neste navegador – faça backup em “Compartilhar e exportar”",
+    "backup": "Fazer backup"
   },
   "footer": {
     "followUs": "Siga-nos em:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Este curso",
+      "targetNew": "Um novo curso",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Enviar alterações para o GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Nada a enviar – nada mudou desde o último envio.",
+      "remoteDrift": "Alguém alterou o repositório no GitHub desde o seu último envio. Busque essas alterações primeiro se quiser mantê-las. Os arquivos que você não alterou continuam como estão no GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Diferenças",
+      "diffHint": "esquerda: GitHub · direita: este editor",
+      "commitMessage": "Breve nota sobre o que você alterou",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Enviando para o GitHub…",
+      "pushBtn": "Enviar {n} arquivo(s)",
+      "done": "Alterações enviadas."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Buscar alterações do GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Seu curso está atualizado com o GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Incorporar {n} arquivo(s)",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Limite do GitHub atingido",
-      "authTitle": "Autenticação necessária",
+      "authTitle": "É preciso entrar no GitHub",
       "manageTitle": "Manage access token",
-      "intro": "Adicione um Token de Acesso Pessoal (PAT) para aumentar o limite e acessar repositórios privados ou enviar alterações.",
+      "intro": "O GitHub precisa de um token de acesso – uma espécie de senha para aplicativos – para enviar alterações, criar repositórios, abrir repositórios privados ou carregar com mais frequência.",
       "howtoToggle": "Como crio um token?",
       "step1": "Abra {link}.",
       "step2Classic": "Certifique-se de que o escopo \"repo\" está marcado.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Publicar em um novo repositório",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Conta ou organização",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Criar repositório",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Enviando arquivos…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Repositório criado e todos os arquivos enviados."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Este curso",
+      "targetNew": "Um novo curso",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Enviar alterações para o GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Nada a enviar – nada mudou desde o último envio.",
+      "remoteDrift": "Alguém alterou o repositório no GitLab desde o seu último envio. Busque essas alterações primeiro se quiser mantê-las. Os arquivos que você não alterou continuam como estão no GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Diferenças",
+      "diffHint": "esquerda: GitLab · direita: este editor",
+      "commitMessage": "Breve nota sobre o que você alterou",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Enviando para o GitLab…",
+      "pushBtn": "Enviar {n} arquivo(s)",
+      "done": "Alterações enviadas."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Buscar alterações do GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Seu curso está atualizado com o GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Incorporar {n} arquivo(s)",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "É preciso entrar no GitLab",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "O GitLab precisa de um token de acesso – uma espécie de senha para aplicativos – para enviar alterações, criar repositórios, abrir repositórios privados ou carregar com mais frequência.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Publicar em um novo repositório",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Conta ou organização",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Criar repositório",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Enviando arquivos…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Repositório criado e todos os arquivos enviados."
     }
   },
   "nostr": {
-    "title": "Compartilhar via Nostr",
-    "keysSection": "Chaves Nostr",
+    "title": "Publicar no Nostr",
+    "keysSection": "Sua identidade Nostr",
     "publicKeyLabel": "Sua chave pública (npub):",
     "publicKeyPlaceholder": "Digite sua chave pública Nostr (npub...)",
     "generateNew": "Gerar nova",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Sua chave privada é necessária para assinar e publicar posts. Mantenha-a segura.",
     "storeCredentials": "Armazenar credenciais neste navegador",
     "storeCredentialsWarning": "Armazenar sua chave privada no navegador é conveniente, mas menos seguro.",
-    "relayServersLabel": "Servidores relay:",
+    "relayServersLabel": "Relays (servidores que distribuem sua publicação):",
     "relayPlaceholder": "Digite servidores relay (um por linha)",
     "relayHint": "Digite servidores relay (um por linha) nos quais seu conteúdo será publicado.",
     "rememberRelays": "Lembrar estes relays para posts futuros",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Esta chave privada dá acesso à sua identidade Nostr. Salve-a com segurança.",
     "intro": "Compartilhe seu curso com a comunidade Nostr. Você pode publicar diretamente ou personalizar seu post primeiro.",
     "nostrLinkLabel": "Link Nostr para o seu curso:",
-    "embedMedia": "Incorporar arquivos de mídia como URIs de dados",
-    "embedMediaHint": "Converte imagens, áudio e vídeo em URIs de dados incorporadas para melhor portabilidade.",
+    "embedMedia": "Incluir imagens, áudio e vídeo na publicação",
+    "embedMediaHint": "Assim o curso funciona também sem este editor, mas a publicação fica maior.",
     "customizePost": "Personalizar post",
     "publishNow": "Publicar agora",
     "messageLabel": "Mensagem (opcional):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Converter para uma plataforma de aprendizagem",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Endereço do Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Normalmente não é preciso mudar nada aqui. Se você usa seu próprio Exporter (por exemplo com 'liaex serve' em http://localhost:3000), informe o endereço dele.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Seu projeto foi entregue. Escolha um formato abaixo (por exemplo SCORM para Moodle) e inicie a exportação.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Não foi possível acessar o Exporter. Verifique o endereço abaixo – com um Exporter próprio, 'liaex serve' precisa estar rodando.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Usar outro Exporter"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "editor → pasta",
+      "pull": "pasta → editor",
+      "conflict": "alterado dos dois lados – escolha, por favor"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Sincronizar com a pasta",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "O editor e a pasta são iguais – nada a fazer.",
+      "applying": "Sincronizando…",
+      "done": "Pronto – o editor e a pasta agora são iguais.",
+      "applyBtn": "Sincronizar {n} arquivo(s)",
+      "keepEditor": "Manter a versão do editor",
+      "keepDisk": "Usar a versão da pasta",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "O navegador precisa da sua permissão para abrir a pasta."
     }
   },
   "result": {

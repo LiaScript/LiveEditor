@@ -13,6 +13,7 @@ import logoImg from "url:../../assets/logo.png";
 import { importSources } from "../ts/importSources";
 
 const WELCOME_HIDDEN_KEY = "liaeditor:welcomeHidden";
+const SORT_KEY = "liaeditor:courseSort";
 
 // localStorage can throw (private mode, blocked site data): the welcome block
 // then simply shows again, which is harmless.
@@ -24,10 +25,18 @@ function readFlag(key: string): boolean {
   }
 }
 
-function writeFlag(key: string) {
+function writeFlag(key: string, value = "1") {
   try {
-    localStorage.setItem(key, "1");
+    localStorage.setItem(key, value);
   } catch {}
+}
+
+function readSort(): "recent" | "title" {
+  try {
+    return localStorage.getItem(SORT_KEY) === "title" ? "title" : "recent";
+  } catch {
+    return "recent";
+  }
 }
 
 function waitForSync(provider) {
@@ -109,6 +118,7 @@ export default {
       // does not flash for returning users
       loaded: false,
       welcomeHidden: readFlag(WELCOME_HIDDEN_KEY),
+      sortBy: readSort(),
     };
   },
 
@@ -123,7 +133,15 @@ export default {
     },
 
     visibleCourses(): any[] {
-      return this.filtering ? this.coursesFiltered : this.courses;
+      const list = this.filtering ? this.coursesFiltered : this.courses;
+      if (this.sortBy !== "title") return list; // already newest first
+      const title = (c: any) => (c.meta?.title || "").trim();
+      return [...list].sort((a, b) => {
+        const ta = title(a);
+        const tb = title(b);
+        if (!ta || !tb) return ta ? -1 : tb ? 1 : 0; // untitled courses last
+        return ta.localeCompare(tb, this.$i18n.locale, { sensitivity: "base" });
+      });
     },
   },
 
@@ -135,6 +153,11 @@ export default {
     this.unwatch?.();
   },
   methods: {
+    setSort(value: "recent" | "title") {
+      this.sortBy = value;
+      writeFlag(SORT_KEY, value);
+    },
+
     hideWelcome() {
       this.welcomeHidden = true;
       writeFlag(WELCOME_HIDDEN_KEY);
@@ -305,6 +328,17 @@ export default {
             {{ $t('index.courseCount', { n: courses.length }, courses.length) }}
           </span>
           <div class="flex-grow-1"></div>
+          <label class="d-flex align-items-center gap-2 small text-body-secondary mb-0">
+            {{ $t('index.sort.label') }}
+            <select
+              class="form-select form-select-sm lia-sort"
+              :value="sortBy"
+              @change="setSort($event.target.value)"
+            >
+              <option value="recent">{{ $t('index.sort.recent') }}</option>
+              <option value="title">{{ $t('index.sort.title') }}</option>
+            </select>
+          </label>
           <div class="lia-search">
             <i class="bi bi-search" aria-hidden="true"></i>
             <input
@@ -542,6 +576,11 @@ export default {
 .lia-search .form-control {
   padding-left: 2.4rem;
   min-height: 44px;
+}
+
+.lia-sort {
+  min-height: 44px;
+  width: auto;
 }
 
 .lia-new-card {

@@ -267,8 +267,9 @@
     "shareFileUrl": "моля, въведете URL адреса на Markdown файл, който искате да споделите"
   },
   "examples": {
-    "show": "Показване",
-    "footer": "Това е съвместен онлайн редактор за {liascript}. Цялото съдържание се съхранява само във вашия браузър. Потърсете вградими {templates} или вече публикувани {courses}."
+    "show": "Отваряне в редактора",
+    "footer": "Това е съвместен онлайн редактор за {liascript}. Цялото съдържание се съхранява само във вашия браузър. Потърсете вградими {templates} или вече публикувани {courses}.",
+    "intro": "Готови курсове за разглеждане и изпробване. Отворете някой от тях в редактора – собствените ви курсове остават непроменени."
   },
   "index": {
     "newCourse": "Нов курс",
@@ -334,7 +335,12 @@
     },
     "courses": "Моите курсове",
     "courseCount": "{n} курс | {n} курса",
-    "newCourseDesc": "Шаблон, файл или импорт"
+    "newCourseDesc": "Шаблон, файл или импорт",
+    "sort": {
+      "label": "Подреждане",
+      "recent": "Последно отваряни",
+      "title": "Заглавие А–Я"
+    }
   },
   "card": {
     "untitled": "Без заглавие",
@@ -358,7 +364,8 @@
       "folder": "Папка"
     },
     "linkedTitle": "Съхранен и извън този браузър",
-    "localTitle": "Съхранен само в този браузър – архивирайте го чрез „Споделяне и експорт“"
+    "localTitle": "Съхранен само в този браузър – архивирайте го чрез „Споделяне и експорт“",
+    "backup": "Архивиране"
   },
   "footer": {
     "followUs": "Следвайте ни в:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Този курс",
+      "targetNew": "Нов курс",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Качване на промените в GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Няма какво да се качи – нищо не е променено от последното качване.",
+      "remoteDrift": "Някой е променил хранилището в GitHub след последното ви качване. Първо вземете тези промени, ако искате да ги запазите. Файловете, които не сте променяли, остават непроменени в GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Разлики",
+      "diffHint": "вляво: GitHub · вдясно: този редактор",
+      "commitMessage": "Кратка бележка какво сте променили",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Качване в GitHub…",
+      "pushBtn": "Качване на файлове: {n}",
+      "done": "Промените са качени."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Вземане на промените от GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Курсът ви е актуален спрямо GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Приемане на файлове: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Достигнат е лимитът на GitHub",
-      "authTitle": "Изисква се удостоверяване",
+      "authTitle": "Нужно е влизане в GitHub",
       "manageTitle": "Manage access token",
-      "intro": "Добавете личен токен за достъп (PAT), за да увеличите лимита и да получите достъп до частни хранилища или да изпращате промени.",
+      "intro": "GitHub се нуждае от токен за достъп – вид парола за приложения – за да качвате промени, да създавате хранилища, да отваряте частни хранилища или да зареждате по-често.",
       "howtoToggle": "Как да създам токен?",
       "step1": "Отворете {link}.",
       "step2Classic": "Уверете се, че обхватът \"repo\" е избран.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Публикуване в ново хранилище",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Акаунт или организация",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Създаване на хранилище",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Качване на файловете…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Хранилището е създадено и всички файлове са качени."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Този курс",
+      "targetNew": "Нов курс",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Качване на промените в GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Няма какво да се качи – нищо не е променено от последното качване.",
+      "remoteDrift": "Някой е променил хранилището в GitLab след последното ви качване. Първо вземете тези промени, ако искате да ги запазите. Файловете, които не сте променяли, остават непроменени в GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Разлики",
+      "diffHint": "вляво: GitLab · вдясно: този редактор",
+      "commitMessage": "Кратка бележка какво сте променили",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Качване в GitLab…",
+      "pushBtn": "Качване на файлове: {n}",
+      "done": "Промените са качени."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Вземане на промените от GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Курсът ви е актуален спрямо GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Приемане на файлове: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Нужно е влизане в GitLab",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab се нуждае от токен за достъп – вид парола за приложения – за да качвате промени, да създавате хранилища, да отваряте частни хранилища или да зареждате по-често.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Публикуване в ново хранилище",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Акаунт или организация",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Създаване на хранилище",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Качване на файловете…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Хранилището е създадено и всички файлове са качени."
     }
   },
   "nostr": {
-    "title": "Споделяне чрез Nostr",
-    "keysSection": "Nostr ключове",
+    "title": "Публикуване в Nostr",
+    "keysSection": "Вашата самоличност в Nostr",
     "publicKeyLabel": "Вашият публичен ключ (npub):",
     "publicKeyPlaceholder": "Въведете вашия публичен Nostr ключ (npub...)",
     "generateNew": "Генериране на нов",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Вашият частен ключ е нужен за подписване и публикуване на публикации. Пазете го сигурно.",
     "storeCredentials": "Съхраняване на идентификационните данни в този браузър",
     "storeCredentialsWarning": "Съхраняването на частния ключ в браузъра е удобно, но по-малко сигурно.",
-    "relayServersLabel": "Relay сървъри:",
+    "relayServersLabel": "Релета (сървъри, които разпространяват публикацията ви):",
     "relayPlaceholder": "Въведете relay сървъри (по един на ред)",
     "relayHint": "Въведете relay сървъри (по един на ред), към които да публикувате съдържанието.",
     "rememberRelays": "Запомняне на тези relay сървъри за бъдещи публикации",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Този частен ключ дава достъп до вашата Nostr идентичност. Запазете го сигурно.",
     "intro": "Споделете курса си с общността на Nostr. Можете да публикувате директно или първо да персонализирате публикацията.",
     "nostrLinkLabel": "Nostr връзка за вашия курс:",
-    "embedMedia": "Вграждане на медийни файлове като data URI",
-    "embedMediaHint": "Преобразува изображения, аудио и видео файлове във вградени data URI за по-добра преносимост.",
+    "embedMedia": "Включване на изображенията, аудиото и видеото в публикацията",
+    "embedMediaHint": "Тогава курсът работи и без този редактор, но публикацията става по-голяма.",
     "customizePost": "Персонализиране на публикацията",
     "publishNow": "Публикуване сега",
     "messageLabel": "Съобщение (по избор):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Преобразуване за учебна платформа",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Адрес на експортера",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Обикновено тук не е нужно да променяте нищо. Ако използвате собствен експортер (например с 'liaex serve' на http://localhost:3000), въведете адреса му тук.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Проектът ви е предаден. Изберете формат по-долу (например SCORM за Moodle) и стартирайте експорта.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Няма връзка с експортера. Проверете адреса по-долу – при собствен експортер 'liaex serve' трябва да работи.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Използване на друг експортер"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "редактор → папка",
+      "pull": "папка → редактор",
+      "conflict": "променено и от двете страни – моля, изберете"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Синхронизиране с папката",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Редакторът и папката са еднакви – няма какво да се прави.",
+      "applying": "Синхронизиране…",
+      "done": "Готово – редакторът и папката вече са еднакви.",
+      "applyBtn": "Синхронизиране на файлове: {n}",
+      "keepEditor": "Запазване на версията от редактора",
+      "keepDisk": "Вземане на версията от папката",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Браузърът се нуждае от вашето разрешение, за да отвори папката."
     }
   },
   "result": {

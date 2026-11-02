@@ -7,14 +7,14 @@ import { getProjectDoc, releaseProjectDoc, handOffProjectDoc } from "../../ts/Pr
 import * as GitHub from "../../ts/GitHubRepo";
 import type { TreeItem } from "../../ts/GitHubRepo";
 import { importPaths, seedEmptyReadme } from "../../ts/githubImport";
-import GitHubModal from "../../components/GitHub/GitHubModal.vue";
+import AppDialog from "../../components/AppDialog.vue";
 import GitHubFileTree from "../../components/GitHub/GitHubFileTree.vue";
 import PatHelp from "../../components/GitHub/PatHelp.vue";
 
 export default defineComponent({
   name: "ImportModal",
 
-  components: { GitHubModal, GitHubFileTree, PatHelp },
+  components: { AppDialog, GitHubFileTree, PatHelp },
 
   props: {
     visible: { type: Boolean, default: false },
@@ -224,7 +224,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <GitHubModal :visible="visible" :title="$t('github.import.title')" @close="close">
+  <AppDialog :visible="visible" icon="bi-github" :title="$t('github.import.title')" @close="close">
     <!-- step: enter repository -->
     <template v-if="step === 'input'">
       <label class="form-label small">{{ $t("github.import.repoLabel") }}</label>
@@ -339,5 +339,5 @@ export default defineComponent({
         {{ $t("github.close") }}
       </button>
     </template>
-  </GitHubModal>
+  </AppDialog>
 </template>

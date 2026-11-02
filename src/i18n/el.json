@@ -267,8 +267,9 @@
     "shareFileUrl": "παρακαλώ εισαγάγετε το URL ενός αρχείου Markdown που θέλετε να μοιραστείτε"
   },
   "examples": {
-    "show": "Εμφάνιση",
-    "footer": "Αυτός είναι ένας συνεργατικός διαδικτυακός επεξεργαστής για {liascript}. Όλο το περιεχόμενο αποθηκεύεται μόνο στο πρόγραμμα περιήγησής σας. Αναζητήστε ενσωματώσιμα {templates} ή ήδη δημοσιευμένα {courses}."
+    "show": "Άνοιγμα στον επεξεργαστή",
+    "footer": "Αυτός είναι ένας συνεργατικός διαδικτυακός επεξεργαστής για {liascript}. Όλο το περιεχόμενο αποθηκεύεται μόνο στο πρόγραμμα περιήγησής σας. Αναζητήστε ενσωματώσιμα {templates} ή ήδη δημοσιευμένα {courses}.",
+    "intro": "Έτοιμα μαθήματα για να τα δείτε και να τα δοκιμάσετε. Ανοίξτε ένα στον επεξεργαστή – τα δικά σας μαθήματα μένουν ανέπαφα."
   },
   "index": {
     "newCourse": "Νέο μάθημα",
@@ -334,7 +335,12 @@
     },
     "courses": "Τα μαθήματά μου",
     "courseCount": "{n} μάθημα | {n} μαθήματα",
-    "newCourseDesc": "Πρότυπο, αρχείο ή εισαγωγή"
+    "newCourseDesc": "Πρότυπο, αρχείο ή εισαγωγή",
+    "sort": {
+      "label": "Ταξινόμηση",
+      "recent": "Τελευταίο άνοιγμα",
+      "title": "Τίτλος Α–Ω"
+    }
   },
   "card": {
     "untitled": "Χωρίς τίτλο",
@@ -358,7 +364,8 @@
       "folder": "Φάκελος"
     },
     "linkedTitle": "Αποθηκευμένο και εκτός αυτού του προγράμματος περιήγησης",
-    "localTitle": "Αποθηκευμένο μόνο σε αυτό το πρόγραμμα περιήγησης – κρατήστε αντίγραφο μέσω «Κοινή χρήση & εξαγωγή»"
+    "localTitle": "Αποθηκευμένο μόνο σε αυτό το πρόγραμμα περιήγησης – κρατήστε αντίγραφο μέσω «Κοινή χρήση & εξαγωγή»",
+    "backup": "Αντίγραφο ασφαλείας"
   },
   "footer": {
     "followUs": "Ακολουθήστε μας στο:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Αυτό το μάθημα",
+      "targetNew": "Ένα νέο μάθημα",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Ανέβασμα αλλαγών στο GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Τίποτα για ανέβασμα – δεν άλλαξε τίποτα από το τελευταίο ανέβασμα.",
+      "remoteDrift": "Κάποιος άλλαξε το αποθετήριο στο GitHub μετά το τελευταίο σας ανέβασμα. Κάντε πρώτα λήψη αυτών των αλλαγών, αν θέλετε να τις κρατήσετε. Τα αρχεία που δεν αλλάξατε μένουν ως έχουν στο GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Διαφορές",
+      "diffHint": "αριστερά: GitHub · δεξιά: αυτός ο επεξεργαστής",
+      "commitMessage": "Σύντομη σημείωση για το τι αλλάξατε",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Ανέβασμα στο GitHub…",
+      "pushBtn": "Ανέβασμα αρχείων: {n}",
+      "done": "Οι αλλαγές ανέβηκαν."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Λήψη αλλαγών από το GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Το μάθημά σας είναι ενημερωμένο με το GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Αποδοχή αρχείων: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Το όριο του GitHub έχει εξαντληθεί",
-      "authTitle": "Απαιτείται έλεγχος ταυτότητας",
+      "authTitle": "Απαιτείται σύνδεση στο GitHub",
       "manageTitle": "Manage access token",
-      "intro": "Προσθέστε ένα προσωπικό διακριτικό πρόσβασης (PAT) για να αυξήσετε το όριο και να αποκτήσετε πρόσβαση σε ιδιωτικά αποθετήρια ή να στείλετε αλλαγές.",
+      "intro": "Το GitHub χρειάζεται ένα διακριτικό πρόσβασης (token) – ένα είδος κωδικού για εφαρμογές – για να ανεβάζετε αλλαγές, να δημιουργείτε αποθετήρια, να ανοίγετε ιδιωτικά αποθετήρια ή να φορτώνετε πιο συχνά.",
       "howtoToggle": "Πώς δημιουργώ ένα διακριτικό;",
       "step1": "Ανοίξτε το {link}.",
       "step2Classic": "Βεβαιωθείτε ότι είναι επιλεγμένο το πεδίο εμβέλειας \"repo\".",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Δημοσίευση σε νέο αποθετήριο",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Λογαριασμός ή οργανισμός",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Δημιουργία αποθετηρίου",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Ανέβασμα αρχείων…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Το αποθετήριο δημιουργήθηκε και όλα τα αρχεία ανέβηκαν."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Αυτό το μάθημα",
+      "targetNew": "Ένα νέο μάθημα",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Ανέβασμα αλλαγών στο GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Τίποτα για ανέβασμα – δεν άλλαξε τίποτα από το τελευταίο ανέβασμα.",
+      "remoteDrift": "Κάποιος άλλαξε το αποθετήριο στο GitLab μετά το τελευταίο σας ανέβασμα. Κάντε πρώτα λήψη αυτών των αλλαγών, αν θέλετε να τις κρατήσετε. Τα αρχεία που δεν αλλάξατε μένουν ως έχουν στο GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Διαφορές",
+      "diffHint": "αριστερά: GitLab · δεξιά: αυτός ο επεξεργαστής",
+      "commitMessage": "Σύντομη σημείωση για το τι αλλάξατε",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Ανέβασμα στο GitLab…",
+      "pushBtn": "Ανέβασμα αρχείων: {n}",
+      "done": "Οι αλλαγές ανέβηκαν."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Λήψη αλλαγών από το GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Το μάθημά σας είναι ενημερωμένο με το GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Αποδοχή αρχείων: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Απαιτείται σύνδεση στο GitLab",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "Το GitLab χρειάζεται ένα διακριτικό πρόσβασης (token) – ένα είδος κωδικού για εφαρμογές – για να ανεβάζετε αλλαγές, να δημιουργείτε αποθετήρια, να ανοίγετε ιδιωτικά αποθετήρια ή να φορτώνετε πιο συχνά.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Δημοσίευση σε νέο αποθετήριο",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Λογαριασμός ή οργανισμός",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Δημιουργία αποθετηρίου",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Ανέβασμα αρχείων…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Το αποθετήριο δημιουργήθηκε και όλα τα αρχεία ανέβηκαν."
     }
   },
   "nostr": {
-    "title": "Κοινή χρήση μέσω Nostr",
-    "keysSection": "Κλειδιά Nostr",
+    "title": "Δημοσίευση στο Nostr",
+    "keysSection": "Η ταυτότητά σας στο Nostr",
     "publicKeyLabel": "Το δημόσιο κλειδί σας (npub):",
     "publicKeyPlaceholder": "Εισαγάγετε το δημόσιο κλειδί Nostr (npub...)",
     "generateNew": "Δημιουργία νέου",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Το ιδιωτικό κλειδί σας απαιτείται για υπογραφή και δημοσίευση αναρτήσεων. Φυλάξτε το με ασφάλεια.",
     "storeCredentials": "Αποθήκευση διαπιστευτηρίων σε αυτό το πρόγραμμα περιήγησης",
     "storeCredentialsWarning": "Η αποθήκευση του ιδιωτικού κλειδιού στο πρόγραμμα περιήγησης είναι βολική αλλά λιγότερο ασφαλής.",
-    "relayServersLabel": "Διακομιστές relay:",
+    "relayServersLabel": "Relays (διακομιστές που διανέμουν την ανάρτησή σας):",
     "relayPlaceholder": "Εισαγάγετε διακομιστές relay (έναν ανά γραμμή)",
     "relayHint": "Εισαγάγετε διακομιστές relay (έναν ανά γραμμή) στους οποίους θα δημοσιευτεί το περιεχόμενό σας.",
     "rememberRelays": "Απομνημόνευση αυτών των relay για μελλοντικές αναρτήσεις",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Αυτό το ιδιωτικό κλειδί παρέχει πρόσβαση στην ταυτότητά σας στο Nostr. Αποθηκεύστε το με ασφάλεια.",
     "intro": "Μοιραστείτε το μάθημά σας με την κοινότητα Nostr. Μπορείτε να δημοσιεύσετε απευθείας ή πρώτα να προσαρμόσετε την ανάρτησή σας.",
     "nostrLinkLabel": "Σύνδεσμος Nostr για το μάθημά σας:",
-    "embedMedia": "Ενσωμάτωση αρχείων πολυμέσων ως data URI",
-    "embedMediaHint": "Μετατρέπει εικόνες, αρχεία ήχου και βίντεο σε ενσωματωμένα data URI για καλύτερη φορητότητα.",
+    "embedMedia": "Συμπερίληψη εικόνων, ήχου και βίντεο στην ανάρτηση",
+    "embedMediaHint": "Έτσι το μάθημα λειτουργεί και χωρίς αυτόν τον επεξεργαστή, αλλά η ανάρτηση γίνεται μεγαλύτερη.",
     "customizePost": "Προσαρμογή ανάρτησης",
     "publishNow": "Δημοσίευση τώρα",
     "messageLabel": "Μήνυμα (προαιρετικό):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Μετατροπή για πλατφόρμα μάθησης",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Διεύθυνση του Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Συνήθως δεν χρειάζεται να αλλάξετε τίποτα εδώ. Αν χρησιμοποιείτε δικό σας Exporter (για παράδειγμα με 'liaex serve' στο http://localhost:3000), εισαγάγετε εδώ τη διεύθυνσή του.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Το έργο σας παραδόθηκε. Επιλέξτε παρακάτω μια μορφή (για παράδειγμα SCORM για Moodle) και ξεκινήστε την εξαγωγή.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Ο Exporter δεν είναι προσβάσιμος. Ελέγξτε τη διεύθυνση παρακάτω – για δικό σας Exporter πρέπει να εκτελείται το 'liaex serve'.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Χρήση άλλου Exporter"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "επεξεργαστής → φάκελος",
+      "pull": "φάκελος → επεξεργαστής",
+      "conflict": "άλλαξε και στις δύο πλευρές – επιλέξτε"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Συγχρονισμός με τον φάκελο",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Ο επεξεργαστής και ο φάκελος είναι ίδιοι – δεν χρειάζεται να κάνετε τίποτα.",
+      "applying": "Συγχρονισμός…",
+      "done": "Έτοιμο – ο επεξεργαστής και ο φάκελος είναι πλέον ίδιοι.",
+      "applyBtn": "Συγχρονισμός αρχείων: {n}",
+      "keepEditor": "Διατήρηση έκδοσης επεξεργαστή",
+      "keepDisk": "Χρήση έκδοσης φακέλου",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Το πρόγραμμα περιήγησης χρειάζεται την άδειά σας για να ανοίξει τον φάκελο."
     }
   },
   "result": {

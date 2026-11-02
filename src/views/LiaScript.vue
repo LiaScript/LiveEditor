@@ -32,7 +32,7 @@ const LocalFolderSyncModal = defineAsyncComponent(() => import("./LocalFolder/Sy
 
 import * as LocalFolder from "../ts/LocalFolder";
 import { detectGitHubRemote, detectGitLabRemote } from "../ts/localFolderSync";
-import { SYNC_ON_OPEN_KEY } from "../ts/createProject";
+import { SYNC_ON_OPEN_KEY, BACKUP_ON_OPEN_KEY } from "../ts/createProject";
 
 import logoImg from "url:../../assets/logo.png";
 
@@ -125,6 +125,15 @@ export default {
     ) {
       sessionStorage.removeItem(SYNC_ON_OPEN_KEY);
       this.localFolderSyncVisible = true;
+    }
+
+    // "Back up" on an index card: show the download/export options right away
+    if (
+      this.$props.storageId &&
+      sessionStorage.getItem(BACKUP_ON_OPEN_KEY) === this.$props.storageId
+    ) {
+      sessionStorage.removeItem(BACKUP_ON_OPEN_KEY);
+      this.$nextTick(() => (this.$refs.shareModal as any)?.open("export"));
     }
   },
 

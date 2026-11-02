@@ -267,8 +267,9 @@
     "shareFileUrl": "paylaşmak istediğiniz Markdown dosyasının URL'sini girin"
   },
   "examples": {
-    "show": "Göster",
-    "footer": "Bu, {liascript} için iş birliğine dayalı çevrimiçi bir editördür. Tüm içerik yalnızca tarayıcınızda saklanır. Yerleştirilebilir {templates} veya daha önce yayımlanmış {courses} arayın."
+    "show": "Editörde aç",
+    "footer": "Bu, {liascript} için iş birliğine dayalı çevrimiçi bir editördür. Tüm içerik yalnızca tarayıcınızda saklanır. Yerleştirilebilir {templates} veya daha önce yayımlanmış {courses} arayın.",
+    "intro": "İncelemek ve denemek için hazır kurslar. Birini editörde açın – kendi kurslarınız değişmeden kalır."
   },
   "index": {
     "newCourse": "Yeni kurs",
@@ -334,7 +335,12 @@
     },
     "courses": "Kurslarım",
     "courseCount": "{n} kurs | {n} kurs",
-    "newCourseDesc": "Şablon, dosya veya içe aktarma"
+    "newCourseDesc": "Şablon, dosya veya içe aktarma",
+    "sort": {
+      "label": "Sırala",
+      "recent": "Son açılan",
+      "title": "Başlık A–Z"
+    }
   },
   "card": {
     "untitled": "Başlıksız",
@@ -358,7 +364,8 @@
       "folder": "Klasör"
     },
     "linkedTitle": "Bu tarayıcının dışında da saklanıyor",
-    "localTitle": "Yalnızca bu tarayıcıda saklanıyor – “Paylaş ve dışa aktar” üzerinden yedekleyin"
+    "localTitle": "Yalnızca bu tarayıcıda saklanıyor – “Paylaş ve dışa aktar” üzerinden yedekleyin",
+    "backup": "Yedekle"
   },
   "footer": {
     "followUs": "Bizi takip edin:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Bu kurs",
+      "targetNew": "Yeni bir kurs",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Değişiklikleri GitHub'a yükle",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Yüklenecek bir şey yok – son yüklemeden beri hiçbir şey değişmedi.",
+      "remoteDrift": "Son yüklemenizden bu yana biri GitHub'daki depoyu değiştirdi. Bu değişiklikleri korumak istiyorsanız önce onları alın. Değiştirmediğiniz dosyalar GitHub'da olduğu gibi kalır.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Farklar",
+      "diffHint": "sol: GitHub · sağ: bu editör",
+      "commitMessage": "Neyi değiştirdiğinize dair kısa bir not",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "GitHub'a yükleniyor…",
+      "pushBtn": "Dosyaları yükle: {n}",
+      "done": "Değişiklikler yüklendi."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Değişiklikleri GitHub'dan al",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Kursunuz GitHub ile güncel.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Dosyaları al: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitHub sınırına ulaşıldı",
-      "authTitle": "Kimlik doğrulama gerekli",
+      "authTitle": "GitHub'a giriş gerekli",
       "manageTitle": "Manage access token",
-      "intro": "Sınırı yükseltmek ve özel depolara erişmek veya değişiklikleri göndermek için bir Kişisel Erişim Belirteci (PAT) ekleyin.",
+      "intro": "Değişiklikleri yüklemek, depo oluşturmak, özel depoları açmak veya daha sık veri almak için GitHub'ın bir erişim belirtecine (token) – uygulamalar için bir tür parolaya – ihtiyacı var.",
       "howtoToggle": "Belirteci nasıl oluştururum?",
       "step1": "{link} adresini açın.",
       "step2Classic": "\"repo\" kapsamının işaretli olduğundan emin olun.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Yeni bir depoda yayınla",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Hesap veya kuruluş",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Depo oluştur",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Dosyalar yükleniyor…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Depo oluşturuldu ve tüm dosyalar yüklendi."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Bu kurs",
+      "targetNew": "Yeni bir kurs",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Değişiklikleri GitLab'a yükle",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Yüklenecek bir şey yok – son yüklemeden beri hiçbir şey değişmedi.",
+      "remoteDrift": "Son yüklemenizden bu yana biri GitLab'daki depoyu değiştirdi. Bu değişiklikleri korumak istiyorsanız önce onları alın. Değiştirmediğiniz dosyalar GitLab'da olduğu gibi kalır.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Farklar",
+      "diffHint": "sol: GitLab · sağ: bu editör",
+      "commitMessage": "Neyi değiştirdiğinize dair kısa bir not",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "GitLab'a yükleniyor…",
+      "pushBtn": "Dosyaları yükle: {n}",
+      "done": "Değişiklikler yüklendi."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Değişiklikleri GitLab'dan al",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Kursunuz GitLab ile güncel.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Dosyaları al: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "GitLab'a giriş gerekli",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "Değişiklikleri yüklemek, depo oluşturmak, özel depoları açmak veya daha sık veri almak için GitLab'ın bir erişim belirtecine (token) – uygulamalar için bir tür parolaya – ihtiyacı var.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Yeni bir depoda yayınla",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Hesap veya kuruluş",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Depo oluştur",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Dosyalar yükleniyor…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Depo oluşturuldu ve tüm dosyalar yüklendi."
     }
   },
   "nostr": {
-    "title": "Nostr ile paylaş",
-    "keysSection": "Nostr anahtarları",
+    "title": "Nostr'da yayınla",
+    "keysSection": "Nostr kimliğiniz",
     "publicKeyLabel": "Açık anahtarınız (npub):",
     "publicKeyPlaceholder": "Nostr açık anahtarınızı girin (npub...)",
     "generateNew": "Yeni oluştur",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Özel anahtarınız gönderileri imzalamak ve yayımlamak için gereklidir. Güvende tutun.",
     "storeCredentials": "Kimlik bilgilerini bu tarayıcıda sakla",
     "storeCredentialsWarning": "Özel anahtarınızı tarayıcıda saklamak kullanışlıdır ama daha az güvenlidir.",
-    "relayServersLabel": "Relay sunucuları:",
+    "relayServersLabel": "Relay'ler (gönderinizi dağıtan sunucular):",
     "relayPlaceholder": "Relay sunucularını girin (her satıra bir tane)",
     "relayHint": "İçeriğinizi yayımlamak için relay sunucularını girin (her satıra bir tane).",
     "rememberRelays": "Gelecekteki gönderiler için bu relay'leri hatırla",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Bu özel anahtar Nostr kimliğinize erişim sağlar. Güvenli şekilde saklayın.",
     "intro": "Kursunuzu Nostr topluluğuyla paylaşın. Doğrudan yayımlayabilir veya önce gönderinizi özelleştirebilirsiniz.",
     "nostrLinkLabel": "Kursunuz için Nostr bağlantısı:",
-    "embedMedia": "Medya dosyalarını data URI olarak yerleştir",
-    "embedMediaHint": "Daha iyi taşınabilirlik için görüntü, ses ve video dosyalarını gömülü data URI'lere dönüştürür.",
+    "embedMedia": "Görselleri, sesi ve videoyu gönderiye ekle",
+    "embedMediaHint": "Böylece kurs bu editör olmadan da çalışır, ancak gönderi büyür.",
     "customizePost": "Gönderiyi özelleştir",
     "publishNow": "Şimdi yayımla",
     "messageLabel": "Mesaj (isteğe bağlı):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Öğrenme platformu için dönüştür",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Exporter adresi",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Genellikle burada değiştirecek bir şey yoktur. Kendi Exporter'ınızı çalıştırıyorsanız (örneğin http://localhost:3000 adresinde 'liaex serve' ile), adresini buraya girin.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Projeniz aktarıldı. Aşağıdan bir biçim seçin (örneğin Moodle için SCORM) ve dışa aktarmayı başlatın.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporter'a ulaşılamıyor. Aşağıdaki adresi kontrol edin – kendi Exporter'ınız için 'liaex serve' çalışıyor olmalı.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Başka bir Exporter kullan"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "editör → klasör",
+      "pull": "klasör → editör",
+      "conflict": "iki tarafta da değişti – lütfen seçin"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Klasörle eşitle",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Editör ve klasör aynı – yapılacak bir şey yok.",
+      "applying": "Eşitleniyor…",
+      "done": "Tamam – editör ve klasör artık aynı.",
+      "applyBtn": "Dosyaları eşitle: {n}",
+      "keepEditor": "Editör sürümünü koru",
+      "keepDisk": "Klasör sürümünü al",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Tarayıcının klasörü açmak için izninize ihtiyacı var."
     }
   },
   "result": {

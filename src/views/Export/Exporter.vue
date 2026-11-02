@@ -1,5 +1,6 @@
 <script lang="ts">
 import { buildProjectZip } from "../../ts/utils";
+import AppDialog from "../../components/AppDialog.vue";
 import { getProjectDoc, releaseProjectDoc } from "../../ts/ProjectDoc";
 
 const STORAGE_KEY = "liaexporter.url";
@@ -7,6 +8,8 @@ const DEFAULT_URL = "https://liascript.github.io/LiaScript-Exporter";
 
 export default {
   name: "ExporterModal",
+
+  components: { AppDialog },
 
   props: {
     visible: { type: Boolean, default: false },
@@ -259,49 +262,14 @@ export default {
 </script>
 
 <template>
-  <div class="exporter-modal" v-if="visible">
-    <div class="modal-backdrop" @click="close"></div>
-    <div class="modal-container">
-      <div class="modal-header">
-        <h5 class="modal-title">
-          <i class="bi bi-box-arrow-up-right me-2"></i>{{ $t('exporter.title') }}
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          @click="close"
-          :aria-label="$t('exporter.close')"
-        ></button>
-      </div>
-
-      <div class="modal-body">
-        <!-- Server URL configuration -->
-        <div class="url-bar">
-          <label for="exporterUrl" class="form-label mb-1">{{ $t('exporter.urlLabel') }}</label>
-          <div class="input-group">
-            <input
-              id="exporterUrl"
-              type="url"
-              class="form-control"
-              v-model="url"
-              :placeholder="$t('exporter.urlPlaceholder')"
-              @keyup.enter="connect"
-            />
-            <button class="btn btn-primary" @click="connect">
-              <i class="bi bi-plug"></i> {{ $t('exporter.connect') }}
-            </button>
-            <button
-              class="btn btn-outline-secondary"
-              @click="resend"
-              :disabled="!iframeReady || sending"
-              :title="$t('exporter.resendTitle')"
-            >
-              <i class="bi bi-arrow-repeat"></i> {{ $t('exporter.resend') }}
-            </button>
-          </div>
-          <div class="form-text text-muted">{{ $t('exporter.urlHint') }}</div>
-        </div>
-
+  <AppDialog
+    :visible="visible"
+    size="xl"
+    icon="bi-mortarboard"
+    :title="$t('exporter.title')"
+    :subtitle="$t('share.items.exporter.desc')"
+    @close="close"
+  >
         <!-- Status line -->
         <div v-if="errorKey" class="alert alert-warning py-2 mt-2 mb-2">
           <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ $t(errorKey) }}
@@ -341,57 +309,49 @@ export default {
             <span class="spinner-border spinner-border-sm me-2"></span>{{ $t('exporter.connecting') }}
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+
+        <!-- Exporter address: the hosted one works for nearly everybody, so the
+             setting stays folded away unless the connection failed. -->
+        <details class="url-bar mt-2" :open="!!errorKey">
+          <summary class="small fw-semibold">{{ $t('exporter.otherServer') }}</summary>
+          <label for="exporterUrl" class="form-label small mt-2 mb-1">{{ $t('exporter.urlLabel') }}</label>
+          <div class="input-group input-group-sm">
+            <input
+              id="exporterUrl"
+              type="url"
+              class="form-control"
+              v-model="url"
+              :placeholder="$t('exporter.urlPlaceholder')"
+              @keyup.enter="connect"
+            />
+            <button class="btn btn-primary" @click="connect">
+              <i class="bi bi-plug" aria-hidden="true"></i> {{ $t('exporter.connect') }}
+            </button>
+          </div>
+          <div class="form-text">{{ $t('exporter.urlHint') }}</div>
+        </details>
+
+    <template #footer>
+      <button
+        class="btn btn-outline-secondary"
+        @click="resend"
+        :disabled="!iframeReady || sending"
+        :title="$t('exporter.resendTitle')"
+      >
+        <i class="bi bi-arrow-repeat" aria-hidden="true"></i> {{ $t('exporter.resend') }}
+      </button>
+    </template>
+  </AppDialog>
 </template>
 
 <style scoped>
-.exporter-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  /* Bootstrap's .modal-backdrop sets z-index: 1050; keep the backdrop below the
-     container so the dialog stays interactive. */
-  z-index: 1;
-}
-
-.modal-container {
-  position: relative;
-  z-index: 2;
-  background: var(--bs-body-bg, #fff);
-  border-radius: 0.5rem;
-  width: 92vw;
-  max-width: 1100px;
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.4);
-}
-
-.modal-header,
-.modal-body {
-  padding: 1rem;
-}
-
-.modal-body {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
 .url-bar {
   flex: 0 0 auto;
+}
+
+.url-bar summary {
+  cursor: pointer;
+  color: var(--lia-muted);
 }
 
 .frame-wrap {

@@ -267,8 +267,9 @@
     "shareFileUrl": "Будь ласка, введіть URL файлу Markdown, яким хочете поділитися"
   },
   "examples": {
-    "show": "Показати",
-    "footer": "Це спільний онлайн-редактор для {liascript}. Весь вміст зберігається лише у вашому браузері. Шукайте вбудовувані {templates} або вже опубліковані {courses}."
+    "show": "Відкрити в редакторі",
+    "footer": "Це спільний онлайн-редактор для {liascript}. Весь вміст зберігається лише у вашому браузері. Шукайте вбудовувані {templates} або вже опубліковані {courses}.",
+    "intro": "Готові курси, які можна переглянути й випробувати. Відкрийте будь-який у редакторі – ваші власні курси залишаться без змін."
   },
   "index": {
     "newCourse": "Новий курс",
@@ -334,7 +335,12 @@
     },
     "courses": "Мої курси",
     "courseCount": "{n} курс | Курсів: {n}",
-    "newCourseDesc": "Шаблон, файл або імпорт"
+    "newCourseDesc": "Шаблон, файл або імпорт",
+    "sort": {
+      "label": "Сортування",
+      "recent": "Нещодавно відкриті",
+      "title": "Назва А–Я"
+    }
   },
   "card": {
     "untitled": "Без назви",
@@ -358,7 +364,8 @@
       "folder": "Тека"
     },
     "linkedTitle": "Також збережено поза цим браузером",
-    "localTitle": "Збережено лише в цьому браузері – створіть резервну копію через «Поділитися й експортувати»"
+    "localTitle": "Збережено лише в цьому браузері – створіть резервну копію через «Поділитися й експортувати»",
+    "backup": "Резервна копія"
   },
   "footer": {
     "followUs": "Слідкуйте за нами:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Цей курс",
+      "targetNew": "Новий курс",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Надіслати зміни в GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Нічого надсилати – від останнього надсилання нічого не змінилося.",
+      "remoteDrift": "Після вашого останнього надсилання хтось змінив репозиторій на GitHub. Спершу отримайте ці зміни, якщо хочете їх зберегти. Файли, які ви не змінювали, залишаться на GitHub без змін.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Відмінності",
+      "diffHint": "ліворуч: GitHub · праворуч: цей редактор",
+      "commitMessage": "Коротка примітка про те, що ви змінили",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Надсилання в GitHub…",
+      "pushBtn": "Надіслати файли: {n}",
+      "done": "Зміни надіслано."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Отримати зміни з GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Ваш курс збігається з версією на GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Прийняти файли: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Досягнуто ліміту GitHub",
-      "authTitle": "Потрібна автентифікація",
+      "authTitle": "Потрібен вхід у GitHub",
       "manageTitle": "Manage access token",
-      "intro": "Додайте персональний токен доступу (PAT), щоб підвищити ліміт і отримати доступ до приватних репозиторіїв або надсилати зміни.",
+      "intro": "GitHub потребує токен доступу – своєрідний пароль для програм – щоб надсилати зміни, створювати репозиторії, відкривати приватні репозиторії або завантажувати частіше.",
       "howtoToggle": "Як створити токен?",
       "step1": "Відкрийте {link}.",
       "step2Classic": "Переконайтеся, що позначено область \"repo\".",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Опублікувати в новому репозиторії",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Обліковий запис або організація",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Створити репозиторій",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Надсилання файлів…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Репозиторій створено, усі файли надіслано."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Цей курс",
+      "targetNew": "Новий курс",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Надіслати зміни в GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Нічого надсилати – від останнього надсилання нічого не змінилося.",
+      "remoteDrift": "Після вашого останнього надсилання хтось змінив репозиторій на GitLab. Спершу отримайте ці зміни, якщо хочете їх зберегти. Файли, які ви не змінювали, залишаться на GitLab без змін.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Відмінності",
+      "diffHint": "ліворуч: GitLab · праворуч: цей редактор",
+      "commitMessage": "Коротка примітка про те, що ви змінили",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Надсилання в GitLab…",
+      "pushBtn": "Надіслати файли: {n}",
+      "done": "Зміни надіслано."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Отримати зміни з GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Ваш курс збігається з версією на GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Прийняти файли: {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Потрібен вхід у GitLab",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab потребує токен доступу – своєрідний пароль для програм – щоб надсилати зміни, створювати репозиторії, відкривати приватні репозиторії або завантажувати частіше.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Опублікувати в новому репозиторії",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Обліковий запис або організація",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Створити репозиторій",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Надсилання файлів…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Репозиторій створено, усі файли надіслано."
     }
   },
   "nostr": {
-    "title": "Поділитися через Nostr",
-    "keysSection": "Ключі Nostr",
+    "title": "Опублікувати в Nostr",
+    "keysSection": "Ваша ідентичність у Nostr",
     "publicKeyLabel": "Ваш публічний ключ (npub):",
     "publicKeyPlaceholder": "Введіть ваш публічний ключ Nostr (npub...)",
     "generateNew": "Згенерувати новий",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Ваш приватний ключ потрібен для підпису та публікації. Зберігайте його надійно.",
     "storeCredentials": "Зберегти облікові дані в цьому браузері",
     "storeCredentialsWarning": "Зберігання приватного ключа в браузері зручне, але менш безпечне.",
-    "relayServersLabel": "Relay-сервери:",
+    "relayServersLabel": "Реле (сервери, які поширюють ваш допис):",
     "relayPlaceholder": "Введіть relay-сервери (по одному на рядок)",
     "relayHint": "Введіть relay-сервери (по одному на рядок), на яких буде опубліковано вміст.",
     "rememberRelays": "Запам'ятати ці relay-сервери для майбутніх публікацій",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Цей приватний ключ надає доступ до вашої ідентичності Nostr. Зберігайте його надійно.",
     "intro": "Поділіться своїм курсом зі спільнотою Nostr. Ви можете опублікувати одразу або спочатку налаштувати публікацію.",
     "nostrLinkLabel": "Посилання Nostr для вашого курсу:",
-    "embedMedia": "Вбудувати медіафайли як дата-URI",
-    "embedMediaHint": "Перетворює зображення, аудіо та відеофайли на вбудовані дата-URI для кращої портативності.",
+    "embedMedia": "Додати зображення, аудіо та відео в допис",
+    "embedMediaHint": "Тоді курс працюватиме й без цього редактора, але допис стане більшим.",
     "customizePost": "Налаштувати публікацію",
     "publishNow": "Опублікувати зараз",
     "messageLabel": "Повідомлення (необов'язково):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Перетворити для навчальної платформи",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Адреса експортера",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Зазвичай тут нічого не потрібно змінювати. Якщо ви запускаєте власний експортер (наприклад, через 'liaex serve' за адресою http://localhost:3000), введіть тут його адресу.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Ваш проєкт передано. Виберіть нижче формат (наприклад, SCORM для Moodle) і запустіть експорт.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Не вдається з’єднатися з експортером. Перевірте адресу нижче – для власного експортера має бути запущено 'liaex serve'.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Використати інший експортер"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "редактор → тека",
+      "pull": "тека → редактор",
+      "conflict": "змінено з обох боків – виберіть, будь ласка"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Синхронізувати з текою",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Редактор і тека однакові – нічого робити не потрібно.",
+      "applying": "Синхронізація…",
+      "done": "Готово – тепер редактор і тека однакові.",
+      "applyBtn": "Синхронізувати файли: {n}",
+      "keepEditor": "Залишити версію редактора",
+      "keepDisk": "Взяти версію з теки",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Браузеру потрібен ваш дозвіл, щоб відкрити теку."
     }
   },
   "result": {

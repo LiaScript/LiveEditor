@@ -31,6 +31,13 @@ export interface ProjectMeta {
  */
 export const SYNC_ON_OPEN_KEY = "liaeditor:syncOnOpen";
 
+/**
+ * sessionStorage key carrying the storageId of a project whose "Share & export"
+ * dialog should open on the download/export group right after the editor
+ * mounts (set by the "Back up" button on an index card).
+ */
+export const BACKUP_ON_OPEN_KEY = "liaeditor:backupOnOpen";
+
 export interface CreateProjectOptions {
   /** Run after the project is set up but before navigating to the editor —
    *  e.g. to persist a linked folder handle while the storageId is known. */

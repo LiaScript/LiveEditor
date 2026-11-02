@@ -267,8 +267,9 @@
     "shareFileUrl": "请输入你要分享的 Markdown 文件 URL"
   },
   "examples": {
-    "show": "显示",
-    "footer": "这是一个用于 {liascript} 的协作式在线编辑器。所有内容只存储在你的浏览器中。搜索可嵌入的 {templates} 或已发布的 {courses}。"
+    "show": "在编辑器中打开",
+    "footer": "这是一个用于 {liascript} 的协作式在线编辑器。所有内容只存储在你的浏览器中。搜索可嵌入的 {templates} 或已发布的 {courses}。",
+    "intro": "可供浏览和试用的现成课程。在编辑器中打开任意一个——你自己的课程不会受到影响。"
   },
   "index": {
     "newCourse": "新课程",
@@ -334,7 +335,12 @@
     },
     "courses": "我的课程",
     "courseCount": "{n} 门课程 | {n} 门课程",
-    "newCourseDesc": "模板、文件或导入"
+    "newCourseDesc": "模板、文件或导入",
+    "sort": {
+      "label": "排序",
+      "recent": "最近打开",
+      "title": "标题 A–Z"
+    }
   },
   "card": {
     "untitled": "无标题",
@@ -358,7 +364,8 @@
       "folder": "文件夹"
     },
     "linkedTitle": "也保存在此浏览器之外",
-    "localTitle": "仅保存在此浏览器中——请通过“分享与导出”备份"
+    "localTitle": "仅保存在此浏览器中——请通过“分享与导出”备份",
+    "backup": "备份"
   },
   "footer": {
     "followUs": "关注我们："
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "此课程",
+      "targetNew": "新课程",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "上传更改到 GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "没有可上传的内容——自上次上传以来没有任何更改。",
+      "remoteDrift": "自你上次上传以来，有人在 GitHub 上更改了仓库。如果想保留这些更改，请先获取它们。你未更改的文件在 GitHub 上保持不变。",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "差异",
+      "diffHint": "左：GitHub · 右：此编辑器",
+      "commitMessage": "简要说明你改了什么",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "正在上传到 GitHub…",
+      "pushBtn": "上传 {n} 个文件",
+      "done": "更改已上传。"
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "从 GitHub 获取更改",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "你的课程已与 GitHub 保持一致。",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "采用 {n} 个文件",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "已达到 GitHub 限制",
-      "authTitle": "需要身份验证",
+      "authTitle": "需要登录 GitHub",
       "manageTitle": "Manage access token",
-      "intro": "添加个人访问令牌（PAT）以提高限制，并访问私有仓库或推送更改。",
+      "intro": "GitHub 需要一个访问令牌（一种供应用使用的密码），才能上传更改、创建仓库、打开私有仓库或更频繁地加载。",
       "howtoToggle": "如何创建令牌？",
       "step1": "打开{link}。",
       "step2Classic": "确保已勾选 \"repo\" 范围。",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "发布到新仓库",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "账户或组织",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "创建仓库",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "正在上传文件…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "仓库已创建，所有文件已上传。"
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "此课程",
+      "targetNew": "新课程",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "上传更改到 GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "没有可上传的内容——自上次上传以来没有任何更改。",
+      "remoteDrift": "自你上次上传以来，有人在 GitLab 上更改了仓库。如果想保留这些更改，请先获取它们。你未更改的文件在 GitLab 上保持不变。",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "差异",
+      "diffHint": "左：GitLab · 右：此编辑器",
+      "commitMessage": "简要说明你改了什么",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "正在上传到 GitLab…",
+      "pushBtn": "上传 {n} 个文件",
+      "done": "更改已上传。"
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "从 GitLab 获取更改",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "你的课程已与 GitLab 保持一致。",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "采用 {n} 个文件",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "需要登录 GitLab",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab 需要一个访问令牌（一种供应用使用的密码），才能上传更改、创建仓库、打开私有仓库或更频繁地加载。",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "发布到新仓库",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "账户或组织",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "创建仓库",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "正在上传文件…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "仓库已创建，所有文件已上传。"
     }
   },
   "nostr": {
-    "title": "通过 Nostr 分享",
-    "keysSection": "Nostr 密钥",
+    "title": "发布到 Nostr",
+    "keysSection": "你的 Nostr 身份",
     "publicKeyLabel": "你的公钥 (npub)：",
     "publicKeyPlaceholder": "输入你的 Nostr 公钥 (npub...)",
     "generateNew": "生成新的",
@@ -592,7 +599,7 @@
     "privateKeyHint": "你的私钥用于签名和发布内容。请妥善保管。",
     "storeCredentials": "在此浏览器中保存凭据",
     "storeCredentialsWarning": "将私钥保存在浏览器中很方便，但安全性较低。",
-    "relayServersLabel": "Relay 服务器：",
+    "relayServersLabel": "中继（分发你的帖子的服务器）：",
     "relayPlaceholder": "输入 Relay 服务器（每行一个）",
     "relayHint": "输入要发布内容的 Relay 服务器（每行一个）。",
     "rememberRelays": "记住这些 Relay 服务器以供将来发布",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "此私钥可访问你的 Nostr 身份。请安全保存。",
     "intro": "与 Nostr 社区分享你的课程。你可以直接发布，也可以先自定义帖子。",
     "nostrLinkLabel": "你的课程的 Nostr 链接：",
-    "embedMedia": "将媒体文件嵌入为数据 URI",
-    "embedMediaHint": "将图片、音频和视频文件转换为嵌入式数据 URI，以提高可移植性。",
+    "embedMedia": "将图片、音频和视频一并放入帖子",
+    "embedMediaHint": "这样课程不依赖此编辑器也能使用，但帖子会变大。",
     "customizePost": "自定义帖子",
     "publishNow": "立即发布",
     "messageLabel": "消息（可选）：",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "转换为学习平台格式",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Exporter 地址",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "通常这里无需更改。如果你运行自己的 Exporter（例如在 http://localhost:3000 上使用 'liaex serve'），请在此输入它的地址。",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "你的项目已移交。请在下方选择一种格式（例如用于 Moodle 的 SCORM），然后开始导出。",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "无法连接到 Exporter。请检查下方的地址——如果是你自己的 Exporter，需要运行 'liaex serve'。",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "使用其他 Exporter"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "编辑器 → 文件夹",
+      "pull": "文件夹 → 编辑器",
+      "conflict": "两边都有更改——请选择"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "与文件夹同步",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "编辑器和文件夹内容一致——无需操作。",
+      "applying": "正在同步…",
+      "done": "完成——编辑器和文件夹现在一致了。",
+      "applyBtn": "同步 {n} 个文件",
+      "keepEditor": "保留编辑器版本",
+      "keepDisk": "采用文件夹版本",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "浏览器需要你的许可才能打开该文件夹。"
     }
   },
   "result": {

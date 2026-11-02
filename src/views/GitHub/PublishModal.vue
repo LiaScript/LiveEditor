@@ -5,7 +5,7 @@ import { getGithubPat } from "../../ts/utils";
 import { getProjectDoc, releaseProjectDoc, ProjectDoc } from "../../ts/ProjectDoc";
 import * as GitHub from "../../ts/GitHubRepo";
 import { computeChanges, pushChanges } from "../../ts/githubImport";
-import GitHubModal from "../../components/GitHub/GitHubModal.vue";
+import AppDialog from "../../components/AppDialog.vue";
 import PatHelp from "../../components/GitHub/PatHelp.vue";
 
 // "Publish" dialog: creates a brand new GitHub repository (under the user or one
@@ -13,7 +13,7 @@ import PatHelp from "../../components/GitHub/PatHelp.vue";
 export default defineComponent({
   name: "PublishModal",
 
-  components: { GitHubModal, PatHelp },
+  components: { AppDialog, PatHelp },
 
   props: {
     visible: { type: Boolean, default: false },
@@ -195,7 +195,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <GitHubModal :visible="visible" :title="$t('github.publish.title')" @close="close">
+  <AppDialog :visible="visible" icon="bi-github" :title="$t('github.publish.title')" @close="close">
     <div v-if="step === 'loading'" class="text-center py-3">
       <span class="spinner-border"></span>
     </div>
@@ -277,5 +277,5 @@ export default defineComponent({
         {{ $t("github.close") }}
       </button>
     </template>
-  </GitHubModal>
+  </AppDialog>
 </template>

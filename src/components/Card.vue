@@ -3,6 +3,7 @@ import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
 import { LiaScriptURL } from "../ts/utils";
 import { navigateTo } from "../index";
+import { BACKUP_ON_OPEN_KEY } from "../ts/createProject";
 
 // "vor 2 Minuten" / "2 minutes ago" in the UI language. Intl does not know
 // every locale the app offers; unknown ones fall back to English.
@@ -145,6 +146,10 @@ export default {
       return { label: this.$t("card.source.local"), icon: "bi-exclamation-triangle", cls: "lia-source-local", title: this.$t("card.localTitle") };
     },
 
+    isLocalOnly(): boolean {
+      return !(this.cardGithub || this.cardGitlab || this.cardFolder || this.cardGist);
+    },
+
     displayTags(): string[] {
       return this.tags.slice(0, 3);
     },
@@ -161,6 +166,13 @@ export default {
 
     openEditor() {
       navigateTo("?/edit/" + this.$props.cardId);
+    },
+
+    backUp() {
+      try {
+        sessionStorage.setItem(BACKUP_ON_OPEN_KEY, this.$props.cardId);
+      } catch {}
+      this.openEditor();
     },
 
     // Resolve a logo that points to a file inside the project (e.g. "img/cover.png").
@@ -343,17 +355,19 @@ export default {
 
         <p v-if="cardComment" class="lia-comment text-muted small mb-0">{{ cardComment }}</p>
 
-        <div class="mt-auto pt-3 d-flex justify-content-between align-items-center">
-          <small class="text-muted text-truncate me-2">
+        <div class="mt-auto pt-3 d-flex flex-wrap justify-content-between align-items-center gap-2">
+          <small class="text-muted">
             <template v-if="cardVersion">v{{ cardVersion }} · </template>{{ createDate(cardTimestamp) }}
           </small>
-          <a
-            :href="'./?/edit/' + cardId"
-            class="btn btn-primary btn-sm flex-shrink-0"
-            data-link="true"
-            @click.stop
-            >{{ $t('card.edit') }}</a
+          <button
+            v-if="isLocalOnly"
+            type="button"
+            class="btn btn-sm lia-backup flex-shrink-0"
+            :title="$t('card.localTitle')"
+            @click.stop="backUp"
           >
+            <i class="bi bi-download" aria-hidden="true"></i> {{ $t('card.backup') }}
+          </button>
         </div>
       </div>
     </div>
@@ -481,6 +495,19 @@ export default {
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.lia-backup {
+  border: 1px solid var(--lia-note-border);
+  background: var(--lia-note-bg);
+  color: var(--lia-note-ink);
+  font-weight: 500;
+}
+
+.lia-backup:hover,
+.lia-backup:focus-visible {
+  background: #f8e9b8;
+  color: var(--lia-note-ink);
 }
 
 .lia-title {

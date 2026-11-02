@@ -267,8 +267,9 @@
     "shareFileUrl": "biko tinye URL nke faịlụ Markdown ịchọrọ ịkekọrịta"
   },
   "examples": {
-    "show": "Gosi",
-    "footer": "Nke a bụ ndezi imekọrịta n'ịntanetị maka {liascript}. A na-echekwa ọdịnaya niile naanị n'ime ihe nchọgharị gị. Chọọ {templates} a pụrụ itinye ma ọ bụ {courses} ebipụtalarị."
+    "show": "Mepee na ndezi",
+    "footer": "Nke a bụ ndezi imekọrịta n'ịntanetị maka {liascript}. A na-echekwa ọdịnaya niile naanị n'ime ihe nchọgharị gị. Chọọ {templates} a pụrụ itinye ma ọ bụ {courses} ebipụtalarị.",
+    "intro": "Ọmụmụ emechara ka ị lee ma nwalee. Mepee otu n'ime ha na ndezi – ọmụmụ nke gị agaghị agbanwe."
   },
   "index": {
     "newCourse": "Ọmụmụ ọhụrụ",
@@ -334,7 +335,12 @@
     },
     "courses": "Ọmụmụ m",
     "courseCount": "ọmụmụ {n} | ọmụmụ {n}",
-    "newCourseDesc": "Ndebiri, faịlụ ma ọ bụ mbubata"
+    "newCourseDesc": "Ndebiri, faịlụ ma ọ bụ mbubata",
+    "sort": {
+      "label": "Hazie",
+      "recent": "Emepere ikpeazụ",
+      "title": "Aha A–Z"
+    }
   },
   "card": {
     "untitled": "Enweghị aha",
@@ -358,7 +364,8 @@
       "folder": "Folda"
     },
     "linkedTitle": "Echekwakwara ya n'èzí ihe nchọgharị a",
-    "localTitle": "Echekwara naanị n'ihe nchọgharị a – chekwaa ya site na “Kekọrịta & bupụ”"
+    "localTitle": "Echekwara naanị n'ihe nchọgharị a – chekwaa ya site na “Kekọrịta & bupụ”",
+    "backup": "Chekwaa mbipụta"
   },
   "footer": {
     "followUs": "Soro anyị na:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Ọmụmụ a",
+      "targetNew": "Ọmụmụ ọhụrụ",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Bulite mgbanwe na GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Ọ dịghị ihe a ga-ebulite – ọ dịghị ihe gbanwere kemgbe mbulite ikpeazụ.",
+      "remoteDrift": "Mmadụ agbanweela ebe nchekwa ahụ na GitHub kemgbe mbulite ikpeazụ gị. Buru ụzọ weta mgbanwe ndị ahụ ma ọ bụrụ na ịchọrọ idebe ha. Faịlụ ndị ị na-agbanweghị ga-anọgide otu ha dị na GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Ndịiche",
+      "diffHint": "aka ekpe: GitHub · aka nri: ndezi a",
+      "commitMessage": "Obere ndetu banyere ihe ị gbanwere",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Na-ebulite na GitHub…",
+      "pushBtn": "Bulite faịlụ {n}",
+      "done": "E bulitela mgbanwe."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Weta mgbanwe site na GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Ọmụmụ gị dị ọhụrụ dịka GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Nabata faịlụ {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Erutela oke GitHub",
-      "authTitle": "Achọrọ nkwenye",
+      "authTitle": "Ịbanye na GitHub dị mkpa",
       "manageTitle": "Manage access token",
-      "intro": "Tinye Token Ohere Onwe (PAT) iji bulie oke ahụ ma nweta ohere ịbanye na ebe nchekwa nzuzo ma ọ bụ zipu mgbanwe.",
+      "intro": "GitHub chọrọ token ohere – ụdị okwuntughe maka ngwa – iji bulite mgbanwe, mepụta ebe nchekwa, mepee ebe nchekwa nzuzo ma ọ bụ budata ugboro ugboro.",
       "howtoToggle": "Kedu ka m ga-esi mepụta token?",
       "step1": "Meghee {link}.",
       "step2Classic": "Gbaa mbọ hụ na ahọpụtala \"repo\" scope.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Bipụta n'ebe nchekwa ọhụrụ",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Akaụntụ ma ọ bụ nzukọ",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Mepụta ebe nchekwa",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Na-ebulite faịlụ…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Emepụtala ebe nchekwa ma bulite faịlụ niile."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Ọmụmụ a",
+      "targetNew": "Ọmụmụ ọhụrụ",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Bulite mgbanwe na GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Ọ dịghị ihe a ga-ebulite – ọ dịghị ihe gbanwere kemgbe mbulite ikpeazụ.",
+      "remoteDrift": "Mmadụ agbanweela ebe nchekwa ahụ na GitLab kemgbe mbulite ikpeazụ gị. Buru ụzọ weta mgbanwe ndị ahụ ma ọ bụrụ na ịchọrọ idebe ha. Faịlụ ndị ị na-agbanweghị ga-anọgide otu ha dị na GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Ndịiche",
+      "diffHint": "aka ekpe: GitLab · aka nri: ndezi a",
+      "commitMessage": "Obere ndetu banyere ihe ị gbanwere",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Na-ebulite na GitLab…",
+      "pushBtn": "Bulite faịlụ {n}",
+      "done": "E bulitela mgbanwe."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Weta mgbanwe site na GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Ọmụmụ gị dị ọhụrụ dịka GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Nabata faịlụ {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Ịbanye na GitLab dị mkpa",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab chọrọ token ohere – ụdị okwuntughe maka ngwa – iji bulite mgbanwe, mepụta ebe nchekwa, mepee ebe nchekwa nzuzo ma ọ bụ budata ugboro ugboro.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Bipụta n'ebe nchekwa ọhụrụ",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Akaụntụ ma ọ bụ nzukọ",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Mepụta ebe nchekwa",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Na-ebulite faịlụ…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Emepụtala ebe nchekwa ma bulite faịlụ niile."
     }
   },
   "nostr": {
-    "title": "Kekọrịta site na Nostr",
-    "keysSection": "Igodo Nostr",
+    "title": "Bipụta na Nostr",
+    "keysSection": "Njirimara Nostr gị",
     "publicKeyLabel": "Igodo ọha gị (npub):",
     "publicKeyPlaceholder": "Tinye igodo ọha Nostr gị (npub...)",
     "generateNew": "Mepụta ọhụrụ",
@@ -592,7 +599,7 @@
     "privateKeyHint": "A chọrọ igodo nzuzo gị iji bịanye aka ma bipụta ozi. Chekwaa ya nke ọma.",
     "storeCredentials": "Chekwaa nkwenye n'ime ihe nchọgharị a",
     "storeCredentialsWarning": "Ịchekwa igodo nzuzo gị n'ime ihe nchọgharị dị mfe, mana ọ bụghị nke kachasị nchebe.",
-    "relayServersLabel": "Sava relay:",
+    "relayServersLabel": "Relay (sava ndị na-ekesa ozi gị):",
     "relayPlaceholder": "Tinye sava relay (otu kwa ahịrị)",
     "relayHint": "Tinye sava relay (otu kwa ahịrị) ebe a ga-ebipụta ọdịnaya gị.",
     "rememberRelays": "Cheta relay ndị a maka mbipụta n'ọdịnihu",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Igodo nzuzo a na-enye ohere ịbanye na njirimara Nostr gị. Chekwaa ya nke ọma.",
     "intro": "Kekọrịta ọmụmụ gị na obodo Nostr. Ị nwere ike ibipụta ozugbo ma ọ bụ hazie ozi gị mbụ.",
     "nostrLinkLabel": "Njikọ Nostr maka ọmụmụ gị:",
-    "embedMedia": "Tinye faịlụ mgbasa ozi dịka data URI",
-    "embedMediaHint": "Na-agbanwe onyonyo, ọdịyo na vidiyo gaa data URI etinyere maka ibugharị ka mma.",
+    "embedMedia": "Tinye foto, ụda na vidiyo n'ime ozi ahụ",
+    "embedMediaHint": "Mgbe ahụ ọmụmụ ahụ ga-arụ ọrụ ọbụna na-enweghị ndezi a, mana ozi ahụ ga-ebuwanye ibu.",
     "customizePost": "Hazie ozi",
     "publishNow": "Bipụta ugbu a",
     "messageLabel": "Ozi (nhọrọ):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Gbanwee maka ikpo okwu mmụta",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Adreesị Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Ọ na-abụkarị na ọ dịghị ihe ị ga-agbanwe ebe a. Ọ bụrụ na ị na-agba Exporter nke gị (dịka ọmụmaatụ site na 'liaex serve' na http://localhost:3000), tinye adreesị ya.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "E nyefeela ọrụ gị. Họrọ usoro n'okpuru (dịka ọmụmaatụ SCORM maka Moodle) ma malite mbupụ ahụ.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Enweghị ike iru Exporter ahụ. Lelee adreesị dị n'okpuru – maka Exporter nke gị, 'liaex serve' ga-anọrịrị na-agba.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Jiri Exporter ọzọ"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "ndezi → folda",
+      "pull": "folda → ndezi",
+      "conflict": "agbanwere ya n'akụkụ abụọ – biko họrọ"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Mekọrịta na folda ahụ",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Ndezi na folda ahụ bụ otu – ọ dịghị ihe ị ga-eme.",
+      "applying": "Na-emekọrịta…",
+      "done": "Emechaala – ndezi na folda ahụ bụzi otu ugbu a.",
+      "applyBtn": "Mekọrịta faịlụ {n}",
+      "keepEditor": "Debe ụdị nke ndezi",
+      "keepDisk": "Were ụdị nke folda",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Ihe nchọgharị chọrọ ikike gị iji mepee folda ahụ."
     }
   },
   "result": {

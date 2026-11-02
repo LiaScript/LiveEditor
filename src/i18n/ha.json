@@ -267,8 +267,9 @@
     "shareFileUrl": "da fatan a saka URL na fayil ɗin Markdown da kake son rabawa"
   },
   "examples": {
-    "show": "Nuna",
-    "footer": "Wannan edita ne na kan layi don haɗin gwiwa ga {liascript}. Ana adana duk abun ciki ne kawai a cikin burauzarka. Nemo {templates} da za a iya sakawa ko {courses} da aka riga aka wallafa."
+    "show": "Buɗe a edita",
+    "footer": "Wannan edita ne na kan layi don haɗin gwiwa ga {liascript}. Ana adana duk abun ciki ne kawai a cikin burauzarka. Nemo {templates} da za a iya sakawa ko {courses} da aka riga aka wallafa.",
+    "intro": "Kwasa-kwasai da aka kammala don dubawa da gwadawa. Buɗe ɗaya a edita – kwasa-kwasanka ba za su canza ba."
   },
   "index": {
     "newCourse": "Sabon kwas",
@@ -334,7 +335,12 @@
     },
     "courses": "Kwasa-kwasaina",
     "courseCount": "kwas {n} | kwasa-kwasai {n}",
-    "newCourseDesc": "Samfuri, fayil ko shigo da"
+    "newCourseDesc": "Samfuri, fayil ko shigo da",
+    "sort": {
+      "label": "Jera",
+      "recent": "An buɗe kwanan nan",
+      "title": "Take A–Z"
+    }
   },
   "card": {
     "untitled": "Babu take",
@@ -358,7 +364,8 @@
       "folder": "Folder"
     },
     "linkedTitle": "An kuma ajiye a wajen wannan burauza",
-    "localTitle": "An ajiye a wannan burauza kawai – ajiye kwafi ta “Raba & fitarwa”"
+    "localTitle": "An ajiye a wannan burauza kawai – ajiye kwafi ta “Raba & fitarwa”",
+    "backup": "Ajiye kwafi"
   },
   "footer": {
     "followUs": "Bi mu a:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Wannan kwas",
+      "targetNew": "Sabon kwas",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Loda canje-canje zuwa GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Babu abin lodawa – babu abin da ya canza tun lodawa ta ƙarshe.",
+      "remoteDrift": "Wani ya canza ma'ajiyar a GitHub tun lodawarka ta ƙarshe. Ka fara ɗauko waɗannan canje-canjen idan kana son riƙe su. Fayilolin da ba ka canza ba za su kasance yadda suke a GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Bambance-bambance",
+      "diffHint": "hagu: GitHub · dama: wannan edita",
+      "commitMessage": "Taƙaitaccen bayani kan abin da ka canza",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Ana lodawa zuwa GitHub…",
+      "pushBtn": "Loda fayil {n}",
+      "done": "An loda canje-canje."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Ɗauko canje-canje daga GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Kwas ɗinka ya yi daidai da GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Karɓi fayil {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "An kai iyakar GitHub",
-      "authTitle": "Ana buƙatar tabbatarwa",
+      "authTitle": "Ana buƙatar shiga GitHub",
       "manageTitle": "Manage access token",
-      "intro": "Ƙara Token na Samun Dama na Kai (PAT) don ƙara iyaka da kuma samun dama zuwa ma'ajiyoyi masu zaman kansu ko turo canje-canje.",
+      "intro": "GitHub yana buƙatar token na samun dama – irin kalmar sirri don manhajoji – don loda canje-canje, ƙirƙirar ma'ajiyoyi, buɗe ma'ajiyoyi masu zaman kansu ko ɗauko bayanai sau da yawa.",
       "howtoToggle": "Yaya zan ƙirƙiri token?",
       "step1": "Buɗe {link}.",
       "step2Classic": "Tabbatar cewa an zaɓi \"repo\" scope.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Wallafa zuwa sabuwar ma'ajiya",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Asusu ko ƙungiya",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Ƙirƙiri ma'ajiya",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Ana loda fayiloli…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "An ƙirƙiri ma'ajiya kuma an loda dukan fayiloli."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Wannan kwas",
+      "targetNew": "Sabon kwas",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Loda canje-canje zuwa GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Babu abin lodawa – babu abin da ya canza tun lodawa ta ƙarshe.",
+      "remoteDrift": "Wani ya canza ma'ajiyar a GitLab tun lodawarka ta ƙarshe. Ka fara ɗauko waɗannan canje-canjen idan kana son riƙe su. Fayilolin da ba ka canza ba za su kasance yadda suke a GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Bambance-bambance",
+      "diffHint": "hagu: GitLab · dama: wannan edita",
+      "commitMessage": "Taƙaitaccen bayani kan abin da ka canza",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Ana lodawa zuwa GitLab…",
+      "pushBtn": "Loda fayil {n}",
+      "done": "An loda canje-canje."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Ɗauko canje-canje daga GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Kwas ɗinka ya yi daidai da GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Karɓi fayil {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Ana buƙatar shiga GitLab",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab yana buƙatar token na samun dama – irin kalmar sirri don manhajoji – don loda canje-canje, ƙirƙirar ma'ajiyoyi, buɗe ma'ajiyoyi masu zaman kansu ko ɗauko bayanai sau da yawa.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Wallafa zuwa sabuwar ma'ajiya",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Asusu ko ƙungiya",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Ƙirƙiri ma'ajiya",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Ana loda fayiloli…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "An ƙirƙiri ma'ajiya kuma an loda dukan fayiloli."
     }
   },
   "nostr": {
-    "title": "Raba ta Nostr",
-    "keysSection": "Maɓallan Nostr",
+    "title": "Wallafa a Nostr",
+    "keysSection": "Shaidarka ta Nostr",
     "publicKeyLabel": "Maɓallinka na jama'a (npub):",
     "publicKeyPlaceholder": "Saka maɓallin Nostr na jama'a (npub...)",
     "generateNew": "Ƙirƙiri sabo",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Ana buƙatar maɓallinka na sirri don sa hannu da wallafa saƙonni. Ka kiyaye shi.",
     "storeCredentials": "Ajiye bayanan shiga a wannan burauzar",
     "storeCredentialsWarning": "Ajiye maɓallin sirri a burauza yana da sauƙi amma ba shi da cikakken tsaro.",
-    "relayServersLabel": "Sabar relay:",
+    "relayServersLabel": "Relay (sabobin da ke rarraba wallafarka):",
     "relayPlaceholder": "Saka sabobin relay (ɗaya a kowane layi)",
     "relayHint": "Saka sabobin relay (ɗaya a kowane layi) inda za a wallafa abun ciki.",
     "rememberRelays": "Tuna waɗannan relay don wallafe-wallafe na gaba",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Wannan maɓallin sirri yana ba da damar shiga shaidarka ta Nostr. Ajiye shi lafiya.",
     "intro": "Raba kwas ɗinka da al'ummar Nostr. Zaka iya wallafawa kai tsaye ko ka fara tsara wallafar.",
     "nostrLinkLabel": "Haɗin Nostr na kwas ɗinka:",
-    "embedMedia": "Saka fayilolin midiya a matsayin data URI",
-    "embedMediaHint": "Yana maida hotuna, sauti da bidiyo zuwa data URI da aka saka don sauƙin ɗauka.",
+    "embedMedia": "Saka hotuna, sauti da bidiyo cikin wallafar",
+    "embedMediaHint": "Sa'an nan kwas ɗin zai yi aiki ko ba tare da wannan edita ba, amma wallafar za ta ƙara girma.",
     "customizePost": "Tsara wallafa",
     "publishNow": "Wallafa yanzu",
     "messageLabel": "Saƙo (na zaɓi):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Mayar don dandalin koyo",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Adireshin Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Yawanci babu abin da za ka canza a nan. Idan kana gudanar da naka Exporter (misali da 'liaex serve' a http://localhost:3000), shigar da adireshinsa.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "An miƙa aikinka. Zaɓi tsari a ƙasa (misali SCORM don Moodle) ka fara fitarwa.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Ba a iya isa ga Exporter ba. Duba adireshin da ke ƙasa – idan Exporter naka ne, dole 'liaex serve' ya kasance yana gudana.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Yi amfani da wani Exporter"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "edita → folder",
+      "pull": "folder → edita",
+      "conflict": "an canza a ɓangarorin biyu – don Allah ka zaɓa"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Daidaita da folder",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Edita da folder iri ɗaya ne – babu abin yi.",
+      "applying": "Ana daidaitawa…",
+      "done": "An gama – edita da folder yanzu iri ɗaya ne.",
+      "applyBtn": "Daidaita fayil {n}",
+      "keepEditor": "Riƙe sigar edita",
+      "keepDisk": "Ɗauki sigar folder",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Burauza yana buƙatar izininka don buɗe folder ɗin."
     }
   },
   "result": {

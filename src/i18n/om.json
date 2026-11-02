@@ -267,8 +267,9 @@
     "shareFileUrl": "maaloo URL faayilii Markdown qooduu barbaaddu galchi"
   },
   "examples": {
-    "show": "Agarsiisi",
-    "footer": "Kun gulaalaa toora interneetii irratti waliin hojjetamu kan {liascript} ti. Qabiyyeen hundi browser kee keessatti qofa kuufama. {templates} keessa galfamuu danda'an yookaan {courses} duraan maxxanfaman barbaadi."
+    "show": "Gulaalaa keessatti bani",
+    "footer": "Kun gulaalaa toora interneetii irratti waliin hojjetamu kan {liascript} ti. Qabiyyeen hundi browser kee keessatti qofa kuufama. {templates} keessa galfamuu danda'an yookaan {courses} duraan maxxanfaman barbaadi.",
+    "intro": "Koorsiiwwan xumuraman ilaaluu fi yaaluuf. Tokko gulaalaa keessatti bani – koorsiiwwan kee hin jijjiiraman."
   },
   "index": {
     "newCourse": "Koorsii haaraa",
@@ -334,7 +335,12 @@
     },
     "courses": "Koorsiiwwan koo",
     "courseCount": "koorsii {n} | koorsiiwwan {n}",
-    "newCourseDesc": "Unkaa, faayila yookaan galchuu"
+    "newCourseDesc": "Unkaa, faayila yookaan galchuu",
+    "sort": {
+      "label": "Tartiibessi",
+      "recent": "Kan dhiyeenya banaman",
+      "title": "Mata duree A–Z"
+    }
   },
   "card": {
     "untitled": "Mata duree malee",
@@ -358,7 +364,8 @@
       "folder": "Foldarii"
     },
     "linkedTitle": "Browser kanaan alas kuufame",
-    "localTitle": "Browser kana keessatti qofa kuufame – karaa “Qoodi fi alergi” kuusi"
+    "localTitle": "Browser kana keessatti qofa kuufame – karaa “Qoodi fi alergi” kuusi",
+    "backup": "Kuusi"
   },
   "footer": {
     "followUs": "Nu hordofi:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Koorsii kana",
+      "targetNew": "Koorsii haaraa",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Jijjiirama gara GitHubtti olkaa'i",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Wanti olkaa'amu hin jiru – olkaa'insa dhumaa booda wanti jijjiirame hin jiru.",
+      "remoteDrift": "Olkaa'insa kee dhumaa booda namni tokko GitHub irratti kuusaa jijjiireera. Yoo eeguu barbaadde, dursa jijjiirama sana fidi. Faayilonni ati hin jijjiirre akkuma GitHub irratti jiranitti hafu.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Garaagarummaa",
+      "diffHint": "bitaa: GitHub · mirga: gulaalaa kana",
+      "commitMessage": "Waan jijjiirte irratti yaadannoo gabaabaa",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Gara GitHubtti olkaa'aa jira…",
+      "pushBtn": "Faayila {n} olkaa'i",
+      "done": "Jijjiiramni olkaa'ameera."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Jijjiirama GitHub irraa fidi",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Koorsiin kee GitHub waliin walsimeera.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Faayila {n} fudhadhu",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Daangaa GitHub gahame",
-      "authTitle": "Mirkaneessi barbaachisa",
+      "authTitle": "GitHub seenuun barbaachisa",
       "manageTitle": "Manage access token",
-      "intro": "Daangaa dabaluu fi kuusaa dhuunfaa seenuuf ykn jijjiirama ergu Token Argannoo Dhuunfaa (PAT) dabali.",
+      "intro": "GitHub jijjiirama olkaa'uuf, kuusaa uumuuf, kuusaa dhuunfaa banuuf ykn irra deddeebiin fe'uuf token argannoo – gosa jecha icciitii appiliikeeshinii – barbaada.",
       "howtoToggle": "Akkamittin token uumu?",
       "step1": "{link} bani.",
       "step2Classic": "Ammayyuu \"repo\" filatamee jiraachuu isaa mirkaneeffadhu.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Kuusaa haaraatti maxxansi",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Herrega ykn dhaabbata",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Kuusaa uumi",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Faayilota olkaa'aa jira…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Kuusaan uumamee faayilonni hundi olkaa'amaniiru."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Koorsii kana",
+      "targetNew": "Koorsii haaraa",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Jijjiirama gara GitLabtti olkaa'i",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Wanti olkaa'amu hin jiru – olkaa'insa dhumaa booda wanti jijjiirame hin jiru.",
+      "remoteDrift": "Olkaa'insa kee dhumaa booda namni tokko GitLab irratti kuusaa jijjiireera. Yoo eeguu barbaadde, dursa jijjiirama sana fidi. Faayilonni ati hin jijjiirre akkuma GitLab irratti jiranitti hafu.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Garaagarummaa",
+      "diffHint": "bitaa: GitLab · mirga: gulaalaa kana",
+      "commitMessage": "Waan jijjiirte irratti yaadannoo gabaabaa",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Gara GitLabtti olkaa'aa jira…",
+      "pushBtn": "Faayila {n} olkaa'i",
+      "done": "Jijjiiramni olkaa'ameera."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Jijjiirama GitLab irraa fidi",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Koorsiin kee GitLab waliin walsimeera.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Faayila {n} fudhadhu",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "GitLab seenuun barbaachisa",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab jijjiirama olkaa'uuf, kuusaa uumuuf, kuusaa dhuunfaa banuuf ykn irra deddeebiin fe'uuf token argannoo – gosa jecha icciitii appiliikeeshinii – barbaada.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Kuusaa haaraatti maxxansi",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Herrega ykn dhaabbata",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Kuusaa uumi",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Faayilota olkaa'aa jira…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Kuusaan uumamee faayilonni hundi olkaa'amaniiru."
     }
   },
   "nostr": {
-    "title": "Karaa Nostr qoodi",
-    "keysSection": "Furtuuwwan Nostr",
+    "title": "Nostr irratti maxxansi",
+    "keysSection": "Eenyummaa kee Nostr",
     "publicKeyLabel": "Furtuu ummataa kee (npub):",
     "publicKeyPlaceholder": "Furtuu ummataa Nostr kee galchi (npub...)",
     "generateNew": "Haaraa uumi",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Furtuun dhuunfaa kee mallatteessuu fi maxxansuuf barbaachisa. Nageenyaan eegi.",
     "storeCredentials": "Ragaa seensaa browser kana keessatti kuusi",
     "storeCredentialsWarning": "Furtuu dhuunfaa browser keessatti kuusuun salphaa dha, garuu nageenya xiqqaa qaba.",
-    "relayServersLabel": "Sarvaroota relay:",
+    "relayServersLabel": "Relay (sarvaroota maxxansa kee raabsan):",
     "relayPlaceholder": "Sarvaroota relay galchi (tokko tokkoon sarara)",
     "relayHint": "Sarvaroota relay qabiyyeen kee irratti maxxanfamu galchi (tokko tokkoon sarara).",
     "rememberRelays": "Relay kana maxxansa gara fuulduraatiif yaadadhu",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Furtuun dhuunfaa kun eenyummaa Nostr keetti seenuu kenna. Nageenyaan kuusi.",
     "intro": "Koorsii kee hawaasa Nostr waliin qoodi. Kallattiin maxxansuu yookaan dursee maxxansa kee sirreessuu dandeessa.",
     "nostrLinkLabel": "Hidhaa Nostr koorsii keetiif:",
-    "embedMedia": "Faayiloota miidiyaa akka data URI keessa galchi",
-    "embedMediaHint": "Suura, sagalee fi viidiyoo gara data URI keessa galfameetti jijjiira, akka salphaatti darbuuf.",
+    "embedMedia": "Suuraa, sagalee fi viidiyoo maxxansa keessa galchi",
+    "embedMediaHint": "Sana booda koorsiin gulaalaa kana malees ni hojjeta, garuu maxxansi ni guddata.",
     "customizePost": "Maxxansa sirreessi",
     "publishNow": "Amma maxxansi",
     "messageLabel": "Ergaa (filannoo):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Waltajjii barumsaatiif jijjiiri",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Teessoo Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Yeroo baay'ee asitti wanti jijjiiramu hin jiru. Yoo Exporter mataa keetii hojjechiifte (fakkeenyaaf 'liaex serve' waliin http://localhost:3000 irratti), teessoo isaa galchi.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Pirojektiin kee dabarfameera. Gadii bifa tokko filadhu (fakkeenyaaf SCORM Moodle-f) sana booda alergii jalqabi.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporter bira gahuun hin danda'amne. Teessoo gadii ilaali – Exporter mataa keetiif 'liaex serve' hojjechaa jiraachuu qaba.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Exporter biraa fayyadami"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "gulaalaa → foldarii",
+      "pull": "foldarii → gulaalaa",
+      "conflict": "gama lamaanuu irratti jijjiirame – maaloo filadhu"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Foldarii waliin walsimsiisi",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Gulaalaa fi foldariin tokkuma – wanti hojjetamu hin jiru.",
+      "applying": "Walsimsiisaa jira…",
+      "done": "Xumurameera – gulaalaa fi foldariin amma tokkuma.",
+      "applyBtn": "Faayila {n} walsimsiisi",
+      "keepEditor": "Kan gulaalaa eegi",
+      "keepDisk": "Kan foldarii fudhadhu",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Foldarii banuuf browser-ni hayyama kee barbaada."
     }
   },
   "result": {

@@ -7,7 +7,7 @@ import * as GitHub from "../../ts/GitHubRepo";
 import type { TreeItem } from "../../ts/GitHubRepo";
 import { computeChanges, importPaths, type FileChange } from "../../ts/githubImport";
 import { formatBytes } from "../../ts/fileIcons";
-import GitHubModal from "../../components/GitHub/GitHubModal.vue";
+import AppDialog from "../../components/AppDialog.vue";
 import PatHelp from "../../components/GitHub/PatHelp.vue";
 
 interface RepoLink {
@@ -20,7 +20,7 @@ interface RepoLink {
 export default defineComponent({
   name: "PullModal",
 
-  components: { GitHubModal, PatHelp },
+  components: { AppDialog, PatHelp },
 
   props: {
     visible: { type: Boolean, default: false },
@@ -209,7 +209,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <GitHubModal :visible="visible" :title="$t('github.pull.title')" @close="close">
+  <AppDialog :visible="visible" icon="bi-github" :title="$t('github.pull.title')" @close="close">
     <div v-if="github" class="d-flex justify-content-between align-items-center mb-2">
       <strong>{{ github.owner }}/{{ github.repo }}</strong>
       <div class="d-flex align-items-center gap-2">
@@ -286,7 +286,7 @@ export default defineComponent({
         {{ $t("github.close") }}
       </button>
     </template>
-  </GitHubModal>
+  </AppDialog>
 </template>
 
 <style scoped>

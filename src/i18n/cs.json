@@ -267,8 +267,9 @@
     "shareFileUrl": "zadejte prosím URL souboru Markdown, který chcete sdílet"
   },
   "examples": {
-    "show": "Zobrazit",
-    "footer": "Toto je společný online editor pro {liascript}. Veškerý obsah je uložen pouze ve vašem prohlížeči. Hledejte vložitelné {templates} nebo již publikované {courses}."
+    "show": "Otevřít v editoru",
+    "footer": "Toto je společný online editor pro {liascript}. Veškerý obsah je uložen pouze ve vašem prohlížeči. Hledejte vložitelné {templates} nebo již publikované {courses}.",
+    "intro": "Hotové kurzy k prohlédnutí a vyzkoušení. Otevřete si některý v editoru – vaše vlastní kurzy zůstanou beze změny."
   },
   "index": {
     "newCourse": "Nový kurz",
@@ -334,7 +335,12 @@
     },
     "courses": "Moje kurzy",
     "courseCount": "{n} kurz | Kurzy: {n}",
-    "newCourseDesc": "Šablona, soubor nebo import"
+    "newCourseDesc": "Šablona, soubor nebo import",
+    "sort": {
+      "label": "Řazení",
+      "recent": "Naposledy otevřené",
+      "title": "Název A–Z"
+    }
   },
   "card": {
     "untitled": "Bez názvu",
@@ -358,7 +364,8 @@
       "folder": "Složka"
     },
     "linkedTitle": "Uloženo i mimo tento prohlížeč",
-    "localTitle": "Uloženo jen v tomto prohlížeči – zálohujte přes „Sdílet a exportovat“"
+    "localTitle": "Uloženo jen v tomto prohlížeči – zálohujte přes „Sdílet a exportovat“",
+    "backup": "Zálohovat"
   },
   "footer": {
     "followUs": "Sledujte nás na:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Tento kurz",
+      "targetNew": "Nový kurz",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Nahrát změny na GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Není co nahrát – od posledního nahrání se nic nezměnilo.",
+      "remoteDrift": "Od vašeho posledního nahrání někdo změnil repozitář na GitHubu. Pokud chcete tyto změny zachovat, nejprve je načtěte. Soubory, které jste nezměnili, zůstanou na GitHubu beze změny.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Rozdíly",
+      "diffHint": "vlevo: GitHub · vpravo: tento editor",
+      "commitMessage": "Krátká poznámka, co jste změnili",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Nahrávání na GitHub…",
+      "pushBtn": "Nahrát soubory ({n})",
+      "done": "Změny nahrány."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Načíst změny z GitHubu",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Váš kurz odpovídá stavu na GitHubu.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Převzít soubory ({n})",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Byl dosažen limit GitHubu",
-      "authTitle": "Vyžadováno ověření",
+      "authTitle": "Je nutné přihlášení k GitHubu",
       "manageTitle": "Manage access token",
-      "intro": "Přidejte osobní přístupový token (PAT) pro zvýšení limitu a přístup k soukromým repozitářům nebo pro odesílání změn.",
+      "intro": "GitHub potřebuje přístupový token – jakési heslo pro aplikace –, aby bylo možné nahrávat změny, vytvářet repozitáře, otevírat soukromé repozitáře nebo načítat častěji.",
       "howtoToggle": "Jak vytvořím token?",
       "step1": "Otevřete {link}.",
       "step2Classic": "Ujistěte se, že je zaškrtnutý rozsah \"repo\".",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Zveřejnit v novém repozitáři",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Účet nebo organizace",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Vytvořit repozitář",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Nahrávání souborů…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Repozitář vytvořen a všechny soubory nahrány."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Tento kurz",
+      "targetNew": "Nový kurz",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Nahrát změny na GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Není co nahrát – od posledního nahrání se nic nezměnilo.",
+      "remoteDrift": "Od vašeho posledního nahrání někdo změnil repozitář na GitLabu. Pokud chcete tyto změny zachovat, nejprve je načtěte. Soubory, které jste nezměnili, zůstanou na GitLabu beze změny.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Rozdíly",
+      "diffHint": "vlevo: GitLab · vpravo: tento editor",
+      "commitMessage": "Krátká poznámka, co jste změnili",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Nahrávání na GitLab…",
+      "pushBtn": "Nahrát soubory ({n})",
+      "done": "Změny nahrány."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Načíst změny z GitLabu",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Váš kurz odpovídá stavu na GitLabu.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Převzít soubory ({n})",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Je nutné přihlášení k GitLabu",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab potřebuje přístupový token – jakési heslo pro aplikace –, aby bylo možné nahrávat změny, vytvářet repozitáře, otevírat soukromé repozitáře nebo načítat častěji.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Zveřejnit v novém repozitáři",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Účet nebo organizace",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Vytvořit repozitář",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Nahrávání souborů…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Repozitář vytvořen a všechny soubory nahrány."
     }
   },
   "nostr": {
-    "title": "Sdílet přes Nostr",
-    "keysSection": "Klíče Nostr",
+    "title": "Zveřejnit na Nostru",
+    "keysSection": "Vaše identita na Nostru",
     "publicKeyLabel": "Váš veřejný klíč (npub):",
     "publicKeyPlaceholder": "Zadejte svůj veřejný klíč Nostr (npub...)",
     "generateNew": "Vygenerovat nový",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Váš soukromý klíč je nutný k podepisování a publikování příspěvků. Uchovávejte jej bezpečně.",
     "storeCredentials": "Uložit přihlašovací údaje v tomto prohlížeči",
     "storeCredentialsWarning": "Uložení soukromého klíče v prohlížeči je pohodlné, ale méně bezpečné.",
-    "relayServersLabel": "Relay servery:",
+    "relayServersLabel": "Relay servery (šíří váš příspěvek):",
     "relayPlaceholder": "Zadejte relay servery (jeden na řádek)",
     "relayHint": "Zadejte relay servery (jeden na řádek), na které bude obsah publikován.",
     "rememberRelays": "Zapamatovat tyto relay servery pro budoucí příspěvky",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Tento soukromý klíč poskytuje přístup k vaší identitě Nostr. Uložte jej bezpečně.",
     "intro": "Sdílejte svůj kurz s komunitou Nostr. Můžete publikovat přímo nebo nejprve upravit příspěvek.",
     "nostrLinkLabel": "Nostr odkaz pro váš kurz:",
-    "embedMedia": "Vložit mediální soubory jako data URI",
-    "embedMediaHint": "Převádí obrázky, audio a video soubory na vložená data URI pro lepší přenositelnost.",
+    "embedMedia": "Vložit do příspěvku obrázky, zvuk a video",
+    "embedMediaHint": "Kurz pak funguje i bez tohoto editoru, ale příspěvek bude větší.",
     "customizePost": "Upravit příspěvek",
     "publishNow": "Publikovat nyní",
     "messageLabel": "Zpráva (volitelné):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Převést pro výukovou platformu",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Adresa Exporteru",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Obvykle zde není třeba nic měnit. Pokud provozujete vlastní Exporter (například pomocí 'liaex serve' na http://localhost:3000), zadejte sem jeho adresu.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Váš projekt byl předán. Níže vyberte formát (například SCORM pro Moodle) a spusťte export.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporter není dostupný. Zkontrolujte adresu níže – u vlastního Exporteru musí běžet 'liaex serve'.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Použít jiný Exporter"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "editor → složka",
+      "pull": "složka → editor",
+      "conflict": "změněno na obou stranách – vyberte prosím"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Synchronizovat se složkou",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Editor a složka jsou stejné – není co dělat.",
+      "applying": "Probíhá synchronizace…",
+      "done": "Hotovo – editor a složka jsou teď stejné.",
+      "applyBtn": "Synchronizovat soubory ({n})",
+      "keepEditor": "Ponechat verzi z editoru",
+      "keepDisk": "Převzít verzi ze složky",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Prohlížeč potřebuje vaše svolení k otevření složky."
     }
   },
   "result": {

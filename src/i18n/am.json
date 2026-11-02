@@ -267,8 +267,9 @@
     "shareFileUrl": "ለማጋራት የምትፈልገውን/ጊውን Markdown ፋይል URL አስገባ/ቢ"
   },
   "examples": {
-    "show": "አሳይ",
-    "footer": "ይህ ለ{liascript} የትብብር የመስመር ላይ አርታዒ ነው። ይዘቱ ሁሉ በአሳሽህ/ሽ ውስጥ ብቻ ይቀመጣል። ሊገቡ የሚችሉ {templates} ወይም ቀድሞ የታተሙ {courses} ፈልግ/ጊ።"
+    "show": "በአርታዒው ውስጥ ክፈት",
+    "footer": "ይህ ለ{liascript} የትብብር የመስመር ላይ አርታዒ ነው። ይዘቱ ሁሉ በአሳሽህ/ሽ ውስጥ ብቻ ይቀመጣል። ሊገቡ የሚችሉ {templates} ወይም ቀድሞ የታተሙ {courses} ፈልግ/ጊ።",
+    "intro": "ለመመልከትና ለመሞከር የተጠናቀቁ ኮርሶች። አንዱን በአርታዒው ውስጥ ክፈት – የራስህ/ሽ ኮርሶች አይቀየሩም።"
   },
   "index": {
     "newCourse": "አዲስ ኮርስ",
@@ -334,7 +335,12 @@
     },
     "courses": "የእኔ ኮርሶች",
     "courseCount": "{n} ኮርስ | {n} ኮርሶች",
-    "newCourseDesc": "አብነት፣ ፋይል ወይም ማስመጣት"
+    "newCourseDesc": "አብነት፣ ፋይል ወይም ማስመጣት",
+    "sort": {
+      "label": "ደርድር",
+      "recent": "በቅርቡ የተከፈቱ",
+      "title": "ርዕስ A–Z"
+    }
   },
   "card": {
     "untitled": "ርዕስ የለም",
@@ -358,7 +364,8 @@
       "folder": "አቃፊ"
     },
     "linkedTitle": "ከዚህ አሳሽ ውጭም ተቀምጧል",
-    "localTitle": "በዚህ አሳሽ ውስጥ ብቻ ተቀምጧል – በ“አጋራ እና ላክ” በኩል ምትኬ አስቀምጥ"
+    "localTitle": "በዚህ አሳሽ ውስጥ ብቻ ተቀምጧል – በ“አጋራ እና ላክ” በኩል ምትኬ አስቀምጥ",
+    "backup": "ምትኬ አስቀምጥ"
   },
   "footer": {
     "followUs": "ተከተሉን በ:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "ይህ ኮርስ",
+      "targetNew": "አዲስ ኮርስ",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "ለውጦችን ወደ GitHub ስቀል",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "የሚሰቀል ነገር የለም – ከመጨረሻው ስቀላ በኋላ ምንም አልተቀየረም።",
+      "remoteDrift": "ከመጨረሻው ስቀላህ በኋላ አንድ ሰው በGitHub ላይ ያለውን ማከማቻ ቀይሯል። ለውጦቹን ማቆየት ከፈለግህ መጀመሪያ አምጣቸው። ያልቀየርካቸው ፋይሎች በGitHub ላይ እንዳሉ ይቆያሉ።",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "ልዩነቶች",
+      "diffHint": "ግራ: GitHub · ቀኝ: ይህ አርታዒ",
+      "commitMessage": "ስለቀየርከው ነገር አጭር ማስታወሻ",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "ወደ GitHub በመስቀል ላይ…",
+      "pushBtn": "{n} ፋይል(ሎች) ስቀል",
+      "done": "ለውጦቹ ተሰቅለዋል።"
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "ለውጦችን ከGitHub አምጣ",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "ኮርስህ ከGitHub ጋር የተዘመነ ነው።",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "{n} ፋይል(ሎች) ውሰድ",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "የGitHub ገደብ ላይ ደርሷል",
-      "authTitle": "ማረጋገጫ ያስፈልጋል",
+      "authTitle": "ወደ GitHub መግባት ያስፈልጋል",
       "manageTitle": "Manage access token",
-      "intro": "ገደቡን ለማሳደግ እና የግል ማከማቻዎችን ለመድረስ ወይም ለውጦችን ለመግፋት የግል መዳረሻ ቶከን (PAT) ያክሉ።",
+      "intro": "GitHub ለውጦችን ለመስቀል፣ ማከማቻዎችን ለመፍጠር፣ የግል ማከማቻዎችን ለመክፈት ወይም ብዙ ጊዜ ለመጫን የመዳረሻ ቶከን – ለመተግበሪያዎች የሚሆን የይለፍ ቃል አይነት – ያስፈልገዋል።",
       "howtoToggle": "ቶከን እንዴት እፈጥራለሁ?",
       "step1": "{link} ይክፈቱ።",
       "step2Classic": "\"repo\" ወሰን መመረጡን ያረጋግጡ።",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "ወደ አዲስ ማከማቻ አትም",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "መለያ ወይም ድርጅት",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "ማከማቻ ፍጠር",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "ፋይሎችን በመስቀል ላይ…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "ማከማቻው ተፈጥሯል፣ ሁሉም ፋይሎችም ተሰቅለዋል።"
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "ይህ ኮርስ",
+      "targetNew": "አዲስ ኮርስ",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "ለውጦችን ወደ GitLab ስቀል",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "የሚሰቀል ነገር የለም – ከመጨረሻው ስቀላ በኋላ ምንም አልተቀየረም።",
+      "remoteDrift": "ከመጨረሻው ስቀላህ በኋላ አንድ ሰው በGitLab ላይ ያለውን ማከማቻ ቀይሯል። ለውጦቹን ማቆየት ከፈለግህ መጀመሪያ አምጣቸው። ያልቀየርካቸው ፋይሎች በGitLab ላይ እንዳሉ ይቆያሉ።",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "ልዩነቶች",
+      "diffHint": "ግራ: GitLab · ቀኝ: ይህ አርታዒ",
+      "commitMessage": "ስለቀየርከው ነገር አጭር ማስታወሻ",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "ወደ GitLab በመስቀል ላይ…",
+      "pushBtn": "{n} ፋይል(ሎች) ስቀል",
+      "done": "ለውጦቹ ተሰቅለዋል።"
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "ለውጦችን ከGitLab አምጣ",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "ኮርስህ ከGitLab ጋር የተዘመነ ነው።",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "{n} ፋይል(ሎች) ውሰድ",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "ወደ GitLab መግባት ያስፈልጋል",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab ለውጦችን ለመስቀል፣ ማከማቻዎችን ለመፍጠር፣ የግል ማከማቻዎችን ለመክፈት ወይም ብዙ ጊዜ ለመጫን የመዳረሻ ቶከን – ለመተግበሪያዎች የሚሆን የይለፍ ቃል አይነት – ያስፈልገዋል።",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "ወደ አዲስ ማከማቻ አትም",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "መለያ ወይም ድርጅት",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "ማከማቻ ፍጠር",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "ፋይሎችን በመስቀል ላይ…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "ማከማቻው ተፈጥሯል፣ ሁሉም ፋይሎችም ተሰቅለዋል።"
     }
   },
   "nostr": {
-    "title": "በNostr አጋራ",
-    "keysSection": "የNostr ቁልፎች",
+    "title": "በNostr ላይ አትም",
+    "keysSection": "የNostr ማንነትህ",
     "publicKeyLabel": "የአንተ/ቺ የህዝብ ቁልፍ (npub):",
     "publicKeyPlaceholder": "የNostr የህዝብ ቁልፍ አስገባ (npub...)",
     "generateNew": "አዲስ ፍጠር",
@@ -592,7 +599,7 @@
     "privateKeyHint": "የግል ቁልፍህ/ሽ ልጥፎችን ለመፈረም እና ለማተም ያስፈልጋል። በደህና አስቀምጠው/ጭው።",
     "storeCredentials": "መግቢያ መረጃዎችን በዚህ አሳሽ ውስጥ አስቀምጥ",
     "storeCredentialsWarning": "የግል ቁልፍን በአሳሽ ውስጥ ማስቀመጥ ቀላል ነው፣ ግን ደህንነቱ ያነሰ ነው።",
-    "relayServersLabel": "Relay ሰርቨሮች:",
+    "relayServersLabel": "Relay (ልጥፍህን የሚያሰራጩ ሰርቨሮች):",
     "relayPlaceholder": "Relay ሰርቨሮችን አስገባ (በአንድ መስመር አንድ)",
     "relayHint": "ይዘትህ/ሽ የሚታተምባቸውን relay ሰርቨሮች አስገባ/ቢ (በአንድ መስመር አንድ).",
     "rememberRelays": "እነዚህን relayዎች ለወደፊት ልጥፎች አስታውስ",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "ይህ የግል ቁልፍ ወደ Nostr ማንነትህ/ሽ መዳረሻ ይሰጣል። በደህና አስቀምጠው/ጭው።",
     "intro": "ኮርስህን/ሽን ከNostr ማህበረሰብ ጋር አጋራ/ሪ። በቀጥታ ማተም ወይም መጀመሪያ ልጥፍህን/ሽን ማበጀት ትችላለህ/ትችያለሽ።",
     "nostrLinkLabel": "ለኮርስህ/ሽ የNostr አገናኝ:",
-    "embedMedia": "ሚዲያ ፋይሎችን እንደ data URI አስገባ",
-    "embedMediaHint": "ምስሎች፣ ድምጾች እና ቪዲዮዎችን ለተሻለ ተንቀሳቃሽነት ወደ የተገባ data URI ይቀይራል።",
+    "embedMedia": "ምስሎችን፣ ድምፅን እና ቪዲዮን በልጥፉ ውስጥ አካትት",
+    "embedMediaHint": "ከዚያ ኮርሱ ያለዚህ አርታዒም ይሰራል፣ ነገር ግን ልጥፉ ትልቅ ይሆናል።",
     "customizePost": "ልጥፍ አብጅ",
     "publishNow": "አሁን አትም",
     "messageLabel": "መልእክት (አማራጭ):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "ለመማሪያ መድረክ ቀይር",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "የExporter አድራሻ",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "ብዙውን ጊዜ እዚህ መቀየር ያለበት ነገር የለም። የራስህን Exporter የምታሄድ ከሆነ (ለምሳሌ በ'liaex serve' በ http://localhost:3000)፣ አድራሻውን አስገባ።",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "ፕሮጀክትህ ተላልፏል። ከታች ቅርጸት ምረጥ (ለምሳሌ SCORM ለ Moodle) እና መላኩን ጀምር።",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporter ሊገኝ አልቻለም። ከታች ያለውን አድራሻ አረጋግጥ – ለራስህ Exporter 'liaex serve' እየሰራ መሆን አለበት።",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "ሌላ Exporter ተጠቀም"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "አርታዒ → አቃፊ",
+      "pull": "አቃፊ → አርታዒ",
+      "conflict": "በሁለቱም በኩል ተቀይሯል – እባክህ ምረጥ"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "ከአቃፊው ጋር አመሳስል",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "አርታዒው እና አቃፊው አንድ ናቸው – ምንም የሚደረግ ነገር የለም።",
+      "applying": "በማመሳሰል ላይ…",
+      "done": "ተጠናቋል – አርታዒው እና አቃፊው አሁን አንድ ናቸው።",
+      "applyBtn": "{n} ፋይል(ሎች) አመሳስል",
+      "keepEditor": "የአርታዒውን ስሪት አቆይ",
+      "keepDisk": "የአቃፊውን ስሪት ውሰድ",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "አቃፊውን ለመክፈት አሳሹ የአንተን ፈቃድ ይፈልጋል።"
     }
   },
   "result": {

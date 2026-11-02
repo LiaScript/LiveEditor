@@ -267,8 +267,9 @@
     "shareFileUrl": "共有したい Markdown ファイルの URL を入力してください"
   },
   "examples": {
-    "show": "表示",
-    "footer": "これは {liascript} 用の共同オンラインエディターです。すべての内容はあなたのブラウザー内にのみ保存されます。埋め込み可能な {templates} や公開済みの {courses} を検索できます。"
+    "show": "エディターで開く",
+    "footer": "これは {liascript} 用の共同オンラインエディターです。すべての内容はあなたのブラウザー内にのみ保存されます。埋め込み可能な {templates} や公開済みの {courses} を検索できます。",
+    "intro": "見たり試したりできる完成済みのコースです。エディターで開いても、ご自分のコースはそのまま残ります。"
   },
   "index": {
     "newCourse": "新しいコース",
@@ -334,7 +335,12 @@
     },
     "courses": "マイコース",
     "courseCount": "{n} 件のコース | {n} 件のコース",
-    "newCourseDesc": "テンプレート、ファイル、インポート"
+    "newCourseDesc": "テンプレート、ファイル、インポート",
+    "sort": {
+      "label": "並べ替え",
+      "recent": "最近開いた順",
+      "title": "タイトル A–Z"
+    }
   },
   "card": {
     "untitled": "無題",
@@ -358,7 +364,8 @@
       "folder": "フォルダー"
     },
     "linkedTitle": "このブラウザーの外にも保存されています",
-    "localTitle": "このブラウザーにのみ保存 – 「共有とエクスポート」からバックアップしてください"
+    "localTitle": "このブラウザーにのみ保存 – 「共有とエクスポート」からバックアップしてください",
+    "backup": "バックアップ"
   },
   "footer": {
     "followUs": "フォロー："
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "このコース",
+      "targetNew": "新しいコース",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "GitHub に変更をアップロード",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "アップロードするものはありません – 前回のアップロード以降、変更はありません。",
+      "remoteDrift": "前回のアップロード以降に、誰かが GitHub 上のリポジトリを変更しました。その変更を残したい場合は、先に取得してください。変更していないファイルは GitHub 上でそのまま残ります。",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "違い",
+      "diffHint": "左: GitHub · 右: このエディター",
+      "commitMessage": "変更内容の短いメモ",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "GitHub にアップロード中…",
+      "pushBtn": "{n} 個のファイルをアップロード",
+      "done": "変更をアップロードしました。"
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "GitHub から変更を取得",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "コースは GitHub と同じ最新の状態です。",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "{n} 個のファイルを取り込む",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitHubの利用上限に達しました",
-      "authTitle": "認証が必要です",
+      "authTitle": "GitHub へのサインインが必要です",
       "manageTitle": "Manage access token",
-      "intro": "上限を引き上げ、プライベートリポジトリへのアクセスや変更のプッシュを行うには、パーソナルアクセストークン（PAT）を追加してください。",
+      "intro": "変更のアップロード、リポジトリの作成、非公開リポジトリを開く、またはより頻繁な読み込みには、GitHub のアクセストークン（アプリ用のパスワードのようなもの）が必要です。",
       "howtoToggle": "トークンの作成方法は?",
       "step1": "{link}を開きます。",
       "step2Classic": "「repo」スコープが選択されていることを確認します。",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "新しいリポジトリに公開",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "アカウントまたは組織",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "リポジトリを作成",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "ファイルをアップロード中…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "リポジトリを作成し、すべてのファイルをアップロードしました。"
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "このコース",
+      "targetNew": "新しいコース",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "GitLab に変更をアップロード",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "アップロードするものはありません – 前回のアップロード以降、変更はありません。",
+      "remoteDrift": "前回のアップロード以降に、誰かが GitLab 上のリポジトリを変更しました。その変更を残したい場合は、先に取得してください。変更していないファイルは GitLab 上でそのまま残ります。",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "違い",
+      "diffHint": "左: GitLab · 右: このエディター",
+      "commitMessage": "変更内容の短いメモ",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "GitLab にアップロード中…",
+      "pushBtn": "{n} 個のファイルをアップロード",
+      "done": "変更をアップロードしました。"
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "GitLab から変更を取得",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "コースは GitLab と同じ最新の状態です。",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "{n} 個のファイルを取り込む",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "GitLab へのサインインが必要です",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "変更のアップロード、リポジトリの作成、非公開リポジトリを開く、またはより頻繁な読み込みには、GitLab のアクセストークン（アプリ用のパスワードのようなもの）が必要です。",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "新しいリポジトリに公開",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "アカウントまたは組織",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "リポジトリを作成",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "ファイルをアップロード中…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "リポジトリを作成し、すべてのファイルをアップロードしました。"
     }
   },
   "nostr": {
-    "title": "Nostr で共有",
-    "keysSection": "Nostr キー",
+    "title": "Nostr で公開",
+    "keysSection": "あなたの Nostr ID",
     "publicKeyLabel": "あなたの公開鍵 (npub)：",
     "publicKeyPlaceholder": "Nostr 公開鍵を入力 (npub...)",
     "generateNew": "新規生成",
@@ -592,7 +599,7 @@
     "privateKeyHint": "秘密鍵は投稿への署名と公開に必要です。安全に保管してください。",
     "storeCredentials": "このブラウザーに認証情報を保存",
     "storeCredentialsWarning": "秘密鍵をブラウザーに保存するのは便利ですが、安全性は低くなります。",
-    "relayServersLabel": "Relay サーバー：",
+    "relayServersLabel": "リレー（投稿を配信するサーバー）:",
     "relayPlaceholder": "Relay サーバーを入力（1 行に 1 つ）",
     "relayHint": "コンテンツを公開する Relay サーバーを入力します（1 行に 1 つ）。",
     "rememberRelays": "今後の投稿のためにこれらの Relay サーバーを記憶",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "この秘密鍵はあなたの Nostr ID へのアクセスを与えます。安全に保存してください。",
     "intro": "あなたのコースを Nostr コミュニティと共有します。直接公開することも、先に投稿をカスタマイズすることもできます。",
     "nostrLinkLabel": "あなたのコースの Nostr リンク：",
-    "embedMedia": "メディアファイルをデータ URI として埋め込む",
-    "embedMediaHint": "画像、音声、動画ファイルを埋め込みデータ URI に変換し、移植性を高めます。",
+    "embedMedia": "画像・音声・動画を投稿に含める",
+    "embedMediaHint": "このエディターがなくてもコースが動作しますが、投稿のサイズが大きくなります。",
     "customizePost": "投稿をカスタマイズ",
     "publishNow": "今すぐ公開",
     "messageLabel": "メッセージ（任意）：",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "学習プラットフォーム用に変換",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Exporter のアドレス",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "通常、ここを変更する必要はありません。独自の Exporter を実行している場合（例: http://localhost:3000 で 'liaex serve'）は、そのアドレスを入力してください。",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "プロジェクトを引き渡しました。下で形式（例: Moodle 用の SCORM）を選び、エクスポートを開始してください。",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporter に接続できません。下のアドレスを確認してください – 独自の Exporter の場合は 'liaex serve' を実行しておく必要があります。",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "別の Exporter を使用"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "エディター → フォルダー",
+      "pull": "フォルダー → エディター",
+      "conflict": "両方で変更されています – どちらかを選んでください"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "フォルダーと同期",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "エディターとフォルダーは同じです。何もする必要はありません。",
+      "applying": "同期中…",
+      "done": "完了しました。エディターとフォルダーが同じになりました。",
+      "applyBtn": "{n} 個のファイルを同期",
+      "keepEditor": "エディターのバージョンを保持",
+      "keepDisk": "フォルダーのバージョンを採用",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "フォルダーを開くには、ブラウザーへの許可が必要です。"
     }
   },
   "result": {

@@ -267,8 +267,9 @@
     "shareFileUrl": "indsæt URL'en til en Markdown-fil, du vil dele"
   },
   "examples": {
-    "show": "Vis",
-    "footer": "Dette er en kollaborativ online editor til {liascript}. Alt indhold gemmes kun i din browser. Søg efter indlejrbare {templates} eller allerede offentliggjorte {courses}."
+    "show": "Åbn i editoren",
+    "footer": "Dette er en kollaborativ online editor til {liascript}. Alt indhold gemmes kun i din browser. Søg efter indlejrbare {templates} eller allerede offentliggjorte {courses}.",
+    "intro": "Færdige kurser, du kan se og prøve. Åbn et i editoren – dine egne kurser forbliver uændrede."
   },
   "index": {
     "newCourse": "Nyt kursus",
@@ -334,7 +335,12 @@
     },
     "courses": "Mine kurser",
     "courseCount": "{n} kursus | {n} kurser",
-    "newCourseDesc": "Skabelon, fil eller import"
+    "newCourseDesc": "Skabelon, fil eller import",
+    "sort": {
+      "label": "Sortér",
+      "recent": "Senest åbnet",
+      "title": "Titel A–Å"
+    }
   },
   "card": {
     "untitled": "Uden titel",
@@ -358,7 +364,8 @@
       "folder": "Mappe"
     },
     "linkedTitle": "Også gemt uden for denne browser",
-    "localTitle": "Kun gemt i denne browser – tag en sikkerhedskopi via »Del og eksportér«"
+    "localTitle": "Kun gemt i denne browser – tag en sikkerhedskopi via »Del og eksportér«",
+    "backup": "Tag sikkerhedskopi"
   },
   "footer": {
     "followUs": "Følg os på:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Dette kursus",
+      "targetNew": "Et nyt kursus",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Upload ændringer til GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Intet at uploade – intet er ændret siden sidste upload.",
+      "remoteDrift": "Nogen har ændret arkivet på GitHub siden din sidste upload. Hent de ændringer først, hvis du vil beholde dem. Filer, du ikke har ændret, forbliver som de er på GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Forskelle",
+      "diffHint": "venstre: GitHub · højre: denne editor",
+      "commitMessage": "Kort note om, hvad du har ændret",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Uploader til GitHub…",
+      "pushBtn": "Upload {n} fil(er)",
+      "done": "Ændringerne er uploadet."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Hent ændringer fra GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Dit kursus er opdateret i forhold til GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Overtag {n} fil(er)",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitHub-grænsen er nået",
-      "authTitle": "Godkendelse påkrævet",
+      "authTitle": "Login til GitHub påkrævet",
       "manageTitle": "Manage access token",
-      "intro": "Tilføj en personlig adgangstoken (PAT) for at hæve grænsen og få adgang til private repositories eller push ændringer.",
+      "intro": "GitHub skal bruge en adgangstoken – en slags adgangskode til apps – for at uploade ændringer, oprette arkiver, åbne private arkiver eller hente oftere.",
       "howtoToggle": "Hvordan opretter jeg en token?",
       "step1": "Åbn {link}.",
       "step2Classic": "Sørg for, at scopet \"repo\" er markeret.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Udgiv i et nyt arkiv",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Konto eller organisation",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Opret arkiv",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Uploader filer…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Arkivet er oprettet, og alle filer er uploadet."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Dette kursus",
+      "targetNew": "Et nyt kursus",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Upload ændringer til GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Intet at uploade – intet er ændret siden sidste upload.",
+      "remoteDrift": "Nogen har ændret arkivet på GitLab siden din sidste upload. Hent de ændringer først, hvis du vil beholde dem. Filer, du ikke har ændret, forbliver som de er på GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Forskelle",
+      "diffHint": "venstre: GitLab · højre: denne editor",
+      "commitMessage": "Kort note om, hvad du har ændret",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Uploader til GitLab…",
+      "pushBtn": "Upload {n} fil(er)",
+      "done": "Ændringerne er uploadet."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Hent ændringer fra GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Dit kursus er opdateret i forhold til GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Overtag {n} fil(er)",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Login til GitLab påkrævet",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab skal bruge en adgangstoken – en slags adgangskode til apps – for at uploade ændringer, oprette arkiver, åbne private arkiver eller hente oftere.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Udgiv i et nyt arkiv",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Konto eller organisation",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Opret arkiv",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Uploader filer…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Arkivet er oprettet, og alle filer er uploadet."
     }
   },
   "nostr": {
-    "title": "Del via Nostr",
-    "keysSection": "Nostr-nøgler",
+    "title": "Udgiv på Nostr",
+    "keysSection": "Din Nostr-identitet",
     "publicKeyLabel": "Din offentlige nøgle (npub):",
     "publicKeyPlaceholder": "Indtast din offentlige Nostr-nøgle (npub...)",
     "generateNew": "Generér ny",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Din private nøgle bruges til at signere og offentliggøre indlæg. Opbevar den sikkert.",
     "storeCredentials": "Gem legitimationsoplysninger i denne browser",
     "storeCredentialsWarning": "Det er praktisk at gemme din private nøgle i browseren, men mindre sikkert.",
-    "relayServersLabel": "Relay-servere:",
+    "relayServersLabel": "Relay-servere (som udbreder dit opslag):",
     "relayPlaceholder": "Indtast relay-servere (én pr. linje)",
     "relayHint": "Indtast relay-servere (én pr. linje), som indholdet skal offentliggøres på.",
     "rememberRelays": "Husk disse relay-servere til fremtidige indlæg",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Denne private nøgle giver adgang til din Nostr-identitet. Gem den sikkert.",
     "intro": "Del dit kursus med Nostr-fællesskabet. Du kan offentliggøre direkte eller først tilpasse dit indlæg.",
     "nostrLinkLabel": "Nostr-link til dit kursus:",
-    "embedMedia": "Indlejr mediefiler som data-URI'er",
-    "embedMediaHint": "Konverterer billeder, lyd og videoer til indlejrede data-URI'er for bedre portabilitet.",
+    "embedMedia": "Medtag billeder, lyd og video i opslaget",
+    "embedMediaHint": "Så virker kurset også uden denne editor, men opslaget bliver større.",
     "customizePost": "Tilpas indlæg",
     "publishNow": "Offentliggør nu",
     "messageLabel": "Besked (valgfri):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Konvertér til en læringsplatform",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Exporterens adresse",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Normalt skal du ikke ændre noget her. Hvis du kører din egen Exporter (for eksempel med 'liaex serve' på http://localhost:3000), skal du indtaste dens adresse her.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Dit projekt er overdraget. Vælg et format nedenfor (for eksempel SCORM til Moodle), og start eksporten.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporteren kunne ikke nås. Tjek adressen nedenfor – med din egen Exporter skal 'liaex serve' køre.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Brug en anden Exporter"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "editor → mappe",
+      "pull": "mappe → editor",
+      "conflict": "ændret på begge sider – vælg venligst"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Synkroniser med mappen",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Editoren og mappen er ens – intet at gøre.",
+      "applying": "Synkroniserer…",
+      "done": "Færdig – editoren og mappen er nu ens.",
+      "applyBtn": "Synkroniser {n} fil(er)",
+      "keepEditor": "Behold editorens version",
+      "keepDisk": "Brug mappens version",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Browseren skal have din tilladelse til at åbne mappen."
     }
   },
   "result": {

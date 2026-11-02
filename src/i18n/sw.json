@@ -267,8 +267,9 @@
     "shareFileUrl": "tafadhali ingiza URL ya faili ya Markdown unayotaka kushiriki"
   },
   "examples": {
-    "show": "Onyesha",
-    "footer": "Hiki ni kihariri cha mtandaoni cha ushirikiano kwa {liascript}. Maudhui yote huhifadhiwa tu ndani ya kivinjari chako. Tafuta {templates} zinazoweza kupachikwa au {courses} zilizochapishwa tayari."
+    "show": "Fungua kwenye kihariri",
+    "footer": "Hiki ni kihariri cha mtandaoni cha ushirikiano kwa {liascript}. Maudhui yote huhifadhiwa tu ndani ya kivinjari chako. Tafuta {templates} zinazoweza kupachikwa au {courses} zilizochapishwa tayari.",
+    "intro": "Kozi zilizokamilika za kutazama na kujaribu. Fungua moja kwenye kihariri – kozi zako mwenyewe hazibadiliki."
   },
   "index": {
     "newCourse": "Kozi mpya",
@@ -334,7 +335,12 @@
     },
     "courses": "Kozi zangu",
     "courseCount": "kozi {n} | kozi {n}",
-    "newCourseDesc": "Kiolezo, faili au kuleta"
+    "newCourseDesc": "Kiolezo, faili au kuleta",
+    "sort": {
+      "label": "Panga",
+      "recent": "Zilizofunguliwa hivi karibuni",
+      "title": "Kichwa A–Z"
+    }
   },
   "card": {
     "untitled": "Bila kichwa",
@@ -358,7 +364,8 @@
       "folder": "Folda"
     },
     "linkedTitle": "Imehifadhiwa pia nje ya kivinjari hiki",
-    "localTitle": "Imehifadhiwa kwenye kivinjari hiki tu – hifadhi nakala kupitia “Shiriki na hamisha”"
+    "localTitle": "Imehifadhiwa kwenye kivinjari hiki tu – hifadhi nakala kupitia “Shiriki na hamisha”",
+    "backup": "Hifadhi nakala"
   },
   "footer": {
     "followUs": "Tufuate kwenye:"
@@ -406,8 +413,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Kozi hii",
+      "targetNew": "Kozi mpya",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -420,37 +427,37 @@
       "tooBig": "too big"
     },
     "push": {
-      "title": "Push to GitHub",
+      "title": "Pakia mabadiliko kwenye GitHub",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitHub since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Hakuna cha kupakia – hakuna kilichobadilika tangu upakiaji wa mwisho.",
+      "remoteDrift": "Mtu amebadilisha hazina kwenye GitHub tangu upakiaji wako wa mwisho. Leta mabadiliko hayo kwanza ikiwa unataka kuyahifadhi. Faili ambazo hukubadilisha zinabaki kama zilivyo kwenye GitHub.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitHub · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Tofauti",
+      "diffHint": "kushoto: GitHub · kulia: kihariri hiki",
+      "commitMessage": "Maelezo mafupi ya ulichobadilisha",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitHub…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Inapakia kwenye GitHub…",
+      "pushBtn": "Pakia faili {n}",
+      "done": "Mabadiliko yamepakiwa."
     },
     "pull": {
-      "title": "Pull from GitHub",
+      "title": "Leta mabadiliko kutoka GitHub",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitHub.",
+      "upToDate": "Kozi yako iko sawa na GitHub.",
       "changesFound": "{n} file(s) changed on GitHub.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Chukua faili {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "Kikomo cha GitHub kimefikiwa",
-      "authTitle": "Uthibitishaji unahitajika",
+      "authTitle": "Unahitaji kuingia kwenye GitHub",
       "manageTitle": "Manage access token",
-      "intro": "Ongeza Token ya Ufikiaji Binafsi (PAT) ili kuongeza kikomo na kufikia hazina za faragha au kusukuma mabadiliko.",
+      "intro": "GitHub inahitaji tokeni ya ufikiaji – aina ya nenosiri kwa programu – ili kupakia mabadiliko, kuunda hazina, kufungua hazina za faragha au kupakua mara nyingi zaidi.",
       "howtoToggle": "Ninawezaje kuunda token?",
       "step1": "Fungua {link}.",
       "step2Classic": "Hakikisha wigo wa \"repo\" umeteuliwa.",
@@ -466,17 +473,17 @@
       "network": "Could not reach GitHub. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Chapisha kwenye hazina mpya",
       "intro": "Create a new GitHub repository and push all project files into it.",
-      "owner": "Owner",
+      "owner": "Akaunti au shirika",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Unda hazina",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Inapakia faili…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Hazina imeundwa na faili zote zimepakiwa."
     }
   },
   "gitlab": {
@@ -505,8 +512,8 @@
       "selectNone": "Select none",
       "selectedCount": "{n} selected",
       "targetLabel": "Import into",
-      "targetCurrent": "Current project",
-      "targetNew": "New project",
+      "targetCurrent": "Kozi hii",
+      "targetNew": "Kozi mpya",
       "importing": "Importing files…",
       "importBtn": "Import {n} file(s)",
       "done": "Imported {n} file(s).",
@@ -515,37 +522,37 @@
       "createEmpty": "Create empty README.md"
     },
     "push": {
-      "title": "Push to GitLab",
+      "title": "Pakia mabadiliko kwenye GitLab",
       "computing": "Computing changes…",
-      "noChanges": "No local changes to push.",
-      "remoteDrift": "The repository changed on GitLab since your last sync. Consider pulling first; unchanged remote files are preserved.",
+      "noChanges": "Hakuna cha kupakia – hakuna kilichobadilika tangu upakiaji wa mwisho.",
+      "remoteDrift": "Mtu amebadilisha hazina kwenye GitLab tangu upakiaji wako wa mwisho. Leta mabadiliko hayo kwanza ikiwa unataka kuyahifadhi. Faili ambazo hukubadilisha zinabaki kama zilivyo kwenye GitLab.",
       "added": "added",
       "modified": "modified",
       "deleted": "deleted",
-      "viewDiff": "Diff",
-      "diffHint": "left: GitLab · right: local",
-      "commitMessage": "Commit message",
+      "viewDiff": "Tofauti",
+      "diffHint": "kushoto: GitLab · kulia: kihariri hiki",
+      "commitMessage": "Maelezo mafupi ya ulichobadilisha",
       "defaultMessage": "Update from LiaScript LiveEdit",
-      "pushing": "Pushing to GitLab…",
-      "pushBtn": "Commit & push {n} file(s)",
-      "done": "Changes pushed successfully."
+      "pushing": "Inapakia kwenye GitLab…",
+      "pushBtn": "Pakia faili {n}",
+      "done": "Mabadiliko yamepakiwa."
     },
     "pull": {
-      "title": "Pull from GitLab",
+      "title": "Leta mabadiliko kutoka GitLab",
       "checking": "Checking for changes…",
-      "upToDate": "Your project is up to date with GitLab.",
+      "upToDate": "Kozi yako iko sawa na GitLab.",
       "changesFound": "{n} file(s) changed on GitLab.",
       "added": "new",
       "modified": "changed",
       "importing": "Importing changes…",
-      "pullBtn": "Pull {n} file(s)",
+      "pullBtn": "Chukua faili {n}",
       "done": "Pulled {n} file(s)."
     },
     "pat": {
       "rateLimitTitle": "GitLab rate limit reached",
-      "authTitle": "Authentication required",
+      "authTitle": "Unahitaji kuingia kwenye GitLab",
       "manageTitle": "Manage access token",
-      "intro": "Add a Personal Access Token (PAT) to raise the rate limit and to access private repositories or push changes.",
+      "intro": "GitLab inahitaji tokeni ya ufikiaji – aina ya nenosiri kwa programu – ili kupakia mabadiliko, kuunda hazina, kufungua hazina za faragha au kupakua mara nyingi zaidi.",
       "howtoToggle": "How do I create a token?",
       "step1": "Open {link}.",
       "step2": "Under \"Generate token\", choose \"Legacy token\" — this integration does not support the newer \"Fine-grained\" token type.",
@@ -562,25 +569,25 @@
       "network": "Could not reach GitLab. Please check your connection."
     },
     "publish": {
-      "title": "Publish to a new repository",
+      "title": "Chapisha kwenye hazina mpya",
       "intro": "Create a new GitLab repository and push all project files into it.",
       "host": "GitLab host",
       "hostHint": "The GitLab instance to publish to, e.g. gitlab.com or gitlab.opencode.de.",
       "continue": "Continue",
-      "owner": "Owner",
+      "owner": "Akaunti au shirika",
       "repoName": "Repository name",
       "description": "Description (optional)",
       "private": "Private repository",
-      "publishBtn": "Create & publish",
+      "publishBtn": "Unda hazina",
       "creating": "Creating repository…",
-      "pushing": "Uploading files…",
+      "pushing": "Inapakia faili…",
       "commitMessage": "Initial publish from LiaScript LiveEdit",
-      "done": "Repository created and files published."
+      "done": "Hazina imeundwa na faili zote zimepakiwa."
     }
   },
   "nostr": {
-    "title": "Shiriki kupitia Nostr",
-    "keysSection": "Funguo za Nostr",
+    "title": "Chapisha kwenye Nostr",
+    "keysSection": "Utambulisho wako wa Nostr",
     "publicKeyLabel": "Ufunguo wako wa umma (npub):",
     "publicKeyPlaceholder": "Ingiza ufunguo wako wa umma wa Nostr (npub...)",
     "generateNew": "Tengeneza mpya",
@@ -592,7 +599,7 @@
     "privateKeyHint": "Ufunguo wako wa faragha unahitajika kusaini na kuchapisha machapisho. Uuhifadhi salama.",
     "storeCredentials": "Hifadhi vitambulisho kwenye kivinjari hiki",
     "storeCredentialsWarning": "Kuhifadhi ufunguo wako wa faragha kwenye kivinjari ni rahisi lakini si salama sana.",
-    "relayServersLabel": "Seva za relay:",
+    "relayServersLabel": "Relay (seva zinazosambaza chapisho lako):",
     "relayPlaceholder": "Ingiza seva za relay (moja kwa kila mstari)",
     "relayHint": "Ingiza seva za relay (moja kwa kila mstari) ambazo maudhui yako yatachapishwa.",
     "rememberRelays": "Kumbuka relay hizi kwa machapisho yajayo",
@@ -600,8 +607,8 @@
     "saveKeyWarningBody": "Ufunguo huu wa faragha hutoa ufikiaji wa utambulisho wako wa Nostr. Uuhifadhi salama.",
     "intro": "Shiriki kozi yako na jumuiya ya Nostr. Unaweza kuchapisha moja kwa moja au kubinafsisha chapisho lako kwanza.",
     "nostrLinkLabel": "Kiungo cha Nostr kwa kozi yako:",
-    "embedMedia": "Pachika faili za midia kama data URI",
-    "embedMediaHint": "Hubadilisha picha, sauti na video kuwa data URI zilizopachikwa kwa ubebekaji bora.",
+    "embedMedia": "Weka picha, sauti na video ndani ya chapisho",
+    "embedMediaHint": "Hapo kozi itafanya kazi hata bila kihariri hiki, lakini chapisho litakuwa kubwa zaidi.",
     "customizePost": "Binafsisha chapisho",
     "publishNow": "Chapisha sasa",
     "messageLabel": "Ujumbe (hiari):",
@@ -762,22 +769,23 @@
     "newFolderDefault": "folder"
   },
   "exporter": {
-    "title": "LiaScript Exporter",
+    "title": "Badilisha kwa ajili ya jukwaa la kujifunzia",
     "close": "Close",
-    "urlLabel": "Exporter server URL",
+    "urlLabel": "Anwani ya Exporter",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
-    "urlHint": "By default the hosted LiaScript Exporter web app is used. You can also run the exporter locally with 'liaex serve' (http://localhost:3000) or enter the address of another exporter. The project is sent to this exporter and converted there.",
+    "urlHint": "Kwa kawaida hakuna cha kubadilisha hapa. Ukiendesha Exporter yako mwenyewe (kwa mfano kwa 'liaex serve' kwenye http://localhost:3000), weka anwani yake.",
     "connect": "Connect",
     "resend": "Resend",
     "resendTitle": "Send the current project to the exporter again",
     "connecting": "Connecting to the exporter...",
     "sending": "Sending project to the exporter...",
-    "handed": "Project handed to the exporter. Choose a format/preset below and start the export.",
+    "handed": "Mradi wako umekabidhiwa. Chagua muundo hapa chini (kwa mfano SCORM kwa Moodle) kisha anza kuhamisha.",
     "errorInvalidUrl": "Invalid URL. Please enter a full address, e.g. https://liascript.github.io/LiaScript-Exporter",
     "errorMixedContent": "This editor runs over HTTPS and cannot embed an insecure HTTP exporter (except localhost). Please use an HTTPS exporter URL.",
-    "errorNoHandshake": "Could not reach the exporter. Make sure it is reachable at this URL (for a local exporter, that 'liaex serve' is running) and that it allows being embedded.",
+    "errorNoHandshake": "Exporter haikuweza kufikiwa. Angalia anwani hapa chini – kwa Exporter yako mwenyewe, 'liaex serve' lazima iwe inaendeshwa.",
     "errorNoProject": "No active project found to export.",
-    "errorSend": "Failed to package and send the project."
+    "errorSend": "Failed to package and send the project.",
+    "otherServer": "Tumia Exporter nyingine"
   },
   "localFolder": {
     "close": "Close",
@@ -790,24 +798,24 @@
       "syncTooltip": "Compare and sync this project with the linked folder"
     },
     "direction": {
-      "push": "to folder",
-      "pull": "to editor",
-      "conflict": "conflict"
+      "push": "kihariri → folda",
+      "pull": "folda → kihariri",
+      "conflict": "imebadilishwa pande zote mbili – tafadhali chagua"
     },
     "sync": {
-      "title": "Synchronize with local folder",
+      "title": "Sawazisha na folda",
       "computing": "Comparing files…",
-      "inSync": "Editor and folder are already in sync.",
-      "applying": "Synchronizing…",
-      "done": "Synchronization complete.",
-      "applyBtn": "Synchronize {n} file(s)",
-      "keepEditor": "Keep editor",
-      "keepDisk": "Keep folder",
+      "inSync": "Kihariri na folda vinafanana – hakuna cha kufanya.",
+      "applying": "Inasawazisha…",
+      "done": "Imekamilika – kihariri na folda sasa vinafanana.",
+      "applyBtn": "Sawazisha faili {n}",
+      "keepEditor": "Baki na toleo la kihariri",
+      "keepDisk": "Chukua toleo la folda",
       "grant": "Grant access"
     },
     "errors": {
       "noFolder": "No folder is linked to this project yet.",
-      "permission": "Access to the folder was denied. Please grant permission to continue."
+      "permission": "Kivinjari kinahitaji ruhusa yako ili kufungua folda."
     }
   },
   "result": {
