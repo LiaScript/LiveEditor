@@ -85,7 +85,7 @@ export default {
     <i18n-t keypath="toast.compileHintEmbed" tag="span">
       <template #ctrl><kbd>Ctrl</kbd>+<kbd>S</kbd></template>
       <template #link>
-        <a :href="LiveEditorURL + '?/show/code/' + zipCode" target="_blank">LiveEditor</a>
+        <a :href="LiveEditorURL + '?/show/code/' + zipCode" target="_blank">LiaEdit</a>
       </template>
     </i18n-t>
     <div v-if="mode">

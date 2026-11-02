@@ -164,7 +164,7 @@ export default {
     <br />
     <i18n-t keypath="toast.openInEditor" tag="span">
       <template #link>
-        <a :href="LiveEditorURL + '?/show/file/' + fileUrl" target="_blank">LiveEditor</a>
+        <a :href="LiveEditorURL + '?/show/file/' + fileUrl" target="_blank">LiaEdit</a>
       </template>
     </i18n-t>
     <br />

@@ -5,12 +5,12 @@
 export const tutorial = `<!--
 author:  LiaScript
 email:   LiaScript@web.de
-comment: A short tour of the LiaScript LiveEditor.
+comment: A short tour of LiaEdit, the LiaScript editor.
 
 classroom: disable
 -->
 
-# Welcome to the LiveEditor
+# Welcome to LiaEdit
 
 Your course is still empty, so here is a short tour.
 As soon as you write something on the left and refresh the preview, this introduction disappears.
@@ -129,12 +129,12 @@ export const tutorialDe = `<!--
 author:   LiaScript
 email:    LiaScript@web.de
 language: de
-comment:  Eine kurze Tour durch den LiaScript LiveEditor.
+comment:  Eine kurze Tour durch LiaEdit, den LiaScript-Editor.
 
 classroom: disable
 -->
 
-# Willkommen im LiveEditor
+# Willkommen bei LiaEdit
 
 Dein Kurs ist noch leer, deshalb hier eine kurze Tour.
 Sobald du links etwas schreibst und die Vorschau aktualisierst, verschwindet diese Einführung.

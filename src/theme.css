@@ -1,5 +1,5 @@
 /*
- * LiveEditor theme: one accent color (LiaScript teal) on top of Bootstrap 5.3.
+ * LiaEdit theme: one accent color (LiaScript teal) on top of Bootstrap 5.3.
  * Loaded right after bootstrap.min.css, so it only re-points Bootstrap's CSS
  * variables; components keep using the normal Bootstrap classes.
  */

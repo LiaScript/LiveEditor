@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * Trim the production bundle: Monaco ships a separate lazy-loaded chunk for the
- * tokenizer of every "basic language". The LiveEditor only needs a curated set
+ * tokenizer of every "basic language". LiaEdit only needs a curated set
  * (the languages the file explorer / multi-file editor actually highlights), so
  * we delete the chunks of all OTHER basic languages from dist.
  *

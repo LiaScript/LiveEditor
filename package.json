@@ -1,7 +1,7 @@
 {
   "name": "liaeditor",
   "version": "2.0.1--2.5.0",
-  "description": "LiaScript LiveEditor",
+  "description": "LiaEdit – the LiaScript editor",
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
     "build": "rm -rf dist && npm run build:index && npm run purge && npm run sw && npm run build:examples && npm run minify:js",

@@ -1,10 +1,10 @@
-# LiveEditor
+# LiaEdit
 
-Welcome to the official LiaScript collaborative LiveEditor! This advanced editor runs entirely in your browser, offering unique capabilities beyond typical markdown editors.
+Welcome to the official LiaScript collaborative editor, LiaEdit! This advanced editor runs entirely in your browser, offering unique capabilities beyond typical markdown editors.
 
 https://github.com/user-attachments/assets/20e40c28-88b9-4aa8-b50d-cb776ad8707a
 
-Try it out: [LiaScript LiveEditor](https://liascript.github.io/LiveEditor/)
+Try it out: [LiaEdit](https://liascript.github.io/LiveEditor/)
 
 For more information about LiaScript, visit the LiaScript website:
 
@@ -14,11 +14,11 @@ or checkout our YouTube-Channel:
 
 https://www.youtube.com/@liascript4180
 
-## Why Choose LiveEditor?
+## Why Choose LiaEdit?
 
-Unlike conventional markdown editors like [HedgeDoc](https://hedgedoc.org), [HackMD](https://hackmd.io), or [Typora](https://typora.io/), LiveEditor operates fully in-browser and can also be installed and used offline, since it is a Progressive Web App too. Thus, when you upload images, videos, or audio files, they remain stored within your browser. If you switch to online editing mode, you can synchronize your work with peers using [WebRTC].
+Unlike conventional markdown editors like [HedgeDoc](https://hedgedoc.org), [HackMD](https://hackmd.io), or [Typora](https://typora.io/), LiaEdit operates fully in-browser and can also be installed and used offline, since it is a Progressive Web App too. Thus, when you upload images, videos, or audio files, they remain stored within your browser. If you switch to online editing mode, you can synchronize your work with peers using [WebRTC].
 
-LiveEditor is specifically designed for creating LiaScript content, enabling you to make your content interactive and engaging.
+LiaEdit is specifically designed for creating LiaScript content, enabling you to make your content interactive and engaging.
 
 ## LiaScript Features
 
@@ -34,11 +34,11 @@ LiaScript is a markdown language that extends the capabilities of traditional ma
 
   See therefore: https://github.com/topics/liascript-template
 
-## LiveEditor Features
+## LiaEdit Features
 
 https://github.com/user-attachments/assets/63494d0f-4885-4fd1-8a07-926797c41b42
 
-LiveEditor offers a range of features to enhance your content creation experience:
+LiaEdit offers a range of features to enhance your content creation experience:
 
 - **Collaborative Editing**: Work together with peers in real-time.
 - **WebRTC Synchronization**: Sync your work seamlessly with others.
@@ -57,7 +57,7 @@ LiveEditor offers a range of features to enhance your content creation experienc
   - MathJS included, which allows you to perform calculations within the browser or translate between different units
   - Emoji support start typing `:`
 
-Experience a new level of interactive content creation with LiaScript's LiveEditor!
+Experience a new level of interactive content creation with LiaEdit!
 
 ## Building the project locally
 
