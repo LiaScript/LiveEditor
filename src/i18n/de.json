@@ -5,17 +5,14 @@
   },
   "nav": {
     "help": "Hilfe",
-    "new": "Neu",
     "fork": "Kopie anlegen",
     "menu": "Teilen & Exportieren",
     "toolbar": {
-      "ariaLabel": "Symbolleiste mit Schaltflächengruppen",
       "radioGroupAria": "Radio-Umschaltgruppe",
       "editorOnly": "Nur Editor",
       "splitView": "Geteilte Ansicht",
       "previewOnly": "Nur Vorschau",
       "compile": "Vorschau aktualisieren (Strg+S)",
-      "toggleNavAria": "Navigation umschalten",
       "refresh": "Aktualisieren"
     },
     "activityBar": {
@@ -44,7 +41,6 @@
       "users": "{n} online"
     },
     "myCourses": "Meine Kurse",
-    "savedLocal": "Gespeichert in diesem Browser",
     "more": "Weitere Aktionen",
     "view": {
       "write": "Schreiben",
@@ -53,59 +49,10 @@
     }
   },
   "share": {
-    "header": "Editor teilen ...",
     "modalTitle": "Teilen & Exportieren",
-    "publishedHeading": "Vorhandene Veröffentlichung öffnen",
-    "nostr": "Nostr",
-    "downloadZipLabel": "ZIP-Archiv",
-    "downloadReadmeLabel": "Readme-Datei",
     "downloadActiveFileInfo": "Lädt nur die aktuell geöffnete Datei herunter",
-    "tabs": {
-      "collaborate": "Editor",
-      "publish": "Publizieren",
-      "published": "Veröffentlichte Links",
-      "export": "Export",
-      "github": "GitHub",
-      "gitlab": "GitLab",
-      "localFolder": "Lokaler Ordner"
-    },
-    "collaborationLink": "Kollaborationslink",
-    "collaborationLinkTitle": "Dieses Dokument mit anderen teilen",
-    "collaborationLinkTooltip": "Forke das Dokument, bevor du diese Funktion nutzt",
-    "snapshotUrl": "Snapshot-URL",
-    "snapshotUrlAria": "Den aktuellen Kurs mit dem Editor teilen",
-    "embedCode": "Einbettungscode",
-    "embedCodeAria": "Den Einbettungscode für den aktuellen Kurs abrufen",
-    "externalResource": "Externe Ressource",
-    "externalResourceAria": "Eine externe Dokument-URL zum Teilen verwenden",
-    "courseHeader": "Kurs teilen via ...",
-    "githubGistLink": "GitHub-Gist-Link",
-    "githubGistLinkTooltip": "Die Datei muss zuerst als GitHub-Gist exportiert werden",
-    "githubGistLinkAria": "Den LiaScript-Kurs aus einem GitHub-Gist-Export laden",
-    "nostrLink": "Nostr-Link",
-    "nostrLinkTooltip": "Die Datei muss zuerst auf Nostr veröffentlicht werden",
-    "nostrLinkAria": "Den LiaScript-Kurs aus einer früheren Nostr-Veröffentlichung laden",
-    "dataUri": "Daten-URI",
-    "dataUriAria": "Den aktuellen Kurs bei LiaScript teilen, mit dem Inhalt in der URL",
-    "fileUrl": "Datei-URL",
-    "fileUrlTitle": "Diesen Kurs auf LiaScript öffnen",
-    "fileUrlTooltip": "Diese Funktion ist nur verfügbar, wenn eine externe Ressource geteilt wurde",
-    "downloadHeader": "Herunterladen ...",
-    "downloadReadme": "Die Readme-Datei herunterladen",
-    "downloadZip": "Das gesamte Projekt als ZIP-Datei herunterladen",
-    "exportHeader": "Exportieren nach ...",
-    "githubGist": "GitHub Gist",
-    "githubGistTitle": "Das Dokument auf GitHub speichern",
-    "githubGistAria": "Das Dokument als GitHub-Gist speichern",
-    "githubGistTooltip": "Forke das Dokument, bevor du diese Funktion nutzt",
-    "nostrAria": "Den aktuellen Inhalt auf Nostr teilen",
-    "exporter": "LiaScript Exporter",
-    "exporterAria": "Das gesamte Projekt an einen LiaScript Exporter senden, um es in SCORM, PDF, APK, ... umzuwandeln",
-    "exporterTooltip": "Das gesamte Projekt zur Konvertierung an einen lokalen oder entfernten LiaScript Exporter übergeben",
     "githubRepoFile": "GitHub-Kurs: {file}",
-    "githubRepoFileTooltip": "Die aktive Datei als LiaScript-Kurs aus dem verknüpften GitHub-Repository öffnen (zuerst Änderungen pushen). Nur für mit GitHub verknüpfte Projekte verfügbar.",
     "gitlabRepoFile": "GitLab-Kurs: {file}",
-    "gitlabRepoFileTooltip": "Die aktive Datei als LiaScript-Kurs aus dem verknüpften GitLab-Repository öffnen (zuerst Änderungen pushen). Nur für mit GitLab verknüpfte Projekte verfügbar.",
     "dialogSub": "Was möchtest du mit „{title}“ tun?",
     "goalsAria": "Ziele",
     "groups": {
@@ -251,17 +198,7 @@
     }
   },
   "modal": {
-    "close": "Schließen",
-    "collaborationTitle": "Kollaborationslink",
-    "collaborationBody": "Wenn du den folgenden Link teilst, wird der Editor im kollaborativen Modus geöffnet. Die Arbeit ist auch offline möglich, aber alle verbundenen Nutzer arbeiten am gleichen Kurs. Wenn du diesen Link erhalten hast und einen neuen Kurs erstellen möchtest, klicke auf \"Fork\", um eine neue Version zu erstellen.",
-    "externalResourceTitle": "Externe Ressource",
-    "externalResourceBody": "Verwende diese URL, um den Inhalt des Teilungslinks vorzudefinieren. Der Editor lädt die Markdown-Datei und fügt ihren Inhalt ein. Dieser Link funktioniert nur, wenn die Markdown-Datei über das Internet zugänglich ist.",
-    "dataProtocolTitle": "Daten-Protokoll",
-    "dataProtocolBody": "Der gesamte Kursinhalt wird als Base64 oder URI in eine Daten-URI eingebettet. Da Base64 bei bestimmten Sprachen fehlschlagen kann, wird auch die URI-kodierte URL erzeugt. Dies funktioniert nur bei kurzen Kursen. Beim Teilen via Messenger prüfen, ob keine Teile abgeschnitten werden! Verschiedene Browser unterstützen unterschiedliche URL-Längen ... (Kürzere Version wählen)",
-    "snapshotTitle": "Snapshot-URL",
-    "snapshotBody": "Snapshots sind URLs, die die gesamte Kursdefinition enthalten. Dies funktioniert nur bei kurzen Kursen. Beim Teilen via Messenger prüfen, ob keine Teile abgeschnitten werden! Verschiedene Browser unterstützen unterschiedliche URL-Längen ...",
-    "embedTitle": "Einbettungscode",
-    "embedBody": "Diesen HTML-Code in die Website einfügen, um den Kurs als Beispiel einzubetten. Optional kann die URL angepasst werden, um direkt den Editor oder die Vorschau zu öffnen:"
+    "close": "Schließen"
   },
   "prompt": {
     "shareFileUrl": "Bitte gib die URL einer Markdown-Datei ein, die du teilen möchtest"
@@ -274,9 +211,7 @@
   "index": {
     "newCourse": "Neuer Kurs",
     "import": {
-      "heading": "Importieren von",
       "title": "Neues Projekt erstellen",
-      "more": "Weitere Optionen",
       "submit": "Importieren",
       "new": "Leeres Dokument",
       "newDesc": "Mit einem leeren Dokument starten und von Grund auf schreiben.",
@@ -314,7 +249,6 @@
     },
     "searchPlaceholder": "Titel oder Inhalt durchsuchen",
     "searchAriaLabel": "Sucheingabe",
-    "clearSearchAria": "Suche löschen",
     "footer": "Dies ist ein kollaborativer Online-Editor für {liascript}. Alle Inhalte werden nur in deinem Browser gespeichert. Schau dir für Inspiration unsere {examples} an, suche nach einbettbaren {templates} oder bereits veröffentlichten {courses}.",
     "footerExamples": "Beispiele",
     "footerTemplates": "Vorlagen",
@@ -344,8 +278,6 @@
   },
   "card": {
     "untitled": "Ohne Titel",
-    "deleteAria": "Löschen",
-    "exports": "Exporte:",
     "edit": "Bearbeiten",
     "menu": {
       "label": "Kursaktionen"
@@ -386,7 +318,6 @@
   },
   "exporter": {
     "title": "Für eine Lernplattform umwandeln",
-    "close": "Schließen",
     "urlLabel": "Adresse des Exporters",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
     "urlHint": "Normalerweise musst du hier nichts ändern. Wenn du einen eigenen Exporter betreibst (zum Beispiel mit 'liaex serve' unter http://localhost:3000), trag hier seine Adresse ein.",
@@ -409,17 +340,6 @@
     "error": "Der Export zu GitHub ist fehlgeschlagen:",
     "close": "Schließen",
     "back": "Zurück",
-    "menu": {
-      "header": "GitHub-Repository",
-      "import": "Von GitHub importieren",
-      "importTooltip": "Dateien aus einem GitHub-Repository importieren",
-      "push": "Zu GitHub pushen",
-      "pushTooltip": "Änderungen committen und ins verknüpfte Repository pushen",
-      "pull": "Von GitHub pullen",
-      "pullTooltip": "Änderungen aus dem verknüpften Repository holen",
-      "publish": "In neues Repository publizieren",
-      "publishTooltip": "Ein neues GitHub-Repository anlegen und alle Projektdateien hochladen"
-    },
     "import": {
       "title": "Von GitHub importieren",
       "repoLabel": "Repository",
@@ -508,17 +428,6 @@
   "gitlab": {
     "close": "Schließen",
     "back": "Zurück",
-    "menu": {
-      "header": "GitLab-Repository",
-      "import": "Von GitLab importieren",
-      "importTooltip": "Dateien aus einem GitLab-Repository importieren",
-      "push": "Zu GitLab pushen",
-      "pushTooltip": "Änderungen committen und ins verknüpfte Repository pushen",
-      "pull": "Von GitLab pullen",
-      "pullTooltip": "Änderungen aus dem verknüpften Repository holen",
-      "publish": "In neues Repository publizieren",
-      "publishTooltip": "Ein neues GitLab-Repository anlegen und alle Projektdateien hochladen"
-    },
     "import": {
       "title": "Von GitLab importieren",
       "repoLabel": "Repository-URL",
@@ -606,14 +515,6 @@
   },
   "localFolder": {
     "close": "Schließen",
-    "menu": {
-      "header": "Lokaler Ordner",
-      "open": "Ordner öffnen…",
-      "openTooltip": "Einen Ordner auf deinem Computer mit diesem Projekt verbinden",
-      "sync": "Synchronisieren…",
-      "syncNamed": "„{name}“ synchronisieren…",
-      "syncTooltip": "Dieses Projekt mit dem verbundenen Ordner vergleichen und abgleichen"
-    },
     "direction": {
       "push": "Editor → Ordner",
       "pull": "Ordner → Editor",
@@ -676,8 +577,6 @@
     "alertMissingKeys": "Bitte gib vor der Veröffentlichung sowohl deinen öffentlichen als auch deinen privaten Schlüssel ein.",
     "alertMissingRelay": "Bitte gib mindestens einen Relay-Server ein.",
     "alertPublishFailed": "Veröffentlichung im Nostr-Netzwerk fehlgeschlagen. Bitte erneut versuchen.",
-    "alertMissingPrivateKey": "Bitte gib deinen privaten Schlüssel ein, um den Beitrag zu signieren und zu veröffentlichen.",
-    "alertProcessingError": "Fehler beim Verarbeiten der Dokumentdaten.",
     "alertInvalidKey": "Ungültiges Format des öffentlichen Schlüssels"
   },
   "toolbar": {
@@ -707,7 +606,6 @@
       "code": "Code",
       "ascii": "ASCII",
       "mathjs": "MathJS",
-      "new": "Neu",
       "init": "Einstieg",
       "tutorial": "Tutorial",
       "shorts": "Kurzvorlagen",

@@ -5,17 +5,14 @@
   },
   "nav": {
     "help": "مساعدة",
-    "new": "جديد",
     "fork": "إنشاء نسخة",
     "menu": "المشاركة والتصدير",
     "toolbar": {
-      "ariaLabel": "شريط أدوات مع مجموعات أزرار",
       "radioGroupAria": "مجموعة أزرار اختيار",
       "editorOnly": "المحرر فقط",
       "splitView": "عرض مقسم",
       "previewOnly": "المعاينة فقط",
       "compile": "تحديث المعاينة (Ctrl+S)",
-      "toggleNavAria": "تبديل التنقل",
       "refresh": "تحديث"
     },
     "activityBar": {
@@ -44,7 +41,6 @@
       "users": "{n} متصل"
     },
     "myCourses": "دوراتي",
-    "savedLocal": "محفوظ في هذا المتصفح",
     "more": "إجراءات أخرى",
     "view": {
       "write": "كتابة",
@@ -53,59 +49,10 @@
     }
   },
   "share": {
-    "header": "مشاركة المحرر ...",
     "modalTitle": "المشاركة والتصدير",
-    "publishedHeading": "فتح منشور موجود",
-    "nostr": "Nostr",
-    "downloadZipLabel": "أرشيف ZIP",
-    "downloadReadmeLabel": "ملف Readme",
     "downloadActiveFileInfo": "ينزّل الملف المفتوح حاليًا فقط",
-    "tabs": {
-      "collaborate": "المحرر",
-      "publish": "نشر",
-      "published": "الروابط المنشورة",
-      "export": "تصدير",
-      "github": "GitHub",
-      "gitlab": "GitLab",
-      "localFolder": "مجلد محلي"
-    },
-    "collaborationLink": "رابط التعاون",
-    "collaborationLinkTitle": "مشاركة هذا المستند مع الآخرين",
-    "collaborationLinkTooltip": "أنشئ Fork لهذا المستند قبل استخدام هذه الوظيفة",
-    "snapshotUrl": "عنوان URL للّقطة",
-    "snapshotUrlAria": "مشاركة الدورة الحالية مع المحرر",
-    "embedCode": "كود التضمين",
-    "embedCodeAria": "الحصول على كود التضمين للدورة الحالية داخل المحرر",
-    "externalResource": "مورد خارجي",
-    "externalResourceAria": "استخدام عنوان URL لمستند خارجي للمشاركة مع المحرر",
-    "courseHeader": "مشاركة الدورة عبر ...",
-    "githubGistLink": "رابط GitHub Gist",
-    "githubGistLinkTooltip": "يجب عليك تصدير هذا الملف إلى GitHub Gist قبل استخدام هذه الوظيفة",
-    "githubGistLinkAria": "تحميل دورة LiaScript من تصدير سابق إلى GitHub Gist",
-    "dataUri": "URI بيانات",
-    "dataUriAria": "مشاركة الدورة الحالية على LiaScript مع تضمين المحتوى في عنوان URL",
-    "fileUrl": "عنوان URL للملف",
-    "fileUrlTitle": "فتح هذه الدورة على LiaScript",
-    "fileUrlTooltip": "هذه الوظيفة متاحة فقط إذا شاركت موردا خارجيا",
-    "downloadHeader": "تنزيل ...",
-    "downloadReadme": "تنزيل ملف Readme",
-    "downloadZip": "تنزيل المشروع بالكامل كملف ZIP",
-    "exportHeader": "تصدير إلى ...",
-    "githubGist": "GitHub Gist",
-    "githubGistTitle": "تخزين المستند على GitHub",
-    "githubGistAria": "تخزين المستند على GitHub كـ Gist",
-    "githubGistTooltip": "أنشئ Fork لهذا المستند قبل استخدام هذه الوظيفة",
-    "nostrAria": "مشاركة المحتوى الحالي على Nostr",
-    "nostrLink": "رابط Nostr",
-    "nostrLinkTooltip": "يجب عليك نشر هذا الملف على Nostr قبل استخدام هذه الوظيفة",
-    "nostrLinkAria": "تحميل دورة LiaScript من نشر سابق على Nostr",
-    "exporter": "مُصدِّر LiaScript",
-    "exporterAria": "إرسال المشروع بالكامل إلى مُصدِّر LiaScript لتحويله إلى SCORM أو PDF أو APK ...",
-    "exporterTooltip": "تسليم المشروع بالكامل إلى مُصدِّر LiaScript محلي أو بعيد لتحويله",
     "githubRepoFile": "دورة GitHub: {file}",
-    "githubRepoFileTooltip": "افتح الملف النشط كدورة LiaScript من مستودع GitHub المرتبط (ادفع تغييراتك أولًا). متاح فقط للمشاريع المرتبطة بـ GitHub.",
     "gitlabRepoFile": "دورة GitLab: {file}",
-    "gitlabRepoFileTooltip": "افتح الملف النشط كدورة LiaScript من مستودع GitLab المرتبط (ادفع تغييراتك أولًا). متاح فقط للمشاريع المرتبطة بـ GitLab.",
     "dialogSub": "ماذا تريد أن تفعل بـ «{title}»؟",
     "goalsAria": "الأهداف",
     "groups": {
@@ -251,17 +198,7 @@
     }
   },
   "modal": {
-    "close": "إغلاق",
-    "collaborationTitle": "رابط التعاون",
-    "collaborationBody": "إذا شاركت الرابط أدناه، فسيتم فتح المحرر في وضع تعاوني. ينبغي أن يكون العمل ممكنا أيضا دون اتصال، لكن جميع المستخدمين المتصلين سيعملون على الدورة نفسها. إذا تلقيت هذا عبر رابط تعاون وتريد إنشاء دورة جديدة بالكامل بنفسك، فعليك النقر على زر \"Fork\"، وسيؤدي ذلك إلى إنشاء إصدار جديد تماما.",
-    "externalResourceTitle": "مورد خارجي",
-    "externalResourceBody": "استخدم عنوان URL هذا لتحديد محتوى رابط المشاركة مسبقا. في هذه الحالة سيحاول المحرر أولا تحميل ملف Markdown وإدراج محتواه في المحرر. سيعمل هذا الرابط فقط إذا كان ملف Markdown الخاص بك متاحا عبر الإنترنت.",
-    "dataProtocolTitle": "بروتوكول البيانات",
-    "dataProtocolBody": "يتم ترميز محتوى الدورة بالكامل بصيغة Base64 أو URI ووضعه في URI بيانات. ونظرا لأن Base64 قد يفشل مع بعض اللغات، يتم أيضا إنشاء عنوان URL مرمز بصيغة URI. ومع ذلك، فهذا يعمل فقط مع الدورات القصيرة؛ كلما طالت الدورة طال عنوان URI. عند مشاركة المحرر عبر تطبيق مراسلة مثلا، يجب أن تتحقق أولا من عدم اقتطاع أي أجزاء. كما أن المتصفحات المختلفة تدعم أطوالا مختلفة لعناوين URL... (اختر النسخة الأقصر)",
-    "snapshotTitle": "عنوان URL للّقطة",
-    "snapshotBody": "اللقطات هي عناوين URL تحتوي على تعريف الدورة بالكامل. ومع ذلك، فهذا يعمل فقط مع الدورات القصيرة؛ كلما طالت الدورة طال عنوان URL. عند مشاركة المحرر عبر تطبيق مراسلة مثلا، يجب أن تتحقق أولا من عدم اقتطاع أي أجزاء. كما أن المتصفحات المختلفة تدعم أطوالا مختلفة لعناوين URL...",
-    "embedTitle": "كود التضمين",
-    "embedBody": "انسخ كود HTML هذا إلى موقعك الإلكتروني لتضمين هذه الدورة كمثال. يمكنك اختياريا تعديل عنوان URL بأحد الخيارات التالية لفتح المحرر أو المعاينة مباشرة:"
+    "close": "إغلاق"
   },
   "prompt": {
     "shareFileUrl": "يرجى إدخال عنوان URL لملف Markdown الذي تريد مشاركته"
@@ -275,14 +212,11 @@
     "newCourse": "دورة جديدة",
     "searchPlaceholder": "ابحث في العنوان أو المحتوى",
     "searchAriaLabel": "حقل البحث",
-    "clearSearchAria": "مسح البحث",
     "footer": "هذا محرر تعاوني على الإنترنت لـ {liascript}. يتم تخزين كل المحتوى داخل متصفحك فقط. إذا كنت بحاجة إلى بعض الإلهام، فاطلع على بعض {examples} لدينا، أو ابحث عن {templates} قابلة للتضمين، أو {courses} منشورة مسبقا.",
     "footerExamples": "أمثلة",
     "footerTemplates": "قوالب",
     "footerCourses": "دورات",
     "import": {
-      "heading": "استيراد من",
-      "more": "خيارات أخرى",
       "submit": "استيراد",
       "new": "مستند فارغ",
       "upload": "رفع ملف (Markdown / ZIP)",
@@ -344,8 +278,6 @@
   },
   "card": {
     "untitled": "بلا عنوان",
-    "deleteAria": "حذف",
-    "exports": "الصادرات:",
     "edit": "تحرير",
     "deleteTitle": "حذف: \"{title}\"",
     "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذا المستند نهائيا؟",
@@ -390,17 +322,6 @@
     "error": "فشل التصدير إلى GitHub:",
     "close": "إغلاق",
     "back": "رجوع",
-    "menu": {
-      "header": "مستودع GitHub",
-      "import": "استيراد من GitHub",
-      "importTooltip": "استيراد ملفات من مستودع GitHub",
-      "push": "دفع إلى GitHub",
-      "pushTooltip": "إيداع التغييرات ودفعها إلى المستودع المرتبط",
-      "pull": "سحب من GitHub",
-      "pullTooltip": "جلب التغييرات من المستودع المرتبط",
-      "publish": "نشر في مستودع جديد",
-      "publishTooltip": "إنشاء مستودع GitHub جديد ودفع جميع ملفات المشروع إليه"
-    },
     "import": {
       "title": "استيراد من GitHub",
       "repoLabel": "المستودع",
@@ -489,17 +410,6 @@
   "gitlab": {
     "close": "إغلاق",
     "back": "رجوع",
-    "menu": {
-      "header": "مستودع GitLab",
-      "import": "استيراد من GitLab",
-      "importTooltip": "استيراد ملفات من مستودع GitLab",
-      "push": "دفع إلى GitLab",
-      "pushTooltip": "إيداع التغييرات ودفعها إلى المستودع المرتبط",
-      "pull": "سحب من GitLab",
-      "pullTooltip": "جلب التغييرات من المستودع المرتبط",
-      "publish": "نشر في مستودع جديد",
-      "publishTooltip": "إنشاء مستودع GitLab جديد ودفع جميع ملفات المشروع إليه"
-    },
     "import": {
       "title": "استيراد من GitLab",
       "repoLabel": "عنوان URL للمستودع",
@@ -626,8 +536,6 @@
     "alertMissingKeys": "يرجى إدخال المفتاحين العام والخاص قبل النشر.",
     "alertMissingRelay": "يرجى إدخال خادم Relay واحد على الأقل.",
     "alertPublishFailed": "فشل النشر على شبكة Nostr. يرجى المحاولة مرة أخرى.",
-    "alertMissingPrivateKey": "يرجى توفير مفتاحك الخاص لتوقيع المنشور ونشره.",
-    "alertProcessingError": "حدث خطأ أثناء معالجة بيانات المستند.",
     "alertInvalidKey": "تنسيق المفتاح العام غير صالح"
   },
   "toolbar": {
@@ -657,7 +565,6 @@
       "code": "كود",
       "ascii": "ASCII",
       "mathjs": "MathJS",
-      "new": "جديد",
       "init": "تهيئة",
       "tutorial": "برنامج تعليمي",
       "shorts": "قوالب قصيرة",
@@ -735,7 +642,7 @@
     "minimap": "الخريطة المصغرة",
     "editing": "التحرير",
     "wrap": "التفاف",
-    "tab": "Tab",
+    "tab": "علامة الجدولة",
     "spaces": "مسافات",
     "whitespace": "مسافات بيضاء",
     "folding": "طي",
@@ -770,7 +677,6 @@
   },
   "exporter": {
     "title": "تحويل لمنصة تعليمية",
-    "close": "إغلاق",
     "urlLabel": "عنوان المُصدِّر",
     "urlPlaceholder": "https://liascript.github.io/LiaScript-Exporter",
     "urlHint": "عادةً لا داعي لتغيير أي شيء هنا. إذا كنت تشغّل مُصدِّرًا خاصًا بك (مثلًا باستخدام 'liaex serve' على http://localhost:3000)، فأدخل عنوانه.",
@@ -789,14 +695,6 @@
   },
   "localFolder": {
     "close": "إغلاق",
-    "menu": {
-      "header": "مجلد محلي",
-      "open": "فتح مجلد…",
-      "openTooltip": "ربط مجلد على جهاز الكمبيوتر بهذا المشروع",
-      "sync": "مزامنة…",
-      "syncNamed": "مزامنة “{name}”…",
-      "syncTooltip": "مقارنة هذا المشروع ومزامنته مع المجلد المرتبط"
-    },
     "direction": {
       "push": "المحرر ← المجلد",
       "pull": "المجلد ← المحرر",
