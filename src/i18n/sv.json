@@ -22,14 +22,16 @@
       "hideToolbar": "Dölj editorns verktygsfält",
       "showToolbar": "Visa editorns verktygsfält",
       "hideFiles": "Dölj filutforskaren",
-      "showFiles": "Visa filutforskaren"
+      "showFiles": "Visa filutforskaren",
+      "tools": "Verktyg",
+      "files": "Filer"
     },
     "connection": {
-      "offlineAria": "Editorn används i offlineläge, vilket betyder att du är den enda som redigerar",
-      "onlineAria": "Editorn är i samarbetsläge via {type}, vilket betyder att du kan dela URL:en och börja redigera med andra",
-      "switchOfflineAria": "Stäng av samarbetsredigering och växla till offlineläge",
-      "switchWebRTCAria": "Växla till samarbetsredigering via WebRTC",
-      "switchWebSocketAria": "Växla till samarbetsredigering via WebSocket",
+      "offlineAria": "Bara jag: bara du redigerar, allt stannar på den här enheten",
+      "onlineAria": "Live via {type}: dela länken för att skriva tillsammans",
+      "switchOfflineAria": "Växla till ”Bara jag”",
+      "switchWebRTCAria": "Växla till ”Live – direkt”",
+      "switchWebSocketAria": "Växla till ”Live – via server”",
       "title": "Vem skriver?",
       "solo": "Bara jag",
       "soloDesc": "Allt stannar på den här enheten. Fungerar utan internet.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Information",
     "close": "Stäng",
-    "compileHint": "Du kan ändra och kompilera den här kursen med {ctrl}, men om du vill spara ändringarna permanent måste du göra en fork!",
-    "compileHintEmbed": "Du kan ändra och kompilera den här kursen med {ctrl}, eller öppna den i {link}.",
-    "compileHintEmbedOnly": "Du kan ändra och kompilera den här kursen med {ctrl}",
-    "openInEditor": "... eller öppna den i {link} ...",
+    "compileHint": "Här kan du prova ändringar och uppdatera förhandsvisningen med {ctrl}. Vill du behålla dem, gör en kopia: ⋮-menyn → ”Gör en kopia”.",
+    "compileHintEmbed": "Du kan prova ändringar och uppdatera förhandsvisningen med {ctrl}, eller öppna kursen i {link}.",
+    "compileHintEmbedOnly": "Du kan prova ändringar och uppdatera förhandsvisningen med {ctrl}.",
+    "openInEditor": "… eller öppna den i {link}.",
     "viewOnLiaScript": "Om du vill se kursen på LiaScript, klicka {here}.",
     "viewHere": "här",
-    "toolbarHint": "Använd verktygsfältet för att växla mellan editor- och förhandsvisningsläge."
+    "toolbarHint": "Knapparna högst upp växlar mellan ”Skriva”, ”Båda” och ”Förhandsvisning”."
   },
   "github": {
     "exporting": "Exporterar till GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Kod",
       "recording": "Inspelning",
       "tutorial": "Handledning",
-      "editor": "Editor"
+      "editor": "Inställningar"
     },
     "sections": {
       "font": "Typsnitt",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Kopiera",
+    "copied": "Kopierad",
+    "open": "Öppna",
+    "length": "{n} tecken",
+    "shortest": "Kortaste versionen (rekommenderas)",
+    "alternative": "Alternativ, om den första inte fungerar",
+    "embedReadable": "Alternativ som även andra verktyg kan skapa",
+    "collaborationIntro": "Skicka länken till alla som ska skriva med. De öppnar kursen i editorn och ser varje ändring direkt.",
+    "collaborationNote": "Alla med länken redigerar samma kurs. Den som vill ha en egen version väljer ”Gör en kopia” i ⋮-menyn.",
+    "externalIntro": "Den här länken öppnar Markdown-filen från webbadressen i editorn.",
+    "externalNote": "Det fungerar bara så länge filen är offentligt tillgänglig på internet.",
+    "dataIntro": "Hela texten i den aktuella filen ligger i länken. Den öppnas på LiaScript utan att något sparas någonstans.",
+    "snapshotIntro": "Den som öppnar länken får editorn med en kopia av den aktuella filen. Din kurs förblir oförändrad.",
+    "embedIntro": "Klistra in den här HTML-koden på din webbplats. Den visar editorn och förhandsvisningen av den aktuella filen.",
+    "embedNote": "Tips: byt ut ”/embed/code/” i adressen mot ”/embed/code/edit/” eller ”/embed/code/preview/” för att bara visa editorn eller bara förhandsvisningen.",
+    "longLinkWarning": "Bilder och andra filer följer inte med, och mycket långa länkar kan klippas av i meddelandeappar eller webbläsare. Testa länken innan du skickar den."
   }
 }

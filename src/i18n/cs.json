@@ -22,14 +22,16 @@
       "hideToolbar": "Skrýt panel nástrojů editoru",
       "showToolbar": "Zobrazit panel nástrojů editoru",
       "hideFiles": "Skrýt průzkumník souborů",
-      "showFiles": "Zobrazit průzkumník souborů"
+      "showFiles": "Zobrazit průzkumník souborů",
+      "tools": "Nástroje",
+      "files": "Soubory"
     },
     "connection": {
-      "offlineAria": "Editor se používá v offline režimu, což znamená, že upravujete jen vy",
-      "onlineAria": "Editor je v režimu spolupráce přes {type}, takže můžete sdílet URL a upravovat s ostatními",
-      "switchOfflineAria": "Vypnout společné úpravy a přepnout do offline režimu",
-      "switchWebRTCAria": "Přepnout na společné úpravy přes WebRTC",
-      "switchWebSocketAria": "Přepnout na společné úpravy přes WebSocket",
+      "offlineAria": "Jen já: upravujete jen vy, vše zůstává v tomto zařízení",
+      "onlineAria": "Živě přes {type}: sdílejte odkaz a pište společně",
+      "switchOfflineAria": "Přepnout na „Jen já“",
+      "switchWebRTCAria": "Přepnout na „Živě – přímo“",
+      "switchWebSocketAria": "Přepnout na „Živě – přes server“",
       "title": "Kdo píše?",
       "solo": "Jen já",
       "soloDesc": "Vše zůstává v tomto zařízení. Funguje i bez internetu.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Informace",
     "close": "Zavřít",
-    "compileHint": "Tento kurz můžete upravit a kompilovat pomocí {ctrl}, ale pokud chcete změny uložit trvale, musíte jej forknout!",
-    "compileHintEmbed": "Tento kurz můžete upravit a kompilovat pomocí {ctrl}, nebo jej otevřít v {link}.",
-    "compileHintEmbedOnly": "Tento kurz můžete upravit a kompilovat pomocí {ctrl}",
-    "openInEditor": "... nebo jej otevřít v {link} ...",
+    "compileHint": "Zde můžete zkoušet změny a náhled obnovit pomocí {ctrl}. Chcete-li je zachovat, vytvořte si kopii: nabídka ⋮ → „Vytvořit kopii“.",
+    "compileHintEmbed": "Můžete zkoušet změny a náhled obnovit pomocí {ctrl}, nebo kurz otevřít v {link}.",
+    "compileHintEmbedOnly": "Můžete zkoušet změny a náhled obnovit pomocí {ctrl}.",
+    "openInEditor": "… nebo jej otevřete v {link}.",
     "viewOnLiaScript": "Pokud chcete kurz zobrazit v LiaScript, klikněte {here}.",
     "viewHere": "zde",
-    "toolbarHint": "Pomocí panelu nástrojů přepínejte mezi režimy editoru a náhledu."
+    "toolbarHint": "Tlačítka nahoře přepínají mezi „Psát“, „Obojí“ a „Náhled“."
   },
   "github": {
     "exporting": "Export do GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Kód",
       "recording": "Nahrávání",
       "tutorial": "Tutoriál",
-      "editor": "Editor"
+      "editor": "Nastavení"
     },
     "sections": {
       "font": "Písmo",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Kopírovat",
+    "copied": "Zkopírováno",
+    "open": "Otevřít",
+    "length": "Znaků: {n}",
+    "shortest": "Nejkratší verze (doporučeno)",
+    "alternative": "Alternativa, pokud první nefunguje",
+    "embedReadable": "Alternativa, kterou umí vytvořit i jiné nástroje",
+    "collaborationIntro": "Pošlete tento odkaz všem, kdo mají psát s vámi. Otevřou kurz v editoru a každou změnu uvidí okamžitě.",
+    "collaborationNote": "Všichni s odkazem upravují stejný kurz. Kdo chce vlastní verzi, použije „Vytvořit kopii“ v nabídce ⋮.",
+    "externalIntro": "Tento odkaz otevře v editoru soubor Markdown z webové adresy.",
+    "externalNote": "Funguje to jen tak dlouho, dokud je soubor veřejně dostupný na internetu.",
+    "dataIntro": "Celý text aktuálního souboru je zabalen přímo v odkazu. Otevře se v LiaScript, aniž by se cokoli kdekoli ukládalo.",
+    "snapshotIntro": "Kdo otevře tento odkaz, dostane editor s kopií aktuálního souboru. Váš kurz zůstane beze změny.",
+    "embedIntro": "Vložte tento HTML kód do svého webu. Zobrazí editor a náhled aktuálního souboru.",
+    "embedNote": "Tip: nahraďte v adrese „/embed/code/“ za „/embed/code/edit/“ nebo „/embed/code/preview/“, chcete-li zobrazit jen editor, nebo jen náhled.",
+    "longLinkWarning": "Obrázky a další soubory nejsou zahrnuty a velmi dlouhé odkazy mohou komunikátory nebo prohlížeče oříznout. Než odkaz odešlete, vyzkoušejte ho."
   }
 }

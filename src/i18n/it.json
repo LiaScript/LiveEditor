@@ -22,14 +22,16 @@
       "hideToolbar": "Nascondi la barra degli strumenti dell'editor",
       "showToolbar": "Mostra la barra degli strumenti dell'editor",
       "hideFiles": "Nascondi esplora file",
-      "showFiles": "Mostra esplora file"
+      "showFiles": "Mostra esplora file",
+      "tools": "Strumenti",
+      "files": "File"
     },
     "connection": {
-      "offlineAria": "L'editor è usato in modalità offline, quindi sei l'unica persona che modifica",
-      "onlineAria": "L'editor è in modalità collaborativa tramite {type}, quindi puoi condividere l'URL e modificare con altri",
-      "switchOfflineAria": "Disattiva la modifica collaborativa e passa alla modalità offline",
-      "switchWebRTCAria": "Passa alla modifica collaborativa tramite WebRTC",
-      "switchWebSocketAria": "Passa alla modifica collaborativa tramite WebSocket",
+      "offlineAria": "Solo io: modifichi solo tu, tutto resta su questo dispositivo",
+      "onlineAria": "Live tramite {type}: condividi il link per scrivere insieme",
+      "switchOfflineAria": "Passa a «Solo io»",
+      "switchWebRTCAria": "Passa a «Live – diretto»",
+      "switchWebSocketAria": "Passa a «Live – tramite server»",
       "title": "Chi sta scrivendo?",
       "solo": "Solo io",
       "soloDesc": "Tutto resta su questo dispositivo. Funziona anche senza internet.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Informazione",
     "close": "Chiudi",
-    "compileHint": "Puoi modificare e compilare questo corso con {ctrl}, ma se vuoi salvare le modifiche in modo permanente devi farne un fork!",
-    "compileHintEmbed": "Puoi modificare e compilare questo corso con {ctrl}, oppure aprirlo in {link}.",
-    "compileHintEmbedOnly": "Puoi modificare e compilare questo corso con {ctrl}",
-    "openInEditor": "... oppure aprilo in {link} ...",
+    "compileHint": "Qui puoi provare delle modifiche e aggiornare l'anteprima con {ctrl}. Per conservarle, fai una copia: menu ⋮ → «Fai una copia».",
+    "compileHintEmbed": "Puoi provare delle modifiche e aggiornare l'anteprima con {ctrl}, oppure aprire il corso nel {link}.",
+    "compileHintEmbedOnly": "Puoi provare delle modifiche e aggiornare l'anteprima con {ctrl}.",
+    "openInEditor": "… oppure aprilo nel {link}.",
     "viewOnLiaScript": "Se vuoi vedere il corso su LiaScript, fai clic {here}.",
     "viewHere": "qui",
-    "toolbarHint": "Usa la barra degli strumenti per passare tra le modalità editor e anteprima."
+    "toolbarHint": "Con i pulsanti in alto passi tra «Scrivi», «Entrambi» e «Anteprima»."
   },
   "github": {
     "exporting": "Esportazione su GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Codice",
       "recording": "Registrazione",
       "tutorial": "Tutorial",
-      "editor": "Editor"
+      "editor": "Impostazioni"
     },
     "sections": {
       "font": "Carattere",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Copia",
+    "copied": "Copiato",
+    "open": "Apri",
+    "length": "{n} caratteri",
+    "shortest": "Versione più breve (consigliata)",
+    "alternative": "Alternativa, se la prima non funziona",
+    "embedReadable": "Alternativa che possono generare anche altri strumenti",
+    "collaborationIntro": "Invia questo link a tutte le persone che devono scrivere con te. Aprono il corso nell'editor e vedono subito ogni modifica.",
+    "collaborationNote": "Chiunque abbia il link modifica lo stesso corso. Chi vuole una versione tutta sua usa «Fai una copia» nel menu ⋮.",
+    "externalIntro": "Questo link apre nell'editor il file Markdown dall'indirizzo web.",
+    "externalNote": "Funziona solo finché il file è raggiungibile pubblicamente su internet.",
+    "dataIntro": "Tutto il testo del file corrente è contenuto nel link. Si apre su LiaScript senza salvare nulla da nessuna parte.",
+    "snapshotIntro": "Chi apre questo link ottiene l'editor con una copia del file corrente. Il tuo corso resta invariato.",
+    "embedIntro": "Incolla questo codice HTML nel tuo sito web. Mostra l'editor e l'anteprima del file corrente.",
+    "embedNote": "Suggerimento: sostituisci «/embed/code/» nell'indirizzo con «/embed/code/edit/» o «/embed/code/preview/» per mostrare solo l'editor o solo l'anteprima.",
+    "longLinkWarning": "Immagini e altri file non sono inclusi, e i link molto lunghi possono essere tagliati da app di messaggistica o browser. Prova il link prima di inviarlo."
   }
 }

@@ -22,14 +22,16 @@
       "hideToolbar": "Ukryj pasek narzędzi edytora",
       "showToolbar": "Pokaż pasek narzędzi edytora",
       "hideFiles": "Ukryj eksplorator plików",
-      "showFiles": "Pokaż eksplorator plików"
+      "showFiles": "Pokaż eksplorator plików",
+      "tools": "Narzędzia",
+      "files": "Pliki"
     },
     "connection": {
-      "offlineAria": "Edytor jest używany w trybie offline, co oznacza, że tylko ty edytujesz",
-      "onlineAria": "Edytor działa w trybie współpracy przez {type}, co oznacza, że możesz udostępnić URL i edytować razem z innymi",
-      "switchOfflineAria": "Wyłącz edycję współdzieloną i przełącz na tryb offline",
-      "switchWebRTCAria": "Przełącz na edycję współdzieloną przez WebRTC",
-      "switchWebSocketAria": "Przełącz na edycję współdzieloną przez WebSocket",
+      "offlineAria": "Tylko ja: edytujesz tylko ty, wszystko zostaje na tym urządzeniu",
+      "onlineAria": "Na żywo przez {type}: udostępnij link, aby pisać razem",
+      "switchOfflineAria": "Przełącz na „Tylko ja”",
+      "switchWebRTCAria": "Przełącz na „Na żywo – bezpośrednio”",
+      "switchWebSocketAria": "Przełącz na „Na żywo – przez serwer”",
       "title": "Kto pisze?",
       "solo": "Tylko ja",
       "soloDesc": "Wszystko zostaje na tym urządzeniu. Działa bez internetu.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Informacja",
     "close": "Zamknij",
-    "compileHint": "Możesz modyfikować i kompilować ten kurs za pomocą {ctrl}, ale jeśli chcesz zapisać zmiany na stałe, musisz zrobić fork!",
-    "compileHintEmbed": "Możesz modyfikować i kompilować ten kurs za pomocą {ctrl}, albo otworzyć go w {link}.",
-    "compileHintEmbedOnly": "Możesz modyfikować i kompilować ten kurs za pomocą {ctrl}",
-    "openInEditor": "... albo otworzyć go w {link} ...",
+    "compileHint": "Możesz tu wypróbować zmiany i odświeżyć podgląd za pomocą {ctrl}. Aby je zachować, zrób kopię: menu ⋮ → „Zrób kopię”.",
+    "compileHintEmbed": "Możesz wypróbować zmiany i odświeżyć podgląd za pomocą {ctrl} albo otworzyć kurs w {link}.",
+    "compileHintEmbedOnly": "Możesz wypróbować zmiany i odświeżyć podgląd za pomocą {ctrl}.",
+    "openInEditor": "… albo otwórz go w {link}.",
     "viewOnLiaScript": "Jeśli chcesz zobaczyć kurs w LiaScript, kliknij {here}.",
     "viewHere": "tutaj",
-    "toolbarHint": "Użyj paska narzędzi, aby przełączać się między trybem edytora i podglądu."
+    "toolbarHint": "Przyciski u góry przełączają między widokami „Pisanie”, „Oba” i „Podgląd”."
   },
   "github": {
     "exporting": "Eksportowanie do GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Kod",
       "recording": "Nagrywanie",
       "tutorial": "Samouczek",
-      "editor": "Edytor"
+      "editor": "Ustawienia"
     },
     "sections": {
       "font": "Czcionka",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Kopiuj",
+    "copied": "Skopiowano",
+    "open": "Otwórz",
+    "length": "Znaki: {n}",
+    "shortest": "Najkrótsza wersja (zalecana)",
+    "alternative": "Alternatywa, jeśli pierwsza nie działa",
+    "embedReadable": "Alternatywa, którą mogą też wygenerować inne narzędzia",
+    "collaborationIntro": "Wyślij ten link wszystkim, którzy mają pisać razem z tobą. Otworzą kurs w edytorze i od razu zobaczą każdą zmianę.",
+    "collaborationNote": "Każdy, kto ma link, edytuje ten sam kurs. Kto chce własną wersję, wybiera „Zrób kopię” w menu ⋮.",
+    "externalIntro": "Ten link otwiera w edytorze plik Markdown spod adresu internetowego.",
+    "externalNote": "Działa to tylko tak długo, jak plik jest publicznie dostępny w internecie.",
+    "dataIntro": "Cały tekst bieżącego pliku mieści się w linku. Otwiera się w LiaScript i nic nie jest nigdzie zapisywane.",
+    "snapshotIntro": "Kto otworzy ten link, dostanie edytor z kopią bieżącego pliku. Twój kurs pozostaje bez zmian.",
+    "embedIntro": "Wklej ten kod HTML na swoją stronę internetową. Pokazuje edytor i podgląd bieżącego pliku.",
+    "embedNote": "Wskazówka: zamień w adresie „/embed/code/” na „/embed/code/edit/” lub „/embed/code/preview/”, aby pokazać tylko edytor albo tylko podgląd.",
+    "longLinkWarning": "Obrazy i inne pliki nie są dołączane, a bardzo długie linki mogą zostać obcięte przez komunikatory lub przeglądarki. Przetestuj link, zanim go wyślesz."
   }
 }

@@ -22,14 +22,16 @@
       "hideToolbar": "Editorwerkbalk verbergen",
       "showToolbar": "Editorwerkbalk tonen",
       "hideFiles": "Bestandsverkenner verbergen",
-      "showFiles": "Bestandsverkenner tonen"
+      "showFiles": "Bestandsverkenner tonen",
+      "tools": "Tools",
+      "files": "Bestanden"
     },
     "connection": {
-      "offlineAria": "De editor wordt offline gebruikt, wat betekent dat jij de enige bent die bewerkt",
-      "onlineAria": "De editor staat in samenwerkingsmodus via {type}, wat betekent dat je de URL kunt delen en samen met anderen kunt bewerken",
-      "switchOfflineAria": "Samenwerkend bewerken uitschakelen en overschakelen naar offline modus",
-      "switchWebRTCAria": "Overschakelen naar samenwerkend bewerken via WebRTC",
-      "switchWebSocketAria": "Overschakelen naar samenwerkend bewerken via WebSocket",
+      "offlineAria": "Alleen ik: alleen jij bewerkt, alles blijft op dit apparaat",
+      "onlineAria": "Live via {type}: deel de link om samen te schrijven",
+      "switchOfflineAria": "Overschakelen naar ‘Alleen ik’",
+      "switchWebRTCAria": "Overschakelen naar ‘Live – direct’",
+      "switchWebSocketAria": "Overschakelen naar ‘Live – via server’",
       "title": "Wie schrijft er mee?",
       "solo": "Alleen ik",
       "soloDesc": "Alles blijft op dit apparaat. Werkt ook zonder internet.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Informatie",
     "close": "Sluiten",
-    "compileHint": "Je kunt deze cursus wijzigen en compileren met {ctrl}, maar als je je wijzigingen permanent wilt opslaan, moet je er een fork van maken!",
-    "compileHintEmbed": "Je kunt deze cursus wijzigen en compileren met {ctrl}, of openen in {link}.",
-    "compileHintEmbedOnly": "Je kunt deze cursus wijzigen en compileren met {ctrl}",
-    "openInEditor": "... of open hem in {link} ...",
+    "compileHint": "Je kunt hier wijzigingen uitproberen en het voorbeeld vernieuwen met {ctrl}. Wil je ze bewaren, maak dan een kopie: ⋮-menu → ‘Kopie maken’.",
+    "compileHintEmbed": "Je kunt wijzigingen uitproberen en het voorbeeld vernieuwen met {ctrl}, of de cursus openen in de {link}.",
+    "compileHintEmbedOnly": "Je kunt wijzigingen uitproberen en het voorbeeld vernieuwen met {ctrl}.",
+    "openInEditor": "… of open hem in de {link}.",
     "viewOnLiaScript": "Als je de cursus op LiaScript wilt zien, klik dan {here}.",
     "viewHere": "hier",
-    "toolbarHint": "Gebruik de werkbalk om te schakelen tussen editor- en voorbeeldmodus."
+    "toolbarHint": "Met de knoppen bovenaan wissel je tussen ‘Schrijven’, ‘Beide’ en ‘Voorbeeld’."
   },
   "github": {
     "exporting": "Exporteren naar GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Code",
       "recording": "Opname",
       "tutorial": "Tutorial",
-      "editor": "Editor"
+      "editor": "Instellingen"
     },
     "sections": {
       "font": "Lettertype",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Kopiëren",
+    "copied": "Gekopieerd",
+    "open": "Openen",
+    "length": "{n} tekens",
+    "shortest": "Kortste versie (aanbevolen)",
+    "alternative": "Alternatief, als de eerste niet werkt",
+    "embedReadable": "Alternatief dat ook andere tools kunnen maken",
+    "collaborationIntro": "Stuur deze link naar iedereen die mee moet schrijven. Ze openen de cursus in de editor en zien elke wijziging meteen.",
+    "collaborationNote": "Iedereen met de link bewerkt dezelfde cursus. Wie een eigen versie wil, kiest ‘Kopie maken’ in het ⋮-menu.",
+    "externalIntro": "Deze link opent het Markdown-bestand van het webadres in de editor.",
+    "externalNote": "Dat werkt alleen zolang het bestand openbaar op internet bereikbaar is.",
+    "dataIntro": "De hele tekst van het huidige bestand zit in de link. Hij opent op LiaScript zonder dat er ergens iets wordt opgeslagen.",
+    "snapshotIntro": "Wie deze link opent, krijgt de editor met een kopie van het huidige bestand. Jouw cursus blijft ongewijzigd.",
+    "embedIntro": "Plak deze HTML-code in je website. Hij toont de editor en het voorbeeld van het huidige bestand.",
+    "embedNote": "Tip: vervang ‘/embed/code/’ in het adres door ‘/embed/code/edit/’ of ‘/embed/code/preview/’ om alleen de editor of alleen het voorbeeld te tonen.",
+    "longLinkWarning": "Afbeeldingen en andere bestanden zitten er niet bij, en heel lange links kunnen door messengers of browsers worden afgekapt. Test de link voordat je hem verstuurt."
   }
 }

@@ -22,14 +22,16 @@
       "hideToolbar": "Ocultar barra de herramientas del editor",
       "showToolbar": "Mostrar barra de herramientas del editor",
       "hideFiles": "Ocultar explorador de archivos",
-      "showFiles": "Mostrar explorador de archivos"
+      "showFiles": "Mostrar explorador de archivos",
+      "tools": "Herramientas",
+      "files": "Archivos"
     },
     "connection": {
-      "offlineAria": "El editor se usa en modo sin conexión; tú eres la única persona editando",
-      "onlineAria": "El editor está en modo colaborativo mediante {type}; comparte la URL y edita con otras personas",
-      "switchOfflineAria": "Desactivar la edición colaborativa y cambiar al modo sin conexión",
-      "switchWebRTCAria": "Cambiar a edición colaborativa mediante WebRTC",
-      "switchWebSocketAria": "Cambiar a edición colaborativa mediante WebSocket",
+      "offlineAria": "Solo yo: solo tú editas, todo se queda en este dispositivo",
+      "onlineAria": "En vivo vía {type}: comparte el enlace para escribir juntos",
+      "switchOfflineAria": "Cambiar a «Solo yo»",
+      "switchWebRTCAria": "Cambiar a «En vivo – directo»",
+      "switchWebSocketAria": "Cambiar a «En vivo – por servidor»",
       "title": "¿Quién escribe?",
       "solo": "Solo yo",
       "soloDesc": "Todo se queda en este dispositivo. Funciona sin internet.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Información",
     "close": "Cerrar",
-    "compileHint": "Puedes modificar y compilar este curso con {ctrl}, pero si quieres guardar los cambios de forma permanente, debes hacer fork.",
-    "compileHintEmbed": "Puedes modificar y compilar este curso con {ctrl}, o abrirlo en {link}.",
-    "compileHintEmbedOnly": "Puedes modificar y compilar este curso con {ctrl}",
-    "openInEditor": "... o abrirlo en {link} ...",
+    "compileHint": "Aquí puedes probar cambios y actualizar la vista previa con {ctrl}. Para conservarlos, haz una copia: menú ⋮ → «Hacer una copia».",
+    "compileHintEmbed": "Puedes probar cambios y actualizar la vista previa con {ctrl}, o abrir el curso en el {link}.",
+    "compileHintEmbedOnly": "Puedes probar cambios y actualizar la vista previa con {ctrl}.",
+    "openInEditor": "… o ábrelo en el {link}.",
     "viewOnLiaScript": "Si quieres ver el curso en LiaScript, haz clic {here}.",
     "viewHere": "aquí",
-    "toolbarHint": "Usa la barra de herramientas para cambiar entre los modos de editor y vista previa."
+    "toolbarHint": "Los botones de arriba cambian entre «Escribir», «Ambos» y «Vista previa»."
   },
   "github": {
     "exporting": "Exportando a GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Código",
       "recording": "Grabación",
       "tutorial": "Tutorial",
-      "editor": "Editor"
+      "editor": "Ajustes"
     },
     "sections": {
       "font": "Fuente",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "open": "Abrir",
+    "length": "{n} caracteres",
+    "shortest": "Versión más corta (recomendada)",
+    "alternative": "Alternativa, si la primera no funciona",
+    "embedReadable": "Alternativa que también pueden generar otras herramientas",
+    "collaborationIntro": "Envía este enlace a todas las personas que vayan a escribir contigo. Abren el curso en el editor y ven cada cambio al instante.",
+    "collaborationNote": "Todos los que tienen el enlace editan el mismo curso. Quien quiera su propia versión usa «Hacer una copia» en el menú ⋮.",
+    "externalIntro": "Este enlace abre en el editor el archivo Markdown de la dirección web.",
+    "externalNote": "Solo funciona mientras el archivo sea accesible públicamente en internet.",
+    "dataIntro": "Todo el texto del archivo actual va dentro del enlace. Se abre en LiaScript sin guardar nada en ningún sitio.",
+    "snapshotIntro": "Quien abra este enlace obtiene el editor con una copia del archivo actual. Tu curso no cambia.",
+    "embedIntro": "Pega este código HTML en tu sitio web. Muestra el editor y la vista previa del archivo actual.",
+    "embedNote": "Consejo: sustituye «/embed/code/» en la dirección por «/embed/code/edit/» o «/embed/code/preview/» para mostrar solo el editor o solo la vista previa.",
+    "longLinkWarning": "Las imágenes y otros archivos no se incluyen, y los enlaces muy largos pueden quedar cortados en apps de mensajería o navegadores. Prueba el enlace antes de enviarlo."
   }
 }

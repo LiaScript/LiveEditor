@@ -582,94 +582,61 @@ export default {
       if (!link.endsWith("/webrtc") && !link.endsWith("/websocket")) {
         link += "/webrtc";
       }
-      this.$refs.modal.show(
-        this.$t('modal.collaborationTitle'),
-        `${this.$t('modal.collaborationBody')}
-        <hr>
-        <a target="_blank" href="${link}">${link}</a>`
-      );
+      this.$refs.modal.show({
+        title: this.$t("share.items.collaborationLink.label"),
+        intro: this.$t("result.collaborationIntro"),
+        entries: [{ value: link, kind: "link" }],
+        note: this.$t("result.collaborationNote"),
+      });
     },
 
     shareFile() {
-      const fileUrl = prompt(this.$t('prompt.shareFileUrl'), "");
+      const fileUrl = prompt(this.$t("prompt.shareFileUrl"), "");
 
       if (!fileUrl) return;
 
-      this.$refs.modal.show(
-        this.$t('modal.externalResourceTitle'),
-        `${this.$t('modal.externalResourceBody')}
-        <hr>
-        <a target="_blank" style="word-break: break-all" href="${this.urlPath([
-          "show",
-          "file",
-          fileUrl,
-        ])}">
-          ${this.urlPath(["show", "file", fileUrl])}
-        </a>`
-      );
-    },
-
-    bytesInfo(url: string) {
-      return `<code>URL-length: ${url.length} bytes</code><br>`;
+      this.$refs.modal.show({
+        title: this.$t("share.items.externalResource.label"),
+        intro: this.$t("result.externalIntro"),
+        entries: [{ value: this.urlPath(["show", "file", fileUrl]), kind: "link" }],
+        note: this.$t("result.externalNote"),
+      });
     },
 
     async shareData() {
-      let base64 = "";
-
-      let uriEncode = "";
-      let gzip = "";
-
       const activeValue = this.$refs.editor.getActiveValue();
+      const links: string[] = [];
 
-      try {
-        base64 =
-          LiaScriptURL + "?data:text/plain;base64," + btoa(activeValue);
-
-        base64 =
-          this.bytesInfo(base64) +
-          `<a target="_blank" style="word-break: break-all" href="${base64}">
-          ${base64}
-        </a>`;
-      } catch (e) {}
-
-      try {
-        uriEncode =
-          LiaScriptURL +
-          "?data:text/plain," +
-          encodeURIComponent(activeValue);
-
-        uriEncode =
-          this.bytesInfo(uriEncode) +
-          `<a target="_blank" style="word-break: break-all" href="${uriEncode}">
-          ${uriEncode}
-        </a>`;
-      } catch (e) {}
-
+      // three encodings; depending on the language one of them is shortest
+      // (base64 fails for some characters, so each is optional)
       try {
         const pako = (await import("pako")).default;
-        gzip = pako.gzip(activeValue);
-        gzip =
+        const gzip = pako.gzip(activeValue);
+        links.push(
           LiaScriptURL +
-          "?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
-          btoa(String.fromCharCode.apply(null, gzip));
-
-        gzip =
-          this.bytesInfo(gzip) +
-          `<a target="_blank" style="word-break: break-all" href="${gzip}">
-          ${gzip}
-        </a>`;
+            "?data:text/plain;charset=utf-8;Content-Encoding=gzip;base64," +
+            btoa(String.fromCharCode.apply(null, gzip))
+        );
+      } catch (e) {}
+      try {
+        links.push(LiaScriptURL + "?data:text/plain;base64," + btoa(activeValue));
+      } catch (e) {}
+      try {
+        links.push(LiaScriptURL + "?data:text/plain," + encodeURIComponent(activeValue));
       } catch (e) {}
 
-      this.$refs.modal.show(
-        this.$t('modal.dataProtocolTitle'),
-        `${this.$t('modal.dataProtocolBody')}
-        <hr>
-        ${gzip}
-        <hr>
-        ${base64}
-        <hr>
-        ${uriEncode}`
-      );
+      links.sort((a, b) => a.length - b.length);
+
+      this.$refs.modal.show({
+        title: this.$t("share.items.dataUri.label"),
+        intro: this.$t("result.dataIntro"),
+        entries: links.map((value, i) => ({
+          label: i === 0 ? this.$t("result.shortest") : this.$t("result.alternative"),
+          value,
+          kind: "link",
+        })),
+        warning: this.$t("result.longLinkWarning"),
+      });
     },
 
     async shareCode() {
@@ -680,42 +647,36 @@ export default {
         await compress(this.$refs.editor.getActiveValue()),
       ]);
 
-      this.$refs.modal.show(
-        this.$t('modal.snapshotTitle'),
-        `${this.$t('modal.snapshotBody')}
-        <hr>
-        ${this.bytesInfo(zipCode)}
-        <a target="_blank" style="word-break: break-all" href="${zipCode}">${zipCode}</a>`
-      );
+      this.$refs.modal.show({
+        title: this.$t("share.items.snapshotUrl.label"),
+        intro: this.$t("result.snapshotIntro"),
+        entries: [{ value: zipCode, kind: "link" }],
+        warning: this.$t("result.longLinkWarning"),
+      });
     },
 
     async embedCode() {
       const { compress } = await import("shrink-string");
       const activeValue = this.$refs.editor.getActiveValue();
-      const zipCode = this.urlPath([
-        "embed",
-        "code",
-        await compress(activeValue),
-      ]);
-
+      const zipCode = this.urlPath(["embed", "code", await compress(activeValue)]);
       const base64 = this.urlPath([
         "embed",
         "code",
         btoa(unescape(encodeURIComponent(activeValue))),
       ]);
+      const iframe = (src: string) =>
+        `<iframe style="height: 80vh; min-width: 100%; border: 1px solid black" src="${src}"></iframe>`;
 
-      this.$refs.modal.show(
-        this.$t('modal.embedTitle'),
-        `${this.$t('modal.embedBody')}<br>
-        <code>?/embed/code/edit</code> or <code>?/embed/code/preview</code>
-        <hr>
-        ${this.bytesInfo(zipCode)}
-        <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${zipCode}"&gt;&lt;/iframe&gt;</code>
-        <hr>
-        <p>This code can be generated externally via: <code>btoa(unescape(encodeURIComponent(string)))</code></p>
-        ${this.bytesInfo(base64)}
-        <code style="word-break: break-all">&lt;iframe style="height: 80vh; min-width: 100%; border: 1px black solid" src="${base64}"&gt;&lt;/iframe&gt;</code>`
-      );
+      this.$refs.modal.show({
+        title: this.$t("share.items.embedCode.label"),
+        intro: this.$t("result.embedIntro"),
+        entries: [
+          { label: this.$t("result.shortest"), value: iframe(zipCode), kind: "code" },
+          { label: this.$t("result.embedReadable"), value: iframe(base64), kind: "code" },
+        ],
+        warning: this.$t("result.longLinkWarning"),
+        note: this.$t("result.embedNote"),
+      });
     },
 
     download() {
@@ -1167,22 +1128,26 @@ export default {
         <div class="lia-editor-area">
           <div v-if="$props.storageId && !$props.embed" class="lia-activity-bar">
             <button
-              class="btn btn-sm btn-outline-secondary"
-              type="button"
-              :class="{ active: showToolbar }"
-              :title="showToolbar ? $t('nav.activityBar.hideToolbar') : $t('nav.activityBar.showToolbar')"
-              @click="showToolbar = !showToolbar"
-            >
-              <i class="bi bi-tools" aria-hidden="true"></i>
-            </button>
-            <button
-              class="btn btn-sm btn-outline-secondary"
+              class="lia-activity-btn"
               type="button"
               :class="{ active: showFiles }"
+              :aria-pressed="showFiles"
               :title="showFiles ? $t('nav.activityBar.hideFiles') : $t('nav.activityBar.showFiles')"
               @click="showFiles = !showFiles"
             >
               <i class="bi bi-folder2-open" aria-hidden="true"></i>
+              <span>{{ $t('nav.activityBar.files') }}</span>
+            </button>
+            <button
+              class="lia-activity-btn"
+              type="button"
+              :class="{ active: showToolbar }"
+              :aria-pressed="showToolbar"
+              :title="showToolbar ? $t('nav.activityBar.hideToolbar') : $t('nav.activityBar.showToolbar')"
+              @click="showToolbar = !showToolbar"
+            >
+              <i class="bi bi-tools" aria-hidden="true"></i>
+              <span>{{ $t('nav.activityBar.tools') }}</span>
             </button>
           </div>
 
@@ -1519,18 +1484,56 @@ export default {
 
 .lia-activity-bar {
   flex: 0 0 auto;
+  width: 4.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4px;
-  background-color: #ececec;
-  border-right: solid lightgray 1px;
+  padding: 6px 4px;
+  background-color: #fff;
+  border-right: 1px solid var(--lia-line);
   gap: 4px;
 }
 
-.lia-activity-bar .btn.active {
-  background-color: var(--bs-secondary, #6c757d);
-  color: #fff;
+.lia-activity-btn {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 2px;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: #3b4652;
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.15;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.lia-activity-btn .bi {
+  font-size: 1.15rem;
+}
+
+.lia-activity-btn:hover {
+  background: #eef1f3;
+}
+
+.lia-activity-btn.active {
+  background: var(--lia-accent-soft);
+  color: var(--lia-accent-ink);
+  font-weight: 600;
+}
+
+/* narrow screens: icons only */
+@media (max-width: 575.98px) {
+  .lia-activity-bar {
+    width: auto;
+  }
+  .lia-activity-btn span {
+    display: none;
+  }
 }
 
 .lia-files-panel {

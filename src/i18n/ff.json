@@ -22,14 +22,16 @@
       "hideToolbar": "Suuɗ palal kuutorɗe taƴtorde",
       "showToolbar": "Hollu palal kuutorɗe taƴtorde",
       "hideFiles": "Suuɗ ceŋtol piille",
-      "showFiles": "Hollu ceŋtol piille"
+      "showFiles": "Hollu ceŋtol piille",
+      "tools": "Kuutorɗe",
+      "files": "Piille"
     },
     "connection": {
-      "offlineAria": "Taƴtorde ndee woni e mbaydi ceŋol alaa; maa tan woni e taƴtagol",
-      "onlineAria": "Taƴtorde ndee woni e mbaydi gollondiral rewde e {type}; aɗa waawi lollinde URL tee taƴtaa e woɗɓe",
-      "switchOfflineAria": "Ñif gollondiral taƴtagol tee artu e mbaydi ceŋol alaa",
-      "switchWebRTCAria": "Yah e gollondiral taƴtagol rewde e WebRTC",
-      "switchWebSocketAria": "Yah e gollondiral taƴtagol rewde e WebSocket",
+      "offlineAria": "Kam tan: aan tan woni e taƴtagol, kala huunde heddoto e ndee kaɓirgol",
+      "onlineAria": "Ɗoon e ɗoon rewde e {type}: lollin jokkorde ndee ngam winndude kawtal",
+      "switchOfflineAria": "Yah e “Kam tan”",
+      "switchWebRTCAria": "Yah e “Ɗoon e ɗoon – beɗɗo”",
+      "switchWebSocketAria": "Yah e “Ɗoon e ɗoon – rewde e sarwer”",
       "title": "Moy winndata?",
       "solo": "Kam tan",
       "soloDesc": "Kala huunde heddoto e ndee kaɓirgol. Ena golla tawa enternet alaa.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Humpito",
     "close": "Uddu",
-    "compileHint": "Aɗa waawi waylude tee kompilaade ndee janngirde e {ctrl}, kono so aɗa yiɗi danndude bayle maa haa badaa, aɗa foti waɗde fork!",
-    "compileHintEmbed": "Aɗa waawi waylude tee kompilaade ndee janngirde e {ctrl}, walla udditde nde e {link}.",
-    "compileHintEmbedOnly": "Aɗa waawi waylude tee kompilaade ndee janngirde e {ctrl}",
-    "openInEditor": "... walla uddit nde e {link} ...",
+    "compileHint": "Aɗa waawi ƴeewtaade waylooji ɗoo tee hesɗitinaa jiytindagol ngol e {ctrl}. Ngam danndude ɗi, waɗ natto: dosol ⋮ → “Waɗ natto”.",
+    "compileHintEmbed": "Aɗa waawi ƴeewtaade waylooji tee hesɗitinaa jiytindagol ngol e {ctrl}, walla uddit janngirde ndee e {link}.",
+    "compileHintEmbedOnly": "Aɗa waawi ƴeewtaade waylooji tee hesɗitinaa jiytindagol ngol e {ctrl}.",
+    "openInEditor": "… walla uddit ɗum e {link}.",
     "viewOnLiaScript": "So aɗa yiɗi yiyde janngirde ndee e LiaScript, dobo {here}.",
     "viewHere": "ɗoo",
-    "toolbarHint": "Huutoro palal kuutorɗe ngam waylude hakkunde taƴtorde e jiytindagol."
+    "toolbarHint": "Butoŋaaji dow ɗii ena mbayla hakkunde “Winndu”, “Ɗi ɗiɗi fof” e “Jiytindagol”."
   },
   "github": {
     "exporting": "Nana jaltina to GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Koddu",
       "recording": "Nana nanngita",
       "tutorial": "Jannginoowo",
-      "editor": "Taƴtorde"
+      "editor": "Teelte"
     },
     "sections": {
       "font": "Font",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Natto",
+    "copied": "Nattaama",
+    "open": "Uddit",
+    "length": "alkule {n}",
+    "shortest": "Yamre ɓurnde rabbidde (ko ɓuri moƴƴude)",
+    "alternative": "Goɗɗum, so arandeere ndee gollaani",
+    "embedReadable": "Goɗɗum ko kuutorɗe goɗɗe kadi mbaawi waɗde",
+    "collaborationIntro": "Neldu jokkorde nde e kala on mo winndata e maa. Ɓe uddita janngirde ndee e taƴtorde ndee, ngiya kala waylo e sahaa oo.",
+    "collaborationNote": "Kala jogiiɗo jokkorde ndee ena taƴtoo janngirde wootere. Kala yiɗɗo yamre mum, huutoro “Waɗ natto” e dosol ⋮.",
+    "externalIntro": "Jokkorde nde ena uddita piilol Markdown iwngol e ñiiɓirde geese e nder taƴtorde ndee.",
+    "externalNote": "Ena golla tan so tawii piilol ngol ena heɓoo e enternet e nder yi'eteeɗi.",
+    "dataIntro": "Binndi piilol woodngol ngol fof ena nder jokkorde ndee. Ena udditoo e LiaScript tawa huunde fof danndaaka e nokku fof.",
+    "snapshotIntro": "Kala udditiiɗo jokkorde nde heɓat taƴtorde wondude e natto piilol woodngol ngol. Janngirde maa ndee heddoto no wayri.",
+    "embedIntro": "Ñoɓɓu koddu HTML oo e lowre maa. Ena holla taƴtorde e jiytindagol piilol woodngol ngol.",
+    "embedNote": "Wasiyaaji: lomtin “/embed/code/” e ñiiɓirde ndee “/embed/code/edit/” walla “/embed/code/preview/” ngam hollude taƴtorde tan walla jiytindagol tan.",
+    "longLinkWarning": "Nate e piile goɗɗe naatnaaka, tee jokkorɗe juuɗe no feewi ena mbaawi taƴeede e porogaramji nelduɗi walla browseruuji. Ƴeewto jokkorde ndee hade maa neldude nde."
   }
 }

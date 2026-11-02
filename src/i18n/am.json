@@ -22,14 +22,16 @@
       "hideToolbar": "የአርታዒውን መሣሪያ አሞሌ ደብቅ",
       "showToolbar": "የአርታዒውን መሣሪያ አሞሌ አሳይ",
       "hideFiles": "የፋይል አሳሽን ደብቅ",
-      "showFiles": "የፋይል አሳሽን አሳይ"
+      "showFiles": "የፋይል አሳሽን አሳይ",
+      "tools": "መሣሪያዎች",
+      "files": "ፋይሎች"
     },
     "connection": {
-      "offlineAria": "አርታዒው ከመስመር ውጭ ሁኔታ ላይ እየተጠቀመ ነው፤ ይህም አንተ/አንቺ ብቻ እያረምክ/እያረምሽ እንደሆነ ማለት ነው",
-      "onlineAria": "አርታዒው በ {type} በትብብር ሁኔታ ላይ ነው፤ URL ማጋራት እና ከሌሎች ጋር ማረም ትችላለህ/ትችያለሽ",
-      "switchOfflineAria": "የትብብር ማረምን አጥፋ እና ወደ ከመስመር ውጭ ሁኔታ ቀይር",
-      "switchWebRTCAria": "በWebRTC ወደ ትብብር ማረም ቀይር",
-      "switchWebSocketAria": "በWebSocket ወደ ትብብር ማረም ቀይር",
+      "offlineAria": "እኔ ብቻ፦ ሌላ የሚያርም ሰው የለም፤ ሁሉም ነገር በዚህ መሣሪያ ላይ ይቆያል",
+      "onlineAria": "ቀጥታ በ{type}፦ አብራችሁ ለመጻፍ አገናኙን አጋሩ",
+      "switchOfflineAria": "ወደ “እኔ ብቻ” ቀይር",
+      "switchWebRTCAria": "ወደ “ቀጥታ – በቀጥታ ግንኙነት” ቀይር",
+      "switchWebSocketAria": "ወደ “ቀጥታ – በአገልጋይ በኩል” ቀይር",
       "title": "ማን እየጻፈ ነው?",
       "solo": "እኔ ብቻ",
       "soloDesc": "ሁሉም ነገር በዚህ መሣሪያ ላይ ይቆያል። ያለ ኢንተርኔትም ይሰራል።",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "መረጃ",
     "close": "ዝጋ",
-    "compileHint": "ይህን ኮርስ በ{ctrl} ማሻሻል እና ኮምፓይል ማድረግ ትችላለህ/ትችያለሽ፣ ግን ለዘላቂ ማስቀመጥ fork ማድረግ አለብህ/ሽ!",
-    "compileHintEmbed": "ይህን ኮርስ በ{ctrl} ማሻሻል እና ኮምፓይል ማድረግ ወይም በ{link} መክፈት ትችላለህ/ትችያለሽ።",
-    "compileHintEmbedOnly": "ይህን ኮርስ በ{ctrl} ማሻሻል እና ኮምፓይል ማድረግ ትችላለህ/ትችያለሽ",
-    "openInEditor": "... ወይም በ{link} ክፈት ...",
+    "compileHint": "እዚህ ለውጦችን መሞከር እና ቅድመ እይታውን በ{ctrl} ማደስ ትችላለህ/ትችያለሽ። ለውጦቹን ለማቆየት ቅጂ ፍጠር/ሪ፦ ⋮ ምናሌ → “ቅጂ ፍጠር”።",
+    "compileHintEmbed": "ለውጦችን መሞከር እና ቅድመ እይታውን በ{ctrl} ማደስ፣ ወይም ኮርሱን በ{link} ውስጥ መክፈት ትችላለህ/ትችያለሽ።",
+    "compileHintEmbedOnly": "ለውጦችን መሞከር እና ቅድመ እይታውን በ{ctrl} ማደስ ትችላለህ/ትችያለሽ።",
+    "openInEditor": "… ወይም በ{link} ውስጥ ክፈተው/ቺው።",
     "viewOnLiaScript": "ኮርሱን በLiaScript ለማየት ከፈለግህ/ሽ፣ {here} ጠቅ አድርግ/ጊ።",
     "viewHere": "እዚህ",
-    "toolbarHint": "በአርታዒ እና በቅድመ እይታ ሁኔታዎች መካከል ለመቀየር የመሣሪያ አሞሌውን ተጠቀም/ሚ።"
+    "toolbarHint": "ከላይ ያሉት አዝራሮች በ“ጻፍ”፣ “ሁለቱም” እና “ቅድመ እይታ” መካከል ይቀያይራሉ።"
   },
   "github": {
     "exporting": "ወደ GitHub Gist በመላክ ላይ...",
@@ -631,7 +633,7 @@
       "code": "ኮድ",
       "recording": "መቅረጽ",
       "tutorial": "መማሪያ",
-      "editor": "አርታዒ"
+      "editor": "ቅንብሮች"
     },
     "sections": {
       "font": "ፊደል",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "ቅዳ",
+    "copied": "ተቀድቷል",
+    "open": "ክፈት",
+    "length": "{n} ቁምፊዎች",
+    "shortest": "አጭሩ ስሪት (የሚመከር)",
+    "alternative": "አማራጭ፣ የመጀመሪያው ካልሰራ",
+    "embedReadable": "ሌሎች መሣሪያዎችም ሊያመነጩት የሚችሉት አማራጭ",
+    "collaborationIntro": "አብረው መጻፍ ለሚገባቸው ሁሉ ይህን አገናኝ ላክ/ኪ። ኮርሱን በአርታዒው ውስጥ ይከፍታሉ፤ እያንዳንዱን ለውጥ ወዲያውኑ ያያሉ።",
+    "collaborationNote": "አገናኙ ያለው ሁሉ አንድ አይነት ኮርስ ያርማል። የራሱን ስሪት የሚፈልግ በ⋮ ምናሌ ውስጥ “ቅጂ ፍጠር”ን ይጠቀም።",
+    "externalIntro": "ይህ አገናኝ የMarkdown ፋይሉን ከድር አድራሻው በአርታዒው ውስጥ ይከፍታል።",
+    "externalNote": "የሚሰራው ፋይሉ በኢንተርኔት ላይ ለሕዝብ ተደራሽ እስከሆነ ድረስ ብቻ ነው።",
+    "dataIntro": "የአሁኑ ፋይል ሙሉ ጽሑፍ በአገናኙ ውስጥ ተካቷል። ምንም ነገር የትም ሳይቀመጥ በLiaScript ላይ ይከፈታል።",
+    "snapshotIntro": "ይህን አገናኝ የሚከፍት ሁሉ የአሁኑን ፋይል ቅጂ የያዘ አርታዒ ያገኛል። ኮርስህ/ሽ እንዳለ ይቆያል።",
+    "embedIntro": "ይህን HTML ኮድ በድር ጣቢያህ/ሽ ውስጥ ለጥፍ/ፊ። የአሁኑን ፋይል አርታዒ እና ቅድመ እይታ ያሳያል።",
+    "embedNote": "ጠቃሚ ምክር፦ አርታዒውን ብቻ ወይም ቅድመ እይታውን ብቻ ለማሳየት በአድራሻው ውስጥ “/embed/code/”ን በ“/embed/code/edit/” ወይም በ“/embed/code/preview/” ተካ/ኪ።",
+    "longLinkWarning": "ምስሎች እና ሌሎች ፋይሎች አልተካተቱም፤ በጣም ረጅም አገናኞችም በመልእክት መላላኪያዎች ወይም በአሳሾች ሊቆረጡ ይችላሉ። ከመላክህ/ሽ በፊት አገናኙን ሞክር/ሪ።"
   }
 }

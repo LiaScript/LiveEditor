@@ -22,14 +22,16 @@
       "hideToolbar": "Szerkesztő eszköztárának elrejtése",
       "showToolbar": "Szerkesztő eszköztárának megjelenítése",
       "hideFiles": "Fájlkezelő elrejtése",
-      "showFiles": "Fájlkezelő megjelenítése"
+      "showFiles": "Fájlkezelő megjelenítése",
+      "tools": "Eszközök",
+      "files": "Fájlok"
     },
     "connection": {
-      "offlineAria": "A szerkesztő offline módban van használatban, ami azt jelenti, hogy csak te szerkesztesz",
-      "onlineAria": "A szerkesztő együttműködési módban van {type} használatával, így megoszthatod az URL-t és másokkal együtt szerkeszthetsz",
-      "switchOfflineAria": "Együttműködő szerkesztés kikapcsolása és váltás offline módra",
-      "switchWebRTCAria": "Váltás WebRTC-alapú együttműködő szerkesztésre",
-      "switchWebSocketAria": "Váltás WebSocket-alapú együttműködő szerkesztésre",
+      "offlineAria": "Csak én: csak te szerkesztesz, minden ezen az eszközön marad",
+      "onlineAria": "Élő ({type}): oszd meg a linket a közös íráshoz",
+      "switchOfflineAria": "Váltás erre: „Csak én”",
+      "switchWebRTCAria": "Váltás erre: „Élő – közvetlen”",
+      "switchWebSocketAria": "Váltás erre: „Élő – szerveren át”",
       "title": "Ki ír?",
       "solo": "Csak én",
       "soloDesc": "Minden ezen az eszközön marad. Internet nélkül is működik.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Információ",
     "close": "Bezárás",
-    "compileHint": "A kurzust módosíthatod és fordíthatod a {ctrl} használatával, de ha a változásokat tartósan el szeretnéd menteni, forkot kell készítened róla!",
-    "compileHintEmbed": "A kurzust módosíthatod és fordíthatod a {ctrl} használatával, vagy megnyithatod itt: {link}.",
-    "compileHintEmbedOnly": "A kurzust módosíthatod és fordíthatod a {ctrl} használatával",
-    "openInEditor": "... vagy nyisd meg itt: {link} ...",
+    "compileHint": "Itt kipróbálhatsz változtatásokat, és frissítheted az előnézetet ({ctrl}). Ha meg szeretnéd tartani őket, készíts másolatot: ⋮ menü → „Másolat készítése”.",
+    "compileHintEmbed": "Kipróbálhatsz változtatásokat, és frissítheted az előnézetet ({ctrl}), vagy megnyithatod a kurzust itt: {link}.",
+    "compileHintEmbedOnly": "Kipróbálhatsz változtatásokat, és frissítheted az előnézetet ({ctrl}).",
+    "openInEditor": "… vagy nyisd meg itt: {link}.",
     "viewOnLiaScript": "Ha meg szeretnéd nézni a kurzust LiaScriptben, kattints {here}.",
     "viewHere": "ide",
-    "toolbarHint": "Az eszköztárral válthatsz a szerkesztő és az előnézet mód között."
+    "toolbarHint": "A fenti gombokkal válthatsz az „Írás”, a „Mindkettő” és az „Előnézet” nézet között."
   },
   "github": {
     "exporting": "Exportálás GitHub Gistbe...",
@@ -631,7 +633,7 @@
       "code": "Kód",
       "recording": "Felvétel",
       "tutorial": "Oktatóanyag",
-      "editor": "Szerkesztő"
+      "editor": "Beállítások"
     },
     "sections": {
       "font": "Betűtípus",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Másolás",
+    "copied": "Másolva",
+    "open": "Megnyitás",
+    "length": "{n} karakter",
+    "shortest": "Legrövidebb változat (ajánlott)",
+    "alternative": "Alternatíva, ha az első nem működik",
+    "embedReadable": "Alternatíva, amelyet más eszközök is elő tudnak állítani",
+    "collaborationIntro": "Küldd el ezt a linket mindenkinek, aki veled együtt ír. Megnyitják a kurzust a szerkesztőben, és minden változást azonnal látnak.",
+    "collaborationNote": "Mindenki, akinél megvan a link, ugyanazt a kurzust szerkeszti. Aki saját változatot szeretne, a ⋮ menüben a „Másolat készítése” lehetőséget választja.",
+    "externalIntro": "Ez a link megnyitja a szerkesztőben a webcímen található Markdown-fájlt.",
+    "externalNote": "Csak addig működik, amíg a fájl nyilvánosan elérhető az interneten.",
+    "dataIntro": "Az aktuális fájl teljes szövege benne van a linkben. A LiaScriptben nyílik meg, és semmi sem tárolódik sehol.",
+    "snapshotIntro": "Aki megnyitja ezt a linket, a szerkesztőt kapja az aktuális fájl másolatával. A kurzusod változatlan marad.",
+    "embedIntro": "Illeszd be ezt a HTML-kódot a weboldaladba. A szerkesztőt és az aktuális fájl előnézetét mutatja.",
+    "embedNote": "Tipp: ha csak a szerkesztőt vagy csak az előnézetet szeretnéd mutatni, cseréld a címben a „/embed/code/” részt erre: „/embed/code/edit/” vagy „/embed/code/preview/”.",
+    "longLinkWarning": "A képek és más fájlok nincsenek benne, a nagyon hosszú linkeket pedig az üzenetküldők vagy a böngészők levághatják. Küldés előtt próbáld ki a linket."
   }
 }

@@ -22,14 +22,16 @@
       "hideToolbar": "Sarara meeshaalee gulaalaa dhoksi",
       "showToolbar": "Sarara meeshaalee gulaalaa agarsiisi",
       "hideFiles": "Sakatta'aa faayilii dhoksi",
-      "showFiles": "Sakatta'aa faayilii agarsiisi"
+      "showFiles": "Sakatta'aa faayilii agarsiisi",
+      "tools": "Meeshaalee",
+      "files": "Faayilota"
     },
     "connection": {
-      "offlineAria": "Gulaalaan haala sarara alaatti fayyadamaa jira; kana jechuun kan gulaalu si qofa",
-      "onlineAria": "Gulaalaan karaa {type} haala waliin hojjechuu keessa jira; URL qooddee namoota biroo waliin gulaaluu dandeessa",
-      "switchOfflineAria": "Gulaallii waliin hojjechuu dhaamsiitii gara haala sarara alaatti jijjiiri",
-      "switchWebRTCAria": "Gara gulaallii waliin hojjechuu WebRTC jijjiiri",
-      "switchWebSocketAria": "Gara gulaallii waliin hojjechuu WebSocket jijjiiri",
+      "offlineAria": "Ana qofa: kan gulaalu si qofa, wanti hundi meeshaa kana irra tura",
+      "onlineAria": "Kallattiin karaa {type}: waliin barreessuuf hidhaa qoodi",
+      "switchOfflineAria": "Gara “Ana qofa”tti jijjiiri",
+      "switchWebRTCAria": "Gara “Kallattiin – walqunnamtii kallattii”tti jijjiiri",
+      "switchWebSocketAria": "Gara “Kallattiin – karaa sarvarii”tti jijjiiri",
       "title": "Eenyutu barreessaa jira?",
       "solo": "Ana qofa",
       "soloDesc": "Wanti hundi meeshaa kana irra tura. Interneetii malees ni hojjeta.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Odeeffannoo",
     "close": "Cufi",
-    "compileHint": "Koorsii kana {ctrl} tiin jijjiiruu fi kompaa'ilii gochuu dandeessa, garuu jijjiirama kee yeroo hundaaf kuusuu yoo barbaadde fork gochuu qabda!",
-    "compileHintEmbed": "Koorsii kana {ctrl} tiin jijjiiruu fi kompaa'ilii gochuu, yookaan {link} keessatti banuu dandeessa.",
-    "compileHintEmbedOnly": "Koorsii kana {ctrl} tiin jijjiiruu fi kompaa'ilii gochuu dandeessa",
-    "openInEditor": "... yookaan {link} keessatti bani ...",
+    "compileHint": "Asitti jijjiirama yaaluu fi durargii {ctrl}n haaromsuu dandeessa. Isaan eeguuf garagalcha uumi: baafata ⋮ → “Garagalcha uumi”.",
+    "compileHintEmbed": "Jijjiirama yaaluu fi durargii {ctrl}n haaromsuu, ykn koorsii {link} keessatti banuu dandeessa.",
+    "compileHintEmbedOnly": "Jijjiirama yaaluu fi durargii {ctrl}n haaromsuu dandeessa.",
+    "openInEditor": "… ykn {link} keessatti bani.",
     "viewOnLiaScript": "Koorsii LiaScript irratti arguu yoo barbaadde, {here} tuqi.",
     "viewHere": "as",
-    "toolbarHint": "Haala gulaalaa fi durargii gidduutti jijjiiruuf sarara meeshaalee fayyadami."
+    "toolbarHint": "Cuqaasonni gubbaa jiran “Barreessi”, “Lamaanuu” fi “Durargii” gidduutti jijjiiru."
   },
   "github": {
     "exporting": "Gara GitHub Gist ergamaa jira...",
@@ -631,7 +633,7 @@
       "code": "Koodii",
       "recording": "Waraabuu",
       "tutorial": "Barnoota",
-      "editor": "Gulaalaa"
+      "editor": "Qindaa'ina"
     },
     "sections": {
       "font": "Fontii",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Waraabi",
+    "copied": "Waraabameera",
+    "open": "Bani",
+    "length": "qubee {n}",
+    "shortest": "Gosa gabaabaa (ni gorfama)",
+    "alternative": "Filannoo biraa, yoo inni jalqabaa hin hojjenne",
+    "embedReadable": "Filannoo biraa meeshaaleen biroos uumuu danda'an",
+    "collaborationIntro": "Hidhaa kana nama waliin barreessuu qabu hundaaf ergi. Isaan koorsii gulaalaa keessatti banu, jijjiirama hunda battaluma argu.",
+    "collaborationNote": "Namni hidhaa qabu hundi koorsii tokkicha gulaala. Namni gosa mataa isaa barbaadu baafata ⋮ keessaa “Garagalcha uumi” fayyadamu.",
+    "externalIntro": "Hidhaan kun faayila Markdown teessoo weebii irraa gulaalaa keessatti bana.",
+    "externalNote": "Kun kan hojjetu yeroo faayilli interneetii irratti uummataaf argamu qofa.",
+    "dataIntro": "Barreeffamni faayila ammaa guutuun hidhaa keessa jira. Wanti tokkollee bakka kamittuu osoo hin kuufamin LiaScript irratti banama.",
+    "snapshotIntro": "Namni hidhaa kana banu gulaalaa garagalcha faayila ammaa qabu argata. Koorsiin kee akkuma jirutti hafa.",
+    "embedIntro": "Koodii HTML kana marsariitii kee keessa maxxansi. Gulaalaa fi durargii faayila ammaa agarsiisa.",
+    "embedNote": "Gorsa: gulaalaa qofa ykn durargii qofa agarsiisuuf, teessoo keessatti “/embed/code/” bakka “/embed/code/edit/” ykn “/embed/code/preview/” buusi.",
+    "longLinkWarning": "Suuraaleen fi faayilonni biroo hin dabalamne, akkasumas hidhaawwan baay'ee dheeraa ta'an appiiwwan ergaa ykn browseroota irratti ciramuu danda'u. Osoo hin ergin dura hidhaa yaali."
   }
 }

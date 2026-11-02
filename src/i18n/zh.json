@@ -22,14 +22,16 @@
       "hideToolbar": "隐藏编辑器工具栏",
       "showToolbar": "显示编辑器工具栏",
       "hideFiles": "隐藏文件浏览器",
-      "showFiles": "显示文件浏览器"
+      "showFiles": "显示文件浏览器",
+      "tools": "工具",
+      "files": "文件"
     },
     "connection": {
-      "offlineAria": "编辑器正在离线模式下使用，只有你在编辑",
-      "onlineAria": "编辑器正在通过 {type} 进行协作模式，你可以分享 URL 并与他人一起编辑",
-      "switchOfflineAria": "关闭协作编辑并切换到离线模式",
-      "switchWebRTCAria": "切换到通过 WebRTC 的协作编辑",
-      "switchWebSocketAria": "切换到通过 WebSocket 的协作编辑",
+      "offlineAria": "只有我：只有你在编辑，所有内容都保留在这台设备上",
+      "onlineAria": "通过 {type} 实时协作：分享链接即可一起编写",
+      "switchOfflineAria": "切换到“只有我”",
+      "switchWebRTCAria": "切换到“实时 – 直连”",
+      "switchWebSocketAria": "切换到“实时 – 通过服务器”",
       "title": "谁在编写？",
       "solo": "只有我",
       "soloDesc": "所有内容都保存在这台设备上。无需联网也能使用。",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "信息",
     "close": "关闭",
-    "compileHint": "你可以使用 {ctrl} 修改并编译此课程，但如果要永久保存更改，必须先 Fork！",
-    "compileHintEmbed": "你可以使用 {ctrl} 修改并编译此课程，或在 {link} 中打开它。",
-    "compileHintEmbedOnly": "你可以使用 {ctrl} 修改并编译此课程",
-    "openInEditor": "... 或在 {link} 中打开它 ...",
+    "compileHint": "你可以在这里尝试修改，并用 {ctrl} 刷新预览。要保留修改，请创建副本：⋮ 菜单 → “创建副本”。",
+    "compileHintEmbed": "你可以尝试修改并用 {ctrl} 刷新预览，或在 {link} 中打开课程。",
+    "compileHintEmbedOnly": "你可以尝试修改并用 {ctrl} 刷新预览。",
+    "openInEditor": "……或在 {link} 中打开。",
     "viewOnLiaScript": "如果你想在 LiaScript 上查看课程，请点击 {here}。",
     "viewHere": "这里",
-    "toolbarHint": "使用工具栏在编辑器和预览模式之间切换。"
+    "toolbarHint": "顶部的按钮可在“编写”“并排”和“预览”之间切换。"
   },
   "github": {
     "exporting": "正在导出到 GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "代码",
       "recording": "录制",
       "tutorial": "教程",
-      "editor": "编辑器"
+      "editor": "设置"
     },
     "sections": {
       "font": "字体",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "复制",
+    "copied": "已复制",
+    "open": "打开",
+    "length": "{n} 个字符",
+    "shortest": "最短版本（推荐）",
+    "alternative": "备选：如果第一个无法使用",
+    "embedReadable": "备选：其他工具也能生成的版本",
+    "collaborationIntro": "把这个链接发给所有要一起编写的人。他们会在编辑器中打开课程，并立即看到每一处更改。",
+    "collaborationNote": "拿到链接的所有人都在编辑同一门课程。想要自己的版本，请在 ⋮ 菜单中选择“创建副本”。",
+    "externalIntro": "此链接会在编辑器中打开该网址上的 Markdown 文件。",
+    "externalNote": "只有当文件在互联网上公开可访问时才有效。",
+    "dataIntro": "当前文件的全部文本都打包在链接里。它会在 LiaScript 上打开，不会在任何地方存储任何内容。",
+    "snapshotIntro": "打开此链接的人会得到一个包含当前文件副本的编辑器。你的课程保持不变。",
+    "embedIntro": "将这段 HTML 代码粘贴到你的网站中。它会显示当前文件的编辑器和预览。",
+    "embedNote": "提示：将地址中的“/embed/code/”替换为“/embed/code/edit/”或“/embed/code/preview/”，即可只显示编辑器或只显示预览。",
+    "longLinkWarning": "图片和其他文件不包含在内，而且很长的链接可能会被聊天软件或浏览器截断。发送前请先测试链接。"
   }
 }

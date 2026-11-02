@@ -22,14 +22,16 @@
       "hideToolbar": "Ɓoye sandar kayan aikin edita",
       "showToolbar": "Nuna sandar kayan aikin edita",
       "hideFiles": "Ɓoye mai binciken fayiloli",
-      "showFiles": "Nuna mai binciken fayiloli"
+      "showFiles": "Nuna mai binciken fayiloli",
+      "tools": "Kayan aiki",
+      "files": "Fayiloli"
     },
     "connection": {
-      "offlineAria": "Ana amfani da editan a yanayin ba tare da intanet ba, ma'ana kai kaɗai kake gyarawa",
-      "onlineAria": "Editan yana cikin yanayin haɗin gwiwa ta {type}, ma'ana zaka iya raba URL ka fara gyara tare da wasu",
-      "switchOfflineAria": "Kashe gyaran haɗin gwiwa kuma koma yanayin ba tare da intanet ba",
-      "switchWebRTCAria": "Koma gyaran haɗin gwiwa ta WebRTC",
-      "switchWebSocketAria": "Koma gyaran haɗin gwiwa ta WebSocket",
+      "offlineAria": "Ni kaɗai: kai kaɗai kake gyarawa, komai yana zama a wannan na'ura",
+      "onlineAria": "Kai tsaye ta {type}: raba haɗin don ku rubuta tare",
+      "switchOfflineAria": "Koma “Ni kaɗai”",
+      "switchWebRTCAria": "Koma “Kai tsaye – haɗi kai tsaye”",
+      "switchWebSocketAria": "Koma “Kai tsaye – ta sabar”",
       "title": "Wa ke rubutu?",
       "solo": "Ni kaɗai",
       "soloDesc": "Komai yana zama a wannan na'ura. Yana aiki ba tare da intanet ba.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Bayani",
     "close": "Rufe",
-    "compileHint": "Zaka iya gyara da haɗa wannan kwas da {ctrl}, amma idan kana son adana canje-canjenka dindindin dole ka yi fork!",
-    "compileHintEmbed": "Zaka iya gyara da haɗa wannan kwas da {ctrl}, ko ka buɗe shi a {link}.",
-    "compileHintEmbedOnly": "Zaka iya gyara da haɗa wannan kwas da {ctrl}",
-    "openInEditor": "... ko ka buɗe shi a {link} ...",
+    "compileHint": "Za ka iya gwada canje-canje a nan ka sabunta dubawa da {ctrl}. Don ka ajiye su, yi kwafi: menu na ⋮ → “Yi kwafi”.",
+    "compileHintEmbed": "Za ka iya gwada canje-canje ka sabunta dubawa da {ctrl}, ko ka buɗe kwas ɗin a {link}.",
+    "compileHintEmbedOnly": "Za ka iya gwada canje-canje ka sabunta dubawa da {ctrl}.",
+    "openInEditor": "… ko ka buɗe shi a {link}.",
     "viewOnLiaScript": "Idan kana son ganin kwas ɗin a LiaScript, danna {here}.",
     "viewHere": "nan",
-    "toolbarHint": "Yi amfani da sandar kayan aiki don sauyawa tsakanin yanayin edita da dubawa."
+    "toolbarHint": "Maɓallan da ke sama suna sauyawa tsakanin “Rubuta”, “Duka biyu” da “Dubawa”."
   },
   "github": {
     "exporting": "Ana fitarwa zuwa GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Lamba",
       "recording": "Rikodi",
       "tutorial": "Darasi",
-      "editor": "Edita"
+      "editor": "Saituna"
     },
     "sections": {
       "font": "Font",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Kwafi",
+    "copied": "An kwafa",
+    "open": "Buɗe",
+    "length": "haruffa {n}",
+    "shortest": "Mafi gajeren siga (an ba da shawara)",
+    "alternative": "Madadin, idan na farko bai yi aiki ba",
+    "embedReadable": "Madadin da sauran kayan aiki ma za su iya samarwa",
+    "collaborationIntro": "Aika wannan haɗin ga duk wanda zai rubuta tare da kai. Za su buɗe kwas ɗin a edita kuma su ga kowane canji nan take.",
+    "collaborationNote": "Duk mai haɗin yana gyara kwas ɗaya. Wanda yake son sigarsa ta kansa ya yi amfani da “Yi kwafi” a menu na ⋮.",
+    "externalIntro": "Wannan haɗin yana buɗe fayil ɗin Markdown daga adireshin yanar gizo a cikin edita.",
+    "externalNote": "Yana aiki ne kawai muddin fayil ɗin yana samuwa a fili a intanet.",
+    "dataIntro": "Duk rubutun fayil na yanzu yana cikin haɗin. Yana buɗewa a LiaScript ba tare da an ajiye komai a ko'ina ba.",
+    "snapshotIntro": "Duk wanda ya buɗe wannan haɗin zai sami edita tare da kwafin fayil na yanzu. Kwas ɗinka ba zai canza ba.",
+    "embedIntro": "Liƙa wannan lambar HTML a shafin yanar gizonka. Tana nuna edita da dubawar fayil na yanzu.",
+    "embedNote": "Shawara: maye gurbin “/embed/code/” a cikin adireshin da “/embed/code/edit/” ko “/embed/code/preview/” don nuna edita kawai ko dubawa kawai.",
+    "longLinkWarning": "Ba a haɗa hotuna da sauran fayiloli ba, kuma manhajojin aika saƙo ko burauzoyi na iya yanke haɗi masu tsayi sosai. Gwada haɗin kafin ka aika shi."
   }
 }

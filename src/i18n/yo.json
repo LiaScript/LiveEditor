@@ -22,14 +22,16 @@
       "hideToolbar": "Tọju pẹpẹ irinṣẹ olootu",
       "showToolbar": "Fi pẹpẹ irinṣẹ olootu han",
       "hideFiles": "Tọju oluwakiri faili",
-      "showFiles": "Fi oluwakiri faili han"
+      "showFiles": "Fi oluwakiri faili han",
+      "tools": "Irinṣẹ",
+      "files": "Faili"
     },
     "connection": {
-      "offlineAria": "Olootu n ṣiṣẹ ni ipo aisinipo, eyi tumọ si pe iwọ nikan ni o n ṣatunkọ",
-      "onlineAria": "Olootu wa ni ipo ifowosowopo nipasẹ {type}, eyi tumọ si pe o le pin URL ki o bẹrẹ ṣiṣatunkọ pẹlu awọn omiiran",
-      "switchOfflineAria": "Pa ṣiṣatunkọ ifowosowopo ki o yipada si ipo aisinipo",
-      "switchWebRTCAria": "Yipada si ṣiṣatunkọ ifowosowopo nipasẹ WebRTC",
-      "switchWebSocketAria": "Yipada si ṣiṣatunkọ ifowosowopo nipasẹ WebSocket",
+      "offlineAria": "Emi nikan: iwọ nikan ni o n ṣatunkọ, ohun gbogbo n duro lori ẹrọ yii",
+      "onlineAria": "Laaye nipasẹ {type}: pin ọna asopọ naa lati kọ papọ",
+      "switchOfflineAria": "Yipada si “Emi nikan”",
+      "switchWebRTCAria": "Yipada si “Laaye – taara”",
+      "switchWebSocketAria": "Yipada si “Laaye – nipasẹ olupin”",
       "title": "Tani n kọwe?",
       "solo": "Emi nikan",
       "soloDesc": "Ohun gbogbo n duro lori ẹrọ yii. O n ṣiṣẹ laisi intanẹẹti.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Alaye",
     "close": "Pa",
-    "compileHint": "O le ṣatunkọ ati kompaili iṣẹ-ẹkọ yii pẹlu {ctrl}, ṣugbọn ti o ba fẹ fi awọn ayipada pamọ titilai o gbọdọ ṣe fork!",
-    "compileHintEmbed": "O le ṣatunkọ ati kompaili iṣẹ-ẹkọ yii pẹlu {ctrl}, tabi ṣi i ninu {link}.",
-    "compileHintEmbedOnly": "O le ṣatunkọ ati kompaili iṣẹ-ẹkọ yii pẹlu {ctrl}",
-    "openInEditor": "... tabi ṣi i ninu {link} ...",
+    "compileHint": "O le gbiyanju awọn ayipada nibi ki o sọ awotẹlẹ di tuntun pẹlu {ctrl}. Lati tọju wọn, ṣe ẹda kan: akojọ ⋮ → “Ṣe ẹda kan”.",
+    "compileHintEmbed": "O le gbiyanju awọn ayipada ki o sọ awotẹlẹ di tuntun pẹlu {ctrl}, tabi ṣi iṣẹ-ẹkọ naa ninu {link}.",
+    "compileHintEmbedOnly": "O le gbiyanju awọn ayipada ki o sọ awotẹlẹ di tuntun pẹlu {ctrl}.",
+    "openInEditor": "… tabi ṣi i ninu {link}.",
     "viewOnLiaScript": "Ti o ba fẹ wo iṣẹ-ẹkọ lori LiaScript, tẹ {here}.",
     "viewHere": "nibi",
-    "toolbarHint": "Lo pẹpẹ irinṣẹ lati yipada laarin awọn ipo olootu ati awotẹlẹ."
+    "toolbarHint": "Awọn bọtini ti o wa loke n yipada laarin “Kọ”, “Mejeeji” ati “Awotẹlẹ”."
   },
   "github": {
     "exporting": "N gbe jade si GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Koodu",
       "recording": "Igbasilẹ",
       "tutorial": "Ikẹkọ",
-      "editor": "Olootu"
+      "editor": "Eto"
     },
     "sections": {
       "font": "Fọnti",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Daakọ",
+    "copied": "Ti daakọ",
+    "open": "Ṣi",
+    "length": "ohun kikọ {n}",
+    "shortest": "Ẹya ti o kuru ju (a ṣeduro rẹ)",
+    "alternative": "Yiyan miiran, ti akọkọ ko ba ṣiṣẹ",
+    "embedReadable": "Yiyan miiran ti awọn irinṣẹ miiran naa le ṣe jade",
+    "collaborationIntro": "Fi ọna asopọ yii ranṣẹ si gbogbo ẹni ti o yẹ ki o kọ pọ pẹlu rẹ. Wọn yoo ṣi iṣẹ-ẹkọ naa ninu olootu, wọn yoo si ri gbogbo ayipada lẹsẹkẹsẹ.",
+    "collaborationNote": "Gbogbo ẹni ti o ni ọna asopọ n ṣatunkọ iṣẹ-ẹkọ kan naa. Ẹni ti o ba fẹ ẹya tirẹ le lo “Ṣe ẹda kan” ninu akojọ ⋮.",
+    "externalIntro": "Ọna asopọ yii n ṣi faili Markdown lati adirẹsi wẹẹbu naa ninu olootu.",
+    "externalNote": "O n ṣiṣẹ nikan niwọn igba ti faili naa ba wa ni gbangba lori intanẹẹti.",
+    "dataIntro": "Gbogbo ọrọ faili lọwọlọwọ ni a ko sinu ọna asopọ naa. O n ṣi lori LiaScript laisi pe a fi ohunkohun pamọ si ibikibi.",
+    "snapshotIntro": "Ẹnikẹni ti o ba ṣi ọna asopọ yii yoo gba olootu pẹlu ẹda faili lọwọlọwọ. Iṣẹ-ẹkọ rẹ ko ni yipada.",
+    "embedIntro": "Lẹ koodu HTML yii mọ inu oju opo wẹẹbu rẹ. O n fi olootu ati awotẹlẹ faili lọwọlọwọ han.",
+    "embedNote": "Imọran: rọpo “/embed/code/” ninu adirẹsi pẹlu “/embed/code/edit/” tabi “/embed/code/preview/” lati fi olootu nikan tabi awotẹlẹ nikan han.",
+    "longLinkWarning": "Awọn aworan ati awọn faili miiran ko si ninu rẹ, ati pe awọn ohun elo ifiranṣẹ tabi awọn aṣawakiri le ge awọn ọna asopọ ti o gun pupọ. Dan ọna asopọ naa wo ki o to fi ranṣẹ."
   }
 }

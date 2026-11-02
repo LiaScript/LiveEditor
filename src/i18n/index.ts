@@ -59,6 +59,8 @@ export async function setLocale(locale: string) {
     global.setLocaleMessage(locale, mod.default ?? mod)
   }
   global.locale = locale
+  // lets the browser hyphenate and screen readers pronounce the UI language
+  document.documentElement.lang = locale
 }
 
 /** Resolves once the detected startup locale is loaded. */

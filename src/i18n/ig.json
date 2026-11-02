@@ -22,14 +22,16 @@
       "hideToolbar": "Zoo ogwe ngwaọrụ ndezi",
       "showToolbar": "Gosi ogwe ngwaọrụ ndezi",
       "hideFiles": "Zoo nchọgharị faịlụ",
-      "showFiles": "Gosi nchọgharị faịlụ"
+      "showFiles": "Gosi nchọgharị faịlụ",
+      "tools": "Ngwaọrụ",
+      "files": "Faịlụ"
     },
     "connection": {
-      "offlineAria": "A na-eji ndezi ahụ na ọnọdụ enweghị ịntanetị, nke pụtara na naanị gị na-edezi",
-      "onlineAria": "Ndezi ahụ nọ na ọnọdụ imekọrịta site na {type}, nke pụtara na ị nwere ike ịkekọrịta URL ma dezie ya na ndị ọzọ",
-      "switchOfflineAria": "Gbanyụọ ndezi imekọrịta ma laghachi na ọnọdụ enweghị ịntanetị",
-      "switchWebRTCAria": "Gbanwee gaa ndezi imekọrịta site na WebRTC",
-      "switchWebSocketAria": "Gbanwee gaa ndezi imekọrịta site na WebSocket",
+      "offlineAria": "Naanị m: ọ bụ naanị gị na-edezi, ihe niile na-anọ na ngwaọrụ a",
+      "onlineAria": "Ozugbo site na {type}: kekọrịta njikọ ahụ ka unu dekọọ ọnụ",
+      "switchOfflineAria": "Gbanwee gaa “Naanị m”",
+      "switchWebRTCAria": "Gbanwee gaa “Ozugbo – kpọmkwem”",
+      "switchWebSocketAria": "Gbanwee gaa “Ozugbo – site na sava”",
       "title": "Onye na-ede?",
       "solo": "Naanị m",
       "soloDesc": "Ihe niile na-anọ na ngwaọrụ a. Ọ na-arụ ọrụ na-enweghị ịntanetị.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Ozi",
     "close": "Mechie",
-    "compileHint": "Ị nwere ike ịgbanwe ma kompaili ọmụmụ a site na {ctrl}, mana ọ bụrụ na ịchọrọ ịchekwa mgbanwe gị ruo mgbe ebighị ebi, ị ga-eme fork!",
-    "compileHintEmbed": "Ị nwere ike ịgbanwe ma kompaili ọmụmụ a site na {ctrl}, ma ọ bụ mepee ya na {link}.",
-    "compileHintEmbedOnly": "Ị nwere ike ịgbanwe ma kompaili ọmụmụ a site na {ctrl}",
-    "openInEditor": "... ma ọ bụ mepee ya na {link} ...",
+    "compileHint": "Ị nwere ike ịnwale mgbanwe ebe a ma mee ka nlele mbụ dị ọhụrụ site na {ctrl}. Iji debe ha, mee mbipụta: menu ⋮ → “Mee mbipụta”.",
+    "compileHintEmbed": "Ị nwere ike ịnwale mgbanwe ma mee ka nlele mbụ dị ọhụrụ site na {ctrl}, ma ọ bụ mepee ọmụmụ ahụ na {link}.",
+    "compileHintEmbedOnly": "Ị nwere ike ịnwale mgbanwe ma mee ka nlele mbụ dị ọhụrụ site na {ctrl}.",
+    "openInEditor": "… ma ọ bụ mepee ya na {link}.",
     "viewOnLiaScript": "Ọ bụrụ na ịchọrọ ịhụ ọmụmụ ahụ na LiaScript, pịa {here}.",
     "viewHere": "ebe a",
-    "toolbarHint": "Jiri ogwe ngwaọrụ gbanwee n'etiti ọnọdụ ndezi na nlele mbụ."
+    "toolbarHint": "Bọtịnụ ndị dị n'elu na-agbanwe n'etiti “Dee”, “Ha abụọ” na “Nlele mbụ”."
   },
   "github": {
     "exporting": "Na-ebupu gaa GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Koodu",
       "recording": "Ndekọ",
       "tutorial": "Nkuzi",
-      "editor": "Ndezi"
+      "editor": "Ntọala"
     },
     "sections": {
       "font": "Font",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Detuo",
+    "copied": "Edetuola",
+    "open": "Mepee",
+    "length": "mkpụrụedemede {n}",
+    "shortest": "Ụdị kacha mkpụmkpụ (a tụrụ aro ya)",
+    "alternative": "Nhọrọ ọzọ, ọ bụrụ na nke mbụ arụghị ọrụ",
+    "embedReadable": "Nhọrọ ọzọ ngwaọrụ ndị ọzọ nwekwara ike imepụta",
+    "collaborationIntro": "Ziga njikọ a nye onye ọ bụla kwesịrị iso gị dee. Ha ga-emepe ọmụmụ ahụ na ndezi ma hụ mgbanwe ọ bụla ozugbo.",
+    "collaborationNote": "Onye ọ bụla nwere njikọ ahụ na-edezi otu ọmụmụ ahụ. Onye chọrọ ụdị nke ya ga-eji “Mee mbipụta” dị na menu ⋮.",
+    "externalIntro": "Njikọ a na-emepe faịlụ Markdown sitere n'adreesị weebụ ahụ na ndezi.",
+    "externalNote": "Ọ na-arụ ọrụ naanị ma ọ bụrụhaala na faịlụ ahụ dị n'ihu ọha na ịntanetị.",
+    "dataIntro": "Ederede faịlụ ugbu a niile dị n'ime njikọ ahụ. Ọ na-emepe na LiaScript na-enweghị ihe a na-echekwa ebe ọ bụla.",
+    "snapshotIntro": "Onye ọ bụla mepere njikọ a ga-enweta ndezi ahụ nwere mbipụta nke faịlụ ugbu a. Ọmụmụ gị ga-anọgide otu ahụ.",
+    "embedIntro": "Mado koodu HTML a n'ime webụsaịtị gị. Ọ na-egosi ndezi na nlele mbụ nke faịlụ ugbu a.",
+    "embedNote": "Ndụmọdụ: dochie “/embed/code/” n'adreesị ahụ na “/embed/code/edit/” ma ọ bụ “/embed/code/preview/” iji gosi naanị ndezi ma ọ bụ naanị nlele mbụ.",
+    "longLinkWarning": "Esoghị onyonyo na faịlụ ndị ọzọ, ngwa ozi ma ọ bụ ihe nchọgharị nwekwara ike ibipụ njikọ ndị toro ogologo nke ukwuu. Nwalee njikọ ahụ tupu i zipu ya."
   }
 }

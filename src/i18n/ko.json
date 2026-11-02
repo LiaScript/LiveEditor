@@ -22,14 +22,16 @@
       "hideToolbar": "편집기 도구 모음 숨기기",
       "showToolbar": "편집기 도구 모음 표시",
       "hideFiles": "파일 탐색기 숨기기",
-      "showFiles": "파일 탐색기 표시"
+      "showFiles": "파일 탐색기 표시",
+      "tools": "도구",
+      "files": "파일"
     },
     "connection": {
-      "offlineAria": "편집기가 오프라인 모드로 사용 중이며, 편집자는 본인뿐입니다",
-      "onlineAria": "편집기가 {type}을 통한 협업 모드입니다. URL을 공유하고 다른 사람과 함께 편집할 수 있습니다",
-      "switchOfflineAria": "협업 편집을 끄고 오프라인 모드로 전환",
-      "switchWebRTCAria": "WebRTC를 통한 협업 편집으로 전환",
-      "switchWebSocketAria": "WebSocket을 통한 협업 편집으로 전환",
+      "offlineAria": "나만: 혼자 편집하며, 모든 내용이 이 기기에 남습니다",
+      "onlineAria": "실시간 ({type}): 링크를 공유해 함께 작성하세요",
+      "switchOfflineAria": "“나만” 모드로 전환",
+      "switchWebRTCAria": "“실시간 – 직접 연결” 모드로 전환",
+      "switchWebSocketAria": "“실시간 – 서버 경유” 모드로 전환",
       "title": "누가 작성하나요?",
       "solo": "나만",
       "soloDesc": "모든 내용이 이 기기에만 남습니다. 인터넷 없이도 작동합니다.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "정보",
     "close": "닫기",
-    "compileHint": "{ctrl}로 이 과정을 수정하고 컴파일할 수 있지만, 변경 사항을 영구적으로 저장하려면 포크해야 합니다!",
-    "compileHintEmbed": "{ctrl}로 이 과정을 수정하고 컴파일하거나 {link}에서 열 수 있습니다.",
-    "compileHintEmbedOnly": "{ctrl}로 이 과정을 수정하고 컴파일할 수 있습니다",
-    "openInEditor": "... 또는 {link}에서 열기 ...",
+    "compileHint": "여기에서 변경 사항을 시험해 보고 미리보기를 새로 고칠 수 있습니다(단축키: {ctrl}). 변경 사항을 유지하려면 사본을 만드세요: ⋮ 메뉴 → “사본 만들기”.",
+    "compileHintEmbed": "변경 사항을 시험해 보고 미리보기를 새로 고치거나(단축키: {ctrl}), 다음에서 과정을 열 수 있습니다: {link}.",
+    "compileHintEmbedOnly": "변경 사항을 시험해 보고 미리보기를 새로 고칠 수 있습니다(단축키: {ctrl}).",
+    "openInEditor": "… 또는 다음에서 여세요: {link}.",
     "viewOnLiaScript": "LiaScript에서 과정을 보려면 {here}를 클릭하세요.",
     "viewHere": "여기",
-    "toolbarHint": "도구 모음을 사용하여 편집기와 미리보기 모드를 전환하세요."
+    "toolbarHint": "위쪽 버튼으로 “작성”, “함께 보기”, “미리보기” 사이를 전환합니다."
   },
   "github": {
     "exporting": "GitHub Gist로 내보내는 중...",
@@ -631,7 +633,7 @@
       "code": "코드",
       "recording": "녹음",
       "tutorial": "튜토리얼",
-      "editor": "편집기"
+      "editor": "설정"
     },
     "sections": {
       "font": "글꼴",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "복사",
+    "copied": "복사됨",
+    "open": "열기",
+    "length": "글자 수: {n}",
+    "shortest": "가장 짧은 버전 (권장)",
+    "alternative": "첫 번째가 작동하지 않을 때의 대안",
+    "embedReadable": "다른 도구로도 만들 수 있는 대안",
+    "collaborationIntro": "함께 작성할 모든 사람에게 이 링크를 보내세요. 편집기에서 과정을 열고 모든 변경 사항을 바로 볼 수 있습니다.",
+    "collaborationNote": "링크가 있는 모든 사람이 같은 과정을 편집합니다. 자신만의 버전이 필요한 사람은 ⋮ 메뉴에서 “사본 만들기”를 사용하세요.",
+    "externalIntro": "이 링크는 웹 주소에 있는 Markdown 파일을 편집기에서 엽니다.",
+    "externalNote": "파일이 인터넷에 공개되어 있는 동안에만 작동합니다.",
+    "dataIntro": "현재 파일의 전체 텍스트가 링크 안에 담겨 있습니다. 어디에도 아무것도 저장하지 않고 LiaScript에서 열립니다.",
+    "snapshotIntro": "이 링크를 여는 사람은 현재 파일의 사본이 담긴 편집기를 받습니다. 원래 과정은 그대로 유지됩니다.",
+    "embedIntro": "이 HTML 코드를 웹사이트에 붙여 넣으세요. 현재 파일의 편집기와 미리보기가 표시됩니다.",
+    "embedNote": "팁: 편집기만 또는 미리보기만 표시하려면 주소의 “/embed/code/”를 “/embed/code/edit/” 또는 “/embed/code/preview/”로 바꾸세요.",
+    "longLinkWarning": "이미지와 기타 파일은 포함되지 않으며, 매우 긴 링크는 메신저나 브라우저에서 잘릴 수 있습니다. 보내기 전에 링크를 테스트하세요."
   }
 }

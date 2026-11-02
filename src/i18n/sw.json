@@ -22,14 +22,16 @@
       "hideToolbar": "Ficha upau wa zana wa kihariri",
       "showToolbar": "Onyesha upau wa zana wa kihariri",
       "hideFiles": "Ficha kichunguzi cha faili",
-      "showFiles": "Onyesha kichunguzi cha faili"
+      "showFiles": "Onyesha kichunguzi cha faili",
+      "tools": "Zana",
+      "files": "Faili"
     },
     "connection": {
-      "offlineAria": "Kihariri kinatumika katika hali ya nje ya mtandao, maana yake ni wewe pekee unayehariri",
-      "onlineAria": "Kihariri kiko katika hali ya ushirikiano kupitia {type}, hivyo unaweza kushiriki URL na kuhariri pamoja na wengine",
-      "switchOfflineAria": "Zima uhariri wa ushirikiano na ubadilishe kwenda hali ya nje ya mtandao",
-      "switchWebRTCAria": "Badilisha kwenda uhariri wa ushirikiano kupitia WebRTC",
-      "switchWebSocketAria": "Badilisha kwenda uhariri wa ushirikiano kupitia WebSocket",
+      "offlineAria": "Mimi tu: wewe pekee unahariri, kila kitu kinabaki kwenye kifaa hiki",
+      "onlineAria": "Moja kwa moja kupitia {type}: shiriki kiungo ili kuandika pamoja",
+      "switchOfflineAria": "Badilisha kwenda “Mimi tu”",
+      "switchWebRTCAria": "Badilisha kwenda “Moja kwa moja – bila kupitia seva”",
+      "switchWebSocketAria": "Badilisha kwenda “Moja kwa moja – kupitia seva”",
       "title": "Nani anaandika?",
       "solo": "Mimi tu",
       "soloDesc": "Kila kitu kinabaki kwenye kifaa hiki. Kinafanya kazi bila intaneti.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Taarifa",
     "close": "Funga",
-    "compileHint": "Unaweza kubadilisha na kukompaili kozi hii kwa {ctrl}, lakini ikiwa unataka kuhifadhi mabadiliko yako daima lazima ufanye fork!",
-    "compileHintEmbed": "Unaweza kubadilisha na kukompaili kozi hii kwa {ctrl}, au kuifungua katika {link}.",
-    "compileHintEmbedOnly": "Unaweza kubadilisha na kukompaili kozi hii kwa {ctrl}",
-    "openInEditor": "... au ifungue katika {link} ...",
+    "compileHint": "Unaweza kujaribu mabadiliko hapa na kuonyesha upya onyesho la awali kwa {ctrl}. Ili kuyahifadhi, tengeneza nakala: menyu ya ⋮ → “Tengeneza nakala”.",
+    "compileHintEmbed": "Unaweza kujaribu mabadiliko na kuonyesha upya onyesho la awali kwa {ctrl}, au kufungua kozi kwenye {link}.",
+    "compileHintEmbedOnly": "Unaweza kujaribu mabadiliko na kuonyesha upya onyesho la awali kwa {ctrl}.",
+    "openInEditor": "… au uifungue kwenye {link}.",
     "viewOnLiaScript": "Ukitaka kuona kozi kwenye LiaScript, bofya {here}.",
     "viewHere": "hapa",
-    "toolbarHint": "Tumia upau wa zana kubadilisha kati ya hali za kihariri na onyesho la awali."
+    "toolbarHint": "Vitufe vilivyo juu vinabadilisha kati ya “Andika”, “Vyote viwili” na “Onyesho la awali”."
   },
   "github": {
     "exporting": "Inahamishwa kwenda GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Msimbo",
       "recording": "Kurekodi",
       "tutorial": "Mafunzo",
-      "editor": "Kihariri"
+      "editor": "Mipangilio"
     },
     "sections": {
       "font": "Fonti",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Nakili",
+    "copied": "Imenakiliwa",
+    "open": "Fungua",
+    "length": "herufi {n}",
+    "shortest": "Toleo fupi zaidi (linapendekezwa)",
+    "alternative": "Mbadala, ikiwa la kwanza halifanyi kazi",
+    "embedReadable": "Mbadala ambao zana nyingine pia zinaweza kutengeneza",
+    "collaborationIntro": "Tuma kiungo hiki kwa kila mtu anayepaswa kuandika pamoja nawe. Wanafungua kozi kwenye kihariri na kuona kila badiliko papo hapo.",
+    "collaborationNote": "Kila mwenye kiungo anahariri kozi ileile. Anayetaka toleo lake mwenyewe atumie “Tengeneza nakala” kwenye menyu ya ⋮.",
+    "externalIntro": "Kiungo hiki kinafungua faili ya Markdown kutoka kwenye anwani ya wavuti ndani ya kihariri.",
+    "externalNote": "Kinafanya kazi tu maadamu faili inapatikana hadharani kwenye intaneti.",
+    "dataIntro": "Maandishi yote ya faili ya sasa yamewekwa ndani ya kiungo. Kinafunguka kwenye LiaScript bila kitu chochote kuhifadhiwa popote.",
+    "snapshotIntro": "Anayefungua kiungo hiki anapata kihariri pamoja na nakala ya faili ya sasa. Kozi yako inabaki bila kubadilika.",
+    "embedIntro": "Bandika msimbo huu wa HTML kwenye tovuti yako. Unaonyesha kihariri na onyesho la awali la faili ya sasa.",
+    "embedNote": "Kidokezo: badilisha “/embed/code/” kwenye anwani kuwa “/embed/code/edit/” au “/embed/code/preview/” ili kuonyesha kihariri pekee au onyesho la awali pekee.",
+    "longLinkWarning": "Picha na faili nyingine hazijajumuishwa, na viungo virefu sana vinaweza kukatwa na programu za ujumbe au vivinjari. Jaribu kiungo kabla ya kukituma."
   }
 }

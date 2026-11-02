@@ -22,14 +22,16 @@
       "hideToolbar": "エディターツールバーを非表示",
       "showToolbar": "エディターツールバーを表示",
       "hideFiles": "ファイルエクスプローラーを非表示",
-      "showFiles": "ファイルエクスプローラーを表示"
+      "showFiles": "ファイルエクスプローラーを表示",
+      "tools": "ツール",
+      "files": "ファイル"
     },
     "connection": {
-      "offlineAria": "エディターはオフラインモードで使用されています。編集しているのはあなただけです",
-      "onlineAria": "エディターは {type} による共同編集モードです。URL を共有して他の人と編集できます",
-      "switchOfflineAria": "共同編集をオフにしてオフラインモードへ切り替え",
-      "switchWebRTCAria": "WebRTC による共同編集へ切り替え",
-      "switchWebSocketAria": "WebSocket による共同編集へ切り替え",
+      "offlineAria": "自分だけ: 編集するのはあなただけで、すべてこのデバイスに残ります",
+      "onlineAria": "ライブ（{type}）: リンクを共有して一緒に書きましょう",
+      "switchOfflineAria": "「自分だけ」に切り替え",
+      "switchWebRTCAria": "「ライブ – 直接」に切り替え",
+      "switchWebSocketAria": "「ライブ – サーバー経由」に切り替え",
       "title": "誰が書いていますか？",
       "solo": "自分だけ",
       "soloDesc": "すべてこのデバイスに保存されます。インターネットがなくても使えます。",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "情報",
     "close": "閉じる",
-    "compileHint": "{ctrl} でこのコースを編集・コンパイルできますが、変更を永続的に保存するにはフォークする必要があります！",
-    "compileHintEmbed": "{ctrl} でこのコースを編集・コンパイルするか、{link} で開くことができます。",
-    "compileHintEmbedOnly": "{ctrl} でこのコースを編集・コンパイルできます",
-    "openInEditor": "... または {link} で開く ...",
+    "compileHint": "ここで変更を試し、{ctrl} でプレビューを更新できます。変更を残すには、コピーを作成してください: ⋮ メニュー → 「コピーを作成」。",
+    "compileHintEmbed": "変更を試して {ctrl} でプレビューを更新するか、{link} でコースを開くことができます。",
+    "compileHintEmbedOnly": "変更を試して {ctrl} でプレビューを更新できます。",
+    "openInEditor": "… または {link} で開くこともできます。",
     "viewOnLiaScript": "LiaScript でコースを表示するには、{here} をクリックしてください。",
     "viewHere": "こちら",
-    "toolbarHint": "ツールバーを使用して、エディターとプレビューモードを切り替えます。"
+    "toolbarHint": "上部のボタンで「編集」「両方」「プレビュー」を切り替えられます。"
   },
   "github": {
     "exporting": "GitHub Gist へエクスポート中...",
@@ -631,7 +633,7 @@
       "code": "コード",
       "recording": "録音",
       "tutorial": "チュートリアル",
-      "editor": "エディター"
+      "editor": "設定"
     },
     "sections": {
       "font": "フォント",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "コピー",
+    "copied": "コピー済み",
+    "open": "開く",
+    "length": "{n} 文字",
+    "shortest": "最短バージョン（推奨）",
+    "alternative": "最初のものが使えない場合の代替",
+    "embedReadable": "他のツールでも生成できる代替",
+    "collaborationIntro": "一緒に書く人全員にこのリンクを送ってください。エディターでコースが開き、すべての変更がすぐに表示されます。",
+    "collaborationNote": "リンクを持つ全員が同じコースを編集します。自分専用の版が必要な人は、⋮ メニューの「コピーを作成」を使ってください。",
+    "externalIntro": "このリンクは、Web アドレスにある Markdown ファイルをエディターで開きます。",
+    "externalNote": "ファイルがインターネット上で公開されている間だけ使えます。",
+    "dataIntro": "現在のファイルのテキスト全体がリンクに含まれています。どこにも何も保存されずに LiaScript で開きます。",
+    "snapshotIntro": "このリンクを開いた人には、現在のファイルのコピーが入ったエディターが表示されます。あなたのコースは変更されません。",
+    "embedIntro": "この HTML コードを Web サイトに貼り付けてください。現在のファイルのエディターとプレビューが表示されます。",
+    "embedNote": "ヒント: アドレス内の「/embed/code/」を「/embed/code/edit/」または「/embed/code/preview/」に置き換えると、エディターだけ、またはプレビューだけを表示できます。",
+    "longLinkWarning": "画像やその他のファイルは含まれません。また、非常に長いリンクはメッセンジャーやブラウザーで途中で切れることがあります。送信する前にリンクを試してください。"
   }
 }

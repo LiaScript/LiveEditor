@@ -22,14 +22,16 @@
       "hideToolbar": "Masquer la barre d'outils de l'éditeur",
       "showToolbar": "Afficher la barre d'outils de l'éditeur",
       "hideFiles": "Masquer l'explorateur de fichiers",
-      "showFiles": "Afficher l'explorateur de fichiers"
+      "showFiles": "Afficher l'explorateur de fichiers",
+      "tools": "Outils",
+      "files": "Fichiers"
     },
     "connection": {
-      "offlineAria": "L'éditeur est utilisé en mode hors ligne ; vous êtes la seule personne à modifier",
-      "onlineAria": "L'éditeur est en mode collaboratif via {type} ; partagez l'URL et modifiez ensemble",
-      "switchOfflineAria": "Désactiver l'édition collaborative et passer en mode hors ligne",
-      "switchWebRTCAria": "Passer à l'édition collaborative via WebRTC",
-      "switchWebSocketAria": "Passer à l'édition collaborative via WebSocket",
+      "offlineAria": "Juste moi : vous êtes la seule personne à modifier, tout reste sur cet appareil",
+      "onlineAria": "Live via {type} : partagez le lien pour écrire ensemble",
+      "switchOfflineAria": "Passer à « Juste moi »",
+      "switchWebRTCAria": "Passer à « Live – direct »",
+      "switchWebSocketAria": "Passer à « Live – via un serveur »",
       "title": "Qui écrit ?",
       "solo": "Juste moi",
       "soloDesc": "Tout reste sur cet appareil. Fonctionne aussi sans internet.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Information",
     "close": "Fermer",
-    "compileHint": "Vous pouvez modifier et compiler ce cours avec {ctrl}, mais pour enregistrer vos changements de façon permanente, vous devez le forker.",
-    "compileHintEmbed": "Vous pouvez modifier et compiler ce cours avec {ctrl}, ou l'ouvrir dans {link}.",
-    "compileHintEmbedOnly": "Vous pouvez modifier et compiler ce cours avec {ctrl}",
-    "openInEditor": "... ou l'ouvrir dans {link} ...",
+    "compileHint": "Vous pouvez essayer des modifications ici et actualiser l'aperçu avec {ctrl}. Pour les conserver, faites une copie : menu ⋮ → « Faire une copie ».",
+    "compileHintEmbed": "Vous pouvez essayer des modifications et actualiser l'aperçu avec {ctrl}, ou ouvrir le cours dans le {link}.",
+    "compileHintEmbedOnly": "Vous pouvez essayer des modifications et actualiser l'aperçu avec {ctrl}.",
+    "openInEditor": "… ou l'ouvrir dans le {link}.",
     "viewOnLiaScript": "Si vous voulez voir le cours sur LiaScript, cliquez {here}.",
     "viewHere": "ici",
-    "toolbarHint": "Utilisez la barre d'outils pour basculer entre les modes éditeur et aperçu."
+    "toolbarHint": "Les boutons en haut permettent de basculer entre « Écrire », « Les deux » et « Aperçu »."
   },
   "github": {
     "exporting": "Exportation vers GitHub Gist...",
@@ -631,7 +633,7 @@
       "code": "Code",
       "recording": "Enregistrement",
       "tutorial": "Tutoriel",
-      "editor": "Éditeur"
+      "editor": "Réglages"
     },
     "sections": {
       "font": "Police",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Copier",
+    "copied": "Copié",
+    "open": "Ouvrir",
+    "length": "{n} caractères",
+    "shortest": "Version la plus courte (recommandée)",
+    "alternative": "Alternative, si la première ne fonctionne pas",
+    "embedReadable": "Alternative que d'autres outils peuvent aussi générer",
+    "collaborationIntro": "Envoyez ce lien à toutes les personnes qui doivent écrire avec vous. Elles ouvrent le cours dans l'éditeur et voient chaque modification immédiatement.",
+    "collaborationNote": "Toutes les personnes ayant le lien modifient le même cours. Pour avoir sa propre version, il suffit d'utiliser « Faire une copie » dans le menu ⋮.",
+    "externalIntro": "Ce lien ouvre dans l'éditeur le fichier Markdown situé à l'adresse web.",
+    "externalNote": "Cela ne fonctionne que tant que le fichier est accessible publiquement sur internet.",
+    "dataIntro": "Tout le texte du fichier actuel est contenu dans le lien. Il s'ouvre sur LiaScript sans que rien ne soit enregistré nulle part.",
+    "snapshotIntro": "Quiconque ouvre ce lien obtient l'éditeur avec une copie du fichier actuel. Votre cours reste inchangé.",
+    "embedIntro": "Collez ce code HTML dans votre site web. Il affiche l'éditeur et l'aperçu du fichier actuel.",
+    "embedNote": "Astuce : remplacez « /embed/code/ » dans l'adresse par « /embed/code/edit/ » ou « /embed/code/preview/ » pour n'afficher que l'éditeur ou que l'aperçu.",
+    "longLinkWarning": "Les images et autres fichiers ne sont pas inclus, et les liens très longs peuvent être coupés par les messageries ou les navigateurs. Testez le lien avant de l'envoyer."
   }
 }

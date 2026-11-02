@@ -22,14 +22,16 @@
       "hideToolbar": "Editör araç çubuğunu gizle",
       "showToolbar": "Editör araç çubuğunu göster",
       "hideFiles": "Dosya gezginini gizle",
-      "showFiles": "Dosya gezginini göster"
+      "showFiles": "Dosya gezginini göster",
+      "tools": "Araçlar",
+      "files": "Dosyalar"
     },
     "connection": {
-      "offlineAria": "Editör çevrimdışı modda kullanılıyor; bu, düzenleyen tek kişinin siz olduğunuz anlamına gelir",
-      "onlineAria": "Editör {type} üzerinden iş birliği modunda; URL'yi paylaşabilir ve başkalarıyla düzenlemeye başlayabilirsiniz",
-      "switchOfflineAria": "İş birliğine dayalı düzenlemeyi kapat ve çevrimdışı moda geç",
-      "switchWebRTCAria": "WebRTC üzerinden iş birliğine dayalı düzenlemeye geç",
-      "switchWebSocketAria": "WebSocket üzerinden iş birliğine dayalı düzenlemeye geç",
+      "offlineAria": "Yalnızca ben: yalnızca siz düzenliyorsunuz, her şey bu cihazda kalır",
+      "onlineAria": "Canlı ({type}): birlikte yazmak için bağlantıyı paylaşın",
+      "switchOfflineAria": "“Yalnızca ben” moduna geç",
+      "switchWebRTCAria": "“Canlı – doğrudan” moduna geç",
+      "switchWebSocketAria": "“Canlı – sunucu üzerinden” moduna geç",
       "title": "Kim yazıyor?",
       "solo": "Yalnızca ben",
       "soloDesc": "Her şey bu cihazda kalır. İnternet olmadan da çalışır.",
@@ -367,13 +369,13 @@
   "toast": {
     "information": "Bilgi",
     "close": "Kapat",
-    "compileHint": "Bu kursu {ctrl} ile değiştirebilir ve derleyebilirsiniz, ancak değişikliklerinizi kalıcı olarak saklamak istiyorsanız fork etmelisiniz!",
-    "compileHintEmbed": "Bu kursu {ctrl} ile değiştirebilir ve derleyebilir ya da {link} içinde açabilirsiniz.",
-    "compileHintEmbedOnly": "Bu kursu {ctrl} ile değiştirebilir ve derleyebilirsiniz",
-    "openInEditor": "... veya {link} içinde açın ...",
+    "compileHint": "Burada değişiklikleri deneyebilir ve önizlemeyi şu tuşlarla yenileyebilirsiniz: {ctrl}. Değişiklikleri saklamak için bir kopya oluşturun: ⋮ menüsü → “Kopya oluştur”.",
+    "compileHintEmbed": "Değişiklikleri deneyip önizlemeyi şu tuşlarla yenileyebilirsiniz: {ctrl}. Kursu şurada da açabilirsiniz: {link}.",
+    "compileHintEmbedOnly": "Değişiklikleri deneyip önizlemeyi şu tuşlarla yenileyebilirsiniz: {ctrl}.",
+    "openInEditor": "… veya şurada açın: {link}.",
     "viewOnLiaScript": "Kursu LiaScript'te görmek istiyorsanız {here} tıklayın.",
     "viewHere": "buraya",
-    "toolbarHint": "Editör ve önizleme modları arasında geçiş yapmak için araç çubuğunu kullanın."
+    "toolbarHint": "Üstteki düğmelerle “Yaz”, “İkisi” ve “Önizleme” görünümleri arasında geçiş yapabilirsiniz."
   },
   "github": {
     "exporting": "GitHub Gist'e aktarılıyor...",
@@ -631,7 +633,7 @@
       "code": "Kod",
       "recording": "Kayıt",
       "tutorial": "Eğitim",
-      "editor": "Editör"
+      "editor": "Ayarlar"
     },
     "sections": {
       "font": "Yazı tipi",
@@ -807,5 +809,23 @@
       "noFolder": "No folder is linked to this project yet.",
       "permission": "Access to the folder was denied. Please grant permission to continue."
     }
+  },
+  "result": {
+    "copy": "Kopyala",
+    "copied": "Kopyalandı",
+    "open": "Aç",
+    "length": "Karakter sayısı: {n}",
+    "shortest": "En kısa sürüm (önerilen)",
+    "alternative": "İlki çalışmazsa alternatif",
+    "embedReadable": "Başka araçların da oluşturabileceği alternatif",
+    "collaborationIntro": "Bu bağlantıyı birlikte yazacak herkese gönderin. Kursu editörde açarlar ve her değişikliği anında görürler.",
+    "collaborationNote": "Bağlantıya sahip herkes aynı kursu düzenler. Kendi sürümünü isteyen, ⋮ menüsündeki “Kopya oluştur” seçeneğini kullanır.",
+    "externalIntro": "Bu bağlantı, web adresindeki Markdown dosyasını editörde açar.",
+    "externalNote": "Bu yalnızca dosya internette herkese açık olduğu sürece çalışır.",
+    "dataIntro": "Geçerli dosyanın tüm metni bağlantının içindedir. Hiçbir yerde hiçbir şey saklanmadan LiaScript'te açılır.",
+    "snapshotIntro": "Bu bağlantıyı açan kişi, geçerli dosyanın bir kopyasını içeren editörü alır. Sizin kursunuz değişmeden kalır.",
+    "embedIntro": "Bu HTML kodunu web sitenize yapıştırın. Editörü ve geçerli dosyanın önizlemesini gösterir.",
+    "embedNote": "İpucu: Yalnızca editörü veya yalnızca önizlemeyi göstermek için adresteki “/embed/code/” kısmını “/embed/code/edit/” veya “/embed/code/preview/” ile değiştirin.",
+    "longLinkWarning": "Resimler ve diğer dosyalar dahil değildir; çok uzun bağlantılar mesajlaşma uygulamaları veya tarayıcılar tarafından kesilebilir. Göndermeden önce bağlantıyı test edin."
   }
 }
