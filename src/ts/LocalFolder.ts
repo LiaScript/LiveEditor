@@ -38,6 +38,8 @@ export async function verifyPermission(
 export interface LocalEntry {
   path: string;
   kind: "file" | "directory";
+  /** the entry's own handle, so callers can read it without re-resolving the path */
+  handle: any;
 }
 
 /** Directory/file names that are never mirrored. */
@@ -51,10 +53,10 @@ export async function readTree(handle: DirHandle): Promise<LocalEntry[]> {
       if (IGNORED.has(entry.name)) continue;
       const path = prefix ? prefix + "/" + entry.name : entry.name;
       if (entry.kind === "directory") {
-        out.push({ path, kind: "directory" });
+        out.push({ path, kind: "directory", handle: entry });
         await walk(entry, path);
       } else {
-        out.push({ path, kind: "file" });
+        out.push({ path, kind: "file", handle: entry });
       }
     }
   }
@@ -101,8 +103,13 @@ export async function writeBytes(
   const { dir, name } = await parentDir(handle, path, true);
   const fileHandle = await dir.getFileHandle(name, { create: true });
   const writable = await fileHandle.createWritable();
-  await writable.write(bytes);
-  await writable.close();
+  try {
+    await writable.write(bytes);
+    await writable.close();
+  } catch (e) {
+    await writable.abort(); // otherwise a .crswap temp file stays behind
+    throw e;
+  }
 }
 
 /** Delete a file (or folder, recursively); silently ignores missing paths. */

@@ -5,7 +5,7 @@
 
 import Dexie from "./indexDB";
 import { navigateTo } from "../index";
-import { randomString } from "./utils";
+import { randomString, loadJSZip } from "./utils";
 import { getProjectDoc } from "./ProjectDoc";
 
 export interface ImportFile {
@@ -72,17 +72,7 @@ export async function createProjectFromFiles(
 /** Decode the bytes of a single uploaded/fetched ZIP into a flat file list.
  *  jszip is loaded lazily (it is already a dependency, see utils.buildProjectZip). */
 export async function filesFromZip(data: Uint8Array): Promise<ImportFile[]> {
-  const mod: any = await import("jszip");
-  const JSZip =
-    typeof mod === "function"
-      ? mod
-      : typeof mod.default === "function"
-      ? mod.default
-      : mod.default && typeof mod.default.default === "function"
-      ? mod.default.default
-      : undefined;
-  if (!JSZip) throw new Error("Could not load JSZip");
-
+  const JSZip = await loadJSZip();
   const zip = await JSZip.loadAsync(data);
   const files: ImportFile[] = [];
 

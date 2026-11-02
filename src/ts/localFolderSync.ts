@@ -24,9 +24,11 @@ export interface SyncEntry {
   resolution?: "editor" | "disk";
 }
 
+// Only hash + size are kept, so the files themselves can be freed right after
+// hashing (otherwise every file would sit in memory twice until the end).
 interface Side {
-  bytes?: Uint8Array;
-  hash?: string;
+  hash: string;
+  size: number;
 }
 
 /**
@@ -45,16 +47,20 @@ export async function computeSync(
     if (meta.type !== "file") continue;
     const bytes = doc.readFileData(path);
     if (!bytes) continue;
-    editor.set(path, { bytes, hash: await LocalFolder.hashBytes(bytes) });
+    editor.set(path, { hash: await LocalFolder.hashBytes(bytes), size: bytes.byteLength });
   }
 
   // disk side
   const disk = new Map<string, Side>();
   for (const entry of await LocalFolder.readTree(handle)) {
     if (entry.kind !== "file") continue;
-    const bytes = await LocalFolder.readBytes(handle, entry.path);
-    if (!bytes) continue;
-    disk.set(entry.path, { bytes, hash: await LocalFolder.hashBytes(bytes) });
+    let bytes: Uint8Array;
+    try {
+      bytes = new Uint8Array(await (await entry.handle.getFile()).arrayBuffer());
+    } catch {
+      continue; // vanished or unreadable, same as readBytes()
+    }
+    disk.set(entry.path, { hash: await LocalFolder.hashBytes(bytes), size: bytes.byteLength });
   }
 
   const paths = new Set<string>([
@@ -71,23 +77,30 @@ export async function computeSync(
     const editorHash = e?.hash;
     const diskHash = d?.hash;
 
+    // gone on both sides: forget it, or re-adding it later would look like a
+    // deletion/conflict (mutates the caller's manifest; saved by applySync)
+    if (!e && !d) {
+      manifest.delete(path);
+      continue;
+    }
+
     // identical on both sides → nothing to do
     if (editorHash === diskHash) continue;
 
     const editorChanged = editorHash !== base;
     const diskChanged = diskHash !== base;
     const isText = isTextFile(path, undefined);
-    const size = (e?.bytes ?? d?.bytes)?.byteLength;
+    const size = (e ?? d)?.size;
 
     // An empty editor file that was never synced (base === undefined) is just a
     // blank placeholder — e.g. the starter README.md of a fresh project or a
     // freshly cloned repo. Adopt the disk version automatically instead of
     // flagging a conflict, so importing real content "just works".
-    const blankPlaceholder = !!e && e.bytes!.byteLength === 0 && base === undefined;
+    const blankPlaceholder = !!e && e.size === 0 && base === undefined;
 
     if (e && d) {
       // present on both, content differs
-      if (blankPlaceholder && d.bytes!.byteLength > 0) {
+      if (blankPlaceholder && d.size > 0) {
         entries.push({ path, direction: "pull", op: "modified", isText, size });
       } else if (editorChanged && diskChanged) {
         entries.push({ path, direction: "conflict", op: "modified", isText, size });

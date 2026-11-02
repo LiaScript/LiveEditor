@@ -197,6 +197,7 @@ export const importSources: ImportSource[] = [
         let content: string = f.content ?? "";
         if (f.truncated && f.raw_url) {
           const raw = await fetch(f.raw_url);
+          if (!raw.ok) throw new Error("fetchFailed");
           content = await raw.text();
         }
         const path = f === mainFile ? "README.md" : f.filename;

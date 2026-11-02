@@ -1,11 +1,14 @@
 import { liveQuery, Dexie } from 'dexie'
+import { markRaw } from 'vue'
 
 export default class {
   private db: Dexie
   private observer?: any
 
   constructor() {
-    this.db = new Dexie('LiveEditor')
+    // markRaw: components keep this wrapper in data(); a Vue proxy around the
+    // Dexie instance breaks its transaction tracking ("transaction has finished")
+    this.db = markRaw(new Dexie('LiveEditor'))
 
     this.db.version(1).stores({
       data: `
@@ -40,16 +43,15 @@ export default class {
 
   async put(id: string, meta: any) {
     if (id.length > 8) {
-      const storedMeta = await this.get(id)
-
-      if (storedMeta) {
-        meta = { ...storedMeta.meta, ...meta }
-      }
-
-      await this.db.data.put({
-        id: id,
-        timestamp: Date.now(),
-        meta: meta,
+      // read-merge-write in one transaction, so two concurrent puts (also from
+      // different Dexie instances) can't drop each other's fields
+      await this.db.transaction('rw', this.db.data, async () => {
+        const stored = await this.db.data.get(id)
+        await this.db.data.put({
+          id: id,
+          timestamp: Date.now(),
+          meta: stored ? { ...stored.meta, ...meta } : meta,
+        })
       })
     }
   }

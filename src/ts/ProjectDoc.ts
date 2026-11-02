@@ -42,6 +42,32 @@ const VIDEO_EXTENSIONS = new Set([
   "webm", "mp4", "ogv", "ogg", "mov", "avi", "mkv", "m4v",
 ]);
 
+/**
+ * Decode a text file for the editor. A UTF-8 BOM is cut off (Monaco drops it
+ * as well, which would shift every y-monaco offset) and reported, so that
+ * readFileData() can restore the exact bytes. Bytes that aren't valid UTF-8
+ * (legacy Latin-1 files) are read as Windows-1252, so umlauts survive instead
+ * of turning into U+FFFD.
+ */
+function decodeText(bytes: Uint8Array): { text: string; bom: boolean } {
+  const bom = bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf;
+  const body = bom ? bytes.subarray(3) : bytes;
+  try {
+    return { text: new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(body), bom };
+  } catch {
+    return { text: new TextDecoder("windows-1252").decode(body), bom: false };
+  }
+}
+
+function encodeText(text: string, bom?: boolean): Uint8Array {
+  const body = new TextEncoder().encode(text);
+  if (!bom) return body;
+  const out = new Uint8Array(body.byteLength + 3);
+  out.set([0xef, 0xbb, 0xbf]);
+  out.set(body, 3);
+  return out;
+}
+
 function extensionOf(path: string): string {
   const name = path.split("/").pop() || "";
   const dot = name.lastIndexOf(".");
@@ -68,12 +94,15 @@ export function isImageFile(path: string, mime?: string): boolean {
 }
 
 export function isAudioFile(path: string, mime?: string): boolean {
+  if (TEXT_EXTENSIONS.has(extensionOf(path))) return false;
   if ((mime || "").toLowerCase().startsWith("audio/")) return true;
   return AUDIO_EXTENSIONS.has(extensionOf(path));
 }
 
 /** Decide whether a path should be played as a video. */
 export function isVideoFile(path: string, mime?: string): boolean {
+  // browsers report .ts (TypeScript) as video/mp2t; a text extension wins
+  if (TEXT_EXTENSIONS.has(extensionOf(path))) return false;
   if ((mime || "").toLowerCase().startsWith("video/")) return true;
   return VIDEO_EXTENSIONS.has(extensionOf(path));
 }
@@ -92,6 +121,8 @@ export interface FileMeta {
   size?: number;
   /** True for the entry backed by the main course document (see mainPath). */
   main?: boolean;
+  /** text file had a UTF-8 BOM; readFileData() puts it back */
+  bom?: boolean;
 }
 
 export interface FileEntry {
@@ -408,7 +439,7 @@ export class ProjectDoc {
     const norm = ProjectDoc.normalize(path);
     // The main document is always text backed by `content`; decode into it.
     if (norm === this.getMainPath()) {
-      return this.setText(norm, new TextDecoder().decode(data), mime || "text/markdown");
+      return this.importText(norm, data, mime || "text/markdown");
     }
     this.ydoc.transact(() => {
       this.ensureParents(norm);
@@ -423,13 +454,13 @@ export class ProjectDoc {
     const norm = ProjectDoc.normalize(path);
     // the main document's text lives in `content` (legacy ydoc.getText(storageId))
     if (norm === this.getMainPath()) {
-      return new TextEncoder().encode(this.content.toString());
+      return encodeText(this.content.toString(), this.meta.get("mainBom"));
     }
     const bytes = this.fileData.get(norm);
     if (bytes) return bytes;
     // text files are stored as Y.Text -> encode them back to bytes on demand
     const yt = this.fileText.get(norm);
-    if (yt) return new TextEncoder().encode(yt.toString());
+    if (yt) return encodeText(yt.toString(), this.files.get(norm)?.bom);
     return undefined;
   }
 
@@ -451,7 +482,7 @@ export class ProjectDoc {
       const created = new Y.Text();
       this.ydoc.transact(() => {
         const bytes = this.fileData.get(norm);
-        const seed = bytes ? new TextDecoder().decode(bytes) : "";
+        const { text: seed, bom } = bytes ? decodeText(bytes) : { text: "", bom: false };
         this.fileText.set(norm, created);
         if (seed) created.insert(0, seed);
         if (bytes) this.fileData.delete(norm);
@@ -459,6 +490,7 @@ export class ProjectDoc {
           this.ensureParents(norm);
           this.files.set(norm, { type: "file" });
         }
+        this.setBom(norm, bom);
       });
       yt = created;
     }
@@ -499,9 +531,29 @@ export class ProjectDoc {
   importFile(path: string, data: Uint8Array, mime?: string): string {
     const norm = ProjectDoc.normalize(path);
     if (isTextFile(norm, mime)) {
-      return this.setText(norm, new TextDecoder().decode(data), mime);
+      return this.importText(norm, data, mime);
     }
     return this.writeFileData(norm, data, mime);
+  }
+
+  /** Decode text bytes into the file's Y.Text, remembering a BOM. */
+  private importText(norm: string, data: Uint8Array, mime?: string): string {
+    const { text, bom } = decodeText(data);
+    this.ydoc.transact(() => {
+      this.setText(norm, text, mime);
+      this.setBom(norm, bom);
+    });
+    return norm;
+  }
+
+  private setBom(norm: string, bom: boolean) {
+    if (norm === this.getMainPath()) {
+      // the main document has no `files` entry of its own
+      if (!!this.meta.get("mainBom") !== bom) this.meta.set("mainBom", bom);
+      return;
+    }
+    const meta = this.files.get(norm);
+    if (meta && !!meta.bom !== bom) this.files.set(norm, { ...meta, bom });
   }
 
   /** All explorer entries as a flat list (sorted by path). Always includes the

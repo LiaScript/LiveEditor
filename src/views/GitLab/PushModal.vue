@@ -116,6 +116,14 @@ export default defineComponent({
         return;
       }
 
+      // files missing from a truncated listing would be pushed as "create" and fail
+      if (tree.truncated) {
+        this.errorMessage = this.$t("gitlab.import.truncated");
+        this.changes = [];
+        this.step = "review";
+        return;
+      }
+
       this.changes = await computeChanges(this.doc!, tree.items);
       this.selected = new Set(this.changes.map((c) => c.path));
       this.tick++;

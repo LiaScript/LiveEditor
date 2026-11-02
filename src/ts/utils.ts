@@ -176,11 +176,7 @@ export interface ProjectBlob {
  *
  *  Shared by the "download as ZIP" menu action and the LiaScript-Exporter
  *  integration so both ship exactly the same content. */
-export async function buildProjectZip(
-  mainContent: string,
-  blobs: ProjectBlob[] | undefined | null,
-  fileName = 'project.zip'
-): Promise<File> {
+export async function loadJSZip(): Promise<any> {
   // jszip is a CommonJS module; depending on the bundler/interop the dynamic
   // import exposes the constructor either as the namespace itself or under
   // `.default` (and dev vs prod builds can differ), so pick whichever is
@@ -195,6 +191,15 @@ export async function buildProjectZip(
           ? mod.default.default
           : undefined
   if (!JSZip) throw new Error('Could not load JSZip')
+  return JSZip
+}
+
+export async function buildProjectZip(
+  mainContent: string,
+  blobs: ProjectBlob[] | undefined | null,
+  fileName = 'project.zip'
+): Promise<File> {
+  const JSZip = await loadJSZip()
   const zip = new JSZip()
 
   zip.file('README.md', mainContent)

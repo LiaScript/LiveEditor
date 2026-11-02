@@ -10,6 +10,7 @@ import {
   type FileEntry,
 } from "../ts/ProjectDoc";
 import Dexie from "../ts/indexDB";
+import { loadJSZip } from "../ts/utils";
 import FileNode, { type TreeNode } from "./FileNode.vue";
 
 export default defineComponent({
@@ -223,18 +224,16 @@ export default defineComponent({
 
     async downloadFolderZip(folder: TreeNode) {
       if (!this.doc) return;
-      // jszip's browser build exposes the constructor as the imported namespace
-      // itself (not under `.default`), so pick whichever is callable.
-      const mod: any = await import("jszip");
-      const JSZip = typeof mod === "function" ? mod : mod.default;
+      const JSZip = await loadJSZip();
       const zip = new JSZip();
       const prefix = folder.path + "/";
-      this.doc.files.forEach((meta, path) => {
+      // entries() (not `files`) so the main document is included as well
+      for (const { path, meta } of this.doc.entries()) {
         if (meta.type === "file" && path.startsWith(prefix)) {
-          const data = this.doc!.readFileData(path);
+          const data = this.doc.readFileData(path);
           if (data) zip.file(path.slice(prefix.length), data);
         }
-      });
+      }
       const blob = await zip.generateAsync({ type: "blob" });
       this.saveBlob(folder.name + ".zip", blob);
     },
