@@ -29,6 +29,9 @@ const localeNames: Record<string, string> = {
   om: 'Afaan Oromoo',
   ff: 'Fulfulde',
   ig: 'Igbo',
+  lt: 'Lietuvių',
+  et: 'Eesti',
+  lv: 'Latviešu',
 }
 
 export default {
