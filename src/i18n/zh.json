@@ -6,16 +6,17 @@
   "nav": {
     "help": "帮助",
     "new": "新建",
-    "fork": "Fork",
-    "menu": "菜单",
+    "fork": "创建副本",
+    "menu": "分享与导出",
     "toolbar": {
       "ariaLabel": "带按钮组的工具栏",
       "radioGroupAria": "单选切换按钮组",
       "editorOnly": "仅编辑器",
       "splitView": "分屏视图",
       "previewOnly": "仅预览",
-      "compile": "编译 (Ctrl+S)",
-      "toggleNavAria": "切换导航"
+      "compile": "刷新预览 (Ctrl+S)",
+      "toggleNavAria": "切换导航",
+      "refresh": "刷新"
     },
     "activityBar": {
       "hideToolbar": "隐藏编辑器工具栏",
@@ -28,12 +29,30 @@
       "onlineAria": "编辑器正在通过 {type} 进行协作模式，你可以分享 URL 并与他人一起编辑",
       "switchOfflineAria": "关闭协作编辑并切换到离线模式",
       "switchWebRTCAria": "切换到通过 WebRTC 的协作编辑",
-      "switchWebSocketAria": "切换到通过 WebSocket 的协作编辑"
+      "switchWebSocketAria": "切换到通过 WebSocket 的协作编辑",
+      "title": "谁在编写？",
+      "solo": "只有我",
+      "soloDesc": "所有内容都保存在这台设备上。无需联网也能使用。",
+      "webrtc": "实时 – 直连",
+      "webrtcDesc": "分享链接后，所有人都能立即看到更改。浏览器之间直接连接。",
+      "websocket": "实时 – 通过服务器",
+      "websocketDesc": "人数较多或在限制严格的学校网络中更可靠。",
+      "tech": "技术：{name}",
+      "sameCourse": "所有拿到链接的人都在编辑同一门课程。想要自己的版本？请创建一个副本。",
+      "users": "{n} 人在线"
+    },
+    "myCourses": "我的课程",
+    "savedLocal": "已保存在此浏览器中",
+    "more": "更多操作",
+    "view": {
+      "write": "编写",
+      "both": "并排",
+      "preview": "预览"
     }
   },
   "share": {
     "header": "分享编辑器 ...",
-    "modalTitle": "共享与操作",
+    "modalTitle": "分享与导出",
     "publishedHeading": "打开已有发布",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP 压缩包",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "你想对“{title}”做什么？",
+    "goalsAria": "目标",
+    "groups": {
+      "collaborate": {
+        "label": "共同编辑",
+        "sub": "与他人一起编写",
+        "intro": "邀请他人参与这门课程——实时协作，或使用各自的副本。"
+      },
+      "publish": {
+        "label": "发布",
+        "sub": "给学习者的链接",
+        "intro": "选择学习者打开课程的方式。标签可以帮助你做决定。"
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "备份与同步",
+        "intro": "将整个项目连同所有文件保存到仓库中，并保持最新。"
+      },
+      "localFolder": {
+        "label": "电脑上的文件夹",
+        "sub": "与真实文件同步",
+        "intro": "连接电脑上的一个文件夹，以便也能用其他程序编辑这些文件。"
+      },
+      "export": {
+        "label": "下载与导出",
+        "sub": "ZIP、用于 LMS 的 SCORM、PDF …",
+        "intro": "把课程带走，或转换后用于学习平台。"
+      }
+    },
+    "sections": {
+      "published": "已发布"
+    },
+    "nothingPublished": "还没有内容。你在这里创建的链接会显示在此列表中。",
+    "items": {
+      "collaborationLink": {
+        "label": "邀请实时共同编辑",
+        "desc": "所有拿到链接的人同时编辑同一门课程。"
+      },
+      "snapshotUrl": {
+        "label": "发送可编辑的副本",
+        "desc": "用当前文件的副本打开编辑器。你的原件保持不变。"
+      },
+      "externalResource": {
+        "label": "在线文件的编辑器链接",
+        "desc": "输入网上某个 Markdown 文件的地址；该链接会在编辑器中打开它。"
+      },
+      "githubGist": {
+        "label": "保存为 GitHub Gist",
+        "desc": "课程的永久链接，保存在你的 GitHub 账户中。"
+      },
+      "nostr": {
+        "label": "发布到 Nostr",
+        "desc": "去中心化存储，无需任何服务商账户。"
+      },
+      "dataUri": {
+        "label": "把课程放进链接发送",
+        "desc": "全部文本都打包在链接里。适合通过聊天软件发送和快速测试。"
+      },
+      "embedCode": {
+        "label": "嵌入网站",
+        "desc": "在你自己的网页中显示编辑器和预览的 HTML 代码。"
+      },
+      "githubGistLink": {
+        "label": "打开 Gist 版本",
+        "desc": "你保存为 GitHub Gist 时的课程版本。"
+      },
+      "nostrLink": {
+        "label": "打开 Nostr 版本",
+        "desc": "你在 Nostr 上发布时的课程版本。"
+      },
+      "repoFile": {
+        "desc": "从关联的仓库打开该文件——请先上传你的更改。"
+      },
+      "fileUrl": {
+        "label": "在 LiaScript 中打开在线文件",
+        "desc": "来自打开此编辑器时所用网址的课程。"
+      },
+      "repoImport": {
+        "label": "从 {service} 导入",
+        "desc": "将 {service} 仓库中的文件添加到这门课程。"
+      },
+      "repoPublish": {
+        "label": "发布到新仓库",
+        "desc": "创建一个新的 {service} 仓库并上传所有项目文件。"
+      },
+      "repoPush": {
+        "label": "上传更改",
+        "desc": "将你的更改保存到关联的 {service} 仓库。"
+      },
+      "repoPull": {
+        "label": "获取更改",
+        "desc": "接收他人在 {service} 仓库中所做的更改。"
+      },
+      "openLocalFolder": {
+        "label": "连接文件夹",
+        "desc": "选择电脑上要与这门课程同步的文件夹。"
+      },
+      "localFolderSync": {
+        "label": "与文件夹同步",
+        "desc": "比较文件，并在任一方向上同步更改。"
+      },
+      "exporter": {
+        "label": "转换为学习平台格式",
+        "desc": "LiaScript Exporter 可将你的项目转换为 SCORM、IMS、PDF、ePub 等格式。"
+      },
+      "downloadZip": {
+        "label": "下载为 ZIP",
+        "desc": "包含所有文件的完整项目——也是很好的备份。"
+      }
+    },
+    "tags": {
+      "permanent": "永久",
+      "githubAccount": "需要 GitHub 账户",
+      "noAccount": "无需账户",
+      "shortOnly": "仅限短课程，不含图片",
+      "live": "实时",
+      "sameCourse": "所有人同一课程",
+      "ownCopy": "独立副本",
+      "allFiles": "所有文件"
+    },
+    "reasons": {
+      "noProject": "仅适用于保存在此浏览器中的课程。",
+      "noRepo": "课程关联到 {service} 仓库后即可使用。",
+      "noFolder": "连接文件夹后即可使用。"
+    },
+    "actions": {
+      "showLink": "显示链接",
+      "createLink": "创建链接",
+      "enterUrl": "输入地址",
+      "save": "保存",
+      "publish": "发布",
+      "createCode": "生成代码",
+      "import": "导入",
+      "createRepo": "创建仓库",
+      "push": "上传",
+      "pull": "获取",
+      "chooseFolder": "选择文件夹",
+      "sync": "同步",
+      "openExporter": "打开 Exporter",
+      "download": "下载",
+      "open": "打开",
+      "connectNow": "立即连接"
+    }
   },
   "modal": {
     "close": "关闭",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "新课程",
-    "searchPlaceholder": "输入以搜索...",
+    "searchPlaceholder": "搜索标题或内容",
     "searchAriaLabel": "搜索输入",
     "clearSearchAria": "清除搜索",
     "footer": "这是一个用于 {liascript} 的协作式在线编辑器。所有内容只存储在你的浏览器中。如果你需要灵感，可以查看我们的 {examples}，搜索可嵌入的 {templates} 或已发布的 {courses}。",
@@ -119,7 +281,7 @@
       "heading": "导入来源",
       "more": "更多选项",
       "submit": "导入",
-      "new": "新建",
+      "new": "空白文档",
       "upload": "上传文件（Markdown / ZIP）",
       "github": "GitHub 仓库",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidGist": "找不到该 ID 对应的 gist。",
         "fetchFailed": "无法加载资源。请检查 URL 和网络连接。"
       },
-      "localFolder": "Local folder"
-    }
+      "localFolder": "Local folder",
+      "template": "从模板开始",
+      "templateDesc": "一门包含格式、测验、代码等内容的示例课程——可直接改写。"
+    },
+    "welcome": {
+      "title": "编写互动课程——并立即看到效果",
+      "lead": "你编写 Markdown，旁边的预览会显示幻灯片、测验和朗读。无需账户——一切都在你的浏览器中运行。",
+      "open": "打开文件",
+      "openDesc": "来自你设备的 Markdown 文件或 ZIP 压缩包。",
+      "remote": "从网上获取",
+      "remoteDesc": "GitHub、GitLab、Gist、网址或电脑上的文件夹。",
+      "examples": "或者先看看现成的示例",
+      "hide": "隐藏"
+    },
+    "storage": {
+      "title": "你的课程只保存在此浏览器中。",
+      "body": "如果清除网站数据，课程就会丢失。请将重要课程备份为 ZIP、备份到文件夹或 GitHub——在编辑器中通过“分享与导出”操作。"
+    },
+    "courses": "我的课程",
+    "courseCount": "{n} 门课程 | {n} 门课程",
+    "newCourseDesc": "模板、文件或导入"
   },
   "card": {
     "untitled": "无标题",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "本地"
-    }
+      "local": "仅在浏览器中",
+      "folder": "文件夹"
+    },
+    "linkedTitle": "也保存在此浏览器之外",
+    "localTitle": "仅保存在此浏览器中——请通过“分享与导出”备份"
   },
   "footer": {
     "followUs": "关注我们："

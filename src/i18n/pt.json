@@ -6,16 +6,17 @@
   "nav": {
     "help": "Ajuda",
     "new": "Novo",
-    "fork": "Fork",
-    "menu": "Menu",
+    "fork": "Fazer uma cópia",
+    "menu": "Compartilhar e exportar",
     "toolbar": {
       "ariaLabel": "Barra de ferramentas com grupos de botões",
       "radioGroupAria": "Grupo de botões de opção",
       "editorOnly": "Apenas editor",
       "splitView": "Vista dividida",
       "previewOnly": "Apenas pré-visualização",
-      "compile": "Compilar (Ctrl+S)",
-      "toggleNavAria": "Alternar navegação"
+      "compile": "Atualizar pré-visualização (Ctrl+S)",
+      "toggleNavAria": "Alternar navegação",
+      "refresh": "Atualizar"
     },
     "activityBar": {
       "hideToolbar": "Ocultar barra de ferramentas do editor",
@@ -28,12 +29,30 @@
       "onlineAria": "O editor está em modo colaborativo via {type}, o que significa que você pode compartilhar a URL e começar a editar com outras pessoas",
       "switchOfflineAria": "Desativar a edição colaborativa e mudar para o modo offline",
       "switchWebRTCAria": "Mudar para edição colaborativa via WebRTC",
-      "switchWebSocketAria": "Mudar para edição colaborativa via WebSocket"
+      "switchWebSocketAria": "Mudar para edição colaborativa via WebSocket",
+      "title": "Quem está escrevendo?",
+      "solo": "Só eu",
+      "soloDesc": "Tudo fica neste dispositivo. Funciona sem internet.",
+      "webrtc": "Ao vivo – direto",
+      "webrtcDesc": "Compartilhe o link e todos veem as alterações na hora. Os navegadores se conectam diretamente entre si.",
+      "websocket": "Ao vivo – via servidor",
+      "websocketDesc": "Mais confiável com muitas pessoas ou em redes escolares restritas.",
+      "tech": "Tecnologia: {name}",
+      "sameCourse": "Todos com o link editam o mesmo curso. Quer sua própria versão? Faça uma cópia.",
+      "users": "{n} online"
+    },
+    "myCourses": "Meus cursos",
+    "savedLocal": "Salvo neste navegador",
+    "more": "Mais ações",
+    "view": {
+      "write": "Escrever",
+      "both": "Ambos",
+      "preview": "Pré-visualização"
     }
   },
   "share": {
     "header": "Compartilhar editor ...",
-    "modalTitle": "Partilhar e ações",
+    "modalTitle": "Compartilhar e exportar",
     "publishedHeading": "Abrir publicação existente",
     "nostr": "Nostr",
     "downloadZipLabel": "Arquivo ZIP",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "O que você quer fazer com “{title}”?",
+    "goalsAria": "Objetivos",
+    "groups": {
+      "collaborate": {
+        "label": "Editar juntos",
+        "sub": "Outros escrevem junto",
+        "intro": "Convide outras pessoas para trabalhar neste curso – ao vivo ou em uma cópia própria."
+      },
+      "publish": {
+        "label": "Publicar",
+        "sub": "Um link para os alunos",
+        "intro": "Escolha como os alunos vão abrir o curso. As etiquetas ajudam você a decidir."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Fazer backup e sincronizar",
+        "intro": "Guarde o projeto inteiro com todos os arquivos em um repositório e mantenha-o atualizado."
+      },
+      "localFolder": {
+        "label": "Pasta neste computador",
+        "sub": "Sincronizar com arquivos reais",
+        "intro": "Conecte uma pasta do seu computador para editar os arquivos também com outros programas."
+      },
+      "export": {
+        "label": "Baixar e exportar",
+        "sub": "ZIP, SCORM para seu LMS, PDF …",
+        "intro": "Leve o curso com você ou converta-o para uma plataforma de aprendizagem."
+      }
+    },
+    "sections": {
+      "published": "Já publicado"
+    },
+    "nothingPublished": "Nada ainda. Os links que você criar aqui vão aparecer nesta lista.",
+    "items": {
+      "collaborationLink": {
+        "label": "Convidar para editar ao vivo",
+        "desc": "Todos com o link editam o mesmo curso ao mesmo tempo."
+      },
+      "snapshotUrl": {
+        "label": "Enviar uma cópia editável",
+        "desc": "Abre o editor com uma cópia do arquivo atual. Seu original não é alterado."
+      },
+      "externalResource": {
+        "label": "Link do editor para um arquivo online",
+        "desc": "Informe o endereço de um arquivo Markdown na web; o link o abre no editor."
+      },
+      "githubGist": {
+        "label": "Salvar como GitHub Gist",
+        "desc": "Um link permanente para o curso, salvo na sua conta do GitHub."
+      },
+      "nostr": {
+        "label": "Publicar no Nostr",
+        "desc": "Armazenado de forma descentralizada, sem conta em nenhum provedor."
+      },
+      "dataUri": {
+        "label": "Enviar o curso dentro do link",
+        "desc": "Todo o texto vai dentro do link. Bom para mensageiros e testes rápidos."
+      },
+      "embedCode": {
+        "label": "Incorporar em um site",
+        "desc": "Código HTML que mostra o editor e a pré-visualização na sua própria página."
+      },
+      "githubGistLink": {
+        "label": "Abrir a versão Gist",
+        "desc": "O curso como você o salvou como GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Abrir a versão Nostr",
+        "desc": "O curso como você o publicou no Nostr."
+      },
+      "repoFile": {
+        "desc": "Abre o arquivo do repositório vinculado – envie suas alterações antes."
+      },
+      "fileUrl": {
+        "label": "Abrir o arquivo online no LiaScript",
+        "desc": "O curso do endereço web com o qual este editor foi aberto."
+      },
+      "repoImport": {
+        "label": "Importar do {service}",
+        "desc": "Adicionar arquivos de um repositório do {service} a este curso."
+      },
+      "repoPublish": {
+        "label": "Publicar em um novo repositório",
+        "desc": "Cria um novo repositório no {service} e envia todos os arquivos do projeto."
+      },
+      "repoPush": {
+        "label": "Enviar alterações",
+        "desc": "Salva suas alterações no repositório do {service} vinculado."
+      },
+      "repoPull": {
+        "label": "Buscar alterações",
+        "desc": "Incorpora as alterações que outras pessoas fizeram no repositório do {service}."
+      },
+      "openLocalFolder": {
+        "label": "Conectar uma pasta",
+        "desc": "Escolha a pasta do seu computador com a qual este curso será sincronizado."
+      },
+      "localFolderSync": {
+        "label": "Sincronizar com a pasta",
+        "desc": "Comparar os arquivos e aplicar alterações nos dois sentidos."
+      },
+      "exporter": {
+        "label": "Converter para uma plataforma de aprendizagem",
+        "desc": "O LiaScript Exporter gera SCORM, IMS, PDF, ePub e mais a partir do seu projeto."
+      },
+      "downloadZip": {
+        "label": "Baixar como ZIP",
+        "desc": "O projeto inteiro com todos os arquivos – também serve como backup."
+      }
+    },
+    "tags": {
+      "permanent": "Permanente",
+      "githubAccount": "Requer conta do GitHub",
+      "noAccount": "Sem conta",
+      "shortOnly": "Só cursos curtos, sem imagens",
+      "live": "Ao vivo",
+      "sameCourse": "O mesmo curso para todos",
+      "ownCopy": "Cópia própria",
+      "allFiles": "Todos os arquivos"
+    },
+    "reasons": {
+      "noProject": "Apenas para cursos salvos neste navegador.",
+      "noRepo": "Disponível assim que o curso estiver vinculado a um repositório do {service}.",
+      "noFolder": "Disponível assim que uma pasta estiver conectada."
+    },
+    "actions": {
+      "showLink": "Mostrar link",
+      "createLink": "Criar link",
+      "enterUrl": "Informar endereço",
+      "save": "Salvar",
+      "publish": "Publicar",
+      "createCode": "Gerar código",
+      "import": "Importar",
+      "createRepo": "Criar repositório",
+      "push": "Enviar",
+      "pull": "Buscar",
+      "chooseFolder": "Escolher pasta",
+      "sync": "Sincronizar",
+      "openExporter": "Abrir Exporter",
+      "download": "Baixar",
+      "open": "Abrir",
+      "connectNow": "Conectar agora"
+    }
   },
   "modal": {
     "close": "Fechar",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Novo curso",
-    "searchPlaceholder": "Digite para pesquisar...",
+    "searchPlaceholder": "Pesquisar no título ou conteúdo",
     "searchAriaLabel": "Campo de pesquisa",
     "clearSearchAria": "Limpar pesquisa",
     "footer": "Este é um editor colaborativo online para {liascript}. Todo o conteúdo é armazenado apenas no seu navegador. Se precisar de inspiração, veja alguns dos nossos {examples}, procure {templates} incorporáveis ou {courses} já publicados.",
@@ -119,7 +281,7 @@
       "heading": "Importar de",
       "more": "Mais opções",
       "submit": "Importar",
-      "new": "Novo",
+      "new": "Documento em branco",
       "upload": "Enviar ficheiro (Markdown / ZIP)",
       "github": "Repositório do GitHub",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidGist": "Não foi encontrado nenhum gist para esse ID.",
         "fetchFailed": "Não foi possível carregar o recurso. Verifica o URL e a tua ligação."
       },
-      "localFolder": "Local folder"
-    }
+      "localFolder": "Local folder",
+      "template": "Começar com um modelo",
+      "templateDesc": "Um curso de exemplo com formatação, quizzes, código e mais – pronto para reescrever."
+    },
+    "welcome": {
+      "title": "Escreva cursos interativos – e veja na hora como funcionam",
+      "lead": "Você escreve em Markdown e a pré-visualização ao lado mostra slides, quizzes e leitura em voz alta. Sem conta – tudo roda no seu navegador.",
+      "open": "Abrir um arquivo",
+      "openDesc": "Um arquivo Markdown ou ZIP do seu dispositivo.",
+      "remote": "Buscar na web",
+      "remoteDesc": "GitHub, GitLab, Gist, um endereço web ou uma pasta do seu computador.",
+      "examples": "Ou veja primeiro um exemplo pronto",
+      "hide": "Ocultar"
+    },
+    "storage": {
+      "title": "Seus cursos ficam salvos apenas neste navegador.",
+      "body": "Se você apagar os dados do site, eles somem. Faça backup dos cursos importantes como ZIP, em uma pasta ou no GitHub – no editor, em “Compartilhar e exportar”."
+    },
+    "courses": "Meus cursos",
+    "courseCount": "{n} curso | {n} cursos",
+    "newCourseDesc": "Modelo, arquivo ou importação"
   },
   "card": {
     "untitled": "Sem título",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "Só no navegador",
+      "folder": "Pasta"
+    },
+    "linkedTitle": "Também salvo fora deste navegador",
+    "localTitle": "Salvo apenas neste navegador – faça backup em “Compartilhar e exportar”"
   },
   "footer": {
     "followUs": "Siga-nos em:"

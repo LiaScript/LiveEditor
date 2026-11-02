@@ -6,16 +6,17 @@
   "nav": {
     "help": "Gargaarsa",
     "new": "Haaraa",
-    "fork": "Fork",
-    "menu": "Baafata",
+    "fork": "Garagalcha uumi",
+    "menu": "Qoodi fi alergi",
     "toolbar": {
       "ariaLabel": "Sarara meeshaalee garee cuqaasota qabu",
       "radioGroupAria": "Garee cuqaasota filannoo",
       "editorOnly": "Gulaalaa qofa",
       "splitView": "Mul'ata qoodame",
       "previewOnly": "Durargii qofa",
-      "compile": "Kompaa'ilii (Ctrl+S)",
-      "toggleNavAria": "Naanna'iinsa jijjiiri"
+      "compile": "Durargii haaromsi (Ctrl+S)",
+      "toggleNavAria": "Naanna'iinsa jijjiiri",
+      "refresh": "Haaromsi"
     },
     "activityBar": {
       "hideToolbar": "Sarara meeshaalee gulaalaa dhoksi",
@@ -28,12 +29,30 @@
       "onlineAria": "Gulaalaan karaa {type} haala waliin hojjechuu keessa jira; URL qooddee namoota biroo waliin gulaaluu dandeessa",
       "switchOfflineAria": "Gulaallii waliin hojjechuu dhaamsiitii gara haala sarara alaatti jijjiiri",
       "switchWebRTCAria": "Gara gulaallii waliin hojjechuu WebRTC jijjiiri",
-      "switchWebSocketAria": "Gara gulaallii waliin hojjechuu WebSocket jijjiiri"
+      "switchWebSocketAria": "Gara gulaallii waliin hojjechuu WebSocket jijjiiri",
+      "title": "Eenyutu barreessaa jira?",
+      "solo": "Ana qofa",
+      "soloDesc": "Wanti hundi meeshaa kana irra tura. Interneetii malees ni hojjeta.",
+      "webrtc": "Kallattiin – walqunnamtii kallattii",
+      "webrtcDesc": "Hidhaa qoodi, namni hundi jijjiirama battaluma arga. Browseroonni kallattiin wal qunnamu.",
+      "websocket": "Kallattiin – karaa sarvarii",
+      "websocketDesc": "Namoota baay'ee yookaan networkii mana barumsaa cimaa keessatti caalaatti amansiisaa dha.",
+      "tech": "Teeknoloojii: {name}",
+      "sameCourse": "Namni hidhaa qabu hundi koorsii tokkicha gulaala. Gosa mataa keetii barbaaddaa? Garagalcha uumi.",
+      "users": "{n} toora irra"
+    },
+    "myCourses": "Koorsiiwwan koo",
+    "savedLocal": "Browser kana keessatti kuufame",
+    "more": "Gochaalee dabalataa",
+    "view": {
+      "write": "Barreessi",
+      "both": "Lamaanuu",
+      "preview": "Durargii"
     }
   },
   "share": {
     "header": "Gulaalaa qoodi ...",
-    "modalTitle": "Share & actions",
+    "modalTitle": "Qoodi fi alergi",
     "publishedHeading": "Open existing publication",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP archive",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "“{title}” waliin maal gochuu barbaadda?",
+    "goalsAria": "Kaayyoowwan",
+    "groups": {
+      "collaborate": {
+        "label": "Waliin gulaaluu",
+        "sub": "Namoonni biroo waliin barreessu",
+        "intro": "Namoota biroo koorsii kana irratti akka hojjetan affeeri – kallattiin yookaan garagalcha mataa isaaniitiin."
+      },
+      "publish": {
+        "label": "Maxxansi",
+        "sub": "Hidhaa barattootaaf",
+        "intro": "Barattoonni koorsii akkamitti akka banan filadhu. Mallattooleen murteessuuf si gargaaru."
+      },
+      "git": {
+        "label": "GitHub fi GitLab",
+        "sub": "Kuusi fi walsimsiisi",
+        "intro": "Pirojektii guutuu faayilota hunda waliin kuusaa (repository) keessatti kuusii yeroon haaromsi."
+      },
+      "localFolder": {
+        "label": "Foldarii kompiitara kana irratti",
+        "sub": "Faayilota dhugaa waliin walsimsiisi",
+        "intro": "Faayilota sagantaalee biroonis hojjechuuf foldarii kompiitara kee irra jiru walqabsiisi."
+      },
+      "export": {
+        "label": "Buusi fi alergi",
+        "sub": "ZIP, SCORM LMS keetiif, PDF …",
+        "intro": "Koorsii of waliin fudhadhu yookaan waltajjii barumsaatiif jijjiiri."
+      }
+    },
+    "sections": {
+      "published": "Duraan maxxanfame"
+    },
+    "nothingPublished": "Ammaaf homtuu hin jiru. Hidhaawwan as uumtu tarree kana keessatti mul'atu.",
+    "items": {
+      "collaborationLink": {
+        "label": "Kallattiin gulaaluuf affeeri",
+        "desc": "Namni hidhaa qabu hundi yeroo tokkotti koorsii tokkicha gulaala."
+      },
+      "snapshotUrl": {
+        "label": "Garagalcha gulaalamuu danda'u ergi",
+        "desc": "Gulaalaa garagalcha faayila ammaa waliin bana. Kan jalqabaa kee hin jijjiiramu."
+      },
+      "externalResource": {
+        "label": "Hidhaa gulaalaa faayila toora irraatiif",
+        "desc": "Teessoo faayila Markdown interneetii irra jiruu galchi; hidhaan gulaalaa keessatti isa bana."
+      },
+      "githubGist": {
+        "label": "Akka GitHub Gist kuusi",
+        "desc": "Hidhaa dhaabbataa koorsichaa, herrega GitHub kee keessatti kuufame."
+      },
+      "nostr": {
+        "label": "Nostr irratti maxxansi",
+        "desc": "Iddoo tokko malee kuufama, herrega dhiyeessaa kamiyyuu malee."
+      },
+      "dataUri": {
+        "label": "Koorsii hidhaa keessatti ergi",
+        "desc": "Barruun guutuun hidhaa keessa jira. Ergaa raabsitootaa fi qormaata saffisaatiif gaarii dha."
+      },
+      "embedCode": {
+        "label": "Marsariitii irratti galchi",
+        "desc": "Koodii HTML gulaalaa fi durargii fuula kee keessatti agarsiisu."
+      },
+      "githubGistLink": {
+        "label": "Gosa Gist bani",
+        "desc": "Koorsii akka ati GitHub Gist tti kuufatte."
+      },
+      "nostrLink": {
+        "label": "Gosa Nostr bani",
+        "desc": "Koorsii akka ati Nostr irratti maxxansite."
+      },
+      "repoFile": {
+        "desc": "Faayila kuusaa walqabate irraa bana – dursii jijjiirama kee olkaa'i."
+      },
+      "fileUrl": {
+        "label": "Faayila toora irraa LiaScript irratti bani",
+        "desc": "Koorsii teessoo weebii gulaalaan kun ittiin banamee irraa."
+      },
+      "repoImport": {
+        "label": "{service} irraa galchi",
+        "desc": "Faayilota kuusaa {service} irraa koorsii kanatti dabali."
+      },
+      "repoPublish": {
+        "label": "Kuusaa haaraatti maxxansi",
+        "desc": "Kuusaa {service} haaraa uumee faayilota pirojektii hunda olkaa'a."
+      },
+      "repoPush": {
+        "label": "Jijjiirama olkaa'i",
+        "desc": "Jijjiirama kee kuusaa {service} walqabate keessatti kuusa."
+      },
+      "repoPull": {
+        "label": "Jijjiirama fidi",
+        "desc": "Jijjiirama namoonni biroo kuusaa {service} keessatti godhan fudhata."
+      },
+      "openLocalFolder": {
+        "label": "Foldarii walqabsiisi",
+        "desc": "Foldarii kompiitara kee irra jiru koorsiin kun waliin walsimu filadhu."
+      },
+      "localFolderSync": {
+        "label": "Foldarii waliin walsimsiisi",
+        "desc": "Faayilota wal bira qabi, jijjiirama kallattii lamaanuun fudhadhu."
+      },
+      "exporter": {
+        "label": "Waltajjii barumsaatiif jijjiiri",
+        "desc": "LiaScript Exporter pirojektii kee irraa SCORM, IMS, PDF, ePub fi kan biroo uuma."
+      },
+      "downloadZip": {
+        "label": "Akka ZIP buusi",
+        "desc": "Pirojektii guutuu faayilota hunda waliin – kuusaa eegumsaatiifis gaarii dha."
+      }
+    },
+    "tags": {
+      "permanent": "Dhaabbataa",
+      "githubAccount": "Herrega GitHub barbaachisa",
+      "noAccount": "Herrega malee",
+      "shortOnly": "Koorsii gabaabaa qofa, suuraa malee",
+      "live": "Kallattiin",
+      "sameCourse": "Koorsii tokkicha hundaaf",
+      "ownCopy": "Garagalcha mataa",
+      "allFiles": "Faayilota hunda"
+    },
+    "reasons": {
+      "noProject": "Koorsiiwwan browser kana keessatti kuufamaniif qofa.",
+      "noRepo": "Erga koorsiin kuusaa {service} waliin walqabatee booda argama.",
+      "noFolder": "Erga foldariin walqabatee booda argama."
+    },
+    "actions": {
+      "showLink": "Hidhaa agarsiisi",
+      "createLink": "Hidhaa uumi",
+      "enterUrl": "Teessoo galchi",
+      "save": "Kuusi",
+      "publish": "Maxxansi",
+      "createCode": "Koodii uumi",
+      "import": "Galchi",
+      "createRepo": "Kuusaa uumi",
+      "push": "Olkaa'i",
+      "pull": "Fidi",
+      "chooseFolder": "Foldarii filadhu",
+      "sync": "Walsimsiisi",
+      "openExporter": "Exporter bani",
+      "download": "Buusi",
+      "open": "Bani",
+      "connectNow": "Amma walqabsiisi"
+    }
   },
   "modal": {
     "close": "Cufi",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Koorsii haaraa",
-    "searchPlaceholder": "Barbaaduuf barreessi...",
+    "searchPlaceholder": "Mata duree yookaan qabiyyee barbaadi",
     "searchAriaLabel": "Dirree barbaacha",
     "clearSearchAria": "Barbaacha qulqulleessi",
     "footer": "Kun gulaalaa toora interneetii irratti waliin hojjetamu kan {liascript} ti. Qabiyyeen hundi browser kee keessatti qofa kuufama. Yaada yoo barbaadde, {examples} keenya ilaali, {templates} keessa galfamuu danda'an yookaan {courses} duraan maxxanfaman barbaadi.",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "Galmee duwwaa",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "Unkaa irraa jalqabi",
+      "templateDesc": "Koorsii fakkeenyaa qindaa'ina, gaaffilee, koodii fi kan biroo qabu – irra deebi'ee barreessuuf qophaa'e."
+    },
+    "welcome": {
+      "title": "Koorsiiwwan walqunnamtii qaban barreessi – akkamitti akka hojjetan battaluma ilaali",
+      "lead": "Ati Markdown barreessita, durargiin cinaa isaa jiru islaayidii, gaaffilee fi sagaleen dubbisuu agarsiisa. Herregni hin barbaachisu – wanti hundi browser kee keessatti hojjeta.",
+      "open": "Faayila bani",
+      "openDesc": "Faayila Markdown yookaan kuusaa ZIP meeshaa kee irraa.",
+      "remote": "Interneetii irraa fidi",
+      "remoteDesc": "GitHub, GitLab, Gist, teessoo weebii yookaan foldarii kompiitara kee irra jiru.",
+      "examples": "Yookaan dura fakkeenya xumurame ilaali",
+      "hide": "Dhoksi"
+    },
+    "storage": {
+      "title": "Koorsiiwwan kee browser kana keessatti qofa kuufamu.",
+      "body": "Yoo daataa marsariitii haqxe, ni bada. Koorsiiwwan barbaachisoo akka ZIP, foldarii keessa yookaan GitHub irratti kuusi – gulaalaa keessatti karaa “Qoodi fi alergi”."
+    },
+    "courses": "Koorsiiwwan koo",
+    "courseCount": "koorsii {n} | koorsiiwwan {n}",
+    "newCourseDesc": "Unkaa, faayila yookaan galchuu"
   },
   "card": {
     "untitled": "Mata duree malee",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "Browser qofa",
+      "folder": "Foldarii"
+    },
+    "linkedTitle": "Browser kanaan alas kuufame",
+    "localTitle": "Browser kana keessatti qofa kuufame – karaa “Qoodi fi alergi” kuusi"
   },
   "footer": {
     "followUs": "Nu hordofi:"

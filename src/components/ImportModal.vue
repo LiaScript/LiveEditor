@@ -118,7 +118,7 @@ export default defineComponent({
 .import-card--featured {
   border-color: var(--bs-primary, #0d6efd);
   border-width: 2px;
-  background: rgba(13, 110, 253, 0.06);
+  background: rgba(var(--bs-primary-rgb), 0.06);
 }
 
 .import-card--disabled {

@@ -18,7 +18,7 @@ import * as Utils from "../ts/utils";
 import type { EditorConfig } from "../ts/utils";
 import EditorSettingsTab from "./EditorSettingsTab.vue";
 import { navigateTo } from "../index";
-import { tutorial } from "../ts/Tutorial";
+import { tutorialFor } from "../ts/Tutorial";
 
 // import * as MATHJS from "mathjs";
 import { TableEditor, options, Point, Range } from "@susisu/mte-kernel";
@@ -727,7 +727,7 @@ $$
         }
 
         case "init-welcome": {
-          Editor.setValue(tutorial);
+          Editor.setValue(tutorialFor(this.$i18n.locale));
           break;
         }
 

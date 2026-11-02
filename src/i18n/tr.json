@@ -6,16 +6,17 @@
   "nav": {
     "help": "Yardım",
     "new": "Yeni",
-    "fork": "Fork",
-    "menu": "Menü",
+    "fork": "Kopya oluştur",
+    "menu": "Paylaş ve dışa aktar",
     "toolbar": {
       "ariaLabel": "Düğme grupları olan araç çubuğu",
       "radioGroupAria": "Radyo geçiş düğmesi grubu",
       "editorOnly": "Yalnızca editör",
       "splitView": "Bölünmüş görünüm",
       "previewOnly": "Yalnızca önizleme",
-      "compile": "Derle (Ctrl+S)",
-      "toggleNavAria": "Gezinmeyi değiştir"
+      "compile": "Önizlemeyi yenile (Ctrl+S)",
+      "toggleNavAria": "Gezinmeyi değiştir",
+      "refresh": "Yenile"
     },
     "activityBar": {
       "hideToolbar": "Editör araç çubuğunu gizle",
@@ -28,12 +29,30 @@
       "onlineAria": "Editör {type} üzerinden iş birliği modunda; URL'yi paylaşabilir ve başkalarıyla düzenlemeye başlayabilirsiniz",
       "switchOfflineAria": "İş birliğine dayalı düzenlemeyi kapat ve çevrimdışı moda geç",
       "switchWebRTCAria": "WebRTC üzerinden iş birliğine dayalı düzenlemeye geç",
-      "switchWebSocketAria": "WebSocket üzerinden iş birliğine dayalı düzenlemeye geç"
+      "switchWebSocketAria": "WebSocket üzerinden iş birliğine dayalı düzenlemeye geç",
+      "title": "Kim yazıyor?",
+      "solo": "Yalnızca ben",
+      "soloDesc": "Her şey bu cihazda kalır. İnternet olmadan da çalışır.",
+      "webrtc": "Canlı – doğrudan",
+      "webrtcDesc": "Bağlantıyı paylaşın, herkes değişiklikleri anında görür. Tarayıcılar birbirine doğrudan bağlanır.",
+      "websocket": "Canlı – sunucu üzerinden",
+      "websocketDesc": "Çok kişiyle veya katı okul ağlarında daha güvenilir.",
+      "tech": "Teknoloji: {name}",
+      "sameCourse": "Bağlantıya sahip herkes aynı kursu düzenler. Kendi sürümünüzü mü istiyorsunuz? Bir kopya oluşturun.",
+      "users": "{n} çevrimiçi"
+    },
+    "myCourses": "Kurslarım",
+    "savedLocal": "Bu tarayıcıda kaydedildi",
+    "more": "Diğer işlemler",
+    "view": {
+      "write": "Yaz",
+      "both": "İkisi",
+      "preview": "Önizleme"
     }
   },
   "share": {
     "header": "Editörü paylaş ...",
-    "modalTitle": "Paylaşım ve işlemler",
+    "modalTitle": "Paylaş ve dışa aktar",
     "publishedHeading": "Mevcut yayını aç",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP arşivi",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "“{title}” ile ne yapmak istersiniz?",
+    "goalsAria": "Hedefler",
+    "groups": {
+      "collaborate": {
+        "label": "Birlikte düzenle",
+        "sub": "Başkaları da yazar",
+        "intro": "Başkalarını bu kurs üzerinde çalışmaya davet edin – canlı ya da kendi kopyalarında."
+      },
+      "publish": {
+        "label": "Yayınla",
+        "sub": "Öğrenciler için bir bağlantı",
+        "intro": "Öğrencilerin kursu nasıl açacağını seçin. Etiketler karar vermenize yardımcı olur."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Yedekle ve eşitle",
+        "intro": "Projenin tamamını tüm dosyalarıyla bir depoda saklayın ve güncel tutun."
+      },
+      "localFolder": {
+        "label": "Bilgisayardaki klasör",
+        "sub": "Gerçek dosyalarla eşitle",
+        "intro": "Dosyalar üzerinde başka programlarla da çalışmak için bilgisayarınızdaki bir klasörü bağlayın."
+      },
+      "export": {
+        "label": "İndir ve dışa aktar",
+        "sub": "ZIP, LMS için SCORM, PDF …",
+        "intro": "Kursu yanınıza alın veya bir öğrenme platformu için dönüştürün."
+      }
+    },
+    "sections": {
+      "published": "Zaten yayınlananlar"
+    },
+    "nothingPublished": "Henüz bir şey yok. Burada oluşturduğunuz bağlantılar bu listede görünür.",
+    "items": {
+      "collaborationLink": {
+        "label": "Canlı düzenlemeye davet et",
+        "desc": "Bağlantıya sahip herkes aynı kursu aynı anda düzenler."
+      },
+      "snapshotUrl": {
+        "label": "Düzenlenebilir bir kopya gönder",
+        "desc": "Editörü geçerli dosyanın bir kopyasıyla açar. Orijinaliniz olduğu gibi kalır."
+      },
+      "externalResource": {
+        "label": "Çevrimiçi bir dosya için editör bağlantısı",
+        "desc": "Webdeki bir Markdown dosyasının adresini girin; bağlantı onu editörde açar."
+      },
+      "githubGist": {
+        "label": "GitHub Gist olarak kaydet",
+        "desc": "Kursa kalıcı bir bağlantı, GitHub hesabınızda saklanır."
+      },
+      "nostr": {
+        "label": "Nostr'da yayınla",
+        "desc": "Merkeziyetsiz olarak saklanır, hiçbir sağlayıcıda hesap gerekmez."
+      },
+      "dataUri": {
+        "label": "Kursu bağlantının içinde gönder",
+        "desc": "Metnin tamamı bağlantıya paketlenir. Mesajlaşma uygulamaları ve hızlı testler için uygundur."
+      },
+      "embedCode": {
+        "label": "Bir web sitesine yerleştir",
+        "desc": "Editörü ve önizlemeyi kendi sayfanızda gösteren HTML kodu."
+      },
+      "githubGistLink": {
+        "label": "Gist sürümünü aç",
+        "desc": "Kursun GitHub Gist olarak kaydettiğiniz hâli."
+      },
+      "nostrLink": {
+        "label": "Nostr sürümünü aç",
+        "desc": "Kursun Nostr'da yayınladığınız hâli."
+      },
+      "repoFile": {
+        "desc": "Dosyayı bağlı depodan açar – önce değişikliklerinizi yükleyin."
+      },
+      "fileUrl": {
+        "label": "Çevrimiçi dosyayı LiaScript'te aç",
+        "desc": "Bu editörün açıldığı web adresindeki kurs."
+      },
+      "repoImport": {
+        "label": "{service} üzerinden içe aktar",
+        "desc": "Bir {service} deposundaki dosyaları bu kursa ekleyin."
+      },
+      "repoPublish": {
+        "label": "Yeni bir depoda yayınla",
+        "desc": "Yeni bir {service} deposu oluşturur ve tüm proje dosyalarını yükler."
+      },
+      "repoPush": {
+        "label": "Değişiklikleri yükle",
+        "desc": "Değişikliklerinizi bağlı {service} deposuna kaydeder."
+      },
+      "repoPull": {
+        "label": "Değişiklikleri al",
+        "desc": "Başkalarının {service} deposunda yaptığı değişiklikleri alır."
+      },
+      "openLocalFolder": {
+        "label": "Bir klasör bağla",
+        "desc": "Bu kursun eşitleneceği, bilgisayarınızdaki klasörü seçin."
+      },
+      "localFolderSync": {
+        "label": "Klasörle eşitle",
+        "desc": "Dosyaları karşılaştırın ve değişiklikleri her iki yönde aktarın."
+      },
+      "exporter": {
+        "label": "Öğrenme platformu için dönüştür",
+        "desc": "LiaScript Exporter, projenizden SCORM, IMS, PDF, ePub ve daha fazlasını oluşturur."
+      },
+      "downloadZip": {
+        "label": "ZIP olarak indir",
+        "desc": "Tüm dosyalarıyla projenin tamamı – aynı zamanda iyi bir yedek."
+      }
+    },
+    "tags": {
+      "permanent": "Kalıcı",
+      "githubAccount": "GitHub hesabı gerekli",
+      "noAccount": "Hesap gerekmez",
+      "shortOnly": "Yalnızca kısa kurslar, resimsiz",
+      "live": "Canlı",
+      "sameCourse": "Herkes için aynı kurs",
+      "ownCopy": "Kendi kopyası",
+      "allFiles": "Tüm dosyalar"
+    },
+    "reasons": {
+      "noProject": "Yalnızca bu tarayıcıda kayıtlı kurslar için.",
+      "noRepo": "Kurs bir {service} deposuna bağlandığında kullanılabilir.",
+      "noFolder": "Bir klasör bağlandığında kullanılabilir."
+    },
+    "actions": {
+      "showLink": "Bağlantıyı göster",
+      "createLink": "Bağlantı oluştur",
+      "enterUrl": "Adres gir",
+      "save": "Kaydet",
+      "publish": "Yayınla",
+      "createCode": "Kod oluştur",
+      "import": "İçe aktar",
+      "createRepo": "Depo oluştur",
+      "push": "Yükle",
+      "pull": "Al",
+      "chooseFolder": "Klasör seç",
+      "sync": "Eşitle",
+      "openExporter": "Exporter'ı aç",
+      "download": "İndir",
+      "open": "Aç",
+      "connectNow": "Şimdi bağla"
+    }
   },
   "modal": {
     "close": "Kapat",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Yeni kurs",
-    "searchPlaceholder": "Aramak için yazın...",
+    "searchPlaceholder": "Başlıkta veya içerikte ara",
     "searchAriaLabel": "Arama alanı",
     "clearSearchAria": "Aramayı temizle",
     "footer": "Bu, {liascript} için iş birliğine dayalı çevrimiçi bir editördür. Tüm içerik yalnızca tarayıcınızda saklanır. İlham gerekiyorsa bazı {examples} örneklerimize bakın, yerleştirilebilir {templates} veya daha önce yayımlanmış {courses} arayın.",
@@ -119,7 +281,7 @@
       "heading": "Şuradan içe aktar",
       "more": "Diğer seçenekler",
       "submit": "İçe aktar",
-      "new": "Yeni",
+      "new": "Boş belge",
       "upload": "Dosya yükle (Markdown / ZIP)",
       "github": "GitHub deposu",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidGist": "Bu kimliğe ait bir gist bulunamadı.",
         "fetchFailed": "Kaynak yüklenemedi. URL'yi ve bağlantınızı kontrol edin."
       },
-      "localFolder": "Local folder"
-    }
+      "localFolder": "Local folder",
+      "template": "Bir şablonla başla",
+      "templateDesc": "Biçimlendirme, testler, kod ve daha fazlasını içeren örnek bir kurs – hemen yeniden yazmaya hazır."
+    },
+    "welcome": {
+      "title": "Etkileşimli kurslar yazın – ve nasıl çalıştıklarını hemen görün",
+      "lead": "Siz Markdown yazarsınız, yanındaki önizleme slaytları, testleri ve sesli okumayı gösterir. Hesap gerekmez – her şey tarayıcınızda çalışır.",
+      "open": "Dosya aç",
+      "openDesc": "Cihazınızdan bir Markdown dosyası veya ZIP arşivi.",
+      "remote": "Webden getir",
+      "remoteDesc": "GitHub, GitLab, Gist, bir web adresi veya bilgisayarınızdaki bir klasör.",
+      "examples": "Ya da önce hazır bir örneğe göz atın",
+      "hide": "Gizle"
+    },
+    "storage": {
+      "title": "Kurslarınız yalnızca bu tarayıcıda saklanır.",
+      "body": "Site verilerini silerseniz kurslar da silinir. Önemli kursları ZIP olarak, bir klasöre veya GitHub'a yedekleyin – editörde “Paylaş ve dışa aktar” üzerinden."
+    },
+    "courses": "Kurslarım",
+    "courseCount": "{n} kurs | {n} kurs",
+    "newCourseDesc": "Şablon, dosya veya içe aktarma"
   },
   "card": {
     "untitled": "Başlıksız",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Yerel"
-    }
+      "local": "Yalnızca tarayıcıda",
+      "folder": "Klasör"
+    },
+    "linkedTitle": "Bu tarayıcının dışında da saklanıyor",
+    "localTitle": "Yalnızca bu tarayıcıda saklanıyor – “Paylaş ve dışa aktar” üzerinden yedekleyin"
   },
   "footer": {
     "followUs": "Bizi takip edin:"

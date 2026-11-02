@@ -6,16 +6,17 @@
   "nav": {
     "help": "Súgó",
     "new": "Új",
-    "fork": "Fork",
-    "menu": "Menü",
+    "fork": "Másolat készítése",
+    "menu": "Megosztás és exportálás",
     "toolbar": {
       "ariaLabel": "Eszköztár gombcsoportokkal",
       "radioGroupAria": "Rádiókapcsoló gombcsoport",
       "editorOnly": "Csak szerkesztő",
       "splitView": "Osztott nézet",
       "previewOnly": "Csak előnézet",
-      "compile": "Fordítás (Ctrl+S)",
-      "toggleNavAria": "Navigáció váltása"
+      "compile": "Előnézet frissítése (Ctrl+S)",
+      "toggleNavAria": "Navigáció váltása",
+      "refresh": "Frissítés"
     },
     "activityBar": {
       "hideToolbar": "Szerkesztő eszköztárának elrejtése",
@@ -28,12 +29,30 @@
       "onlineAria": "A szerkesztő együttműködési módban van {type} használatával, így megoszthatod az URL-t és másokkal együtt szerkeszthetsz",
       "switchOfflineAria": "Együttműködő szerkesztés kikapcsolása és váltás offline módra",
       "switchWebRTCAria": "Váltás WebRTC-alapú együttműködő szerkesztésre",
-      "switchWebSocketAria": "Váltás WebSocket-alapú együttműködő szerkesztésre"
+      "switchWebSocketAria": "Váltás WebSocket-alapú együttműködő szerkesztésre",
+      "title": "Ki ír?",
+      "solo": "Csak én",
+      "soloDesc": "Minden ezen az eszközön marad. Internet nélkül is működik.",
+      "webrtc": "Élő – közvetlen",
+      "webrtcDesc": "Oszd meg a linket, és mindenki azonnal látja a változásokat. A böngészők közvetlenül kapcsolódnak egymáshoz.",
+      "websocket": "Élő – szerveren át",
+      "websocketDesc": "Megbízhatóbb sok résztvevővel vagy szigorú iskolai hálózatokban.",
+      "tech": "Technológia: {name}",
+      "sameCourse": "Mindenki, akinél megvan a link, ugyanazt a kurzust szerkeszti. Saját változatot szeretnél? Készíts másolatot.",
+      "users": "{n} online"
+    },
+    "myCourses": "Kurzusaim",
+    "savedLocal": "Ebben a böngészőben mentve",
+    "more": "További műveletek",
+    "view": {
+      "write": "Írás",
+      "both": "Mindkettő",
+      "preview": "Előnézet"
     }
   },
   "share": {
     "header": "Szerkesztő megosztása ...",
-    "modalTitle": "Megosztás és műveletek",
+    "modalTitle": "Megosztás és exportálás",
     "publishedHeading": "Meglévő közzététel megnyitása",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP-archívum",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Mit szeretnél kezdeni ezzel: „{title}”?",
+    "goalsAria": "Célok",
+    "groups": {
+      "collaborate": {
+        "label": "Közös szerkesztés",
+        "sub": "Mások is írnak",
+        "intro": "Hívj meg másokat, hogy dolgozzanak ezen a kurzuson – élőben vagy saját másolatban."
+      },
+      "publish": {
+        "label": "Közzététel",
+        "sub": "Link a tanulóknak",
+        "intro": "Válaszd ki, hogyan nyissák meg a tanulók a kurzust. A címkék segítenek dönteni."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Mentés és szinkronizálás",
+        "intro": "Tárold a teljes projektet minden fájlával egy tárolóban, és tartsd naprakészen."
+      },
+      "localFolder": {
+        "label": "Mappa a számítógépen",
+        "sub": "Szinkronizálás valódi fájlokkal",
+        "intro": "Kapcsolj hozzá egy mappát a számítógépedről, hogy a fájlokat más programokkal is szerkeszthesd."
+      },
+      "export": {
+        "label": "Letöltés és exportálás",
+        "sub": "ZIP, SCORM az LMS-edhez, PDF …",
+        "intro": "Vidd magaddal a kurzust, vagy alakítsd át egy tanulási platformhoz."
+      }
+    },
+    "sections": {
+      "published": "Már közzétéve"
+    },
+    "nothingPublished": "Még semmi. Az itt létrehozott linkek ebben a listában jelennek meg.",
+    "items": {
+      "collaborationLink": {
+        "label": "Meghívás élő szerkesztésre",
+        "desc": "Mindenki, akinél megvan a link, egyszerre ugyanazt a kurzust szerkeszti."
+      },
+      "snapshotUrl": {
+        "label": "Szerkeszthető másolat küldése",
+        "desc": "Megnyitja a szerkesztőt az aktuális fájl másolatával. Az eredeti érintetlen marad."
+      },
+      "externalResource": {
+        "label": "Szerkesztőlink egy online fájlhoz",
+        "desc": "Add meg egy weben elérhető Markdown-fájl címét; a link megnyitja azt a szerkesztőben."
+      },
+      "githubGist": {
+        "label": "Mentés GitHub Gistként",
+        "desc": "Állandó link a kurzushoz, a GitHub-fiókodban tárolva."
+      },
+      "nostr": {
+        "label": "Közzététel a Nostron",
+        "desc": "Decentralizáltan tárolva, bármely szolgáltatónál vezetett fiók nélkül."
+      },
+      "dataUri": {
+        "label": "A kurzus küldése a linkben",
+        "desc": "A teljes szöveg a linkbe van csomagolva. Jó üzenetküldőkhöz és gyors tesztekhez."
+      },
+      "embedCode": {
+        "label": "Beágyazás weboldalba",
+        "desc": "HTML-kód, amely a saját oldaladon jeleníti meg a szerkesztőt és az előnézetet."
+      },
+      "githubGistLink": {
+        "label": "A Gist-változat megnyitása",
+        "desc": "A kurzus úgy, ahogy GitHub Gistként elmentetted."
+      },
+      "nostrLink": {
+        "label": "A Nostr-változat megnyitása",
+        "desc": "A kurzus úgy, ahogy a Nostron közzétetted."
+      },
+      "repoFile": {
+        "desc": "Megnyitja a fájlt a kapcsolt tárolóból – előbb töltsd fel a változtatásaidat."
+      },
+      "fileUrl": {
+        "label": "Az online fájl megnyitása a LiaScriptben",
+        "desc": "A kurzus arról a webcímről, amellyel ezt a szerkesztőt megnyitották."
+      },
+      "repoImport": {
+        "label": "Importálás innen: {service}",
+        "desc": "Fájlok hozzáadása ehhez a kurzushoz egy {service}-tárolóból."
+      },
+      "repoPublish": {
+        "label": "Közzététel új tárolóban",
+        "desc": "Létrehoz egy új {service}-tárolót, és feltölti a projekt összes fájlját."
+      },
+      "repoPush": {
+        "label": "Változtatások feltöltése",
+        "desc": "Elmenti a változtatásaidat a kapcsolt {service}-tárolóba."
+      },
+      "repoPull": {
+        "label": "Változtatások lekérése",
+        "desc": "Átveszi azokat a változtatásokat, amelyeket mások végeztek a {service}-tárolóban."
+      },
+      "openLocalFolder": {
+        "label": "Mappa csatlakoztatása",
+        "desc": "Válaszd ki a számítógépeden azt a mappát, amellyel ez a kurzus szinkronizálódjon."
+      },
+      "localFolderSync": {
+        "label": "Szinkronizálás a mappával",
+        "desc": "Hasonlítsd össze a fájlokat, és vedd át a változtatásokat bármelyik irányba."
+      },
+      "exporter": {
+        "label": "Átalakítás tanulási platformhoz",
+        "desc": "A LiaScript Exporter SCORM-, IMS-, PDF-, ePub- és más formátumot készít a projektedből."
+      },
+      "downloadZip": {
+        "label": "Letöltés ZIP-ként",
+        "desc": "A teljes projekt minden fájllal – biztonsági mentésnek is jó."
+      }
+    },
+    "tags": {
+      "permanent": "Állandó",
+      "githubAccount": "GitHub-fiók szükséges",
+      "noAccount": "Fiók nélkül",
+      "shortOnly": "Csak rövid kurzusok, képek nélkül",
+      "live": "Élő",
+      "sameCourse": "Ugyanaz a kurzus mindenkinek",
+      "ownCopy": "Saját másolat",
+      "allFiles": "Minden fájl"
+    },
+    "reasons": {
+      "noProject": "Csak az ebben a böngészőben mentett kurzusokhoz.",
+      "noRepo": "Elérhető, amint a kurzus egy {service}-tárolóhoz kapcsolódik.",
+      "noFolder": "Elérhető, amint csatlakoztatsz egy mappát."
+    },
+    "actions": {
+      "showLink": "Link mutatása",
+      "createLink": "Link létrehozása",
+      "enterUrl": "Cím megadása",
+      "save": "Mentés",
+      "publish": "Közzététel",
+      "createCode": "Kód létrehozása",
+      "import": "Importálás",
+      "createRepo": "Tároló létrehozása",
+      "push": "Feltöltés",
+      "pull": "Lekérés",
+      "chooseFolder": "Mappa kiválasztása",
+      "sync": "Szinkronizálás",
+      "openExporter": "Exporter megnyitása",
+      "download": "Letöltés",
+      "open": "Megnyitás",
+      "connectNow": "Csatlakoztatás most"
+    }
   },
   "modal": {
     "close": "Bezárás",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Új kurzus",
-    "searchPlaceholder": "Írj a kereséshez...",
+    "searchPlaceholder": "Keresés címben vagy tartalomban",
     "searchAriaLabel": "Keresőmező",
     "clearSearchAria": "Keresés törlése",
     "footer": "Ez egy együttműködő online szerkesztő a {liascript} számára. Minden tartalom csak a böngésződben tárolódik. Ha inspirációra van szükséged, nézd meg néhány {examples} példánkat, keress beágyazható {templates} vagy már közzétett {courses} elemeket.",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "Üres dokumentum",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "Kezdés sablonból",
+      "templateDesc": "Mintakurzus formázással, kvízekkel, kóddal és még sok mással – azonnal átírható."
+    },
+    "welcome": {
+      "title": "Írj interaktív kurzusokat – és lásd azonnal, hogyan működnek",
+      "lead": "Te Markdownt írsz, a mellette lévő előnézet pedig diákat, kvízeket és felolvasást mutat. Nem kell fiók – minden a böngésződben fut.",
+      "open": "Fájl megnyitása",
+      "openDesc": "Markdown-fájl vagy ZIP-archívum az eszközödről.",
+      "remote": "Letöltés a webről",
+      "remoteDesc": "GitHub, GitLab, Gist, egy webcím vagy egy mappa a számítógépeden.",
+      "examples": "Vagy nézz meg előbb egy kész példát",
+      "hide": "Elrejtés"
+    },
+    "storage": {
+      "title": "A kurzusaid csak ebben a böngészőben vannak tárolva.",
+      "body": "Ha törlöd a webhely adatait, elvesznek. Mentsd a fontos kurzusokat ZIP-ként, egy mappába vagy a GitHubra – a szerkesztőben a „Megosztás és exportálás” menüben."
+    },
+    "courses": "Kurzusaim",
+    "courseCount": "{n} kurzus | {n} kurzus",
+    "newCourseDesc": "Sablon, fájl vagy importálás"
   },
   "card": {
     "untitled": "Cím nélkül",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "Csak a böngészőben",
+      "folder": "Mappa"
+    },
+    "linkedTitle": "Ezen a böngészőn kívül is tárolva",
+    "localTitle": "Csak ebben a böngészőben tárolva – ments róla másolatot a „Megosztás és exportálás” menüben"
   },
   "footer": {
     "followUs": "Kövess minket:"

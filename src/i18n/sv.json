@@ -6,16 +6,17 @@
   "nav": {
     "help": "Hjälp",
     "new": "Ny",
-    "fork": "Fork",
-    "menu": "Meny",
+    "fork": "Gör en kopia",
+    "menu": "Dela och exportera",
     "toolbar": {
       "ariaLabel": "Verktygsfält med knappgrupper",
       "radioGroupAria": "Grupp med radioknappar",
       "editorOnly": "Endast editor",
       "splitView": "Delad vy",
       "previewOnly": "Endast förhandsvisning",
-      "compile": "Kompilera (Ctrl+S)",
-      "toggleNavAria": "Växla navigering"
+      "compile": "Uppdatera förhandsvisning (Ctrl+S)",
+      "toggleNavAria": "Växla navigering",
+      "refresh": "Uppdatera"
     },
     "activityBar": {
       "hideToolbar": "Dölj editorns verktygsfält",
@@ -28,12 +29,30 @@
       "onlineAria": "Editorn är i samarbetsläge via {type}, vilket betyder att du kan dela URL:en och börja redigera med andra",
       "switchOfflineAria": "Stäng av samarbetsredigering och växla till offlineläge",
       "switchWebRTCAria": "Växla till samarbetsredigering via WebRTC",
-      "switchWebSocketAria": "Växla till samarbetsredigering via WebSocket"
+      "switchWebSocketAria": "Växla till samarbetsredigering via WebSocket",
+      "title": "Vem skriver?",
+      "solo": "Bara jag",
+      "soloDesc": "Allt stannar på den här enheten. Fungerar utan internet.",
+      "webrtc": "Live – direkt",
+      "webrtcDesc": "Dela länken så ser alla ändringar direkt. Webbläsarna ansluter direkt till varandra.",
+      "websocket": "Live – via server",
+      "websocketDesc": "Pålitligare med många personer eller i strikta skolnätverk.",
+      "tech": "Teknik: {name}",
+      "sameCourse": "Alla med länken redigerar samma kurs. Vill du ha en egen version? Gör en kopia.",
+      "users": "{n} online"
+    },
+    "myCourses": "Mina kurser",
+    "savedLocal": "Sparad i den här webbläsaren",
+    "more": "Fler åtgärder",
+    "view": {
+      "write": "Skriva",
+      "both": "Båda",
+      "preview": "Förhandsvisning"
     }
   },
   "share": {
     "header": "Dela editor ...",
-    "modalTitle": "Delning och åtgärder",
+    "modalTitle": "Dela och exportera",
     "publishedHeading": "Öppna befintlig publicering",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP-arkiv",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Vad vill du göra med ”{title}”?",
+    "goalsAria": "Mål",
+    "groups": {
+      "collaborate": {
+        "label": "Redigera tillsammans",
+        "sub": "Andra skriver med",
+        "intro": "Bjud in andra att arbeta med kursen – live eller i en egen kopia."
+      },
+      "publish": {
+        "label": "Publicera",
+        "sub": "En länk för elever",
+        "intro": "Välj hur eleverna ska öppna kursen. Etiketterna hjälper dig att bestämma."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Säkerhetskopiera och synka",
+        "intro": "Spara hela projektet med alla filer i ett arkiv och håll det uppdaterat."
+      },
+      "localFolder": {
+        "label": "Mapp på datorn",
+        "sub": "Synka med riktiga filer",
+        "intro": "Koppla en mapp på din dator för att även kunna redigera filerna i andra program."
+      },
+      "export": {
+        "label": "Ladda ner och exportera",
+        "sub": "ZIP, SCORM för din lärplattform, PDF …",
+        "intro": "Ta med dig kursen eller konvertera den för en lärplattform."
+      }
+    },
+    "sections": {
+      "published": "Redan publicerat"
+    },
+    "nothingPublished": "Inget än. Länkar som du skapar här visas i den här listan.",
+    "items": {
+      "collaborationLink": {
+        "label": "Bjud in till live-redigering",
+        "desc": "Alla med länken redigerar samma kurs samtidigt."
+      },
+      "snapshotUrl": {
+        "label": "Skicka en redigerbar kopia",
+        "desc": "Öppnar editorn med en kopia av den aktuella filen. Ditt original förblir orört."
+      },
+      "externalResource": {
+        "label": "Editorlänk till en fil på nätet",
+        "desc": "Ange adressen till en Markdown-fil på webben; länken öppnar den i editorn."
+      },
+      "githubGist": {
+        "label": "Spara som GitHub Gist",
+        "desc": "En permanent länk till kursen, sparad i ditt GitHub-konto."
+      },
+      "nostr": {
+        "label": "Publicera på Nostr",
+        "desc": "Lagras decentraliserat, utan konto hos någon leverantör."
+      },
+      "dataUri": {
+        "label": "Skicka kursen i länken",
+        "desc": "Hela texten ryms i länken. Bra för chattappar och snabba tester."
+      },
+      "embedCode": {
+        "label": "Bädda in på en webbplats",
+        "desc": "HTML-kod som visar editor och förhandsvisning på din egen sida."
+      },
+      "githubGistLink": {
+        "label": "Öppna Gist-versionen",
+        "desc": "Kursen så som du sparade den som GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Öppna Nostr-versionen",
+        "desc": "Kursen så som du publicerade den på Nostr."
+      },
+      "repoFile": {
+        "desc": "Öppnar filen från det kopplade arkivet – ladda upp dina ändringar först."
+      },
+      "fileUrl": {
+        "label": "Öppna filen på nätet i LiaScript",
+        "desc": "Kursen från webbadressen som den här editorn öppnades med."
+      },
+      "repoImport": {
+        "label": "Importera från {service}",
+        "desc": "Lägg till filer från ett {service}-arkiv i den här kursen."
+      },
+      "repoPublish": {
+        "label": "Publicera i ett nytt arkiv",
+        "desc": "Skapar ett nytt {service}-arkiv och laddar upp alla projektfiler."
+      },
+      "repoPush": {
+        "label": "Ladda upp ändringar",
+        "desc": "Sparar dina ändringar i det kopplade {service}-arkivet."
+      },
+      "repoPull": {
+        "label": "Hämta ändringar",
+        "desc": "Tar in ändringar som andra har gjort i {service}-arkivet."
+      },
+      "openLocalFolder": {
+        "label": "Koppla en mapp",
+        "desc": "Välj mappen på din dator som kursen ska synkas med."
+      },
+      "localFolderSync": {
+        "label": "Synka med mappen",
+        "desc": "Jämför filerna och för över ändringar åt båda hållen."
+      },
+      "exporter": {
+        "label": "Konvertera för en lärplattform",
+        "desc": "LiaScript Exporter skapar SCORM, IMS, PDF, ePub med mera av ditt projekt."
+      },
+      "downloadZip": {
+        "label": "Ladda ner som ZIP",
+        "desc": "Hela projektet med alla filer – också bra som säkerhetskopia."
+      }
+    },
+    "tags": {
+      "permanent": "Permanent",
+      "githubAccount": "GitHub-konto krävs",
+      "noAccount": "Inget konto",
+      "shortOnly": "Bara korta kurser, inga bilder",
+      "live": "Live",
+      "sameCourse": "Samma kurs för alla",
+      "ownCopy": "Egen kopia",
+      "allFiles": "Alla filer"
+    },
+    "reasons": {
+      "noProject": "Bara för kurser som är sparade i den här webbläsaren.",
+      "noRepo": "Tillgängligt när kursen är kopplad till ett {service}-arkiv.",
+      "noFolder": "Tillgängligt när en mapp är kopplad."
+    },
+    "actions": {
+      "showLink": "Visa länk",
+      "createLink": "Skapa länk",
+      "enterUrl": "Ange adress",
+      "save": "Spara",
+      "publish": "Publicera",
+      "createCode": "Skapa kod",
+      "import": "Importera",
+      "createRepo": "Skapa arkiv",
+      "push": "Ladda upp",
+      "pull": "Hämta",
+      "chooseFolder": "Välj mapp",
+      "sync": "Synka",
+      "openExporter": "Öppna Exporter",
+      "download": "Ladda ner",
+      "open": "Öppna",
+      "connectNow": "Koppla nu"
+    }
   },
   "modal": {
     "close": "Stäng",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Ny kurs",
-    "searchPlaceholder": "Skriv för att söka...",
+    "searchPlaceholder": "Sök i titel eller innehåll",
     "searchAriaLabel": "Sökfält",
     "clearSearchAria": "Rensa sökning",
     "footer": "Detta är en samarbetsbaserad online-editor för {liascript}. Allt innehåll lagras endast i din webbläsare. Om du behöver inspiration kan du titta på några av våra {examples}, söka efter inbäddningsbara {templates} eller redan publicerade {courses}.",
@@ -119,7 +281,7 @@
       "heading": "Importera från",
       "more": "Fler alternativ",
       "submit": "Importera",
-      "new": "Ny",
+      "new": "Tomt dokument",
       "upload": "Ladda upp fil (Markdown / ZIP)",
       "github": "GitHub-arkiv",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidGist": "Ingen gist hittades för det ID:t.",
         "fetchFailed": "Kunde inte ladda resursen. Kontrollera URL:en och din anslutning."
       },
-      "localFolder": "Local folder"
-    }
+      "localFolder": "Local folder",
+      "template": "Börja med en mall",
+      "templateDesc": "En exempelkurs med formatering, quiz, kod och mer – redo att skrivas om."
+    },
+    "welcome": {
+      "title": "Skriv interaktiva kurser – och se direkt hur de fungerar",
+      "lead": "Du skriver Markdown och förhandsvisningen bredvid visar bildspel, quiz och uppläsning. Inget konto behövs – allt körs i webbläsaren.",
+      "open": "Öppna en fil",
+      "openDesc": "En Markdown-fil eller ett ZIP-arkiv från din enhet.",
+      "remote": "Hämta från nätet",
+      "remoteDesc": "GitHub, GitLab, Gist, en webbadress eller en mapp på datorn.",
+      "examples": "Eller titta först på ett färdigt exempel",
+      "hide": "Dölj"
+    },
+    "storage": {
+      "title": "Dina kurser sparas bara i den här webbläsaren.",
+      "body": "Om du rensar webbplatsdata försvinner de. Säkerhetskopiera viktiga kurser som ZIP, i en mapp eller på GitHub – i editorn via ”Dela och exportera”."
+    },
+    "courses": "Mina kurser",
+    "courseCount": "{n} kurs | {n} kurser",
+    "newCourseDesc": "Mall, fil eller import"
   },
   "card": {
     "untitled": "Namnlös",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Lokal"
-    }
+      "local": "Bara i webbläsaren",
+      "folder": "Mapp"
+    },
+    "linkedTitle": "Sparad även utanför den här webbläsaren",
+    "localTitle": "Sparad bara i den här webbläsaren – säkerhetskopiera via ”Dela och exportera”"
   },
   "footer": {
     "followUs": "Följ oss på:"

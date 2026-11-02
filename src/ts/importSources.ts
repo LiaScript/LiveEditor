@@ -4,6 +4,7 @@
 // ImportUrlModal components render whatever is registered.
 
 import { navigateTo } from "../index";
+import { i18n } from "../i18n";
 import { getGithubPat } from "./utils";
 import { parseRepoUrl } from "./GitHubRepo";
 import { parseGitLabUrl } from "./GitLabRepo";
@@ -68,14 +69,35 @@ async function filesFromSingle(
   return [{ path: name.replace(/^.*\//, ""), bytes }];
 }
 
+/** Create a project from the built-in sample course, in German when the UI is
+ *  German, otherwise in English. Snippets.ts is large, so it is loaded lazily. */
+async function createFromTemplate() {
+  const { Snippets } = await import("./Snippets");
+  const label = (i18n.global as any).locale === "de" ? "lia-template-de" : "lia-template";
+  const template = Snippets.find((s: any) => s.label === label)?.insertText || "";
+  const bytes = new TextEncoder().encode(template);
+  await createProjectFromFiles([{ path: "README.md", bytes, mime: "text/markdown" }]);
+}
+
 export const importSources: ImportSource[] = [
+  {
+    id: "template",
+    icon: "bi-journal-richtext",
+    labelKey: "index.import.template",
+    descriptionKey: "index.import.templateDesc",
+    kind: "navigate",
+    featured: true,
+    onSelect: () => {
+      createFromTemplate().catch(console.warn);
+    },
+  },
+
   {
     id: "new",
     icon: "bi-file-earmark-plus",
     labelKey: "index.import.new",
     descriptionKey: "index.import.newDesc",
     kind: "navigate",
-    featured: true,
     onSelect: () => navigateTo("?/edit"),
   },
 

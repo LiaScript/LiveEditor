@@ -92,7 +92,9 @@ export function loadConfig(): {
     }
   } else {
     config = {
-      lights: false,
+      // new users start with the light editor theme, matching the rest of the
+      // UI; existing users keep whatever they stored
+      lights: true,
       mode: 2,
       user: {
         name: randomString(),

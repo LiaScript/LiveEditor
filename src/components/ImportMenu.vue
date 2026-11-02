@@ -13,6 +13,13 @@ export default defineComponent({
 
   components: { ImportModal, ImportUrlModal },
 
+  props: {
+    // "primary" on the index page; "outline" where it is a secondary action
+    variant: { type: String, default: "primary" },
+    // render only the dialogs; the parent opens them via openChooser()
+    hideButton: { type: Boolean, default: false },
+  },
+
   data() {
     return {
       acceptFor: "" as string,
@@ -59,14 +66,16 @@ export default defineComponent({
 <template>
   <div>
     <button
-      class="btn btn-primary btn-sm"
+      v-if="!hideButton"
+      class="btn btn-sm"
+      :class="variant === 'outline' ? 'btn-outline-secondary' : 'btn-primary'"
       type="button"
       :disabled="busy"
       @click="openChooser"
     >
       <span v-if="busy" class="spinner-border spinner-border-sm me-1"></span>
       <i v-else class="bi bi-file-earmark-plus-fill"></i>
-      {{ $t("index.import.new") }}
+      {{ $t("index.newCourse") }}
     </button>
 
     <input

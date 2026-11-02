@@ -6,16 +6,17 @@
   "nav": {
     "help": "Nápověda",
     "new": "Nový",
-    "fork": "Fork",
-    "menu": "Menu",
+    "fork": "Vytvořit kopii",
+    "menu": "Sdílet a exportovat",
     "toolbar": {
       "ariaLabel": "Panel nástrojů se skupinami tlačítek",
       "radioGroupAria": "Skupina přepínacích rádiových tlačítek",
       "editorOnly": "Pouze editor",
       "splitView": "Rozdělené zobrazení",
       "previewOnly": "Pouze náhled",
-      "compile": "Kompilovat (Ctrl+S)",
-      "toggleNavAria": "Přepnout navigaci"
+      "compile": "Obnovit náhled (Ctrl+S)",
+      "toggleNavAria": "Přepnout navigaci",
+      "refresh": "Obnovit"
     },
     "activityBar": {
       "hideToolbar": "Skrýt panel nástrojů editoru",
@@ -28,12 +29,30 @@
       "onlineAria": "Editor je v režimu spolupráce přes {type}, takže můžete sdílet URL a upravovat s ostatními",
       "switchOfflineAria": "Vypnout společné úpravy a přepnout do offline režimu",
       "switchWebRTCAria": "Přepnout na společné úpravy přes WebRTC",
-      "switchWebSocketAria": "Přepnout na společné úpravy přes WebSocket"
+      "switchWebSocketAria": "Přepnout na společné úpravy přes WebSocket",
+      "title": "Kdo píše?",
+      "solo": "Jen já",
+      "soloDesc": "Vše zůstává v tomto zařízení. Funguje i bez internetu.",
+      "webrtc": "Živě – přímo",
+      "webrtcDesc": "Sdílejte odkaz a všichni uvidí změny okamžitě. Prohlížeče se spojí přímo mezi sebou.",
+      "websocket": "Živě – přes server",
+      "websocketDesc": "Spolehlivější při větším počtu lidí nebo v přísných školních sítích.",
+      "tech": "Technologie: {name}",
+      "sameCourse": "Všichni s odkazem upravují stejný kurz. Chcete vlastní verzi? Vytvořte si kopii.",
+      "users": "{n} online"
+    },
+    "myCourses": "Moje kurzy",
+    "savedLocal": "Uloženo v tomto prohlížeči",
+    "more": "Další akce",
+    "view": {
+      "write": "Psát",
+      "both": "Obojí",
+      "preview": "Náhled"
     }
   },
   "share": {
     "header": "Sdílet editor ...",
-    "modalTitle": "Sdílení a akce",
+    "modalTitle": "Sdílet a exportovat",
     "publishedHeading": "Otevřít existující publikaci",
     "nostr": "Nostr",
     "downloadZipLabel": "Archiv ZIP",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Co chcete udělat s kurzem „{title}“?",
+    "goalsAria": "Cíle",
+    "groups": {
+      "collaborate": {
+        "label": "Upravovat společně",
+        "sub": "Ostatní píší s vámi",
+        "intro": "Pozvěte ostatní ke spolupráci na tomto kurzu – živě nebo ve vlastní kopii."
+      },
+      "publish": {
+        "label": "Zveřejnit",
+        "sub": "Odkaz pro studující",
+        "intro": "Vyberte, jak budou studující kurz otevírat. Štítky vám pomohou se rozhodnout."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Zálohovat a synchronizovat",
+        "intro": "Uložte celý projekt se všemi soubory do repozitáře a udržujte ho aktuální."
+      },
+      "localFolder": {
+        "label": "Složka v počítači",
+        "sub": "Synchronizovat se skutečnými soubory",
+        "intro": "Připojte složku ve svém počítači a upravujte soubory i v jiných programech."
+      },
+      "export": {
+        "label": "Stáhnout a exportovat",
+        "sub": "ZIP, SCORM pro váš LMS, PDF …",
+        "intro": "Vezměte si kurz s sebou nebo ho převeďte pro výukovou platformu."
+      }
+    },
+    "sections": {
+      "published": "Již zveřejněno"
+    },
+    "nothingPublished": "Zatím nic. Odkazy, které zde vytvoříte, se zobrazí v tomto seznamu.",
+    "items": {
+      "collaborationLink": {
+        "label": "Pozvat k živým úpravám",
+        "desc": "Všichni s odkazem upravují stejný kurz ve stejnou chvíli."
+      },
+      "snapshotUrl": {
+        "label": "Poslat upravitelnou kopii",
+        "desc": "Otevře editor s kopií aktuálního souboru. Váš originál zůstane beze změny."
+      },
+      "externalResource": {
+        "label": "Odkaz do editoru na online soubor",
+        "desc": "Zadejte adresu souboru Markdown na webu; odkaz ho otevře v editoru."
+      },
+      "githubGist": {
+        "label": "Uložit jako GitHub Gist",
+        "desc": "Trvalý odkaz na kurz, uložený ve vašem účtu GitHub."
+      },
+      "nostr": {
+        "label": "Zveřejnit na Nostru",
+        "desc": "Uloženo decentralizovaně, bez účtu u jakéhokoli poskytovatele."
+      },
+      "dataUri": {
+        "label": "Poslat kurz přímo v odkazu",
+        "desc": "Celý text je uložen v odkazu. Vhodné pro komunikátory a rychlé testy."
+      },
+      "embedCode": {
+        "label": "Vložit na web",
+        "desc": "HTML kód, který zobrazí editor a náhled na vaší vlastní stránce."
+      },
+      "githubGistLink": {
+        "label": "Otevřít verzi z Gistu",
+        "desc": "Kurz tak, jak jste ho uložili jako GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Otevřít verzi z Nostru",
+        "desc": "Kurz tak, jak jste ho zveřejnili na Nostru."
+      },
+      "repoFile": {
+        "desc": "Otevře soubor z propojeného repozitáře – nejprve nahrajte své změny."
+      },
+      "fileUrl": {
+        "label": "Otevřít online soubor v LiaScriptu",
+        "desc": "Kurz z webové adresy, se kterou byl tento editor otevřen."
+      },
+      "repoImport": {
+        "label": "Importovat z {service}",
+        "desc": "Přidat do tohoto kurzu soubory z repozitáře {service}."
+      },
+      "repoPublish": {
+        "label": "Zveřejnit v novém repozitáři",
+        "desc": "Vytvoří nový repozitář {service} a nahraje do něj všechny soubory projektu."
+      },
+      "repoPush": {
+        "label": "Nahrát změny",
+        "desc": "Uloží vaše změny do propojeného repozitáře {service}."
+      },
+      "repoPull": {
+        "label": "Načíst změny",
+        "desc": "Převezme změny, které ostatní provedli v repozitáři {service}."
+      },
+      "openLocalFolder": {
+        "label": "Připojit složku",
+        "desc": "Vyberte složku v počítači, se kterou se má tento kurz synchronizovat."
+      },
+      "localFolderSync": {
+        "label": "Synchronizovat se složkou",
+        "desc": "Porovnat soubory a převzít změny oběma směry."
+      },
+      "exporter": {
+        "label": "Převést pro výukovou platformu",
+        "desc": "LiaScript Exporter z vašeho projektu vytvoří SCORM, IMS, PDF, ePub a další."
+      },
+      "downloadZip": {
+        "label": "Stáhnout jako ZIP",
+        "desc": "Celý projekt se všemi soubory – hodí se i jako záloha."
+      }
+    },
+    "tags": {
+      "permanent": "Trvalé",
+      "githubAccount": "Vyžaduje účet GitHub",
+      "noAccount": "Bez účtu",
+      "shortOnly": "Jen krátké kurzy, bez obrázků",
+      "live": "Živě",
+      "sameCourse": "Stejný kurz pro všechny",
+      "ownCopy": "Vlastní kopie",
+      "allFiles": "Všechny soubory"
+    },
+    "reasons": {
+      "noProject": "Jen pro kurzy uložené v tomto prohlížeči.",
+      "noRepo": "K dispozici, jakmile bude kurz propojen s repozitářem {service}.",
+      "noFolder": "K dispozici, jakmile bude připojena složka."
+    },
+    "actions": {
+      "showLink": "Zobrazit odkaz",
+      "createLink": "Vytvořit odkaz",
+      "enterUrl": "Zadat adresu",
+      "save": "Uložit",
+      "publish": "Zveřejnit",
+      "createCode": "Vytvořit kód",
+      "import": "Importovat",
+      "createRepo": "Vytvořit repozitář",
+      "push": "Nahrát",
+      "pull": "Načíst",
+      "chooseFolder": "Vybrat složku",
+      "sync": "Synchronizovat",
+      "openExporter": "Otevřít Exporter",
+      "download": "Stáhnout",
+      "open": "Otevřít",
+      "connectNow": "Připojit nyní"
+    }
   },
   "modal": {
     "close": "Zavřít",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Nový kurz",
-    "searchPlaceholder": "Pište pro vyhledávání...",
+    "searchPlaceholder": "Hledat v názvu nebo obsahu",
     "searchAriaLabel": "Vyhledávací pole",
     "clearSearchAria": "Vymazat vyhledávání",
     "footer": "Toto je společný online editor pro {liascript}. Veškerý obsah je uložen pouze ve vašem prohlížeči. Pokud potřebujete inspiraci, podívejte se na naše {examples}, hledejte vložitelné {templates} nebo již publikované {courses}.",
@@ -119,7 +281,7 @@
       "heading": "Importovat z",
       "more": "Další možnosti",
       "submit": "Importovat",
-      "new": "Nový",
+      "new": "Prázdný dokument",
       "upload": "Nahrát soubor (Markdown / ZIP)",
       "github": "Repozitář GitHub",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidGist": "Pro toto ID nebyl nalezen žádný gist.",
         "fetchFailed": "Zdroj se nepodařilo načíst. Zkontrolujte URL a připojení."
       },
-      "localFolder": "Local folder"
-    }
+      "localFolder": "Local folder",
+      "template": "Začít šablonou",
+      "templateDesc": "Ukázkový kurz s formátováním, kvízy, kódem a dalším – připravený k přepsání."
+    },
+    "welcome": {
+      "title": "Pište interaktivní kurzy – a hned uvidíte, jak fungují",
+      "lead": "Píšete v Markdownu, náhled vedle zobrazuje snímky, kvízy a předčítání. Bez účtu – vše běží ve vašem prohlížeči.",
+      "open": "Otevřít soubor",
+      "openDesc": "Soubor Markdown nebo archiv ZIP z vašeho zařízení.",
+      "remote": "Načíst z webu",
+      "remoteDesc": "GitHub, GitLab, Gist, webová adresa nebo složka ve vašem počítači.",
+      "examples": "Nebo si nejdřív prohlédněte hotový příklad",
+      "hide": "Skrýt"
+    },
+    "storage": {
+      "title": "Vaše kurzy jsou uloženy jen v tomto prohlížeči.",
+      "body": "Pokud vymažete data webu, zmizí. Důležité kurzy si zálohujte jako ZIP, do složky nebo na GitHub – v editoru přes „Sdílet a exportovat“."
+    },
+    "courses": "Moje kurzy",
+    "courseCount": "{n} kurz | Kurzy: {n}",
+    "newCourseDesc": "Šablona, soubor nebo import"
   },
   "card": {
     "untitled": "Bez názvu",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Místní"
-    }
+      "local": "Jen v prohlížeči",
+      "folder": "Složka"
+    },
+    "linkedTitle": "Uloženo i mimo tento prohlížeč",
+    "localTitle": "Uloženo jen v tomto prohlížeči – zálohujte přes „Sdílet a exportovat“"
   },
   "footer": {
     "followUs": "Sledujte nás na:"

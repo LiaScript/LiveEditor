@@ -6,16 +6,17 @@
   "nav": {
     "help": "Ballal",
     "new": "Kesum",
-    "fork": "Fork",
-    "menu": "Doggol",
+    "fork": "Waɗ natto",
+    "menu": "Lollin & yaltin",
     "toolbar": {
       "ariaLabel": "Palal kuutorɗe jogiiɗo pelle butoŋaaji",
       "radioGroupAria": "Dennduɓe butoŋaaji suɓo",
       "editorOnly": "Taƴtorde tan",
       "splitView": "Jiytol ceeɓngol",
       "previewOnly": "Jiytindagol tan",
-      "compile": "Kompili (Ctrl+S)",
-      "toggleNavAria": "Waylu njiylawu"
+      "compile": "Hesɗitin jiytindagol (Ctrl+S)",
+      "toggleNavAria": "Waylu njiylawu",
+      "refresh": "Hesɗitin"
     },
     "activityBar": {
       "hideToolbar": "Suuɗ palal kuutorɗe taƴtorde",
@@ -28,12 +29,30 @@
       "onlineAria": "Taƴtorde ndee woni e mbaydi gollondiral rewde e {type}; aɗa waawi lollinde URL tee taƴtaa e woɗɓe",
       "switchOfflineAria": "Ñif gollondiral taƴtagol tee artu e mbaydi ceŋol alaa",
       "switchWebRTCAria": "Yah e gollondiral taƴtagol rewde e WebRTC",
-      "switchWebSocketAria": "Yah e gollondiral taƴtagol rewde e WebSocket"
+      "switchWebSocketAria": "Yah e gollondiral taƴtagol rewde e WebSocket",
+      "title": "Moy winndata?",
+      "solo": "Kam tan",
+      "soloDesc": "Kala huunde heddoto e ndee kaɓirgol. Ena golla tawa enternet alaa.",
+      "webrtc": "Ɗoon e ɗoon – beɗɗo",
+      "webrtcDesc": "Lollin jokkorde ndee, kala gooto yiyat waylooji ɗii e sahaa oo. Browseruuji ɗii ceŋondirta beɗɗo.",
+      "websocket": "Ɗoon e ɗoon – rewde e sarwer",
+      "websocketDesc": "Ɓuri hoolaade so yimɓe ɓuri heewde walla e laabi ceŋol duɗe tiiɗɗe.",
+      "tech": "Karallaagal: {name}",
+      "sameCourse": "Kala jogiiɗo jokkorde ndee ena taƴtoo janngirde wootere. Aɗa yiɗi yamre maa? Waɗ natto.",
+      "users": "{n} e ceŋol"
+    },
+    "myCourses": "Janngirɗe am",
+    "savedLocal": "Danndaama e ndee browser",
+    "more": "Golle goɗɗe",
+    "view": {
+      "write": "Winndu",
+      "both": "Ɗi ɗiɗi fof",
+      "preview": "Jiytindagol"
     }
   },
   "share": {
     "header": "Lollin taƴtorde ...",
-    "modalTitle": "Share & actions",
+    "modalTitle": "Lollin & yaltin",
     "publishedHeading": "Open existing publication",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP archive",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Ko honɗum yiɗɗaa waɗde e “{title}”?",
+    "goalsAria": "Faandaaji",
+    "groups": {
+      "collaborate": {
+        "label": "Taƴtoo kawral",
+        "sub": "Woɗɓe ena mbinnda e maa",
+        "intro": "Noddu woɗɓe ngollu e ndee janngirde – ɗoon e ɗoon walla e natto mum en."
+      },
+      "publish": {
+        "label": "Bayyin",
+        "sub": "Jokkorde ngam jaŋngooɓe",
+        "intro": "Suɓo no jaŋngooɓe udditirta janngirde ndee. Maandeeji ɗii ena mballa ma suɓaade."
+      },
+      "git": {
+        "label": "GitHub e GitLab",
+        "sub": "Danndu e fotondin",
+        "intro": "Danndu pirooje oo fof e piile mum fof e depoo (repository) tee hesɗitinaa ɗum."
+      },
+      "localFolder": {
+        "label": "Siflorde e ordinateer oo",
+        "sub": "Fotondin e piile goonga",
+        "intro": "Jokku siflorde e ordinateer maa ngam waawde gollirde piile ɗee kadi e porogaramji goɗɗi."
+      },
+      "export": {
+        "label": "Aawto & yaltin",
+        "sub": "ZIP, SCORM ngam LMS maa, PDF …",
+        "intro": "Ƴettu janngirde ndee e maa walla waylu ɗum ngam palatfoorm jaŋde."
+      }
+    },
+    "sections": {
+      "published": "Bayyinaama kisa"
+    },
+    "nothingPublished": "Alaa huunde tawo. Jokkorɗe ɗe sosɗaa ɗoo maa feeñ e ndee doggol.",
+    "items": {
+      "collaborationLink": {
+        "label": "Noddu ngam taƴtaade ɗoon e ɗoon",
+        "desc": "Kala jogiiɗo jokkorde ndee ena taƴtoo janngirde wootere e sahaa gooto."
+      },
+      "snapshotUrl": {
+        "label": "Neldu natto taƴtotoongo",
+        "desc": "Ena uddita taƴtorde ndee e natto piilol jooni ngol. Iwdi maa waylataa."
+      },
+      "externalResource": {
+        "label": "Jokkorde taƴtorde faade e piilol e ceŋol",
+        "desc": "Naatnu ñiiɓirde piilol Markdown e enternet; jokkorde ndee maa uddit ngol e taƴtorde."
+      },
+      "githubGist": {
+        "label": "Danndu no GitHub Gist",
+        "desc": "Jokkorde duumiinde faade e janngirde ndee, danndaande e konte GitHub maa."
+      },
+      "nostr": {
+        "label": "Bayyin e Nostr",
+        "desc": "Danndaado tawa alaa nokku gooto hunuɓuɗo, alaa konte e jeeyoowo walla."
+      },
+      "dataUri": {
+        "label": "Neldu janngirde ndee nder jokkorde",
+        "desc": "Binndi ɗii fof ena nder jokkorde ndee. Ena moƴƴi ngam jaaɓorɗe ɓatakeeji e etaaɗe yaawɗe."
+      },
+      "embedCode": {
+        "label": "Naatnu e lowre",
+        "desc": "Koddu HTML hollirta taƴtorde e jiytindagol nder hello maa."
+      },
+      "githubGistLink": {
+        "label": "Uddit yamre Gist",
+        "desc": "Janngirde ndee no danndirɗaa nde no GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Uddit yamre Nostr",
+        "desc": "Janngirde ndee no bayyinirɗaa nde e Nostr."
+      },
+      "repoFile": {
+        "desc": "Ena uddita piilol ngol iwde e depoo jokkaaɗo oo – adii soodnu waylooji maa."
+      },
+      "fileUrl": {
+        "label": "Uddit piilol e ceŋol ngol e LiaScript",
+        "desc": "Janngirde iwnde e ñiiɓirde geese nde ndee taƴtorde udditiraa."
+      },
+      "repoImport": {
+        "label": "Naatnu iwde e {service}",
+        "desc": "Ɓeydu piile iwɗe e depoo {service} e ndee janngirde."
+      },
+      "repoPublish": {
+        "label": "Bayyin e depoo kesoowo",
+        "desc": "Ena sosa depoo {service} kesoowo tee soodna piile pirooje oo fof."
+      },
+      "repoPush": {
+        "label": "Soodnu waylooji",
+        "desc": "Ena dannda waylooji maa e depoo {service} jokkaaɗo oo."
+      },
+      "repoPull": {
+        "label": "Addu waylooji",
+        "desc": "Ena ƴetta waylooji ɗi woɗɓe waɗi e depoo {service} oo."
+      },
+      "openLocalFolder": {
+        "label": "Jokku siflorde",
+        "desc": "Suɓo siflorde e ordinateer maa nde ndee janngirde fotondirta."
+      },
+      "localFolderSync": {
+        "label": "Fotondin e siflorde ndee",
+        "desc": "Fotondir piile ɗee tee ƴettu waylooji e fannuuji ɗiɗi ɗii fof."
+      },
+      "exporter": {
+        "label": "Waylu ngam palatfoorm jaŋde",
+        "desc": "LiaScript Exporter ena sosa SCORM, IMS, PDF, ePub e goɗɗe iwde e pirooje maa."
+      },
+      "downloadZip": {
+        "label": "Aawto no ZIP",
+        "desc": "Pirooje oo fof e piile mum fof – ena moƴƴi kadi no danndol."
+      }
+    },
+    "tags": {
+      "permanent": "Duumiiɗo",
+      "githubAccount": "Konte GitHub ena soklaa",
+      "noAccount": "Alaa konte",
+      "shortOnly": "Janngirɗe ceeɗɗe tan, alaa nate",
+      "live": "Ɗoon e ɗoon",
+      "sameCourse": "Janngirde wootere ngam kala gooto",
+      "ownCopy": "Natto maa",
+      "allFiles": "Piile fof"
+    },
+    "reasons": {
+      "noProject": "Ngam janngirɗe danndaaɗe e ndee browser tan.",
+      "noRepo": "Ena heɓoo so janngirde ndee jokkaama e depoo {service}.",
+      "noFolder": "Ena heɓoo so siflorde jokkaama."
+    },
+    "actions": {
+      "showLink": "Hollu jokkorde",
+      "createLink": "Sos jokkorde",
+      "enterUrl": "Naatnu ñiiɓirde",
+      "save": "Danndu",
+      "publish": "Bayyin",
+      "createCode": "Sos koddu",
+      "import": "Naatnu",
+      "createRepo": "Sos depoo",
+      "push": "Soodnu",
+      "pull": "Addu",
+      "chooseFolder": "Suɓo siflorde",
+      "sync": "Fotondin",
+      "openExporter": "Uddit Exporter",
+      "download": "Aawto",
+      "open": "Uddit",
+      "connectNow": "Jokku jooni"
+    }
   },
   "modal": {
     "close": "Uddu",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Janngirde hesere",
-    "searchPlaceholder": "Winndu ngam yiylaade...",
+    "searchPlaceholder": "Yiylo tiitoonde walla loowdi",
     "searchAriaLabel": "Naatnorde yiylaade",
     "clearSearchAria": "Momtu yiylaade",
     "footer": "Ɗum ko taƴtorde geese gollondiral ngam {liascript}. Loowdi fof ena danndaa tan e browser maa. So aɗa sokli hakkillo, ƴeewto {examples} amen, yiylo {templates} naatnotooɗe walla {courses} bayyinaaɗe kisa.",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "Ɗeeɗol mehol",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "Fuɗɗo e moolde",
+      "templateDesc": "Janngirde misal jogiinde mbaydi binndi, ƴeewndooji, koddu e goɗɗe – ena hebbi ngam winndude kadi."
+    },
+    "welcome": {
+      "title": "Winndu janngirɗe jokkondirɗe – yiyaa e sahaa oo no ɗe gollirta",
+      "lead": "Aan a winndat Markdown, jiytindagol takko mum ena holla palle, ƴeewndooji e jaŋngude e daande. Konte soklaaki – kala huunde ena dogga e browser maa.",
+      "open": "Uddit piilol",
+      "openDesc": "Piilol Markdown walla ZIP iwngol e kaɓirgol maa.",
+      "remote": "Addu iwde e enternet",
+      "remoteDesc": "GitHub, GitLab, Gist, ñiiɓirde geese walla siflorde e ordinateer maa.",
+      "examples": "Walla ndaar adii misal timmungal",
+      "hide": "Suuɗ"
+    },
+    "storage": {
+      "title": "Janngirɗe maa ena danndaa e ndee browser tan.",
+      "body": "So a momtii keɓe lowre ndee, ɗe majjan. Danndu janngirɗe teeŋtuɗe no ZIP, e siflorde walla e GitHub – e taƴtorde rewde e “Lollin & yaltin”."
+    },
+    "courses": "Janngirɗe am",
+    "courseCount": "janngirde {n} | janngirɗe {n}",
+    "newCourseDesc": "Moolde, piilol walla naatnugol"
   },
   "card": {
     "untitled": "Alaa tiitoonde",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "Browser tan",
+      "folder": "Siflorde"
+    },
+    "linkedTitle": "Danndaama kadi caggal ndee browser",
+    "localTitle": "Danndaama e ndee browser tan – danndu ɗum rewde e “Lollin & yaltin”"
   },
   "footer": {
     "followUs": "Rewindo min e:"

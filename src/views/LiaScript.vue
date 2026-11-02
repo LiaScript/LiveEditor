@@ -1,5 +1,5 @@
 <script lang="ts">
-import { tutorial } from "../ts/Tutorial";
+import { tutorialFor } from "../ts/Tutorial";
 import Dexie from "../ts/indexDB";
 
 import Editor from "../components/Editor.vue";
@@ -134,6 +134,60 @@ export default {
       return this.activeFilePath.split("/").pop() || this.activeFilePath;
     },
 
+    courseTitle(): string {
+      return (this.meta as any)?.meta?.title || this.$t("card.untitled");
+    },
+
+    // plain-language name of the current collaboration mode
+    connLabel(): string {
+      switch (this.conn.type) {
+        case "WebRTC":
+          return this.$t("nav.connection.webrtc");
+        case "WebSocket":
+          return this.$t("nav.connection.websocket");
+        default:
+          return this.$t("nav.connection.solo");
+      }
+    },
+
+    connTitle(): string {
+      return this.conn.users > 0
+        ? `${this.connLabel} · ${this.$t("nav.connection.users", { n: this.conn.users })}`
+        : this.connLabel;
+    },
+
+    connOptions(): any[] {
+      const id = this.$props.storageId;
+      return [
+        {
+          id: "offline",
+          path: ["edit", id],
+          labelKey: "nav.connection.solo",
+          descKey: "nav.connection.soloDesc",
+          ariaKey: "nav.connection.switchOfflineAria",
+          active: this.conn.type === "Offline",
+        },
+        {
+          id: "webrtc",
+          path: ["edit", id, "webrtc"],
+          labelKey: "nav.connection.webrtc",
+          descKey: "nav.connection.webrtcDesc",
+          ariaKey: "nav.connection.switchWebRTCAria",
+          tech: "WebRTC",
+          active: this.conn.type === "WebRTC",
+        },
+        {
+          id: "websocket",
+          path: ["edit", id, "websocket"],
+          labelKey: "nav.connection.websocket",
+          descKey: "nav.connection.websocketDesc",
+          ariaKey: "nav.connection.switchWebSocketAria",
+          tech: "WebSocket",
+          active: this.conn.type === "WebSocket",
+        },
+      ];
+    },
+
     // File System Access API is Chromium-only; gate the menu segment on it.
     localFolderSupported(): boolean {
       return LocalFolder.isSupported();
@@ -178,121 +232,199 @@ export default {
       return (this.meta as any)?.meta?.nostr_files?.[this.previewFilePath]?.url || "";
     },
 
-    // Tabbed structure consumed by ShareModal. Labels/descriptions reuse the
-    // existing share.* / github.menu.* / localFolder.menu.* keys; `disabled`
-    // mirrors the gates of the old dropdown (need a project / linked repo /
-    // linked folder / a previous export). `href` items open an external link.
-    shareTabs(): any[] {
+    // Groups for ShareModal, ordered by what the user wants to achieve. All
+    // texts are translated here so items can interpolate ({service}, {file}).
+    // `disabled` mirrors the old gates (need a saved project / linked repo /
+    // linked folder); a disabled item names the reason and, where possible, the
+    // action that unlocks it (`fix`).
+    shareGroups(): any[] {
+      const t = (key: string, values?: any) => this.$t(key, values) as string;
+      const meta = (this.meta as any)?.meta || {};
       const noProject = !this.$props.storageId;
-      const noRepo = !(this.meta as any)?.meta?.github;
-      const noGitlabRepo = !(this.meta as any)?.meta?.gitlab;
-      const noFolder = !(this.meta as any)?.meta?.localFolder;
 
-      const tabs: any[] = [
+      const tag = {
+        permanent: { text: t("share.tags.permanent"), tone: "good" },
+        noAccount: { text: t("share.tags.noAccount"), tone: "good" },
+        githubAccount: { text: t("share.tags.githubAccount") },
+        shortOnly: { text: t("share.tags.shortOnly"), tone: "warn" },
+        live: { text: t("share.tags.live"), tone: "good" },
+        sameCourse: { text: t("share.tags.sameCourse") },
+        ownCopy: { text: t("share.tags.ownCopy") },
+        allFiles: { text: t("share.tags.allFiles"), tone: "good" },
+      };
+
+      // items that need a project stored in this browser
+      const needsProject = (item: any) =>
+        noProject
+          ? {
+              ...item,
+              disabled: true,
+              reason: t("share.reasons.noProject"),
+              fix: { id: "fork", label: t("nav.fork") },
+            }
+          : item;
+
+      const repoItems = (service: "GitHub" | "GitLab", prefix: string, linked: boolean) => {
+        const s = { service };
+        const notLinked = !linked && {
+          disabled: true,
+          reason: t("share.reasons.noRepo", s),
+          fix: noProject ? undefined : { id: prefix + "Publish", label: t("share.actions.connectNow") },
+        };
+        return [
+          needsProject({
+            id: prefix + "Publish",
+            icon: "bi-cloud-upload",
+            label: t("share.items.repoPublish.label", s),
+            desc: t("share.items.repoPublish.desc", s),
+            tags: [tag.permanent, tag.allFiles],
+            action: t("share.actions.createRepo"),
+            primary: !linked,
+          }),
+          {
+            id: prefix + "Push",
+            icon: "bi-arrow-up-circle",
+            label: t("share.items.repoPush.label", s),
+            desc: t("share.items.repoPush.desc", s),
+            tech: "Push",
+            action: t("share.actions.push"),
+            primary: linked,
+            ...(notLinked || {}),
+          },
+          {
+            id: prefix + "Pull",
+            icon: "bi-arrow-down-circle",
+            label: t("share.items.repoPull.label", s),
+            desc: t("share.items.repoPull.desc", s),
+            tech: "Pull",
+            action: t("share.actions.pull"),
+            ...(notLinked || {}),
+          },
+          {
+            id: prefix + "Import",
+            icon: "bi-box-arrow-in-down",
+            label: t("share.items.repoImport.label", s),
+            desc: t("share.items.repoImport.desc", s),
+            action: t("share.actions.import"),
+          },
+        ];
+      };
+
+      // links to earlier publications: only the ones that exist are listed
+      const published: any[] = [];
+      if (this.gistLink)
+        published.push({ id: "githubGistLink", icon: "bi-github", label: t("share.items.githubGistLink.label"), desc: t("share.items.githubGistLink.desc"), href: this.gistLink, action: t("share.actions.open") });
+      if (this.nostrLink)
+        published.push({ id: "nostrLink", icon: "bi-broadcast", label: t("share.items.nostrLink.label"), desc: t("share.items.nostrLink.desc"), href: this.nostrLink, action: t("share.actions.open") });
+      if (this.githubCourseUrl)
+        published.push({ id: "githubRepoFile", icon: "bi-github", label: t("share.githubRepoFile", { file: this.activeFileName }), desc: t("share.items.repoFile.desc"), href: this.githubCourseUrl, action: t("share.actions.open") });
+      if (this.gitlabCourseUrl)
+        published.push({ id: "gitlabRepoFile", icon: "bi-gitlab", label: t("share.gitlabRepoFile", { file: this.activeFileName }), desc: t("share.items.repoFile.desc"), href: this.gitlabCourseUrl, action: t("share.actions.open") });
+      if (this.$props.fileUrl)
+        published.push({ id: "fileUrl", icon: "bi-globe", label: t("share.items.fileUrl.label"), desc: t("share.items.fileUrl.desc"), href: this.LiaScriptURL + "?" + this.$props.fileUrl, action: t("share.actions.open") });
+
+      const groups: any[] = [
         {
           id: "collaborate",
-          labelKey: "share.tabs.collaborate",
+          icon: "bi-people",
+          label: t("share.groups.collaborate.label"),
+          sub: t("share.groups.collaborate.sub"),
+          intro: t("share.groups.collaborate.intro"),
           sections: [
             {
               items: [
-                { id: "collaborationLink", icon: "bi-people", labelKey: "share.collaborationLink", descriptionKey: "share.collaborationLinkTitle", disabled: noProject },
-                { id: "snapshotUrl", icon: "bi-camera", labelKey: "share.snapshotUrl", descriptionKey: "share.snapshotUrlAria" },
-                { id: "embedCode", icon: "bi-code-slash", labelKey: "share.embedCode", descriptionKey: "share.embedCodeAria" },
-                { id: "externalResource", icon: "bi-link-45deg", labelKey: "share.externalResource", descriptionKey: "share.externalResourceAria" },
+                needsProject({ id: "collaborationLink", icon: "bi-people", label: t("share.items.collaborationLink.label"), desc: t("share.items.collaborationLink.desc"), tags: [tag.live, tag.sameCourse], tech: "WebRTC", action: t("share.actions.showLink"), primary: true }),
+                { id: "snapshotUrl", icon: "bi-copy", label: t("share.items.snapshotUrl.label"), desc: t("share.items.snapshotUrl.desc"), tags: [tag.ownCopy, tag.shortOnly], tech: "Snapshot-URL", action: t("share.actions.createLink") },
+                { id: "externalResource", icon: "bi-link-45deg", label: t("share.items.externalResource.label"), desc: t("share.items.externalResource.desc"), action: t("share.actions.enterUrl") },
               ],
             },
           ],
         },
         {
           id: "publish",
-          labelKey: "share.tabs.publish",
+          icon: "bi-globe",
+          label: t("share.groups.publish.label"),
+          sub: t("share.groups.publish.sub"),
+          intro: t("share.groups.publish.intro"),
           sections: [
             {
               items: [
-                { id: "githubGist", icon: "bi-github", labelKey: "share.githubGist", descriptionKey: "share.githubGistTooltip", disabled: noProject },
-                { id: "nostr", icon: "bi-broadcast", labelKey: "share.nostr", descriptionKey: "share.nostrAria" },
-                { id: "dataUri", icon: "bi-link", labelKey: "share.dataUri", descriptionKey: "share.dataUriAria" },
+                needsProject({ id: "githubGist", icon: "bi-github", label: t("share.items.githubGist.label"), desc: t("share.items.githubGist.desc"), tags: [tag.permanent, tag.githubAccount], tech: "Gist", action: t("share.actions.save"), primary: true }),
+                { id: "nostr", icon: "bi-broadcast", label: t("share.items.nostr.label"), desc: t("share.items.nostr.desc"), tags: [tag.permanent, tag.noAccount], tech: "Nostr", action: t("share.actions.publish") },
+                { id: "dataUri", icon: "bi-link", label: t("share.items.dataUri.label"), desc: t("share.items.dataUri.desc"), tags: [tag.noAccount, tag.shortOnly], tech: "data-URI", action: t("share.actions.createLink") },
+                { id: "embedCode", icon: "bi-code-slash", label: t("share.items.embedCode.label"), desc: t("share.items.embedCode.desc"), tags: [tag.shortOnly], tech: "iframe", action: t("share.actions.createCode") },
               ],
+            },
+            {
+              heading: t("share.sections.published"),
+              items: published,
+              empty: t("share.nothingPublished"),
             },
           ],
         },
         {
-          id: "published",
-          labelKey: "share.tabs.published",
+          id: "git",
+          icon: "bi-git",
+          label: t("share.groups.git.label"),
+          sub: t("share.groups.git.sub"),
+          intro: t("share.groups.git.intro"),
           sections: [
-            {
-              items: [
-                { id: "githubGistLink", icon: "bi-box-arrow-up-right", labelKey: "share.githubGistLink", descriptionKey: "share.githubGistLinkTooltip", href: this.gistLink, disabled: !this.gistLink },
-                { id: "nostrLink", icon: "bi-box-arrow-up-right", labelKey: "share.nostrLink", descriptionKey: "share.nostrLinkTooltip", href: this.nostrLink, disabled: !this.nostrLink },
-                { id: "githubRepoFile", icon: "bi-box-arrow-up-right", label: this.$t("share.githubRepoFile", { file: this.activeFileName }), descriptionKey: "share.githubRepoFileTooltip", href: this.githubCourseUrl, disabled: !this.githubCourseUrl },
-                { id: "gitlabRepoFile", icon: "bi-box-arrow-up-right", label: this.$t("share.gitlabRepoFile", { file: this.activeFileName }), descriptionKey: "share.gitlabRepoFileTooltip", href: this.gitlabCourseUrl, disabled: !this.gitlabCourseUrl },
-                { id: "fileUrl", icon: "bi-box-arrow-up-right", labelKey: "share.fileUrl", descriptionKey: "share.fileUrlTooltip", href: this.$props.fileUrl ? this.LiaScriptURL + "?" + this.$props.fileUrl : "", disabled: !this.$props.fileUrl },
-              ],
-            },
-          ],
-        },
-        {
-          id: "github",
-          labelKey: "share.tabs.github",
-          sections: [
-            {
-              items: [
-                { id: "githubImport", icon: "bi-box-arrow-in-down", labelKey: "github.menu.import", descriptionKey: "github.menu.importTooltip" },
-                { id: "githubPublish", icon: "bi-cloud-upload", labelKey: "github.menu.publish", descriptionKey: "github.menu.publishTooltip", disabled: noProject },
-                { id: "githubPush", icon: "bi-arrow-up-circle", labelKey: "github.menu.push", descriptionKey: "github.menu.pushTooltip", disabled: noRepo },
-                { id: "githubPull", icon: "bi-arrow-down-circle", labelKey: "github.menu.pull", descriptionKey: "github.menu.pullTooltip", disabled: noRepo },
-              ],
-            },
-          ],
-        },
-        {
-          id: "gitlab",
-          labelKey: "share.tabs.gitlab",
-          sections: [
-            {
-              items: [
-                { id: "gitlabImport", icon: "bi-box-arrow-in-down", labelKey: "gitlab.menu.import", descriptionKey: "gitlab.menu.importTooltip" },
-                { id: "gitlabPublish", icon: "bi-cloud-upload", labelKey: "gitlab.menu.publish", descriptionKey: "gitlab.menu.publishTooltip", disabled: noProject },
-                { id: "gitlabPush", icon: "bi-arrow-up-circle", labelKey: "gitlab.menu.push", descriptionKey: "gitlab.menu.pushTooltip", disabled: noGitlabRepo },
-                { id: "gitlabPull", icon: "bi-arrow-down-circle", labelKey: "gitlab.menu.pull", descriptionKey: "gitlab.menu.pullTooltip", disabled: noGitlabRepo },
-              ],
-            },
+            { heading: "GitHub", items: repoItems("GitHub", "github", !!meta.github) },
+            { heading: "GitLab", items: repoItems("GitLab", "gitlab", !!meta.gitlab) },
           ],
         },
       ];
 
       if (this.localFolderSupported) {
-        tabs.push({
+        groups.push({
           id: "localFolder",
-          labelKey: "share.tabs.localFolder",
+          icon: "bi-folder2-open",
+          label: t("share.groups.localFolder.label"),
+          sub: t("share.groups.localFolder.sub"),
+          intro: t("share.groups.localFolder.intro"),
           sections: [
             {
               items: [
-                { id: "openLocalFolder", icon: "bi-folder2-open", labelKey: "localFolder.menu.open", descriptionKey: "localFolder.menu.openTooltip", disabled: noProject },
-                { id: "localFolderSync", icon: "bi-arrow-down-up", labelKey: "localFolder.menu.sync", descriptionKey: "localFolder.menu.syncTooltip", disabled: noFolder },
+                needsProject({ id: "openLocalFolder", icon: "bi-folder-plus", label: t("share.items.openLocalFolder.label"), desc: t("share.items.openLocalFolder.desc"), action: t("share.actions.chooseFolder"), primary: !meta.localFolder }),
+                {
+                  id: "localFolderSync",
+                  icon: "bi-arrow-down-up",
+                  label: t("share.items.localFolderSync.label"),
+                  desc: t("share.items.localFolderSync.desc"),
+                  action: t("share.actions.sync"),
+                  primary: !!meta.localFolder,
+                  ...(meta.localFolder
+                    ? {}
+                    : {
+                        disabled: true,
+                        reason: t("share.reasons.noFolder"),
+                        fix: noProject ? undefined : { id: "openLocalFolder", label: t("share.actions.connectNow") },
+                      }),
+                },
               ],
             },
           ],
         });
       }
 
-      // Export is the last tab: the LiaScript Exporter (format conversion) plus
-      // the plain file downloads — i.e. every way to get the content "out".
-      tabs.push({
+      groups.push({
         id: "export",
-        labelKey: "share.tabs.export",
+        icon: "bi-download",
+        label: t("share.groups.export.label"),
+        sub: t("share.groups.export.sub"),
+        intro: t("share.groups.export.intro"),
         sections: [
           {
             items: [
-              { id: "exporter", icon: "bi-box-arrow-up-right", labelKey: "share.exporter", descriptionKey: "share.exporterTooltip", disabled: noProject },
-              { id: "downloadZip", icon: "bi-file-zip", labelKey: "share.downloadZipLabel", descriptionKey: "share.downloadZip" },
-              { id: "downloadReadme", icon: "bi-file-earmark-text", label: this.activeFileName, descriptionKey: "share.downloadActiveFileInfo" },
+              { id: "downloadZip", icon: "bi-file-zip", label: t("share.items.downloadZip.label"), desc: t("share.items.downloadZip.desc"), tags: [tag.allFiles], action: t("share.actions.download"), primary: true },
+              needsProject({ id: "exporter", icon: "bi-mortarboard", label: t("share.items.exporter.label"), desc: t("share.items.exporter.desc"), tech: "SCORM · IMS · PDF · ePub", action: t("share.actions.openExporter") }),
+              { id: "downloadReadme", icon: "bi-file-earmark-text", label: this.activeFileName, desc: t("share.downloadActiveFileInfo"), action: t("share.actions.download") },
             ],
           },
         ],
       });
 
-      return tabs;
+      return groups;
     },
   },
 
@@ -324,6 +456,7 @@ export default {
         gitlabPull: () => this.gitlabPull(),
         openLocalFolder: () => this.openLocalFolder(),
         localFolderSync: () => this.localFolderSync(),
+        fork: () => this.fork(),
       };
       actions[id]?.();
     },
@@ -634,6 +767,10 @@ export default {
       this.$refs.editor.fork();
     },
 
+    newCourse() {
+      (this.$refs.importMenu as any)?.openChooser();
+    },
+
     onResize() {
       this.horizontal =
         document.documentElement.clientWidth < document.documentElement.clientHeight;
@@ -648,7 +785,7 @@ export default {
         let code = this.$refs.editor.getPreviewValue();
 
         if (code.trim().length == 0) {
-          code = tutorial;
+          code = tutorialFor(this.$i18n.locale);
         }
 
         this.preview.focusOnMain = false;
@@ -765,7 +902,11 @@ export default {
       if (this.compilationCounter > 1) {
         this.previewNotReady = false;
 
-        if (this.$props.storageId) {
+        // an empty document shows the built-in introduction (see compile());
+        // its title/comment/version must not end up on the course card
+        const showsIntro = this.$refs.editor.getPreviewValue().trim().length === 0;
+
+        if (this.$props.storageId && !showsIntro) {
           const titleMatch = this.$refs.editor.getMainValue().match(/^# (.+)/m);
 
           if (titleMatch) params.title = titleMatch[1];
@@ -802,209 +943,206 @@ export default {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a v-if="!embed" class="navbar-brand" href="./" data-link="true">
-        <img :src="logoImg" alt="LiaScript" height="28" />
-        <span id="lia-edit">{{ $t('app.title') }}</span>
-      </a>
-      <span v-else class="navbar-brand">
-        <img :src="logoImg" alt="LiaScript" height="28" />
-        <span id="lia-edit">{{ $t('app.demo') }}</span>
-      </span>
-
-      <div
-        class="btn-toolbar btn-group-sm"
-        role="toolbar"
-        :aria-label="$t('nav.toolbar.ariaLabel')"
-      >
-        <div
-          class="btn-group btn-group-sm btn-outline-secondary me-2"
-          role="group"
-          :aria-label="$t('nav.toolbar.radioGroupAria')"
+  <nav class="navbar bg-white border-bottom lia-editbar">
+    <div class="container-fluid flex-nowrap gap-2 px-2">
+      <!-- left: where am I -->
+      <div class="lia-editbar-side d-flex align-items-center gap-2">
+        <a
+          v-if="!embed"
+          class="lia-logo"
+          href="./"
+          data-link="true"
+          :title="$t('nav.myCourses')"
+          :aria-label="$t('nav.myCourses')"
         >
-          <input
-            type="radio"
-            class="btn-check"
-            name="btnradio"
-            id="btnradio1"
-            autocomplete="off"
-            @click="changeMode(-1)"
-            :checked="currentMode < 0"
-          />
-          <label class="btn btn-sm btn-outline-secondary" for="btnradio1" :title="$t('nav.toolbar.editorOnly')">
-            <i class="bi bi-pencil"></i>
-          </label>
+          <img :src="logoImg" alt="" height="28" />
+        </a>
+        <span v-else class="lia-logo">
+          <img :src="logoImg" alt="" height="28" />
+        </span>
 
-          <input
-            type="radio"
-            class="btn-check"
-            name="btnradio"
-            id="btnradio2"
-            autocomplete="off"
-            :checked="currentMode === 0"
+        <div v-if="storageId && !embed" class="lia-course d-none d-sm-flex">
+          <a class="lia-course-crumb" href="./" data-link="true">{{ $t('nav.myCourses') }} /</a>
+          <span class="lia-course-title" :title="courseTitle">{{ courseTitle }}</span>
+        </div>
+        <span v-else class="fw-semibold d-none d-sm-inline">
+          {{ embed ? $t('app.demo') : $t('app.title') }}
+        </span>
+      </div>
+
+      <!-- center: what do I see -->
+      <div class="d-flex align-items-center gap-2 flex-shrink-0">
+        <div class="lia-view-switch" role="radiogroup" :aria-label="$t('nav.toolbar.radioGroupAria')">
+          <button
+            type="button"
+            role="radio"
+            :aria-checked="currentMode < 0"
+            :class="{ active: currentMode < 0 }"
+            :title="$t('nav.toolbar.editorOnly')"
+            @click="changeMode(-1)"
+          >
+            <i class="bi bi-pencil" aria-hidden="true"></i>
+            <span class="d-none d-xl-inline">{{ $t('nav.view.write') }}</span>
+          </button>
+          <button
+            type="button"
+            role="radio"
+            :aria-checked="currentMode === 0"
+            :class="{ active: currentMode === 0 }"
+            :title="$t('nav.toolbar.splitView')"
             @click="changeMode(0)"
-          />
-          <label class="btn btn-sm btn-outline-secondary" for="btnradio2" :title="$t('nav.toolbar.splitView')">
+          >
             <i
               class="bi bi-layout-split"
-              style="display: inline-block"
-              :style="{ transform: horizontal ? 'rotate(90deg)' : 'rotate(0deg)' }"
+              aria-hidden="true"
+              :style="{ transform: horizontal ? 'rotate(90deg)' : 'none' }"
             ></i>
-          </label>
-
-          <input
-            type="radio"
-            class="btn-check"
-            name="btnradio"
-            id="btnradio3"
-            autocomplete="off"
+            <span class="d-none d-xl-inline">{{ $t('nav.view.both') }}</span>
+          </button>
+          <button
+            type="button"
+            role="radio"
+            :aria-checked="currentMode > 0"
+            :class="{ active: currentMode > 0 }"
+            :title="$t('nav.toolbar.previewOnly')"
             @click="changeMode(1)"
-            :checked="currentMode > 0"
-          />
-          <label class="btn btn-sm btn-outline-secondary" for="btnradio3" :title="$t('nav.toolbar.previewOnly')">
-            <i class="bi bi-eye"></i>
-          </label>
+          >
+            <i class="bi bi-eye" aria-hidden="true"></i>
+            <span class="d-none d-xl-inline">{{ $t('nav.view.preview') }}</span>
+          </button>
         </div>
+
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary lia-bar-btn"
+          @click="compile()"
+          :title="$t('nav.toolbar.compile')"
+          :aria-label="$t('nav.toolbar.compile')"
+        >
+          <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+          <span class="d-none d-lg-inline">{{ $t('nav.toolbar.refresh') }}</span>
+        </button>
       </div>
 
-      <button
-        type="button"
-        class="btn btn-sm btn-outline-secondary me-2"
-        @click="compile()"
-        :title="$t('nav.toolbar.compile')"
-      >
-        <i class="bi bi-arrow-counterclockwise"></i>
-      </button>
-
-      <div class="flex-grow-1 d-flex justify-content-center">
-        <LanguageDropdown />
-      </div>
-
-      <!-- Drop-Down Navigation -->
-
-      <button
-        v-if="!embed"
-        class="navbar-toggler btn btn-sm btn-outline-secondary me-2"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        :aria-label="$t('nav.toolbar.toggleNavAria')"
-      >
-        <i class="bi bi-list"></i>
-      </button>
-
-      <div v-if="!embed" class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
-        <!-- SPAN -->
-        <div class="navbar-nav me-auto mb-lg-0"></div>
-
-        <div class="navbar-nav mb-2 mb-lg-0">
-          <div class="nav-actions-row">
-          <div class="nav-item nav-item-sm ms-2 me-2">
-            <a
-              class="nav-link"
-              aria-current="page"
-              href="https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md"
-              :title="$t('nav.help')"
-              target="_blank"
-            >
-              <i class="bi bi-question"></i>
-              {{ $t('nav.help') }}
-            </a>
-          </div>
-
-         
-
-          <div class="nav-item ms-2 me-2">
+      <!-- right: what can I do -->
+      <div class="lia-editbar-side d-flex align-items-center justify-content-end gap-1">
+        <template v-if="!embed">
+          <div class="dropdown">
             <button
               type="button"
-              class="btn nav-link btn-link"
-              @click="fork"
-              :title="$t('nav.fork')"
-            >
-              <i class="bi bi-copy"></i>
-              {{ $t('nav.fork') }}
-            </button>
-          </div>
-          </div>
-
-          <div class="nav-item ms-2 me-2">
-            <button
-              type="button"
-              class="btn nav-link btn-link"
-              @click="openShare"
-              :title="$t('nav.menu')"
-            >
-              <i class="bi bi-three-dots-vertical"></i>
-              {{ $t('nav.menu') }}
-            </button>
-          </div>
-
-          <div class="nav-item dropdown ms-2 me-2 d-flex align-items-center flex-wrap">
-            <button
-              class="btn btn-sm dropdown-toggle text-white"
-              :class="conn.users === 0 ? 'bg-secondary' : 'bg-primary'"
+              class="btn btn-sm lia-bar-btn lia-conn"
+              :class="conn.type === 'Offline' ? 'btn-outline-secondary' : 'btn-primary'"
               data-bs-toggle="dropdown"
               data-bs-display="static"
               aria-expanded="false"
-              style="width: 100%"
+              :title="connTitle"
               :aria-label="
                 conn.type === 'Offline'
                   ? $t('nav.connection.offlineAria')
                   : $t('nav.connection.onlineAria', { type: conn.type })
               "
             >
-              {{ conn.type }}
-              <i class="bi bi-people-fill mx-1"></i>
-              <span class="mx-1">
-                {{ conn.users > 0 ? conn.users : "" }}
-              </span>
+              <i class="bi" :class="conn.type === 'Offline' ? 'bi-person' : 'bi-people-fill'" aria-hidden="true"></i>
+              <span class="d-none d-md-inline">{{ connLabel }}</span>
+              <span v-if="conn.users > 0" class="lia-conn-users">{{ conn.users }}</span>
+              <i class="bi bi-chevron-down small" aria-hidden="true"></i>
             </button>
 
-            <ul class="dropdown-menu">
-              <li>
-                <a
-                  class="btn dropdown-item btn-link"
-                  :class="{ disabled: !storageId }"
-                  aria-current="page"
-                  :href="this.urlPath(['edit', storageId])"
-                  :aria-label="$t('nav.connection.switchOfflineAria')"
-                >
-                  Offline
-                </a>
-              </li>
+            <div class="dropdown-menu dropdown-menu-end lia-conn-menu">
+              <h6 class="dropdown-header">{{ $t('nav.connection.title') }}</h6>
+              <a
+                v-for="option in connOptions"
+                :key="option.id"
+                class="dropdown-item lia-conn-option"
+                :class="{ active: option.active, disabled: !storageId }"
+                :href="urlPath(option.path)"
+                :aria-current="option.active ? 'true' : null"
+                :aria-label="$t(option.ariaKey)"
+              >
+                <i class="bi" :class="option.active ? 'bi-record-circle-fill' : 'bi-circle'" aria-hidden="true"></i>
+                <span>
+                  <span class="d-block fw-semibold">{{ $t(option.labelKey) }}</span>
+                  <span class="d-block small lia-conn-desc">{{ $t(option.descKey) }}</span>
+                  <span v-if="option.tech" class="d-block small lia-conn-desc">
+                    {{ $t('nav.connection.tech', { name: option.tech }) }}
+                  </span>
+                </span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <p class="px-3 mb-2 small text-body-secondary lia-conn-hint">
+                {{ $t('nav.connection.sameCourse') }}
+              </p>
+              <div class="px-3 pb-1">
+                <button type="button" class="btn btn-sm btn-outline-secondary" @click="fork">
+                  <i class="bi bi-copy" aria-hidden="true"></i>
+                  {{ $t('nav.fork') }}
+                </button>
+              </div>
+            </div>
+          </div>
 
+          <a
+            class="btn btn-sm lia-bar-btn lia-icon-btn d-none d-sm-inline-flex"
+            href="https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md"
+            target="_blank"
+            :title="$t('nav.help')"
+            :aria-label="$t('nav.help')"
+          >
+            <i class="bi bi-question-circle" aria-hidden="true"></i>
+          </a>
+
+          <div class="d-none d-md-block">
+            <LanguageDropdown align="end" />
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-sm btn-primary lia-bar-btn"
+            @click="openShare"
+            :title="$t('nav.menu')"
+            :aria-label="$t('nav.menu')"
+          >
+            <i class="bi bi-box-arrow-up" aria-hidden="true"></i>
+            <span class="d-none d-md-inline">{{ $t('nav.menu') }}</span>
+          </button>
+
+          <div class="dropdown">
+            <button
+              type="button"
+              class="btn btn-sm lia-bar-btn lia-icon-btn"
+              data-bs-toggle="dropdown"
+              data-bs-display="static"
+              aria-expanded="false"
+              :title="$t('nav.more')"
+              :aria-label="$t('nav.more')"
+            >
+              <i class="bi bi-three-dots-vertical" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a
-                  class="btn dropdown-item btn-link"
-                  :class="{ disabled: !storageId }"
-                  aria-current="page"
-                  :href="this.urlPath(['edit', storageId, 'webrtc'])"
-                  :aria-label="$t('nav.connection.switchWebRTCAria')"
-                >
-                  WebRTC
-                </a>
+                <button type="button" class="dropdown-item" @click="newCourse">
+                  <i class="bi bi-plus-lg me-2" aria-hidden="true"></i>{{ $t('index.newCourse') }}
+                </button>
               </li>
               <li>
+                <button type="button" class="dropdown-item" @click="fork">
+                  <i class="bi bi-copy me-2" aria-hidden="true"></i>{{ $t('nav.fork') }}
+                </button>
+              </li>
+              <li class="d-sm-none">
                 <a
-                  class="btn dropdown-item btn-link"
-                  :class="{ disabled: !storageId }"
-                  aria-current="page"
-                  :href="this.urlPath(['edit', storageId, 'websocket'])"
-                  :aria-label="$t('nav.connection.switchWebSocketAria')"
+                  class="dropdown-item"
+                  href="https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md"
+                  target="_blank"
                 >
-                  Websocket
+                  <i class="bi bi-question-circle me-2" aria-hidden="true"></i>{{ $t('nav.help') }}
                 </a>
               </li>
             </ul>
           </div>
 
-          <div class="nav-item nav-item-sm ms-2 me-2 d-flex align-items-center">
-            <ImportMenu />
-          </div>
-        </div>
+          <ImportMenu ref="importMenu" hide-button />
+        </template>
       </div>
     </div>
   </nav>
@@ -1035,7 +1173,7 @@ export default {
               :title="showToolbar ? $t('nav.activityBar.hideToolbar') : $t('nav.activityBar.showToolbar')"
               @click="showToolbar = !showToolbar"
             >
-              <i class="bi bi-layout-text-window-reverse"></i>
+              <i class="bi bi-tools" aria-hidden="true"></i>
             </button>
             <button
               class="btn btn-sm btn-outline-secondary"
@@ -1044,7 +1182,7 @@ export default {
               :title="showFiles ? $t('nav.activityBar.hideFiles') : $t('nav.activityBar.showFiles')"
               @click="showFiles = !showFiles"
             >
-              <i class="bi bi-layout-text-sidebar-reverse"></i>
+              <i class="bi bi-folder2-open" aria-hidden="true"></i>
             </button>
           </div>
 
@@ -1121,7 +1259,7 @@ export default {
   </div>
 
   <Modal ref="modal" />
-  <ShareModal ref="shareModal" :tabs="shareTabs" @action="onShareAction" />
+  <ShareModal ref="shareModal" :groups="shareGroups" :course-title="storageId ? courseTitle : ''" @action="onShareAction" />
   <NostrModal
     ref="nostrModal"
     :visible="nostrModalVisible"
@@ -1217,26 +1355,146 @@ export default {
   height: 100vh;
 }
 
-/* help / new / fork in one row */
-.nav-actions-row {
-  display: flex;
+/* top bar: left = course, center = view, right = actions */
+.lia-editbar {
+  height: 56px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
-/* below the navbar breakpoint (lg) the menu is stacked: keep these three in a
-   single row and let them share the full width equally */
-@media (max-width: 991.98px) {
-  .nav-actions-row {
-    width: 100%;
+.lia-editbar-side {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* the actions never shrink below their content; the course title gives way */
+.lia-editbar-side:last-child {
+  min-width: max-content;
+}
+
+@media (max-width: 575.98px) {
+  .lia-view-switch button {
+    padding: 0 0.55rem;
   }
-  .nav-actions-row > .nav-item {
-    flex: 1 1 0;
-    margin-left: 0.25rem !important;
-    margin-right: 0.25rem !important;
+  .lia-conn .bi-chevron-down {
+    display: none;
   }
-  .nav-actions-row > .nav-item .nav-link {
-    width: 100%;
-    text-align: center;
-  }
+}
+
+.lia-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
+.lia-course {
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.lia-course-crumb {
+  font-size: 0.75rem;
+  color: var(--lia-muted);
+  text-decoration: none;
+}
+
+.lia-course-crumb:hover {
+  color: var(--lia-accent);
+}
+
+.lia-course-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lia-view-switch {
+  display: inline-flex;
+  padding: 3px;
+  background: #eef1f3;
+  border-radius: 0.6rem;
+}
+
+.lia-view-switch button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 32px;
+  padding: 0 0.7rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: #3b4652;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.lia-view-switch button .bi {
+  display: inline-block;
+}
+
+.lia-view-switch button.active {
+  background: #fff;
+  color: #17212b;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(23, 33, 43, 0.12);
+}
+
+.lia-bar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 36px;
+  white-space: nowrap;
+}
+
+.lia-icon-btn {
+  width: 36px;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  color: #3b4652;
+  font-size: 1.1rem;
+}
+
+.lia-icon-btn:hover {
+  background: #eef1f3;
+}
+
+.lia-conn-users {
+  font-weight: 600;
+}
+
+.lia-conn-menu {
+  width: min(22rem, calc(100vw - 1rem));
+  white-space: normal;
+}
+
+.lia-conn-option {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  white-space: normal;
+}
+
+.lia-conn-option .bi {
+  margin-top: 0.15rem;
+}
+
+.lia-conn-desc {
+  color: var(--lia-muted);
+}
+
+.lia-conn-option.active .lia-conn-desc {
+  color: #d5ecea;
 }
 
 .invisible {
@@ -1295,18 +1553,6 @@ export default {
   }
 }
 
-#lia-edit {
-  margin-left: 10px;
-}
-
-@media (max-width: 418px) {
-  #lia-edit {
-    display: none;
-  }
-  .btn {
-    padding: 0.2rem 0.4rem;
-  }
-}
 </style>
 
 <style>

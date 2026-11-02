@@ -6,16 +6,17 @@
   "nav": {
     "help": "Iranlowo",
     "new": "Titun",
-    "fork": "Fork",
-    "menu": "Menyu",
+    "fork": "Ṣe ẹda kan",
+    "menu": "Pin & gbe jade",
     "toolbar": {
       "ariaLabel": "Pẹpẹ irinṣẹ pẹlu awọn ẹgbẹ bọtini",
       "radioGroupAria": "Ẹgbẹ bọtini yiyan",
       "editorOnly": "Olootu nikan",
       "splitView": "Wiwo pin",
       "previewOnly": "Awotẹlẹ nikan",
-      "compile": "Kompaili (Ctrl+S)",
-      "toggleNavAria": "Yi lilọ kiri pada"
+      "compile": "Sọ awotẹlẹ di tuntun (Ctrl+S)",
+      "toggleNavAria": "Yi lilọ kiri pada",
+      "refresh": "Sọ di tuntun"
     },
     "activityBar": {
       "hideToolbar": "Tọju pẹpẹ irinṣẹ olootu",
@@ -28,12 +29,30 @@
       "onlineAria": "Olootu wa ni ipo ifowosowopo nipasẹ {type}, eyi tumọ si pe o le pin URL ki o bẹrẹ ṣiṣatunkọ pẹlu awọn omiiran",
       "switchOfflineAria": "Pa ṣiṣatunkọ ifowosowopo ki o yipada si ipo aisinipo",
       "switchWebRTCAria": "Yipada si ṣiṣatunkọ ifowosowopo nipasẹ WebRTC",
-      "switchWebSocketAria": "Yipada si ṣiṣatunkọ ifowosowopo nipasẹ WebSocket"
+      "switchWebSocketAria": "Yipada si ṣiṣatunkọ ifowosowopo nipasẹ WebSocket",
+      "title": "Tani n kọwe?",
+      "solo": "Emi nikan",
+      "soloDesc": "Ohun gbogbo n duro lori ẹrọ yii. O n ṣiṣẹ laisi intanẹẹti.",
+      "webrtc": "Laaye – taara",
+      "webrtcDesc": "Pin ọna asopọ naa, gbogbo eniyan yoo ri awọn ayipada lẹsẹkẹsẹ. Awọn aṣawakiri n sopọ mọ ara wọn taara.",
+      "websocket": "Laaye – nipasẹ olupin",
+      "websocketDesc": "O gbẹkẹle diẹ sii nigbati eniyan ba pọ tabi ni awọn nẹtiwọọki ile-iwe ti o muna.",
+      "tech": "Imọ-ẹrọ: {name}",
+      "sameCourse": "Gbogbo ẹni ti o ni ọna asopọ n ṣatunkọ iṣẹ-ẹkọ kan naa. Ṣe o fẹ ẹya tirẹ? Ṣe ẹda kan.",
+      "users": "{n} lori ayelujara"
+    },
+    "myCourses": "Awọn iṣẹ-ẹkọ mi",
+    "savedLocal": "Ti fi pamọ sinu aṣawakiri yii",
+    "more": "Awọn iṣe diẹ sii",
+    "view": {
+      "write": "Kọ",
+      "both": "Mejeeji",
+      "preview": "Awotẹlẹ"
     }
   },
   "share": {
     "header": "Pin olootu ...",
-    "modalTitle": "Share & actions",
+    "modalTitle": "Pin & gbe jade",
     "publishedHeading": "Open existing publication",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP archive",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Kini o fẹ ṣe pẹlu “{title}”?",
+    "goalsAria": "Awọn ibi-afẹde",
+    "groups": {
+      "collaborate": {
+        "label": "Ṣatunkọ papọ",
+        "sub": "Awọn miiran n kọwe pẹlu rẹ",
+        "intro": "Pe awọn miiran lati ṣiṣẹ lori iṣẹ-ẹkọ yii – laaye tabi gẹgẹ bi ẹda tiwọn."
+      },
+      "publish": {
+        "label": "Tẹjade",
+        "sub": "Ọna asopọ fun awọn akẹkọọ",
+        "intro": "Yan bi awọn akẹkọọ ṣe yẹ ki o ṣi iṣẹ-ẹkọ naa. Awọn aami yoo ran ọ lọwọ lati pinnu."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Ṣe afẹyinti ki o muṣiṣẹpọ",
+        "intro": "Fi gbogbo iṣẹ akanṣe pẹlu gbogbo awọn faili pamọ sinu ibi ipamọ (repository) ki o jẹ ki o wa ni imudojuiwọn."
+      },
+      "localFolder": {
+        "label": "Àpò lori kọmputa yii",
+        "sub": "Muṣiṣẹpọ pẹlu awọn faili gidi",
+        "intro": "So àpò kan lori kọmputa rẹ pọ lati ṣiṣẹ lori awọn faili pẹlu awọn eto miiran naa."
+      },
+      "export": {
+        "label": "Gba silẹ & gbe jade",
+        "sub": "ZIP, SCORM fun LMS rẹ, PDF …",
+        "intro": "Mu iṣẹ-ẹkọ naa lọ pẹlu rẹ tabi yi i pada fun pẹpẹ ikẹkọ kan."
+      }
+    },
+    "sections": {
+      "published": "Ti tẹjade tẹlẹ"
+    },
+    "nothingPublished": "Ko si nkankan sibẹsibẹ. Awọn ọna asopọ ti o ṣẹda nibi yoo han ninu atokọ yii.",
+    "items": {
+      "collaborationLink": {
+        "label": "Pe lati ṣatunkọ laaye",
+        "desc": "Gbogbo ẹni ti o ni ọna asopọ n ṣatunkọ iṣẹ-ẹkọ kan naa ni akoko kan naa."
+      },
+      "snapshotUrl": {
+        "label": "Fi ẹda ti a le ṣatunkọ ranṣẹ",
+        "desc": "O ṣi olootu pẹlu ẹda faili lọwọlọwọ. Atilẹba rẹ ko ni yipada."
+      },
+      "externalResource": {
+        "label": "Ọna asopọ olootu si faili ori ayelujara",
+        "desc": "Tẹ adirẹsi faili Markdown kan lori ayelujara; ọna asopọ naa yoo ṣi i ninu olootu."
+      },
+      "githubGist": {
+        "label": "Fi pamọ bi GitHub Gist",
+        "desc": "Ọna asopọ ayeraye si iṣẹ-ẹkọ naa, ti a fi pamọ sinu akọọlẹ GitHub rẹ."
+      },
+      "nostr": {
+        "label": "Tẹjade lori Nostr",
+        "desc": "A fi pamọ ni ọna ti ko ni aarin kan, laisi akọọlẹ lọdọ olupese eyikeyi."
+      },
+      "dataUri": {
+        "label": "Fi iṣẹ-ẹkọ ranṣẹ ninu ọna asopọ",
+        "desc": "Gbogbo ọrọ naa wa ninu ọna asopọ. O dara fun awọn ohun elo fifiranṣẹ ati awọn idanwo kiakia."
+      },
+      "embedCode": {
+        "label": "Fi sinu oju opo wẹẹbu",
+        "desc": "Koodu HTML ti o fi olootu ati awotẹlẹ han ninu oju-iwe tirẹ."
+      },
+      "githubGistLink": {
+        "label": "Ṣi ẹya Gist",
+        "desc": "Iṣẹ-ẹkọ naa bi o ṣe fi pamọ gẹgẹ bi GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Ṣi ẹya Nostr",
+        "desc": "Iṣẹ-ẹkọ naa bi o ṣe tẹjade rẹ lori Nostr."
+      },
+      "repoFile": {
+        "desc": "O ṣi faili lati inu ibi ipamọ ti a sopọ – kọkọ gbe awọn ayipada rẹ soke."
+      },
+      "fileUrl": {
+        "label": "Ṣi faili ori ayelujara lori LiaScript",
+        "desc": "Iṣẹ-ẹkọ lati adirẹsi wẹẹbu ti a fi ṣi olootu yii."
+      },
+      "repoImport": {
+        "label": "Gbe wọle lati {service}",
+        "desc": "Ṣafikun awọn faili lati ibi ipamọ {service} kan si iṣẹ-ẹkọ yii."
+      },
+      "repoPublish": {
+        "label": "Tẹjade si ibi ipamọ tuntun",
+        "desc": "O ṣẹda ibi ipamọ {service} tuntun ki o si gbe gbogbo awọn faili iṣẹ akanṣe soke."
+      },
+      "repoPush": {
+        "label": "Gbe awọn ayipada soke",
+        "desc": "O fi awọn ayipada rẹ pamọ sinu ibi ipamọ {service} ti a sopọ."
+      },
+      "repoPull": {
+        "label": "Mu awọn ayipada wa",
+        "desc": "O gba awọn ayipada ti awọn miiran ṣe ninu ibi ipamọ {service}."
+      },
+      "openLocalFolder": {
+        "label": "So àpò kan pọ",
+        "desc": "Yan àpò lori kọmputa rẹ ti iṣẹ-ẹkọ yii yoo muṣiṣẹpọ pẹlu rẹ."
+      },
+      "localFolderSync": {
+        "label": "Muṣiṣẹpọ pẹlu àpò naa",
+        "desc": "Ṣe afiwe awọn faili ki o gba awọn ayipada ni itọsọna mejeeji."
+      },
+      "exporter": {
+        "label": "Yi pada fun pẹpẹ ikẹkọ",
+        "desc": "LiaScript Exporter n ṣẹda SCORM, IMS, PDF, ePub ati diẹ sii lati inu iṣẹ akanṣe rẹ."
+      },
+      "downloadZip": {
+        "label": "Gba silẹ bi ZIP",
+        "desc": "Gbogbo iṣẹ akanṣe pẹlu gbogbo awọn faili – o tun dara bi afẹyinti."
+      }
+    },
+    "tags": {
+      "permanent": "Ayeraye",
+      "githubAccount": "O nilo akọọlẹ GitHub",
+      "noAccount": "Laisi akọọlẹ",
+      "shortOnly": "Awọn iṣẹ-ẹkọ kukuru nikan, laisi aworan",
+      "live": "Laaye",
+      "sameCourse": "Iṣẹ-ẹkọ kan naa fun gbogbo eniyan",
+      "ownCopy": "Ẹda tirẹ",
+      "allFiles": "Gbogbo awọn faili"
+    },
+    "reasons": {
+      "noProject": "Fun awọn iṣẹ-ẹkọ ti a fi pamọ sinu aṣawakiri yii nikan.",
+      "noRepo": "Yoo wa ni kete ti iṣẹ-ẹkọ ba sopọ mọ ibi ipamọ {service} kan.",
+      "noFolder": "Yoo wa ni kete ti àpò kan ba sopọ."
+    },
+    "actions": {
+      "showLink": "Fi ọna asopọ han",
+      "createLink": "Ṣẹda ọna asopọ",
+      "enterUrl": "Tẹ adirẹsi sii",
+      "save": "Fi pamọ",
+      "publish": "Tẹjade",
+      "createCode": "Ṣẹda koodu",
+      "import": "Gbe wọle",
+      "createRepo": "Ṣẹda ibi ipamọ",
+      "push": "Gbe soke",
+      "pull": "Mu wa",
+      "chooseFolder": "Yan àpò",
+      "sync": "Muṣiṣẹpọ",
+      "openExporter": "Ṣi Exporter",
+      "download": "Gba silẹ",
+      "open": "Ṣi",
+      "connectNow": "Sopọ bayii"
+    }
   },
   "modal": {
     "close": "Pa",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Iṣẹ-ẹkọ tuntun",
-    "searchPlaceholder": "Tẹ lati wa...",
+    "searchPlaceholder": "Wa akọle tabi akoonu",
     "searchAriaLabel": "Aaye wiwa",
     "clearSearchAria": "Nu wiwa kuro",
     "footer": "Eyi jẹ olootu ori ayelujara fun ifowosowopo fun {liascript}. Gbogbo akoonu wa ni ipamọ ninu aṣawakiri rẹ nikan. Ti o ba nilo awokose, wo diẹ ninu awọn {examples} wa, wa {templates} ti a le fi sii, tabi {courses} ti a ti tẹjade tẹlẹ.",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "Iwe ofo",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "Bẹrẹ lati awoṣe kan",
+      "templateDesc": "Iṣẹ-ẹkọ apẹẹrẹ pẹlu ọna kika, idanwo, koodu ati diẹ sii – ṣetan lati tun kọ."
+    },
+    "welcome": {
+      "title": "Kọ awọn iṣẹ-ẹkọ ibaraenisepo – ki o si ri lẹsẹkẹsẹ bi wọn ṣe n ṣiṣẹ",
+      "lead": "Iwọ n kọ Markdown, awotẹlẹ ti o wa lẹgbẹẹ rẹ n fi awọn ifaworanhan, idanwo ati kika soke han. Ko nilo akọọlẹ – ohun gbogbo n ṣiṣẹ ninu aṣawakiri rẹ.",
+      "open": "Ṣi faili kan",
+      "openDesc": "Faili Markdown tabi ile ifi nkan pamọ ZIP lati ẹrọ rẹ.",
+      "remote": "Gba lati ori ayelujara",
+      "remoteDesc": "GitHub, GitLab, Gist, adirẹsi wẹẹbu tabi àpò kan lori kọmputa rẹ.",
+      "examples": "Tabi kọkọ wo apẹẹrẹ ti o ti pari",
+      "hide": "Fi pamọ"
+    },
+    "storage": {
+      "title": "Awọn iṣẹ-ẹkọ rẹ wa ni ipamọ ninu aṣawakiri yii nikan.",
+      "body": "Ti o ba pa data aaye naa rẹ, wọn yoo sọnu. Ṣe afẹyinti awọn iṣẹ-ẹkọ pataki bi ZIP, sinu àpò kan tabi si GitHub – ninu olootu nipasẹ “Pin & gbe jade”."
+    },
+    "courses": "Awọn iṣẹ-ẹkọ mi",
+    "courseCount": "iṣẹ-ẹkọ {n} | awọn iṣẹ-ẹkọ {n}",
+    "newCourseDesc": "Awoṣe, faili tabi gbigbe wọle"
   },
   "card": {
     "untitled": "Laisi akọle",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "Aṣawakiri nikan",
+      "folder": "Àpò"
+    },
+    "linkedTitle": "Tun wa ni ipamọ ni ita aṣawakiri yii",
+    "localTitle": "Wa ni ipamọ ninu aṣawakiri yii nikan – ṣe afẹyinti nipasẹ “Pin & gbe jade”"
   },
   "footer": {
     "followUs": "Tẹle wa lori:"

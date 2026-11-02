@@ -34,6 +34,12 @@ const localeNames: Record<string, string> = {
 export default {
   name: 'LanguageDropdown',
 
+  props: {
+    // "center" (default) opens the menu centered under the button,
+    // "end" aligns it to the right edge, for a button at the end of a bar
+    align: { type: String, default: 'center' },
+  },
+
   data() {
     return { open: false, locales }
   },
@@ -78,7 +84,8 @@ export default {
     <ul
       class="dropdown-menu"
       :class="{ show: open }"
-      style="left: 50%; transform: translateX(-50%); max-height: calc(100vh - 4rem); overflow-y: auto; overscroll-behavior: contain;"
+      :style="align === 'end' ? 'right: 0; left: auto;' : 'left: 50%; transform: translateX(-50%);'"
+      style="max-height: calc(100vh - 4rem); overflow-y: auto; overscroll-behavior: contain;"
     >
       <li v-for="locale in locales" :key="locale">
         <button

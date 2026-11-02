@@ -6,16 +6,17 @@
   "nav": {
     "help": "Помощ",
     "new": "Нов",
-    "fork": "Fork",
-    "menu": "Меню",
+    "fork": "Създаване на копие",
+    "menu": "Споделяне и експорт",
     "toolbar": {
       "ariaLabel": "Лента с инструменти с групи бутони",
       "radioGroupAria": "Група радио бутони за превключване",
       "editorOnly": "Само редактор",
       "splitView": "Разделен изглед",
       "previewOnly": "Само преглед",
-      "compile": "Компилиране (Ctrl+S)",
-      "toggleNavAria": "Превключване на навигацията"
+      "compile": "Опресняване на прегледа (Ctrl+S)",
+      "toggleNavAria": "Превключване на навигацията",
+      "refresh": "Опресняване"
     },
     "activityBar": {
       "hideToolbar": "Скриване на лентата с инструменти на редактора",
@@ -28,12 +29,30 @@
       "onlineAria": "Редакторът е в режим на съвместна работа чрез {type}, което означава, че можете да споделите URL адреса и да редактирате с други",
       "switchOfflineAria": "Изключване на съвместното редактиране и преминаване към офлайн режим",
       "switchWebRTCAria": "Преминаване към съвместно редактиране чрез WebRTC",
-      "switchWebSocketAria": "Преминаване към съвместно редактиране чрез WebSocket"
+      "switchWebSocketAria": "Преминаване към съвместно редактиране чрез WebSocket",
+      "title": "Кой пише?",
+      "solo": "Само аз",
+      "soloDesc": "Всичко остава на това устройство. Работи и без интернет.",
+      "webrtc": "На живо – директно",
+      "webrtcDesc": "Споделете връзката и всички ще виждат промените веднага. Браузърите се свързват директно помежду си.",
+      "websocket": "На живо – чрез сървър",
+      "websocketDesc": "По-надеждно при много хора или в строги училищни мрежи.",
+      "tech": "Технология: {name}",
+      "sameCourse": "Всички с връзката редактират един и същ курс. Искате своя версия? Направете копие.",
+      "users": "{n} онлайн"
+    },
+    "myCourses": "Моите курсове",
+    "savedLocal": "Запазено в този браузър",
+    "more": "Още действия",
+    "view": {
+      "write": "Писане",
+      "both": "И двете",
+      "preview": "Преглед"
     }
   },
   "share": {
     "header": "Споделяне на редактора ...",
-    "modalTitle": "Споделяне и действия",
+    "modalTitle": "Споделяне и експорт",
     "publishedHeading": "Отваряне на съществуваща публикация",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP архив",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Какво искате да направите с „{title}“?",
+    "goalsAria": "Цели",
+    "groups": {
+      "collaborate": {
+        "label": "Редактиране заедно",
+        "sub": "Други пишат с вас",
+        "intro": "Поканете други да работят по този курс – на живо или в собствено копие."
+      },
+      "publish": {
+        "label": "Публикуване",
+        "sub": "Връзка за учащите",
+        "intro": "Изберете как учащите да отварят курса. Етикетите ще ви помогнат да решите."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Архивиране и синхронизиране",
+        "intro": "Съхранете целия проект с всички файлове в хранилище и го поддържайте актуален."
+      },
+      "localFolder": {
+        "label": "Папка на компютъра",
+        "sub": "Синхронизиране с истински файлове",
+        "intro": "Свържете папка на компютъра си, за да работите с файловете и в други програми."
+      },
+      "export": {
+        "label": "Изтегляне и експорт",
+        "sub": "ZIP, SCORM за вашата LMS, PDF …",
+        "intro": "Вземете курса със себе си или го преобразувайте за учебна платформа."
+      }
+    },
+    "sections": {
+      "published": "Вече публикувано"
+    },
+    "nothingPublished": "Все още нищо. Връзките, които създадете тук, ще се появят в този списък.",
+    "items": {
+      "collaborationLink": {
+        "label": "Покана за редактиране на живо",
+        "desc": "Всички с връзката редактират един и същ курс едновременно."
+      },
+      "snapshotUrl": {
+        "label": "Изпращане на копие за редактиране",
+        "desc": "Отваря редактора с копие на текущия файл. Оригиналът ви остава непроменен."
+      },
+      "externalResource": {
+        "label": "Връзка към редактора за онлайн файл",
+        "desc": "Въведете адреса на Markdown файл в интернет; връзката ще го отвори в редактора."
+      },
+      "githubGist": {
+        "label": "Запазване като GitHub Gist",
+        "desc": "Постоянна връзка към курса, съхранена във вашия акаунт в GitHub."
+      },
+      "nostr": {
+        "label": "Публикуване в Nostr",
+        "desc": "Съхранява се децентрализирано, без акаунт при какъвто и да е доставчик."
+      },
+      "dataUri": {
+        "label": "Изпращане на курса в самата връзка",
+        "desc": "Целият текст се съдържа във връзката. Удобно за месинджъри и бързи тестове."
+      },
+      "embedCode": {
+        "label": "Вграждане в уебсайт",
+        "desc": "HTML код, който показва редактора и прегледа във вашата собствена страница."
+      },
+      "githubGistLink": {
+        "label": "Отваряне на версията в Gist",
+        "desc": "Курсът такъв, какъвто сте го запазили като GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Отваряне на версията в Nostr",
+        "desc": "Курсът такъв, какъвто сте го публикували в Nostr."
+      },
+      "repoFile": {
+        "desc": "Отваря файла от свързаното хранилище – първо качете промените си."
+      },
+      "fileUrl": {
+        "label": "Отваряне на онлайн файла в LiaScript",
+        "desc": "Курсът от уеб адреса, с който е отворен този редактор."
+      },
+      "repoImport": {
+        "label": "Импортиране от {service}",
+        "desc": "Добавете към този курс файлове от хранилище в {service}."
+      },
+      "repoPublish": {
+        "label": "Публикуване в ново хранилище",
+        "desc": "Създава ново хранилище в {service} и качва всички файлове на проекта."
+      },
+      "repoPush": {
+        "label": "Качване на промените",
+        "desc": "Запазва промените ви в свързаното хранилище в {service}."
+      },
+      "repoPull": {
+        "label": "Вземане на промените",
+        "desc": "Прехвърля промените, които други са направили в хранилището в {service}."
+      },
+      "openLocalFolder": {
+        "label": "Свързване на папка",
+        "desc": "Изберете папката на компютъра си, с която да се синхронизира този курс."
+      },
+      "localFolderSync": {
+        "label": "Синхронизиране с папката",
+        "desc": "Сравнете файловете и прехвърлете промените в двете посоки."
+      },
+      "exporter": {
+        "label": "Преобразуване за учебна платформа",
+        "desc": "LiaScript Exporter създава от вашия проект SCORM, IMS, PDF, ePub и др."
+      },
+      "downloadZip": {
+        "label": "Изтегляне като ZIP",
+        "desc": "Целият проект с всички файлове – също и добро резервно копие."
+      }
+    },
+    "tags": {
+      "permanent": "Постоянно",
+      "githubAccount": "Нужен е акаунт в GitHub",
+      "noAccount": "Без акаунт",
+      "shortOnly": "Само кратки курсове, без изображения",
+      "live": "На живо",
+      "sameCourse": "Един курс за всички",
+      "ownCopy": "Собствено копие",
+      "allFiles": "Всички файлове"
+    },
+    "reasons": {
+      "noProject": "Само за курсове, запазени в този браузър.",
+      "noRepo": "Достъпно, щом курсът бъде свързан с хранилище в {service}.",
+      "noFolder": "Достъпно, щом бъде свързана папка."
+    },
+    "actions": {
+      "showLink": "Показване на връзката",
+      "createLink": "Създаване на връзка",
+      "enterUrl": "Въвеждане на адрес",
+      "save": "Запазване",
+      "publish": "Публикуване",
+      "createCode": "Създаване на код",
+      "import": "Импортиране",
+      "createRepo": "Създаване на хранилище",
+      "push": "Качване",
+      "pull": "Вземане",
+      "chooseFolder": "Избор на папка",
+      "sync": "Синхронизиране",
+      "openExporter": "Отваряне на Exporter",
+      "download": "Изтегляне",
+      "open": "Отваряне",
+      "connectNow": "Свързване сега"
+    }
   },
   "modal": {
     "close": "Затваряне",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Нов курс",
-    "searchPlaceholder": "Въведете за търсене...",
+    "searchPlaceholder": "Търсене в заглавие или съдържание",
     "searchAriaLabel": "Поле за търсене",
     "clearSearchAria": "Изчистване на търсенето",
     "footer": "Това е съвместен онлайн редактор за {liascript}. Цялото съдържание се съхранява само във вашия браузър. Ако имате нужда от вдъхновение, разгледайте някои от нашите {examples}, потърсете вградими {templates} или вече публикувани {courses}.",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "Празен документ",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "Започване от шаблон",
+      "templateDesc": "Примерен курс с форматиране, тестове, код и още – готов за преработване."
+    },
+    "welcome": {
+      "title": "Пишете интерактивни курсове – и веднага вижте как работят",
+      "lead": "Вие пишете Markdown, а прегледът до него показва слайдове, тестове и четене на глас. Не е нужен акаунт – всичко работи във вашия браузър.",
+      "open": "Отваряне на файл",
+      "openDesc": "Markdown файл или ZIP архив от вашето устройство.",
+      "remote": "Вземане от интернет",
+      "remoteDesc": "GitHub, GitLab, Gist, уеб адрес или папка на вашия компютър.",
+      "examples": "Или първо разгледайте готов пример",
+      "hide": "Скриване"
+    },
+    "storage": {
+      "title": "Курсовете ви се съхраняват само в този браузър.",
+      "body": "Ако изтриете данните на сайта, те ще изчезнат. Архивирайте важните курсове като ZIP, в папка или в GitHub – в редактора чрез „Споделяне и експорт“."
+    },
+    "courses": "Моите курсове",
+    "courseCount": "{n} курс | {n} курса",
+    "newCourseDesc": "Шаблон, файл или импорт"
   },
   "card": {
     "untitled": "Без заглавие",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "Само в браузъра",
+      "folder": "Папка"
+    },
+    "linkedTitle": "Съхранен и извън този браузър",
+    "localTitle": "Съхранен само в този браузър – архивирайте го чрез „Споделяне и експорт“"
   },
   "footer": {
     "followUs": "Следвайте ни в:"

@@ -3,7 +3,31 @@ import * as Y from "yjs";
 import { IndexeddbPersistence } from "y-indexeddb";
 import { LiaScriptURL } from "../ts/utils";
 import { navigateTo } from "../index";
-import DateFormat from "date-format-simple";
+
+// "vor 2 Minuten" / "2 minutes ago" in the UI language. Intl does not know
+// every locale the app offers; unknown ones fall back to English.
+const UNITS: [Intl.RelativeTimeFormatUnit, number][] = [
+  ["year", 31536000],
+  ["month", 2592000],
+  ["week", 604800],
+  ["day", 86400],
+  ["hour", 3600],
+  ["minute", 60],
+];
+
+function relativeTime(timestamp: number, locale: string): string {
+  let rtf: Intl.RelativeTimeFormat;
+  try {
+    rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
+  } catch {
+    rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+  }
+  const diff = (timestamp - Date.now()) / 1000;
+  for (const [unit, seconds] of UNITS) {
+    if (Math.abs(diff) >= seconds) return rtf.format(Math.round(diff / seconds), unit);
+  }
+  return rtf.format(0, "second");
+}
 
 function mulberry32(a) {
   return function () {
@@ -77,12 +101,12 @@ export default {
     "cardGist",
     "cardGithub",
     "cardGitlab",
+    "cardFolder",
     "cardTags",
   ],
   emits: ["drop"],
 
   data() {
-    const dateFormat = new DateFormat(new Date().getTime());
     // Remote logos (http/data/blob) are shown directly; a local project path is
     // resolved from the project store in mounted() (loadLocalLogo); otherwise we
     // fall back to the generated SVG.
@@ -97,7 +121,6 @@ export default {
     }
 
     return {
-      dateFormat,
       svg,
       url,
       tags,
@@ -108,15 +131,18 @@ export default {
   },
 
   computed: {
-    // Origin badge shown on the preview: where this course was imported from.
-    source(): { label: string; icon: string; cls: string } {
+    // Badge on the preview: where else this course lives besides the browser.
+    // "Browser only" is highlighted, as such a course is lost with the site data.
+    source(): { label: string; icon: string; cls: string; title: string } {
       if (this.cardGithub)
-        return { label: this.$t("card.source.github"), icon: "bi-github", cls: "lia-source-github" };
+        return { label: this.$t("card.source.github"), icon: "bi-github", cls: "lia-source-github", title: this.$t("card.linkedTitle") };
       if (this.cardGitlab)
-        return { label: this.$t("card.source.gitlab"), icon: "bi-gitlab", cls: "lia-source-gitlab" };
+        return { label: this.$t("card.source.gitlab"), icon: "bi-gitlab", cls: "lia-source-gitlab", title: this.$t("card.linkedTitle") };
+      if (this.cardFolder)
+        return { label: this.$t("card.source.folder"), icon: "bi-folder2", cls: "lia-source-folder", title: this.$t("card.linkedTitle") };
       if (this.cardGist)
-        return { label: this.$t("card.source.gist"), icon: "bi-git", cls: "lia-source-gist" };
-      return { label: this.$t("card.source.local"), icon: "bi-hdd", cls: "lia-source-local" };
+        return { label: this.$t("card.source.gist"), icon: "bi-git", cls: "lia-source-gist", title: this.$t("card.linkedTitle") };
+      return { label: this.$t("card.source.local"), icon: "bi-exclamation-triangle", cls: "lia-source-local", title: this.$t("card.localTitle") };
     },
 
     displayTags(): string[] {
@@ -195,9 +221,7 @@ export default {
     },
 
     createDate(timestamp: number) {
-      const dateObject = new Date(timestamp);
-
-      return this.dateFormat.print(dateObject);
+      return relativeTime(timestamp, this.$i18n.locale);
     },
   },
 
@@ -243,7 +267,7 @@ export default {
         ></svg>
       </div>
 
-      <span class="badge lia-source" :class="source.cls">
+      <span class="badge lia-source" :class="source.cls" :title="source.title">
         <i class="bi" :class="source.icon"></i> {{ source.label }}
       </span>
 
@@ -321,7 +345,7 @@ export default {
 
         <div class="mt-auto pt-3 d-flex justify-content-between align-items-center">
           <small class="text-muted text-truncate me-2">
-            v{{ cardVersion }} · {{ createDate(cardTimestamp) }}
+            <template v-if="cardVersion">v{{ cardVersion }} · </template>{{ createDate(cardTimestamp) }}
           </small>
           <a
             :href="'./?/edit/' + cardId"
@@ -389,7 +413,7 @@ export default {
 .lia-card:hover,
 .lia-card:focus-visible {
   transform: translateY(-4px);
-  box-shadow: 0 0.7rem 1.4rem rgba(28, 30, 179, 0.25) !important;
+  box-shadow: 0 0.7rem 1.4rem rgba(var(--bs-primary-rgb), 0.22) !important;
   outline: none;
 }
 
@@ -428,8 +452,12 @@ export default {
 .lia-source-gist {
   background-color: rgba(111, 66, 193, 0.85);
 }
+.lia-source-folder {
+  background-color: rgba(var(--lia-accent-rgb), 0.9);
+}
 .lia-source-local {
-  background-color: rgba(73, 80, 87, 0.8);
+  background-color: var(--lia-note-bg);
+  color: var(--lia-note-ink);
 }
 
 .lia-menu {

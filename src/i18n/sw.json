@@ -6,16 +6,17 @@
   "nav": {
     "help": "Msaada",
     "new": "Mpya",
-    "fork": "Fork",
-    "menu": "Menyu",
+    "fork": "Tengeneza nakala",
+    "menu": "Shiriki na hamisha",
     "toolbar": {
       "ariaLabel": "Upau wa zana wenye vikundi vya vitufe",
       "radioGroupAria": "Kikundi cha vitufe vya kuchagua",
       "editorOnly": "Kihariri pekee",
       "splitView": "Mwonekano uliogawanywa",
       "previewOnly": "Onyesho la awali pekee",
-      "compile": "Kompaili (Ctrl+S)",
-      "toggleNavAria": "Badilisha urambazaji"
+      "compile": "Onyesha upya onyesho la awali (Ctrl+S)",
+      "toggleNavAria": "Badilisha urambazaji",
+      "refresh": "Onyesha upya"
     },
     "activityBar": {
       "hideToolbar": "Ficha upau wa zana wa kihariri",
@@ -28,12 +29,30 @@
       "onlineAria": "Kihariri kiko katika hali ya ushirikiano kupitia {type}, hivyo unaweza kushiriki URL na kuhariri pamoja na wengine",
       "switchOfflineAria": "Zima uhariri wa ushirikiano na ubadilishe kwenda hali ya nje ya mtandao",
       "switchWebRTCAria": "Badilisha kwenda uhariri wa ushirikiano kupitia WebRTC",
-      "switchWebSocketAria": "Badilisha kwenda uhariri wa ushirikiano kupitia WebSocket"
+      "switchWebSocketAria": "Badilisha kwenda uhariri wa ushirikiano kupitia WebSocket",
+      "title": "Nani anaandika?",
+      "solo": "Mimi tu",
+      "soloDesc": "Kila kitu kinabaki kwenye kifaa hiki. Kinafanya kazi bila intaneti.",
+      "webrtc": "Moja kwa moja – bila kupitia seva",
+      "webrtcDesc": "Shiriki kiungo na kila mtu ataona mabadiliko papo hapo. Vivinjari vinaunganishwa moja kwa moja.",
+      "websocket": "Moja kwa moja – kupitia seva",
+      "websocketDesc": "Inategemewa zaidi kukiwa na watu wengi au kwenye mitandao ya shule yenye vizuizi.",
+      "tech": "Teknolojia: {name}",
+      "sameCourse": "Kila mwenye kiungo anahariri kozi ileile. Unataka toleo lako mwenyewe? Tengeneza nakala.",
+      "users": "{n} mtandaoni"
+    },
+    "myCourses": "Kozi zangu",
+    "savedLocal": "Imehifadhiwa kwenye kivinjari hiki",
+    "more": "Vitendo zaidi",
+    "view": {
+      "write": "Andika",
+      "both": "Vyote viwili",
+      "preview": "Onyesho la awali"
     }
   },
   "share": {
     "header": "Shiriki kihariri ...",
-    "modalTitle": "Kushiriki na vitendo",
+    "modalTitle": "Shiriki na hamisha",
     "publishedHeading": "Fungua chapisho lililopo",
     "nostr": "Nostr",
     "downloadZipLabel": "Kumbukumbu ya ZIP",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Ungependa kufanya nini na “{title}”?",
+    "goalsAria": "Malengo",
+    "groups": {
+      "collaborate": {
+        "label": "Hariri pamoja",
+        "sub": "Wengine wanaandika pamoja nawe",
+        "intro": "Waalike wengine kufanya kazi kwenye kozi hii – moja kwa moja au kwa nakala yao wenyewe."
+      },
+      "publish": {
+        "label": "Chapisha",
+        "sub": "Kiungo kwa wanafunzi",
+        "intro": "Chagua jinsi wanafunzi watakavyofungua kozi. Lebo zinakusaidia kuamua."
+      },
+      "git": {
+        "label": "GitHub na GitLab",
+        "sub": "Hifadhi nakala na sawazisha",
+        "intro": "Hifadhi mradi mzima pamoja na faili zote kwenye hazina (repository) na uuweke ukiwa wa kisasa."
+      },
+      "localFolder": {
+        "label": "Folda kwenye kompyuta hii",
+        "sub": "Sawazisha na faili halisi",
+        "intro": "Unganisha folda kwenye kompyuta yako ili ufanyie kazi faili kwa programu nyingine pia."
+      },
+      "export": {
+        "label": "Pakua na hamisha",
+        "sub": "ZIP, SCORM kwa LMS yako, PDF …",
+        "intro": "Chukua kozi pamoja nawe au ibadilishe kwa ajili ya jukwaa la kujifunzia."
+      }
+    },
+    "sections": {
+      "published": "Imeshachapishwa"
+    },
+    "nothingPublished": "Bado hakuna kitu. Viungo utakavyotengeneza hapa vitaonekana kwenye orodha hii.",
+    "items": {
+      "collaborationLink": {
+        "label": "Alika kuhariri moja kwa moja",
+        "desc": "Kila mwenye kiungo anahariri kozi ileile kwa wakati mmoja."
+      },
+      "snapshotUrl": {
+        "label": "Tuma nakala inayoweza kuhaririwa",
+        "desc": "Inafungua kihariri na nakala ya faili ya sasa. Asili yako haibadiliki."
+      },
+      "externalResource": {
+        "label": "Kiungo cha kihariri kwa faili ya mtandaoni",
+        "desc": "Weka anwani ya faili ya Markdown mtandaoni; kiungo kinaifungua kwenye kihariri."
+      },
+      "githubGist": {
+        "label": "Hifadhi kama GitHub Gist",
+        "desc": "Kiungo cha kudumu cha kozi, kimehifadhiwa kwenye akaunti yako ya GitHub."
+      },
+      "nostr": {
+        "label": "Chapisha kwenye Nostr",
+        "desc": "Huhifadhiwa bila kituo kimoja, bila akaunti kwa mtoa huduma yeyote."
+      },
+      "dataUri": {
+        "label": "Tuma kozi ndani ya kiungo",
+        "desc": "Maandishi yote yamewekwa ndani ya kiungo. Inafaa kwa programu za ujumbe na majaribio ya haraka."
+      },
+      "embedCode": {
+        "label": "Pachika kwenye tovuti",
+        "desc": "Msimbo wa HTML unaoonyesha kihariri na onyesho la awali ndani ya ukurasa wako."
+      },
+      "githubGistLink": {
+        "label": "Fungua toleo la Gist",
+        "desc": "Kozi kama ulivyoihifadhi kama GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Fungua toleo la Nostr",
+        "desc": "Kozi kama ulivyoichapisha kwenye Nostr."
+      },
+      "repoFile": {
+        "desc": "Inafungua faili kutoka kwenye hazina iliyounganishwa – pakia mabadiliko yako kwanza."
+      },
+      "fileUrl": {
+        "label": "Fungua faili ya mtandaoni kwenye LiaScript",
+        "desc": "Kozi kutoka kwenye anwani ya wavuti iliyotumika kufungua kihariri hiki."
+      },
+      "repoImport": {
+        "label": "Leta kutoka {service}",
+        "desc": "Ongeza faili kutoka kwenye hazina ya {service} kwenye kozi hii."
+      },
+      "repoPublish": {
+        "label": "Chapisha kwenye hazina mpya",
+        "desc": "Inaunda hazina mpya ya {service} na kupakia faili zote za mradi."
+      },
+      "repoPush": {
+        "label": "Pakia mabadiliko",
+        "desc": "Inahifadhi mabadiliko yako kwenye hazina ya {service} iliyounganishwa."
+      },
+      "repoPull": {
+        "label": "Leta mabadiliko",
+        "desc": "Inachukua mabadiliko ambayo wengine wamefanya kwenye hazina ya {service}."
+      },
+      "openLocalFolder": {
+        "label": "Unganisha folda",
+        "desc": "Chagua folda kwenye kompyuta yako ambayo kozi hii itasawazishwa nayo."
+      },
+      "localFolderSync": {
+        "label": "Sawazisha na folda",
+        "desc": "Linganisha faili na uchukue mabadiliko kwa pande zote mbili."
+      },
+      "exporter": {
+        "label": "Badilisha kwa ajili ya jukwaa la kujifunzia",
+        "desc": "LiaScript Exporter inatengeneza SCORM, IMS, PDF, ePub na zaidi kutoka kwenye mradi wako."
+      },
+      "downloadZip": {
+        "label": "Pakua kama ZIP",
+        "desc": "Mradi mzima pamoja na faili zote – pia ni nakala nzuri ya akiba."
+      }
+    },
+    "tags": {
+      "permanent": "Ya kudumu",
+      "githubAccount": "Inahitaji akaunti ya GitHub",
+      "noAccount": "Bila akaunti",
+      "shortOnly": "Kozi fupi tu, bila picha",
+      "live": "Moja kwa moja",
+      "sameCourse": "Kozi ileile kwa wote",
+      "ownCopy": "Nakala yako mwenyewe",
+      "allFiles": "Faili zote"
+    },
+    "reasons": {
+      "noProject": "Kwa kozi zilizohifadhiwa kwenye kivinjari hiki tu.",
+      "noRepo": "Inapatikana kozi ikishaunganishwa na hazina ya {service}.",
+      "noFolder": "Inapatikana folda ikishaunganishwa."
+    },
+    "actions": {
+      "showLink": "Onyesha kiungo",
+      "createLink": "Tengeneza kiungo",
+      "enterUrl": "Weka anwani",
+      "save": "Hifadhi",
+      "publish": "Chapisha",
+      "createCode": "Tengeneza msimbo",
+      "import": "Leta",
+      "createRepo": "Unda hazina",
+      "push": "Pakia",
+      "pull": "Leta",
+      "chooseFolder": "Chagua folda",
+      "sync": "Sawazisha",
+      "openExporter": "Fungua Exporter",
+      "download": "Pakua",
+      "open": "Fungua",
+      "connectNow": "Unganisha sasa"
+    }
   },
   "modal": {
     "close": "Funga",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Kozi mpya",
-    "searchPlaceholder": "Andika ili kutafuta...",
+    "searchPlaceholder": "Tafuta kichwa au maudhui",
     "searchAriaLabel": "Sehemu ya utafutaji",
     "clearSearchAria": "Futa utafutaji",
     "footer": "Hiki ni kihariri cha mtandaoni cha ushirikiano kwa {liascript}. Maudhui yote huhifadhiwa tu ndani ya kivinjari chako. Ukihitaji msukumo, angalia baadhi ya {examples} zetu, tafuta {templates} zinazoweza kupachikwa au {courses} zilizochapishwa tayari.",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "Hati tupu",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "Anza na kiolezo",
+      "templateDesc": "Kozi ya mfano yenye mpangilio wa maandishi, maswali, msimbo na zaidi – tayari kuandikwa upya."
+    },
+    "welcome": {
+      "title": "Andika kozi shirikishi – na uone mara moja jinsi zinavyofanya kazi",
+      "lead": "Unaandika Markdown, na onyesho la awali kando yake linaonyesha slaidi, maswali na usomaji kwa sauti. Hakuna akaunti inayohitajika – kila kitu kinafanya kazi kwenye kivinjari chako.",
+      "open": "Fungua faili",
+      "openDesc": "Faili ya Markdown au kumbukumbu ya ZIP kutoka kwenye kifaa chako.",
+      "remote": "Leta kutoka mtandaoni",
+      "remoteDesc": "GitHub, GitLab, Gist, anwani ya wavuti au folda kwenye kompyuta yako.",
+      "examples": "Au tazama kwanza mfano uliokamilika",
+      "hide": "Ficha"
+    },
+    "storage": {
+      "title": "Kozi zako zimehifadhiwa kwenye kivinjari hiki tu.",
+      "body": "Ukifuta data ya tovuti, zitapotea. Hifadhi nakala za kozi muhimu kama ZIP, kwenye folda au kwenye GitHub – kwenye kihariri kupitia “Shiriki na hamisha”."
+    },
+    "courses": "Kozi zangu",
+    "courseCount": "kozi {n} | kozi {n}",
+    "newCourseDesc": "Kiolezo, faili au kuleta"
   },
   "card": {
     "untitled": "Bila kichwa",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "Kivinjari tu",
+      "folder": "Folda"
+    },
+    "linkedTitle": "Imehifadhiwa pia nje ya kivinjari hiki",
+    "localTitle": "Imehifadhiwa kwenye kivinjari hiki tu – hifadhi nakala kupitia “Shiriki na hamisha”"
   },
   "footer": {
     "followUs": "Tufuate kwenye:"

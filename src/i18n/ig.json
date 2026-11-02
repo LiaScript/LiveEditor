@@ -6,16 +6,17 @@
   "nav": {
     "help": "Enyemaka",
     "new": "Ọhụrụ",
-    "fork": "Fork",
-    "menu": "Menu",
+    "fork": "Mee mbipụta",
+    "menu": "Kekọrịta & bupụ",
     "toolbar": {
       "ariaLabel": "Ogwe ngwaọrụ nwere ìgwè bọtịnụ",
       "radioGroupAria": "Ìgwè bọtịnụ nhọrọ",
       "editorOnly": "Ndezi naanị",
       "splitView": "Nlele kewara",
       "previewOnly": "Nlele mbụ naanị",
-      "compile": "Kompaili (Ctrl+S)",
-      "toggleNavAria": "Gbanwee njem"
+      "compile": "Mee ka nlele mbụ dị ọhụrụ (Ctrl+S)",
+      "toggleNavAria": "Gbanwee njem",
+      "refresh": "Mee ka ọ dị ọhụrụ"
     },
     "activityBar": {
       "hideToolbar": "Zoo ogwe ngwaọrụ ndezi",
@@ -28,12 +29,30 @@
       "onlineAria": "Ndezi ahụ nọ na ọnọdụ imekọrịta site na {type}, nke pụtara na ị nwere ike ịkekọrịta URL ma dezie ya na ndị ọzọ",
       "switchOfflineAria": "Gbanyụọ ndezi imekọrịta ma laghachi na ọnọdụ enweghị ịntanetị",
       "switchWebRTCAria": "Gbanwee gaa ndezi imekọrịta site na WebRTC",
-      "switchWebSocketAria": "Gbanwee gaa ndezi imekọrịta site na WebSocket"
+      "switchWebSocketAria": "Gbanwee gaa ndezi imekọrịta site na WebSocket",
+      "title": "Onye na-ede?",
+      "solo": "Naanị m",
+      "soloDesc": "Ihe niile na-anọ na ngwaọrụ a. Ọ na-arụ ọrụ na-enweghị ịntanetị.",
+      "webrtc": "Ozugbo – kpọmkwem",
+      "webrtcDesc": "Kekọrịta njikọ ahụ, onye ọ bụla ga-ahụ mgbanwe ozugbo. Ihe nchọgharị na-ejikọ onwe ha kpọmkwem.",
+      "websocket": "Ozugbo – site na sava",
+      "websocketDesc": "Ọ na-adị ntụkwasị obi karị mgbe mmadụ dị ọtụtụ ma ọ bụ na netwọk ụlọ akwụkwọ siri ike.",
+      "tech": "Teknụzụ: {name}",
+      "sameCourse": "Onye ọ bụla nwere njikọ ahụ na-edezi otu ọmụmụ ahụ. Ị chọrọ nke gị? Mee otu mbipụta.",
+      "users": "{n} nọ n'ịntanetị"
+    },
+    "myCourses": "Ọmụmụ m",
+    "savedLocal": "Echekwara n'ihe nchọgharị a",
+    "more": "Omume ndị ọzọ",
+    "view": {
+      "write": "Dee",
+      "both": "Ha abụọ",
+      "preview": "Nlele mbụ"
     }
   },
   "share": {
     "header": "Kekọrịta ndezi ...",
-    "modalTitle": "Share & actions",
+    "modalTitle": "Kekọrịta & bupụ",
     "publishedHeading": "Open existing publication",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP archive",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Gịnị ka ị chọrọ ime na “{title}”?",
+    "goalsAria": "Ebumnuche",
+    "groups": {
+      "collaborate": {
+        "label": "Dezie ọnụ",
+        "sub": "Ndị ọzọ na-eso ede",
+        "intro": "Kpọọ ndị ọzọ ka ha rụọ ọrụ n'ọmụmụ a – ozugbo ma ọ bụ dịka mbipụta nke ha."
+      },
+      "publish": {
+        "label": "Bipụta",
+        "sub": "Njikọ maka ndị na-amụ ihe",
+        "intro": "Họrọ ka ndị na-amụ ihe ga-esi mepee ọmụmụ ahụ. Akara ndị a ga-enyere gị aka ikpebi."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Chekwaa ma mekọrịta",
+        "intro": "Chekwaa ọrụ ahụ niile na faịlụ ya niile n'ebe nchekwa (repository) ma mee ka ọ dị ọhụrụ."
+      },
+      "localFolder": {
+        "label": "Folda na kọmputa a",
+        "sub": "Mekọrịta na faịlụ n'ezie",
+        "intro": "Jikọọ folda na kọmputa gị ka i jiri mmemme ndị ọzọ rụọ ọrụ na faịlụ ndị ahụ."
+      },
+      "export": {
+        "label": "Budata & bupụ",
+        "sub": "ZIP, SCORM maka LMS gị, PDF …",
+        "intro": "Were ọmụmụ ahụ gaa ma ọ bụ gbanwee ya maka ikpo okwu mmụta."
+      }
+    },
+    "sections": {
+      "published": "Ebipụtalarị"
+    },
+    "nothingPublished": "Ọ dịbeghị ihe ọ bụla. Njikọ ị mepụtara ebe a ga-apụta na ndepụta a.",
+    "items": {
+      "collaborationLink": {
+        "label": "Kpọọ ka a dezie ozugbo",
+        "desc": "Onye ọ bụla nwere njikọ ahụ na-edezi otu ọmụmụ ahụ n'otu oge."
+      },
+      "snapshotUrl": {
+        "label": "Zipu mbipụta a ga-edezi",
+        "desc": "Ọ na-emepe ndezi ahụ na mbipụta nke faịlụ ugbu a. Nke mbụ gị ga-anọgide otu ahụ."
+      },
+      "externalResource": {
+        "label": "Njikọ ndezi gaa na faịlụ dị n'ịntanetị",
+        "desc": "Tinye adreesị faịlụ Markdown dị n'ịntanetị; njikọ ahụ ga-emepe ya na ndezi."
+      },
+      "githubGist": {
+        "label": "Chekwaa dịka GitHub Gist",
+        "desc": "Njikọ na-adịgide adịgide gaa n'ọmụmụ ahụ, echekwara n'akaụntụ GitHub gị."
+      },
+      "nostr": {
+        "label": "Bipụta na Nostr",
+        "desc": "A na-echekwa ya n'ebe dị iche iche, na-enweghị akaụntụ n'ebe onye na-eweta ọrụ ọ bụla."
+      },
+      "dataUri": {
+        "label": "Zipu ọmụmụ ahụ n'ime njikọ",
+        "desc": "Ederede niile dị n'ime njikọ ahụ. Ọ dị mma maka ngwa ozi na nnwale ngwa ngwa."
+      },
+      "embedCode": {
+        "label": "Tinye na webụsaịtị",
+        "desc": "Koodu HTML na-egosi ndezi na nlele mbụ n'ime ibe nke gị."
+      },
+      "githubGistLink": {
+        "label": "Mepee ụdị Gist",
+        "desc": "Ọmụmụ ahụ dịka i chekwara ya dịka GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Mepee ụdị Nostr",
+        "desc": "Ọmụmụ ahụ dịka i bipụtara ya na Nostr."
+      },
+      "repoFile": {
+        "desc": "Ọ na-emepe faịlụ ahụ site n'ebe nchekwa ejikọrọ – buru ụzọ bulite mgbanwe gị."
+      },
+      "fileUrl": {
+        "label": "Mepee faịlụ dị n'ịntanetị na LiaScript",
+        "desc": "Ọmụmụ sitere n'adreesị weebụ e ji mepee ndezi a."
+      },
+      "repoImport": {
+        "label": "Bubata site na {service}",
+        "desc": "Tinye faịlụ site n'ebe nchekwa {service} n'ọmụmụ a."
+      },
+      "repoPublish": {
+        "label": "Bipụta n'ebe nchekwa ọhụrụ",
+        "desc": "Ọ na-emepụta ebe nchekwa {service} ọhụrụ ma bulite faịlụ niile nke ọrụ ahụ."
+      },
+      "repoPush": {
+        "label": "Bulite mgbanwe",
+        "desc": "Ọ na-echekwa mgbanwe gị n'ebe nchekwa {service} ejikọrọ."
+      },
+      "repoPull": {
+        "label": "Weta mgbanwe",
+        "desc": "Ọ na-anabata mgbanwe ndị ọzọ mere n'ebe nchekwa {service}."
+      },
+      "openLocalFolder": {
+        "label": "Jikọọ folda",
+        "desc": "Họrọ folda na kọmputa gị nke a ga-eji mekọrịta ọmụmụ a."
+      },
+      "localFolderSync": {
+        "label": "Mekọrịta na folda ahụ",
+        "desc": "Tụnyere faịlụ ndị ahụ ma nabata mgbanwe n'akụkụ abụọ."
+      },
+      "exporter": {
+        "label": "Gbanwee maka ikpo okwu mmụta",
+        "desc": "LiaScript Exporter na-emepụta SCORM, IMS, PDF, ePub na ndị ọzọ site n'ọrụ gị."
+      },
+      "downloadZip": {
+        "label": "Budata dịka ZIP",
+        "desc": "Ọrụ ahụ niile na faịlụ ya niile – ọ dịkwa mma dịka nchekwa ndabere."
+      }
+    },
+    "tags": {
+      "permanent": "Na-adịgide adịgide",
+      "githubAccount": "Achọrọ akaụntụ GitHub",
+      "noAccount": "Enweghị akaụntụ",
+      "shortOnly": "Naanị ọmụmụ dị mkpụmkpụ, enweghị onyonyo",
+      "live": "Ozugbo",
+      "sameCourse": "Otu ọmụmụ maka mmadụ niile",
+      "ownCopy": "Mbipụta nke gị",
+      "allFiles": "Faịlụ niile"
+    },
+    "reasons": {
+      "noProject": "Naanị maka ọmụmụ echekwara n'ihe nchọgharị a.",
+      "noRepo": "Ọ ga-adị ozugbo ejikọrọ ọmụmụ ahụ na ebe nchekwa {service}.",
+      "noFolder": "Ọ ga-adị ozugbo ejikọrọ folda."
+    },
+    "actions": {
+      "showLink": "Gosi njikọ",
+      "createLink": "Mepụta njikọ",
+      "enterUrl": "Tinye adreesị",
+      "save": "Chekwaa",
+      "publish": "Bipụta",
+      "createCode": "Mepụta koodu",
+      "import": "Bubata",
+      "createRepo": "Mepụta ebe nchekwa",
+      "push": "Bulite",
+      "pull": "Weta",
+      "chooseFolder": "Họrọ folda",
+      "sync": "Mekọrịta",
+      "openExporter": "Mepee Exporter",
+      "download": "Budata",
+      "open": "Mepee",
+      "connectNow": "Jikọọ ugbu a"
+    }
   },
   "modal": {
     "close": "Mechie",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Ọmụmụ ọhụrụ",
-    "searchPlaceholder": "Pịnye iji chọọ...",
+    "searchPlaceholder": "Chọọ aha ma ọ bụ ọdịnaya",
     "searchAriaLabel": "Ogige ọchụchọ",
     "clearSearchAria": "Hichapụ ọchụchọ",
     "footer": "Nke a bụ ndezi imekọrịta n'ịntanetị maka {liascript}. A na-echekwa ọdịnaya niile naanị n'ime ihe nchọgharị gị. Ọ bụrụ na ịchọrọ mkpali, lelee ụfọdụ {examples} anyị, chọọ {templates} a pụrụ itinye, ma ọ bụ {courses} ebipụtalarị.",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "Akwụkwọ efu",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "Malite site na ndebiri",
+      "templateDesc": "Ọmụmụ ihe atụ nwere nhazi, ajụjụ, koodu na ndị ọzọ – dị njikere ka i degharịa ya."
+    },
+    "welcome": {
+      "title": "Dee ọmụmụ mmekọrịta – ma hụ ozugbo ka ha si arụ ọrụ",
+      "lead": "Ị na-ede Markdown, nlele mbụ dị n'akụkụ ya na-egosi slaịdị, ajụjụ na ịgụ n'olu dara ụda. Achọghị akaụntụ – ihe niile na-arụ n'ihe nchọgharị gị.",
+      "open": "Mepee faịlụ",
+      "openDesc": "Faịlụ Markdown ma ọ bụ faịlụ ZIP site na ngwaọrụ gị.",
+      "remote": "Weta ya site n'ịntanetị",
+      "remoteDesc": "GitHub, GitLab, Gist, adreesị weebụ ma ọ bụ folda na kọmputa gị.",
+      "examples": "Ma ọ bụ buru ụzọ lee ihe atụ emechara",
+      "hide": "Zoo"
+    },
+    "storage": {
+      "title": "Ọmụmụ gị dị naanị n'ihe nchọgharị a.",
+      "body": "Ọ bụrụ na i hichapụ data saịtị ahụ, ha ga-efu. Chekwaa ọmụmụ ndị dị mkpa dịka ZIP, na folda ma ọ bụ na GitHub – na ndezi site na “Kekọrịta & bupụ”."
+    },
+    "courses": "Ọmụmụ m",
+    "courseCount": "ọmụmụ {n} | ọmụmụ {n}",
+    "newCourseDesc": "Ndebiri, faịlụ ma ọ bụ mbubata"
   },
   "card": {
     "untitled": "Enweghị aha",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "Naanị ihe nchọgharị",
+      "folder": "Folda"
+    },
+    "linkedTitle": "Echekwakwara ya n'èzí ihe nchọgharị a",
+    "localTitle": "Echekwara naanị n'ihe nchọgharị a – chekwaa ya site na “Kekọrịta & bupụ”"
   },
   "footer": {
     "followUs": "Soro anyị na:"

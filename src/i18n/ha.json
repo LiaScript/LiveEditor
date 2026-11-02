@@ -6,16 +6,17 @@
   "nav": {
     "help": "Taimako",
     "new": "Sabo",
-    "fork": "Fork",
-    "menu": "Menu",
+    "fork": "Yi kwafi",
+    "menu": "Raba & fitarwa",
     "toolbar": {
       "ariaLabel": "Sandar kayan aiki mai rukunan maɓalli",
       "radioGroupAria": "Rukunin maɓallan zaɓi",
       "editorOnly": "Edita kawai",
       "splitView": "Kallo raba biyu",
       "previewOnly": "Dubawa kawai",
-      "compile": "Haɗa (Ctrl+S)",
-      "toggleNavAria": "Canja kewayawa"
+      "compile": "Sabunta dubawa (Ctrl+S)",
+      "toggleNavAria": "Canja kewayawa",
+      "refresh": "Sabunta"
     },
     "activityBar": {
       "hideToolbar": "Ɓoye sandar kayan aikin edita",
@@ -28,12 +29,30 @@
       "onlineAria": "Editan yana cikin yanayin haɗin gwiwa ta {type}, ma'ana zaka iya raba URL ka fara gyara tare da wasu",
       "switchOfflineAria": "Kashe gyaran haɗin gwiwa kuma koma yanayin ba tare da intanet ba",
       "switchWebRTCAria": "Koma gyaran haɗin gwiwa ta WebRTC",
-      "switchWebSocketAria": "Koma gyaran haɗin gwiwa ta WebSocket"
+      "switchWebSocketAria": "Koma gyaran haɗin gwiwa ta WebSocket",
+      "title": "Wa ke rubutu?",
+      "solo": "Ni kaɗai",
+      "soloDesc": "Komai yana zama a wannan na'ura. Yana aiki ba tare da intanet ba.",
+      "webrtc": "Kai tsaye – haɗi kai tsaye",
+      "webrtcDesc": "Raba haɗin, kowa zai ga canje-canje nan take. Burauzoyi suna haɗuwa da juna kai tsaye.",
+      "websocket": "Kai tsaye – ta sabar",
+      "websocketDesc": "Ya fi aminci idan mutane sun yi yawa ko a cikin tsauraran hanyoyin sadarwar makaranta.",
+      "tech": "Fasaha: {name}",
+      "sameCourse": "Duk mai haɗin yana gyara kwas ɗaya. Kana son sigarka ta kanka? Yi kwafi.",
+      "users": "{n} a kan layi"
+    },
+    "myCourses": "Kwasa-kwasaina",
+    "savedLocal": "An ajiye a wannan burauza",
+    "more": "Ƙarin ayyuka",
+    "view": {
+      "write": "Rubuta",
+      "both": "Duka biyu",
+      "preview": "Dubawa"
     }
   },
   "share": {
     "header": "Raba edita ...",
-    "modalTitle": "Share & actions",
+    "modalTitle": "Raba & fitarwa",
     "publishedHeading": "Open existing publication",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP archive",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Me kake son yi da “{title}”?",
+    "goalsAria": "Manufofi",
+    "groups": {
+      "collaborate": {
+        "label": "Gyara tare",
+        "sub": "Wasu suna rubutu tare da kai",
+        "intro": "Gayyaci wasu su yi aiki a kan wannan kwas – kai tsaye ko a matsayin kwafinsu na kansu."
+      },
+      "publish": {
+        "label": "Wallafa",
+        "sub": "Haɗi ga ɗalibai",
+        "intro": "Zaɓi yadda ɗalibai za su buɗe kwas ɗin. Alamomin za su taimaka maka ka yanke shawara."
+      },
+      "git": {
+        "label": "GitHub da GitLab",
+        "sub": "Ajiye kwafi da daidaita",
+        "intro": "Ajiye duk aikin tare da dukan fayiloli a cikin ma'ajiya (repository) ka kuma riƙa sabunta shi."
+      },
+      "localFolder": {
+        "label": "Folder a wannan kwamfuta",
+        "sub": "Daidaita da ainihin fayiloli",
+        "intro": "Haɗa folder a kwamfutarka domin ka iya aiki da fayilolin da wasu manhajoji ma."
+      },
+      "export": {
+        "label": "Sauke & fitarwa",
+        "sub": "ZIP, SCORM don LMS ɗinka, PDF …",
+        "intro": "Ɗauki kwas ɗin tare da kai ko ka mayar da shi don dandalin koyo."
+      }
+    },
+    "sections": {
+      "published": "An riga an wallafa"
+    },
+    "nothingPublished": "Babu komai tukuna. Haɗin da ka ƙirƙira a nan zai bayyana a wannan jerin.",
+    "items": {
+      "collaborationLink": {
+        "label": "Gayyata don gyara kai tsaye",
+        "desc": "Duk mai haɗin yana gyara kwas ɗaya a lokaci guda."
+      },
+      "snapshotUrl": {
+        "label": "Aika kwafi da za a iya gyarawa",
+        "desc": "Yana buɗe edita da kwafin fayil ɗin yanzu. Asalinka ba zai canza ba."
+      },
+      "externalResource": {
+        "label": "Haɗin edita zuwa fayil na kan layi",
+        "desc": "Shigar da adireshin fayil ɗin Markdown a intanet; haɗin zai buɗe shi a edita."
+      },
+      "githubGist": {
+        "label": "Ajiye a matsayin GitHub Gist",
+        "desc": "Haɗi na dindindin zuwa kwas ɗin, an ajiye shi a asusunka na GitHub."
+      },
+      "nostr": {
+        "label": "Wallafa a Nostr",
+        "desc": "Ana ajiye shi ba a wuri ɗaya ba, ba tare da asusu a wani mai bada sabis ba."
+      },
+      "dataUri": {
+        "label": "Aika kwas ɗin a cikin haɗin",
+        "desc": "Ana saka dukan rubutun a cikin haɗin. Yana da kyau don manhajojin saƙo da gwaji cikin sauri."
+      },
+      "embedCode": {
+        "label": "Saka a shafin yanar gizo",
+        "desc": "Lambar HTML da ke nuna edita da dubawa a cikin shafinka."
+      },
+      "githubGistLink": {
+        "label": "Buɗe sigar Gist",
+        "desc": "Kwas ɗin kamar yadda ka ajiye shi a GitHub Gist."
+      },
+      "nostrLink": {
+        "label": "Buɗe sigar Nostr",
+        "desc": "Kwas ɗin kamar yadda ka wallafa shi a Nostr."
+      },
+      "repoFile": {
+        "desc": "Yana buɗe fayil ɗin daga ma'ajiyar da aka haɗa – fara loda canje-canjenka."
+      },
+      "fileUrl": {
+        "label": "Buɗe fayil na kan layi a LiaScript",
+        "desc": "Kwas ɗin daga adireshin yanar gizo da aka buɗe wannan edita da shi."
+      },
+      "repoImport": {
+        "label": "Shigo daga {service}",
+        "desc": "Ƙara fayiloli daga ma'ajiyar {service} zuwa wannan kwas."
+      },
+      "repoPublish": {
+        "label": "Wallafa zuwa sabuwar ma'ajiya",
+        "desc": "Yana ƙirƙirar sabuwar ma'ajiyar {service} ya kuma loda dukan fayilolin aikin."
+      },
+      "repoPush": {
+        "label": "Loda canje-canje",
+        "desc": "Yana ajiye canje-canjenka a ma'ajiyar {service} da aka haɗa."
+      },
+      "repoPull": {
+        "label": "Ɗauko canje-canje",
+        "desc": "Yana karɓar canje-canjen da wasu suka yi a ma'ajiyar {service}."
+      },
+      "openLocalFolder": {
+        "label": "Haɗa folder",
+        "desc": "Zaɓi folder a kwamfutarka da za a daidaita wannan kwas da shi."
+      },
+      "localFolderSync": {
+        "label": "Daidaita da folder",
+        "desc": "Kwatanta fayilolin ka karɓi canje-canje ta kowace hanya."
+      },
+      "exporter": {
+        "label": "Mayar don dandalin koyo",
+        "desc": "LiaScript Exporter yana ƙirƙirar SCORM, IMS, PDF, ePub da ƙari daga aikinka."
+      },
+      "downloadZip": {
+        "label": "Sauke a matsayin ZIP",
+        "desc": "Dukan aikin tare da dukan fayiloli – kuma kyakkyawan kwafin ajiya."
+      }
+    },
+    "tags": {
+      "permanent": "Na dindindin",
+      "githubAccount": "Ana buƙatar asusun GitHub",
+      "noAccount": "Babu asusu",
+      "shortOnly": "Gajerun kwasa-kwasai kawai, babu hotuna",
+      "live": "Kai tsaye",
+      "sameCourse": "Kwas ɗaya ga kowa",
+      "ownCopy": "Kwafi na kanka",
+      "allFiles": "Dukan fayiloli"
+    },
+    "reasons": {
+      "noProject": "Sai don kwasa-kwasan da aka ajiye a wannan burauza.",
+      "noRepo": "Yana samuwa da zarar an haɗa kwas ɗin da ma'ajiyar {service}.",
+      "noFolder": "Yana samuwa da zarar an haɗa folder."
+    },
+    "actions": {
+      "showLink": "Nuna haɗi",
+      "createLink": "Ƙirƙiri haɗi",
+      "enterUrl": "Shigar da adireshi",
+      "save": "Ajiye",
+      "publish": "Wallafa",
+      "createCode": "Ƙirƙiri lamba",
+      "import": "Shigo da",
+      "createRepo": "Ƙirƙiri ma'ajiya",
+      "push": "Loda",
+      "pull": "Ɗauko",
+      "chooseFolder": "Zaɓi folder",
+      "sync": "Daidaita",
+      "openExporter": "Buɗe Exporter",
+      "download": "Sauke",
+      "open": "Buɗe",
+      "connectNow": "Haɗa yanzu"
+    }
   },
   "modal": {
     "close": "Rufe",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Sabon kwas",
-    "searchPlaceholder": "Rubuta don nema...",
+    "searchPlaceholder": "Nemo take ko abun ciki",
     "searchAriaLabel": "Filin nema",
     "clearSearchAria": "Share nema",
     "footer": "Wannan edita ne na kan layi don haɗin gwiwa ga {liascript}. Ana adana duk abun ciki ne kawai a cikin burauzarka. Idan kana buƙatar wahayi, duba wasu {examples} namu, nemo {templates} da za a iya sakawa ko {courses} da aka riga aka wallafa.",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "Takarda maras komai",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "Fara daga samfuri",
+      "templateDesc": "Kwas na misali mai tsari, tambayoyi, lamba da ƙari – a shirye don ka sake rubutawa."
+    },
+    "welcome": {
+      "title": "Rubuta kwasa-kwasai masu mu'amala – ka ga nan take yadda suke aiki",
+      "lead": "Kai kana rubuta Markdown, dubawa a gefensa tana nuna sildi, tambayoyi da karantawa da murya. Ba a buƙatar asusu – komai yana gudana a burauzarka.",
+      "open": "Buɗe fayil",
+      "openDesc": "Fayil ɗin Markdown ko taskar ZIP daga na'urarka.",
+      "remote": "Ɗauko daga intanet",
+      "remoteDesc": "GitHub, GitLab, Gist, adireshin yanar gizo ko folder a kwamfutarka.",
+      "examples": "Ko ka fara duba misali da aka kammala",
+      "hide": "Ɓoye"
+    },
+    "storage": {
+      "title": "Ana ajiye kwasa-kwasanka a wannan burauza kawai.",
+      "body": "Idan ka share bayanan shafin, za su ɓace. Ajiye kwafin kwasa-kwasai masu muhimmanci a matsayin ZIP, a folder ko a GitHub – a edita ta “Raba & fitarwa”."
+    },
+    "courses": "Kwasa-kwasaina",
+    "courseCount": "kwas {n} | kwasa-kwasai {n}",
+    "newCourseDesc": "Samfuri, fayil ko shigo da"
   },
   "card": {
     "untitled": "Babu take",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "A burauza kawai",
+      "folder": "Folder"
+    },
+    "linkedTitle": "An kuma ajiye a wajen wannan burauza",
+    "localTitle": "An ajiye a wannan burauza kawai – ajiye kwafi ta “Raba & fitarwa”"
   },
   "footer": {
     "followUs": "Bi mu a:"

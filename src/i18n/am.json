@@ -6,16 +6,17 @@
   "nav": {
     "help": "እገዛ",
     "new": "አዲስ",
-    "fork": "Fork",
-    "menu": "ምናሌ",
+    "fork": "ቅጂ ፍጠር",
+    "menu": "አጋራ እና ላክ",
     "toolbar": {
       "ariaLabel": "የአዝራር ቡድኖች ያሉት የመሣሪያ አሞሌ",
       "radioGroupAria": "የሬዲዮ መቀየሪያ አዝራሮች ቡድን",
       "editorOnly": "አርታዒ ብቻ",
       "splitView": "የተከፈለ እይታ",
       "previewOnly": "ቅድመ እይታ ብቻ",
-      "compile": "ኮምፓይል (Ctrl+S)",
-      "toggleNavAria": "አሰሳ ቀይር"
+      "compile": "ቅድመ እይታውን አድስ (Ctrl+S)",
+      "toggleNavAria": "አሰሳ ቀይር",
+      "refresh": "አድስ"
     },
     "activityBar": {
       "hideToolbar": "የአርታዒውን መሣሪያ አሞሌ ደብቅ",
@@ -28,12 +29,30 @@
       "onlineAria": "አርታዒው በ {type} በትብብር ሁኔታ ላይ ነው፤ URL ማጋራት እና ከሌሎች ጋር ማረም ትችላለህ/ትችያለሽ",
       "switchOfflineAria": "የትብብር ማረምን አጥፋ እና ወደ ከመስመር ውጭ ሁኔታ ቀይር",
       "switchWebRTCAria": "በWebRTC ወደ ትብብር ማረም ቀይር",
-      "switchWebSocketAria": "በWebSocket ወደ ትብብር ማረም ቀይር"
+      "switchWebSocketAria": "በWebSocket ወደ ትብብር ማረም ቀይር",
+      "title": "ማን እየጻፈ ነው?",
+      "solo": "እኔ ብቻ",
+      "soloDesc": "ሁሉም ነገር በዚህ መሣሪያ ላይ ይቆያል። ያለ ኢንተርኔትም ይሰራል።",
+      "webrtc": "ቀጥታ – በቀጥታ ግንኙነት",
+      "webrtcDesc": "አገናኙን አጋራ፣ ሁሉም ለውጦቹን ወዲያውኑ ያያሉ። አሳሾቹ በቀጥታ እርስ በርስ ይገናኛሉ።",
+      "websocket": "ቀጥታ – በአገልጋይ በኩል",
+      "websocketDesc": "ብዙ ሰዎች ሲኖሩ ወይም ጥብቅ በሆኑ የትምህርት ቤት ኔትወርኮች ውስጥ ይበልጥ አስተማማኝ ነው።",
+      "tech": "ቴክኖሎጂ፦ {name}",
+      "sameCourse": "አገናኙ ያለው ሁሉ አንድ አይነት ኮርስ ያርማል። የራስህ/ሽ ስሪት ትፈልጋለህ/ጊያለሽ? ቅጂ ፍጠር/ሪ።",
+      "users": "{n} በመስመር ላይ"
+    },
+    "myCourses": "የእኔ ኮርሶች",
+    "savedLocal": "በዚህ አሳሽ ውስጥ ተቀምጧል",
+    "more": "ተጨማሪ ድርጊቶች",
+    "view": {
+      "write": "ጻፍ",
+      "both": "ሁለቱም",
+      "preview": "ቅድመ እይታ"
     }
   },
   "share": {
     "header": "አርታዒውን አጋራ ...",
-    "modalTitle": "Share & actions",
+    "modalTitle": "አጋራ እና ላክ",
     "publishedHeading": "Open existing publication",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP archive",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "በ“{title}” ምን ማድረግ ትፈልጋለህ/ጊያለሽ?",
+    "goalsAria": "ግቦች",
+    "groups": {
+      "collaborate": {
+        "label": "አብሮ ማረም",
+        "sub": "ሌሎች አብረው ይጽፋሉ",
+        "intro": "ሌሎች በዚህ ኮርስ ላይ እንዲሰሩ ጋብዝ – በቀጥታ ወይም በራሳቸው ቅጂ።"
+      },
+      "publish": {
+        "label": "አትም",
+        "sub": "ለተማሪዎች አገናኝ",
+        "intro": "ተማሪዎች ኮርሱን እንዴት እንደሚከፍቱ ምረጥ። መለያዎቹ ለመወሰን ይረዱሃል/ሻል።"
+      },
+      "git": {
+        "label": "GitHub እና GitLab",
+        "sub": "ምትኬ አስቀምጥ እና አመሳስል",
+        "intro": "ሙሉ ፕሮጀክቱን ከሁሉም ፋይሎች ጋር በማከማቻ (repository) ውስጥ አስቀምጥ እና ወቅታዊ አድርገህ/ሽ ጠብቅ።"
+      },
+      "localFolder": {
+        "label": "በዚህ ኮምፒውተር ላይ ያለ አቃፊ",
+        "sub": "ከእውነተኛ ፋይሎች ጋር አመሳስል",
+        "intro": "ፋይሎቹን በሌሎች ፕሮግራሞችም ለመስራት በኮምፒውተርህ/ሽ ላይ ያለ አቃፊ አገናኝ።"
+      },
+      "export": {
+        "label": "አውርድ እና ላክ",
+        "sub": "ZIP፣ SCORM ለLMSህ/ሽ፣ PDF …",
+        "intro": "ኮርሱን ይዘህ/ሽ ሂድ ወይም ለመማሪያ መድረክ ቀይረው።"
+      }
+    },
+    "sections": {
+      "published": "አስቀድሞ የታተመ"
+    },
+    "nothingPublished": "እስካሁን ምንም የለም። እዚህ የምትፈጥራቸው አገናኞች በዚህ ዝርዝር ውስጥ ይታያሉ።",
+    "items": {
+      "collaborationLink": {
+        "label": "በቀጥታ ለማረም ጋብዝ",
+        "desc": "አገናኙ ያለው ሁሉ በአንድ ጊዜ አንድ አይነት ኮርስ ያርማል።"
+      },
+      "snapshotUrl": {
+        "label": "ሊታረም የሚችል ቅጂ ላክ",
+        "desc": "አርታዒውን ከአሁኑ ፋይል ቅጂ ጋር ይከፍታል። ዋናው ፋይልህ/ሽ እንዳለ ይቆያል።"
+      },
+      "externalResource": {
+        "label": "በመስመር ላይ ወዳለ ፋይል የአርታዒ አገናኝ",
+        "desc": "በድር ላይ ያለ የMarkdown ፋይል አድራሻ አስገባ፤ አገናኙ በአርታዒው ውስጥ ይከፍተዋል።"
+      },
+      "githubGist": {
+        "label": "እንደ GitHub Gist አስቀምጥ",
+        "desc": "በGitHub መለያህ/ሽ ውስጥ የተቀመጠ ወደ ኮርሱ የሚወስድ ቋሚ አገናኝ።"
+      },
+      "nostr": {
+        "label": "በNostr ላይ አትም",
+        "desc": "ያልተማከለ ሆኖ ይቀመጣል፣ በየትኛውም አቅራቢ መለያ ሳያስፈልግ።"
+      },
+      "dataUri": {
+        "label": "ኮርሱን በአገናኙ ውስጥ ላክ",
+        "desc": "ሙሉው ጽሑፍ በአገናኙ ውስጥ ይታሸጋል። ለመልእክት መተግበሪያዎች እና ለፈጣን ሙከራዎች ጥሩ ነው።"
+      },
+      "embedCode": {
+        "label": "በድር ጣቢያ ላይ አስገባ",
+        "desc": "አርታዒውን እና ቅድመ እይታውን በራስህ/ሽ ገጽ ውስጥ የሚያሳይ HTML ኮድ።"
+      },
+      "githubGistLink": {
+        "label": "የGist ስሪቱን ክፈት",
+        "desc": "እንደ GitHub Gist ያስቀመጥከው/ሽው ኮርስ።"
+      },
+      "nostrLink": {
+        "label": "የNostr ስሪቱን ክፈት",
+        "desc": "በNostr ላይ ያተምከው/ሽው ኮርስ።"
+      },
+      "repoFile": {
+        "desc": "ፋይሉን ከተገናኘው ማከማቻ ይከፍታል – መጀመሪያ ለውጦችህን/ሽን ስቀል።"
+      },
+      "fileUrl": {
+        "label": "የመስመር ላይ ፋይሉን በLiaScript ክፈት",
+        "desc": "ይህ አርታዒ የተከፈተበት የድር አድራሻ ኮርስ።"
+      },
+      "repoImport": {
+        "label": "ከ{service} አስመጣ",
+        "desc": "ከ{service} ማከማቻ ፋይሎችን ወደዚህ ኮርስ ጨምር።"
+      },
+      "repoPublish": {
+        "label": "ወደ አዲስ ማከማቻ አትም",
+        "desc": "አዲስ የ{service} ማከማቻ ፈጥሮ ሁሉንም የፕሮጀክት ፋይሎች ይሰቅላል።"
+      },
+      "repoPush": {
+        "label": "ለውጦችን ስቀል",
+        "desc": "ለውጦችህን/ሽን በተገናኘው የ{service} ማከማቻ ውስጥ ያስቀምጣል።"
+      },
+      "repoPull": {
+        "label": "ለውጦችን አምጣ",
+        "desc": "ሌሎች በ{service} ማከማቻ ውስጥ ያደረጓቸውን ለውጦች ይወስዳል።"
+      },
+      "openLocalFolder": {
+        "label": "አቃፊ አገናኝ",
+        "desc": "ይህ ኮርስ የሚመሳሰልበትን በኮምፒውተርህ/ሽ ላይ ያለ አቃፊ ምረጥ።"
+      },
+      "localFolderSync": {
+        "label": "ከአቃፊው ጋር አመሳስል",
+        "desc": "ፋይሎቹን አወዳድር እና ለውጦችን በሁለቱም አቅጣጫ ውሰድ።"
+      },
+      "exporter": {
+        "label": "ለመማሪያ መድረክ ቀይር",
+        "desc": "LiaScript Exporter ከፕሮጀክትህ/ሽ SCORM፣ IMS፣ PDF፣ ePub እና ሌሎችንም ይፈጥራል።"
+      },
+      "downloadZip": {
+        "label": "እንደ ZIP አውርድ",
+        "desc": "ሙሉ ፕሮጀክቱ ከሁሉም ፋይሎች ጋር – ጥሩ ምትኬም ነው።"
+      }
+    },
+    "tags": {
+      "permanent": "ቋሚ",
+      "githubAccount": "የGitHub መለያ ያስፈልጋል",
+      "noAccount": "መለያ አያስፈልግም",
+      "shortOnly": "ለአጭር ኮርሶች ብቻ፣ ያለ ምስሎች",
+      "live": "ቀጥታ",
+      "sameCourse": "ለሁሉም አንድ አይነት ኮርስ",
+      "ownCopy": "የራስ ቅጂ",
+      "allFiles": "ሁሉም ፋይሎች"
+    },
+    "reasons": {
+      "noProject": "በዚህ አሳሽ ውስጥ ለተቀመጡ ኮርሶች ብቻ።",
+      "noRepo": "ኮርሱ ከ{service} ማከማቻ ጋር ሲገናኝ ይገኛል።",
+      "noFolder": "አቃፊ ሲገናኝ ይገኛል።"
+    },
+    "actions": {
+      "showLink": "አገናኙን አሳይ",
+      "createLink": "አገናኝ ፍጠር",
+      "enterUrl": "አድራሻ አስገባ",
+      "save": "አስቀምጥ",
+      "publish": "አትም",
+      "createCode": "ኮድ ፍጠር",
+      "import": "አስመጣ",
+      "createRepo": "ማከማቻ ፍጠር",
+      "push": "ስቀል",
+      "pull": "አምጣ",
+      "chooseFolder": "አቃፊ ምረጥ",
+      "sync": "አመሳስል",
+      "openExporter": "Exporter ክፈት",
+      "download": "አውርድ",
+      "open": "ክፈት",
+      "connectNow": "አሁን አገናኝ"
+    }
   },
   "modal": {
     "close": "ዝጋ",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "አዲስ ኮርስ",
-    "searchPlaceholder": "ለመፈለግ ይተይቡ...",
+    "searchPlaceholder": "ርዕስ ወይም ይዘት ፈልግ",
     "searchAriaLabel": "የፍለጋ መስክ",
     "clearSearchAria": "ፍለጋ አጽዳ",
     "footer": "ይህ ለ{liascript} የትብብር የመስመር ላይ አርታዒ ነው። ይዘቱ ሁሉ በአሳሽህ/ሽ ውስጥ ብቻ ይቀመጣል። መነሻ ሀሳብ ካስፈለገህ/ሽ፣ አንዳንድ {examples} ተመልከት/ቺ፣ ሊገቡ የሚችሉ {templates} ወይም ቀድሞ የታተሙ {courses} ፈልግ/ጊ።",
@@ -119,7 +281,7 @@
       "heading": "Import from",
       "more": "More options",
       "submit": "Import",
-      "new": "New",
+      "new": "ባዶ ሰነድ",
       "upload": "Upload file (Markdown / ZIP)",
       "github": "GitHub repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidUrl": "Please enter a valid http(s) URL.",
         "invalidGist": "Could not find a gist for that ID.",
         "fetchFailed": "Could not load the resource. Check the URL and your connection."
-      }
-    }
+      },
+      "template": "ከአብነት ጀምር",
+      "templateDesc": "ቅርጸት፣ ጥያቄዎች፣ ኮድ እና ሌሎችም ያሉት የናሙና ኮርስ – እንደገና ለመጻፍ ዝግጁ።"
+    },
+    "welcome": {
+      "title": "በይነተገናኝ ኮርሶችን ጻፍ – እና እንዴት እንደሚሰሩ ወዲያውኑ እይ",
+      "lead": "አንተ/አንቺ Markdown ትጽፋለህ/ፊያለሽ፣ ከጎኑ ያለው ቅድመ እይታ ስላይዶችን፣ ጥያቄዎችን እና ጮክ ብሎ ማንበብን ያሳያል። መለያ አያስፈልግም – ሁሉም ነገር በአሳሽህ/ሽ ውስጥ ይሰራል።",
+      "open": "ፋይል ክፈት",
+      "openDesc": "ከመሣሪያህ/ሽ የMarkdown ፋይል ወይም የZIP ማህደር።",
+      "remote": "ከድር አምጣ",
+      "remoteDesc": "GitHub፣ GitLab፣ Gist፣ የድር አድራሻ ወይም በኮምፒውተርህ/ሽ ላይ ያለ አቃፊ።",
+      "examples": "ወይም መጀመሪያ የተጠናቀቀ ምሳሌ ተመልከት",
+      "hide": "ደብቅ"
+    },
+    "storage": {
+      "title": "ኮርሶችህ/ሽ የተቀመጡት በዚህ አሳሽ ውስጥ ብቻ ነው።",
+      "body": "የጣቢያውን ውሂብ ካጸዳህ/ሽ ይጠፋሉ። አስፈላጊ ኮርሶችን እንደ ZIP፣ በአቃፊ ወይም በGitHub ላይ ምትኬ አስቀምጥ – በአርታዒው ውስጥ በ“አጋራ እና ላክ” በኩል።"
+    },
+    "courses": "የእኔ ኮርሶች",
+    "courseCount": "{n} ኮርስ | {n} ኮርሶች",
+    "newCourseDesc": "አብነት፣ ፋይል ወይም ማስመጣት"
   },
   "card": {
     "untitled": "ርዕስ የለም",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Local"
-    }
+      "local": "በአሳሽ ውስጥ ብቻ",
+      "folder": "አቃፊ"
+    },
+    "linkedTitle": "ከዚህ አሳሽ ውጭም ተቀምጧል",
+    "localTitle": "በዚህ አሳሽ ውስጥ ብቻ ተቀምጧል – በ“አጋራ እና ላክ” በኩል ምትኬ አስቀምጥ"
   },
   "footer": {
     "followUs": "ተከተሉን በ:"

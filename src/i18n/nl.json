@@ -6,16 +6,17 @@
   "nav": {
     "help": "Help",
     "new": "Nieuw",
-    "fork": "Fork",
-    "menu": "Menu",
+    "fork": "Kopie maken",
+    "menu": "Delen & exporteren",
     "toolbar": {
       "ariaLabel": "Werkbalk met knopgroepen",
       "radioGroupAria": "Groep met keuzeknoppen",
       "editorOnly": "Alleen editor",
       "splitView": "Gesplitste weergave",
       "previewOnly": "Alleen voorbeeld",
-      "compile": "Compileren (Ctrl+S)",
-      "toggleNavAria": "Navigatie schakelen"
+      "compile": "Voorbeeld vernieuwen (Ctrl+S)",
+      "toggleNavAria": "Navigatie schakelen",
+      "refresh": "Vernieuwen"
     },
     "activityBar": {
       "hideToolbar": "Editorwerkbalk verbergen",
@@ -28,12 +29,30 @@
       "onlineAria": "De editor staat in samenwerkingsmodus via {type}, wat betekent dat je de URL kunt delen en samen met anderen kunt bewerken",
       "switchOfflineAria": "Samenwerkend bewerken uitschakelen en overschakelen naar offline modus",
       "switchWebRTCAria": "Overschakelen naar samenwerkend bewerken via WebRTC",
-      "switchWebSocketAria": "Overschakelen naar samenwerkend bewerken via WebSocket"
+      "switchWebSocketAria": "Overschakelen naar samenwerkend bewerken via WebSocket",
+      "title": "Wie schrijft er mee?",
+      "solo": "Alleen ik",
+      "soloDesc": "Alles blijft op dit apparaat. Werkt ook zonder internet.",
+      "webrtc": "Live – direct",
+      "webrtcDesc": "Deel de link en iedereen ziet wijzigingen meteen. De browsers maken rechtstreeks verbinding met elkaar.",
+      "websocket": "Live – via server",
+      "websocketDesc": "Betrouwbaarder met veel mensen of in strenge schoolnetwerken.",
+      "tech": "Techniek: {name}",
+      "sameCourse": "Iedereen met de link bewerkt dezelfde cursus. Wil je een eigen versie? Maak een kopie.",
+      "users": "{n} online"
+    },
+    "myCourses": "Mijn cursussen",
+    "savedLocal": "Opgeslagen in deze browser",
+    "more": "Meer acties",
+    "view": {
+      "write": "Schrijven",
+      "both": "Beide",
+      "preview": "Voorbeeld"
     }
   },
   "share": {
     "header": "Editor delen ...",
-    "modalTitle": "Delen en acties",
+    "modalTitle": "Delen & exporteren",
     "publishedHeading": "Bestaande publicatie openen",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP-archief",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "Wat wil je doen met ‘{title}’?",
+    "goalsAria": "Doelen",
+    "groups": {
+      "collaborate": {
+        "label": "Samen bewerken",
+        "sub": "Anderen schrijven mee",
+        "intro": "Nodig anderen uit om aan deze cursus mee te werken – live of als eigen kopie."
+      },
+      "publish": {
+        "label": "Publiceren",
+        "sub": "Een link voor leerlingen",
+        "intro": "Kies hoe leerlingen de cursus openen. De labels helpen je kiezen."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "Back-uppen en synchroniseren",
+        "intro": "Bewaar het hele project met alle bestanden in een repository en houd het up-to-date."
+      },
+      "localFolder": {
+        "label": "Map op deze computer",
+        "sub": "Synchroniseren met echte bestanden",
+        "intro": "Koppel een map op je computer om de bestanden ook met andere programma's te bewerken."
+      },
+      "export": {
+        "label": "Downloaden & exporteren",
+        "sub": "ZIP, SCORM voor je LMS, PDF …",
+        "intro": "Neem de cursus mee of zet hem om voor een leerplatform."
+      }
+    },
+    "sections": {
+      "published": "Al gepubliceerd"
+    },
+    "nothingPublished": "Nog niets. Links die je hier maakt, verschijnen in deze lijst.",
+    "items": {
+      "collaborationLink": {
+        "label": "Uitnodigen om live mee te schrijven",
+        "desc": "Iedereen met de link bewerkt tegelijk dezelfde cursus."
+      },
+      "snapshotUrl": {
+        "label": "Bewerkbare kopie versturen",
+        "desc": "Opent de editor met een kopie van het huidige bestand. Je origineel blijft ongewijzigd."
+      },
+      "externalResource": {
+        "label": "Editorlink naar een online bestand",
+        "desc": "Geef het adres van een Markdown-bestand op het web op; de link opent het in de editor."
+      },
+      "githubGist": {
+        "label": "Opslaan als GitHub Gist",
+        "desc": "Een blijvende link naar de cursus, opgeslagen in je GitHub-account."
+      },
+      "nostr": {
+        "label": "Publiceren op Nostr",
+        "desc": "Decentraal opgeslagen, zonder account bij een aanbieder."
+      },
+      "dataUri": {
+        "label": "Cursus in de link versturen",
+        "desc": "De hele tekst zit in de link. Handig voor chat-apps en snelle tests."
+      },
+      "embedCode": {
+        "label": "Insluiten op een website",
+        "desc": "HTML-code die editor en voorbeeld in je eigen pagina toont."
+      },
+      "githubGistLink": {
+        "label": "Gist-versie openen",
+        "desc": "De cursus zoals je hem als GitHub Gist hebt opgeslagen."
+      },
+      "nostrLink": {
+        "label": "Nostr-versie openen",
+        "desc": "De cursus zoals je hem op Nostr hebt gepubliceerd."
+      },
+      "repoFile": {
+        "desc": "Opent het bestand uit de gekoppelde repository – upload eerst je wijzigingen."
+      },
+      "fileUrl": {
+        "label": "Online bestand openen in LiaScript",
+        "desc": "De cursus van het webadres waarmee deze editor is geopend."
+      },
+      "repoImport": {
+        "label": "Importeren uit {service}",
+        "desc": "Bestanden uit een {service}-repository aan deze cursus toevoegen."
+      },
+      "repoPublish": {
+        "label": "Publiceren in een nieuwe repository",
+        "desc": "Maakt een nieuwe {service}-repository aan en uploadt alle projectbestanden."
+      },
+      "repoPush": {
+        "label": "Wijzigingen uploaden",
+        "desc": "Slaat je wijzigingen op in de gekoppelde {service}-repository."
+      },
+      "repoPull": {
+        "label": "Wijzigingen ophalen",
+        "desc": "Neemt wijzigingen over die anderen in de {service}-repository hebben gemaakt."
+      },
+      "openLocalFolder": {
+        "label": "Map koppelen",
+        "desc": "Kies de map op je computer waarmee deze cursus wordt gesynchroniseerd."
+      },
+      "localFolderSync": {
+        "label": "Synchroniseren met de map",
+        "desc": "Bestanden vergelijken en wijzigingen in beide richtingen overnemen."
+      },
+      "exporter": {
+        "label": "Omzetten voor een leerplatform",
+        "desc": "De LiaScript Exporter maakt van je project SCORM, IMS, PDF, ePub en meer."
+      },
+      "downloadZip": {
+        "label": "Downloaden als ZIP",
+        "desc": "Het hele project met alle bestanden – ook handig als back-up."
+      }
+    },
+    "tags": {
+      "permanent": "Blijvend",
+      "githubAccount": "GitHub-account nodig",
+      "noAccount": "Geen account",
+      "shortOnly": "Alleen korte cursussen, geen afbeeldingen",
+      "live": "Live",
+      "sameCourse": "Dezelfde cursus voor iedereen",
+      "ownCopy": "Eigen kopie",
+      "allFiles": "Alle bestanden"
+    },
+    "reasons": {
+      "noProject": "Alleen voor cursussen die in deze browser zijn opgeslagen.",
+      "noRepo": "Beschikbaar zodra de cursus aan een {service}-repository is gekoppeld.",
+      "noFolder": "Beschikbaar zodra er een map is gekoppeld."
+    },
+    "actions": {
+      "showLink": "Link tonen",
+      "createLink": "Link maken",
+      "enterUrl": "Adres invoeren",
+      "save": "Opslaan",
+      "publish": "Publiceren",
+      "createCode": "Code maken",
+      "import": "Importeren",
+      "createRepo": "Repository maken",
+      "push": "Uploaden",
+      "pull": "Ophalen",
+      "chooseFolder": "Map kiezen",
+      "sync": "Synchroniseren",
+      "openExporter": "Exporter openen",
+      "download": "Downloaden",
+      "open": "Openen",
+      "connectNow": "Nu koppelen"
+    }
   },
   "modal": {
     "close": "Sluiten",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "Nieuwe cursus",
-    "searchPlaceholder": "Typ om te zoeken...",
+    "searchPlaceholder": "Zoeken in titel of inhoud",
     "searchAriaLabel": "Zoekveld",
     "clearSearchAria": "Zoekopdracht wissen",
     "footer": "Dit is een samenwerkende online editor voor {liascript}. Alle inhoud wordt alleen in je browser opgeslagen. Als je inspiratie nodig hebt, bekijk dan enkele van onze {examples}, zoek naar insluitbare {templates} of al gepubliceerde {courses}.",
@@ -119,7 +281,7 @@
       "heading": "Importeren uit",
       "more": "Meer opties",
       "submit": "Importeren",
-      "new": "Nieuw",
+      "new": "Leeg document",
       "upload": "Bestand uploaden (Markdown / ZIP)",
       "github": "GitHub-repository",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidGist": "Geen gist gevonden voor dat ID.",
         "fetchFailed": "Kan de bron niet laden. Controleer de URL en je verbinding."
       },
-      "localFolder": "Local folder"
-    }
+      "localFolder": "Local folder",
+      "template": "Beginnen met een sjabloon",
+      "templateDesc": "Een voorbeeldcursus met opmaak, quizzen, code en meer – klaar om te herschrijven."
+    },
+    "welcome": {
+      "title": "Schrijf interactieve cursussen – en zie meteen hoe ze werken",
+      "lead": "Jij schrijft Markdown, het voorbeeld ernaast toont dia's, quizzen en voorlezen. Geen account nodig – alles draait in je browser.",
+      "open": "Bestand openen",
+      "openDesc": "Een Markdown-bestand of ZIP-archief van je apparaat.",
+      "remote": "Van het web halen",
+      "remoteDesc": "GitHub, GitLab, Gist, een webadres of een map op je computer.",
+      "examples": "Of bekijk eerst een kant-en-klaar voorbeeld",
+      "hide": "Verbergen"
+    },
+    "storage": {
+      "title": "Je cursussen worden alleen in deze browser bewaard.",
+      "body": "Als je de websitegegevens wist, zijn ze weg. Maak een back-up van belangrijke cursussen als ZIP, in een map of op GitHub – in de editor via ‘Delen & exporteren’."
+    },
+    "courses": "Mijn cursussen",
+    "courseCount": "{n} cursus | {n} cursussen",
+    "newCourseDesc": "Sjabloon, bestand of import"
   },
   "card": {
     "untitled": "Naamloos",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "Lokaal"
-    }
+      "local": "Alleen in browser",
+      "folder": "Map"
+    },
+    "linkedTitle": "Ook buiten deze browser opgeslagen",
+    "localTitle": "Alleen in deze browser opgeslagen – maak een back-up via ‘Delen & exporteren’"
   },
   "footer": {
     "followUs": "Volg ons op:"

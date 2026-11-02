@@ -6,16 +6,17 @@
   "nav": {
     "help": "ヘルプ",
     "new": "新規",
-    "fork": "フォーク",
-    "menu": "メニュー",
+    "fork": "コピーを作成",
+    "menu": "共有とエクスポート",
     "toolbar": {
       "ariaLabel": "ボタングループ付きツールバー",
       "radioGroupAria": "ラジオ切り替えボタングループ",
       "editorOnly": "エディターのみ",
       "splitView": "分割表示",
       "previewOnly": "プレビューのみ",
-      "compile": "コンパイル (Ctrl+S)",
-      "toggleNavAria": "ナビゲーションを切り替え"
+      "compile": "プレビューを更新 (Ctrl+S)",
+      "toggleNavAria": "ナビゲーションを切り替え",
+      "refresh": "更新"
     },
     "activityBar": {
       "hideToolbar": "エディターツールバーを非表示",
@@ -28,12 +29,30 @@
       "onlineAria": "エディターは {type} による共同編集モードです。URL を共有して他の人と編集できます",
       "switchOfflineAria": "共同編集をオフにしてオフラインモードへ切り替え",
       "switchWebRTCAria": "WebRTC による共同編集へ切り替え",
-      "switchWebSocketAria": "WebSocket による共同編集へ切り替え"
+      "switchWebSocketAria": "WebSocket による共同編集へ切り替え",
+      "title": "誰が書いていますか？",
+      "solo": "自分だけ",
+      "soloDesc": "すべてこのデバイスに保存されます。インターネットがなくても使えます。",
+      "webrtc": "ライブ – 直接",
+      "webrtcDesc": "リンクを共有すると、全員がすぐに変更を見られます。ブラウザー同士が直接つながります。",
+      "websocket": "ライブ – サーバー経由",
+      "websocketDesc": "参加者が多いときや、制限の厳しい学校ネットワークでより安定します。",
+      "tech": "技術: {name}",
+      "sameCourse": "リンクを持つ全員が同じコースを編集します。自分専用の版が必要なら、コピーを作成してください。",
+      "users": "{n} 人がオンライン"
+    },
+    "myCourses": "マイコース",
+    "savedLocal": "このブラウザーに保存済み",
+    "more": "その他の操作",
+    "view": {
+      "write": "編集",
+      "both": "両方",
+      "preview": "プレビュー"
     }
   },
   "share": {
     "header": "エディターを共有 ...",
-    "modalTitle": "共有とアクション",
+    "modalTitle": "共有とエクスポート",
     "publishedHeading": "既存の公開を開く",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP アーカイブ",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "「{title}」で何をしますか？",
+    "goalsAria": "目的",
+    "groups": {
+      "collaborate": {
+        "label": "一緒に編集",
+        "sub": "他の人も書き込めます",
+        "intro": "このコースの作業に他の人を招待します – ライブで、または各自のコピーで。"
+      },
+      "publish": {
+        "label": "公開",
+        "sub": "学習者向けのリンク",
+        "intro": "学習者がコースをどう開くかを選びます。ラベルが判断の手助けになります。"
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "バックアップと同期",
+        "intro": "すべてのファイルを含むプロジェクト全体をリポジトリに保存し、最新の状態に保ちます。"
+      },
+      "localFolder": {
+        "label": "このコンピューターのフォルダー",
+        "sub": "実際のファイルと同期",
+        "intro": "コンピューター上のフォルダーを接続すると、他のプログラムでもファイルを編集できます。"
+      },
+      "export": {
+        "label": "ダウンロードとエクスポート",
+        "sub": "ZIP、LMS 用の SCORM、PDF …",
+        "intro": "コースを持ち出したり、学習プラットフォーム用に変換したりできます。"
+      }
+    },
+    "sections": {
+      "published": "公開済み"
+    },
+    "nothingPublished": "まだ何もありません。ここで作成したリンクがこの一覧に表示されます。",
+    "items": {
+      "collaborationLink": {
+        "label": "ライブ編集に招待",
+        "desc": "リンクを持つ全員が同じコースを同時に編集します。"
+      },
+      "snapshotUrl": {
+        "label": "編集可能なコピーを送る",
+        "desc": "現在のファイルのコピーでエディターを開きます。元のファイルはそのまま残ります。"
+      },
+      "externalResource": {
+        "label": "オンラインファイルへのエディターリンク",
+        "desc": "Web 上の Markdown ファイルのアドレスを入力すると、リンクからエディターで開けます。"
+      },
+      "githubGist": {
+        "label": "GitHub Gist として保存",
+        "desc": "GitHub アカウントに保存される、コースへの恒久的なリンクです。"
+      },
+      "nostr": {
+        "label": "Nostr で公開",
+        "desc": "分散型で保存され、どのサービスのアカウントも不要です。"
+      },
+      "dataUri": {
+        "label": "コースをリンクに入れて送る",
+        "desc": "テキスト全体がリンクに収められます。メッセンジャーや簡単なテストに便利です。"
+      },
+      "embedCode": {
+        "label": "Web サイトに埋め込む",
+        "desc": "自分のページにエディターとプレビューを表示する HTML コードです。"
+      },
+      "githubGistLink": {
+        "label": "Gist 版を開く",
+        "desc": "GitHub Gist として保存したときのコースです。"
+      },
+      "nostrLink": {
+        "label": "Nostr 版を開く",
+        "desc": "Nostr で公開したときのコースです。"
+      },
+      "repoFile": {
+        "desc": "接続済みのリポジトリからファイルを開きます – 先に変更をアップロードしてください。"
+      },
+      "fileUrl": {
+        "label": "オンラインファイルを LiaScript で開く",
+        "desc": "このエディターを開いたときの Web アドレスにあるコースです。"
+      },
+      "repoImport": {
+        "label": "{service} からインポート",
+        "desc": "{service} リポジトリのファイルをこのコースに追加します。"
+      },
+      "repoPublish": {
+        "label": "新しいリポジトリに公開",
+        "desc": "新しい {service} リポジトリを作成し、プロジェクトの全ファイルをアップロードします。"
+      },
+      "repoPush": {
+        "label": "変更をアップロード",
+        "desc": "変更を接続済みの {service} リポジトリに保存します。"
+      },
+      "repoPull": {
+        "label": "変更を取得",
+        "desc": "他の人が {service} リポジトリで行った変更を取り込みます。"
+      },
+      "openLocalFolder": {
+        "label": "フォルダーを接続",
+        "desc": "このコースと同期する、コンピューター上のフォルダーを選びます。"
+      },
+      "localFolderSync": {
+        "label": "フォルダーと同期",
+        "desc": "ファイルを比較し、どちらの方向にも変更を反映します。"
+      },
+      "exporter": {
+        "label": "学習プラットフォーム用に変換",
+        "desc": "LiaScript Exporter がプロジェクトから SCORM、IMS、PDF、ePub などを作成します。"
+      },
+      "downloadZip": {
+        "label": "ZIP でダウンロード",
+        "desc": "すべてのファイルを含むプロジェクト全体 – バックアップにも便利です。"
+      }
+    },
+    "tags": {
+      "permanent": "恒久的",
+      "githubAccount": "GitHub アカウントが必要",
+      "noAccount": "アカウント不要",
+      "shortOnly": "短いコースのみ、画像なし",
+      "live": "ライブ",
+      "sameCourse": "全員が同じコース",
+      "ownCopy": "各自のコピー",
+      "allFiles": "全ファイル"
+    },
+    "reasons": {
+      "noProject": "このブラウザーに保存されたコースでのみ使えます。",
+      "noRepo": "コースを {service} リポジトリに接続すると使えます。",
+      "noFolder": "フォルダーを接続すると使えます。"
+    },
+    "actions": {
+      "showLink": "リンクを表示",
+      "createLink": "リンクを作成",
+      "enterUrl": "アドレスを入力",
+      "save": "保存",
+      "publish": "公開",
+      "createCode": "コードを作成",
+      "import": "インポート",
+      "createRepo": "リポジトリを作成",
+      "push": "アップロード",
+      "pull": "取得",
+      "chooseFolder": "フォルダーを選択",
+      "sync": "同期",
+      "openExporter": "Exporter を開く",
+      "download": "ダウンロード",
+      "open": "開く",
+      "connectNow": "今すぐ接続"
+    }
   },
   "modal": {
     "close": "閉じる",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "新しいコース",
-    "searchPlaceholder": "検索語を入力...",
+    "searchPlaceholder": "タイトルや内容を検索",
     "searchAriaLabel": "検索入力",
     "clearSearchAria": "検索をクリア",
     "footer": "これは {liascript} 用の共同オンラインエディターです。すべての内容はあなたのブラウザー内にのみ保存されます。インスピレーションが必要な場合は、{examples} を確認したり、埋め込み可能な {templates} や公開済みの {courses} を検索したりできます。",
@@ -119,7 +281,7 @@
       "heading": "インポート元",
       "more": "その他のオプション",
       "submit": "インポート",
-      "new": "新規",
+      "new": "空のドキュメント",
       "upload": "ファイルをアップロード（Markdown / ZIP）",
       "github": "GitHub リポジトリ",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidGist": "その ID の gist が見つかりませんでした。",
         "fetchFailed": "リソースを読み込めませんでした。URL と接続を確認してください。"
       },
-      "localFolder": "Local folder"
-    }
+      "localFolder": "Local folder",
+      "template": "テンプレートから始める",
+      "templateDesc": "書式、クイズ、コードなどを含むサンプルコース – そのまま書き換えられます。"
+    },
+    "welcome": {
+      "title": "インタラクティブなコースを書いて、その動きをすぐに確認",
+      "lead": "Markdown を書くと、横のプレビューにスライド、クイズ、読み上げが表示されます。アカウントは不要 – すべてブラウザー内で動きます。",
+      "open": "ファイルを開く",
+      "openDesc": "デバイス上の Markdown ファイルまたは ZIP アーカイブ。",
+      "remote": "Web から取得",
+      "remoteDesc": "GitHub、GitLab、Gist、Web アドレス、またはコンピューター上のフォルダー。",
+      "examples": "まずは完成したサンプルを見てみる",
+      "hide": "非表示"
+    },
+    "storage": {
+      "title": "コースはこのブラウザーにのみ保存されています。",
+      "body": "サイトデータを削除すると、コースも消えてしまいます。大切なコースは ZIP、フォルダー、または GitHub にバックアップしてください – エディターの「共有とエクスポート」から行えます。"
+    },
+    "courses": "マイコース",
+    "courseCount": "{n} 件のコース | {n} 件のコース",
+    "newCourseDesc": "テンプレート、ファイル、インポート"
   },
   "card": {
     "untitled": "無題",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "ローカル"
-    }
+      "local": "ブラウザーのみ",
+      "folder": "フォルダー"
+    },
+    "linkedTitle": "このブラウザーの外にも保存されています",
+    "localTitle": "このブラウザーにのみ保存 – 「共有とエクスポート」からバックアップしてください"
   },
   "footer": {
     "followUs": "フォロー："

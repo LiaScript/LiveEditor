@@ -6,16 +6,17 @@
   "nav": {
     "help": "도움말",
     "new": "새로 만들기",
-    "fork": "포크",
-    "menu": "메뉴",
+    "fork": "사본 만들기",
+    "menu": "공유 및 내보내기",
     "toolbar": {
       "ariaLabel": "버튼 그룹이 있는 도구 모음",
       "radioGroupAria": "라디오 토글 버튼 그룹",
       "editorOnly": "편집기만",
       "splitView": "분할 보기",
       "previewOnly": "미리보기만",
-      "compile": "컴파일 (Ctrl+S)",
-      "toggleNavAria": "내비게이션 전환"
+      "compile": "미리보기 새로 고침 (Ctrl+S)",
+      "toggleNavAria": "내비게이션 전환",
+      "refresh": "새로 고침"
     },
     "activityBar": {
       "hideToolbar": "편집기 도구 모음 숨기기",
@@ -28,12 +29,30 @@
       "onlineAria": "편집기가 {type}을 통한 협업 모드입니다. URL을 공유하고 다른 사람과 함께 편집할 수 있습니다",
       "switchOfflineAria": "협업 편집을 끄고 오프라인 모드로 전환",
       "switchWebRTCAria": "WebRTC를 통한 협업 편집으로 전환",
-      "switchWebSocketAria": "WebSocket을 통한 협업 편집으로 전환"
+      "switchWebSocketAria": "WebSocket을 통한 협업 편집으로 전환",
+      "title": "누가 작성하나요?",
+      "solo": "나만",
+      "soloDesc": "모든 내용이 이 기기에만 남습니다. 인터넷 없이도 작동합니다.",
+      "webrtc": "실시간 – 직접 연결",
+      "webrtcDesc": "링크를 공유하면 모두가 변경 사항을 바로 봅니다. 브라우저끼리 직접 연결됩니다.",
+      "websocket": "실시간 – 서버 경유",
+      "websocketDesc": "참여자가 많거나 제한이 엄격한 학교 네트워크에서 더 안정적입니다.",
+      "tech": "기술: {name}",
+      "sameCourse": "링크가 있는 모든 사람이 같은 과정을 편집합니다. 나만의 버전이 필요하신가요? 사본을 만드세요.",
+      "users": "{n}명 접속 중"
+    },
+    "myCourses": "내 과정",
+    "savedLocal": "이 브라우저에 저장됨",
+    "more": "더 많은 작업",
+    "view": {
+      "write": "작성",
+      "both": "함께 보기",
+      "preview": "미리보기"
     }
   },
   "share": {
     "header": "편집기 공유 ...",
-    "modalTitle": "공유 및 작업",
+    "modalTitle": "공유 및 내보내기",
     "publishedHeading": "기존 게시물 열기",
     "nostr": "Nostr",
     "downloadZipLabel": "ZIP 아카이브",
@@ -84,7 +103,150 @@
     "githubRepoFile": "GitHub course: {file}",
     "githubRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitHub repository (push your changes first). Only available for GitHub-linked projects.",
     "gitlabRepoFile": "GitLab course: {file}",
-    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects."
+    "gitlabRepoFileTooltip": "Open the active file as a LiaScript course from the linked GitLab repository (push your changes first). Only available for GitLab-linked projects.",
+    "dialogSub": "“{title}” – 무엇을 하시겠어요?",
+    "goalsAria": "목표",
+    "groups": {
+      "collaborate": {
+        "label": "함께 편집",
+        "sub": "다른 사람과 함께 작성",
+        "intro": "다른 사람을 이 과정 작업에 초대하세요 – 실시간으로 또는 각자의 사본으로."
+      },
+      "publish": {
+        "label": "게시",
+        "sub": "학습자용 링크",
+        "intro": "학습자가 과정을 여는 방식을 선택하세요. 라벨이 결정에 도움이 됩니다."
+      },
+      "git": {
+        "label": "GitHub & GitLab",
+        "sub": "백업 및 동기화",
+        "intro": "모든 파일이 포함된 전체 프로젝트를 저장소에 보관하고 최신 상태로 유지하세요."
+      },
+      "localFolder": {
+        "label": "이 컴퓨터의 폴더",
+        "sub": "실제 파일과 동기화",
+        "intro": "컴퓨터의 폴더를 연결하면 다른 프로그램에서도 파일을 편집할 수 있습니다."
+      },
+      "export": {
+        "label": "다운로드 및 내보내기",
+        "sub": "ZIP, LMS용 SCORM, PDF …",
+        "intro": "과정을 가져가거나 학습 플랫폼용으로 변환하세요."
+      }
+    },
+    "sections": {
+      "published": "이미 게시됨"
+    },
+    "nothingPublished": "아직 없습니다. 여기서 만든 링크가 이 목록에 표시됩니다.",
+    "items": {
+      "collaborationLink": {
+        "label": "실시간 편집에 초대",
+        "desc": "링크가 있는 모든 사람이 같은 과정을 동시에 편집합니다."
+      },
+      "snapshotUrl": {
+        "label": "편집 가능한 사본 보내기",
+        "desc": "현재 파일의 사본으로 편집기를 엽니다. 원본은 그대로 유지됩니다."
+      },
+      "externalResource": {
+        "label": "온라인 파일용 편집기 링크",
+        "desc": "웹에 있는 Markdown 파일의 주소를 입력하세요. 링크를 열면 편집기에서 열립니다."
+      },
+      "githubGist": {
+        "label": "GitHub Gist로 저장",
+        "desc": "GitHub 계정에 저장되는 과정의 영구 링크입니다."
+      },
+      "nostr": {
+        "label": "Nostr에 게시",
+        "desc": "탈중앙화 방식으로 저장되며, 어떤 서비스의 계정도 필요 없습니다."
+      },
+      "dataUri": {
+        "label": "링크 안에 과정 담아 보내기",
+        "desc": "전체 텍스트가 링크 안에 담깁니다. 메신저나 빠른 테스트에 좋습니다."
+      },
+      "embedCode": {
+        "label": "웹사이트에 삽입",
+        "desc": "내 웹 페이지에 편집기와 미리보기를 보여 주는 HTML 코드입니다."
+      },
+      "githubGistLink": {
+        "label": "Gist 버전 열기",
+        "desc": "GitHub Gist로 저장했을 때의 과정입니다."
+      },
+      "nostrLink": {
+        "label": "Nostr 버전 열기",
+        "desc": "Nostr에 게시했을 때의 과정입니다."
+      },
+      "repoFile": {
+        "desc": "연결된 저장소에서 파일을 엽니다 – 먼저 변경 사항을 업로드하세요."
+      },
+      "fileUrl": {
+        "label": "LiaScript에서 온라인 파일 열기",
+        "desc": "이 편집기를 열 때 사용한 웹 주소의 과정입니다."
+      },
+      "repoImport": {
+        "label": "{service}에서 가져오기",
+        "desc": "{service} 저장소의 파일을 이 과정에 추가합니다."
+      },
+      "repoPublish": {
+        "label": "새 저장소에 게시",
+        "desc": "새 {service} 저장소를 만들고 모든 프로젝트 파일을 업로드합니다."
+      },
+      "repoPush": {
+        "label": "변경 사항 업로드",
+        "desc": "변경 사항을 연결된 {service} 저장소에 저장합니다."
+      },
+      "repoPull": {
+        "label": "변경 사항 가져오기",
+        "desc": "다른 사람이 {service} 저장소에서 변경한 내용을 반영합니다."
+      },
+      "openLocalFolder": {
+        "label": "폴더 연결",
+        "desc": "이 과정과 동기화할 컴퓨터의 폴더를 선택하세요."
+      },
+      "localFolderSync": {
+        "label": "폴더와 동기화",
+        "desc": "파일을 비교하고 어느 방향으로든 변경 사항을 반영합니다."
+      },
+      "exporter": {
+        "label": "학습 플랫폼용으로 변환",
+        "desc": "LiaScript Exporter가 프로젝트에서 SCORM, IMS, PDF, ePub 등을 만듭니다."
+      },
+      "downloadZip": {
+        "label": "ZIP으로 다운로드",
+        "desc": "모든 파일이 포함된 전체 프로젝트 – 백업용으로도 좋습니다."
+      }
+    },
+    "tags": {
+      "permanent": "영구적",
+      "githubAccount": "GitHub 계정 필요",
+      "noAccount": "계정 불필요",
+      "shortOnly": "짧은 과정만, 이미지 없음",
+      "live": "실시간",
+      "sameCourse": "모두 같은 과정",
+      "ownCopy": "각자의 사본",
+      "allFiles": "모든 파일"
+    },
+    "reasons": {
+      "noProject": "이 브라우저에 저장된 과정에서만 사용할 수 있습니다.",
+      "noRepo": "과정이 {service} 저장소에 연결되면 사용할 수 있습니다.",
+      "noFolder": "폴더가 연결되면 사용할 수 있습니다."
+    },
+    "actions": {
+      "showLink": "링크 보기",
+      "createLink": "링크 만들기",
+      "enterUrl": "주소 입력",
+      "save": "저장",
+      "publish": "게시",
+      "createCode": "코드 만들기",
+      "import": "가져오기",
+      "createRepo": "저장소 만들기",
+      "push": "업로드",
+      "pull": "가져오기",
+      "chooseFolder": "폴더 선택",
+      "sync": "동기화",
+      "openExporter": "Exporter 열기",
+      "download": "다운로드",
+      "open": "열기",
+      "connectNow": "지금 연결"
+    }
   },
   "modal": {
     "close": "닫기",
@@ -108,7 +270,7 @@
   },
   "index": {
     "newCourse": "새 과정",
-    "searchPlaceholder": "검색어 입력...",
+    "searchPlaceholder": "제목 또는 내용 검색",
     "searchAriaLabel": "검색 입력",
     "clearSearchAria": "검색 지우기",
     "footer": "이것은 {liascript}용 협업 온라인 편집기입니다. 모든 내용은 브라우저 안에만 저장됩니다. 영감이 필요하다면 {examples}를 확인하거나, 임베드 가능한 {templates} 또는 이미 게시된 {courses}를 검색하세요.",
@@ -119,7 +281,7 @@
       "heading": "가져오기 소스",
       "more": "추가 옵션",
       "submit": "가져오기",
-      "new": "새로 만들기",
+      "new": "빈 문서",
       "upload": "파일 업로드 (Markdown / ZIP)",
       "github": "GitHub 저장소",
       "gitlab": "GitLab repository",
@@ -150,8 +312,27 @@
         "invalidGist": "해당 ID의 gist를 찾을 수 없습니다.",
         "fetchFailed": "리소스를 불러올 수 없습니다. URL과 연결을 확인하세요."
       },
-      "localFolder": "Local folder"
-    }
+      "localFolder": "Local folder",
+      "template": "템플릿으로 시작",
+      "templateDesc": "서식, 퀴즈, 코드 등이 담긴 예시 과정 – 바로 고쳐 쓸 수 있습니다."
+    },
+    "welcome": {
+      "title": "인터랙티브 과정을 작성하고 작동하는 모습을 바로 확인하세요",
+      "lead": "Markdown으로 작성하면 옆의 미리보기에 슬라이드, 퀴즈, 읽어 주기가 표시됩니다. 계정이 필요 없습니다 – 모든 것이 브라우저에서 실행됩니다.",
+      "open": "파일 열기",
+      "openDesc": "기기에 있는 Markdown 파일 또는 ZIP 압축 파일.",
+      "remote": "웹에서 가져오기",
+      "remoteDesc": "GitHub, GitLab, Gist, 웹 주소 또는 컴퓨터의 폴더.",
+      "examples": "또는 먼저 완성된 예시를 살펴보세요",
+      "hide": "숨기기"
+    },
+    "storage": {
+      "title": "과정은 이 브라우저에만 저장됩니다.",
+      "body": "사이트 데이터를 지우면 과정도 사라집니다. 중요한 과정은 ZIP, 폴더 또는 GitHub에 백업하세요 – 편집기의 “공유 및 내보내기”에서 할 수 있습니다."
+    },
+    "courses": "내 과정",
+    "courseCount": "과정 {n}개 | 과정 {n}개",
+    "newCourseDesc": "템플릿, 파일 또는 가져오기"
   },
   "card": {
     "untitled": "제목 없음",
@@ -171,8 +352,11 @@
       "github": "GitHub",
       "gitlab": "GitLab",
       "gist": "Gist",
-      "local": "로컬"
-    }
+      "local": "브라우저에만",
+      "folder": "폴더"
+    },
+    "linkedTitle": "이 브라우저 밖에도 저장됨",
+    "localTitle": "이 브라우저에만 저장됨 – “공유 및 내보내기”에서 백업하세요"
   },
   "footer": {
     "followUs": "팔로우:"

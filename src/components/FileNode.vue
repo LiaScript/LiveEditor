@@ -232,7 +232,7 @@ export default defineComponent({
 }
 
 .lia-node-row.active {
-  background-color: rgba(13, 110, 253, 0.12);
+  background-color: rgba(var(--bs-primary-rgb), 0.12);
 }
 
 .lia-chevron {
