@@ -995,7 +995,7 @@ export default {
       </div>
 
       <!-- right: what can I do -->
-      <div class="lia-editbar-side d-flex align-items-center justify-content-end gap-1">
+      <div class="lia-editbar-side lia-editbar-right d-flex align-items-center justify-content-end">
         <template v-if="!embed">
           <div class="dropdown">
             <button
@@ -1038,16 +1038,19 @@ export default {
                   </span>
                 </span>
               </a>
-              <div class="dropdown-divider"></div>
-              <p class="px-3 mb-2 small text-body-secondary lia-conn-hint">
-                {{ $t('nav.connection.sameCourse') }}
-              </p>
-              <div class="px-3 pb-1">
-                <button type="button" class="btn btn-sm btn-outline-secondary" @click="fork">
-                  <i class="bi bi-copy" aria-hidden="true"></i>
-                  {{ $t('nav.fork') }}
-                </button>
-              </div>
+              <!-- only true while live: "Only me" shares nothing via the link -->
+              <template v-if="conn.type !== 'Offline'">
+                <div class="dropdown-divider"></div>
+                <p class="px-3 mb-2 small text-body-secondary lia-conn-hint">
+                  {{ $t('nav.connection.sameCourse') }}
+                </p>
+                <div class="px-3 pb-1">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" @click="fork">
+                    <i class="bi bi-copy" aria-hidden="true"></i>
+                    {{ $t('nav.fork') }}
+                  </button>
+                </div>
+              </template>
             </div>
           </div>
 
@@ -1061,7 +1064,7 @@ export default {
             <i class="bi bi-question-circle" aria-hidden="true"></i>
           </a>
 
-          <div class="d-none d-md-block">
+          <div class="d-none d-md-block lia-lang">
             <LanguageDropdown align="end" />
           </div>
 
@@ -1426,6 +1429,25 @@ export default {
   gap: 0.4rem;
   height: 36px;
   white-space: nowrap;
+}
+
+/* even visible spacing: bordered buttons sit 8px apart, the borderless
+   icon buttons are narrower so their glyph gets about the same room */
+.lia-editbar-right {
+  gap: 0.5rem;
+}
+
+.lia-editbar-right .lia-icon-btn {
+  width: 28px;
+  margin-inline: -5px;
+}
+
+/* the language dropdown matches the 36px bar buttons */
+.lia-lang :deep(.dropdown-toggle) {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .lia-icon-btn {
