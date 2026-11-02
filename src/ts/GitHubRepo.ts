@@ -253,7 +253,8 @@ export async function loadRepoTree(
   if (isError(head)) {
     // A missing ref can mean either the repository is empty or it does not
     // exist / is inaccessible. Confirm via the repo endpoint to disambiguate.
-    if (head.error === 'not_found') {
+    // An empty repository answers 409 "Git Repository is empty." (not 404).
+    if (head.error === 'not_found' || /repository is empty/i.test(head.message)) {
       const info = await getRepoInfo(owner, repo, pat)
       if (isError(info)) return info
       return { branch, commitSha: '', items: [], truncated: false, empty: true }
@@ -296,6 +297,30 @@ function bytesToBase64(bytes: Uint8Array): string {
     )
   }
   return btoa(binary)
+}
+
+/**
+ * Download a file from raw.githubusercontent.com. Unlike the API this does not
+ * count against the rate limit (60 requests/hour without a token). Returns
+ * undefined when unavailable (private repository, network/CORS error).
+ */
+export async function getRawFile(
+  owner: string,
+  repo: string,
+  ref: string,
+  path: string
+): Promise<Uint8Array | undefined> {
+  const url = `https://raw.githubusercontent.com/${owner}/${repo}/${ref}/${path
+    .split('/')
+    .map(encodeURIComponent)
+    .join('/')}`
+  try {
+    const response = await fetch(url)
+    if (response.ok) return new Uint8Array(await response.arrayBuffer())
+  } catch {
+    /* fall back to the API */
+  }
+  return undefined
 }
 
 /**

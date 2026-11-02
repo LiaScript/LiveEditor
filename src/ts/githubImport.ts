@@ -147,7 +147,9 @@ export async function importPaths(
   items: TreeItem[],
   paths: string[],
   pat: string | undefined,
-  onProgress?: (p: ImportProgress) => void
+  onProgress?: (p: ImportProgress) => void,
+  /** commit sha of `items`; enables rate-limit-free raw downloads */
+  ref?: string
 ): Promise<{ imported: number } | GitHubError> {
   const byPath = new Map(items.map((i) => [i.path, i]));
   let done = 0;
@@ -161,13 +163,23 @@ export async function importPaths(
       for (const [path, bytes] of fetched) doc.importFile(path, bytes);
     });
 
+  let useRaw = !!ref;
+
   for (const path of paths) {
     const item = byPath.get(path);
     done++;
     if (!item || item.type !== "blob") continue;
     onProgress?.({ done, total: paths.length, path });
 
-    const bytes = await GitHub.getBlob(owner, repo, item.sha, pat);
+    let bytes: Uint8Array | GitHubError | undefined;
+    if (useRaw) {
+      const raw = await GitHub.getRawFile(owner, repo, ref!, path);
+      // unavailable (private repo, network): use the API for all remaining files
+      if (!raw) useRaw = false;
+      // only accept exactly the listed blob, otherwise fall back for this file
+      else if ((await GitHub.gitBlobSha(raw)) === item.sha) bytes = raw;
+    }
+    if (!bytes) bytes = await GitHub.getBlob(owner, repo, item.sha, pat);
     if (GitHub.isError(bytes)) {
       flush();
       return bytes;

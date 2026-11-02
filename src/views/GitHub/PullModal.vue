@@ -166,7 +166,8 @@ export default defineComponent({
         this.items,
         paths,
         getGithubPat(),
-        (p) => (this.progress = p)
+        (p) => (this.progress = p),
+        this.headSha
       );
 
       if (GitHub.isError(result)) {

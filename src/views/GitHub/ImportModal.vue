@@ -162,7 +162,8 @@ export default defineComponent({
             this.items,
             this.selected,
             getGithubPat(),
-            (p) => (this.progress = p)
+            (p) => (this.progress = p),
+            this.commitSha
           );
 
           if (GitHub.isError(result)) {
