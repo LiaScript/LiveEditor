@@ -10,8 +10,8 @@ import 'bootstrap/js/dist/modal'
 
 // Configure Monaco Editor web workers for Parcel bundler.
 // getWorker (not getWorkerUrl) is required so Parcel recognises the
-// new Worker(new URL(...)) pattern and bundles all deps inline into the
-// worker chunk, avoiding shared-chunk require() failures at runtime.
+// new Worker(new URL(...)) pattern and bundles each worker. The workers still
+// share a chunk; see editor.worker.ts for the workaround that keeps it loadable.
 (window as any).MonacoEnvironment = {
   getWorker: function (_moduleId: string, label: string) {
     // Each language service ships its own worker; returning the generic
