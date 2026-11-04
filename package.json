@@ -1,6 +1,6 @@
 {
   "name": "liaeditor",
-  "version": "2.1.0--2.6.1",
+  "version": "2.1.0--2.6.2",
   "description": "LiaEdit – the LiaScript editor",
   "scripts": {
     "sw": "npx workbox injectManifest workbox-config.js",
@@ -16,7 +16,7 @@
   "author": "André Dietrich",
   "license": "MIT",
   "dependencies": {
-    "@liascript/editor": "^1.2.0--2.6.1",
+    "@liascript/editor": "^1.2.0--2.6.2",
     "@susisu/mte-kernel": "^2.1.1",
     "minisearch": "^7.2.0",
     "pako": "^2.1.0",
