@@ -61,6 +61,10 @@ window.injectHandler = function (param) {
           image.dataset.liaSrc = image.getAttribute('src')
           image.src = url
 
+          // the hover zoom shows the figure's background-image, not the <img>
+          const figure = image.closest('.lia-figure__zoom')
+          if (figure) figure.style.backgroundImage = "url('" + url + "')"
+
           if (image.onclick) {
             image.onclick = function () {
               window.LIA.img.click(url)
