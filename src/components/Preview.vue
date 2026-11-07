@@ -2,6 +2,27 @@
 const INIT_CODE = `
 var blob = {};
 
+// Cache keys are paths as written, which point elsewhere in another document.
+// LiaScript also reuses media elements whose markdown src is unchanged, so put
+// the original src (and onerror) back to make them fail and get resolved again.
+window.LIA.clearMedia = function () {
+  blob = {}
+  document.querySelectorAll('[data-lia-src]').forEach(function (el) {
+    const src = el.dataset.liaSrc
+    el.removeAttribute('data-lia-src')
+    el.setAttribute('src', src)
+
+    if (el.tagName === 'SOURCE') {
+      const media = el.parentNode
+      el.setAttribute('onerror', "window.LIA.fetchError('" + media.tagName.toLowerCase() + "','" + src + "')")
+      media.removeAttribute('src')
+      media.load()
+    } else if (el.tagName !== 'IMG') {
+      el.load()
+    }
+  })
+};
+
 // TODO: Fix this HACK, so that preferBrowserTTS works as expected
 if (window.LIA.settings?.preferBrowserTTS || false) {
   window.LIA.settings.preferBrowserTTS = false;
@@ -23,7 +44,8 @@ window.injectHandler = function (param) {
     return
   }
 
-  const src = window.location.origin + param.src
+  // resolve like the browser does for element.src ("/../a.png" -> origin + "/a.png")
+  const src = new URL(param.src.split("#")[0], window.location.origin).href
 
   // Media fragment (e.g. "#t=0,5") that has to be re-applied to the blob URL so
   // the author's start/stop time keeps working. Blob URLs lose any fragment.
@@ -36,6 +58,7 @@ window.injectHandler = function (param) {
       for (let i = 0; i < images.length; i++) {
         let image = images[i]
         if (image.src == src) {
+          image.dataset.liaSrc = image.getAttribute('src')
           image.src = url
 
           if (image.onclick) {
@@ -60,6 +83,7 @@ window.injectHandler = function (param) {
             parent.pause()
           }
 
+          elem.dataset.liaSrc = elem.getAttribute('src')
           elem.src = url + fragment
           elem.removeAttribute("onerror")
 
@@ -80,6 +104,7 @@ window.injectHandler = function (param) {
         if (elem.src == src + fragment) {
           const parent = elem.parentNode
           parent.src = url + fragment
+          elem.dataset.liaSrc = elem.getAttribute('src')
           elem.src = url + fragment
           parent.load()
           parent.onloadeddata = function() {
@@ -94,6 +119,7 @@ window.injectHandler = function (param) {
         let elem = nodes[i]
 
         if (elem.src == src) {
+          elem.dataset.liaSrc = elem.getAttribute('src')
           elem.src = url + fragment
           elem.load()
           elem.onloadeddata = function() {

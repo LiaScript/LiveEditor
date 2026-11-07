@@ -789,7 +789,7 @@ export default {
       // leave remote/embedded references untouched
       if (/^(https?:|data:|blob:|\/\/)/i.test(value)) return null;
 
-      const bytes = (this.$refs.editor as any)?.getBlob(value);
+      const bytes = (this.$refs.editor as any)?.getBlob(this.resolvePath(value));
       if (!bytes) return null;
 
       return "data:" + this.mimeForPath(value) + ";base64," + this.bytesToBase64(bytes);
@@ -833,7 +833,21 @@ export default {
       if (src.indexOf(origin) === 0) {
         src = src.slice(origin.length);
       }
-      return this.$refs.editor.getBlob(src);
+      // LiaScript prefixes paths with "/" ("../a.png" -> "/../a.png",
+      // "/a.png" -> "//a.png"), so drop exactly one to get the written path.
+      return this.$refs.editor.getBlob(this.resolvePath(src.replace(/^\//, "")));
+    },
+
+    // Resolve a path written in the previewed document against that document's
+    // folder; a leading "/" means the project root.
+    resolvePath(path: string): string {
+      const dir = this.previewFilePath.replace(/[^/]*$/, "");
+      const resolved = new URL(path, "http://x/" + dir).pathname.slice(1);
+      try {
+        return decodeURIComponent(resolved);
+      } catch {
+        return resolved;
+      }
     },
 
     editorReady() {
@@ -1180,7 +1194,7 @@ export default {
               @online="online"
               @goto="gotoPreview"
               @active="activeFilePath = $event"
-              @preview="previewFilePath = $event"
+              @preview="previewFilePath = $event; preview?.clearMedia?.()"
               :storage-id="$props.storageId"
               :content="$props.content"
               ref="editor"

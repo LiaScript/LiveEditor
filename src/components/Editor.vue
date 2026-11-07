@@ -163,7 +163,10 @@ export default {
     // Falls back to the legacy hash/blob storage when no project doc exists.
     storeUpload(filename: string, data: Uint8Array, mime?: string): string {
       if (this.projectDoc) {
-        return this.projectDoc.addUpload(filename, data, mime);
+        const path = this.projectDoc.addUpload(filename, data, mime);
+        // uploads land in the project root; reference them from the open document's folder
+        const doc = this.activePath || this.projectDoc.getMainPath();
+        return "../".repeat(doc.split("/").length - 1) + path;
       }
       (this.blob as any)?.set(filename, data);
       return filename;
