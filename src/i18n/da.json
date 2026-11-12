@@ -302,7 +302,46 @@
     "followUs": "Følg os på:"
   },
   "preview": {
-    "loading": "Indlæser..."
+    "loading": "Indlæser...",
+    "device": {
+      "title": "Eksempelenhed",
+      "responsive": "Responsiv (udfylder ruden)",
+      "tablet": "Tablet",
+      "laptop": "Bærbar",
+      "fullhd": "Full HD-skærm / projektor",
+      "ultrawide": "Ultrawide-skærm",
+      "beamer4k": "4K-projektor",
+      "rotate": "Roter enhed",
+      "zoom": "Zoom",
+      "fit": "Tilpas",
+      "fitTitle": "Skaler enheden, så den passer til ruden",
+      "actualTitle": "Vis i faktisk størrelse (rul)",
+      "scaling": "Visningsskalering i enheden",
+      "scaleDown": "Zoom ud (mindre)",
+      "scaleUp": "Zoom ind (større)",
+      "groups": {
+        "phones": "Telefoner",
+        "tablets": "Tablets",
+        "desktop": "Computer og projektor"
+      },
+      "keys": {
+        "keypad": "Telefontaster",
+        "softLeft": "Venstre softtast",
+        "softRight": "Højre softtast",
+        "ok": "OK / vælg",
+        "call": "Ring op",
+        "end": "Afslut / tilbage",
+        "home": "Hjem: rul til toppen",
+        "up": "Op",
+        "down": "Ned",
+        "left": "Venstre (forrige slide)",
+        "right": "Højre (næste slide)",
+        "volumeUp": "Lydstyrke op",
+        "volumeDown": "Lydstyrke ned",
+        "power": "Tænd/sluk: skærm fra/til",
+        "back": "Tilbage (forrige slide)"
+      }
+    }
   },
   "toast": {
     "information": "Information",

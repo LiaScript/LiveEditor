@@ -302,7 +302,46 @@
     "followUs": "Obserwuj nas na:"
   },
   "preview": {
-    "loading": "Ładowanie..."
+    "loading": "Ładowanie...",
+    "device": {
+      "title": "Urządzenie podglądu",
+      "responsive": "Responsywny (wypełnia panel)",
+      "tablet": "Tablet",
+      "laptop": "Laptop",
+      "fullhd": "Monitor Full HD / projektor",
+      "ultrawide": "Monitor Ultrawide",
+      "beamer4k": "Projektor 4K",
+      "rotate": "Obróć urządzenie",
+      "zoom": "Powiększenie",
+      "fit": "Dopasuj",
+      "fitTitle": "Skaluj urządzenie, aby mieściło się w panelu",
+      "actualTitle": "Pokaż w rzeczywistym rozmiarze (przewijanie)",
+      "scaling": "Skala wyświetlania w urządzeniu",
+      "scaleDown": "Pomniejsz",
+      "scaleUp": "Powiększ",
+      "groups": {
+        "phones": "Telefony",
+        "tablets": "Tablety",
+        "desktop": "Komputer i projektor"
+      },
+      "keys": {
+        "keypad": "Klawisze telefonu",
+        "softLeft": "Lewy klawisz funkcyjny",
+        "softRight": "Prawy klawisz funkcyjny",
+        "ok": "OK / wybierz",
+        "call": "Zadzwoń",
+        "end": "Koniec / wstecz",
+        "home": "Początek: przewiń na górę",
+        "up": "W górę",
+        "down": "W dół",
+        "left": "W lewo (poprzedni slajd)",
+        "right": "W prawo (następny slajd)",
+        "volumeUp": "Głośniej",
+        "volumeDown": "Ciszej",
+        "power": "Zasilanie: wyłącz/włącz ekran",
+        "back": "Wstecz (poprzedni slajd)"
+      }
+    }
   },
   "toast": {
     "information": "Informacja",

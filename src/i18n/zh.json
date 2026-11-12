@@ -302,7 +302,46 @@
     "followUs": "关注我们："
   },
   "preview": {
-    "loading": "正在加载..."
+    "loading": "正在加载...",
+    "device": {
+      "title": "预览设备",
+      "responsive": "自适应（填满窗格）",
+      "tablet": "平板电脑",
+      "laptop": "笔记本电脑",
+      "fullhd": "Full HD 显示器 / 投影仪",
+      "ultrawide": "超宽显示器",
+      "beamer4k": "4K 投影仪",
+      "rotate": "旋转设备",
+      "zoom": "缩放",
+      "fit": "适应",
+      "fitTitle": "缩放设备以适应窗格",
+      "actualTitle": "以实际大小显示（可滚动）",
+      "scaling": "设备内的显示缩放",
+      "scaleDown": "缩小",
+      "scaleUp": "放大",
+      "groups": {
+        "phones": "手机",
+        "tablets": "平板电脑",
+        "desktop": "台式机和投影仪"
+      },
+      "keys": {
+        "keypad": "手机按键",
+        "softLeft": "左软键",
+        "softRight": "右软键",
+        "ok": "确定 / 选择",
+        "call": "通话",
+        "end": "结束 / 返回",
+        "home": "主页：滚动到顶部",
+        "up": "上",
+        "down": "下",
+        "left": "左（上一张幻灯片）",
+        "right": "右（下一张幻灯片）",
+        "volumeUp": "音量增大",
+        "volumeDown": "音量减小",
+        "power": "电源：关闭/开启屏幕",
+        "back": "返回（上一张幻灯片）"
+      }
+    }
   },
   "toast": {
     "information": "信息",

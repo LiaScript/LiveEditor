@@ -302,7 +302,46 @@
     "followUs": "Sekite mus:"
   },
   "preview": {
-    "loading": "Įkeliama..."
+    "loading": "Įkeliama...",
+    "device": {
+      "title": "Peržiūros įrenginys",
+      "responsive": "Prisitaikantis (užpildo skydelį)",
+      "tablet": "Planšetė",
+      "laptop": "Nešiojamasis kompiuteris",
+      "fullhd": "Full HD monitorius / projektorius",
+      "ultrawide": "Ultrawide monitorius",
+      "beamer4k": "4K projektorius",
+      "rotate": "Pasukti įrenginį",
+      "zoom": "Mastelis",
+      "fit": "Pritaikyti",
+      "fitTitle": "Pritaikyti įrenginio dydį skydeliui",
+      "actualTitle": "Rodyti tikruoju dydžiu (slinkti)",
+      "scaling": "Rodymo mastelis įrenginyje",
+      "scaleDown": "Sumažinti",
+      "scaleUp": "Padidinti",
+      "groups": {
+        "phones": "Telefonai",
+        "tablets": "Planšetės",
+        "desktop": "Stalinis kompiuteris ir projektorius"
+      },
+      "keys": {
+        "keypad": "Telefono klavišai",
+        "softLeft": "Kairysis funkcinis klavišas",
+        "softRight": "Dešinysis funkcinis klavišas",
+        "ok": "OK / pasirinkti",
+        "call": "Skambinti",
+        "end": "Baigti / atgal",
+        "home": "Pradžia: slinkti į viršų",
+        "up": "Aukštyn",
+        "down": "Žemyn",
+        "left": "Kairėn (ankstesnė skaidrė)",
+        "right": "Dešinėn (kita skaidrė)",
+        "volumeUp": "Garsiau",
+        "volumeDown": "Tyliau",
+        "power": "Maitinimas: išjungti/įjungti ekraną",
+        "back": "Atgal (ankstesnė skaidrė)"
+      }
+    }
   },
   "toast": {
     "information": "Informacija",

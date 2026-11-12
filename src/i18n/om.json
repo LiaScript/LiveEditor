@@ -302,7 +302,46 @@
     "followUs": "Nu hordofi:"
   },
   "preview": {
-    "loading": "Fe'amaa jira..."
+    "loading": "Fe'amaa jira...",
+    "device": {
+      "title": "Meeshaa dursee ilaaluu",
+      "responsive": "Responsive (paanee guuta)",
+      "tablet": "Tablet",
+      "laptop": "Laptop",
+      "fullhd": "Monitor Full HD / beamer",
+      "ultrawide": "Monitor Ultrawide",
+      "beamer4k": "Beamer 4K",
+      "rotate": "Meeshaa naannessi",
+      "zoom": "Zoom",
+      "fit": "Madaalchisi",
+      "fitTitle": "Meeshaan paanee waliin akka wal madaalu gadi xiqqeessi",
+      "actualTitle": "Guddina dhugaa agarsiisi (sirbi)",
+      "scaling": "Madaallii agarsiisa meeshaa keessatti",
+      "scaleDown": "Xiqqeessi",
+      "scaleUp": "Guddisi",
+      "groups": {
+        "phones": "Bilbilootaa",
+        "tablets": "Tablet-oota",
+        "desktop": "Desktop fi beamer"
+      },
+      "keys": {
+        "keypad": "Qabduu bilbilaa",
+        "softLeft": "Qabduu bitaa",
+        "softRight": "Qabduu mirgaa",
+        "ok": "OK / filadhu",
+        "call": "Bilbili",
+        "end": "Xumuri / duubatti",
+        "home": "Mana: gara ol sirbi",
+        "up": "Ol",
+        "down": "Gadi",
+        "left": "Bitaa (slaayidii darbe)",
+        "right": "Mirga (slaayidii itti aanu)",
+        "volumeUp": "Sagalee ol qabi",
+        "volumeDown": "Sagalee gad buusi",
+        "power": "Humna: iskiriinii cufi/banii",
+        "back": "Duubatti (slaayidii darbe)"
+      }
+    }
   },
   "toast": {
     "information": "Odeeffannoo",

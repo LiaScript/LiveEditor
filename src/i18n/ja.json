@@ -302,7 +302,46 @@
     "followUs": "フォロー："
   },
   "preview": {
-    "loading": "読み込み中..."
+    "loading": "読み込み中...",
+    "device": {
+      "title": "プレビューデバイス",
+      "responsive": "レスポンシブ（ペインに合わせる）",
+      "tablet": "タブレット",
+      "laptop": "ノートPC",
+      "fullhd": "フルHDモニター／プロジェクター",
+      "ultrawide": "ウルトラワイドモニター",
+      "beamer4k": "4Kプロジェクター",
+      "rotate": "デバイスを回転",
+      "zoom": "ズーム",
+      "fit": "フィット",
+      "fitTitle": "デバイスをペインに合わせて縮尺",
+      "actualTitle": "実寸で表示（スクロール）",
+      "scaling": "デバイス内の表示倍率",
+      "scaleDown": "縮小",
+      "scaleUp": "拡大",
+      "groups": {
+        "phones": "スマートフォン",
+        "tablets": "タブレット",
+        "desktop": "デスクトップ＆プロジェクター"
+      },
+      "keys": {
+        "keypad": "電話キー",
+        "softLeft": "左ソフトキー",
+        "softRight": "右ソフトキー",
+        "ok": "OK／決定",
+        "call": "通話",
+        "end": "終了／戻る",
+        "home": "ホーム：先頭へスクロール",
+        "up": "上",
+        "down": "下",
+        "left": "左（前のスライド）",
+        "right": "右（次のスライド）",
+        "volumeUp": "音量を上げる",
+        "volumeDown": "音量を下げる",
+        "power": "電源：画面オフ／オン",
+        "back": "戻る（前のスライド）"
+      }
+    }
   },
   "toast": {
     "information": "情報",

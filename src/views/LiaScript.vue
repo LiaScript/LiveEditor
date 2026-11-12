@@ -33,6 +33,14 @@ const LocalFolderSyncModal = defineAsyncComponent(() => import("./LocalFolder/Sy
 import * as LocalFolder from "../ts/LocalFolder";
 import { detectGitHubRemote, detectGitLabRemote } from "../ts/localFolderSync";
 import { SYNC_ON_OPEN_KEY, BACKUP_ON_OPEN_KEY } from "../ts/createProject";
+import {
+  DEVICES,
+  DEVICE_GROUPS,
+  RESPONSIVE,
+  findDevice,
+  loadPreviewDevice,
+  savePreviewDevice,
+} from "../ts/previewDevices";
 
 import logoImg from "url:../../assets/logo.png";
 
@@ -67,8 +75,16 @@ export default {
         connectionType = "Offline";
     }
 
+    const previewDevice = loadPreviewDevice();
+
     return {
       logoImg,
+      DEVICE_GROUPS,
+      RESPONSIVE,
+      previewDevice: previewDevice.device,
+      previewLandscape: previewDevice.landscape,
+      previewZoom: previewDevice.zoom,
+      previewScaling: previewDevice.scaling,
       preview: undefined,
       horizontal:
         document.documentElement.clientWidth < document.documentElement.clientHeight,
@@ -109,6 +125,17 @@ export default {
     };
   },
 
+  watch: {
+    previewDeviceState(state) {
+      savePreviewDevice(state);
+    },
+
+    // 200 % suits a 4K beamer, not a 240 px phone
+    previewDevice() {
+      this.previewScaling = 1;
+    },
+  },
+
   unmounted() {
     window.removeEventListener("resize", this.onResize);
     this.unwatch?.();
@@ -138,6 +165,19 @@ export default {
   },
 
   computed: {
+    currentDevice() {
+      return findDevice(this.previewDevice);
+    },
+
+    previewDeviceState() {
+      return {
+        device: this.previewDevice,
+        landscape: this.previewLandscape,
+        zoom: this.previewZoom,
+        scaling: this.previewScaling,
+      };
+    },
+
     // basename of the active file (shown on the download menu entry)
     activeFileName(): string {
       return this.activeFilePath.split("/").pop() || this.activeFilePath;
@@ -438,6 +478,14 @@ export default {
   },
 
   methods: {
+    devicesIn(group: string) {
+      return DEVICES.filter((d) => d.group === group);
+    },
+
+    deviceName(device: any) {
+      return device.i18n ? this.$t("preview.device." + device.name) : device.name;
+    },
+
     openShare() {
       (this.$refs.shareModal as any)?.open();
     },
@@ -996,6 +1044,55 @@ export default {
           </button>
         </div>
 
+        <div v-if="currentMode >= 0" class="dropdown">
+          <button
+            type="button"
+            class="btn btn-sm lia-bar-btn"
+            :class="previewDevice === RESPONSIVE.id ? 'btn-outline-secondary' : 'btn-secondary'"
+            data-bs-toggle="dropdown"
+            data-bs-display="static"
+            aria-expanded="false"
+            :title="$t('preview.device.title')"
+            :aria-label="$t('preview.device.title')"
+          >
+            <i class="bi" :class="currentDevice.icon" aria-hidden="true"></i>
+            <span class="d-none d-xl-inline lia-device-label">{{ deviceName(currentDevice) }}</span>
+            <i class="bi bi-chevron-down small" aria-hidden="true"></i>
+          </button>
+
+          <ul class="dropdown-menu lia-device-menu">
+            <li>
+              <button
+                type="button"
+                class="dropdown-item lia-device-item"
+                :class="{ active: previewDevice === RESPONSIVE.id }"
+                :aria-current="previewDevice === RESPONSIVE.id ? 'true' : null"
+                @click="previewDevice = RESPONSIVE.id"
+              >
+                <i class="bi" :class="RESPONSIVE.icon" aria-hidden="true"></i>
+                <span>{{ deviceName(RESPONSIVE) }}</span>
+              </button>
+            </li>
+            <template v-for="group in DEVICE_GROUPS" :key="group">
+              <li><hr class="dropdown-divider" /></li>
+              <li><h6 class="dropdown-header">{{ $t('preview.device.groups.' + group) }}</h6></li>
+              <li v-for="device in devicesIn(group)" :key="device.id">
+                <button
+                  type="button"
+                  class="dropdown-item lia-device-item"
+                  :class="{ active: previewDevice === device.id }"
+                  :aria-current="previewDevice === device.id ? 'true' : null"
+                  @click="previewDevice = device.id"
+                >
+                  <i class="bi" :class="device.icon" aria-hidden="true"></i>
+                  <span>{{ deviceName(device) }}</span>
+                  <span class="lia-device-size">{{ device.width }}×{{ device.height }}</span>
+                </button>
+              </li>
+            </template>
+          </ul>
+        </div>
+
         <button
           type="button"
           class="btn btn-sm btn-outline-secondary lia-bar-btn"
@@ -1243,6 +1340,10 @@ export default {
           @update="previewUpdate"
           @goto="gotoEditor"
           :fetchError="fetchError"
+          :device="previewDevice"
+          v-model:landscape="previewLandscape"
+          v-model:zoom="previewZoom"
+          v-model:scaling="previewScaling"
           :class="{ invisible: previewNotReady }"
         />
       </pane>
@@ -1475,6 +1576,34 @@ export default {
 
 .lia-icon-btn:hover {
   background: #eef1f3;
+}
+
+.lia-device-label {
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lia-device-menu {
+  min-width: 17rem;
+}
+
+.lia-device-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.lia-device-size {
+  margin-left: auto;
+  padding-left: 1rem;
+  font-size: 0.8rem;
+  color: var(--lia-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.lia-device-item.active .lia-device-size {
+  color: inherit;
 }
 
 .lia-conn-users {

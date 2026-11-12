@@ -302,7 +302,46 @@
     "followUs": "Sekojiet mums:"
   },
   "preview": {
-    "loading": "Ielādē..."
+    "loading": "Ielādē...",
+    "device": {
+      "title": "Priekšskatījuma ierīce",
+      "responsive": "Adaptīvs (aizpilda paneli)",
+      "tablet": "Planšetdators",
+      "laptop": "Portatīvais dators",
+      "fullhd": "Full HD monitors / projektors",
+      "ultrawide": "Ultrawide monitors",
+      "beamer4k": "4K projektors",
+      "rotate": "Pagriezt ierīci",
+      "zoom": "Mērogs",
+      "fit": "Ietilpināt",
+      "fitTitle": "Mērogot ierīci, lai tā ietilptu panelī",
+      "actualTitle": "Rādīt faktiskajā izmērā (ritināt)",
+      "scaling": "Attēlojuma mērogs ierīcē",
+      "scaleDown": "Samazināt",
+      "scaleUp": "Palielināt",
+      "groups": {
+        "phones": "Tālruņi",
+        "tablets": "Planšetdatori",
+        "desktop": "Galddators un projektors"
+      },
+      "keys": {
+        "keypad": "Tālruņa taustiņi",
+        "softLeft": "Kreisais programmtaustiņš",
+        "softRight": "Labais programmtaustiņš",
+        "ok": "OK / izvēlēties",
+        "call": "Zvanīt",
+        "end": "Beigt / atpakaļ",
+        "home": "Sākums: ritināt uz augšu",
+        "up": "Uz augšu",
+        "down": "Uz leju",
+        "left": "Pa kreisi (iepriekšējais slaids)",
+        "right": "Pa labi (nākamais slaids)",
+        "volumeUp": "Skaļāk",
+        "volumeDown": "Klusāk",
+        "power": "Barošana: izslēgt/ieslēgt ekrānu",
+        "back": "Atpakaļ (iepriekšējais slaids)"
+      }
+    }
   },
   "toast": {
     "information": "Informācija",

@@ -302,7 +302,46 @@
     "followUs": "Follow us on:"
   },
   "preview": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "device": {
+      "title": "Preview device",
+      "responsive": "Responsive (fill pane)",
+      "tablet": "Tablet",
+      "laptop": "Laptop",
+      "fullhd": "Full HD monitor / beamer",
+      "ultrawide": "Ultrawide monitor",
+      "beamer4k": "4K beamer",
+      "rotate": "Rotate device",
+      "zoom": "Zoom",
+      "fit": "Fit",
+      "fitTitle": "Scale the device to fit the pane",
+      "actualTitle": "Show at actual size (scroll)",
+      "scaling": "Display scaling inside the device",
+      "scaleDown": "Zoom out (smaller)",
+      "scaleUp": "Zoom in (larger)",
+      "groups": {
+        "phones": "Phones",
+        "tablets": "Tablets",
+        "desktop": "Desktop & beamer"
+      },
+      "keys": {
+        "keypad": "Phone keys",
+        "softLeft": "Left softkey",
+        "softRight": "Right softkey",
+        "ok": "OK / select",
+        "call": "Call",
+        "end": "End / back",
+        "home": "Home: scroll to top",
+        "up": "Up",
+        "down": "Down",
+        "left": "Left (previous slide)",
+        "right": "Right (next slide)",
+        "volumeUp": "Volume up",
+        "volumeDown": "Volume down",
+        "power": "Power: screen off/on",
+        "back": "Back (previous slide)"
+      }
+    }
   },
   "toast": {
     "information": "Information",

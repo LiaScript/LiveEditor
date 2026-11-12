@@ -302,7 +302,46 @@
     "followUs": "Rewindo min e:"
   },
   "preview": {
-    "loading": "Nana loowa..."
+    "loading": "Nana loowa...",
+    "device": {
+      "title": "Kaɓirgel ndeen",
+      "responsive": "Responsive (heɓtina pane)",
+      "tablet": "Tablet",
+      "laptop": "Laptop",
+      "fullhd": "Monitor Full HD / beamer",
+      "ultrawide": "Monitor Ultrawide",
+      "beamer4k": "Beamer 4K",
+      "rotate": "Hirso kaɓirgel",
+      "zoom": "Zoom",
+      "fit": "Maaɗtin",
+      "fitTitle": "Maaɗtin kaɓirgel ngel haa pane",
+      "actualTitle": "Hollu manngu goonga (wiilude)",
+      "scaling": "Maaɗtingol hollirde nder kaɓirgel",
+      "scaleDown": "Famtin (pamaro)",
+      "scaleUp": "Ɓeydu (mawngo)",
+      "groups": {
+        "phones": "Telefonji",
+        "tablets": "Tablet-ji",
+        "desktop": "Desktop & beamer"
+      },
+      "keys": {
+        "keypad": "Bouton telefon",
+        "softLeft": "Bouton cuuɗi nano",
+        "softRight": "Bouton cuuɗi nano",
+        "ok": "OK / suɓtu",
+        "call": "Noddu",
+        "end": "Gaɗɗu / hootu",
+        "home": "Ɗerewol: yaltu ley",
+        "up": "Ley",
+        "down": "Les",
+        "left": "Nano (slide aroore)",
+        "right": "Ñaamo (slide jokkotoongo)",
+        "volumeUp": "Ɓeydu sawru",
+        "volumeDown": "Famtin sawru",
+        "power": "Hoorngo: maasel maayde/yoɓde",
+        "back": "Hootu (slide aroore)"
+      }
+    }
   },
   "toast": {
     "information": "Humpito",

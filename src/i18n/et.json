@@ -302,7 +302,46 @@
     "followUs": "Jälgi meid:"
   },
   "preview": {
-    "loading": "Laadimine..."
+    "loading": "Laadimine...",
+    "device": {
+      "title": "Eelvaate seade",
+      "responsive": "Kohanduv (täidab paneeli)",
+      "tablet": "Tahvelarvuti",
+      "laptop": "Sülearvuti",
+      "fullhd": "Full HD monitor / projektor",
+      "ultrawide": "Ultrawide monitor",
+      "beamer4k": "4K projektor",
+      "rotate": "Pööra seadet",
+      "zoom": "Suum",
+      "fit": "Sobita",
+      "fitTitle": "Skaleeri seade paneelile sobivaks",
+      "actualTitle": "Näita tegelikus suuruses (kerimine)",
+      "scaling": "Kuva skaleerimine seadmes",
+      "scaleDown": "Vähenda",
+      "scaleUp": "Suurenda",
+      "groups": {
+        "phones": "Telefonid",
+        "tablets": "Tahvelarvutid",
+        "desktop": "Lauaarvuti ja projektor"
+      },
+      "keys": {
+        "keypad": "Telefoni klahvid",
+        "softLeft": "Vasak softklahv",
+        "softRight": "Parem softklahv",
+        "ok": "OK / vali",
+        "call": "Helista",
+        "end": "Lõpeta / tagasi",
+        "home": "Avaleht: keri üles",
+        "up": "Üles",
+        "down": "Alla",
+        "left": "Vasakule (eelmine slaid)",
+        "right": "Paremale (järgmine slaid)",
+        "volumeUp": "Helitugevus üles",
+        "volumeDown": "Helitugevus alla",
+        "power": "Toitenupp: ekraan välja/sisse",
+        "back": "Tagasi (eelmine slaid)"
+      }
+    }
   },
   "toast": {
     "information": "Teave",

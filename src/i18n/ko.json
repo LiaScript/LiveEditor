@@ -302,7 +302,46 @@
     "followUs": "팔로우:"
   },
   "preview": {
-    "loading": "불러오는 중..."
+    "loading": "불러오는 중...",
+    "device": {
+      "title": "미리보기 기기",
+      "responsive": "반응형(창 채우기)",
+      "tablet": "태블릿",
+      "laptop": "노트북",
+      "fullhd": "Full HD 모니터 / 빔프로젝터",
+      "ultrawide": "울트라와이드 모니터",
+      "beamer4k": "4K 빔프로젝터",
+      "rotate": "기기 회전",
+      "zoom": "확대/축소",
+      "fit": "맞춤",
+      "fitTitle": "기기를 창에 맞게 축소",
+      "actualTitle": "실제 크기로 보기(스크롤)",
+      "scaling": "기기 내 화면 배율",
+      "scaleDown": "축소",
+      "scaleUp": "확대",
+      "groups": {
+        "phones": "휴대폰",
+        "tablets": "태블릿",
+        "desktop": "데스크톱 및 빔프로젝터"
+      },
+      "keys": {
+        "keypad": "전화 키",
+        "softLeft": "왼쪽 소프트키",
+        "softRight": "오른쪽 소프트키",
+        "ok": "확인 / 선택",
+        "call": "통화",
+        "end": "종료 / 뒤로",
+        "home": "홈: 맨 위로 스크롤",
+        "up": "위",
+        "down": "아래",
+        "left": "왼쪽(이전 슬라이드)",
+        "right": "오른쪽(다음 슬라이드)",
+        "volumeUp": "볼륨 높이기",
+        "volumeDown": "볼륨 낮추기",
+        "power": "전원: 화면 끄기/켜기",
+        "back": "뒤로(이전 슬라이드)"
+      }
+    }
   },
   "toast": {
     "information": "정보",

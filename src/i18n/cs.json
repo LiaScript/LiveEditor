@@ -302,7 +302,46 @@
     "followUs": "Sledujte nás na:"
   },
   "preview": {
-    "loading": "Načítání..."
+    "loading": "Načítání...",
+    "device": {
+      "title": "Zařízení náhledu",
+      "responsive": "Responzivní (vyplní panel)",
+      "tablet": "Tablet",
+      "laptop": "Notebook",
+      "fullhd": "Full HD monitor / projektor",
+      "ultrawide": "Ultrawide monitor",
+      "beamer4k": "4K projektor",
+      "rotate": "Otočit zařízení",
+      "zoom": "Zvětšení",
+      "fit": "Přizpůsobit",
+      "fitTitle": "Přizpůsobit velikost zařízení panelu",
+      "actualTitle": "Zobrazit ve skutečné velikosti (posuvník)",
+      "scaling": "Měřítko zobrazení v zařízení",
+      "scaleDown": "Zmenšit",
+      "scaleUp": "Zvětšit",
+      "groups": {
+        "phones": "Telefony",
+        "tablets": "Tablety",
+        "desktop": "Počítač a projektor"
+      },
+      "keys": {
+        "keypad": "Klávesy telefonu",
+        "softLeft": "Levé softtlačítko",
+        "softRight": "Pravé softtlačítko",
+        "ok": "OK / vybrat",
+        "call": "Volat",
+        "end": "Konec / zpět",
+        "home": "Domů: posun na začátek",
+        "up": "Nahoru",
+        "down": "Dolů",
+        "left": "Vlevo (předchozí snímek)",
+        "right": "Vpravo (další snímek)",
+        "volumeUp": "Hlasitěji",
+        "volumeDown": "Tišeji",
+        "power": "Vypínač: vypnout/zapnout displej",
+        "back": "Zpět (předchozí snímek)"
+      }
+    }
   },
   "toast": {
     "information": "Informace",

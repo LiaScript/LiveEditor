@@ -302,7 +302,46 @@
     "followUs": "Bi mu a:"
   },
   "preview": {
-    "loading": "Ana lodawa..."
+    "loading": "Ana lodawa...",
+    "device": {
+      "title": "Na’urar samfoti",
+      "responsive": "Mai daidaitawa (cika bangaren)",
+      "tablet": "Tablet",
+      "laptop": "Laptop",
+      "fullhd": "Na’urar duba Full HD / beamer",
+      "ultrawide": "Na’urar duba Ultrawide",
+      "beamer4k": "Beamer 4K",
+      "rotate": "Juya na’ura",
+      "zoom": "Zuƙo",
+      "fit": "Daidaita",
+      "fitTitle": "Daidaita girman na’ura da bangaren",
+      "actualTitle": "Nuna girman gaske (gungura)",
+      "scaling": "Ma’aunin nuni a cikin na’urar",
+      "scaleDown": "Rage (ƙarami)",
+      "scaleUp": "Ƙara girma (babba)",
+      "groups": {
+        "phones": "Wayoyi",
+        "tablets": "Tablet-oci",
+        "desktop": "Kwamfuta da beamer"
+      },
+      "keys": {
+        "keypad": "Maɓallan waya",
+        "softLeft": "Maɓallin hagu",
+        "softRight": "Maɓallin dama",
+        "ok": "OK / zaɓi",
+        "call": "Kira",
+        "end": "Ƙare / koma baya",
+        "home": "Gida: gungura zuwa sama",
+        "up": "Sama",
+        "down": "Ƙasa",
+        "left": "Hagu (zane na baya)",
+        "right": "Dama (zane na gaba)",
+        "volumeUp": "Ƙara ƙara",
+        "volumeDown": "Rage ƙara",
+        "power": "Wuta: kashe/kunna allo",
+        "back": "Koma baya (zane na baya)"
+      }
+    }
   },
   "toast": {
     "information": "Bayani",

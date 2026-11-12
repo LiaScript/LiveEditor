@@ -302,7 +302,46 @@
     "followUs": "Soro anyị na:"
   },
   "preview": {
-    "loading": "Na-ebudata..."
+    "loading": "Na-ebudata...",
+    "device": {
+      "title": "Ngwaọrụ nlele",
+      "responsive": "Na-agbanwe agbanwe (jupụta pane)",
+      "tablet": "Tablet",
+      "laptop": "Laptọọpụ",
+      "fullhd": "Monitọ Full HD / beamer",
+      "ultrawide": "Monitọ Ultrawide",
+      "beamer4k": "Beamer 4K",
+      "rotate": "Tụgharịa ngwaọrụ",
+      "zoom": "Zoom",
+      "fit": "Kwekọọ",
+      "fitTitle": "Mee ka ngwaọrụ ruo pane",
+      "actualTitle": "Gosi n’ogo ya n’ezie (ịpịgharị)",
+      "scaling": "Nha ngosi n’ime ngwaọrụ",
+      "scaleDown": "Mee obere",
+      "scaleUp": "Mee nnukwu",
+      "groups": {
+        "phones": "Ekwentị",
+        "tablets": "Tablet",
+        "desktop": "Desktọọpụ na beamer"
+      },
+      "keys": {
+        "keypad": "Mkpịsị ekwentị",
+        "softLeft": "Mkpịsị aka ekpe",
+        "softRight": "Mkpịsị aka nri",
+        "ok": "OK / họrọ",
+        "call": "Kpọọ",
+        "end": "Kwụsị / laghachi",
+        "home": "Ụlọ: kpọga n’elu",
+        "up": "Elu",
+        "down": "Ala",
+        "left": "Aka ekpe (slide gara aga)",
+        "right": "Aka nri (slide na-esote)",
+        "volumeUp": "Mee ụda dị elu",
+        "volumeDown": "Mee ụda dị ala",
+        "power": "Ike: gbanyụọ/gbanye ihuenyo",
+        "back": "Laghachi (slide gara aga)"
+      }
+    }
   },
   "toast": {
     "information": "Ozi",

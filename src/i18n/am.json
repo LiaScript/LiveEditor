@@ -302,7 +302,46 @@
     "followUs": "ተከተሉን በ:"
   },
   "preview": {
-    "loading": "በመጫን ላይ..."
+    "loading": "በመጫን ላይ...",
+    "device": {
+      "title": "የቅድመ እይታ መሣሪያ",
+      "responsive": "ምላሽ ሰጪ (ክፍሉን ሙላ)",
+      "tablet": "ታብሌት",
+      "laptop": "ላፕቶፕ",
+      "fullhd": "Full HD ማሳያ / ቢመር",
+      "ultrawide": "Ultrawide ማሳያ",
+      "beamer4k": "4K ቢመር",
+      "rotate": "መሣሪያውን አዙር",
+      "zoom": "አጉላ",
+      "fit": "አስማማ",
+      "fitTitle": "መሣሪያውን ከክፍሉ ጋር እንዲመጥን አስተካክል",
+      "actualTitle": "በእውነተኛ መጠን አሳይ (ማሸብለል)",
+      "scaling": "በመሣሪያው ውስጥ የማሳያ ልኬት",
+      "scaleDown": "አሳንስ (ትንሽ)",
+      "scaleUp": "አጉላ (ትልቅ)",
+      "groups": {
+        "phones": "ስልኮች",
+        "tablets": "ታብሌቶች",
+        "desktop": "ዴስክቶፕ እና ቢመር"
+      },
+      "keys": {
+        "keypad": "የስልክ ቁልፎች",
+        "softLeft": "ግራ ሶፍትኪ",
+        "softRight": "ቀኝ ሶፍትኪ",
+        "ok": "እሺ / ምረጥ",
+        "call": "ደውል",
+        "end": "ጨርስ / ተመለስ",
+        "home": "መነሻ፡ ወደ ላይ ሸብልል",
+        "up": "ወደ ላይ",
+        "down": "ወደ ታች",
+        "left": "ግራ (ቀዳሚ ስላይድ)",
+        "right": "ቀኝ (ቀጣይ ስላይድ)",
+        "volumeUp": "ድምፅ ጨምር",
+        "volumeDown": "ድምፅ ቀንስ",
+        "power": "ኃይል፡ ማያ አጥፋ/አብራ",
+        "back": "ተመለስ (ቀዳሚ ስላይድ)"
+      }
+    }
   },
   "toast": {
     "information": "መረጃ",

@@ -302,7 +302,46 @@
     "followUs": "Bizi takip edin:"
   },
   "preview": {
-    "loading": "Yükleniyor..."
+    "loading": "Yükleniyor...",
+    "device": {
+      "title": "Önizleme cihazı",
+      "responsive": "Duyarlı (bölmeyi doldurur)",
+      "tablet": "Tablet",
+      "laptop": "Dizüstü bilgisayar",
+      "fullhd": "Full HD monitör / projektör",
+      "ultrawide": "Ultrawide monitör",
+      "beamer4k": "4K projektör",
+      "rotate": "Cihazı döndür",
+      "zoom": "Yakınlaştırma",
+      "fit": "Sığdır",
+      "fitTitle": "Cihazı bölmeye sığacak şekilde ölçekle",
+      "actualTitle": "Gerçek boyutta göster (kaydır)",
+      "scaling": "Cihaz içindeki görüntü ölçeği",
+      "scaleDown": "Uzaklaştır (daha küçük)",
+      "scaleUp": "Yakınlaştır (daha büyük)",
+      "groups": {
+        "phones": "Telefonlar",
+        "tablets": "Tabletler",
+        "desktop": "Masaüstü ve projektör"
+      },
+      "keys": {
+        "keypad": "Telefon tuşları",
+        "softLeft": "Sol yazılım tuşu",
+        "softRight": "Sağ yazılım tuşu",
+        "ok": "Tamam / seç",
+        "call": "Ara",
+        "end": "Bitir / geri",
+        "home": "Ana sayfa: en üste kaydır",
+        "up": "Yukarı",
+        "down": "Aşağı",
+        "left": "Sol (önceki slayt)",
+        "right": "Sağ (sonraki slayt)",
+        "volumeUp": "Sesi artır",
+        "volumeDown": "Sesi azalt",
+        "power": "Güç: ekranı kapat/aç",
+        "back": "Geri (önceki slayt)"
+      }
+    }
   },
   "toast": {
     "information": "Bilgi",

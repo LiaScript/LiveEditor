@@ -302,7 +302,46 @@
     "followUs": "Kövess minket:"
   },
   "preview": {
-    "loading": "Betöltés..."
+    "loading": "Betöltés...",
+    "device": {
+      "title": "Előnézeti eszköz",
+      "responsive": "Reszponzív (kitölti a panelt)",
+      "tablet": "Táblagép",
+      "laptop": "Laptop",
+      "fullhd": "Full HD monitor / kivetítő",
+      "ultrawide": "Ultrawide monitor",
+      "beamer4k": "4K kivetítő",
+      "rotate": "Eszköz elforgatása",
+      "zoom": "Nagyítás",
+      "fit": "Illesztés",
+      "fitTitle": "Az eszköz méretezése a panelhez",
+      "actualTitle": "Megjelenítés valós méretben (görgetés)",
+      "scaling": "Megjelenítési skála az eszközön belül",
+      "scaleDown": "Kicsinyítés",
+      "scaleUp": "Nagyítás",
+      "groups": {
+        "phones": "Telefonok",
+        "tablets": "Táblagépek",
+        "desktop": "Asztali gép és kivetítő"
+      },
+      "keys": {
+        "keypad": "Telefon gombjai",
+        "softLeft": "Bal funkciógomb",
+        "softRight": "Jobb funkciógomb",
+        "ok": "OK / kiválasztás",
+        "call": "Hívás",
+        "end": "Vége / vissza",
+        "home": "Kezdőlap: görgetés az elejére",
+        "up": "Fel",
+        "down": "Le",
+        "left": "Balra (előző dia)",
+        "right": "Jobbra (következő dia)",
+        "volumeUp": "Hangerő fel",
+        "volumeDown": "Hangerő le",
+        "power": "Be/ki: képernyő ki/be",
+        "back": "Vissza (előző dia)"
+      }
+    }
   },
   "toast": {
     "information": "Információ",

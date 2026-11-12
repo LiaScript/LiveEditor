@@ -302,7 +302,46 @@
     "followUs": "Tẹle wa lori:"
   },
   "preview": {
-    "loading": "N kojọpọ..."
+    "loading": "N kojọpọ...",
+    "device": {
+      "title": "Ẹ̀rọ ìwoyẹ̀wò",
+      "responsive": "Aṣàtúnṣe ara rẹ̀ (kún pánẹ́ẹ̀lì)",
+      "tablet": "Tablet",
+      "laptop": "Kọ̀ǹpútà alágbèéká",
+      "fullhd": "Mọ́níìtọ̀ Full HD / beamer",
+      "ultrawide": "Mọ́níìtọ̀ Ultrawide",
+      "beamer4k": "Beamer 4K",
+      "rotate": "Yí ẹ̀rọ po",
+      "zoom": "Zoom",
+      "fit": "Bá mu",
+      "fitTitle": "Ṣe ẹ̀rọ náà kí ó bá pánẹ́ẹ̀lì mu",
+      "actualTitle": "Fi ìtóbi gidi hàn (yí lọ)",
+      "scaling": "Ìwọ̀n ìfihàn inú ẹ̀rọ",
+      "scaleDown": "Dín kù (kékeré)",
+      "scaleUp": "Pọ̀ sí i (tóbi)",
+      "groups": {
+        "phones": "Fóònù",
+        "tablets": "Tablet",
+        "desktop": "Kọ̀ǹpútà orí tábìlì àti beamer"
+      },
+      "keys": {
+        "keypad": "Àwọn bọtìnì fóònù",
+        "softLeft": "Bọtìnì òsì",
+        "softRight": "Bọtìnì ọ̀tún",
+        "ok": "OK / yàn",
+        "call": "Pè",
+        "end": "Parí / padà",
+        "home": "Ilé: yí lọ sí òkè",
+        "up": "Òkè",
+        "down": "Ìsàlẹ̀",
+        "left": "Òsì (ìgbékalẹ̀ tó kọjá)",
+        "right": "Ọ̀tún (ìgbékalẹ̀ tó kàn)",
+        "volumeUp": "Gbé ohùn sókè",
+        "volumeDown": "Gbé ohùn sílẹ̀",
+        "power": "Agbára: pa/tan ojú ìbòjú",
+        "back": "Padà (ìgbékalẹ̀ tó kọjá)"
+      }
+    }
   },
   "toast": {
     "information": "Alaye",

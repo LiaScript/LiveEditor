@@ -302,7 +302,46 @@
     "followUs": "Tufuate kwenye:"
   },
   "preview": {
-    "loading": "Inapakia..."
+    "loading": "Inapakia...",
+    "device": {
+      "title": "Kifaa cha onyesho la awali",
+      "responsive": "Kinachojirekebisha (jaza kidirisha)",
+      "tablet": "Tabuleti",
+      "laptop": "Kompyuta mpakato",
+      "fullhd": "Skrini ya Full HD / projekta",
+      "ultrawide": "Skrini ya Ultrawide",
+      "beamer4k": "Projekta ya 4K",
+      "rotate": "Zungusha kifaa",
+      "zoom": "Kukuza",
+      "fit": "Pangilia",
+      "fitTitle": "Rekebisha ukubwa wa kifaa kutoshea kidirisha",
+      "actualTitle": "Onyesha ukubwa halisi (sogeza)",
+      "scaling": "Kipimo cha onyesho ndani ya kifaa",
+      "scaleDown": "Punguza (ndogo zaidi)",
+      "scaleUp": "Kuza (kubwa zaidi)",
+      "groups": {
+        "phones": "Simu",
+        "tablets": "Tabuleti",
+        "desktop": "Kompyuta ya mezani na projekta"
+      },
+      "keys": {
+        "keypad": "Vitufe vya simu",
+        "softLeft": "Kitufe cha kushoto",
+        "softRight": "Kitufe cha kulia",
+        "ok": "OK / chagua",
+        "call": "Piga simu",
+        "end": "Maliza / rudi nyuma",
+        "home": "Mwanzo: sogeza juu",
+        "up": "Juu",
+        "down": "Chini",
+        "left": "Kushoto (slaidi iliyopita)",
+        "right": "Kulia (slaidi inayofuata)",
+        "volumeUp": "Ongeza sauti",
+        "volumeDown": "Punguza sauti",
+        "power": "Nguvu: zima/washa skrini",
+        "back": "Rudi nyuma (slaidi iliyopita)"
+      }
+    }
   },
   "toast": {
     "information": "Taarifa",

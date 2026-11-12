@@ -302,7 +302,46 @@
     "followUs": "Seguici su:"
   },
   "preview": {
-    "loading": "Caricamento..."
+    "loading": "Caricamento...",
+    "device": {
+      "title": "Dispositivo di anteprima",
+      "responsive": "Reattivo (riempie il pannello)",
+      "tablet": "Tablet",
+      "laptop": "Laptop",
+      "fullhd": "Monitor Full HD / proiettore",
+      "ultrawide": "Monitor Ultrawide",
+      "beamer4k": "Proiettore 4K",
+      "rotate": "Ruota dispositivo",
+      "zoom": "Zoom",
+      "fit": "Adatta",
+      "fitTitle": "Ridimensiona il dispositivo per adattarlo al pannello",
+      "actualTitle": "Mostra a dimensione reale (scorri)",
+      "scaling": "Scala di visualizzazione nel dispositivo",
+      "scaleDown": "Riduci (più piccolo)",
+      "scaleUp": "Ingrandisci (più grande)",
+      "groups": {
+        "phones": "Telefoni",
+        "tablets": "Tablet",
+        "desktop": "Desktop e proiettore"
+      },
+      "keys": {
+        "keypad": "Tasti del telefono",
+        "softLeft": "Tasto software sinistro",
+        "softRight": "Tasto software destro",
+        "ok": "OK / seleziona",
+        "call": "Chiama",
+        "end": "Fine / indietro",
+        "home": "Home: scorri in alto",
+        "up": "Su",
+        "down": "Giù",
+        "left": "Sinistra (diapositiva precedente)",
+        "right": "Destra (diapositiva successiva)",
+        "volumeUp": "Volume su",
+        "volumeDown": "Volume giù",
+        "power": "Accensione: schermo spento/acceso",
+        "back": "Indietro (diapositiva precedente)"
+      }
+    }
   },
   "toast": {
     "information": "Informazione",

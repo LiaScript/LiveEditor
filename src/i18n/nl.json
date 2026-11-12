@@ -302,7 +302,46 @@
     "followUs": "Volg ons op:"
   },
   "preview": {
-    "loading": "Laden..."
+    "loading": "Laden...",
+    "device": {
+      "title": "Voorbeeldapparaat",
+      "responsive": "Responsief (vult het paneel)",
+      "tablet": "Tablet",
+      "laptop": "Laptop",
+      "fullhd": "Full HD-monitor / beamer",
+      "ultrawide": "Ultrawide-monitor",
+      "beamer4k": "4K-beamer",
+      "rotate": "Apparaat draaien",
+      "zoom": "Zoom",
+      "fit": "Passend",
+      "fitTitle": "Apparaat schalen zodat het in het paneel past",
+      "actualTitle": "Op ware grootte tonen (scrollen)",
+      "scaling": "Weergaveschaal in het apparaat",
+      "scaleDown": "Uitzoomen (kleiner)",
+      "scaleUp": "Inzoomen (groter)",
+      "groups": {
+        "phones": "Telefoons",
+        "tablets": "Tablets",
+        "desktop": "Desktop & beamer"
+      },
+      "keys": {
+        "keypad": "Telefoontoetsen",
+        "softLeft": "Linker softkey",
+        "softRight": "Rechter softkey",
+        "ok": "OK / selecteren",
+        "call": "Bellen",
+        "end": "Einde / terug",
+        "home": "Home: naar boven scrollen",
+        "up": "Omhoog",
+        "down": "Omlaag",
+        "left": "Links (vorige dia)",
+        "right": "Rechts (volgende dia)",
+        "volumeUp": "Volume omhoog",
+        "volumeDown": "Volume omlaag",
+        "power": "Aan/uit: scherm uit/aan",
+        "back": "Terug (vorige dia)"
+      }
+    }
   },
   "toast": {
     "information": "Informatie",
