@@ -20,7 +20,8 @@
       "hideFiles": "Bestandsverkenner verbergen",
       "showFiles": "Bestandsverkenner tonen",
       "tools": "Hulpmiddelen",
-      "files": "Bestanden"
+      "files": "Bestanden",
+      "devices": "Apparaten"
     },
     "connection": {
       "offlineAria": "Alleen ik: alleen jij bewerkt, alles blijft op dit apparaat",

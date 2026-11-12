@@ -20,7 +20,8 @@
       "hideFiles": "Dosya gezginini gizle",
       "showFiles": "Dosya gezginini göster",
       "tools": "Araçlar",
-      "files": "Dosyalar"
+      "files": "Dosyalar",
+      "devices": "Cihazlar"
     },
     "connection": {
       "offlineAria": "Yalnızca ben: yalnızca siz düzenliyorsunuz, her şey bu cihazda kalır",

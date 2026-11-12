@@ -20,7 +20,8 @@
       "hideFiles": "Sakatta'aa faayilii dhoksi",
       "showFiles": "Sakatta'aa faayilii agarsiisi",
       "tools": "Meeshaalee",
-      "files": "Faayilota"
+      "files": "Faayilota",
+      "devices": "Meeshaalee"
     },
     "connection": {
       "offlineAria": "Ana qofa: kan gulaalu si qofa, wanti hundi meeshaa kana irra tura",

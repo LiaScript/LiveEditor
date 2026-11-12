@@ -233,6 +233,7 @@ export default {
     landscape: { type: Boolean, default: false },
     zoom: { type: String, default: "fit" },
     scaling: { type: Number, default: 1 },
+    bar: { type: Boolean, default: false },
   },
 
   data() {
@@ -271,9 +272,6 @@ export default {
     },
     screenH(): number {
       return this.rotated ? this.dev.width : this.dev.height;
-    },
-    deviceName(): string {
-      return this.dev.i18n ? this.$t("preview.device." + this.dev.name) : this.dev.name;
     },
     holderStyle(): any {
       if (!this.active) return {};
@@ -533,55 +531,56 @@ export default {
 -->
 <template>
   <div class="pv-stage" :class="{ 'pv-active': active }">
-    <div v-if="active" class="pv-bar">
-      <i class="bi" :class="dev.icon" aria-hidden="true"></i>
-      <span class="pv-name">{{ deviceName }}</span>
-      <span class="pv-meta">
-        {{ screenW }}×{{ screenH }}<template v-if="scaling !== 1"> → {{ Math.round(screenW / scaling) }}×{{ Math.round(screenH / scaling) }}</template>
-        · {{ Math.round(scale * 100) }} %
-      </span>
-      <span class="pv-spacer"></span>
-      <div class="pv-scaling" role="group" :title="$t('preview.device.scaling')" :aria-label="$t('preview.device.scaling')">
-        <button type="button" class="pv-bar-btn" :aria-label="$t('preview.device.scaleDown')" :disabled="scaling === SCALINGS[0]" @click="stepScaling(-1)">
-          <i class="bi bi-zoom-out" aria-hidden="true"></i>
-        </button>
-        <span class="pv-scaling-value">{{ Math.round(scaling * 100) }} %</span>
-        <button type="button" class="pv-bar-btn" :aria-label="$t('preview.device.scaleUp')" :disabled="scaling === SCALINGS[SCALINGS.length - 1]" @click="stepScaling(1)">
-          <i class="bi bi-zoom-in" aria-hidden="true"></i>
-        </button>
-      </div>
-      <button
-        v-if="dev.rotatable"
-        type="button"
-        class="pv-bar-btn"
-        :title="$t('preview.device.rotate')"
-        :aria-label="$t('preview.device.rotate')"
-        @click="$emit('update:landscape', !landscape)"
-      >
-        <i class="bi bi-arrow-repeat" aria-hidden="true"></i>
-      </button>
-      <div class="pv-zoom" role="radiogroup" :aria-label="$t('preview.device.zoom')">
+    <div v-if="bar" class="pv-bar">
+      <slot name="bar"></slot>
+      <template v-if="active">
+        <span class="pv-meta">
+          {{ screenW }}×{{ screenH }}<template v-if="scaling !== 1"> → {{ Math.round(screenW / scaling) }}×{{ Math.round(screenH / scaling) }}</template>
+          · {{ Math.round(scale * 100) }} %
+        </span>
+        <span class="pv-spacer"></span>
+        <div class="pv-scaling" role="group" :title="$t('preview.device.scaling')" :aria-label="$t('preview.device.scaling')">
+          <button type="button" class="pv-bar-btn" :aria-label="$t('preview.device.scaleDown')" :disabled="scaling === SCALINGS[0]" @click="stepScaling(-1)">
+            <i class="bi bi-zoom-out" aria-hidden="true"></i>
+          </button>
+          <span class="pv-scaling-value">{{ Math.round(scaling * 100) }} %</span>
+          <button type="button" class="pv-bar-btn" :aria-label="$t('preview.device.scaleUp')" :disabled="scaling === SCALINGS[SCALINGS.length - 1]" @click="stepScaling(1)">
+            <i class="bi bi-zoom-in" aria-hidden="true"></i>
+          </button>
+        </div>
         <button
+          v-if="dev.rotatable"
           type="button"
-          role="radio"
-          :aria-checked="zoom !== '100'"
-          :class="{ active: zoom !== '100' }"
-          :title="$t('preview.device.fitTitle')"
-          @click="$emit('update:zoom', 'fit')"
+          class="pv-bar-btn"
+          :title="$t('preview.device.rotate')"
+          :aria-label="$t('preview.device.rotate')"
+          @click="$emit('update:landscape', !landscape)"
         >
-          {{ $t('preview.device.fit') }}
+          <i class="bi bi-arrow-repeat" aria-hidden="true"></i>
         </button>
-        <button
-          type="button"
-          role="radio"
-          :aria-checked="zoom === '100'"
-          :class="{ active: zoom === '100' }"
-          :title="$t('preview.device.actualTitle')"
-          @click="$emit('update:zoom', '100')"
-        >
-          100 %
-        </button>
-      </div>
+        <div class="pv-zoom" role="radiogroup" :aria-label="$t('preview.device.zoom')">
+          <button
+            type="button"
+            role="radio"
+            :aria-checked="zoom !== '100'"
+            :class="{ active: zoom !== '100' }"
+            :title="$t('preview.device.fitTitle')"
+            @click="$emit('update:zoom', 'fit')"
+          >
+            {{ $t('preview.device.fit') }}
+          </button>
+          <button
+            type="button"
+            role="radio"
+            :aria-checked="zoom === '100'"
+            :class="{ active: zoom === '100' }"
+            :title="$t('preview.device.actualTitle')"
+            @click="$emit('update:zoom', '100')"
+          >
+            100 %
+          </button>
+        </div>
+      </template>
     </div>
 
     <div ref="viewport" class="pv-viewport" :class="{ 'pv-scroll': active && zoom === '100' }">
@@ -735,23 +734,21 @@ export default {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  height: 36px;
-  padding: 0 0.6rem;
-  background: rgba(255, 255, 255, 0.92);
-  border-bottom: 1px solid var(--lia-line, #dee2e6);
+  height: 30px;
+  padding: 0 0.4rem;
+  background: #e8e8e8;
+  border-bottom: 1px solid #c8c8c8;
   font-size: 0.8rem;
   color: #3b4652;
   white-space: nowrap;
-  overflow: hidden;
-}
-
-.pv-name {
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  position: relative;
+  z-index: 2;
 }
 
 .pv-meta {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: var(--lia-muted, #6c757d);
   font-variant-numeric: tabular-nums;
 }
@@ -764,8 +761,8 @@ export default {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border: 0;
   border-radius: 0.4rem;
   background: transparent;
@@ -799,7 +796,7 @@ export default {
 }
 
 .pv-zoom button {
-  height: 24px;
+  height: 22px;
   padding: 0 0.5rem;
   border: 0;
   border-radius: 0.35rem;

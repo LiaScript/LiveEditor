@@ -20,7 +20,8 @@
       "hideFiles": "Skjul filoversigt",
       "showFiles": "Vis filoversigt",
       "tools": "Værktøj",
-      "files": "Filer"
+      "files": "Filer",
+      "devices": "Enheder"
     },
     "connection": {
       "offlineAria": "Kun mig: kun du redigerer, alt bliver på denne enhed",

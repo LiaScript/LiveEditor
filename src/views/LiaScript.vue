@@ -122,6 +122,7 @@ export default {
       localFolderSyncVisible: false,
       showFiles: false,
       showToolbar: true,
+      showDevices: false,
     };
   },
 
@@ -1044,55 +1045,6 @@ export default {
           </button>
         </div>
 
-        <div v-if="currentMode >= 0" class="dropdown">
-          <button
-            type="button"
-            class="btn btn-sm lia-bar-btn"
-            :class="previewDevice === RESPONSIVE.id ? 'btn-outline-secondary' : 'btn-secondary'"
-            data-bs-toggle="dropdown"
-            data-bs-display="static"
-            aria-expanded="false"
-            :title="$t('preview.device.title')"
-            :aria-label="$t('preview.device.title')"
-          >
-            <i class="bi" :class="currentDevice.icon" aria-hidden="true"></i>
-            <span class="d-none d-xl-inline lia-device-label">{{ deviceName(currentDevice) }}</span>
-            <i class="bi bi-chevron-down small" aria-hidden="true"></i>
-          </button>
-
-          <ul class="dropdown-menu lia-device-menu">
-            <li>
-              <button
-                type="button"
-                class="dropdown-item lia-device-item"
-                :class="{ active: previewDevice === RESPONSIVE.id }"
-                :aria-current="previewDevice === RESPONSIVE.id ? 'true' : null"
-                @click="previewDevice = RESPONSIVE.id"
-              >
-                <i class="bi" :class="RESPONSIVE.icon" aria-hidden="true"></i>
-                <span>{{ deviceName(RESPONSIVE) }}</span>
-              </button>
-            </li>
-            <template v-for="group in DEVICE_GROUPS" :key="group">
-              <li><hr class="dropdown-divider" /></li>
-              <li><h6 class="dropdown-header">{{ $t('preview.device.groups.' + group) }}</h6></li>
-              <li v-for="device in devicesIn(group)" :key="device.id">
-                <button
-                  type="button"
-                  class="dropdown-item lia-device-item"
-                  :class="{ active: previewDevice === device.id }"
-                  :aria-current="previewDevice === device.id ? 'true' : null"
-                  @click="previewDevice = device.id"
-                >
-                  <i class="bi" :class="device.icon" aria-hidden="true"></i>
-                  <span>{{ deviceName(device) }}</span>
-                  <span class="lia-device-size">{{ device.width }}×{{ device.height }}</span>
-                </button>
-              </li>
-            </template>
-          </ul>
-        </div>
-
         <button
           type="button"
           class="btn btn-sm btn-outline-secondary lia-bar-btn"
@@ -1272,6 +1224,18 @@ export default {
               <i class="bi bi-tools" aria-hidden="true"></i>
               <span>{{ $t('nav.activityBar.tools') }}</span>
             </button>
+            <button
+              v-if="currentMode === 0"
+              class="lia-activity-btn"
+              type="button"
+              :class="{ active: showDevices }"
+              :aria-pressed="showDevices"
+              :title="$t('preview.device.title')"
+              @click="showDevices = !showDevices"
+            >
+              <i class="bi bi-phone" aria-hidden="true"></i>
+              <span>{{ $t('nav.activityBar.devices') }}</span>
+            </button>
           </div>
 
           <FileExplorer
@@ -1344,8 +1308,61 @@ export default {
           v-model:landscape="previewLandscape"
           v-model:zoom="previewZoom"
           v-model:scaling="previewScaling"
+          :bar="showDevices || currentMode > 0"
           :class="{ invisible: previewNotReady }"
-        />
+        >
+          <template #bar>
+            <!-- no :class on the toggle (Vue would drop Bootstrap's "show", the menu
+                 never closes); fixed popper so the pane's overflow can't cut the menu -->
+            <div class="dropdown">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary lia-pv-btn"
+                data-bs-toggle="dropdown"
+                data-bs-popper-config='{"strategy":"fixed"}'
+                aria-expanded="false"
+                :title="$t('preview.device.title')"
+                :aria-label="$t('preview.device.title')"
+              >
+                <i class="bi" :class="currentDevice.icon" aria-hidden="true"></i>
+                <span class="lia-device-label">{{ deviceName(currentDevice) }}</span>
+                <i class="bi bi-chevron-down small" aria-hidden="true"></i>
+              </button>
+    
+              <ul class="dropdown-menu lia-device-menu">
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item lia-device-item"
+                    :class="{ active: previewDevice === RESPONSIVE.id }"
+                    :aria-current="previewDevice === RESPONSIVE.id ? 'true' : null"
+                    @click="previewDevice = RESPONSIVE.id"
+                  >
+                    <i class="bi" :class="RESPONSIVE.icon" aria-hidden="true"></i>
+                    <span>{{ deviceName(RESPONSIVE) }}</span>
+                  </button>
+                </li>
+                <template v-for="group in DEVICE_GROUPS" :key="group">
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><h6 class="dropdown-header">{{ $t('preview.device.groups.' + group) }}</h6></li>
+                  <li v-for="device in devicesIn(group)" :key="device.id">
+                    <button
+                      type="button"
+                      class="dropdown-item lia-device-item"
+                      :class="{ active: previewDevice === device.id }"
+                      :aria-current="previewDevice === device.id ? 'true' : null"
+                      @click="previewDevice = device.id"
+                    >
+                      <i class="bi" :class="device.icon" aria-hidden="true"></i>
+                      <span>{{ deviceName(device) }}</span>
+                      <span class="lia-device-size">{{ device.width }}×{{ device.height }}</span>
+                    </button>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </template>
+        </Preview>
       </pane>
     </splitpanes>
   </div>
@@ -1576,6 +1593,16 @@ export default {
 
 .lia-icon-btn:hover {
   background: #eef1f3;
+}
+
+.lia-pv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 24px;
+  padding: 0 0.45rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
 }
 
 .lia-device-label {

@@ -20,7 +20,8 @@
       "hideFiles": "Datei-Explorer ausblenden",
       "showFiles": "Datei-Explorer einblenden",
       "tools": "Werkzeuge",
-      "files": "Dateien"
+      "files": "Dateien",
+      "devices": "Geräte"
     },
     "connection": {
       "offlineAria": "Nur ich: Nur du bearbeitest, alles bleibt auf diesem Gerät",

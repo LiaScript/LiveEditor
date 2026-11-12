@@ -20,7 +20,8 @@
       "hideFiles": "隐藏文件浏览器",
       "showFiles": "显示文件浏览器",
       "tools": "工具",
-      "files": "文件"
+      "files": "文件",
+      "devices": "设备"
     },
     "connection": {
       "offlineAria": "只有我：只有你在编辑，所有内容都保留在这台设备上",

@@ -20,7 +20,8 @@
       "hideFiles": "Fájlkezelő elrejtése",
       "showFiles": "Fájlkezelő megjelenítése",
       "tools": "Eszközök",
-      "files": "Fájlok"
+      "files": "Fájlok",
+      "devices": "Eszközök"
     },
     "connection": {
       "offlineAria": "Csak én: csak te szerkesztesz, minden ezen az eszközön marad",
@@ -309,7 +310,7 @@
       "tablet": "Táblagép",
       "laptop": "Laptop",
       "fullhd": "Full HD monitor / kivetítő",
-      "ultrawide": "Ultrawide monitor",
+      "ultrawide": "Ultraszéles monitor",
       "beamer4k": "4K kivetítő",
       "rotate": "Eszköz elforgatása",
       "zoom": "Nagyítás",

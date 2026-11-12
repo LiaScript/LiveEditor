@@ -20,7 +20,8 @@
       "hideFiles": "Nascondi esplora file",
       "showFiles": "Mostra esplora file",
       "tools": "Strumenti",
-      "files": "File"
+      "files": "File",
+      "devices": "Dispositivi"
     },
     "connection": {
       "offlineAria": "Solo io: modifichi solo tu, tutto resta su questo dispositivo",

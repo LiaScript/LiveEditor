@@ -20,7 +20,8 @@
       "hideFiles": "Dölj filutforskaren",
       "showFiles": "Visa filutforskaren",
       "tools": "Verktyg",
-      "files": "Filer"
+      "files": "Filer",
+      "devices": "Enheter"
     },
     "connection": {
       "offlineAria": "Bara jag: bara du redigerar, allt stannar på den här enheten",

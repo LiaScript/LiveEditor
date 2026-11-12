@@ -20,7 +20,8 @@
       "hideFiles": "Slėpti failų naršyklę",
       "showFiles": "Rodyti failų naršyklę",
       "tools": "Įrankiai",
-      "files": "Failai"
+      "files": "Failai",
+      "devices": "Įrenginiai"
     },
     "connection": {
       "offlineAria": "Tik aš: redaguojate tik jūs, viskas lieka šiame įrenginyje",

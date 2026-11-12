@@ -20,7 +20,8 @@
       "hideFiles": "ファイルエクスプローラーを非表示",
       "showFiles": "ファイルエクスプローラーを表示",
       "tools": "ツール",
-      "files": "ファイル"
+      "files": "ファイル",
+      "devices": "デバイス"
     },
     "connection": {
       "offlineAria": "自分だけ: 編集するのはあなただけで、すべてこのデバイスに残ります",

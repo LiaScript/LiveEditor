@@ -20,7 +20,8 @@
       "hideFiles": "Paslēpt failu pārlūku",
       "showFiles": "Rādīt failu pārlūku",
       "tools": "Rīki",
-      "files": "Faili"
+      "files": "Faili",
+      "devices": "Ierīces"
     },
     "connection": {
       "offlineAria": "Tikai es: rediģējat tikai jūs, viss paliek šajā ierīcē",

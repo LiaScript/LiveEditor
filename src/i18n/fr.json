@@ -20,7 +20,8 @@
       "hideFiles": "Masquer l'explorateur de fichiers",
       "showFiles": "Afficher l'explorateur de fichiers",
       "tools": "Outils",
-      "files": "Fichiers"
+      "files": "Fichiers",
+      "devices": "Appareils"
     },
     "connection": {
       "offlineAria": "Juste moi : vous êtes la seule personne à modifier, tout reste sur cet appareil",

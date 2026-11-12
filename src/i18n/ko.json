@@ -20,7 +20,8 @@
       "hideFiles": "파일 탐색기 숨기기",
       "showFiles": "파일 탐색기 표시",
       "tools": "도구",
-      "files": "파일"
+      "files": "파일",
+      "devices": "기기"
     },
     "connection": {
       "offlineAria": "나만: 혼자 편집하며, 모든 내용이 이 기기에 남습니다",

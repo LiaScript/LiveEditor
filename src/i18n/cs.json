@@ -20,7 +20,8 @@
       "hideFiles": "Skrýt průzkumník souborů",
       "showFiles": "Zobrazit průzkumník souborů",
       "tools": "Nástroje",
-      "files": "Soubory"
+      "files": "Soubory",
+      "devices": "Zařízení"
     },
     "connection": {
       "offlineAria": "Jen já: upravujete jen vy, vše zůstává v tomto zařízení",
@@ -309,7 +310,7 @@
       "tablet": "Tablet",
       "laptop": "Notebook",
       "fullhd": "Full HD monitor / projektor",
-      "ultrawide": "Ultrawide monitor",
+      "ultrawide": "Ultraširoký monitor",
       "beamer4k": "4K projektor",
       "rotate": "Otočit zařízení",
       "zoom": "Zvětšení",

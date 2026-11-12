@@ -20,7 +20,8 @@
       "hideFiles": "Peida failihaldur",
       "showFiles": "Näita failihaldurit",
       "tools": "Tööriistad",
-      "files": "Failid"
+      "files": "Failid",
+      "devices": "Seadmed"
     },
     "connection": {
       "offlineAria": "Ainult mina: ainult sina muudad, kõik jääb sellesse seadmesse",
@@ -309,7 +310,7 @@
       "tablet": "Tahvelarvuti",
       "laptop": "Sülearvuti",
       "fullhd": "Full HD monitor / projektor",
-      "ultrawide": "Ultrawide monitor",
+      "ultrawide": "Ülilai monitor",
       "beamer4k": "4K projektor",
       "rotate": "Pööra seadet",
       "zoom": "Suum",

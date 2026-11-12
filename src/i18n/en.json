@@ -20,7 +20,8 @@
       "hideFiles": "Hide file explorer",
       "showFiles": "Show file explorer",
       "tools": "Tools",
-      "files": "Files"
+      "files": "Files",
+      "devices": "Devices"
     },
     "connection": {
       "offlineAria": "Only me: only you are editing, everything stays on this device",
