@@ -32,6 +32,7 @@ const localeNames: Record<string, string> = {
   lt: 'Lietuvių',
   et: 'Eesti',
   lv: 'Latviešu',
+  ms: 'Bahasa Melayu',
 }
 
 export default {

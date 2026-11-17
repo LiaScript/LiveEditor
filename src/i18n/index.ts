@@ -33,6 +33,7 @@ const loaders: Record<string, () => Promise<any>> = {
   lt: () => import('./lt.json'),
   et: () => import('./et.json'),
   lv: () => import('./lv.json'),
+  ms: () => import('./ms.json'),
 }
 
 export const locales = ['en', ...Object.keys(loaders)].sort()
